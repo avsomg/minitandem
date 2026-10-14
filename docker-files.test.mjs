@@ -39,7 +39,8 @@ test('.dockerignore, read by a model of Docker\'s matching rules (no real build 
     'editorial/workflow-state/jobs.sqlite','editorial/external-review-receipts.json','editorial/agent-artifacts/0123.json','node_modules/x/index.js'])
     assert.equal(excluded(file),true,file+' would enter the image');
   for(const file of ['server.mjs','build.mjs','site.mjs','index.html','data.js','research.md','assets/leaflet.js','editorial/quality.mjs','editorial/package.json',
-    'editorial/package-lock.json','editorial/source-watch.json','editorial/approved-updates.json','docker/entrypoint.sh','.vercelignore'])
+    'editorial/package-lock.json','editorial/source-watch.json','editorial/approved-updates.json','docker/entrypoint.sh','.vercelignore',
+    'case-study.mjs','content/fallstudie.de.md','content/fallstudie.en.md'])
     assert.equal(excluded(file),false,file+' is needed by the build');
   for(const file of ['server.test.mjs','editorial/jobs.test.mjs','verify.mjs','demo/run.mjs','design/minitandem-mockup.html'])
     assert.equal(excluded(file),true,file+' is not needed in the image');
@@ -138,6 +139,26 @@ test('the entrypoint creates one demo family, never an editor key, serves /healt
     assert.equal(Object.keys(JSON.parse(fs.readFileSync(path.join(env.MINITANDEM_STATE_DIR,'families.json'),'utf8')).families).length,1);
     assert.doesNotMatch(run.output(),/Created one demo family/);
   }finally{await stop(run);}
+});
+
+// The image runs `node build.mjs --public` on the files the build context lets in. Building from exactly those files
+// here catches a source the build needs but .dockerignore leaves out; the first deployment of /projekt/ failed that way.
+test('the site builds from the files the Docker build context lets in',t=>{
+  const listed=spawnSync('git',['ls-files'],{cwd:root,encoding:'utf8'});
+  if(listed.status!==0)return t.skip('not a git checkout');
+  const excluded=dockerignore(read('.dockerignore'));
+  const context=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-context-'));
+  t.after(()=>fs.rmSync(context,{recursive:true,force:true}));
+  for(const file of listed.stdout.split('\n').filter(Boolean).filter(file=>!excluded(file))){
+    fs.mkdirSync(path.dirname(path.join(context,file)),{recursive:true});
+    fs.copyFileSync(path.join(root,file),path.join(context,file));
+  }
+  // The image installs the pipeline's dependencies in its own stage; here the checkout's copy stands in for them.
+  if(fs.existsSync(path.join(root,'editorial/node_modules')))fs.symlinkSync(path.join(root,'editorial/node_modules'),path.join(context,'editorial/node_modules'));
+  const build=spawnSync(process.execPath,['build.mjs','--public'],{cwd:context,encoding:'utf8'});
+  assert.equal(build.status,0,build.stderr.slice(-800));
+  for(const file of ['index.html','projekt/index.html','projekt/en/index.html','places/index.html','sitemap.xml'])
+    assert.ok(fs.existsSync(path.join(context,'.publish',file)),file);
 });
 
 const HAS_CURL=spawnSync('curl',['--version'],{stdio:'ignore'}).status===0;
