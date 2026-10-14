@@ -37,7 +37,7 @@ test('both READMEs carry the honesty section, the licence, the badge and the com
   assert.equal(JSON.parse(read('package.json')).license,'MIT');
   assert.match(en,/^The code is under the MIT licence \(`LICENSE`\)\. It does not cover the catalogue data/m);
   assert.match(de,/^Der Code steht unter der MIT-Lizenz \(`LICENSE`\)\. Sie gilt nicht für die Katalogdaten/m);
-  for(const text of [en,de])assert.match(text,/\[!\[tests\]\(https:\/\/github\.com\/OWNER\/minitandem\/actions\/workflows\/test\.yml\/badge\.svg\)\]/);
+  for(const text of [en,de])assert.match(text,/\[!\[tests\]\(https:\/\/github\.com\/avsomg\/minitandem\/actions\/workflows\/test\.yml\/badge\.svg\)\]/);
   assert.match(en,/OpenAI Codex wrote the code until 8 October 2026; Claude Code has done so since then/);
   assert.match(en,/does not write the code himself/);
   assert.match(en,/history of this repository starts at its first commit/);

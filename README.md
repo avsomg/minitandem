@@ -1,7 +1,6 @@
 # Minitandem
 
-[![tests](https://github.com/OWNER/minitandem/actions/workflows/test.yml/badge.svg)](https://github.com/OWNER/minitandem/actions/workflows/test.yml)
-<!-- Replace OWNER with the GitHub account name once the repository exists. The workflow runs only after publication. -->
+[![tests](https://github.com/avsomg/minitandem/actions/workflows/test.yml/badge.svg)](https://github.com/avsomg/minitandem/actions/workflows/test.yml)
 
 Deutsche Fassung: [README.de.md](README.de.md)
 
