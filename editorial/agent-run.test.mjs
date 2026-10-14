@@ -92,6 +92,20 @@ test('sources fetched for earlier leads are captured again for the verifier, ahe
   fetched.length=0;await prepareEvidence({kind:'facts',payload:{...payload,researchLeads:[]}},{sources:[],saveImpl:async()=>{},captureImpl});
   assert.deepEqual(fetched,[url]);
 });
+test('a source issue URL is captured first and facts contracts carry the notice rule',async()=>{
+  const alarm='https://example.org/alarm',fetched=[];
+  const captureImpl=async u=>{fetched.push(u);return {...first,url:u};};
+  const payload={card:{...card,sources:[{url}]},sourceIssues:[{kind:'possible-closure',details:{url:alarm,lines:[{text:'Closed for works',context:['a','b']}]}}]};
+  await prepareEvidence({kind:'facts',payload},{sources:[],saveImpl:async()=>{},captureImpl});
+  assert.deepEqual(fetched,[alarm,url]);
+  for(const kind of ['facts','verify-facts']){
+    const prompt=promptFor({id:'job',kind,input_revision:'revision',payload});
+    assert.match(prompt,/verify the quoted notice on the live official page first/);
+    assert.match(prompt,/a notice about another offer on the same page does not apply/);
+    assert.match(prompt,/an outage is not closure/);
+    assert.match(prompt,/never set a status without an exact binding/);
+  }
+});
 test('primary extraction is not anchored on old field values or unrelated public copy',()=>{
   const prompt=promptFor({id:'job',kind:'facts',input_revision:'revision',payload:{card:{...card,notes:['Unrelated old prose'],practical:{commitment:{value:true}}}}});
   assert.doesNotMatch(prompt,/Unrelated old prose|"min":5|"commitment":\{"value":true/);

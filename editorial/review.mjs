@@ -14,7 +14,13 @@ if(value('show')){
   const task=state.queue.find(q=>q.id===value('show'));
   if(!task)throw Error('Task not found');
   console.log(JSON.stringify(task,null,2));
-  const old=task.details?.oldVersion,newVersion=task.details?.newVersion;
+  const d=task.details||{};
+  if(['possible-closure','possible-reopen'].includes(task.kind))for(const line of d.lines||[]){
+    console.log(`\n[${(line.cats||[]).join(',')}] ${line.strength||''}${line.office?' (office)':''}: ${line.text}`);
+    for(const c of line.context||[])console.log(`    | ${c}`);
+  }
+  if(task.kind==='redirect-changed')console.log(`\nRedirect (${d.class||'?'}, HTTP ${d.httpStatus??'?'}): ${d.from} -> ${d.to}`);
+  const old=task.details?.firstOldVersion||task.details?.oldVersion,newVersion=task.details?.newVersion;
   if(old&&newVersion){
     const a=path.join(here,'versions',task.sourceId,old+'.txt');
     const b=path.join(here,'versions',task.sourceId,newVersion+'.txt');
@@ -30,5 +36,5 @@ if(value('show')){
   console.log(JSON.stringify({resolved:task.id,decision,note},null,2));
 }else{
   const open=state.queue.filter(q=>q.status==='open');
-  console.log(JSON.stringify({open:open.length,tasks:open.map(q=>({id:q.id,kind:q.kind,sourceId:q.sourceId,recordIds:q.recordIds,firstSeen:q.firstSeen,occurrences:q.occurrences,details:q.details}))},null,2));
+  console.log(JSON.stringify({open:open.length,tasks:open.map(q=>({id:q.id,kind:q.kind,sourceId:q.sourceId,recordIds:q.recordIds,firstSeen:q.firstSeen,occurrences:q.occurrences,details:q.details,...(['possible-closure','possible-reopen'].includes(q.kind)?{lines:(q.details?.lines||[]).map(l=>({cats:l.cats,strength:l.strength,text:l.text,context:l.context}))}:{}),...(q.kind==='redirect-changed'?{redirect:`${q.details?.from} -> ${q.details?.to} (${q.details?.class})`}:{})}))},null,2));
 }

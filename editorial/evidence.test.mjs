@@ -3,7 +3,7 @@ import test from 'node:test';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import {snapshot,validateSnapshot,locateQuote,evidenceProblem,publicUrl,captureUrl,htmlText,saveSnapshot,hash,MAX_PDF_BYTES} from './evidence.mjs';
+import {snapshot,validateSnapshot,locateQuote,evidenceProblem,publicUrl,captureUrl,htmlText,saveSnapshot,hash,MAX_PDF_BYTES,monitorSnapshot} from './evidence.mjs';
 
 const now='2026-10-01T10:00:00Z';
 const sample=()=>snapshot({url:'https://example.org/course',fetchedAt:now,text:'Kinder ab 3 Jahren. Teilnahme mit einer Bezugsperson. Anmeldung erforderlich.'});
@@ -62,4 +62,16 @@ test('large official PDFs use a bounded separate limit without relaxing HTML lim
     pdfImpl:async()=>{throw Error('Oversized PDF must never reach the parser');}}),/byte limit/);
   await assert.rejects(captureUrl('https://example.org',{...options,
     fetchImpl:async()=>new Response(null,{headers:{'content-type':'text/html','content-length':'2000001'}})}),/byte limit/);
+});
+
+test('monitor snapshots are labelled by the parser that produced the stored text',async()=>{
+  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'monitor-snap-'));
+  const text='Open every Saturday from nine to noon for families.';
+  const h=hash(text);
+  await fs.mkdir(path.join(dir,'versions','s1'),{recursive:true});
+  await fs.writeFile(path.join(dir,'versions','s1',h.slice(0,12)+'.txt'),text+'\n');
+  const source={id:'s1',url:'https://example.org/p'};
+  const entry={hash:h,lastSuccess:'2026-10-01T10:00:00.000Z'};
+  assert.equal((await monitorSnapshot(source,entry,dir)).parser,'monitor-text-v1');
+  assert.equal((await monitorSnapshot(source,{...entry,parser:'v2'},dir)).parser,'monitor-text-v2');
 });

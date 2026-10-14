@@ -156,5 +156,5 @@ export async function monitorSnapshot(source,entry,editorial){
   if(!entry?.hash||!entry.lastSuccess)return null;
   const text=(await fs.readFile(path.join(editorial,'versions',source.id,entry.hash.slice(0,12)+'.txt'),'utf8')).replace(/\n$/,'');
   if(hash(text)!==entry.hash)throw Error('Monitor snapshot hash mismatch');
-  return snapshot({url:source.url,finalUrl:entry.finalUrl||source.url,fetchedAt:entry.lastSuccess,text});
+  return snapshot({url:source.url,finalUrl:entry.finalUrl||source.url,fetchedAt:entry.lastSuccess,parser:entry.parser==='v2'?'monitor-text-v2':'monitor-text-v1',text});
 }
