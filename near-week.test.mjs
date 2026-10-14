@@ -62,8 +62,8 @@ test('nearest first: exact and approximate distances in one order, unknown last,
   const f={...K.defaultFilters(),sort:'near'};
   assert.deepEqual(ids(C.sortItems(cards.slice(),f,{near:HOME})),['Near town','Twin A','Twin B','Far exact','Far town','Alpha','Zeta']);
   assert.deepEqual(ids(C.sortItems(cards.slice(),f,{near:null})),ids(C.sortItems(cards.slice(),K.defaultFilters(),{})),'no point: the default order');
-  // By the kilometre a row shows; within it a checked address before a town-centre estimate: "≈ 0.3 km" before "< 1 km · centre",
-  // and "≈ 4 km" (4.4, exact) before "≈ 4 km · centre" (4.2).
+  // By the kilometre a row shows; within it a checked address before a town-centre estimate: "≈ 0.3 km" before "< 1 km · centre",
+  // and "≈ 4 km" (4.4, exact) before "≈ 4 km · centre" (4.2).
   const band=catalogue([card('Centre here',{town:'Here'}),card('Exact near',{town:'Here',geo:{...north(0.3)}}),card('Centre four',{town:'Four'}),card('Exact four',{town:'Here',geo:{...north(4.4)}})],
     {Here:{...HOME},Four:{...north(4.2)}});
   assert.deepEqual(ids(band.sortItems(band.activities.slice(),f,{near:HOME})),['Exact near','Centre here','Exact four','Centre four']);
@@ -98,12 +98,12 @@ test('rows show the distance only once a point is set, and say when it is approx
   const approximate=C.activities.find(a=>!C.isArchive(a)&&!a.geo&&C.townCentre(a.town));
   assert.ok(!V.row(exact).includes('r-dist'),'no point, no distance');
   state.near={kind:'geo',...exact.geo};
-  assert.match(V.row(exact),/<span class="r-dist">≈ 0\.1 km<\/span>/);
+  assert.match(V.row(exact),/<span class="r-dist">≈ 0\.1 km<\/span>/);
   const far=C.distanceOf(approximate,state.near).km;
   assert.ok(far>=1);
   assert.ok(V.row(approximate).includes(`<span class="r-dist">${V.esc(t('near.kmTown',{km:Math.round(far)}))}</span>`));
   // Short enough to stay on the category line; the line under the count and the filter panel say what "centre" means.
-  assert.equal(t('near.kmTown',{km:4}),'≈ 4 km · centre');assert.equal(t('near.townUnder1'),'< 1 km · centre');
+  assert.equal(t('near.kmTown',{km:4}),'≈ 4 km · centre');assert.equal(t('near.townUnder1'),'< 1 km · centre');
   const centre=C.townCentre(approximate.town);
   state.near={kind:'town',name:approximate.town,lat:centre.lat,lon:centre.lon};
   assert.ok(V.row(approximate).includes(V.esc(t('near.townUnder1'))),'at the centre itself: under 1 km');
