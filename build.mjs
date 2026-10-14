@@ -5,6 +5,7 @@ import crypto from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import {generatePublicPages,site} from './public-pages.mjs';
+import {generateCaseStudy} from './case-study.mjs';
 import {SCRIPTS,STATIC,ASSETS,GENERATED} from './ui-files.mjs';
 import {preparePublicOutput} from './public-output.mjs';
 import {externalReviewReport,assertPublicationReviewed,readExternalReviewInputs} from './editorial/external-review.mjs';
@@ -85,4 +86,5 @@ for (const file of [...STATIC,...GENERATED,...new Set(SCRIPTS),'.vercelignore'])
 fs.mkdirSync(path.join(output,'assets'),{recursive:true});
 for (const file of ASSETS) fs.copyFileSync(path.join(root,'assets',file),path.join(output,'assets',file));
 const publicPages=generatePublicPages(records,context.window.CATALOG_REGIONS,output,new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Zurich'}));
+generateCaseStudy(root,output);
 console.log(JSON.stringify({output,revision,records:records.length,publicationGates,publicPages,files:fs.readdirSync(output)},null,2));

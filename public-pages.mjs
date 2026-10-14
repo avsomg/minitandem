@@ -2,6 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {SITE_ORIGIN} from './site.mjs';
+import {CASE_STUDY_URLS} from './case-study.mjs';
 
 export const site=SITE_ORIGIN;
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -34,7 +35,7 @@ export function generatePublicPages(records,regions,output,date){
   for(const a of items){const dir=path.join(directory,a.id);fs.mkdirSync(dir);fs.writeFileSync(path.join(dir,'index.html'),placePage(a,regions,date));}
   const groups=Object.entries(regions).filter(([region])=>items.some(a=>a.region===region));
   fs.writeFileSync(path.join(directory,'index.html'),documentPage({title:'Places and activities for families · Minitandem',description:'Activities for families with children aged 0–6 in canton Fribourg: age, prices, addresses and conditions of taking part, with links to the sources.',canonical:'/places/',prefix:'../',body:`<h1>Places and activities</h1><p>${items.length} entries in the current selection. Coverage of the districts is not guaranteed to be complete.</p><nav class="public-regions" aria-label="Districts">${groups.map(([id,label])=>`<a href="#${id}">${esc(label)}</a>`).join('')}</nav>${groups.map(([id,label])=>`<section id="${id}"><h2>${esc(label)}</h2><ul class="place-directory">${items.filter(a=>a.region===id).sort((a,b)=>a.name.localeCompare(b.name,'en')).map(a=>`<li><a href="${a.id}/">${esc(a.name)}</a><span>${esc(a.town)} · ${esc(a.age)}</span></li>`).join('')}</ul></section>`).join('')}`}));
-  const urls=[`${site}/`,`${site}/places/`,...items.map(a=>`${site}/places/${a.id}/`)];
+  const urls=[`${site}/`,`${site}/places/`,...CASE_STUDY_URLS.map(url=>site+url),...items.map(a=>`${site}/places/${a.id}/`)];
   fs.writeFileSync(path.join(output,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+urls.map(url=>`<url><loc>${esc(url)}</loc></url>`).join('')+'</urlset>\n');
   return items.length;
 }

@@ -173,7 +173,8 @@ test('static directory and sitemap include all public records and no archives',(
   const dir=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-public-'));
   try{
     assert.equal(generatePublicPages(catalog.ACTIVITIES,catalog.CATALOG_REGIONS,dir,'2026-09-27'),295);
-    const sitemap=fs.readFileSync(path.join(dir,'sitemap.xml'),'utf8');assert.equal((sitemap.match(/<loc>/g)||[]).length,297);
+    const sitemap=fs.readFileSync(path.join(dir,'sitemap.xml'),'utf8');assert.equal((sitemap.match(/<loc>/g)||[]).length,299);
+    assert.ok(sitemap.includes(`<loc>${SITE_ORIGIN}/projekt/</loc>`)&&sitemap.includes(`<loc>${SITE_ORIGIN}/projekt/en/</loc>`));
     assert.ok(sitemap.includes(`<loc>${SITE_ORIGIN}/</loc>`)&&sitemap.includes(`<loc>${SITE_ORIGIN}/places/mpe/</loc>`));
     assert.ok([...sitemap.matchAll(/<loc>([^<]*)<\/loc>/g)].every(match=>match[1].startsWith(SITE_ORIGIN+'/')));
     const directory=fs.readFileSync(path.join(dir,'places/index.html'),'utf8');
