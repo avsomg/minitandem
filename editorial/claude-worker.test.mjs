@@ -113,7 +113,9 @@ test('reads are allowed by absolute rule for the job folder only, and home folde
   const settings=claudeSettings('/private/var/folders/x/minitandem-claude-worker-1');
   assert.equal(settings.permissions.allow[0],'Read(//private/var/folders/x/minitandem-claude-worker-1/**)');
   for(const rule of ['Read(~/**)','Read(//Users/**)','Read(//Volumes/**)'])assert.ok(settings.permissions.deny.includes(rule));
-  assert.throws(()=>workerRoot(os.homedir()),/outside home folders/);assert.equal(workerRoot('/private/tmp'),'/private/tmp');
+  assert.throws(()=>workerRoot(os.homedir()),/outside home folders/);
+  // The system temporary folder exists on every runner (on the Mac it resolves under /private, on Linux it is /tmp).
+  const temp=fs.realpathSync(os.tmpdir());assert.equal(workerRoot(temp),temp);
   assert.deepEqual(claudeUsage({permission_denials:[{tool_name:'Read'},{}]},{model:'m',effort:'low'},2).permissionDenials,['Read','unknown']);
 });
 test('an older CLI earlier in PATH is refused before any job is claimed',()=>{
