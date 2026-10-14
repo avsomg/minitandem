@@ -439,6 +439,7 @@ textarea.field { display: block; }
 /* card page additions */
 .d-actions { display: inline-flex; align-items: center; gap: 2px; }
 .d-checked { margin: 2px 0 0; font-size: 13px; color: var(--d); }
+.d-stale { margin: 2px 0 0; font-size: 13px; color: #7c2d12; }
 .results:focus { outline: none; }
 .warns { margin: 12px 0 0; padding: 12px 14px 12px 32px; border-radius: 14px; background: #fff7ed; color: #7c2d12; display: grid; gap: 4px; font-size: 14.5px; }
 .venue-link { margin-top: 12px; }

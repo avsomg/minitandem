@@ -83,3 +83,35 @@ test('the new words exist in three languages; French keeps its no-break spaces; 
   }
   for(const lang of ['en','de','fr'])assert.equal(D[lang]['report.mailBody'].split('\n').length,7,lang);
 });
+
+test('the card page shows when it was checked; past 60 days a hint asks to confirm with the organiser, and the status stays',()=>{
+  for(const lang of ['en','de','fr']){
+    const {V,C,P,F,t}=stack({lang});
+    const a=C.activities.find(x=>!C.isArchive(x)&&x.checked),today=C.today();
+    const day=n=>new Date(Date.parse(today+'T12:00:00Z')-n*86400000).toISOString().slice(0,10);
+    const html=(card)=>V.detail(card);
+    const at=n=>({...a,checked:day(n)});
+    assert.equal(P.STALE_CHECK_DAYS,60);
+    assert.equal(P.checkAge(at(0),today),0);
+    assert.equal(P.checkAge(at(60),today),60);
+    assert.equal(P.checkStale(at(60),today),false,'60 days old is still within the limit');
+    assert.equal(P.checkStale(at(61),today),true,'61 days old is past it');
+    assert.equal(P.checkAge({...a,checked:day(-3)},today),null,'a date in the future is not shown as an age');
+    const hint=V.esc(t('card.checkedOld')),line=V.esc(t('card.checked',{date:F.dateLabel(at(61).checked)}));
+    assert.ok(html(at(61)).includes(line)&&html(at(61)).includes(hint),lang+': old card carries date and hint');
+    assert.ok(html(at(60)).includes(V.esc(t('card.checked',{date:F.dateLabel(at(60).checked)})))&&!html(at(60)).includes(hint),lang+': fresh card has no hint');
+    assert.equal(C.statusOf(at(61),NaN),C.statusOf(at(1),NaN),'age of the check does not change the status');
+  }
+});
+
+test('a card without a valid check date shows no date line and no hint',()=>{
+  const {V,C,P,t}=stack();
+  const a=C.activities.find(x=>!C.isArchive(x));
+  for(const checked of [undefined,'','soon','2026-13-40']){
+    const html=V.detail({...a,checked});
+    assert.ok(!html.includes('d-checked')&&!html.includes('d-stale')&&!html.includes('Invalid'),String(checked));
+    assert.equal(P.checkAge({...a,checked},C.today()),null);
+    assert.equal(P.checkStale({...a,checked},C.today()),false);
+  }
+  assert.ok(t('card.checkedOld'));
+});

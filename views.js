@@ -93,6 +93,11 @@
       if (d.exact) return t('near.km', {km: window.MinitandemCatalogue.roundKm(d.km)});
       return d.km < 1 ? t('near.townUnder1') : t('near.kmTown', {km: Math.round(d.km)});
     }
+    // The date of the card's last check, and after P.STALE_CHECK_DAYS a hint to confirm with the organiser. No date on the card: nothing is shown.
+    function checkedLine(a) {
+      if (P.checkAge(a, C.today()) === null) return '';
+      return `<p class="d-checked">${esc(t('card.checked', {date: F.dateLabel(a.checked)}))}</p>` + (P.checkStale(a, C.today()) ? `<p class="d-stale">${esc(t('card.checkedOld'))}</p>` : '');
+    }
     // A row of the list. opts (week view): time is a session's time, shown first; lead is a bold first part of the date line
     // ("Regular, confirm holidays", "Hours"), when replaces the rest of it. Card text that falls back to English carries lang="en".
     function row(card, {time = '', lead = '', when = null} = {}) {
@@ -292,7 +297,7 @@
         `<div class="d-body" tabindex="-1" autofocus>` +
         `<p class="d-kicker">${esc(t('category.' + a.category))}</p><h2 class="d-name" id="dTitle"${en}>${nm(a.name)}</h2><p class="d-where">${esc(placeLine(a))} · ${esc(t('card.canton'))}</p>` +
         (why ? `<p class="hint d-english">${esc(t(why === 'failed' ? 'card.notLoaded' : 'card.inEnglish'))}</p>` : '') +
-        `<p class="d-status" id="detail-data-status"><i class="dot ${statusClass[status]}" aria-hidden="true"></i>${esc(t('status.' + status + '.long'))}</p><p class="d-checked">${esc(t('card.checked', {date: F.dateLabel(a.checked)}))}</p>` +
+        `<p class="d-status" id="detail-data-status"><i class="dot ${statusClass[status]}" aria-hidden="true"></i>${esc(t('status.' + status + '.long'))}</p>${checkedLine(a)}` +
         (warnings.length ? `<ul class="warns">${warnings.map(w => `<li${w.card ? en : ''}>${esc(w.text)}</li>`).join('')}</ul>` : '') +
         (C.venueFor(a) ? `<button type="button" class="ghost venue-link" data-venue="${esc(C.venueFor(a).id)}">${esc(t('card.venue', {name: C.venueFor(a).name}))}</button>` : '') +
         `<dl class="facts">${facts}</dl><!--second-->`;
@@ -318,7 +323,7 @@
       out += section(t('card.contacts'), contacts + (a.contacts.some(c => c.phone || c.email) ? '' : `<p class="np">${esc(t('card.noContact'))}</p>`));
       const photo = a.practical?.photo;
       if (photo || a.practical?.gallery) out += section(t('card.photos'), (photo ? `<figure class="place-photo"><img src="${esc(photo.path)}" alt="${esc(photo.alt)}" loading="lazy" width="960" height="443"><figcaption>${esc(photo.caption)} ${link(photo.source, esc(photo.credit), 'inline-link')}</figcaption></figure>` : '') + (a.practical.gallery ? link(a.practical.gallery, esc(t('card.gallery')) + ICON.out(14), 'inline-link') : '') + `<p class="hint">${esc(t('card.photoNote'))}</p>`);
-      out += section(t('card.sources'), a.sources.filter(s => /^https:\/\//i.test(s.url)).length ? `<ul class="srcs"${en}>${a.sources.filter(s => /^https:\/\//i.test(s.url)).map(s => `<li>${link(s.url, `<span>${esc(s.label)}</span>${ICON.out(16)}`)}</li>`).join('')}</ul><p class="hint">${esc(t('card.sourceNote', {date: F.dateLabel(a.checked)}))}${C.needsReview(a) ? ' ' + esc(t('card.reviewDue')) : ''}</p>` : `<p class="np">${esc(t('card.noSources'))}</p>`);
+      out += section(t('card.sources'), a.sources.filter(s => /^https:\/\//i.test(s.url)).length ? `<ul class="srcs"${en}>${a.sources.filter(s => /^https:\/\//i.test(s.url)).map(s => `<li>${link(s.url, `<span>${esc(s.label)}</span>${ICON.out(16)}`)}</li>`).join('')}</ul><p class="hint">${esc(P.checkAge(a, C.today()) === null ? t('card.sourceNoteUndated') : t('card.sourceNote', {date: F.dateLabel(a.checked)}))}${C.needsReview(a) ? ' ' + esc(t('card.reviewDue')) : ''}</p>` : `<p class="np">${esc(t('card.noSources'))}</p>`);
       // The correction form reaches the editors only through the family service; without it, the e-mail under the facts is the way.
       out += `<div class="d-more">${ctx.syncConnected?.() ? `<button type="button" class="linkbtn" data-action="report-change">${ICON.flag(16)} ${esc(t('card.report'))}</button>` : ''}${!C.isArchive(a) ? `<a class="linkbtn" href="places/${esc(a.id)}/">${esc(t('card.publicPage'))}</a>` : ''}</div></div>`;
       const url = organiserURL(a), first = a.contacts.find(c => c.phone), mail = a.contacts.find(c => c.email);

@@ -42,6 +42,16 @@
   const facilityKeys=['indoor','duration','access','changing','toilet','feeding','playArea','parking'];
   const attendanceKeys=['','went','missed'];
   const usefulnessKeys=['','yes','no'];
+  // How old the card's own check date is, in whole days at `today`; null when the card has no valid date (or it lies in the future), so nothing is invented.
+  // After STALE_CHECK_DAYS the card page adds a hint; the card's status is not changed by it. 60 days: twice the usual 30-day review window of an
+  // active card (reviewAfter), and the lower end of the 60-90 day cycle planned for venues; a term-based schedule can change within that time.
+  const STALE_CHECK_DAYS=60;
+  function checkAge(a,today) {
+    if(!validDate(a?.checked)||!validDate(today))return null;
+    const days=Math.round((Date.parse(today+'T12:00:00Z')-Date.parse(a.checked+'T12:00:00Z'))/86400000);
+    return days>=0?days:null;
+  }
+  const checkStale=(a,today)=>{const d=checkAge(a,today);return d!==null&&d>STALE_CHECK_DAYS;};
   const informationKeys=['','enough','missing'];
   // Each warning is {code} (generated here, worded by the interface) or {text} (published card content, shown as written).
   function warnings(a,date) {
@@ -153,5 +163,5 @@
     const current=snapshot(a,previous.date);
     return trackedFieldKeys.filter(key=>previous.fields[key]!==current.fields[key]).map(key=>({key,before:previous.fields[key],after:current.fields[key]}));
   }
-  window.MinitandemPlanning={scenario,range,matches,needKeys,matchesNeeds,matchesWhen,facilityKeys,attendanceKeys,usefulnessKeys,informationKeys,warnings,visit,visitFieldKeys,shareIds,shareURL,familyPrice,matchReasons,admission,admissionKeys,bookingStateKeys,outcomeKeys,validDate,validTime,validateVisits,mergeVisits,snapshot,validateTracked,changes,trackedFieldKeys,maxVisits,fail};
+  window.MinitandemPlanning={STALE_CHECK_DAYS,checkAge,checkStale,scenario,range,matches,needKeys,matchesNeeds,matchesWhen,facilityKeys,attendanceKeys,usefulnessKeys,informationKeys,warnings,visit,visitFieldKeys,shareIds,shareURL,familyPrice,matchReasons,admission,admissionKeys,bookingStateKeys,outcomeKeys,validDate,validTime,validateVisits,mergeVisits,snapshot,validateTracked,changes,trackedFieldKeys,maxVisits,fail};
 })();
