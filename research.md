@@ -109,7 +109,7 @@ To confirm before visiting:
 - Course payment: Individual lesson CHF 80; separate trial lesson CHF 60 [Source](https://sellenhof.ch/Reitangebote)
 - Coordinates of the address (not the entrance): 46.743980407714844, 7.289436340332031. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Sellenhof+Seeliweg+21+1716+Plaffeien&type=locations&origins=address&limit=5&sr=4326)
 
-## Pony entdecken · Stéphanie Ruffieux
+## Pony entdecken · Tierhappy
 
 - Status: For later; see age and conditions
 - Place: Oberschrot
@@ -142,7 +142,7 @@ To confirm before visiting:
 - [Additional check: Course leader](https://www.tierhappy.ch/à-propos-de-moi)
 - Coordinates of the address (not the entrance): 46.731719970703125, 7.262561798095703. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ober+Tsch%C3%BCplere+90+1716+Oberschrot&type=locations&origins=address&limit=5&sr=4326)
 
-## Pony Spass · Stéphanie Ruffieux
+## Pony Spass · Tierhappy
 
 - Status: For later; see age and conditions
 - Place: Oberschrot
@@ -171,7 +171,7 @@ To confirm before visiting:
 - [Tierhappy · organiser](https://www.tierhappy.ch/)
 - Coordinates of the address (not the entrance): 46.731719970703125, 7.262561798095703. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ober+Tsch%C3%BCplere+90+1716+Oberschrot&type=locations&origins=address&limit=5&sr=4326)
 
-## Mit Pferden unterwegs Sein · Rahel Grunder
+## Mit Pferden unterwegs Sein
 
 - Status: For later; see age and conditions
 - Place: Oberschrot
