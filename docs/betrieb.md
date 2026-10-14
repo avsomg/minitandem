@@ -1,6 +1,6 @@
 # Betrieb: Server, Sicherung, Überwachung
 
-Dieses Dokument beschreibt, wie Minitandem auf einem kleinen Server laufen würde. **Vorbereitet, nicht ausgeführt:** Es wurde nichts ausgerollt, keine Verbindung zum Server aufgebaut und das Image auf dem Entwicklungsrechner nicht gebaut (siehe «Stand der Prüfung» ganz unten).
+Dieses Dokument beschreibt den Betrieb von Minitandem auf einem kleinen Server. Seit dem 14. Oktober 2026 läuft die Seite nach dieser Anleitung unter https://minitandem.ch (siehe «Stand der Prüfung» ganz unten).
 
 Zielsystem (nur zur Referenz): Ubuntu 24.04 LTS, 1 vCPU, 2 GB RAM, eingehend offen sind 22, 80 und 443 auf IPv4. Ausgehend ist Port 25 gesperrt.
 
@@ -208,5 +208,11 @@ Geprüft auf dem Entwicklungsrechner, ohne Docker:
 - `ops/healthcheck.sh` läuft im Test gegen einen Wegwerf-Server mit einem Ersatz für `sendmail`: eine Mail beim Ausfall, eine bei der Rückkehr, sonst keine.
 - Die Regeln aus `.dockerignore` werden im Test nachgebildet; kein privater Pfad der Audit-Liste gelangt in den Build-Kontext.
 
-**Nicht geprüft:** das Bauen des Images, das Starten der Container, die Syntax des `Caddyfile` und das Ausstellen von Zertifikaten. Auf dem Entwicklungsrechner ist zwar ein Docker-Client installiert, aber kein laufender Docker-Dienst. Vor dem ersten echten Deployment deshalb zuerst `docker compose config -q`, `docker compose build` und
-`docker run --rm -e ACME_EMAIL=test@example.org -v "$PWD/docker/Caddyfile:/etc/caddy/Caddyfile:ro" caddy:2-alpine caddy validate --config /etc/caddy/Caddyfile` ausführen.
+Auf dem Server, am 14. Oktober 2026:
+
+- Deployment nach «Erstes Deployment»: Das Image wurde gebaut, beide Container laufen, Caddy hat die Zertifikate für `minitandem.ch` und `www.minitandem.ch` von Let's Encrypt bezogen. Von aussen geprüft: `www` und `http` leiten auf `https://minitandem.ch` um, `/healthz` antwortet, die Editor-Pfade antworten mit 404, die Oberfläche läuft in allen drei Sprachen.
+- Ein Update nach «Update» lief durch; das vorherige Image blieb für einen Rollback erhalten.
+- Sichern und Wiederherstellen wurden geübt (siehe dort).
+- Überwachung per E-Mail eingerichtet: Eine Testmail sowie je eine Mail für Ausfall und Rückkehr wurden über `mail.infomaniak.com:587` verschickt, vom Relay angenommen und kamen an; der Timer läuft alle fünf Minuten.
+
+**Nicht geprüft:** ein Neustart des ganzen Servers (die Container haben `restart: unless-stopped`, Docker startet beim Booten) und das Erneuern eines Zertifikats. Die jetzigen Zertifikate gelten bis zum 12. Januar 2027; Caddy erneuert sie vorher selbst, voraussichtlich ab Mitte Dezember 2026.
