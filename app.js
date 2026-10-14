@@ -63,10 +63,11 @@
   // A remembered town comes back; a position from the browser never does, so "nearest first" without a point falls back.
   { const name = store.loadNear(), centre = name && C.townCentre(name); if (centre) state.near = {kind: 'town', name, lat: centre.lat, lon: centre.lon}; }
   if (state.f.sort === 'near' && !state.near) state.f.sort = 'default';
+  if (!state.near) state.f.radius = 0;
   state.outingDate = Object.values(store.personal.visits).map(v => v.date).filter(date => date >= C.today()).sort()[0] || C.today();
 
   const els = {};
-  for (const id of ['q', 'qClear', 'fbar', 'fpAge', 'fpAgeV', 'fpPlace', 'fpPlaceV', 'fpMore', 'count', 'countNote', 'barR', 'fcount', 'list', 'listhead', 'empty', 'endnav', 'endNote', 'toFilters', 'more', 'moreBtn', 'fchips', 'fchipList',
+  for (const id of ['q', 'qClear', 'fbar', 'fpAge', 'fpAgeV', 'fpPlace', 'fpPlaceV', 'fpMore', 'count', 'countNote', 'whenNote', 'barR', 'fcount', 'list', 'listhead', 'empty', 'endnav', 'endNote', 'toFilters', 'more', 'moreBtn', 'fchips', 'fchipList',
     'sheet', 'sheetBody', 'sheetDone', 'sheetClose', 'colBody', 'detail', 'utility', 'utilityTitle', 'utilityBody', 'panel', 'toast', 'viewTitle', 'viewTools', 'savedBox', 'mapBox', 'updates',
     'syncState', 'contentNote', 'importFile', 'planImportFile', 'results', 'tabSaved', 'nearNote', 'nearText', 'nearOpen', 'resetTop', 'weekBox'])
     els[id] = document.getElementById(id);
@@ -134,6 +135,7 @@
       for (const value of set) out.push({key: kind + ':' + value, label: t(prefix + '.' + value)});
     for (const [kind, prefix] of [['when', 'when'], ['price', 'priceFilter'], ['status', 'statusFilter'], ['preset', 'preset']]) if (f[kind]) out.push({key: kind, label: t(prefix + '.' + f[kind])});
     if (f.parentMatch) out.push({key: 'adult', label: t('filter.withAdult')});
+    if (f.radius && state.near) out.push({key: 'radius', label: t('near.radiusKm', {km: f.radius})});
     return out;
   }
   function removeFilter(key) {
@@ -144,6 +146,7 @@
     else if (kind === 'place') f.place = '';
     else if (kind === 'indoor') f.indoor = false;
     else if (kind === 'adult') f.parentMatch = false;
+    else if (kind === 'radius') f.radius = 0;
     else if (['when', 'price', 'status', 'preset'].includes(kind)) f[kind] = '';
     state.limit = PAGE; render();
   }
@@ -191,7 +194,12 @@
     els.contentNote.hidden = !english;
     els.contentNote.textContent = !english ? '' : cardText.failed.has(cardText.lang) ? t('cards.notLoaded') : t('cards.english', {n: english});
     els.nearNote.hidden = !state.near || isMap || !n;
-    els.nearText.textContent = !state.near ? '' : state.near.kind === 'town' ? t('near.listFromTown', {town: state.near.name}) : t('near.listFromLocation');
+    // With a distance limit the line also says how many cards it leaves out because their distance is unknown.
+    const unknownLeftOut = state.near && state.f.radius ? C.filter({...state.f, radius: 0}, {age: a0, view, personal: store.personal, venueId: state.venueId, sharedIds: state.sharedIds}).filter(a => !C.distanceOf(a, state.near)).length : 0;
+    els.nearText.textContent = !state.near ? '' : (state.near.kind === 'town' ? t('near.listFromTown', {town: state.near.name}) : t('near.listFromLocation')) +
+      (unknownLeftOut ? ' ' + t('near.radiusUnknown', {n: unknownLeftOut}) : '');
+    // Today, this weekend, the next 7 days: weekly hours count, and the line says that holidays are not in the data.
+    els.whenNote.hidden = !K.DAY_WHEN.includes(state.f.when) || !n; els.whenNote.textContent = els.whenNote.hidden ? '' : t('note.whenRegular');
     // body of the results
     const shown = list.slice(0, state.limit);
     els.listhead.hidden = isMap || isWeek || !n;
@@ -201,7 +209,7 @@
     lastDays = days || [];
     els.weekBox.hidden = !isWeek || !n; els.weekBox.innerHTML = isWeek && n ? V.week(days) : '';
     const emptyKind = view === 'saved' && !store.personal.favorites.length ? 'saved' : view === 'catalog' && Number.isFinite(a0) && !state.f.includeUnknownAge ? 'unknown' : '';
-    els.empty.hidden = !!n; els.empty.innerHTML = n ? '' : V.empty(emptyKind);
+    els.empty.hidden = !!n; els.empty.innerHTML = n ? '' : K.DAY_WHEN.includes(state.f.when) && view !== 'saved' ? V.empty('when', whenAlternative()) : V.empty(emptyKind);
     if (isMap && !n) els.mapBox.hidden = true;
     const more = !isMap && !isWeek && shown.length < n;
     els.more.hidden = !more; els.moreBtn.textContent = more ? t('list.more', {shown: shown.length, total: n}) : '';
@@ -215,6 +223,13 @@
     els.updates.hidden = !changed || view === 'saved'; els.updates.innerHTML = changed ? `<button type="button" class="linkbtn" data-action="open-updates">${esc(t('saved.banner', {n: changed}))}</button>` : '';
     syncPanel();
     if (isMap && n) mountMap(list);
+  }
+  // Nothing found for "today", "this weekend" or "next 7 days": what the same day filter finds without the other filters (with the child's
+  // age if that still finds something, else without it), so that the visitor is offered a way on instead of a dead end.
+  function whenAlternative() {
+    const only = {...K.defaultFilters(), when: state.f.when}, context = {view: 'catalog', near: state.near};
+    const withAge = Number.isFinite(age()) ? C.filter(only, {...context, age: age()}).length : 0;
+    return withAge ? {n: withAge, when: state.f.when, keepsAge: true} : {n: C.filter(only, {...context, age: null}).length, when: state.f.when, keepsAge: false};
   }
   function pendingChangeCount() { return store.personal.favorites.filter(id => C.byId.has(id) && P.changes(C.byId.get(id), store.personal.tracked[id]).length).length; }
 
@@ -266,6 +281,7 @@
     note.classList.toggle('err', state.nearStatus === 'failed');
     $('#nearGeo', panel).disabled = state.nearStatus === 'locating';
     $('#nearClear', panel).hidden = !state.near;
+    const radius = $('#nearRadius', panel); radius.disabled = !state.near; radius.value = String(state.near ? state.f.radius : 0);
   }
   function togglePanelValue(kind, val) {
     const f = state.f, toggle = (set, v) => set.has(v) ? set.delete(v) : set.add(v);
@@ -295,7 +311,8 @@
     });
     panel.addEventListener('change', e => {
       if (e.target.id === 'age') { const hint = $('#ageHint', panel); hint.textContent = hint.dataset.text; hint.classList.remove('err'); syncPanel(); }
-      else if (e.target.id === 'place') { state.f.place = e.target.value; state.limit = PAGE; render(); }
+      else if (e.target.id === 'place') { state.f.place = e.target.value; if (state.f.place && state.f.radius) { state.f.radius = 0; toast(t('near.radiusCleared')); } state.limit = PAGE; render(); }
+      else if (e.target.id === 'nearRadius') setRadius(Number(e.target.value));
       else if (e.target.id === 'sort') { state.f.sort = e.target.value; render(); }
       else if (e.target.id === 'nearTown') chooseTown(e.target.value);
     });
@@ -312,9 +329,16 @@
   /* ---------- distances from a point the visitor sets ---------- */
   // A chosen town is remembered in this browser. The browser's location is asked for once per press, coarse, and kept only in this
   // page's memory: it is never stored, never put in the address and never sent anywhere. Setting a point sorts nearest first.
+  // A distance limit and a district or town do not stack silently: setting a limit removes the district or town (and says so); choosing
+  // a district or town removes the limit. The limit shows as a chip that removes it.
+  function setRadius(km) {
+    state.f.radius = K.RADIUS_KEYS.includes(km) && state.near ? km : 0;
+    if (state.f.radius && state.f.place) { state.f.place = ''; toast(t('near.placeCleared')); }
+    state.limit = PAGE; render();
+  }
   function setNear(near) {
     state.near = near; state.nearStatus = '';
-    if (near) state.f.sort = 'near'; else if (state.f.sort === 'near') state.f.sort = 'default';
+    if (near) state.f.sort = 'near'; else { if (state.f.sort === 'near') state.f.sort = 'default'; state.f.radius = 0; }
     state.limit = PAGE; render();
   }
   function chooseTown(name) {
@@ -486,6 +510,7 @@
   }
   const actions = {
     'copy-link': () => copy(location.href),
+    'when-only': () => { const alt = whenAlternative(); state.f = {...K.defaultFilters(), when: state.f.when, sort: state.f.sort}; state.limit = PAGE; if (!alt.keepsAge && Number.isFinite(age())) setAge(null); else render(); },
     // The phone's share sheet with the card's name, next date (or its schedule), price and a link that opens it in this language.
     'share-card': async () => {
       const a = shown(C.byId.get(state.openId)); if (!a) return;

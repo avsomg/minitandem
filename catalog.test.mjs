@@ -632,7 +632,9 @@ test('list rows and card pages show the status label from the dictionary',()=>{
   assert.equal(C.statusOf(sample,AGE),'active');
   assert.ok(V.row(sample).includes(`${V.esc(t('status.active.short'))}</span>`));
   assert.ok(V.detail(sample).includes(V.esc(t('status.active.long'))));
-  assert.ok(V.row(sample).includes('class="dot good"'));
+  // In a row "Current" is written without a dot; the remaining dots mark what needs a look.
+  assert.ok(!V.row(sample).includes('class="dot good"'));
+  assert.ok(V.row({...sample,status:'check'}).includes('class="dot check"'));
   const check={...sample,status:'check'};
   assert.equal(C.statusOf(check,AGE),'check');
   assert.ok(V.row(check).includes(V.esc(t('status.check.short'))));
@@ -849,6 +851,9 @@ test('every filter option selects only cards that have the property, and some ca
   const weekday=date=>new Date(date+'T12:00:00Z').getUTCDay()||7;
   // 14 October 2026 is a Wednesday and the test clock stands at 10:00, so the weekend is 17 and 18 October.
   const dated=(a,from,to)=>a.events.some(e=>e.date>=from&&e.date<=to&&(e.date!=='2026-10-14'||!e.end||e.end>='10:00'));
+  // Today, this weekend and the next 7 days also count a card without dated sessions on its weekdays while its schedule is valid.
+  const repeats=(a,dates)=>!a.events.length&&dates.some(d=>a.days.includes(weekday(d))&&(!a.scheduleValidThrough||a.scheduleValidThrough>=d));
+  const days=(from,n)=>Array.from({length:n},(_,i)=>new Date(Date.parse(from+'T12:00:00Z')+i*864e5).toISOString().slice(0,10));
   const cases=[
     ['category',f=>f.categories.add('water'),a=>a.category==='water'],
     ['format',f=>f.formats.add('event'),a=>a.format==='event'],
@@ -858,9 +863,9 @@ test('every filter option selects only cards that have the property, and some ca
     ['condition: trial visit',f=>f.needs.add('trial'),a=>a.practical?.trial?.value===true],
     ['condition: no course fee',f=>f.needs.add('noCourse'),a=>a.practical?.commitment?.value===false],
     ['when: upcoming',f=>{f.when='upcoming';},a=>dated(a,'2026-10-14','9999-12-31')],
-    ['when: today',f=>{f.when='today';},a=>dated(a,'2026-10-14','2026-10-14')],
-    ['when: next 7 days',f=>{f.when='week';},a=>dated(a,'2026-10-14','2026-10-20')],
-    ['when: this weekend',f=>{f.when='weekend';},a=>dated(a,'2026-10-17','2026-10-18')],
+    ['when: today',f=>{f.when='today';},a=>dated(a,'2026-10-14','2026-10-14')||repeats(a,days('2026-10-14',1))],
+    ['when: next 7 days',f=>{f.when='week';},a=>dated(a,'2026-10-14','2026-10-20')||repeats(a,days('2026-10-14',7))],
+    ['when: this weekend',f=>{f.when='weekend';},a=>dated(a,'2026-10-17','2026-10-18')||repeats(a,days('2026-10-17',2))],
     ['price: free or donation',f=>{f.price='free';},a=>a.priceKind==='free'||a.priceKind==='donation'],
     ['price: per course',f=>{f.price='course';},a=>a.priceKind==='course'],
     ['price: unclear',f=>{f.price='unknown';},a=>a.priceKind==='unknown'],

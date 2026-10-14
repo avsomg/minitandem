@@ -218,7 +218,7 @@ test('the week view: a row to jump to a day, dated sessions open and time first,
   assert.ok(html.includes('id="wd-2026-10-15" tabindex="-1">Tomorrow · Thursday 15 October'));
   // A dated session: open, its time first on the row, its title on the date line.
   assert.ok(html.includes('>1 dated session<'));
-  assert.match(html,/<a class="row has-time"[^>]*><span class="r-main"><span class="r-cat"><b class="r-time">09:30–11:00<\/b>/);
+  assert.match(html,/<a class="row has-time"[^>]*><span class="tile c-play" aria-hidden="true"><svg[\s\S]*?<\/svg><\/span><span class="r-main"><span class="r-cat"><b class="r-time">09:30–11:00<\/b>/);
   assert.ok(html.includes('<span>Autumn morning</span>'));
   // Wednesday: the regular group and the places are folded into a count each, and their rows are not built yet.
   const wednesday=html.slice(html.indexOf('id="wd-2026-10-14"'),html.indexOf('id="wd-2026-10-15"'));

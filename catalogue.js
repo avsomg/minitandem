@@ -14,6 +14,10 @@
   const PRESET_KEYS = ['', 'walkin', 'short'];
   const SCENARIO_KEYS = ['', 'visit', 'event', 'course'];
   const SORT_KEYS = ['default', 'name', 'town', 'date', 'near'];
+  // A distance limit in km around the point the visitor set (0: none). It needs a point; without one it has no effect.
+  const RADIUS_KEYS = [0, 5, 10, 20, 30];
+  // The "when" choices that mean days (as opposed to "has upcoming dates"): they count regular groups and opening hours as well.
+  const DAY_WHEN = ['today', 'weekend', 'week'];
   const DAY_KEYS = [1, 2, 3, 4, 5, 6, 7];
   const VIEWS = ['catalog', 'week', 'map', 'saved', 'archive', 'shared', 'venue'];
   const MAX_AGE = 18;
@@ -32,7 +36,7 @@
   const bounded = a => (a.min !== null && a.min > 0) || a.max !== null;
   function defaultFilters() {
     return {query: '', place: '', categories: new Set(), formats: new Set(), languages: new Set(), days: new Set(), needs: new Set(), when: '', price: '', status: '',
-      scenario: '', preset: '', indoor: false, parentMatch: false, includeUnknownAge: true, planStatus: '', sort: 'default'};
+      scenario: '', preset: '', indoor: false, radius: 0, parentMatch: false, includeUnknownAge: true, planStatus: '', sort: 'default'};
   }
   // Swiss calendar dates as 'YYYY-MM-DD'; weekdays as on the cards and in the day filter: 1 = Monday ... 7 = Sunday.
   const addDays = (date, n) => { const d = new Date(date + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
@@ -42,6 +46,50 @@
     const rad = x => x * Math.PI / 180, dLat = rad(to.lat - from.lat), dLon = rad(to.lon - from.lon);
     const h = Math.sin(dLat / 2) ** 2 + Math.cos(rad(from.lat)) * Math.cos(rad(to.lat)) * Math.sin(dLon / 2) ** 2;
     return 2 * 6371.0088 * Math.asin(Math.min(1, Math.sqrt(h)));
+  }
+  // The time a schedule gives for one weekday (1 = Monday ... 7 = Sunday), read from the English text: "Mon–Fri 09–22, Sat–Sun 09–20" gives
+  // "09–20" for Saturday. Each time is read with the day words right before it. Nothing is guessed: null when the part that names the day
+  // also has a rule a weekday cannot express ("2nd and 4th Saturday", "by arrangement", a season, holidays), ends before the date or starts
+  // after it ("until 30.09"), when the day has no time, or when it appears in more than one part.
+  const DAY_WORDS = [['mon', 'monday', 'mondays'], ['tue', 'tues', 'tuesday', 'tuesdays'], ['wed', 'wednesday', 'wednesdays'], ['thu', 'thur', 'thurs', 'thursday', 'thursdays'],
+    ['fri', 'friday', 'fridays'], ['sat', 'saturday', 'saturdays'], ['sun', 'sunday', 'sundays']];
+  const dayOfWord = word => DAY_WORDS.findIndex(words => words.includes(String(word).toLowerCase())) + 1;
+  const CONNECTORS = ['–', '-', ',', '/', '&', 'and', 'to'];
+  // The days named just before a time: "Sat–Sun", "Tue, Thu, Fri", "Monday to Saturday", "Daily".
+  function daysBefore(head) {
+    const tokens = head.match(/[A-Za-z]+|[–\-,/&]/g) || [];
+    let start = tokens.length;
+    while (start > 0 && (dayOfWord(tokens[start - 1]) || CONNECTORS.includes(tokens[start - 1].toLowerCase()))) start--;
+    const spec = tokens.slice(start), days = new Set();
+    if (!spec.some(dayOfWord)) return /\b(?:daily|every day)\s*$/i.test(head) ? new Set(DAY_KEYS) : null;
+    for (let i = 0; i < spec.length; i++) {
+      const day = dayOfWord(spec[i]); if (!day) continue;
+      const next = (spec[i + 1] || '').toLowerCase(), end = ['–', '-', 'to'].includes(next) && dayOfWord(spec[i + 2] || '');
+      if (end) { for (let d = day; ; d = d % 7 + 1) { days.add(d); if (d === end) break; } i += 2; } else days.add(day);
+    }
+    return days;
+  }
+  const TIME = String.raw`\d{1,2}(?::\d{2})?\s*[–-]\s*\d{1,2}(?::\d{2})?`;
+  const TIMES = new RegExp(String.raw`(?<![\d.:])${TIME}(?:\s*(?:,|and|&|or|/)\s*${TIME})*(?![\d:]|\.\d)`, 'g');
+  // A day and month in the text ("until 31.10", "from 01.11.2026") as a date of the given year.
+  const dayMonth = (match, year) => `${match[3] || year}-${match[2].padStart(2, '0')}-${match[1].padStart(2, '0')}`;
+  function scheduleSlot(schedule, weekday, date = '') {
+    const hits = [];
+    for (const clause of String(schedule || '').split(/\s*(?:;|·|\.\s|\n)\s*/)) {
+      let last = 0;
+      for (const match of clause.matchAll(TIMES)) {
+        const days = daysBefore(clause.slice(last, match.index));
+        last = match.index + match[0].length;
+        if (!days || !days.has(weekday)) continue;
+        if (/\b(?:1st|2nd|3rd|4th|5th|first|second|third|fourth|last|every other|alternate|once a month|monthly|fortnightly|on request|arrangement|winter|summer|spring|autumn|season|holidays?|vacation|closed)\b/i.test(clause)) return null;
+        if (date) {
+          const until = clause.match(/\buntil (\d{1,2})\.(\d{1,2})\.?(\d{4})?/i), from = clause.match(/\bfrom (\d{1,2})\.(\d{1,2})\.?(\d{4})?/i);
+          if ((until && dayMonth(until, date.slice(0, 4)) < date) || (from && dayMonth(from, date.slice(0, 4)) > date)) return null;
+        }
+        hits.push(match[0].replace(/\s*[–-]\s*(?=\d)/g, '–').replace(/\s*(?:,|and|&|or|\/)\s*(?=\d)/g, ', '));
+      }
+    }
+    return hits.length === 1 ? hits[0] : null;
   }
   // What a row shows: one decimal under 1 km, whole kilometres above.
   const roundKm = km => km < 1 ? Math.max(0.1, Math.round(km * 10) / 10) : Math.round(km);
@@ -63,6 +111,25 @@
     // The point a card is measured to: its checked address point (the same rule as the map: not an area, not an address that
     // changes by date), else the centre of its town, approximate. null: no point at all, the distance is unknown.
     const exactPoint = a => a.geo && a.addressPrecision !== 'area' && !a.events.some(e => e.address && e.address !== a.address) ? a.geo : null;
+    // A date counts for a card when a dated session falls on it (today: one not over yet), or when the card has no dated sessions, names
+    // that weekday and its schedule has not run out by then. The week view and the day filters use the same two tests.
+    const sessionsOn = (a, date) => a.events.filter(e => e.date === date && inFuture(e));
+    const repeatsOn = (a, date) => !isArchive(a) && !a.events.length && a.days.includes(weekdayOf(date)) && (!a.scheduleValidThrough || a.scheduleValidThrough >= date);
+    function whenDates(mode) {
+      if (!DAY_WHEN.includes(mode)) return null;
+      const [from, to] = P.range(mode, today()), dates = [];
+      for (let date = from; date <= to; date = addDays(date, 1)) dates.push(date);
+      return dates;
+    }
+    // How a card meets a day filter: {date, kind} with kind 'session', 'regular' (a group or course) or 'place' (visited on one's own);
+    // null when it does not, or when no day filter is on.
+    function whenInfo(a, f) {
+      const dates = whenDates(f.when);
+      if (!dates) return null;
+      for (const date of dates) if (sessionsOn(a, date).length) return {date, kind: 'session'};
+      for (const date of dates) if (repeatsOn(a, date)) return {date, kind: a.format === 'self' ? 'place' : 'regular'};
+      return null;
+    }
     function distanceOf(a, from) {
       if (!from) return null;
       const exact = exactPoint(a);
@@ -99,7 +166,7 @@
       t('category.' + a.category), ALIASES[a.town] || '', note].join(' '));
     const matchesSearch = (text, query) => norm(query.trim()).split(/\s+/).every(q => text.includes(q));
 
-    function matches(a, f, {age = null, view = 'catalog', personal = null, venueId = '', sharedIds = []} = {}) {
+    function matches(a, f, {age = null, view = 'catalog', personal = null, venueId = '', sharedIds = [], near = null} = {}) {
       if (view === 'venue') return Boolean(venues.find(v => v.id === venueId)?.members.includes(a.id));
       if (view === 'shared') return sharedIds.includes(a.id);
       if (f.place) {
@@ -116,7 +183,12 @@
       // Rainy day: only cards whose organiser states the activity is indoors; unknown and outdoor cards are left out.
       if (f.indoor && !P.matches(a, 'indoor')) return false;
       if (!P.matchesNeeds(a, f.needs)) return false;
-      if (f.when) { const now = clock.nowHm(); if (!P.matchesWhen(a, f.when, today(), now)) return false; }
+      if (f.when) {
+        if (DAY_WHEN.includes(f.when)) { if (!whenInfo(a, f)) return false; }
+        else if (!P.matchesWhen(a, f.when, today(), clock.nowHm())) return false;
+      }
+      // A distance limit: only cards with a known distance within it (unknown distances are left out while it is on).
+      if (f.radius && near) { const d = distanceOf(a, near); if (!d || d.km > f.radius) return false; }
       if (f.categories.size && !f.categories.has(a.category)) return false;
       if (f.formats.size && !f.formats.has(a.format)) return false;
       if (f.languages.size && !Array.from(f.languages).some(l => l === 'unknown' ? !a.languages.length : ['DE', 'FR'].includes(l) ? a.languages.includes(l) || a.languages.includes('DE/FR') : a.languages.includes(l))) return false;
@@ -166,7 +238,7 @@
         const date = addDays(start, offset), weekday = weekdayOf(date);
         if ((f.days.size && !f.days.has(weekday)) || date < from || date > to) continue;
         const sessions = items.flatMap(a => a.events.map((e, index) => ({a, e, index}))).filter(({e}) => e.date === date && inFuture(e)).sort(byTime);
-        const repeating = items.filter(a => !isArchive(a) && !a.events.length && a.days.includes(weekday) && (!a.scheduleValidThrough || a.scheduleValidThrough >= date));
+        const repeating = items.filter(a => repeatsOn(a, date));
         days.push({date, weekday, offset, sessions, regular: sortItems(repeating.filter(a => a.format !== 'self'), f, {age, near}),
           places: sortItems(repeating.filter(a => a.format === 'self'), f, {age, near})});
       }
@@ -177,7 +249,7 @@
     // Filters shown as active: every option chosen in the panel counts once; the search text has its own field.
     function activeCount(f, age) {
       return (Number.isFinite(age) ? 1 : 0) + (f.place ? 1 : 0) + f.categories.size + f.formats.size + f.languages.size + f.days.size + f.needs.size
-        + (f.when ? 1 : 0) + (f.price ? 1 : 0) + (f.status ? 1 : 0) + (f.scenario ? 1 : 0) + (f.preset ? 1 : 0) + (f.indoor ? 1 : 0) + (f.parentMatch ? 1 : 0);
+        + (f.when ? 1 : 0) + (f.price ? 1 : 0) + (f.status ? 1 : 0) + (f.scenario ? 1 : 0) + (f.preset ? 1 : 0) + (f.indoor ? 1 : 0) + (f.radius ? 1 : 0) + (f.parentMatch ? 1 : 0);
     }
     const anyFilter = (f, age) => Boolean(f.query.trim()) || activeCount(f, age) > 0;
     function ageSummary(items, age) {
@@ -194,7 +266,7 @@
       const set = (key, allowed, number = false) => { f[key] = new Set((Array.isArray(saved[key]) ? saved[key] : []).map(x => number ? Number(x) : x).filter(x => allowed.includes(x))); };
       set('categories', CATEGORY_KEYS); set('formats', FORMAT_KEYS); set('languages', LANGUAGE_KEYS); set('days', DAY_KEYS, true); set('needs', P.needKeys);
       const one = (key, allowed) => { if (allowed.includes(saved[key])) f[key] = saved[key]; };
-      one('when', WHEN_KEYS); one('price', ['', ...PRICE_KEYS]); one('status', ['', ...STATUS_FILTER_KEYS]); one('scenario', SCENARIO_KEYS); one('preset', PRESET_KEYS);
+      one('when', WHEN_KEYS); if (RADIUS_KEYS.includes(Number(saved.radius))) f.radius = Number(saved.radius); one('price', ['', ...PRICE_KEYS]); one('status', ['', ...STATUS_FILTER_KEYS]); one('scenario', SCENARIO_KEYS); one('preset', PRESET_KEYS);
       one('sort', SORT_KEYS); one('planStatus', ['', 'none', ...PERSONAL_KEYS.filter(Boolean)]);
       if (typeof saved.query === 'string') f.query = saved.query.slice(0, 500);
       f.parentMatch = saved.parentMatch === true;
@@ -215,8 +287,8 @@
     // Towns a visitor can measure from: those with a centre, by name.
     const centreTowns = () => [...new Set(localities.map(place => place.name))].filter(townCentre).sort((a, b) => a.localeCompare(b, 'de-CH'));
     return {PERSONAL: PERSONAL_KEYS, norm, isArchive, byId, localities, localityByKey, today, inFuture, upcoming, past, venueFor, ageFit, ageRank, bounded, needsReview, statusOf, searchText, setLocalText, matchesSearch, matches, filter,
-      sortItems, activeCount, anyFilter, ageSummary, restoreFilters, serializeFilters, placeOptions, townCentre, centreTowns, distanceOf, week, weekCards, regions, coverage, venues, activities};
+      sortItems, activeCount, anyFilter, ageSummary, restoreFilters, serializeFilters, placeOptions, townCentre, centreTowns, distanceOf, week, weekCards, whenDates, whenInfo, sessionsOn, repeatsOn, regions, coverage, venues, activities};
   }
-  window.MinitandemCatalogue = {create, defaultFilters, swissNow, norm, canonicalId, isArchive, placeNames, placeKey, bounded, addDays, weekdayOf, distanceKm, roundKm, ALIASES, MAX_AGE,
+  window.MinitandemCatalogue = {create, defaultFilters, swissNow, norm, canonicalId, isArchive, placeNames, placeKey, bounded, addDays, weekdayOf, distanceKm, roundKm, scheduleSlot, RADIUS_KEYS, DAY_WHEN, ALIASES, MAX_AGE,
     CATEGORY_KEYS, FORMAT_KEYS, LANGUAGE_KEYS, PRICE_KEYS, STATUS_FILTER_KEYS, PERSONAL_KEYS, WHEN_KEYS, PRESET_KEYS, SCENARIO_KEYS, SORT_KEYS, DAY_KEYS, VIEWS};
 })();

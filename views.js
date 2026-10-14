@@ -36,6 +36,20 @@
     refresh: size => svg(size, '<path d="M20 11a8 8 0 0 0-14-4M4 5v4h4M4 13a8 8 0 0 0 14 4M20 19v-4h-4"/>'),
     umbrella: size => svg(size, '<path d="M3 12a9 9 0 0 1 18 0z"/><path d="M12 12v6a2 2 0 0 0 4 0"/>')
   };
+  // One line icon per category, drawn in the category's ink on its pale tint (styles.css, .c-<category>). The word stays next to it.
+  const CATEGORY_ICON = {
+    play: '<rect x="4" y="13" width="7" height="7" rx="1.2"/><rect x="13" y="13" width="7" height="7" rx="1.2"/><path d="M12 4.5l3.6 6H8.4z"/>',
+    dining: '<path d="M5 9h11v4.5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"/><path d="M16 10.5h1.2a2.4 2.4 0 0 1 0 4.8H16"/><path d="M9 4.5v2M12.5 4.5v2"/>',
+    movement: '<circle cx="12" cy="5" r="2"/><path d="M12 7.5v5.5M7.5 10.5l4.5-1.5 4.5 1.5M12 13l-3.5 6.5M12 13l3.5 6.5"/>',
+    water: '<path d="M3 8.5c1.6 0 2.4-1.5 4.5-1.5S10.4 8.5 12 8.5s2.4-1.5 4.5-1.5S19.4 8.5 21 8.5"/><path d="M3 13c1.6 0 2.4-1.5 4.5-1.5S10.4 13 12 13s2.4-1.5 4.5-1.5S19.4 13 21 13"/><path d="M3 17.5c1.6 0 2.4-1.5 4.5-1.5S10.4 17.5 12 17.5s2.4-1.5 4.5-1.5 2.9 1.5 4.5 1.5"/>',
+    horses: '<path d="M7 19.5V12a5 5 0 0 1 10 0v7.5"/><path d="M4.5 19.5h5M14.5 19.5h5"/><path d="M8.6 9.2l1 .6M15.4 9.2l-1 .6"/>',
+    music: '<path d="M9 17.5V6l10-2v11.5"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="15.5" r="2.5"/>',
+    creative: '<path d="M12 4a8 8 0 1 0 0 16c1.4 0 2-.9 2-1.9 0-1.2-1-1.6-1-2.6 0-1 .9-1.5 2-1.5h2a3 3 0 0 0 3-3C20 7 16.4 4 12 4z"/><circle cx="7.8" cy="11.5" r="1"/><circle cx="10.5" cy="7.8" r="1"/><circle cx="15" cy="8.2" r="1"/>',
+    nature: '<path d="M5 19c0-8.5 5.5-14 14-14 0 9-5.5 14-14 14z"/><path d="M5 19l8.5-8.5"/>',
+    books: '<path d="M12 6.5C10 5 7 4.6 4 5v13c3-.4 6 0 8 1.5 2-1.5 5-1.9 8-1.5V5c-3-.4-6 0-8 1.5z"/><path d="M12 6.5v13"/>',
+    events: '<path d="M12 3.5a5 5 0 0 1 5 5c0 3.6-2.8 6.5-5 6.5s-5-2.9-5-6.5a5 5 0 0 1 5-5z"/><path d="M11 16.5h2M12 16.5c0 2-2 2.6-1 4.5"/>'
+  };
+  const categoryTile = category => `<span class="tile c-${esc(category)}" aria-hidden="true">${svg(22, CATEGORY_ICON[category] || '')}</span>`;
 
   // The practical facts in the order the card shows them. The translation of the cards (catalogue-i18n.js, and the translation pipeline,
   // which reads this line) uses the same order.
@@ -93,14 +107,21 @@
       const whenHtml = when !== null ? (lead ? `<b>${esc(lead)}</b>${when ? ' · ' : ''}` : '') + `<span${en}>${esc(when)}</span>`
         : upcoming.length ? `<span class="w-full">${esc(next)}</span><span class="w-short">${esc(F.nextShort(upcoming))}</span>`
         : next ? esc(next) : `<span${en}>${esc(F.first(a.schedule))}</span>`;
-      return `<li><a class="row${time ? ' has-time' : ''}" href="${esc(hashFor(a.id))}" data-id="${esc(a.id)}">` +
+      return `<li><a class="row${time ? ' has-time' : ''}" href="${esc(hashFor(a.id))}" data-id="${esc(a.id)}">` + categoryTile(a.category) +
         `<span class="r-main"><span class="r-cat">${time ? `<b class="r-time">${esc(time)}</b>` : ''}<span class="r-catname">${esc(t('category.' + a.category))}</span>${dist ? `<span class="r-dist">${esc(dist)}</span>` : ''}</span>` +
         `<span class="r-name"><span${en}>${nm(a.name)}</span>${saved ? `<span class="r-saved" title="${esc(t('row.saved'))}">${ICON.bookmarkOn(14)}<span class="sr">${esc(t('row.saved'))}</span></span>` : ''}</span><span class="r-town-d">${esc(placeLine(a))}</span></span>` +
         `<span class="r-facts"><span class="r-town-m">${esc(a.town)}</span><span class="r-age${F.bounds(a) || fits ? ' known' : ''}">${ageMark}${esc(ageText)}</span><span class="r-price${a.priceKind !== 'unknown' ? ' known' : ''}"${en}>${esc(F.first(a.price))}</span></span>` +
-        `<span class="r-l3"><span class="r-when${lead || time ? ' is-wrap' : ''}">${whenHtml}</span><span class="r-status st"><i class="dot ${statusClass[status]}" aria-hidden="true"></i>${esc(t('status.' + status + '.short'))}</span></span>` +
-        ICON.chev(20) + '</a></li>';
+        `<span class="r-l3"><span class="r-when${lead || time ? ' is-wrap' : ''}">${whenHtml}</span><span class="r-status st${status === 'active' ? ' is-current' : ''}">${status === 'active' ? '' : `<i class="dot ${statusClass[status]}" aria-hidden="true"></i>`}${esc(t('status.' + status + '.short'))}</span></span></a></li>`;
     }
-    const rows = items => items.map(a => row(a)).join('');
+    // Under "today", "this weekend" or "next 7 days" a card that counts through its weekly hours is marked as in the week view, with the
+    // time its schedule gives for the matching weekday when the text says it plainly (scheduleSlot), else its whole schedule.
+    function dayRow(a) {
+      const info = C.whenInfo(a, state().f);
+      if (!info || info.kind === 'session') return row(a);
+      const weekday = window.MinitandemCatalogue.weekdayOf(info.date), slot = window.MinitandemCatalogue.scheduleSlot((a.english || a).schedule, weekday, info.date);
+      return row(a, {lead: t(info.kind === 'place' ? 'week.hoursMark' : 'week.regularMark'), when: slot ? `${t('weekday.' + weekday)} ${slot}` : shown(a).schedule});
+    }
+    const rows = items => items.map(dayRow).join('');
     // The line under the count: each filter that is on as a chip that removes it, then the rainy-day switch while it is off.
     // active: [{key, label}] from app.js; key is what removing it needs ('cat:music', 'age', 'indoor').
     function filterChips(active) {
@@ -173,6 +194,7 @@
       return `<div class="group" id="g-near" role="group" aria-labelledby="nearL"><span class="glabel" id="nearL">${esc(t('near.title'))}</span>` +
         `<button type="button" class="ghost near-geo" id="nearGeo">${ICON.pin(18)}${esc(t('near.useLocation'))}</button>` +
         `<label class="near-or" for="nearTown">${esc(t('near.town'))}</label><span class="select"><select class="field" id="nearTown"><option value="">${esc(t('near.townNone'))}</option>${towns}</select></span>` +
+        `<label class="near-or" for="nearRadius">${esc(t('near.radius'))}</label><span class="select"><select class="field" id="nearRadius">${window.MinitandemCatalogue.RADIUS_KEYS.map(km => `<option value="${km}">${esc(km ? t('near.radiusKm', {km}) : t('near.radiusAny'))}</option>`).join('')}</select></span>` +
         `<p class="hint" id="nearState" role="status" aria-live="polite"></p><button type="button" class="linkbtn near-clear" id="nearClear" hidden>${esc(t('near.clear'))}</button>` +
         `<p class="hint">${esc(t('near.hint'))}</p></div>`;
     }
@@ -352,7 +374,13 @@
         `<details class="more"><summary>${esc(t('map.addresses', {n: located.length}))}</summary>${list(located, () => '')}</details>` +
         (missing.length ? `<details class="more"><summary>${esc(t('map.missing', {n: missing.length}))}</summary><p class="hint">${esc(t('map.missingNote'))}</p>${list(missing, a => t('visit.addressTbc', {town: a.town}))}</details>` : '') + '</div>';
     }
-    function empty(kind) {
+    // alt (day filters): {n, when, keepsAge} — what the same day filter finds without the other filters, offered instead of a dead end.
+    function empty(kind, alt = null) {
+      if (kind === 'when' && alt) {
+        const when = t('when.' + alt.when);
+        return `<p class="tt">${esc(t('empty.title'))}</p>` + (alt.n ? `<p class="hint">${esc(t('empty.whenAlt', {n: alt.n, when}))}</p><button type="button" class="ghost" data-action="when-only">${esc(t('empty.whenAltButton'))}</button>`
+          : `<p class="hint">${esc(t('empty.whenNone', {when}))}</p><button type="button" class="ghost" data-reset>${esc(t('empty.reset'))}</button>`);
+      }
       const savedEmpty = kind === 'saved';
       return `<p class="tt">${esc(t(savedEmpty ? 'empty.savedTitle' : 'empty.title'))}</p><p class="hint">${esc(t(savedEmpty ? 'empty.savedText' : kind === 'unknown' ? 'empty.unknownText' : 'empty.text'))}</p>` +
         (kind === 'unknown' ? `<button type="button" class="ghost" data-action="include-unknown">${esc(t('empty.includeUnknown'))}</button>` : '') +
@@ -418,8 +446,8 @@
       return {title: t('conflict.title'), body: `<p>${esc(t('conflict.text'))}</p><p class="notice">${esc(t('conflict.counts', {lf: personal().favorites.length, lv: Object.keys(personal().visits).length, rf: remote.profile?.favorites?.length || 0, rv: Object.keys(remote.profile?.visits || {}).length}))}</p><div class="rowbtns"><button type="button" class="ghost" data-action="backup-export">${ICON.download(18)}${esc(t('conflict.backup'))}</button><button type="button" class="ghost" data-action="sync-use-remote">${esc(t('conflict.useService'))}</button><button type="button" class="go" data-action="sync-use-local">${esc(t('conflict.keepHere'))}</button></div><p class="hint">${esc(t('conflict.note'))}</p>`};
     }
     const copyFallback = text => ({title: t('copy.title'), body: `<p>${esc(t('copy.denied'))}</p><textarea class="field area copy-fallback" readonly>${esc(text)}</textarea>`});
-    return {esc, ICON, nm, shown, row, rows, filterChips, distanceText, week, weekGroup, reportMail, panel, detail, saveButton, visitPlans, visitRows, visitLabel, saved, changesBox, outing, viewTools, venueBox, mapBox, empty, about, data, shareList, planExchange, pilot, visitForm,
+    return {esc, ICON, CATEGORY_ICON, categoryTile, nm, shown, row, dayRow, rows, filterChips, distanceText, week, weekGroup, reportMail, panel, detail, saveButton, visitPlans, visitRows, visitLabel, saved, changesBox, outing, viewTools, venueBox, mapBox, empty, about, data, shareList, planExchange, pilot, visitForm,
       importConfirm, planImportConfirm, report, conflict, copyFallback, warningText, hashFor, organiserURL, mapURL, routeURL, placeOptionsHtml, cost, ageFitNote, statusClass, phoneHref};
   }
-  window.MinitandemViews = {create, esc, ICON, PRACTICAL_ORDER};
+  window.MinitandemViews = {create, esc, ICON, CATEGORY_ICON, PRACTICAL_ORDER};
 })();
