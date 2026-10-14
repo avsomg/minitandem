@@ -95,7 +95,7 @@ test('rows show the distance only once a point is set, and say when it is approx
   const far=C.distanceOf(approximate,state.near).km;
   assert.ok(far>=1);
   assert.ok(V.row(approximate).includes(`<span class="r-dist">${V.esc(t('near.kmTown',{km:Math.round(far)}))}</span>`));
-  assert.match(t('near.kmTown',{km:4}),/^≈ 4 km, town centre$/);
+  assert.match(t('near.kmTown',{km:4}),/^≈ 4 km to the town centre$/);
   const centre=C.townCentre(approximate.town);
   state.near={kind:'town',name:approximate.town,lat:centre.lat,lon:centre.lon};
   assert.ok(V.row(approximate).includes(V.esc(t('near.townUnder1'))),'at the centre itself: under 1 km');
@@ -213,7 +213,7 @@ test('the week view: day headings; sessions with times; regular groups open and 
   assert.ok(wednesday.includes(`<b>${V.esc(t('week.regularMark'))}</b> · Wednesday 09:00–11:00; except school holidays`));
   assert.equal(t('week.regularMark'),'Regular, confirm holidays');
   assert.ok(!/<details[^>]*>[\s\S]*Group card[\s\S]*<\/details>/.test(wednesday),'the group is not folded away');
-  assert.ok(wednesday.includes('<summary>2 places open, such as play areas, museums and libraries</summary>'));
+  assert.ok(wednesday.includes('<summary>2 places open by their weekly hours</summary>'));
   assert.ok(wednesday.includes(`<b>${V.esc(t('week.hoursMark'))}</b> · Wed–Sun 10:00–17:00`));
   assert.ok(wednesday.includes(V.esc(t('week.regularNote'))));
   assert.ok(!html.includes('<details class="more wreg" data-day="2026-10-14" open>'),'folded at first');
@@ -224,8 +224,8 @@ test('the week view: day headings; sessions with times; regular groups open and 
   assert.ok(html.includes('<details class="more wreg" data-day="2026-10-14" open>'),'an unfolded day stays unfolded');
   // The counts are worded with the weekday in every language.
   I.setLang('de',{persist:false});
-  assert.equal(t('week.regular',{n:2,day:t('weekly.3')}),'2 regelmässige Gruppen und Kurse, jeweils mittwochs');
-  assert.equal(t('week.places',{n:2}),'2 Orte geöffnet, etwa Spielplätze, Museen und Bibliotheken');
+  assert.equal(t('week.regular',{n:2,day:t('weekly.3')}),'2 regelmässige Gruppen- und Kursangebote, jeweils mittwochs');
+  assert.equal(t('week.places',{n:2}),'2 Orte laut Öffnungszeiten geöffnet');
   I.setLang('fr',{persist:false});
   assert.equal(t('week.regular',{n:1,day:t('weekly.3')}),'1 groupe ou cours régulier le mercredi');
   assert.equal(t('week.places',{n:1}),'1 lieu ouvert selon ses horaires');
