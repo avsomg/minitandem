@@ -73,7 +73,7 @@ Der Dienst hat keine Datenmigrationen (Format `schema: 1`), ein Rollback der Ver
 
 Im Volume `minitandem_state` liegen die gehashten Familienschlüssel und Profile (`families.json`), eingereichte Korrekturen (`corrections/`), die Datei `demo-family-key.txt` und die 20 letzten automatischen Kopien `backup-*.json`, die der Dienst bei jedem Schreiben anlegt. Der Dienst ersetzt Dateien atomar, ein Archiv im laufenden Betrieb ist deshalb in sich konsistent.
 
-**Sichern.** `ops/backup.sh` legt beide Archive an und behält von jeder Art die 14 neuesten. Auf dem Server ist es als `/usr/local/sbin/minitandem-backup` installiert und läuft jede Nacht um 03:15 UTC per Cron des Benutzers `ubuntu`:
+**Sichern.** `ops/backup.sh` legt beide Archive an und behält von beiden Archiven je die 14 neuesten. Auf dem Server ist es als `/usr/local/sbin/minitandem-backup` installiert und läuft jede Nacht um 3.15 Uhr UTC per Cron des Benutzers `ubuntu`:
 
 ```
 sudo install -m 755 ops/backup.sh /usr/local/sbin/minitandem-backup

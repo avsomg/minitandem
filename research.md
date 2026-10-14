@@ -171,7 +171,7 @@ To confirm before visiting:
 - [Tierhappy · organiser](https://www.tierhappy.ch/)
 - Coordinates of the address (not the entrance): 46.731719970703125, 7.262561798095703. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ober+Tsch%C3%BCplere+90+1716+Oberschrot&type=locations&origins=address&limit=5&sr=4326)
 
-## Mit Pferden unterwegs Sein
+## Unterwegs mit Pferden
 
 - Status: For later; see age and conditions
 - Place: Oberschrot
