@@ -64,7 +64,7 @@
       <button type="button" class="tab" data-view="catalog" aria-pressed="true"><span data-i18n="tab.list">List</span></button>
       <button type="button" class="tab" data-view="week" aria-pressed="false"><span data-i18n="tab.week">This week</span></button>
       <button type="button" class="tab" data-view="map" aria-pressed="false"><span data-i18n="tab.map">Map</span></button>
-      <button type="button" class="tab" id="tabSaved" data-view="saved" aria-pressed="false"><span data-i18n="tab.saved">Saved</span> <span class="tabn">0</span></button>
+      <button type="button" class="tab" id="tabSaved" data-view="saved" aria-pressed="false"><svg class="tab-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v16l-5-3.5L7 20z"/></svg><span class="tab-label" data-i18n="tab.saved">Saved</span> <span class="tabn">0</span></button>
     </nav>
 
     <div class="layout">
@@ -92,9 +92,12 @@
           <p class="count" id="count" role="status" aria-live="polite"></p>
           <div class="bar-r" id="barR">
             <button type="button" class="ghost nearbtn" id="nearOpen"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s6-5.5 6-11a6 6 0 0 0-12 0c0 5.5 6 11 6 11z"/><circle cx="12" cy="10" r="2.2"/></svg><span data-i18n="near.open">Near me</span></button>
-            <span class="fcount" id="fcount"></span>
-            <button type="button" class="linkbtn" id="resetTop" data-reset data-i18n="filters.reset" data-i18n-label="filters.resetAll" aria-label="Reset all filters">Reset</button>
           </div>
+        </div>
+        <div class="fchips" id="fchips" role="group" data-i18n-label="filters.group" aria-label="Filters">
+          <span class="fcount" id="fcount" hidden></span>
+          <span class="fchip-list" id="fchipList"></span>
+          <button type="button" class="linkbtn" id="resetTop" data-reset data-i18n="filters.reset" data-i18n-label="filters.resetAll" aria-label="Reset all filters" hidden>Reset</button>
         </div>
         <p class="note" id="countNote" hidden></p>
         <p class="note" id="contentNote" hidden></p>

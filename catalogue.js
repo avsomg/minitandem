@@ -133,10 +133,13 @@
     }
     function sortItems(items, f, {age = null, view = 'catalog', near = null} = {}) {
       const byName = (a, b) => a.name.localeCompare(b.name, 'en');
-      // Nearest first needs a point; without one the default order applies. Cards with no distance come last.
-      const km = f.sort === 'near' && near ? new Map(items.map(a => [a.id, distanceOf(a, near)?.km ?? Infinity])) : null;
+      // Nearest first needs a point; without one the default order applies. Cards are ordered by the kilometre a row shows (under 1 km
+      // counts as 0), within one kilometre a checked address before a town-centre estimate, then by distance; no distance comes last.
+      const key = a => { const d = distanceOf(a, near); return d ? [d.km < 1 ? 0 : Math.round(d.km), d.exact ? 0 : 1, d.km] : [Infinity, 1, Infinity]; };
+      const keys = f.sort === 'near' && near ? new Map(items.map(a => [a.id, key(a)])) : null;
+      const cmp = (x, y) => x === y ? 0 : x < y ? -1 : 1;
       return items.sort((a, b) => {
-        if (km) return (km.get(a.id) === km.get(b.id) ? 0 : km.get(a.id) < km.get(b.id) ? -1 : 1) || byName(a, b);
+        if (keys) { const x = keys.get(a.id), y = keys.get(b.id); return cmp(x[0], y[0]) || cmp(x[1], y[1]) || cmp(x[2], y[2]) || byName(a, b); }
         if (f.sort === 'name') return byName(a, b);
         if (f.sort === 'town') return a.town.localeCompare(b.town, 'de-CH') || byName(a, b);
         if (f.sort === 'date') {

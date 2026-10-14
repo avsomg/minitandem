@@ -38,8 +38,10 @@
       if (past.length) return t('date.passed', {date: dayDate(past[past.length - 1].date)});
       return null;
     };
+    // The next date without "Next:", for the table column that is already headed "Next date".
+    const nextShort = upcoming => { const e = upcoming[0]; return `${dayDate(e.date)}, ${e.start ? clockLabel(e) : t('time.tbc')}` + (upcoming.length > 1 ? ' ' + t('date.more', {n: upcoming.length - 1}) : ''); };
     const cell = value => String(value ?? '');
-    return {dateLabel, shortDate, dayDate, dayLong, weekdayName, clockLabel, first, ageShort, ageLabel, ageBare, parentLong, parentShort, langText, nextText, bounds, cell};
+    return {dateLabel, shortDate, dayDate, dayLong, weekdayName, clockLabel, first, ageShort, ageLabel, ageBare, parentLong, parentShort, langText, nextText, nextShort, bounds, cell};
   }
   window.MinitandemFormat = {create};
 })();

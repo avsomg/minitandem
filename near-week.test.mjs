@@ -19,6 +19,8 @@ const catalogue=(activities,towns={})=>K.create({activities,regions:{sense:'Sens
 const HOME={lat:46.8,lon:7.15};
 // About 1.11 km of latitude per 0.01 degree.
 const north=km=>({lat:HOME.lat+km/111.195,lon:HOME.lon});
+// The order of nearest first as one comparable string: the kilometre a row shows (under 1 km is 0), exact before town centre, distance.
+const nearKey=(C,a,from)=>{const d=C.distanceOf(a,from);return d?[String(d.km<1?0:Math.round(d.km)).padStart(4,'0'),d.exact?0:1,d.km.toFixed(6).padStart(14,'0')].join('|'):'9999';};
 
 test('straight-line distance: zero at the point, symmetric, one degree of the equator is about 111.2 km',()=>{
   assert.equal(K.distanceKm(HOME,HOME),0);
@@ -60,6 +62,11 @@ test('nearest first: exact and approximate distances in one order, unknown last,
   const f={...K.defaultFilters(),sort:'near'};
   assert.deepEqual(ids(C.sortItems(cards.slice(),f,{near:HOME})),['Near town','Twin A','Twin B','Far exact','Far town','Alpha','Zeta']);
   assert.deepEqual(ids(C.sortItems(cards.slice(),f,{near:null})),ids(C.sortItems(cards.slice(),K.defaultFilters(),{})),'no point: the default order');
+  // By the kilometre a row shows; within it a checked address before a town-centre estimate: "≈ 0.3 km" before "< 1 km · centre",
+  // and "≈ 4 km" (4.4, exact) before "≈ 4 km · centre" (4.2).
+  const band=catalogue([card('Centre here',{town:'Here'}),card('Exact near',{town:'Here',geo:{...north(0.3)}}),card('Centre four',{town:'Four'}),card('Exact four',{town:'Here',geo:{...north(4.4)}})],
+    {Here:{...HOME},Four:{...north(4.2)}});
+  assert.deepEqual(ids(band.sortItems(band.activities.slice(),f,{near:HOME})),['Exact near','Centre here','Exact four','Centre four']);
   // The session keeps "nearest first"; the page drops it when there is no point to measure from.
   assert.equal(S.C.restoreFilters({sort:'near'}).sort,'near');
 });
@@ -81,7 +88,7 @@ test('the real catalogue: every town on a published card has an entry in data-to
   state.f.sort='near';
   const items=list(),km=items.map(a=>C.distanceOf(a,state.near)?.km??Infinity);
   assert.equal(items.length,published.length);
-  for(let i=1;i<km.length;i++)assert.ok(km[i-1]<=km[i],items[i].id);
+  for(let i=1;i<km.length;i++)assert.ok(nearKey(C,items[i-1],state.near)<=nearKey(C,items[i],state.near),items[i].id);
   assert.ok(km[0]<2,'the first card is in or next to Plaffeien');
 });
 
@@ -95,7 +102,8 @@ test('rows show the distance only once a point is set, and say when it is approx
   const far=C.distanceOf(approximate,state.near).km;
   assert.ok(far>=1);
   assert.ok(V.row(approximate).includes(`<span class="r-dist">${V.esc(t('near.kmTown',{km:Math.round(far)}))}</span>`));
-  assert.match(t('near.kmTown',{km:4}),/^≈ 4 km to the town centre$/);
+  // Short enough to stay on the category line; the line under the count and the filter panel say what "centre" means.
+  assert.equal(t('near.kmTown',{km:4}),'≈ 4 km · centre');assert.equal(t('near.townUnder1'),'< 1 km · centre');
   const centre=C.townCentre(approximate.town);
   state.near={kind:'town',name:approximate.town,lat:centre.lat,lon:centre.lon};
   assert.ok(V.row(approximate).includes(V.esc(t('near.townUnder1'))),'at the centre itself: under 1 km');
@@ -180,7 +188,7 @@ test('this week follows the weekday and "when" filters by leaving other days out
   const centre=R.townCentre('Fribourg');
   state.f.sort='near';
   const near=R.week(list(),state.f,{age:3,near:centre});
-  for(const d of near)for(const part of [d.regular,d.places]){const km=part.map(a=>R.distanceOf(a,centre)?.km??Infinity);for(let i=1;i<km.length;i++)assert.ok(km[i-1]<=km[i],d.date);}
+  for(const d of near)for(const part of [d.regular,d.places])for(let i=1;i<part.length;i++)assert.ok(nearKey(R,part[i-1],centre)<=nearKey(R,part[i],centre),d.date);
   // Without filters, a Wednesday splits the many places from the groups and courses, and lists exactly the cards the list offers
   // for that weekday, "check details" included; each row carries the status mark of the list.
   const all=loadStack();
@@ -192,7 +200,7 @@ test('this week follows the weekday and "when" filters by leaving other days out
   for(const a of wednesday.regular)assert.ok(all.V.row(a).includes(all.V.esc(all.t('status.'+all.C.statusOf(a,null)+'.short'))),a.id);
 });
 
-test('the week view: day headings; sessions with times; regular groups open and marked; places folded into a count; a line for an empty day',()=>{
+test('the week view: a row to jump to a day, dated sessions open and time first, regular groups and places folded and built only when opened',()=>{
   const {K:K2,P:P2,window:W,t,I}=loadStack();
   const sessions=card('Session card',{format:'group',events:[{date:'2026-10-15',start:'09:30',end:'11:00',title:'Autumn morning'}]});
   const group=card('Group card',{format:'group',days:[3],schedule:'Wednesday 09:00–11:00; except school holidays'});
@@ -204,24 +212,31 @@ test('the week view: day headings; sessions with times; regular groups open and 
   const days=C.week(C.activities,state.f);
   let html=V.week(days);
   assert.ok(html.includes(V.esc(t('week.note'))));
-  assert.ok(html.includes('Today · Wednesday 14 October'));
-  assert.ok(html.includes('Tomorrow · Thursday 15 October'));
-  assert.ok(html.includes('>1 dated session<')&&html.includes('<b>09:30–11:00</b> · Autumn morning'));
-  // In this order on Wednesday: the regular group, open, with its whole weekly schedule and the mark; then the places, folded.
-  const wednesday=html.slice(html.indexOf('Today ·'),html.indexOf('Tomorrow ·'));
-  assert.ok(wednesday.indexOf('1 regular group or course on Wednesdays')<wednesday.indexOf('<details'));
-  assert.ok(wednesday.includes(`<b>${V.esc(t('week.regularMark'))}</b> · Wednesday 09:00–11:00; except school holidays`));
-  assert.equal(t('week.regularMark'),'Regular, confirm holidays');
-  assert.ok(!/<details[^>]*>[\s\S]*Group card[\s\S]*<\/details>/.test(wednesday),'the group is not folded away');
-  assert.ok(wednesday.includes('<summary>2 places open by their weekly hours</summary>'));
-  assert.ok(wednesday.includes(`<b>${V.esc(t('week.hoursMark'))}</b> · Wed–Sun 10:00–17:00`));
-  assert.ok(wednesday.includes(V.esc(t('week.regularNote'))));
-  assert.ok(!html.includes('<details class="more wreg" data-day="2026-10-14" open>'),'folded at first');
+  // Seven buttons, today first and marked; each names its day in full for screen readers.
+  assert.equal((html.match(/class="wjump-day" data-jump="/g)||[]).length,7);
+  assert.match(html,/data-jump="2026-10-14" aria-label="Today · Wednesday 14 October" aria-current="date"><small>Wed<\/small><b>14<\/b>/);
+  assert.ok(html.includes('id="wd-2026-10-15" tabindex="-1">Tomorrow · Thursday 15 October'));
+  // A dated session: open, its time first on the row, its title on the date line.
+  assert.ok(html.includes('>1 dated session<'));
+  assert.match(html,/<a class="row has-time"[^>]*><span class="r-main"><span class="r-cat"><b class="r-time">09:30–11:00<\/b>/);
+  assert.ok(html.includes('<span>Autumn morning</span>'));
+  // Wednesday: the regular group and the places are folded into a count each, and their rows are not built yet.
+  const wednesday=html.slice(html.indexOf('id="wd-2026-10-14"'),html.indexOf('id="wd-2026-10-15"'));
+  assert.ok(wednesday.includes('<summary>1 regular group or course on Wednesdays</summary><div class="wfold-body"></div>'));
+  assert.ok(wednesday.includes('<summary>2 places open by their weekly hours</summary><div class="wfold-body"></div>'));
+  assert.ok(wednesday.indexOf('data-kind="regular"')<wednesday.indexOf('data-kind="places"'));
+  assert.ok(!html.includes('Group card')&&!html.includes('Place A'),'folded rows are not in the page');
   assert.equal((html.match(new RegExp(V.esc(t('week.emptyDay')),'g'))||[]).length,5,'five days have nothing');
-  assert.equal((html.match(/<a class="row" href="#view=week&amp;activity=/g)||[]).length,4,'every entry opens its card like a list row');
-  state.weekOpen.add('2026-10-14');
+  // Opened, a folded list is built: rows marked weekly, with the whole schedule.
+  const regular=V.weekGroup(days[0],'regular'),open=V.weekGroup(days[0],'places');
+  assert.ok(regular.includes(`<b>${V.esc(t('week.regularMark'))}</b> · <span>Wednesday 09:00–11:00; except school holidays</span>`));
+  assert.ok(open.includes(V.esc(t('week.regularNote')))&&open.includes(`<b>${V.esc(t('week.hoursMark'))}</b> · <span>Wed–Sun 10:00–17:00</span>`));
+  assert.equal((open.match(/<a class="row" href="#view=week&amp;activity=/g)||[]).length,2,'every entry opens its card like a list row');
+  // What the visitor unfolded stays unfolded when the view is rebuilt.
+  state.weekOpen.add('2026-10-14|places');
   html=V.week(days);
-  assert.ok(html.includes('<details class="more wreg" data-day="2026-10-14" open>'),'an unfolded day stays unfolded');
+  assert.ok(html.includes('data-kind="places" open><summary>2 places open by their weekly hours</summary><div class="wfold-body"><p class="hint">'));
+  assert.ok(html.includes('Place A')&&!html.includes('Group card'));
   // The counts are worded with the weekday in every language.
   I.setLang('de',{persist:false});
   assert.equal(t('week.regular',{n:2,day:t('weekly.3')}),'2 regelmässige Gruppen- und Kursangebote, jeweils mittwochs');
@@ -233,6 +248,16 @@ test('the week view: day headings; sessions with times; regular groups open and 
   assert.ok(html.includes('Aujourd’hui · mercredi 14 octobre'),'the weekday stays small after "today"');
   assert.ok(html.includes('>Vendredi 16 octobre<'),'and starts with a capital when it begins the heading');
   I.setLang('en',{persist:false});
+});
+
+test('the real week view stays small: a Wednesday builds its sessions and two counts per day, not hundreds of rows',()=>{
+  const {C,V,state,list}=loadStack();
+  state.view='week';
+  const days=C.week(list(),state.f),html=V.week(days);
+  const rows=(html.match(/<a class="row/g)||[]).length,sessions=days.reduce((n,d)=>n+d.sessions.length,0);
+  assert.equal(rows,sessions,'only the dated sessions are rows');
+  assert.ok(days.reduce((n,d)=>n+d.regular.length+d.places.length,0)>500,'while hundreds of weekly entries stay folded');
+  assert.ok(html.length<120000,`the markup is ${html.length} bytes`);
 });
 
 test('rainy day: only cards stated to be indoors; unknown and outdoor cards are left out; it combines with presets and counts once',()=>{

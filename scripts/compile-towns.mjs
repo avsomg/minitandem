@@ -48,7 +48,7 @@ for(const name of names){
   const spelled=SPELLING[name]||name,text=spelled.replace(/[()]/g,' ').replace(/\s+/g,' ').trim(),wanted=districts.get(name);
   try{
     const places=await search(text,'gazetteer',20);
-    const fribourg=places.results.filter(r=>inCanton(r)&&/^\(FR\) - /.test(gazetteerTail(r))&&inDistrict(gazetteerTail(r).replace(/^\(FR\) - /,'').split(','),wanted));
+    const fribourg=places.results.filter(r=>inCanton(r)&&/^\(FR\) - /.test(gazetteerTail(r))&&inDistrict(gazetteerTail(r).replace(/^\(FR\) - /,'').split(',').map(name=>name.trim()),wanted));
     const villages=fribourg.filter(r=>r.objectclass==='TLM_SIEDLUNGSNAME'&&['Ort',''].includes(gazetteerType(r)));
     // The exact name first ("Forel FR" is Forel); then a single namesake with a qualifier ("Pont (Veveyse)" for Pont).
     let r=one(villages.filter(r=>normal(gazetteerName(r))===normal(spelled)))||one(villages.filter(r=>base(gazetteerName(r))===base(spelled)));

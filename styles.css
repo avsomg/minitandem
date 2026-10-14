@@ -6,6 +6,8 @@
 :root {
   color-scheme: light;
   --bg: #fff; --t: #0d0d0d; --inv: #fff; --d: #636363; --r: rgb(0 0 0 / 0.1); --edge: rgb(0 0 0 / 0.28);
+  /* The outline of a text field or a select: at least 3:1 against white and the field fill (WCAG 1.4.11). */
+  --field-edge: rgb(0 0 0 / 0.45);
   --surface: #f6f6f6; --raised: #ececec; --chip: #2b2b2b; --field: #f6f6f6;
   --dot-good: #16a34a; --dot-check: #d97706; --dot-later: #9333ea;
   --lift: 0 8px 28px rgb(0 0 0 / 0.14); --ring: rgb(0 0 0 / 0.1);
@@ -51,7 +53,7 @@ h1 { margin: 0; font-size: 28px; font-weight: 400; letter-spacing: -0.032em; lin
 /* Search */
 .search { position: relative; }
 .search .si { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--d); pointer-events: none; }
-#q { width: 100%; height: 52px; padding: 0 52px 0 48px; border: 1px solid var(--edge); border-radius: 999px; background: var(--field); color: var(--t); appearance: none; -webkit-appearance: none; }
+#q { width: 100%; height: 52px; padding: 0 52px 0 48px; border: 1px solid var(--field-edge); border-radius: 999px; background: var(--field); color: var(--t); appearance: none; -webkit-appearance: none; }
 #q::placeholder { color: var(--d); opacity: 1; }
 #q::-webkit-search-cancel-button { display: none; }
 #q:focus { outline: none; border-color: var(--t); box-shadow: 0 0 0 3px var(--ring); }
@@ -78,6 +80,14 @@ h1 { margin: 0; font-size: 28px; font-weight: 400; letter-spacing: -0.032em; lin
 .nearline span { margin-right: 4px; }
 .nearline .linkbtn { padding: 0 6px; font-size: 13px; }
 .fcount { font-size: 14px; font-weight: 500; color: var(--t); }
+/* Under the count, in the page flow: the filters that are on as chips that remove them, the rainy-day switch, Reset. */
+.fchips { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: 0 0 6px; }
+.fchip-list { display: contents; }
+.chip.fchip, .chip.fchip-quick { min-height: 44px; padding: 0 12px; gap: 6px; font-size: 14px; }
+.chip.fchip { background: var(--t); color: var(--inv); }
+.chip.fchip svg:last-child { opacity: 0.8; }
+@media (hover: hover) { .chip.fchip:hover { background: #333; } }
+#resetTop { padding: 0 6px; }
 .count { margin: 0; color: var(--d); font-size: 14px; font-variant-numeric: tabular-nums; }
 .count b { color: var(--t); font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
 .note { margin: 0 0 6px; color: var(--d); font-size: 13px; }
@@ -94,9 +104,12 @@ h1 { margin: 0; font-size: 28px; font-weight: 400; letter-spacing: -0.032em; lin
 .listhead { display: none; }
 .row { display: grid; grid-template-columns: minmax(0, 1fr) 20px; grid-template-areas: "cat chev" "name chev" "facts chev" "l3 chev"; column-gap: 10px; row-gap: 3px; align-items: start; padding: 14px 12px 14px 16px; min-height: 64px; color: inherit; text-decoration: none; }
 .r-main { display: contents; }
-.r-cat { grid-area: cat; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; font-size: 13px; line-height: 1.3; color: var(--d); }
+.r-cat { grid-area: cat; display: flex; align-items: baseline; column-gap: 10px; min-width: 0; font-size: 13px; line-height: 1.3; color: var(--d); }
+/* The category gives way (it is cut short) so that a session's time and the distance stay on the same line. */
+.r-catname { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.r-time { flex: none; color: var(--t); font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; }
 /* Straight-line distance, shown once the visitor sets a point: on the category line, pushed to its right end. */
-.r-dist { margin-left: auto; color: var(--t); font-weight: 500; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.r-dist { flex: none; margin-left: auto; color: var(--t); font-weight: 500; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .r-name { grid-area: name; font-weight: 600; font-size: 16px; line-height: 1.3; letter-spacing: -0.012em; overflow-wrap: anywhere; }
 .r-town-d { display: none; }
 .r-facts { grid-area: facts; display: flex; flex-wrap: wrap; gap: 0 16px; color: var(--d); font-size: 14px; line-height: 1.45; min-width: 0; }
@@ -107,7 +120,8 @@ h1 { margin: 0; font-size: 28px; font-weight: 400; letter-spacing: -0.032em; lin
 .r-l3 .r-status { order: -1; color: var(--t); }
 .r-when { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 /* Week view: the time of a session (or "Regular") leads, and the line may wrap so that a weekly schedule is read whole. */
-.r-when.wrap { white-space: normal; overflow: visible; overflow-wrap: anywhere; }
+.r-when.is-wrap { white-space: normal; overflow: visible; overflow-wrap: anywhere; }
+.w-short { display: none; }
 .r-when b { font-weight: 600; color: var(--t); }
 .r-l3 .r-status { flex: none; }
 /* Below the table layout a week row reads time first, status at the end of the line. */
@@ -116,6 +130,8 @@ h1 { margin: 0; font-size: 28px; font-weight: 400; letter-spacing: -0.032em; lin
   .week .r-l3 .r-status { order: 1; }
 }
 .chev { grid-area: chev; align-self: center; color: var(--d); }
+/* The list clips its rounded corners, so the focus ring of a row is drawn inside the row. */
+.row:focus-visible { outline-offset: -3px; }
 
 /* Small tick line: shown when a published age limit matches the chosen age (list and card detail). */
 .fitnote { display: flex; align-items: center; gap: 6px; margin-top: 3px; font-size: 13px; color: var(--t); }
@@ -132,7 +148,7 @@ legend.glabel { margin-bottom: 10px; }
 .group { scroll-margin-top: 20px; }
 .hint { margin: 0; font-size: 13px; color: var(--d); line-height: 1.4; }
 .hint.err { color: #b91c1c; font-weight: 500; }
-.field { height: 52px; width: 100%; padding: 0 16px; border: 1px solid var(--edge); border-radius: 14px; background: var(--field); color: var(--t); appearance: none; -webkit-appearance: none; }
+.field { height: 52px; width: 100%; padding: 0 16px; border: 1px solid var(--field-edge); border-radius: 14px; background: var(--field); color: var(--t); appearance: none; -webkit-appearance: none; }
 .field::placeholder { color: var(--d); opacity: 1; }
 .field:focus { outline: none; border-color: var(--t); box-shadow: 0 0 0 3px var(--ring); }
 input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
@@ -148,7 +164,9 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 .chip .num { font-size: 12.5px; color: var(--d); font-variant-numeric: tabular-nums; }
 .chip[aria-pressed="true"] .num { color: #d6d6d6; }
 .chips.ages { gap: 6px; flex-wrap: nowrap; }
-.chip.age { min-width: 44px; padding: 0; flex: 1 1 0; max-width: 52px; }
+.chip.age { min-width: 0; padding: 0; flex: 1 1 0; max-width: 52px; }
+/* Nothing in the filter panel may push it wider than the sheet (reflow at 320 px). */
+.panel > * { min-width: 0; }
 .switchrow { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 14px; padding: 12px 8px 12px 16px; background: var(--surface); border-radius: 14px; }
 .switchrow .sw-t { display: block; font-size: 14.5px; font-weight: 500; }
 .switchrow .hint { margin-top: 2px; }
@@ -287,7 +305,10 @@ dialog .toast { position: absolute; top: 76px; bottom: auto; }
   .r-when { white-space: normal; overflow: visible; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; line-height: 1.35; color: var(--d); }
   .r-age, .r-price { display: -webkit-box !important; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
   /* Week view: the time or the weekly schedule is read whole. */
-  .r-when.wrap { display: block; overflow: visible; }
+  .r-when.is-wrap { display: block; overflow: visible; }
+  /* The column is headed "Next date": the date without "Next:". */
+  .w-full { display: none; }
+  .w-short { display: inline; }
 
 }
 @media (max-width: 380px) {
@@ -324,6 +345,14 @@ dialog .toast { position: absolute; top: 76px; bottom: auto; }
 @media (max-width: 419px) {
   .tabs { gap: 6px; }
   .tab { flex: 1 1 auto; justify-content: center; padding: 0 9px; font-size: 14px; }
+}
+/* Narrow phones: Saved becomes a bookmark with the count; its word stays for screen readers. The four views keep one line. */
+.tab-icon { display: none; }
+@media (max-width: 379px) {
+  .tab-icon { display: block; }
+  .tab-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .tabs { gap: 4px; }
+  .tab { padding: 0 7px; }
 }
 .viewtitle { margin: 0 0 4px; font-size: 22px; font-weight: 500; letter-spacing: -0.025em; }
 .syncstate, .updates, .viewtools { margin: 0 0 6px; }
@@ -368,8 +397,20 @@ textarea.field { display: block; }
 .wday h3 { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -0.015em; }
 .wday .hint { margin: 0; }
 .wsub { margin: 6px 0 0; font-size: 13.5px; font-weight: 500; color: var(--d); }
-.wreg { margin-top: 0; }
-.wreg[open] > .hint { margin-bottom: 8px; }
+.wfold { margin-top: 0; }
+.wfold[open] .wfold-body > .hint { margin-bottom: 8px; }
+/* A row to jump to a day: seven equal buttons, weekday over the date; four to a line on the narrowest phones. */
+.wjump { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+.wjump-day { min-height: 48px; padding: 4px 0; border: 0; border-radius: 12px; background: var(--raised); color: var(--t); display: grid; place-items: center; line-height: 1.1; }
+.wjump-day small { font-size: 12px; color: var(--d); }
+.wjump-day b { font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.wjump-day[aria-current="date"] { background: var(--t); color: var(--inv); }
+.wjump-day[aria-current="date"] small { color: #d0d0d0; }
+@media (max-width: 359px) { .wjump { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.wday h3:focus { outline: none; }
+.wday { scroll-margin-top: 12px; }
+.d-report { margin: 10px 0 0; }
+.d-report .linkbtn { display: inline-flex; align-items: center; gap: 6px; padding-left: 0; }
 
 /* Distance from: a point chosen in the filter panel */
 #g-near .near-geo { justify-self: start; }

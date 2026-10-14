@@ -265,6 +265,17 @@ try{
     await other.close();
   }
 
+  // Near me: a position that arrives after a town was chosen meanwhile is ignored; the town stays.
+  await page.evaluate(()=>{navigator.geolocation.getCurrentPosition=ok=>setTimeout(()=>ok({coords:{latitude:46.8,longitude:7.15,accuracy:1000}}),400);});
+  await page.locator('#nearOpen').click();
+  await page.locator('#nearGeo').click();
+  await page.locator('#nearTown').selectOption('Plaffeien');
+  await page.waitForTimeout(700);
+  assert.match(await page.locator('#nearText').textContent(),/Plaffeien/,'The town chosen while locating stays');
+  await page.locator('#sheetClose').click();
+  await page.locator('#nearOff').click();
+  assert.equal(await page.locator('#nearNote').isVisible(),false);
+
   // Backup download, and a storage failure must be reported, not hidden.
   await page.locator('#openData').click();
   const backupPromise=page.waitForEvent('download');await page.locator('[data-action="backup-export"]').click();

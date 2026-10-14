@@ -37,7 +37,9 @@ test('counted phrases come as a singular and a plural in every language',()=>{
   }
 });
 test('German and French do not copy the English interface text for ordinary labels',()=>{
-  const same=(lang)=>Object.keys(dictionaries.en).filter(k=>dictionaries[lang][k]===dictionaries.en[k]&&dictionaries.en[k].length>14&&!/^(meta|csv)\./.test(k));
+  // "centre" is the same word in English and French: the short distance labels of a row may be identical.
+  const SAME=new Set(['near.kmTown','near.townUnder1']);
+  const same=(lang)=>Object.keys(dictionaries.en).filter(k=>dictionaries[lang][k]===dictionaries.en[k]&&dictionaries.en[k].length>14&&!/^(meta|csv)\./.test(k)&&!(lang==='fr'&&SAME.has(k)));
   assert.deepEqual(same('de'),[],'German strings identical to English');
   assert.deepEqual(same('fr'),[],'French strings identical to English');
 });

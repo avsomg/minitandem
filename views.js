@@ -33,7 +33,8 @@
     phone: size => svg(size, '<path d="M6 4h3l2 5-2 1.5a11 11 0 0 0 5 5L15.500 13.500 20 15v3a2 2 0 0 1-2 2A14 14 0 0 1 4 6a2 2 0 0 1 2-2z"/>'),
     mail: size => svg(size, '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>'),
     check: size => svg(size, '<path d="M5 12.5l4.5 4.5L19 7.5"/>'),
-    refresh: size => svg(size, '<path d="M20 11a8 8 0 0 0-14-4M4 5v4h4M4 13a8 8 0 0 0 14 4M20 19v-4h-4"/>')
+    refresh: size => svg(size, '<path d="M20 11a8 8 0 0 0-14-4M4 5v4h4M4 13a8 8 0 0 0 14 4M20 19v-4h-4"/>'),
+    umbrella: size => svg(size, '<path d="M3 12a9 9 0 0 1 18 0z"/><path d="M12 12v6a2 2 0 0 0 4 0"/>')
   };
 
   // The practical facts in the order the card shows them. The translation of the cards (catalogue-i18n.js, and the translation pipeline,
@@ -78,36 +79,62 @@
       if (d.exact) return t('near.km', {km: window.MinitandemCatalogue.roundKm(d.km)});
       return d.km < 1 ? t('near.townUnder1') : t('near.kmTown', {km: Math.round(d.km)});
     }
-    // opts (week view): lead is a bold first part of the date line (a session's time, or "Regular"), when replaces the rest of it.
-    function row(card, {lead = '', when = null} = {}) {
-      const a = shown(card), status = C.statusOf(a, age()), next = F.nextText(a, C.upcoming(a), C.past(a));
-      const saved = personal().favorites.includes(a.id), dist = distanceText(a);
-      const whenText = when ?? (next || F.first(a.schedule));
-      return `<li><a class="row" href="${esc(hashFor(a.id))}" data-id="${esc(a.id)}">` +
-        `<span class="r-main"><span class="r-cat">${esc(t('category.' + a.category))}${dist ? `<span class="r-dist">${esc(dist)}</span>` : ''}</span><span class="r-name">${nm(a.name)}${saved ? `<span class="r-saved" title="${esc(t('row.saved'))}">${ICON.bookmarkOn(14)}<span class="sr">${esc(t('row.saved'))}</span></span>` : ''}</span><span class="r-town-d">${esc(placeLine(a))}</span></span>` +
-        `<span class="r-facts"><span class="r-town-m">${esc(a.town)}</span><span class="r-age${F.bounds(a) ? ' known' : ''}">${fitMark(a)}${esc(F.ageShort(a))}</span><span class="r-price${a.priceKind !== 'unknown' ? ' known' : ''}">${esc(F.first(a.price))}</span></span>` +
-        `<span class="r-l3"><span class="r-when${lead ? ' wrap' : ''}">${lead ? `<b>${esc(lead)}</b>${whenText ? ' · ' : ''}` : ''}${esc(whenText)}</span><span class="r-status st"><i class="dot ${statusClass[status]}" aria-hidden="true"></i>${esc(t('status.' + status + '.short'))}</span></span>` +
+    // A row of the list. opts (week view): time is a session's time, shown first; lead is a bold first part of the date line
+    // ("Regular, confirm holidays", "Hours"), when replaces the rest of it. Card text that falls back to English carries lang="en".
+    function row(card, {time = '', lead = '', when = null} = {}) {
+      const a = shown(card), status = C.statusOf(a, age()), upcoming = C.upcoming(a), next = F.nextText(a, upcoming, C.past(a));
+      const saved = personal().favorites.includes(a.id), dist = distanceText(a), en = ctx.inEnglish?.(a) ? ' lang="en"' : '';
+      // The age slot holds an age: without a published bound it says so (or that the chosen age fits, "from birth" for example); the card
+      // page keeps the organiser's wording.
+      const a0 = age(), fits = Number.isFinite(a0) && C.ageFit(a, a0) === true;
+      const ageText = F.bounds(a) ? F.ageShort(a) : fits ? t('fit.yes', {age: F.ageBare(a0)}) : t('age.notPublished');
+      const ageMark = F.bounds(a) ? fitMark(a) : fits ? ICON.tick(14) : '';
+      // The table's "Next date" column needs no "Next:" before each date; the phone line keeps it.
+      const whenHtml = when !== null ? (lead ? `<b>${esc(lead)}</b>${when ? ' · ' : ''}` : '') + `<span${en}>${esc(when)}</span>`
+        : upcoming.length ? `<span class="w-full">${esc(next)}</span><span class="w-short">${esc(F.nextShort(upcoming))}</span>`
+        : next ? esc(next) : `<span${en}>${esc(F.first(a.schedule))}</span>`;
+      return `<li><a class="row${time ? ' has-time' : ''}" href="${esc(hashFor(a.id))}" data-id="${esc(a.id)}">` +
+        `<span class="r-main"><span class="r-cat">${time ? `<b class="r-time">${esc(time)}</b>` : ''}<span class="r-catname">${esc(t('category.' + a.category))}</span>${dist ? `<span class="r-dist">${esc(dist)}</span>` : ''}</span>` +
+        `<span class="r-name"><span${en}>${nm(a.name)}</span>${saved ? `<span class="r-saved" title="${esc(t('row.saved'))}">${ICON.bookmarkOn(14)}<span class="sr">${esc(t('row.saved'))}</span></span>` : ''}</span><span class="r-town-d">${esc(placeLine(a))}</span></span>` +
+        `<span class="r-facts"><span class="r-town-m">${esc(a.town)}</span><span class="r-age${F.bounds(a) || fits ? ' known' : ''}">${ageMark}${esc(ageText)}</span><span class="r-price${a.priceKind !== 'unknown' ? ' known' : ''}"${en}>${esc(F.first(a.price))}</span></span>` +
+        `<span class="r-l3"><span class="r-when${lead || time ? ' is-wrap' : ''}">${whenHtml}</span><span class="r-status st"><i class="dot ${statusClass[status]}" aria-hidden="true"></i>${esc(t('status.' + status + '.short'))}</span></span>` +
         ICON.chev(20) + '</a></li>';
     }
     const rows = items => items.map(a => row(a)).join('');
+    // The line under the count: each filter that is on as a chip that removes it, then the rainy-day switch while it is off.
+    // active: [{key, label}] from app.js; key is what removing it needs ('cat:music', 'age', 'indoor').
+    function filterChips(active) {
+      const umbrella = key => key === 'indoor' ? ICON.umbrella(16) : '';
+      return active.map(f => `<button type="button" class="chip fchip" data-remove="${esc(f.key)}" aria-label="${esc(t('filters.remove', {name: f.label}))}">${umbrella(f.key)}${esc(f.label)}${ICON.x(14)}</button>`).join('') +
+        (active.some(f => f.key === 'indoor') ? '' : `<button type="button" class="chip fchip-quick" data-quick="indoor" aria-pressed="false">${ICON.umbrella(16)}${esc(t('filter.indoor'))}</button>`);
+    }
 
     /* ---------- this week ---------- */
-    // days from C.week(): a heading per day, then what happens (dated sessions, with their time), what repeats (regular groups and
-    // courses, open, each marked as weekly) and what is open (places to visit on your own, folded into one line).
-    function week(days) {
+    // days from C.week(): a row to jump to a day, then per day what happens (dated sessions, open, time first), and folded into one line
+    // each what repeats (regular groups and courses) and what is open (places to visit on your own). A folded list is built only when
+    // its day is opened (weekGroup, called by app.js), so the page holds a few dozen rows, not hundreds.
+    const dayHeading = d => d.offset === 0 ? t('week.today', {date: F.dayLong(d.date)}) : d.offset === 1 ? t('week.tomorrow', {date: F.dayLong(d.date)})
       // A heading that starts with the weekday starts with a capital, also in French ('Vendredi 16 octobre', but 'Demain · jeudi 15 octobre').
-      const heading = d => d.offset === 0 ? t('week.today', {date: F.dayLong(d.date)}) : d.offset === 1 ? t('week.tomorrow', {date: F.dayLong(d.date)})
-        : F.dayLong(d.date).replace(/^\p{Ll}/u, c => c.toUpperCase());
+      : F.dayLong(d.date).replace(/^\p{Ll}/u, c => c.toUpperCase());
+    function weekGroup(d, kind) {
+      const mark = t(kind === 'regular' ? 'week.regularMark' : 'week.hoursMark');
+      return (kind === 'places' ? `<p class="hint">${esc(t('week.regularNote'))}</p>` : '') + `<ul class="list">${d[kind].map(a => row(a, {lead: mark, when: shown(a).schedule})).join('')}</ul>`;
+    }
+    function week(days) {
       const open = state().weekOpen || new Set();
-      return `<p class="hint week-note">${esc(t('week.note'))}</p>` + days.map(d => {
+      const folded = (d, kind) => {
+        if (!d[kind].length) return '';
+        const isOpen = open.has(d.date + '|' + kind);
+        const summary = kind === 'regular' ? t('week.regular', {n: d.regular.length, day: t('weekly.' + d.weekday)}) : t('week.places', {n: d.places.length});
+        return `<details class="more wfold" data-day="${esc(d.date)}" data-kind="${kind}"${isOpen ? ' open' : ''}><summary>${esc(summary)}</summary><div class="wfold-body">${isOpen ? weekGroup(d, kind) : ''}</div></details>`;
+      };
+      const jump = days.length > 1 ? `<nav class="wjump" aria-label="${esc(t('week.jump'))}">` + days.map(d => `<button type="button" class="wjump-day" data-jump="${esc(d.date)}" aria-label="${esc(dayHeading(d))}"${d.offset === 0 ? ' aria-current="date"' : ''}><small>${esc(t('weekday.' + d.weekday))}</small><b>${Number(d.date.slice(8))}</b></button>`).join('') + '</nav>' : '';
+      return jump + `<p class="hint week-note">${esc(t('week.note'))}</p>` + days.map(d => {
         const sessions = d.sessions.length ? `<p class="wsub">${esc(t('week.sessions', {n: d.sessions.length}))}</p><ul class="list">` +
-          d.sessions.map(({a, index}) => { const s = shown(a), e = s.events[index]; return row(a, {lead: F.clockLabel(e), when: [e.title, e.address && e.address !== s.address ? e.address : ''].filter(Boolean).join(' · ')}); }).join('') + '</ul>' : '';
-        const regular = d.regular.length ? `<p class="wsub">${esc(t('week.regular', {n: d.regular.length, day: t('weekly.' + d.weekday)}))}</p><ul class="list">` +
-          d.regular.map(a => row(a, {lead: t('week.regularMark'), when: shown(a).schedule})).join('') + '</ul>' : '';
-        const places = d.places.length ? `<details class="more wreg" data-day="${esc(d.date)}"${open.has(d.date) ? ' open' : ''}><summary>${esc(t('week.places', {n: d.places.length}))}</summary>` +
-          `<p class="hint">${esc(t('week.regularNote'))}</p><ul class="list">${d.places.map(a => row(a, {lead: t('week.hoursMark'), when: shown(a).schedule})).join('')}</ul></details>` : '';
-        return `<section class="wday" aria-labelledby="wd-${esc(d.date)}"><h3 id="wd-${esc(d.date)}">${esc(heading(d))}</h3>` + sessions + regular + places +
-          (sessions || regular || places ? '' : `<p class="hint">${esc(t('week.emptyDay'))}</p>`) + '</section>';
+          d.sessions.map(({a, index}) => { const s = shown(a), e = s.events[index]; return row(a, {time: F.clockLabel(e), when: [e.title, e.address && e.address !== s.address ? e.address : ''].filter(Boolean).join(' · ')}); }).join('') + '</ul>' : '';
+        const rest = folded(d, 'regular') + folded(d, 'places');
+        return `<section class="wday" aria-labelledby="wd-${esc(d.date)}"><h3 id="wd-${esc(d.date)}" tabindex="-1">${esc(dayHeading(d))}</h3>` + sessions + rest +
+          (sessions || rest ? '' : `<p class="hint">${esc(t('week.emptyDay'))}</p>`) + '</section>';
       }).join('');
     }
 
@@ -157,7 +184,7 @@
     const fr = (label, value) => `<div class="fr"><dt>${esc(label)}</dt><dd>${value}</dd></div>`;
     const np = (value) => value ? esc(value) : `<span class="np">${esc(t('common.notPublished'))}</span>`;
     const section = (title, body, cls = '') => `<section class="dsec ${cls}"><h3>${esc(title)}</h3>${body}</section>`;
-    const bullets = items => `<ul class="plain">${items.map(n => `<li>${esc(n)}</li>`).join('')}</ul>`;
+    const bullets = (items, lang = '') => `<ul class="plain"${lang}>${items.map(n => `<li>${esc(n)}</li>`).join('')}</ul>`;
     const organiserURL = a => (a.sources.find(s => /^https:\/\//i.test(s.url)) || {}).url || '';
     const mapURL = a => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(en(a).address || en(a).town + ', Switzerland')}`;
     const routeURL = (a, address = en(a).address) => {
@@ -219,56 +246,66 @@
       return section(t('mine.title'), `<label class="glabel" for="personal-status">${esc(t('mine.status'))}</label><span class="select"><select class="field" id="personal-status">${C.PERSONAL.map(v => `<option value="${v}" ${personal().statuses[a.id] === v ? 'selected' : ''}>${esc(keyed('personalStatus', v))}</option>`).join('')}</select></span>` +
         `<label class="glabel" for="personal-note">${esc(t('mine.note'))}</label><textarea class="field area" id="personal-note" maxlength="10000" placeholder="${esc(t('mine.notePlaceholder'))}">${esc(personal().notes[a.id] || '')}</textarea><p class="hint" id="note-state">${esc(t(store.storageAvailable ? 'mine.stored' : 'mine.notStored'))}</p>`, 'mine');
     }
+    // "Report an error": an e-mail to the directory with the card's name, id and link, written by the visitor's own mail app.
+    function reportMail(a) {
+      const link = (ctx.origin || '') + '/' + hashFor(a.id, 'catalog');
+      return 'mailto:hello@minitandem.ch?subject=' + encodeURIComponent(t('report.mailSubject', {name: a.name})) + '&body=' + encodeURIComponent(t('report.mailBody', {name: a.name, id: a.id, link}).replace(/\n/g, '\r\n'));
+    }
     function detail(card) {
-      const a = shown(card), status = C.statusOf(a, age()), seen = new Set();
+      // why: '' when the card is shown in the interface language, else why it is shown in English; card text then carries lang="en".
+      const a = shown(card), status = C.statusOf(a, age()), seen = new Set(), why = ctx.inEnglish?.(a) || '', en = why ? ' lang="en"' : '';
+      const cardText = text => `<span${en}>${esc(text)}</span>`;
       const key = text => C.norm(text).replace(/\s+/g, ' ').trim();
       const take = text => { if (!text) return false; const k = key(text); if (seen.has(k)) return false; seen.add(k); return true; };
       take(a.intro); take(a.parentDetails);
-      const warnings = P.warnings(a, C.today()).map(warningText).filter(take);
+      const warnings = P.warnings(a, C.today()).map(w => ({text: warningText(w), card: !w.code})).filter(w => take(w.text));
       const langs = F.langText(a), variedAddress = a.events.some(e => e.address && e.address !== a.address);
-      const facts = fr(t('fact.age'), esc(a.age) + (F.bounds(a) ? `<span class="sub">${esc(t('fact.publishedLimits', {value: F.ageShort(a)}))}</span>` : '') + ageFitNote(a)) +
-        fr(t('fact.parent'), esc(F.parentLong(a))) + fr(t('fact.schedule'), esc(a.schedule)) +
-        fr(t('fact.price'), esc(a.price) + (a.priceKind === 'course' ? `<span class="sub">${esc(t('fact.courseHint'))}</span>` : '')) +
-        fr(t('fact.address'), variedAddress ? `<span class="np">${esc(t('fact.addressByDate'))}</span>` : np(a.address) + (a.addressPrecision === 'area' ? `<span class="sub">${esc(t('fact.areaOnly'))}</span>` : '')) +
+      const facts = fr(t('fact.age'), cardText(a.age) + (F.bounds(a) ? `<span class="sub">${esc(t('fact.publishedLimits', {value: F.ageShort(a)}))}</span>` : '') + ageFitNote(a)) +
+        fr(t('fact.parent'), a.parentDetails ? cardText(a.parentDetails) : esc(F.parentLong(a))) + fr(t('fact.schedule'), cardText(a.schedule)) +
+        fr(t('fact.price'), cardText(a.price) + (a.priceKind === 'course' ? `<span class="sub">${esc(t('fact.courseHint'))}</span>` : '')) +
+        fr(t('fact.address'), variedAddress ? `<span class="np">${esc(t('fact.addressByDate'))}</span>` : (a.address ? cardText(a.address) : np(a.address)) + (a.addressPrecision === 'area' ? `<span class="sub">${esc(t('fact.areaOnly'))}</span>` : '')) +
         fr(t('fact.languages'), langs ? esc(langs) + (a.languages.includes('DE') ? `<span class="sub">${esc(t('fact.germanNote'))}</span>` : '') : `<span class="np">${esc(t('common.notStated'))}</span>`) +
         fr(t('fact.format'), esc(t('format.' + a.format)));
       let out = `<div class="d-top"><button type="button" class="ghost" data-close>${ICON.back(18)}${esc(t('card.back'))}</button><span class="d-actions"><span id="detail-save">${saveButton(a)}</span><button type="button" class="iconbtn" data-action="copy-link" aria-label="${esc(t('card.copyLink'))}" title="${esc(t('card.copyLink'))}">${ICON.link(20)}</button></span></div>` +
         `<div class="d-body" tabindex="-1" autofocus>` +
-        `<p class="d-kicker">${esc(t('category.' + a.category))}</p><h2 class="d-name" id="dTitle">${nm(a.name)}</h2><p class="d-where">${esc(placeLine(a))} · ${esc(t('card.canton'))}</p>` +
-        (ctx.inEnglish?.(a) ? `<p class="hint d-english">${esc(t('card.inEnglish'))}</p>` : '') +
+        `<p class="d-kicker">${esc(t('category.' + a.category))}</p><h2 class="d-name" id="dTitle"${en}>${nm(a.name)}</h2><p class="d-where">${esc(placeLine(a))} · ${esc(t('card.canton'))}</p>` +
+        (why ? `<p class="hint d-english">${esc(t(why === 'failed' ? 'card.notLoaded' : 'card.inEnglish'))}</p>` : '') +
         `<p class="d-status" id="detail-data-status"><i class="dot ${statusClass[status]}" aria-hidden="true"></i>${esc(t('status.' + status + '.long'))}</p><p class="d-checked">${esc(t('card.checked', {date: F.dateLabel(a.checked)}))}</p>` +
-        (warnings.length ? `<ul class="warns">${warnings.map(w => `<li>${esc(w)}</li>`).join('')}</ul>` : '') +
+        (warnings.length ? `<ul class="warns">${warnings.map(w => `<li${w.card ? en : ''}>${esc(w.text)}</li>`).join('')}</ul>` : '') +
         (C.venueFor(a) ? `<button type="button" class="ghost venue-link" data-venue="${esc(C.venueFor(a).id)}">${esc(t('card.venue', {name: C.venueFor(a).name}))}</button>` : '') +
         `<dl class="facts">${facts}</dl><!--second-->`;
       if (a.events.length) out += section(t('dates.title'), dateRows(a));
-      out += section(t('card.about'), `<p>${a.intro ? esc(a.intro) : `<span class="np">${esc(t('card.noDescription'))}</span>`}</p>`);
+      out += section(t('card.about'), `<p${a.intro ? en : ''}>${a.intro ? esc(a.intro) : `<span class="np">${esc(t('card.noDescription'))}</span>`}</p>`);
       const notes = a.notes.filter(take);
-      if (notes.length) out += section(t('card.goodToKnow'), bullets(notes));
+      if (notes.length) out += section(t('card.goodToKnow'), bullets(notes, en));
       const groups = [];
       for (const k of PRACTICAL_ORDER) {
         const f = a.practical?.[k];
         if (f?.text && take(f.text)) groups.push([k, f]);
       }
       const warn = (a.practical?.warnings || []).filter(take);
-      if (groups.length || warn.length) out += section(t('card.practical'), `<dl class="pr">${groups.map(([k, f]) => `<div class="fr"><dt>${esc(t('practical.' + k))}</dt><dd>${esc(f.text)}${f.source ? ' ' + link(f.source, esc(t('card.source')), 'inline-link') : ''}</dd></div>`).join('')}${warn.length ? `<div class="fr"><dt>${esc(t('practical.warnings'))}</dt><dd>${warn.length > 1 ? `<ul>${warn.map(w => `<li>${esc(w)}</li>`).join('')}</ul>` : esc(warn[0])}</dd></div>` : ''}</dl>`);
+      if (groups.length || warn.length) out += section(t('card.practical'), `<dl class="pr">${groups.map(([k, f]) => `<div class="fr"><dt>${esc(t('practical.' + k))}</dt><dd>${cardText(f.text)}${f.source ? ' ' + link(f.source, esc(t('card.source')), 'inline-link') : ''}</dd></div>`).join('')}${warn.length ? `<div class="fr"><dt>${esc(t('practical.warnings'))}</dt><dd${en}>${warn.length > 1 ? `<ul>${warn.map(w => `<li>${esc(w)}</li>`).join('')}</ul>` : esc(warn[0])}</dd></div>` : ''}</dl>`);
       out += cost(a);
       const found = (a.research?.findings || []).filter(f => take(f.text));
-      if (found.length) out += section(t('card.checkedTitle'), `<div class="found">${found.map(f => `<div>${f.field ? `<span class="ff">${esc(f.field)}</span>` : ''}<p>${esc(f.text)}</p></div>`).join('')}</div><p class="hint">${esc(t('card.checkedOn', {date: F.dateLabel(a.research.date)}))}</p>`);
+      if (found.length) out += section(t('card.checkedTitle'), `<div class="found"${en}>${found.map(f => `<div>${f.field ? `<span class="ff">${esc(f.field)}</span>` : ''}<p>${esc(f.text)}</p></div>`).join('')}</div><p class="hint">${esc(t('card.checkedOn', {date: F.dateLabel(a.research.date)}))}</p>`);
       const rem = (a.research?.remaining || []).filter(take);
-      if (rem.length) out += section(t('card.toConfirm'), bullets(rem) + `<button type="button" class="linkbtn" data-action="copy-questions">${ICON.copy(16)} ${esc(t('card.copyQuestions'))}</button>`);
+      if (rem.length) out += section(t('card.toConfirm'), bullets(rem, en) + `<button type="button" class="linkbtn" data-action="copy-questions">${ICON.copy(16)} ${esc(t('card.copyQuestions'))}</button>`);
       out += visitPlans(a) + notesBox(a);
-      const contacts = a.contacts.map(c => `<div class="contact">${c.name ? `<strong>${esc(c.name)}</strong>` : ''}${c.phone ? `<a href="${esc(phoneHref(c.phone))}">${ICON.phone(16)} ${esc(c.phone)}</a>` : ''}${c.email ? `<a href="mailto:${esc(c.email)}">${ICON.mail(16)} ${esc(c.email)}</a>` : ''}</div>`).join('');
+      const contacts = a.contacts.map(c => `<div class="contact">${c.name ? `<strong${en}>${esc(c.name)}</strong>` : ''}${c.phone ? `<a href="${esc(phoneHref(c.phone))}">${ICON.phone(16)} ${esc(c.phone)}</a>` : ''}${c.email ? `<a href="mailto:${esc(c.email)}">${ICON.mail(16)} ${esc(c.email)}</a>` : ''}</div>`).join('');
       // A contact may be just a name; without a phone or address the family still needs the pointer to the sources.
       out += section(t('card.contacts'), contacts + (a.contacts.some(c => c.phone || c.email) ? '' : `<p class="np">${esc(t('card.noContact'))}</p>`));
       const photo = a.practical?.photo;
       if (photo || a.practical?.gallery) out += section(t('card.photos'), (photo ? `<figure class="place-photo"><img src="${esc(photo.path)}" alt="${esc(photo.alt)}" loading="lazy" width="960" height="443"><figcaption>${esc(photo.caption)} ${link(photo.source, esc(photo.credit), 'inline-link')}</figcaption></figure>` : '') + (a.practical.gallery ? link(a.practical.gallery, esc(t('card.gallery')) + ICON.out(14), 'inline-link') : '') + `<p class="hint">${esc(t('card.photoNote'))}</p>`);
-      out += section(t('card.sources'), a.sources.filter(s => /^https:\/\//i.test(s.url)).length ? `<ul class="srcs">${a.sources.filter(s => /^https:\/\//i.test(s.url)).map(s => `<li>${link(s.url, `<span>${esc(s.label)}</span>${ICON.out(16)}`)}</li>`).join('')}</ul><p class="hint">${esc(t('card.sourceNote', {date: F.dateLabel(a.checked)}))}${C.needsReview(a) ? ' ' + esc(t('card.reviewDue')) : ''}</p>` : `<p class="np">${esc(t('card.noSources'))}</p>`);
-      out += `<div class="d-more"><button type="button" class="linkbtn" data-action="report-change">${ICON.flag(16)} ${esc(t('card.report'))}</button>${!C.isArchive(a) ? `<a class="linkbtn" href="places/${esc(a.id)}/">${esc(t('card.publicPage'))}</a>` : ''}</div></div>`;
+      out += section(t('card.sources'), a.sources.filter(s => /^https:\/\//i.test(s.url)).length ? `<ul class="srcs"${en}>${a.sources.filter(s => /^https:\/\//i.test(s.url)).map(s => `<li>${link(s.url, `<span>${esc(s.label)}</span>${ICON.out(16)}`)}</li>`).join('')}</ul><p class="hint">${esc(t('card.sourceNote', {date: F.dateLabel(a.checked)}))}${C.needsReview(a) ? ' ' + esc(t('card.reviewDue')) : ''}</p>` : `<p class="np">${esc(t('card.noSources'))}</p>`);
+      // The correction form reaches the editors only through the family service; without it, the e-mail under the facts is the way.
+      out += `<div class="d-more">${ctx.syncConnected?.() ? `<button type="button" class="linkbtn" data-action="report-change">${ICON.flag(16)} ${esc(t('card.report'))}</button>` : ''}${!C.isArchive(a) ? `<a class="linkbtn" href="places/${esc(a.id)}/">${esc(t('card.publicPage'))}</a>` : ''}</div></div>`;
       const url = organiserURL(a), first = a.contacts.find(c => c.phone), mail = a.contacts.find(c => c.email);
       const secondary = [!variedAddress && a.addressPrecision !== 'area' && a.address ? link(routeURL(a), ICON.route(18) + esc(t('card.directions')), 'ghost') : link(mapURL(a), ICON.pin(18) + esc(t('card.map')), 'ghost'),
-        first ? `<a class="ghost" href="${esc(phoneHref(first.phone))}">${ICON.phone(18)}${esc(t('card.call'))}</a>` : '', mail ? `<a class="ghost" href="mailto:${esc(mail.email)}">${ICON.mail(18)}${esc(t('card.write'))}</a>` : ''].filter(Boolean).join('');
-      // The bottom bar keeps the one primary action; directions, phone and e-mail sit under the facts and scroll with the page.
-      out = out.replace('<!--second-->', secondary ? `<div class="d-second">${secondary}</div>` : '');
+        first ? `<a class="ghost" href="${esc(phoneHref(first.phone))}">${ICON.phone(18)}${esc(t('card.call'))}</a>` : '', mail ? `<a class="ghost" href="mailto:${esc(mail.email)}">${ICON.mail(18)}${esc(t('card.write'))}</a>` : '',
+        `<button type="button" class="ghost" data-action="share-card">${ICON.share(18)}${esc(t('card.share'))}</button>`].filter(Boolean).join('');
+      // The bottom bar keeps the one primary action; directions, phone, e-mail and sharing sit under the facts and scroll with the page,
+      // and right below them the way to report an error.
+      out = out.replace('<!--second-->', `<div class="d-second">${secondary}</div><p class="d-report"><a class="linkbtn" href="${esc(reportMail(a))}">${ICON.flag(16)} ${esc(t('card.reportError'))}</a></p>`);
       out += `<div class="d-foot">${url ? `<a class="go" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(t('card.open'))}${ICON.out(18)}</a><p class="fine">${esc(t('card.openNote'))}</p>` : `<p class="fine">${esc(t('card.noSources'))}</p>`}</div>`;
       return out;
     }
@@ -381,7 +418,7 @@
       return {title: t('conflict.title'), body: `<p>${esc(t('conflict.text'))}</p><p class="notice">${esc(t('conflict.counts', {lf: personal().favorites.length, lv: Object.keys(personal().visits).length, rf: remote.profile?.favorites?.length || 0, rv: Object.keys(remote.profile?.visits || {}).length}))}</p><div class="rowbtns"><button type="button" class="ghost" data-action="backup-export">${ICON.download(18)}${esc(t('conflict.backup'))}</button><button type="button" class="ghost" data-action="sync-use-remote">${esc(t('conflict.useService'))}</button><button type="button" class="go" data-action="sync-use-local">${esc(t('conflict.keepHere'))}</button></div><p class="hint">${esc(t('conflict.note'))}</p>`};
     }
     const copyFallback = text => ({title: t('copy.title'), body: `<p>${esc(t('copy.denied'))}</p><textarea class="field area copy-fallback" readonly>${esc(text)}</textarea>`});
-    return {esc, ICON, nm, shown, row, rows, distanceText, week, panel, detail, saveButton, visitPlans, visitRows, visitLabel, saved, changesBox, outing, viewTools, venueBox, mapBox, empty, about, data, shareList, planExchange, pilot, visitForm,
+    return {esc, ICON, nm, shown, row, rows, filterChips, distanceText, week, weekGroup, reportMail, panel, detail, saveButton, visitPlans, visitRows, visitLabel, saved, changesBox, outing, viewTools, venueBox, mapBox, empty, about, data, shareList, planExchange, pilot, visitForm,
       importConfirm, planImportConfirm, report, conflict, copyFallback, warningText, hashFor, organiserURL, mapURL, routeURL, placeOptionsHtml, cost, ageFitNote, statusClass, phoneHref};
   }
   window.MinitandemViews = {create, esc, ICON, PRACTICAL_ORDER};

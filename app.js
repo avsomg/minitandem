@@ -13,13 +13,18 @@
   const local = storageOf('localStorage'), session = storageOf('sessionStorage');
   try { W.MinitandemMigration.run(local, session); } catch {}
   I.init();
+  // A shared link may name its language (?lang=de): it applies to this visit, is not remembered, and leaves the address.
+  { const params = new URLSearchParams(location.search), linkLang = params.get('lang');
+    if (linkLang) { if (I.LANGS.includes(linkLang)) I.setLang(linkLang, {persist: false}); params.delete('lang'); const rest = params.toString(); try { history.replaceState(history.state, '', location.pathname + (rest ? '?' + rest : '') + location.hash); } catch {} } }
   const ALL = W.ACTIVITIES;
   const C = K.create({activities: ALL, venues: W.ACTIVITY_VENUES || [], regions: W.CATALOG_REGIONS, towns: W.CATALOG_TOWNS || {}, coverage: W.CATALOG_COVERAGE, planning: P, t});
   const F = W.MinitandemFormat.create({t, locale: I.locale});
   /* Card texts in German or French: data-de.js or data-fr.js, loaded from this site only when that language is chosen. A card is shown
      translated while its English still matches the translation; otherwise, and until the file is loaded, it is shown in English. */
   const CI = W.MinitandemCatalogueI18n;
-  const cardText = {lang: 'en', overlay: null, loading: '', failed: new Set()}, overlays = {};
+  // failed: languages whose file could not be loaded; it is tried again when the browser is back online and on later renders (at most
+  // every 20 seconds), and until then the cards are shown in English with a note that says so.
+  const cardText = {lang: 'en', overlay: null, loading: '', failed: new Set(), triedAt: 0}, overlays = {};
   function cardLanguage(lang) {
     cardText.lang = CI.LANGS.includes(lang) ? lang : 'en';
     cardText.overlay = null;
@@ -27,16 +32,22 @@
     const data = W.MINITANDEM_CARDS?.[lang];
     if (data) { overlays[lang] ||= CI.overlay(ALL, data, W.MinitandemViews.PRACTICAL_ORDER); cardText.overlay = overlays[lang]; return; }
     if (cardText.loading === lang || cardText.failed.has(lang)) return;
-    cardText.loading = lang;
+    cardText.loading = lang; cardText.triedAt = Date.now();
     const script = document.createElement('script');
     script.src = `data-${lang}.js`;
-    script.onload = () => { cardText.loading = ''; if (I.lang() === lang) { cardLanguage(lang); refreshCards(); } };
+    script.onload = () => { cardText.loading = ''; if (!W.MINITANDEM_CARDS?.[lang]) cardText.failed.add(lang); if (I.lang() === lang) { cardLanguage(lang); refreshCards(); } };
     script.onerror = () => { cardText.loading = ''; cardText.failed.add(lang); script.remove(); if (I.lang() === lang) refreshCards(); };
     document.head.append(script);
   }
+  function retryCardText() {
+    const lang = cardText.lang;
+    if (!cardText.failed.has(lang) || Date.now() - cardText.triedAt < 20000) return;
+    cardText.failed.delete(lang); cardLanguage(lang);
+  }
   const shown = a => cardText.overlay ? cardText.overlay.card(a) : a;
-  // A card falls back to English when the language is not English, its file is not loading any more and the card has no current translation.
-  const inEnglish = a => cardText.lang !== 'en' && cardText.loading !== cardText.lang && !cardText.overlay?.translated(a);
+  // Why a card is shown in English although another language is chosen: 'failed' (the language file could not be loaded) or 'stale'
+  // (no current translation of this card); '' when it is shown in the chosen language or while its file is still loading.
+  const inEnglish = a => cardText.lang === 'en' || cardText.loading === cardText.lang ? '' : cardText.failed.has(cardText.lang) ? 'failed' : cardText.overlay?.translated(a) ? '' : 'stale';
   C.setLocalText(a => cardText.overlay ? cardText.overlay.text(a) : '');
   let sync = null;
   const store = W.MinitandemStore.create({storage: local, byId: C.byId, P, today: C.today, statusKeys: K.PERSONAL_KEYS, canonicalId: K.canonicalId, onSaved: () => sync?.queue()});
@@ -44,7 +55,7 @@
   // or 'failed'. weekOpen: the days of the week view whose regular offers are unfolded.
   const state = {view: 'catalog', venueId: '', sharedIds: [], f: K.defaultFilters(), limit: 24, openId: null, outingDate: '', opener: null, returnId: null,
     near: null, nearStatus: '', weekOpen: new Set()};
-  const V = W.MinitandemViews.create({t, C, P, X, F, store, state: () => state, shown, inEnglish});
+  const V = W.MinitandemViews.create({t, C, P, X, F, store, state: () => state, shown, inEnglish, origin: location.origin, syncConnected: () => Boolean(sync?.config)});
   const EX = W.MinitandemExports.create({t, lang: I.lang, P, byId: C.byId, regions: W.CATALOG_REGIONS, today: C.today, format: F});
   const PAGE = 24;
   const SESSION_FILTERS = store.KEYS.filters;
@@ -55,7 +66,7 @@
   state.outingDate = Object.values(store.personal.visits).map(v => v.date).filter(date => date >= C.today()).sort()[0] || C.today();
 
   const els = {};
-  for (const id of ['q', 'qClear', 'fbar', 'fpAge', 'fpAgeV', 'fpPlace', 'fpPlaceV', 'fpMore', 'count', 'countNote', 'barR', 'fcount', 'list', 'listhead', 'empty', 'endnav', 'endNote', 'toFilters', 'more', 'moreBtn',
+  for (const id of ['q', 'qClear', 'fbar', 'fpAge', 'fpAgeV', 'fpPlace', 'fpPlaceV', 'fpMore', 'count', 'countNote', 'barR', 'fcount', 'list', 'listhead', 'empty', 'endnav', 'endNote', 'toFilters', 'more', 'moreBtn', 'fchips', 'fchipList',
     'sheet', 'sheetBody', 'sheetDone', 'sheetClose', 'colBody', 'detail', 'utility', 'utilityTitle', 'utilityBody', 'panel', 'toast', 'viewTitle', 'viewTools', 'savedBox', 'mapBox', 'updates',
     'syncState', 'contentNote', 'importFile', 'planImportFile', 'results', 'tabSaved', 'nearNote', 'nearText', 'nearOpen', 'resetTop', 'weekBox'])
     els[id] = document.getElementById(id);
@@ -105,7 +116,7 @@
   }
 
   /* ---------- rendering ---------- */
-  let disposeMap = null, resultKey = '', lastItems = [], renderToken = 0;
+  let disposeMap = null, resultKey = '', lastItems = [], renderToken = 0, lastDays = [];
   const age = () => store.personal.age;
   const filterCount = () => C.activeCount(state.f, age());
   const placeName = () => {
@@ -113,6 +124,29 @@
     if (!place) return t('place.anywhere.short');
     return place.startsWith('d:') ? C.regions[place.slice(2)] : C.localityByKey.get(place.slice(2))?.name || '';
   };
+  // The filters that are on, each with the words of its chip and how to remove it ('kind:value'). The search text has its own field.
+  function activeFilters() {
+    const f = state.f, a0 = age(), out = [];
+    if (Number.isFinite(a0)) out.push({key: 'age', label: F.ageLabel(a0)});
+    if (f.place) out.push({key: 'place', label: placeName()});
+    if (f.indoor) out.push({key: 'indoor', label: t('filter.indoor')});
+    for (const [kind, set, prefix] of [['cat', f.categories, 'category'], ['fmt', f.formats, 'format'], ['lang', f.languages, 'langFilter'], ['day', f.days, 'weekday'], ['need', f.needs, 'needs']])
+      for (const value of set) out.push({key: kind + ':' + value, label: t(prefix + '.' + value)});
+    for (const [kind, prefix] of [['when', 'when'], ['price', 'priceFilter'], ['status', 'statusFilter'], ['preset', 'preset']]) if (f[kind]) out.push({key: kind, label: t(prefix + '.' + f[kind])});
+    if (f.parentMatch) out.push({key: 'adult', label: t('filter.withAdult')});
+    return out;
+  }
+  function removeFilter(key) {
+    const f = state.f, [kind, ...rest] = key.split(':'), value = rest.join(':');
+    const sets = {cat: f.categories, fmt: f.formats, lang: f.languages, day: f.days, need: f.needs};
+    if (kind === 'age') { setAge(null); return; }
+    if (sets[kind]) sets[kind].delete(kind === 'day' ? Number(value) : value);
+    else if (kind === 'place') f.place = '';
+    else if (kind === 'indoor') f.indoor = false;
+    else if (kind === 'adult') f.parentMatch = false;
+    else if (['when', 'price', 'status', 'preset'].includes(kind)) f[kind] = '';
+    state.limit = PAGE; render();
+  }
   function items() { return C.filter(state.f, {age: age(), view: state.view, personal: store.personal, venueId: state.venueId, sharedIds: state.sharedIds, near: state.near}); }
   const publicView = () => ['shared', 'venue'].includes(state.view);
   function render() {
@@ -140,18 +174,22 @@
     els.fpAge.classList.toggle('on', Number.isFinite(a0)); els.fpPlace.classList.toggle('on', !!state.f.place); els.fpMore.classList.toggle('on', af > 0);
     els.fpMore.setAttribute('aria-label', af ? t('filters.buttonActive', {n: af}) : t('filters.button'));
     els.count.innerHTML = (n === total && !C.anyFilter(state.f, a0) && view === 'catalog') || view !== 'catalog' ? `<b>${n}</b> ${esc(t('count.label', {n}))}` : `<b>${n}</b> ${esc(t('count.of', {n: total, total}))}`;
-    // The count bar's right end: the way to distances (until a point is set), then the active filters and Reset.
-    els.barR.hidden = publicView(); els.resetTop.hidden = !C.anyFilter(state.f, a0);
-    els.nearOpen.hidden = !!state.near || isMap;
+    // The count bar holds the count and the way to distances (until a point is set). Below it, in the page flow: how many filters are on,
+    // each of them as a chip that removes it, the rainy-day switch while it is off, and Reset.
+    els.barR.hidden = publicView(); els.nearOpen.hidden = !!state.near || isMap;
+    els.fchips.hidden = publicView(); els.resetTop.hidden = !C.anyFilter(state.f, a0);
     els.fcount.textContent = af ? t('filters.active', {n: af}) : ''; els.fcount.hidden = !af;
+    els.fchipList.innerHTML = V.filterChips(activeFilters());
     els.sheetDone.textContent = n ? t('filters.show', {n}) : t('filters.none');
     if (Number.isFinite(a0) && n && !publicView()) {
       const s = C.ageSummary(cards, a0);
       els.countNote.textContent = t('note.age', {age: F.ageBare(a0), fits: s.fits, unknown: s.unknown}); els.countNote.hidden = false;
     } else els.countNote.hidden = true;
     // Said only when some of the cards listed here are shown in English although another language is chosen.
+    retryCardText();
     const english = cards.filter(inEnglish).length;
-    els.contentNote.hidden = !english; els.contentNote.textContent = english ? t('cards.english', {n: english}) : '';
+    els.contentNote.hidden = !english;
+    els.contentNote.textContent = !english ? '' : cardText.failed.has(cardText.lang) ? t('cards.notLoaded') : t('cards.english', {n: english});
     els.nearNote.hidden = !state.near || isMap || !n;
     els.nearText.textContent = !state.near ? '' : state.near.kind === 'town' ? t('near.listFromTown', {town: state.near.name}) : t('near.listFromLocation');
     // body of the results
@@ -160,6 +198,7 @@
     els.list.innerHTML = isMap || isWeek ? '' : V.rows(shown);
     els.list.hidden = isMap || isWeek || !n;
     els.mapBox.hidden = !isMap; els.mapBox.innerHTML = isMap ? V.mapBox(list) : '';
+    lastDays = days || [];
     els.weekBox.hidden = !isWeek || !n; els.weekBox.innerHTML = isWeek && n ? V.week(days) : '';
     const emptyKind = view === 'saved' && !store.personal.favorites.length ? 'saved' : view === 'catalog' && Number.isFinite(a0) && !state.f.includeUnknownAge ? 'unknown' : '';
     els.empty.hidden = !!n; els.empty.innerHTML = n ? '' : V.empty(emptyKind);
@@ -288,8 +327,9 @@
     const failed = () => { state.nearStatus = 'failed'; syncPanel(); $('#nearTown', els.panel)?.focus(); };
     if (!navigator.geolocation) { failed(); return; }
     state.nearStatus = 'locating'; syncPanel();
-    navigator.geolocation.getCurrentPosition(position => { store.saveNear(''); setNear({kind: 'geo', lat: position.coords.latitude, lon: position.coords.longitude}); },
-      failed, {enableHighAccuracy: false, timeout: 20000, maximumAge: 600000});
+    // A position or a refusal that arrives after a town was chosen (or the distances were turned off) meanwhile is ignored.
+    navigator.geolocation.getCurrentPosition(position => { if (state.nearStatus !== 'locating') return; store.saveNear(''); setNear({kind: 'geo', lat: position.coords.latitude, lon: position.coords.longitude}); },
+      () => { if (state.nearStatus === 'locating') failed(); }, {enableHighAccuracy: false, timeout: 20000, maximumAge: 600000});
   }
   function placePanel() {
     if (wide.matches) { if (els.sheet.open) els.sheet.close(); els.colBody.appendChild(els.panel); }
@@ -360,8 +400,8 @@
     const a = document.createElement('a'); a.href = url; a.download = file.name; document.body.append(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 10000);
   }
-  async function copy(text) {
-    try { await navigator.clipboard.writeText(text); toast(t('toast.copied')); }
+  async function copy(text, done = t('toast.copied')) {
+    try { await navigator.clipboard.writeText(text); toast(done); }
     catch { utility(V.copyFallback(text)); $('.copy-fallback')?.select(); }
   }
   const errorText = error => error?.code && t('error.' + error.code) !== 'error.' + error.code ? t('error.' + error.code) : (error?.message || t('error.generic'));
@@ -446,6 +486,14 @@
   }
   const actions = {
     'copy-link': () => copy(location.href),
+    // The phone's share sheet with the card's name, next date (or its schedule), price and a link that opens it in this language.
+    'share-card': async () => {
+      const a = shown(C.byId.get(state.openId)); if (!a) return;
+      const upcoming = C.upcoming(a), url = location.origin + location.pathname + (I.lang() === 'en' ? '' : '?lang=' + I.lang()) + V.hashFor(a.id, 'catalog');
+      const text = [a.name, upcoming.length ? F.nextText(a, upcoming, []) : F.first(a.schedule), F.first(a.price)].filter(Boolean).join('\n');
+      if (navigator.share) { try { await navigator.share({title: a.name, text, url}); return; } catch (error) { if (error?.name === 'AbortError') return; } }
+      await copy(text + '\n' + url, t('share.cardCopied'));
+    },
     'copy-questions': () => { const a = shown(C.byId.get(state.openId)); copy([a.name, t('card.toConfirm') + ':', ...(a.research?.remaining || []).map(q => '- ' + q)].join('\n\n')); },
     'report-change': () => { const a = C.byId.get(state.openId); if (a) utility(V.report(a, !!sync.config)); },
     'more': () => { const firstNew = state.limit; state.limit += PAGE; render(); $$('#list .row')[firstNew]?.focus(); },
@@ -498,6 +546,9 @@
     if (d.save) { toggleSave(d.save); return; }
     if (el.hasAttribute('data-close')) { closeDetail(); return; }
     if (el.hasAttribute('data-close-utility')) { els.utility.close(); return; }
+    if (d.remove !== undefined) { removeFilter(d.remove); ($('button', els.fchips) || els.results).focus({preventScroll: true}); return; }
+    if (d.quick === 'indoor') { state.f.indoor = true; state.limit = PAGE; render(); $('[data-remove="indoor"]', els.fchips)?.focus({preventScroll: true}); return; }
+    if (d.jump) { const h = document.getElementById('wd-' + d.jump); if (h) { h.scrollIntoView({block: 'start', behavior: W.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'}); h.focus({preventScroll: true}); } return; }
     if (d.action && actions[d.action]) { actions[d.action](); return; }
     if (el.id === 'openAbout') { utility(V.about(), () => utility(V.about())); return; }
     if (el.id === 'openData') { utility(dataDialog(), () => utility(dataDialog())); return; }
@@ -507,8 +558,14 @@
     const a = e.target.closest('a.row'); if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
     e.preventDefault(); openDetail(a.dataset.id, true);
   });
-  // The week view is rebuilt on every change; the days whose regular offers are unfolded stay unfolded.
-  els.weekBox.addEventListener('toggle', e => { const day = e.target.dataset?.day; if (day) { if (e.target.open) state.weekOpen.add(day); else state.weekOpen.delete(day); } }, true);
+  // A folded list of the week view (a day's regular groups or its places) is built when it is opened and dropped when it is closed;
+  // the week view is rebuilt on every change and keeps what is unfolded.
+  els.weekBox.addEventListener('toggle', e => {
+    const box = e.target, day = box.dataset?.day, kind = box.dataset?.kind; if (!day || !kind) return;
+    const key = day + '|' + kind, body = $('.wfold-body', box);
+    if (box.open) { state.weekOpen.add(key); const d = lastDays.find(x => x.date === day); if (d && body && !body.innerHTML) body.innerHTML = V.weekGroup(d, kind); }
+    else { state.weekOpen.delete(key); if (body) body.innerHTML = ''; }
+  }, true);
   document.addEventListener('change', e => {
     const el = e.target;
     if (el.id === 'outing-date' && P.validDate(el.value)) { state.outingDate = el.value; render(); }
@@ -597,7 +654,7 @@
       const sel = $('#personal-status'); if (sel) sel.value = store.personal.statuses[id] || '';
     } catch { toast(t('storage.otherTab')); }
   });
-  W.addEventListener('online', () => sync.now());
+  W.addEventListener('online', () => { sync.now(); if (cardText.failed.has(cardText.lang)) { cardText.triedAt = 0; retryCardText(); } });
   document.addEventListener('visibilitychange', () => { if (!document.hidden) sync.now(); });
 
   cardLanguage(I.lang());
