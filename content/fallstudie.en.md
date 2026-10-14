@@ -7,7 +7,7 @@ A directory of family activities in canton Fribourg. By Alex Shamrai.
 ## What it is
 
 Minitandem collects activities for families with children from 0 to 6 across canton Fribourg, from play and nature
-to music and horses. Parents filter by age, place and category. The interface is in German, French and English.
+to music and horses. Parents filter by age, place and category. The app is in German, French and English.
 
 The hard part is not the site but the data. Activities change, and a language model easily makes up an answer when
 a source says nothing.
@@ -83,7 +83,10 @@ I cannot read code fluently yet. I can explain how it works: the four main paths
 
 ## Limits
 
-- The catalogue texts are in English. German and French are only there for the interface.
+- All entries are in German, French and English. Language models translated the German and French texts. A
+  program checked numbers, times, weekdays and the like, and further language models checked the meaning. No native
+  speaker of German or French has read them yet. The plain single pages without JavaScript (under /places/)
+  are so far only in English.
 - Many fields are "unknown". That is on purpose, but less convenient for parents.
 - If the whole server goes down, it cannot send an e-mail any more. An outside check is still missing.
 - Syncing between devices is open to the public only for one demo family.

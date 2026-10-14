@@ -7,7 +7,7 @@ Ein Verzeichnis von Familienangeboten im Kanton Freiburg. Von Alex Shamrai.
 ## Worum es geht
 
 Minitandem sammelt Angebote für Familien mit Kindern von 0 bis 6 Jahren im ganzen Kanton Freiburg, von Spielen und
-Natur bis Musik und Pferden. Eltern filtern nach Alter, Ort und Kategorie. Die Oberfläche gibt es auf Deutsch,
+Natur bis Musik und Pferden. Eltern filtern nach Alter, Ort und Kategorie. Die App gibt es auf Deutsch,
 Französisch und Englisch.
 
 Schwierig ist nicht die Seite, sondern die Daten. Angebote ändern sich, und ein Sprachmodell erfindet leicht eine
@@ -88,7 +88,10 @@ Code lese ich noch nicht flüssig. Die Abläufe kann ich erklären: Die vier wic
 
 ## Grenzen
 
-- Die Texte im Katalog sind auf Englisch. Deutsch und Französisch gibt es nur für die Oberfläche.
+- Alle Einträge gibt es auf Deutsch, Französisch und Englisch. Sprachmodelle haben die deutschen und französischen
+  Texte übersetzt. Ein Programm hat Zahlen, Uhrzeiten, Wochentage und Ähnliches geprüft, weitere Sprachmodelle den
+  Sinn. Gelesen hat die Texte noch niemand mit Deutsch oder Französisch als Muttersprache. Die einfachen
+  Einzelseiten ohne JavaScript (unter /places/) gibt es bisher nur auf Englisch.
 - Viele Felder sind «unbekannt». Das ist Absicht, aber für Eltern weniger bequem.
 - Fällt der ganze Server aus, kann er keine E-Mail mehr schicken. Eine Prüfung von aussen fehlt noch.
 - Den Abgleich zwischen Geräten gibt es öffentlich nur für eine Demo-Familie.
