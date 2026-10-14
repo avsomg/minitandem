@@ -136,12 +136,12 @@ export class JobQueue{
       const backlog=this.db.prepare("SELECT count(*) AS n FROM jobs WHERE state IN ('ready','leased','retry') AND kind IN ('verify','verify-facts','review-patch','editorial','integrate','qa')").get().n;
       const job=this.db.prepare(`SELECT * FROM jobs WHERE kind IN (${placeholders}) AND
         (state='ready' OR state='retry' AND retry_after<=?) AND
-        (?=0 OR priority>=120) AND (? IS NULL OR card_id=?) AND NOT EXISTS(
+        (?=0 OR priority>=120 OR kind='facts' AND ?=0) AND (? IS NULL OR card_id=?) AND NOT EXISTS(
           SELECT 1 FROM jobs held WHERE held.card_id=jobs.card_id AND held.state='leased')
         AND (kind NOT IN ('qa','review-patch','release') OR NOT EXISTS(
           SELECT 1 FROM jobs held WHERE held.state='leased' AND held.kind IN ('qa','review-patch','release')))
         AND NOT EXISTS(SELECT 1 FROM jobs held WHERE held.state='leased' AND held.kind='release')
-        ORDER BY priority DESC,created_at,id LIMIT 1`).get(...ROLE_KINDS[role],now,role==='search'&&backlog>=backpressure?1:0,cardId,cardId);
+        ORDER BY priority DESC,created_at,id LIMIT 1`).get(...ROLE_KINDS[role],now,role==='search'&&backlog>=backpressure?1:0,role==='search'&&backlog>=2*backpressure?1:0,cardId,cardId);
       if(!job)return null;
       const token=randomUUID(),until=new Date(Date.parse(now)+leaseMs).toISOString();
       this.db.prepare('UPDATE jobs SET state=?,owner=?,token=?,lease_until=?,attempt=attempt+1,updated_at=? WHERE id=?')

@@ -13,6 +13,15 @@ export function loadCatalog({updatesFile=path.join(root,'editorial','approved-up
   for(const file of ['data-practical.js','regions.js','data-geo.js','planning.js','exchange.js'])vm.runInNewContext(fs.readFileSync(path.join(root,file),'utf8'),context);
   return context.window;
 }
+const KIND_WEIGHT={'possible-closure':400,'redirect-changed':150,'content-changed':80,'parser-failed':80,'possible-reopen':80,'source-unavailable':60};
+const SIGNIFICANCE_WEIGHT={high:150,normal:80,low:20};
+export function issueWeight(issue){
+  const d=issue.details||{};
+  if(issue.kind==='content-changed')return SIGNIFICANCE_WEIGHT[d.significance]??80;
+  if(issue.kind==='redirect-changed')return ['language','path'].includes(d.class)?80:150;
+  if(issue.kind==='possible-closure'&&Array.isArray(d.lines)&&d.lines.length&&d.lines.every(l=>l.office||l.strength==='info'))return 80;
+  return KIND_WEIGHT[issue.kind]??80;
+}
 export function qualityReport(records,sources,date,monitorState){
   const fields=['booking','observe','trial','leave','commitment','groupSize','leader','standardGerman','access','changing'];
   const active=records.filter(a=>!['closed','excluded'].includes(a.status));
@@ -44,8 +53,11 @@ export function qualityReport(records,sources,date,monitorState){
     const nextEvent=a.events.map(e=>e.date).filter(value=>value>=date).sort()[0]||null;
     const imminent=Boolean(nextEvent&&nextEvent<=horizon);
     const weights={age:8,parent:6,price:4,address:10,language:5,booking:5};
-    const priority=(stale?120:0)+(sourceIssues.length?80:0)+(a.status==='check'?25:0)+
-      (imminent?(a.status==='check'||critical.length?55:10):0)+critical.reduce((sum,key)=>sum+weights[key],0)+(watched.length?0:15);
+    const signal=sourceIssues.reduce((max,issue)=>Math.max(max,issueWeight(issue)),0);
+    const staleWeight=stale?(a.format==='self'&&!imminent?60:120):0;
+    const imminentWeight=imminent?(sourceIssues.length?100:(a.status==='check'||critical.length?55:10)):0;
+    const priority=staleWeight+signal+(a.status==='check'?25:0)+imminentWeight+
+      critical.reduce((sum,key)=>sum+weights[key],0)+(watched.length?0:15);
     return {id:a.id,name:a.name,region:a.region,checked:a.checked,reviewAfter:a.reviewAfter||null,stale,nextEvent,critical,missing,watched,sourceIssues,owner:null,priority,source:a.sources[0]?.url||null};
   }).sort((a,b)=>b.priority-a.priority||(a.nextEvent||'9999').localeCompare(b.nextEvent||'9999')||a.id.localeCompare(b.id));
   return {generatedFor:date,records:active.length,unassigned:rows.length,stale:rows.filter(a=>a.stale).length,withoutMonitor:rows.filter(a=>!a.watched.length).length,

@@ -81,6 +81,16 @@ test('backpressure holds ordinary discovery but allows urgent checks',t=>{
   const job=queue.claim('search','worker',{backpressure:1});assert.equal(job.card_id,'urgent');
   queue.finish(job.id,job.token,'search',{});assert.equal(queue.claim('search','worker',{backpressure:1}),null);
 });
+test('facts re-checks wait only for double backlog unless urgent; discovery waits for single backlog',t=>{
+  const {queue}=fixture(t);
+  queue.enqueue(spec('facts','soft','v1',85));queue.enqueue(spec('search','plain','v1',85));
+  queue.enqueue(spec('verify','b1'));
+  assert.equal(queue.claim('search','w',{backpressure:1}).card_id,'soft');
+  queue.enqueue(spec('facts','soft2','v1',85));queue.enqueue(spec('verify','b2'));
+  assert.equal(queue.claim('search','w',{backpressure:1}),null);
+  queue.enqueue(spec('facts','alarm','v1',400));
+  assert.equal(queue.claim('search','w',{backpressure:1}).card_id,'alarm');
+});
 test('artifacts and outbox survive reopening; followups are ready immediately',t=>{
   const {queue,directory,file}=fixture(t);queue.enqueue(spec());const job=queue.claim('search','one');
   const result=queue.finish(job.id,job.token,'search',{found:true},{writes:[{file:'editorial/external-candidates/card.json',data:{found:true}}],
