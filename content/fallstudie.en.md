@@ -73,8 +73,9 @@ Codex (2 and 3 October), 8 through Claude. The rules in the code are the same fo
 AI agents write the code: Claude Code, earlier Codex. My part:
 
 - I decide what the product does and what it does not. For example: no names of private persons in the catalogue.
-- I write the specs and the rules for the agents.
-- I check the results: tests, audits, the demo, the live site from outside.
+- I set the requirements and the rules. The agents write the specs from them, and I approve them.
+- I check the results: the agents run the tests and audits, I read their reports and look at the live site
+  myself.
 - I decide what gets published. I chose and paid for the domain and the server. Agents set up both after my approval.
 
 I cannot read code fluently yet. I can explain how it works: the four main paths through the code are described in

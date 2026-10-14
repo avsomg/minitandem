@@ -77,8 +77,9 @@ mit OpenAI Codex (2. und 3. Oktober), 8 über Claude. Die Regeln im Code sind f�
 Den Code schreiben KI-Agenten: Claude Code, früher Codex. Meine Arbeit:
 
 - Ich lege fest, was das Produkt tut und was nicht. Zum Beispiel: keine Namen von Privatpersonen im Katalog.
-- Ich schreibe die Specs und die Regeln für die Agenten.
-- Ich prüfe die Ergebnisse: Tests, Audits, die Demo, die Seite von aussen.
+- Ich lege die Anforderungen und Regeln fest. Die Agenten schreiben daraus die Specs, ich gebe sie frei.
+- Ich prüfe die Ergebnisse: Die Agenten führen Tests und Audits durch, ich lese ihre Berichte und sehe mir die
+  laufende Seite selbst an.
 - Ich entscheide, was veröffentlicht wird. Domain und Server habe ich ausgewählt und bezahlt.
   Agenten haben beides nach meiner Freigabe eingerichtet.
 
