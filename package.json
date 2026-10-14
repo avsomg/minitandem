@@ -1,0 +1,21 @@
+{
+  "name": "minitandem",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "A directory of activities for families with children aged 0 to 6 in canton Fribourg, with the editorial pipeline that keeps it checked.",
+  "engines": {
+    "node": ">=24.12.0"
+  },
+  "scripts": {
+    "setup": "npm ci --prefix editorial",
+    "build": "node build.mjs --public",
+    "pretest": "npm run build",
+    "test": "node --test *.test.mjs editorial/*.test.mjs",
+    "test:browser": "node scripts/browser-checks.mjs",
+    "demo": "node --disable-warning=ExperimentalWarning demo/run.mjs",
+    "audit:public": "node editorial/public-audit.mjs --strict",
+    "scan:public": "node scripts/scan-public.mjs",
+    "start": "node --disable-warning=ExperimentalWarning server.mjs start"
+  }
+}

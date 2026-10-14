@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@typesafe-ai/sdk": "0.6.0",
+    "ajv": "8.20.0",
+    "cheerio": "1.2.0",
+    "ical.js": "2.2.1",
+    "image-size": "2.0.4"
+  }
+}

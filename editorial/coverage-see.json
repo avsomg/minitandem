@@ -1,0 +1,1717 @@
+{
+  "asOf": "2026-09-27",
+  "region": "see",
+  "sources": [
+    "https://www.regionseelac.ch/de/communes",
+    "https://bdlf.fr.ch/app/fr/change_documents/5513"
+  ],
+  "aliases": {
+    "Murten": [
+      "Morat"
+    ],
+    "Meyriez": [
+      "Merlach"
+    ],
+    "Kerzers": [
+      "Chiètres"
+    ],
+    "Gurmels": [
+      "Ulmiz"
+    ]
+  },
+  "note": "Partial means a source was reviewed and logged. Search-only means a category-specific web search was run but its leads still need local primary-source review. Neither status establishes completeness or absence. District expansion remains on hold.",
+  "cells": [
+    {
+      "commune": "Courgevaux",
+      "category": "play",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2401"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Courgevaux",
+      "category": "movement",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2431"
+      ],
+      "targetedSearchIds": [
+        "see-p2-001"
+      ]
+    },
+    {
+      "commune": "Courgevaux",
+      "category": "water",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2431"
+      ],
+      "targetedSearchIds": [
+        "see-p2-002"
+      ]
+    },
+    {
+      "commune": "Courgevaux",
+      "category": "music",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2431"
+      ],
+      "targetedSearchIds": [
+        "see-p2-003"
+      ]
+    },
+    {
+      "commune": "Courgevaux",
+      "category": "creative",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2431"
+      ],
+      "targetedSearchIds": [
+        "see-p2-004"
+      ]
+    },
+    {
+      "commune": "Courgevaux",
+      "category": "nature",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2431"
+      ],
+      "targetedSearchIds": [
+        "see-p2-005"
+      ]
+    },
+    {
+      "commune": "Courgevaux",
+      "category": "books",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2431"
+      ],
+      "targetedSearchIds": [
+        "see-p2-006"
+      ]
+    },
+    {
+      "commune": "Courgevaux",
+      "category": "horses",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2431"
+      ],
+      "targetedSearchIds": [
+        "see-p2-007"
+      ]
+    },
+    {
+      "commune": "Courgevaux",
+      "category": "events",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2431"
+      ],
+      "targetedSearchIds": [
+        "see-p2-008"
+      ]
+    },
+    {
+      "commune": "Courtepin",
+      "category": "play",
+      "status": "partial",
+      "catalogRecordIds": [
+        "ateliers-familles-courtepin"
+      ],
+      "searchLogIds": [
+        "see-2402",
+        "see-2418"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Courtepin",
+      "category": "movement",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2418"
+      ],
+      "targetedSearchIds": [
+        "see-p2-009"
+      ]
+    },
+    {
+      "commune": "Courtepin",
+      "category": "water",
+      "status": "partial",
+      "catalogRecordIds": [
+        "swim-courtepin-babies"
+      ],
+      "searchLogIds": [
+        "see-2402",
+        "see-2418"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Courtepin",
+      "category": "music",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2418"
+      ],
+      "targetedSearchIds": [
+        "see-p2-010"
+      ]
+    },
+    {
+      "commune": "Courtepin",
+      "category": "creative",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2418"
+      ],
+      "targetedSearchIds": [
+        "see-p2-011"
+      ]
+    },
+    {
+      "commune": "Courtepin",
+      "category": "nature",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2418"
+      ],
+      "targetedSearchIds": [
+        "see-p2-012"
+      ]
+    },
+    {
+      "commune": "Courtepin",
+      "category": "books",
+      "status": "partial",
+      "catalogRecordIds": [
+        "library-courtepin",
+        "ludo-pinocchio-courtepin"
+      ],
+      "searchLogIds": [
+        "see-2402",
+        "see-2418"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Courtepin",
+      "category": "horses",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2418"
+      ],
+      "targetedSearchIds": [
+        "see-p2-013"
+      ]
+    },
+    {
+      "commune": "Courtepin",
+      "category": "events",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2418"
+      ],
+      "targetedSearchIds": [
+        "see-p2-014"
+      ]
+    },
+    {
+      "commune": "Cressier",
+      "category": "play",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2403",
+        "see-2419"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Cressier",
+      "category": "movement",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2419"
+      ],
+      "targetedSearchIds": [
+        "see-p2-015"
+      ]
+    },
+    {
+      "commune": "Cressier",
+      "category": "water",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2419"
+      ],
+      "targetedSearchIds": [
+        "see-p2-016"
+      ]
+    },
+    {
+      "commune": "Cressier",
+      "category": "music",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2419"
+      ],
+      "targetedSearchIds": [
+        "see-p2-017"
+      ]
+    },
+    {
+      "commune": "Cressier",
+      "category": "creative",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2419"
+      ],
+      "targetedSearchIds": [
+        "see-p2-018"
+      ]
+    },
+    {
+      "commune": "Cressier",
+      "category": "nature",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2419"
+      ],
+      "targetedSearchIds": [
+        "see-p2-019"
+      ]
+    },
+    {
+      "commune": "Cressier",
+      "category": "books",
+      "status": "partial",
+      "catalogRecordIds": [
+        "library-cressier"
+      ],
+      "searchLogIds": [
+        "see-2403",
+        "see-2419"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Cressier",
+      "category": "horses",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2419"
+      ],
+      "targetedSearchIds": [
+        "see-p2-020"
+      ]
+    },
+    {
+      "commune": "Cressier",
+      "category": "events",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2419"
+      ],
+      "targetedSearchIds": [
+        "see-p2-021"
+      ]
+    },
+    {
+      "commune": "Fräschels",
+      "category": "play",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2404",
+        "see-2420"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Fräschels",
+      "category": "movement",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2420"
+      ],
+      "targetedSearchIds": [
+        "see-p2-022"
+      ]
+    },
+    {
+      "commune": "Fräschels",
+      "category": "water",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2420"
+      ],
+      "targetedSearchIds": [
+        "see-p2-023"
+      ]
+    },
+    {
+      "commune": "Fräschels",
+      "category": "music",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2420"
+      ],
+      "targetedSearchIds": [
+        "see-p2-024"
+      ]
+    },
+    {
+      "commune": "Fräschels",
+      "category": "creative",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2420"
+      ],
+      "targetedSearchIds": [
+        "see-p2-025"
+      ]
+    },
+    {
+      "commune": "Fräschels",
+      "category": "nature",
+      "status": "partial",
+      "catalogRecordIds": [
+        "waldlehrpfad-fraeschels"
+      ],
+      "searchLogIds": [
+        "see-2420"
+      ],
+      "targetedSearchIds": [
+        "see-p2-026"
+      ]
+    },
+    {
+      "commune": "Fräschels",
+      "category": "books",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2420"
+      ],
+      "targetedSearchIds": [
+        "see-p2-027"
+      ]
+    },
+    {
+      "commune": "Fräschels",
+      "category": "horses",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2420"
+      ],
+      "targetedSearchIds": [
+        "see-p2-028"
+      ]
+    },
+    {
+      "commune": "Fräschels",
+      "category": "events",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2420"
+      ],
+      "targetedSearchIds": [
+        "see-p2-029"
+      ]
+    },
+    {
+      "commune": "Greng",
+      "category": "play",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2405",
+        "see-2421"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Greng",
+      "category": "movement",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2421"
+      ],
+      "targetedSearchIds": [
+        "see-p2-030"
+      ]
+    },
+    {
+      "commune": "Greng",
+      "category": "water",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2421"
+      ],
+      "targetedSearchIds": [
+        "see-p2-031"
+      ]
+    },
+    {
+      "commune": "Greng",
+      "category": "music",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2421"
+      ],
+      "targetedSearchIds": [
+        "see-p2-032"
+      ]
+    },
+    {
+      "commune": "Greng",
+      "category": "creative",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2421"
+      ],
+      "targetedSearchIds": [
+        "see-p2-033"
+      ]
+    },
+    {
+      "commune": "Greng",
+      "category": "nature",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2421"
+      ],
+      "targetedSearchIds": [
+        "see-p2-034"
+      ]
+    },
+    {
+      "commune": "Greng",
+      "category": "books",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2421"
+      ],
+      "targetedSearchIds": [
+        "see-p2-035"
+      ]
+    },
+    {
+      "commune": "Greng",
+      "category": "horses",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2421"
+      ],
+      "targetedSearchIds": [
+        "see-p2-036"
+      ]
+    },
+    {
+      "commune": "Greng",
+      "category": "events",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2421"
+      ],
+      "targetedSearchIds": [
+        "see-p2-037"
+      ]
+    },
+    {
+      "commune": "Gurmels",
+      "category": "play",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2406",
+        "see-2422"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Gurmels",
+      "category": "movement",
+      "status": "partial",
+      "catalogRecordIds": [
+        "schlittschuh-gurmels"
+      ],
+      "searchLogIds": [
+        "see-2422"
+      ],
+      "targetedSearchIds": [
+        "see-p2-038"
+      ]
+    },
+    {
+      "commune": "Gurmels",
+      "category": "water",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2422"
+      ],
+      "targetedSearchIds": [
+        "see-p2-039"
+      ]
+    },
+    {
+      "commune": "Gurmels",
+      "category": "music",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2406",
+        "see-2422"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Gurmels",
+      "category": "creative",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2422"
+      ],
+      "targetedSearchIds": [
+        "see-p2-040"
+      ]
+    },
+    {
+      "commune": "Gurmels",
+      "category": "nature",
+      "status": "partial",
+      "catalogRecordIds": [
+        "biberpfad-gurmels"
+      ],
+      "searchLogIds": [
+        "see-2422"
+      ],
+      "targetedSearchIds": [
+        "see-p2-041"
+      ]
+    },
+    {
+      "commune": "Gurmels",
+      "category": "books",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2422"
+      ],
+      "targetedSearchIds": [
+        "see-p2-042"
+      ]
+    },
+    {
+      "commune": "Gurmels",
+      "category": "horses",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2422"
+      ],
+      "targetedSearchIds": [
+        "see-p2-043"
+      ]
+    },
+    {
+      "commune": "Gurmels",
+      "category": "events",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2422"
+      ],
+      "targetedSearchIds": [
+        "see-p2-044"
+      ]
+    },
+    {
+      "commune": "Kerzers",
+      "category": "play",
+      "status": "partial",
+      "catalogRecordIds": [
+        "krabbel-kerzers"
+      ],
+      "searchLogIds": [
+        "see-2407",
+        "see-2423"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Kerzers",
+      "category": "movement",
+      "status": "partial",
+      "catalogRecordIds": [
+        "elki-kerzers",
+        "familybloom-yoga",
+        "familybloom-mini-move"
+      ],
+      "searchLogIds": [
+        "see-2407",
+        "see-2423"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Kerzers",
+      "category": "water",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2423"
+      ],
+      "targetedSearchIds": [
+        "see-p2-045"
+      ]
+    },
+    {
+      "commune": "Kerzers",
+      "category": "music",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2407",
+        "see-2423"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Kerzers",
+      "category": "creative",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2423"
+      ],
+      "targetedSearchIds": [
+        "see-p2-046"
+      ]
+    },
+    {
+      "commune": "Kerzers",
+      "category": "nature",
+      "status": "partial",
+      "catalogRecordIds": [
+        "papiliorama-kerzers",
+        "karla-gemuesetrail"
+      ],
+      "searchLogIds": [
+        "see-2407",
+        "see-2423"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Kerzers",
+      "category": "books",
+      "status": "partial",
+      "catalogRecordIds": [
+        "library-kerzers"
+      ],
+      "searchLogIds": [
+        "see-2407",
+        "see-2423"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Kerzers",
+      "category": "horses",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2423"
+      ],
+      "targetedSearchIds": [
+        "see-p2-047"
+      ]
+    },
+    {
+      "commune": "Kerzers",
+      "category": "events",
+      "status": "partial",
+      "catalogRecordIds": [
+        "spielkafi-kerzers-2026",
+        "familienkonzert-kerzers-2026"
+      ],
+      "searchLogIds": [
+        "see-2423"
+      ],
+      "targetedSearchIds": [
+        "see-p2-048"
+      ]
+    },
+    {
+      "commune": "Kleinbösingen",
+      "category": "play",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2408",
+        "see-2424"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Kleinbösingen",
+      "category": "movement",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2424"
+      ],
+      "targetedSearchIds": [
+        "see-p2-049"
+      ]
+    },
+    {
+      "commune": "Kleinbösingen",
+      "category": "water",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2424"
+      ],
+      "targetedSearchIds": [
+        "see-p2-050"
+      ]
+    },
+    {
+      "commune": "Kleinbösingen",
+      "category": "music",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2424"
+      ],
+      "targetedSearchIds": [
+        "see-p2-051"
+      ]
+    },
+    {
+      "commune": "Kleinbösingen",
+      "category": "creative",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2424"
+      ],
+      "targetedSearchIds": [
+        "see-p2-052"
+      ]
+    },
+    {
+      "commune": "Kleinbösingen",
+      "category": "nature",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2424"
+      ],
+      "targetedSearchIds": [
+        "see-p2-053"
+      ]
+    },
+    {
+      "commune": "Kleinbösingen",
+      "category": "books",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2424"
+      ],
+      "targetedSearchIds": [
+        "see-p2-054"
+      ]
+    },
+    {
+      "commune": "Kleinbösingen",
+      "category": "horses",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2424"
+      ],
+      "targetedSearchIds": [
+        "see-p2-055"
+      ]
+    },
+    {
+      "commune": "Kleinbösingen",
+      "category": "events",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2424"
+      ],
+      "targetedSearchIds": [
+        "see-p2-056"
+      ]
+    },
+    {
+      "commune": "Meyriez",
+      "category": "play",
+      "status": "partial",
+      "catalogRecordIds": [
+        "krabbeltreff-meyriez"
+      ],
+      "searchLogIds": [
+        "see-2409",
+        "see-2425"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Meyriez",
+      "category": "movement",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2425"
+      ],
+      "targetedSearchIds": [
+        "see-p2-057"
+      ]
+    },
+    {
+      "commune": "Meyriez",
+      "category": "water",
+      "status": "partial",
+      "catalogRecordIds": [
+        "firstflow-meyriez-2026"
+      ],
+      "searchLogIds": [
+        "see-2425"
+      ],
+      "targetedSearchIds": [
+        "see-p2-058"
+      ]
+    },
+    {
+      "commune": "Meyriez",
+      "category": "music",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2425"
+      ],
+      "targetedSearchIds": [
+        "see-p2-059"
+      ]
+    },
+    {
+      "commune": "Meyriez",
+      "category": "creative",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2425"
+      ],
+      "targetedSearchIds": [
+        "see-p2-060"
+      ]
+    },
+    {
+      "commune": "Meyriez",
+      "category": "nature",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2425"
+      ],
+      "targetedSearchIds": [
+        "see-p2-061"
+      ]
+    },
+    {
+      "commune": "Meyriez",
+      "category": "books",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2425"
+      ],
+      "targetedSearchIds": [
+        "see-p2-062"
+      ]
+    },
+    {
+      "commune": "Meyriez",
+      "category": "horses",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2425"
+      ],
+      "targetedSearchIds": [
+        "see-p2-063"
+      ]
+    },
+    {
+      "commune": "Meyriez",
+      "category": "events",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2425"
+      ],
+      "targetedSearchIds": [
+        "see-p2-064"
+      ]
+    },
+    {
+      "commune": "Misery-Courtion",
+      "category": "play",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2410",
+        "see-2426"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Misery-Courtion",
+      "category": "movement",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2426"
+      ],
+      "targetedSearchIds": [
+        "see-p2-065"
+      ]
+    },
+    {
+      "commune": "Misery-Courtion",
+      "category": "water",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2426"
+      ],
+      "targetedSearchIds": [
+        "see-p2-066"
+      ]
+    },
+    {
+      "commune": "Misery-Courtion",
+      "category": "music",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2426"
+      ],
+      "targetedSearchIds": [
+        "see-p2-067"
+      ]
+    },
+    {
+      "commune": "Misery-Courtion",
+      "category": "creative",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2426"
+      ],
+      "targetedSearchIds": [
+        "see-p2-068"
+      ]
+    },
+    {
+      "commune": "Misery-Courtion",
+      "category": "nature",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2426"
+      ],
+      "targetedSearchIds": [
+        "see-p2-069"
+      ]
+    },
+    {
+      "commune": "Misery-Courtion",
+      "category": "books",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2426"
+      ],
+      "targetedSearchIds": [
+        "see-p2-070"
+      ]
+    },
+    {
+      "commune": "Misery-Courtion",
+      "category": "horses",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2426"
+      ],
+      "targetedSearchIds": [
+        "see-p2-071"
+      ]
+    },
+    {
+      "commune": "Misery-Courtion",
+      "category": "events",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2426"
+      ],
+      "targetedSearchIds": [
+        "see-p2-072"
+      ]
+    },
+    {
+      "commune": "Mont-Vully",
+      "category": "play",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2411",
+        "see-2427"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Mont-Vully",
+      "category": "movement",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2427"
+      ],
+      "targetedSearchIds": [
+        "see-p2-073"
+      ]
+    },
+    {
+      "commune": "Mont-Vully",
+      "category": "water",
+      "status": "partial",
+      "catalogRecordIds": [
+        "plage-praz-vully"
+      ],
+      "searchLogIds": [
+        "see-2427"
+      ],
+      "targetedSearchIds": [
+        "see-p2-074"
+      ]
+    },
+    {
+      "commune": "Mont-Vully",
+      "category": "music",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2427"
+      ],
+      "targetedSearchIds": [
+        "see-p2-075"
+      ]
+    },
+    {
+      "commune": "Mont-Vully",
+      "category": "creative",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2427"
+      ],
+      "targetedSearchIds": [
+        "see-p2-076"
+      ]
+    },
+    {
+      "commune": "Mont-Vully",
+      "category": "nature",
+      "status": "partial",
+      "catalogRecordIds": [
+        "sentier-botanique-vully"
+      ],
+      "searchLogIds": [
+        "see-2411",
+        "see-2427"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Mont-Vully",
+      "category": "books",
+      "status": "partial",
+      "catalogRecordIds": [
+        "library-vully"
+      ],
+      "searchLogIds": [
+        "see-2411",
+        "see-2427"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Mont-Vully",
+      "category": "horses",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2427"
+      ],
+      "targetedSearchIds": [
+        "see-p2-077"
+      ]
+    },
+    {
+      "commune": "Mont-Vully",
+      "category": "events",
+      "status": "partial",
+      "catalogRecordIds": [
+        "jeux-apav-vully-2026"
+      ],
+      "searchLogIds": [
+        "see-2427"
+      ],
+      "targetedSearchIds": [
+        "see-p2-078"
+      ]
+    },
+    {
+      "commune": "Muntelier",
+      "category": "play",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2412"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Muntelier",
+      "category": "movement",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2432"
+      ],
+      "targetedSearchIds": [
+        "see-p2-079"
+      ]
+    },
+    {
+      "commune": "Muntelier",
+      "category": "water",
+      "status": "partial",
+      "catalogRecordIds": [
+        "badeplatz-muntelier"
+      ],
+      "searchLogIds": [
+        "see-2428"
+      ],
+      "targetedSearchIds": [
+        "see-p2-080"
+      ]
+    },
+    {
+      "commune": "Muntelier",
+      "category": "music",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2432"
+      ],
+      "targetedSearchIds": [
+        "see-p2-081"
+      ]
+    },
+    {
+      "commune": "Muntelier",
+      "category": "creative",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2432"
+      ],
+      "targetedSearchIds": [
+        "see-p2-082"
+      ]
+    },
+    {
+      "commune": "Muntelier",
+      "category": "nature",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2432"
+      ],
+      "targetedSearchIds": [
+        "see-p2-083"
+      ]
+    },
+    {
+      "commune": "Muntelier",
+      "category": "books",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2432"
+      ],
+      "targetedSearchIds": [
+        "see-p2-084"
+      ]
+    },
+    {
+      "commune": "Muntelier",
+      "category": "horses",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2432"
+      ],
+      "targetedSearchIds": [
+        "see-p2-085"
+      ]
+    },
+    {
+      "commune": "Muntelier",
+      "category": "events",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2432"
+      ],
+      "targetedSearchIds": [
+        "see-p2-086"
+      ]
+    },
+    {
+      "commune": "Murten",
+      "category": "play",
+      "status": "partial",
+      "catalogRecordIds": [
+        "family-cafe-murten",
+        "bulles-familles-murten"
+      ],
+      "searchLogIds": [
+        "see-2413",
+        "see-2429"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Murten",
+      "category": "movement",
+      "status": "partial",
+      "catalogRecordIds": [
+        "kibim-murten"
+      ],
+      "searchLogIds": [
+        "see-2429"
+      ],
+      "targetedSearchIds": [
+        "see-p2-087"
+      ]
+    },
+    {
+      "commune": "Murten",
+      "category": "water",
+      "status": "partial",
+      "catalogRecordIds": [
+        "baby-bade-murten"
+      ],
+      "searchLogIds": [
+        "see-2429"
+      ],
+      "targetedSearchIds": [
+        "see-p2-088"
+      ]
+    },
+    {
+      "commune": "Murten",
+      "category": "music",
+      "status": "partial",
+      "catalogRecordIds": [
+        "stimm-family"
+      ],
+      "searchLogIds": [
+        "see-2413",
+        "see-2429"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Murten",
+      "category": "creative",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2429"
+      ],
+      "targetedSearchIds": [
+        "see-p2-089"
+      ]
+    },
+    {
+      "commune": "Murten",
+      "category": "nature",
+      "status": "partial",
+      "catalogRecordIds": [
+        "treasure-murten"
+      ],
+      "searchLogIds": [
+        "see-2413",
+        "see-2429"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Murten",
+      "category": "books",
+      "status": "partial",
+      "catalogRecordIds": [
+        "library-murten",
+        "ludothek-murten"
+      ],
+      "searchLogIds": [
+        "see-2413",
+        "see-2429"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Murten",
+      "category": "horses",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2429"
+      ],
+      "targetedSearchIds": [
+        "see-p2-090"
+      ]
+    },
+    {
+      "commune": "Murten",
+      "category": "events",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2429"
+      ],
+      "targetedSearchIds": [
+        "see-p2-091"
+      ]
+    },
+    {
+      "commune": "Ried bei Kerzers",
+      "category": "play",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2414",
+        "see-2430"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Ried bei Kerzers",
+      "category": "movement",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2430"
+      ],
+      "targetedSearchIds": [
+        "see-p2-092"
+      ]
+    },
+    {
+      "commune": "Ried bei Kerzers",
+      "category": "water",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2430"
+      ],
+      "targetedSearchIds": [
+        "see-p2-093"
+      ]
+    },
+    {
+      "commune": "Ried bei Kerzers",
+      "category": "music",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2430"
+      ],
+      "targetedSearchIds": [
+        "see-p2-094"
+      ]
+    },
+    {
+      "commune": "Ried bei Kerzers",
+      "category": "creative",
+      "status": "partial",
+      "catalogRecordIds": [
+        "candles-ried-2026"
+      ],
+      "searchLogIds": [
+        "see-2414",
+        "see-2430"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Ried bei Kerzers",
+      "category": "nature",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2430"
+      ],
+      "targetedSearchIds": [
+        "see-p2-095"
+      ]
+    },
+    {
+      "commune": "Ried bei Kerzers",
+      "category": "books",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2430"
+      ],
+      "targetedSearchIds": [
+        "see-p2-096"
+      ]
+    },
+    {
+      "commune": "Ried bei Kerzers",
+      "category": "horses",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2430"
+      ],
+      "targetedSearchIds": [
+        "see-p2-097"
+      ]
+    },
+    {
+      "commune": "Ried bei Kerzers",
+      "category": "events",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2414",
+        "see-2430"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Courgevaux",
+      "category": "dining",
+      "status": "search-only",
+      "catalogRecordIds": [],
+      "searchLogIds": [],
+      "targetedSearchIds": [
+        "see-dining-01"
+      ]
+    },
+    {
+      "commune": "Courtepin",
+      "category": "dining",
+      "status": "search-only",
+      "catalogRecordIds": [],
+      "searchLogIds": [],
+      "targetedSearchIds": [
+        "see-dining-02"
+      ]
+    },
+    {
+      "commune": "Cressier",
+      "category": "dining",
+      "status": "search-only",
+      "catalogRecordIds": [],
+      "searchLogIds": [],
+      "targetedSearchIds": [
+        "see-dining-03"
+      ]
+    },
+    {
+      "commune": "Fräschels",
+      "category": "dining",
+      "status": "search-only",
+      "catalogRecordIds": [],
+      "searchLogIds": [],
+      "targetedSearchIds": [
+        "see-dining-04"
+      ]
+    },
+    {
+      "commune": "Greng",
+      "category": "dining",
+      "status": "search-only",
+      "catalogRecordIds": [],
+      "searchLogIds": [],
+      "targetedSearchIds": [
+        "see-dining-05"
+      ]
+    },
+    {
+      "commune": "Gurmels",
+      "category": "dining",
+      "status": "search-only",
+      "catalogRecordIds": [],
+      "searchLogIds": [],
+      "targetedSearchIds": [
+        "see-dining-06"
+      ]
+    },
+    {
+      "commune": "Kerzers",
+      "category": "dining",
+      "status": "partial",
+      "catalogRecordIds": [
+        "kafi8-kerzers",
+        "clubcafe-kerzers"
+      ],
+      "searchLogIds": [
+        "see-2703"
+      ],
+      "targetedSearchIds": [
+        "see-dining-07"
+      ]
+    },
+    {
+      "commune": "Kleinbösingen",
+      "category": "dining",
+      "status": "search-only",
+      "catalogRecordIds": [],
+      "searchLogIds": [],
+      "targetedSearchIds": [
+        "see-dining-08"
+      ]
+    },
+    {
+      "commune": "Meyriez",
+      "category": "dining",
+      "status": "search-only",
+      "catalogRecordIds": [],
+      "searchLogIds": [],
+      "targetedSearchIds": [
+        "see-dining-09"
+      ]
+    },
+    {
+      "commune": "Misery-Courtion",
+      "category": "dining",
+      "status": "search-only",
+      "catalogRecordIds": [],
+      "searchLogIds": [],
+      "targetedSearchIds": [
+        "see-dining-10"
+      ]
+    },
+    {
+      "commune": "Mont-Vully",
+      "category": "dining",
+      "status": "partial",
+      "catalogRecordIds": [],
+      "searchLogIds": [
+        "see-2702"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Muntelier",
+      "category": "dining",
+      "status": "partial",
+      "catalogRecordIds": [
+        "jardin-muntelier",
+        "beachhouse-muntelier"
+      ],
+      "searchLogIds": [
+        "see-2704"
+      ],
+      "targetedSearchIds": [
+        "see-dining-11"
+      ]
+    },
+    {
+      "commune": "Murten",
+      "category": "dining",
+      "status": "partial",
+      "catalogRecordIds": [
+        "laferme-murten"
+      ],
+      "searchLogIds": [
+        "see-2701"
+      ],
+      "targetedSearchIds": []
+    },
+    {
+      "commune": "Ried bei Kerzers",
+      "category": "dining",
+      "status": "search-only",
+      "catalogRecordIds": [],
+      "searchLogIds": [],
+      "targetedSearchIds": [
+        "see-dining-12"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "verdicts": [
+    {"key": "min-253772165341", "verdict": "approve", "reason": "The page states children aged 2 to 4 years for this playgroup; the lower bound is 2."},
+    {"key": "max-d3abb364d081", "verdict": "approve", "reason": "Same sentence; the upper bound is 4."},
+    {"key": "parent-56e209fce397", "verdict": "approve", "reason": "The page says a parent stays with the child for the whole session."},
+    {"key": "priceKind-81a47d660a99", "verdict": "reject", "reason": "The quote says only that registration is not needed. It says nothing about the price, and the page lists a contribution of CHF 5 per family per visit."},
+    {"key": "languages-79997f26a2e0", "verdict": "await-source", "reason": "Unknown stays unknown: the page does not state the session language."}
+  ]
+}

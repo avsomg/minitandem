@@ -1,0 +1,26 @@
+{
+  "draft": {
+    "cardId": "training-little-owls",
+    "patch": {
+      "min": 2,
+      "max": 4,
+      "age": "2 to 4 years",
+      "parent": "yes"
+    },
+    "practicalPatch": {},
+    "findings": [
+      {"field": "Age and adult", "kind": "official", "text": "The playgroup is for children aged 2 to 4 years, and a parent stays for the whole session.", "url": "https://little-owls.example.org/playgroup"}
+    ],
+    "remaining": [
+      "The price is not confirmed: the page lists a contribution that no approved claim covers yet.",
+      "The language of the sessions is not stated."
+    ],
+    "bindings": [
+      {"field": "min", "source": "https://little-owls.example.org/playgroup", "quote": "children aged 2 to 4 years", "kind": "official", "scope": "exact-card", "claimKey": "min-253772165341"},
+      {"field": "max", "source": "https://little-owls.example.org/playgroup", "quote": "children aged 2 to 4 years", "kind": "official", "scope": "exact-card", "claimKey": "max-d3abb364d081"},
+      {"field": "age", "source": "https://little-owls.example.org/playgroup", "quote": "children aged 2 to 4 years", "kind": "official", "scope": "exact-card", "claimKey": null},
+      {"field": "parent", "source": "https://little-owls.example.org/playgroup", "quote": "A parent stays with the child for the whole session.", "kind": "official", "scope": "exact-card", "claimKey": "parent-56e209fce397"},
+      {"field": "research.findings.0", "source": "https://little-owls.example.org/playgroup", "quote": "children aged 2 to 4 years", "kind": "official", "scope": "exact-card", "claimKey": null}
+    ]
+  }
+}

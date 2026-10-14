@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["project", "jobId", "inputRevision", "resultJson"],
+  "properties": {
+    "project": {"type": "string", "enum": ["vmeste"]},
+    "jobId": {"type": "string"},
+    "inputRevision": {"type": "string"},
+    "resultJson": {"type": "string"}
+  }
+}

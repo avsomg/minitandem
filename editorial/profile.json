@@ -1,0 +1,71 @@
+{
+  "generatedAt": "2026-10-14T00:57:22.332Z",
+  "grain": "One published catalogue card; formats include groups, individual offers, events and self-guided visits.",
+  "total": 321,
+  "catalog": 295,
+  "archive": 26,
+  "geocodedCards": 140,
+  "uniqueAddressPoints": 115,
+  "byRegion": {
+    "sense": 60,
+    "sarine": 77,
+    "see": 48,
+    "veveyse": 22,
+    "broye": 26,
+    "gruyere": 38,
+    "glane": 24
+  },
+  "byFormat": {
+    "group": 80,
+    "individual": 3,
+    "event": 32,
+    "self": 180
+  },
+  "storedStatus": {
+    "check": 101,
+    "future": 10,
+    "active": 184
+  },
+  "checkedDates": [
+    "2026-09-27",
+    "2026-09-28",
+    "2026-10-02",
+    "2026-09-22",
+    "2026-09-29"
+  ],
+  "unknownFields": {
+    "minAge": 199,
+    "parent": 27,
+    "language": 263,
+    "price": 189,
+    "address": 5
+  },
+  "sources": 462,
+  "explicitScheduleEnd": 72,
+  "seeLocalities": [
+    "Murten",
+    "Kerzers",
+    "Muntelier",
+    "Meyriez",
+    "Courtepin",
+    "Mont-Vully",
+    "Cressier",
+    "Ried bei Kerzers",
+    "Gurmels",
+    "Fräschels",
+    "Misery",
+    "Nant",
+    "Jeuss",
+    "Môtier",
+    "Sugiez",
+    "Greng",
+    "Kleinbösingen",
+    "Courgevaux"
+  ],
+  "limitations": [
+    "Unknown values are not automatically errors.",
+    "Stored active status is not a count of fully confirmed bookable offers.",
+    "Locality presence does not measure completed research.",
+    "No completeness rate or market total can be inferred."
+  ]
+}

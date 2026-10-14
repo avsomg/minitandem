@@ -1,0 +1,18 @@
+{
+  "asOf":"2026-09-27",
+  "scope":"Targeted web searches only; reviewed sources are recorded separately in search-log-see.json. Empty relevant results do not establish absence.",
+  "queries":[
+    {"id":"see-dining-01","commune":"Courgevaux","category":"dining","query":"Courgevaux restaurant \"Spielplatz\" OR \"jeux\"","topResults":[],"outcome":"No suitable local lead in returned results; results spill into other places."},
+    {"id":"see-dining-02","commune":"Courtepin","category":"dining","query":"Courtepin restaurant \"place de jeux\" OR \"coin jeux\" OR \"Spielplatz\"","topResults":[],"outcome":"No suitable local lead in returned results; direct local review still needed."},
+    {"id":"see-dining-03","commune":"Cressier","category":"dining","query":"Cressier FR restaurant \"jeux\" enfants","topResults":["https://www.j3l.ch/fr/P47870/a-faire/boire-manger/restaurants/le-tilleul"],"outcome":"Le Tilleul is in Cressier NE, not FR; excluded as geographic false positive."},
+    {"id":"see-dining-04","commune":"Fräschels","category":"dining","query":"Fräschels Restaurant Spielplatz Spielecke","topResults":[],"outcome":"No qualified local venue found; not evidence of absence."},
+    {"id":"see-dining-05","commune":"Greng","category":"dining","query":"\"Greng\" restaurant Spielplatz","topResults":["https://www.atelier-greng.ch/"],"outcome":"Restaurant found, but no play evidence in returned description."},
+    {"id":"see-dining-06","commune":"Gurmels","category":"dining","query":"\"Gurmels\" Restaurant Spielecke Spielplatz","topResults":["https://www.jugendarbeit-gurmels.ch/b%C3%BCvette"],"outcome":"Event-room rental with table football and billiards; not confirmed as a drop-in cafe for toddlers."},
+    {"id":"see-dining-07","commune":"Kerzers","category":"dining","query":"\"Kerzers\" Restaurant Kinderspielplatz Spielecke","topResults":["https://www.baernermamis.ch/blog/geniessen/cafe/kafi8-kerzers","https://www.clubcafe-kerzers.ch/gartenwirtschaft/","https://www.happykid.ch/lieux/restaurant-maerli-pinte"],"outcome":"Kafi8 and Clubcafe subsequently reviewed and added. Maerlipinte has conflicting old/closed listings; no current operation established."},
+    {"id":"see-dining-08","commune":"Kleinbösingen","category":"dining","query":"\"Kleinbösingen\" Restaurant Spielplatz","topResults":[],"outcome":"Municipal barbecue-area documents do not establish a restaurant play area."},
+    {"id":"see-dining-09","commune":"Meyriez","category":"dining","query":"\"Meyriez\" restaurant \"jeux\"","topResults":["https://www.merlach.ch/fr/vivre/le-parc-chatoney/conditions-et-offres.html/279"],"outcome":"Municipal park and private pavilion hire are different formats, not a confirmed cafe."},
+    {"id":"see-dining-10","commune":"Misery-Courtion","category":"dining","query":"\"Misery-Courtion\" restaurant \"jeux\"","topResults":[],"outcome":"No qualified local venue found; direct local review still needed."},
+    {"id":"see-dining-11","commune":"Muntelier","category":"dining","query":"\"Muntelier\" Restaurant Spielplatz","topResults":["https://www.j3l.ch/fr/P4727/a-faire/boire-manger/restaurants/restaurant-le-jardin","https://banjo-yellow-gy9s.squarespace.com/blog/beach-house-murten-seebar-bad-murtensee"],"outcome":"Le Jardin and Beach House subsequently reviewed and added with caveats. Existing public beach is not duplicated."},
+    {"id":"see-dining-12","commune":"Ried bei Kerzers","category":"dining","query":"\"Ried bei Kerzers\" Restaurant Spielplatz","topResults":["https://www.kreuz-ried.ch/reservation/"],"outcome":"Restaurant Kreuz found without play-area proof; municipal school playground budgets do not qualify."}
+  ]
+}

@@ -1,0 +1,207 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {EventEmitter} from 'node:events';
+import {snapshot} from './evidence.mjs';
+import {JobQueue,digest} from './jobs.mjs';
+import {retireStaleReadyJobs} from './workflow.mjs';
+import {captureClaims,prepareEvidence,captureDraft,promptFor,runRoles,runCodex,workerEvidenceFiles,normalizePilotSources,upgradeInputBudgetJob,upgradeInvestigatedJob,requestQa} from './agent-run.mjs';
+
+const now=new Date().toISOString(),url='https://example.org/course';
+const first=snapshot({url,fetchedAt:now,text:'Official source: admission is free. Course is on Monday.'});
+const second=snapshot({url,fetchedAt:now,parser:'calendar-selected-zurich-v1',text:'Derived official calendar: 2026-10-03 starts at 09:30 in Zurich.'});
+const card={id:'course',name:'Meeting',format:'event',sources:[{url}],checked:'2026-09-01',min:5};
+const claim=(field,value,quote)=>({key:field,field,value,quote,source:url,status:'supported',scope:'exact-card',kind:'official',note:'Published exact condition.'});
+test('operator can request version-bound QA for code changes without a card approval',t=>{
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-qa-request-')),q=new JobQueue(path.join(directory,'jobs.sqlite'));
+  t.after(()=>{q.close();fs.rmSync(directory,{recursive:true,force:true});});
+  fs.writeFileSync(path.join(directory,'app.js'),'original');const first=requestQa(q,directory);
+  assert.equal(first.kind,'qa');assert.equal(first.card_id,'catalogue');assert.equal(requestQa(q,directory).id,first.id);
+  q.db.prepare("UPDATE jobs SET state='superseded' WHERE id=?").run(first.id);
+  const repeated=requestQa(q,directory);assert.notEqual(repeated.id,first.id);assert.equal(requestQa(q,directory).id,repeated.id);
+  q.db.prepare("UPDATE jobs SET state='done' WHERE id=?").run(repeated.id);
+  assert.notEqual(requestQa(q,directory).id,repeated.id);
+  fs.writeFileSync(path.join(directory,'app.js'),'changed');assert.notEqual(requestQa(q,directory).id,first.id);
+});
+test('obsolete ready and retry inputs are retired before model calls, without clearing unresolved or leased work',t=>{
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-stale-input-')),q=new JobQueue(path.join(directory,'jobs.sqlite'));
+  t.after(()=>{q.close();fs.rmSync(directory,{recursive:true,force:true});});
+  for(const [index,state] of ['ready','retry','await-source','leased'].entries()){
+    const j=q.enqueue({kind:'integrate',cardId:card.id,inputRevision:String(index),payload:{cardRevision:digest(card)}});
+    q.db.prepare('UPDATE jobs SET state=?,attempt=2 WHERE id=?').run(state,j.id);
+  }
+  assert.equal(retireStaleReadyJobs(q,[{...card,min:6}]).length,2);
+  assert.deepEqual(q.list().map(j=>j.state).sort(),['await-source','leased','superseded','superseded']);
+  assert.ok(q.list().every(j=>j.attempt===2));
+});
+test('an open systemic circuit leaves deterministic QA available even in a verify-first chain',()=>{
+  assert.deepEqual(runRoles({role:'verify',chain:true,circuitOpen:true}),['qa']);
+  assert.deepEqual(runRoles({role:'qa',chain:false,circuitOpen:true}),['qa']);
+  assert.equal(runRoles({role:'verify',chain:true,circuitOpen:false})[0],'verify');
+});
+test('capture resolves each quote in its own controller snapshot, including derived calendar evidence',async()=>{
+  const bundle={project:'vmeste',cardId:card.id,claims:[claim('priceKind','free','admission is free'),claim('events',[{date:'2026-10-03',start:'09:30'}],'2026-10-03 starts at 09:30')]};
+  await captureClaims(bundle,card,{prepared:[first,second],saveImpl:async()=>{},captureImpl:async()=>{throw Error('Must not refetch prepared evidence');}});
+  assert.equal(bundle.snapshots.length,2);assert.equal(bundle.claims[0].snapshotId,first.id);assert.equal(bundle.claims[1].snapshotId,second.id);
+});
+test('a scope-limited critical claim stays unknown without discarding separately supported facts',async()=>{
+  const bundle={project:'vmeste',cardId:card.id,claims:[claim('priceKind','free','admission is free'),{...claim('parent','yes','admission is free'),kind:'inference',scope:'uncertain'}]};
+  await captureClaims(bundle,card,{prepared:[first],saveImpl:async()=>{}});
+  assert.equal(bundle.claims[0].status,'supported');assert.equal(bundle.claims[1].status,'unknown');
+  assert.equal(bundle.claims[1].value,null);assert.equal(bundle.claims[1].rejectedValue,'yes');
+  assert.match(bundle.claims[1].controllerRejection,/Critical claim/);
+});
+test('identical facts merge losslessly but distinct values and quotes still require independent verification',async()=>{
+  const duplicate={...claim('priceKind','free','admission is free'),key:'another-key',note:'Another explanation.'};
+  const bundle={project:'vmeste',cardId:card.id,claims:[claim('priceKind','free','admission is free'),duplicate,claim('priceKind','visit','Official source')]};
+  await captureClaims(bundle,card,{prepared:[first],saveImpl:async()=>{}});
+  assert.equal(bundle.claims.length,2);
+  assert.deepEqual(bundle.claims[0].mergedDuplicates,[{submittedKey:'another-key',note:'Another explanation.'}]);
+  assert.equal(bundle.claims[1].value,'visit');
+});
+test('a draft preserves inspection evidence for unknown coverage even when no binding uses it',async t=>{
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-agent-test-')),queue=new JobQueue(path.join(directory,'jobs.sqlite'));
+  t.after(()=>{queue.close();fs.rmSync(directory,{recursive:true,force:true});});
+  const draft={bindings:[{field:'priceKind',source:url,quote:'admission is free'}],reviewCoverage:{fields:[{field:'min',outcome:'unknown',snapshotIds:[second.id]}]}};
+  await captureDraft(draft,[first,second],queue,{saveImpl:async()=>{}});
+  assert.equal(draft.snapshots.length,2);assert.equal(queue.db.prepare('SELECT count(*) AS n FROM captured_evidence').get().n,2);
+});
+test('prepared calendar evidence is scoped to the exact title, never the whole neighboring programme',async()=>{
+  const feed='https://example.org/calendar.ics',link='https://tockify.com/example/detail/123/1790000000000';
+  const event=(title,start)=>`BEGIN:VEVENT\nUID:${title}\nURL:${link}\nSUMMARY:${title}\nDTSTART:${start}\nDTEND:20261003T100000Z\nEND:VEVENT\n`;
+  const raw=snapshot({url:feed,fetchedAt:now,parser:'calendar-raw-v1',contentType:'text/calendar',text:'BEGIN:VCALENDAR\nVERSION:2.0\n'+event('Exact meeting','20261003T070000Z')+'END:VCALENDAR\n'});
+  const record={...card,sources:[{url:link}]},saved=[];
+  const job={kind:'facts',payload:{card:record}};
+  const prepared=await prepareEvidence(job,{sources:[{type:'ics',url:feed,recordIds:[card.id]}],
+    saveImpl:async(_,e)=>saved.push(e),captureImpl:async u=>{if(u===feed)return raw;throw Error('Empty JS page');}});
+  assert.equal(saved.length,2);assert.equal(prepared.payload.preparedEvidence.length,1);
+  assert.equal(prepared.payload.preparedEvidence[0].parser,'calendar-selected-zurich-v1');
+  assert.match(prepared.payload.preparedEvidence[0].text,/09:00/);assert.match(prepared.payload.preparedEvidence[0].text,new RegExp(raw.id));
+});
+test('sources fetched for earlier leads are captured again for the verifier, ahead of the claim sources',async()=>{
+  const poster='https://example.org/poster.pdf',fetched=[];
+  const captureImpl=async u=>{fetched.push(u);if(u===poster)throw Error('Invalid evidence snapshot');return {...first,url:u};};
+  const payload={card:{...card,sources:[{url}]},bundle:{claims:[],snapshots:[]},followedLeads:[{source:poster,note:'Poster'},{source:url+'/lead',note:'Second'}]};
+  const prepared=await prepareEvidence({kind:'verify-facts',payload},{sources:[],saveImpl:async()=>{},captureImpl});
+  assert.deepEqual(fetched,[poster,url+'/lead',url]);
+  assert.deepEqual(prepared.payload.preparedEvidence.map(e=>e.url),[url+'/lead',url]);
+  assert.deepEqual(prepared.payload.evidenceFailures,[{url:poster,status:'capture-unavailable'}]);
+  // Only the verifier of claims gets them; an extraction keeps fetching just the leads it was given.
+  fetched.length=0;await prepareEvidence({kind:'facts',payload:{...payload,researchLeads:[]}},{sources:[],saveImpl:async()=>{},captureImpl});
+  assert.deepEqual(fetched,[url]);
+});
+test('primary extraction is not anchored on old field values or unrelated public copy',()=>{
+  const prompt=promptFor({id:'job',kind:'facts',input_revision:'revision',payload:{card:{...card,notes:['Unrelated old prose'],practical:{commitment:{value:true}}}}});
+  assert.doesNotMatch(prompt,/Unrelated old prose|"min":5|"commitment":\{"value":true/);
+  assert.match(prompt,/example.org/);
+});
+test('editor context preserves evidence while omitting duplicate approved claims and model advisory',()=>{
+  const one=claim('priceKind','free','admission is free');
+  const prompt=promptFor({id:'job',kind:'integrate',input_revision:'r',payload:{card,approved:[one],
+    bundle:{project:'vmeste',cardId:card.id,claims:[one],snapshots:[first],semanticAdvisory:{secretMarker:'Repeated advisory'}}}});
+  assert.equal(prompt.split('"key":"priceKind"').length-1,1);assert.doesNotMatch(prompt,/Repeated advisory/);
+  assert.match(prompt,/admission is free/);assert.match(prompt,new RegExp(first.id));
+});
+// An editor or reviewer job for a card with about thirty claims sits at the 60,000-character input limit; what cannot apply to the job is left out.
+test('editor and reviewer prompts carry full-review reference data, the stale-update rule and the OCR rule only when the job can use them',()=>{
+  const one={...claim('priceKind','free','admission is free'),submittedKey:'price-free'},open={...claim('languages',null,''),status:'unknown',submittedKey:'language-unknown'};
+  const payload={card,approved:[one],bundle:{project:'vmeste',cardId:card.id,claims:[one,open],snapshots:[first]},staleApprovedUpdates:[]};
+  const read=job=>{const prompt=promptFor({id:'j',input_revision:'r',...job});return {prompt,data:JSON.parse(prompt.split('TASK DATA:\n')[1])};};
+  for(const kind of ['integrate','review-patch']){
+    const partial=read({kind,payload:{...payload,primaryReviewStatus:'partial'}}),complete=read({kind,payload:{...payload,primaryReviewStatus:'complete'}});
+    for(const status of ['incomplete',undefined])assert.doesNotMatch(read({kind,payload:{...payload,primaryReviewStatus:status}}).prompt,/"fullReviewUnknownText"|"fullReviewFields"/);
+    assert.doesNotMatch(partial.prompt,/"submittedKey"|"fullReviewUnknownText"|"fullReviewFields"/);
+    assert.doesNotMatch(partial.prompt,/If staleApprovedUpdates are supplied|A tesseract-eng-poster-v1 snapshot is OCR/);
+    // Every field keeps its meaning and type; the claims keep their key, value, source, quote and note.
+    assert.deepEqual(Object.keys(partial.data.fieldDictionary),Object.keys(complete.data.fieldDictionary));
+    assert.match(partial.data.fieldDictionary['practical.indoor'].meaning,/indoors/);assert.equal(partial.data.fieldDictionary.min.type,'number');
+    assert.deepEqual(partial.data.approved,[claim('priceKind','free','admission is free')]);assert.equal(partial.data.bundle.claims[0].note,open.note);
+    assert.ok(complete.data.fieldDictionary.age.fullReviewUnknownText.length);assert.ok(complete.data.fieldDictionary['practical.indoor'].fullReviewUnknownText.length);
+    assert.ok(Array.isArray(complete.data.fullReviewFields));assert.ok(complete.prompt.length-partial.prompt.length>2500);
+    // The rules for building full coverage go with them; a partial job is told in one sentence what it may not contain.
+    assert.match(complete.prompt,/covering EVERY fullReviewFields entry with its resulting value/);assert.doesNotMatch(partial.prompt,/covering EVERY fullReviewFields entry/);
+    assert.match(partial.prompt,/A partial review preserves checked: this draft has no patch\.checked, no reviewCoverage and no review\.FIELD binding\. reviewAfter is an internal future target/);
+    for(const prompt of [partial.prompt,complete.prompt])assert.match(prompt,/The editor may renew checked or supply reviewCoverage ONLY when primaryReviewStatus is complete/);
+  }
+  const stale=read({kind:'review-patch',payload:{...payload,staleApprovedUpdates:[{jobId:'old',draft:{snapshots:[first]}}]}});
+  assert.match(stale.prompt,/If staleApprovedUpdates are supplied, reconcile EACH previous patch/);assert.match(stale.prompt,/checkedStaleUpdates\. No approval can supersede/);
+  // Extraction and claim verification are not at the limit and keep everything they had.
+  const verify=read({kind:'verify-facts',payload:{card,requestedReview:'full',bundle:payload.bundle}});
+  assert.match(verify.prompt,/"submittedKey":"price-free"/);assert.ok(verify.data.fieldDictionary.age.fullReviewUnknownText);assert.ok(Array.isArray(verify.data.fullReviewFields));
+  assert.ok(Array.isArray(read({kind:'facts',payload:{card}}).data.fullReviewFields));
+  for(const prompt of [verify.prompt,read({kind:'facts',payload:{card}}).prompt])assert.match(prompt,/covering EVERY fullReviewFields entry with its resulting value/);
+});
+test('rejected draft context retains bindings and snapshot hashes without duplicating whole source texts',()=>{
+  const rejectedDraft={patch:{age:'To be confirmed'},bindings:[{field:'age',quote:'Exact excerpt'}],snapshots:[{...first,text:'Long repeated body '.repeat(3000)}]};
+  const prompt=promptFor({id:'job',kind:'integrate',input_revision:'r',payload:{card,rejectedDraft}});
+  assert.doesNotMatch(prompt,/Long repeated body/);assert.match(prompt,/Exact excerpt/);assert.match(prompt,new RegExp(first.id));
+  assert.match(prompt,new RegExp(digest(rejectedDraft)));assert.ok(prompt.length<60000);
+});
+test('every original snapshot remains readable in a worker file, independently of a fresh capture',async()=>{
+  const job={id:'job',kind:'review-patch',input_revision:'r',payload:{card,preparedEvidence:[second],
+    bundle:{claims:[],snapshots:[first]},draft:{snapshots:[first]},rejectedDraft:{snapshots:[second]},
+    staleApprovedUpdates:[{draft:{snapshots:[first]}}]}};
+  const policy={roles:{verify:{model:'test-model',effort:'low',criticalEffort:'medium'}},maxToolCallsPerJob:50};
+  const data=JSON.parse(promptFor(job).split('TASK DATA:\n')[1]);
+  const references=[...data.preparedEvidence,...data.bundle.snapshots,...data.draft.snapshots,...data.rejectedDraft.snapshots,...data.staleApprovedUpdates[0].draft.snapshots];
+  assert.deepEqual(references.map(e=>e.evidenceFile),workerEvidenceFiles(job).map(e=>e.file));
+  let directory;
+  const output=await runCodex(job,policy,{runImpl:(_command,args)=>{
+    directory=args[args.indexOf('--cd')+1];
+    for(const {file,evidence} of workerEvidenceFiles(job)){
+      assert.deepEqual(JSON.parse(fs.readFileSync(path.join(directory,file),'utf8')),evidence);
+      assert.equal(fs.statSync(path.join(directory,file)).mode&0o777,0o600);
+    }
+    const child=new EventEmitter();child.stdout=new EventEmitter();child.stderr=new EventEmitter();child.kill=()=>{};
+    child.stdin={end:()=>{
+      fs.writeFileSync(args[args.indexOf('--output-last-message')+1],JSON.stringify({project:'vmeste',jobId:job.id,inputRevision:'r',resultJson:JSON.stringify({verdict:'await-source'})}));
+      queueMicrotask(()=>child.emit('close',0));
+    }};
+    return child;
+  }});
+  assert.equal(output.result.verdict,'await-source');assert.equal(fs.existsSync(directory),false);
+});
+test('an investigated input-budget repair preserves attempts and immutable failure history',t=>{
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-input-repair-')),q=new JobQueue(path.join(directory,'jobs.sqlite'));
+  t.after(()=>{q.close();fs.rmSync(directory,{recursive:true,force:true});});
+  q.enqueue({kind:'integrate',cardId:card.id,inputRevision:'old',payload:{card,cardRevision:digest(card)}});
+  const old=q.claim('editor','editor');q.fail(old.id,old.token,'editor','Worker input exceeds budget; split the task without truncating evidence');
+  const result=upgradeInputBudgetJob(q,old.id,'Removed repeated advisory and duplicated approved claims.',{getInputs:()=>({records:[card]})});
+  assert.equal(q.get(old.id).state,'superseded');assert.equal(q.get(old.id).attempt,1);assert.equal(q.get(result.jobId).attempt,1);
+  assert.equal(q.claim('editor','editor').attempt,2);assert.match(q.get(old.id).error,/input exceeds/);
+  assert.throws(()=>upgradeInputBudgetJob(q,old.id,'Again',{getInputs:()=>({records:[card]})}),/Only a retryable/);
+});
+test('supplementary pilot documents remain unapproved, public and bounded',()=>{
+  assert.deepEqual(normalizePilotSources([url+'#page=2',url],{pilot:true}),[url]);
+  assert.throws(()=>normalizePilotSources([url]),/explicit pilot/);
+  assert.throws(()=>normalizePilotSources(Array(4).fill(url),{pilot:true}),/At most three/);
+  assert.throws(()=>normalizePilotSources(['https://localhost/private'],{pilot:true}),/Non-public/);
+  const prompt=promptFor({id:'j',kind:'verify-facts',input_revision:'r',payload:{bundle:{claims:[],snapshots:[]}}});
+  assert.match(prompt,/controller can extract PDFs up to 20 MB locally/);
+});
+test('full primary verification receives all field meanings and the controller quote rules',()=>{
+  const payload={card,requestedReview:'full',bundle:{claims:[claim('min',2,'Course is on Monday')],snapshots:[first]}};
+  const job={id:'job',kind:'verify-facts',input_revision:'r',payload};
+  const prompt=promptFor(job),data=JSON.parse(prompt.split('TASK DATA:\n')[1]);
+  assert.ok(data.fieldDictionary.contacts);assert.ok(data.fieldDictionary.status);assert.ok(data.fieldDictionary['practical.indoor']);
+  const partial=JSON.parse(promptFor({...job,payload:{...payload,requestedReview:'partial'}}).split('TASK DATA:\n')[1]);
+  assert.equal(partial.fieldDictionary.contacts,undefined);assert.ok(partial.fieldDictionary.min);
+  assert.match(prompt,/normalizes Unicode NFC and collapses whitespace/);
+});
+test('an incomplete full-review prompt repair requires the rejected draft, preserves attempts and cannot renew checked',t=>{
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-coverage-repair-')),q=new JobQueue(path.join(directory,'jobs.sqlite'));
+  t.after(()=>{q.close();fs.rmSync(directory,{recursive:true,force:true});});
+  q.enqueue({kind:'integrate',cardId:card.id,inputRevision:'old',payload:{card,cardRevision:digest(card),requestedReview:'full'}});
+  const old=q.claim('editor','editor');q.fail(old.id,old.token,'editor','checked requires a current full-card review');
+  const inputs={getInputs:()=>({records:[card]})};
+  assert.throws(()=>upgradeInvestigatedJob(q,old.id,'Corrected downgrade instructions.',inputs),/intact rejected partial draft/);
+  const artifact={rejected:true,result:{draft:{patch:{},reviewCoverage:{mode:'full'},reviewLimitations:['Library source unavailable.']}}};
+  q.db.prepare('INSERT INTO artifacts VALUES (?,?,?,?,?)').run(digest(artifact),old.id,'editor',JSON.stringify(artifact),q.now());
+  assert.throws(()=>upgradeInputBudgetJob(q,old.id,'Wrong repair route.',inputs),/Only a retryable/);
+  const upgraded=upgradeInvestigatedJob(q,old.id,'Corrected partial fallback; no coverage or checked renewal.',inputs);
+  assert.equal(q.get(old.id).state,'superseded');assert.equal(q.get(upgraded.jobId).attempt,1);
+  assert.equal(q.claim('editor','editor').attempt,2);
+  assert.match(promptFor(old),/Omit BOTH patch.checked and reviewCoverage entirely/);
+});

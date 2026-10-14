@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Minitandem · editorial</title>
+  <link rel="stylesheet" href="/admin.css">
+  <script src="/assets/lucide.min.js" defer></script>
+  <script src="/admin.js" defer></script>
+</head>
+<body>
+  <header><h1>Minitandem editorial</h1><a href="/">Catalogue</a></header>
+  <main>
+    <form id="access"><label>Editor key <input id="key" type="password" autocomplete="off" required></label><button>Open the queue</button></form>
+    <p id="message" role="status"></p>
+    <div id="dashboard" hidden>
+      <div class="toolbar"><p id="updated" class="muted"></p><div class="actions"><button id="refresh" type="button" class="secondary icon-button" aria-label="Refresh the queue" title="Refresh the queue"><i data-lucide="refresh-cw" aria-hidden="true"></i></button><button id="logout" type="button" class="secondary icon-button" aria-label="Sign out" title="Sign out"><i data-lucide="log-out" aria-hidden="true"></i></button></div></div>
+      <div class="summary" id="summary"></div>
+      <section aria-labelledby="operations-heading"><h2 id="operations-heading">Agent work</h2><p id="operations-message" role="status"></p><div id="operations-summary" class="summary"></div><div id="job-counts"></div><details><summary>Usage and speed</summary><div id="usage"></div></details><details><summary>Waiting for a decision <span id="blocked-count"></span></summary><div id="blocked"></div></details></section>
+      <section><h2>Corrections from families</h2><div id="corrections"></div></section>
+      <section><h2>Cards to review</h2><div id="quality"></div></section>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,73 @@
+/* The visitor's own records (favourites, notes, statuses, visit plans, child's age, starting point) and where they live.
+   Everything stays in the browser unless the visitor connects the optional family service. The storage object is passed in,
+   so the same code runs against a fake storage in tests. Several tabs may write: persist() merges this tab's changes into
+   whatever is stored now instead of overwriting it. */
+(() => {
+  'use strict';
+  const KEYS = {family: 'minitandem-family-v1', sync: 'minitandem-sync-v1', corrections: 'minitandem-pending-corrections-v1', filters: 'minitandem-family-v1-filters'};
+  const cleanOrigin = value => typeof value === 'string' ? value.replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, 80) : '';
+  const emptyPersonal = () => ({version: 1, favorites: [], notes: {}, statuses: {}, visits: {}, tracked: {}, age: null, origin: ''});
+
+  function create({storage, byId, P, today, statusKeys, canonicalId = id => id, onSaved = () => {}}) {
+    const fail = P.fail;
+    function validateBackup(raw, fallbackOrigin = '') {
+      if (!raw || raw.version !== 1 || !Array.isArray(raw.favorites) || typeof raw.notes !== 'object' || !raw.notes || typeof raw.statuses !== 'object' || !raw.statuses) throw fail('backup.invalid', 'Not a Minitandem backup file.');
+      const renameKeys = value => value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).map(([id, item]) => [canonicalId(id), item])) : {};
+      const visits = Object.fromEntries(Object.entries(raw.visits || {}).map(([id, visit]) => [id, visit && typeof visit === 'object' ? {...visit, activity: canonicalId(visit.activity)} : visit]));
+      return {version: 1,
+        favorites: [...new Set(raw.favorites.map(canonicalId).filter(x => typeof x === 'string' && byId.has(x)))],
+        notes: Object.fromEntries(Object.entries(renameKeys(raw.notes)).filter(([k, v]) => byId.has(k) && typeof v === 'string').map(([k, v]) => [k, v.slice(0, 10000)])),
+        statuses: Object.fromEntries(Object.entries(renameKeys(raw.statuses)).filter(([k, v]) => byId.has(k) && statusKeys.includes(v))),
+        visits: P.validateVisits(visits, byId), tracked: P.validateTracked(renameKeys(raw.tracked), byId),
+        age: Number.isFinite(raw.age) && raw.age >= 0 && raw.age <= 18 ? raw.age : null,
+        origin: Object.hasOwn(raw, 'origin') ? cleanOrigin(raw.origin) : fallbackOrigin};
+    }
+    const store = {KEYS, validateBackup, cleanOrigin, emptyPersonal, personal: emptyPersonal(), baseline: emptyPersonal(), storageAvailable: true};
+    try { const stored = storage.getItem(KEYS.family); if (stored) store.personal = validateBackup(JSON.parse(stored)); } catch { store.storageAvailable = false; }
+    store.baseline = structuredClone(store.personal);
+
+    // Re-read what is stored now (another tab, or the family service) and make it the current state.
+    store.adopt = profile => { store.personal = profile; store.baseline = structuredClone(profile); };
+    store.reload = () => { const raw = storage.getItem(KEYS.family); store.adopt(raw ? validateBackup(JSON.parse(raw)) : emptyPersonal()); return store.personal; };
+    store.writeProfile = profile => { storage.setItem(KEYS.family, JSON.stringify(profile)); store.adopt(profile); };
+
+    // Apply this tab's changes to what is stored now; `overrides` (an explicit backup import) replaces the matching records.
+    store.persist = (overrides = null) => {
+      const personal = store.personal, baseline = store.baseline;
+      try {
+        const raw = storage.getItem(KEYS.family);
+        // A stored profile that is not even JSON cannot be merged and is replaced; one of an unknown version is left alone.
+        let latest;
+        try { latest = raw ? validateBackup(JSON.parse(raw)) : emptyPersonal(); } catch (error) { if (!(error instanceof SyntaxError)) throw error; latest = emptyPersonal(); }
+        const removed = new Set(baseline.favorites.filter(id => !personal.favorites.includes(id)));
+        latest.favorites = [...new Set([...latest.favorites.filter(id => !removed.has(id)), ...personal.favorites.filter(id => !baseline.favorites.includes(id))])];
+        for (const key of ['notes', 'statuses']) for (const [id, value] of Object.entries(personal[key])) if (value !== baseline[key][id]) latest[key][id] = value;
+        latest.visits = P.mergeVisits(latest.visits, personal.visits, baseline.visits);
+        for (const [id, value] of Object.entries(personal.tracked)) if (JSON.stringify(value) !== JSON.stringify(baseline.tracked[id])) latest.tracked[id] = value;
+        if (personal.age !== baseline.age) latest.age = personal.age;
+        if (personal.origin !== baseline.origin) latest.origin = personal.origin;
+        if (overrides) {
+          latest.favorites = [...new Set([...latest.favorites, ...overrides.favorites])];
+          latest.notes = {...latest.notes, ...overrides.notes}; latest.statuses = {...latest.statuses, ...overrides.statuses};
+          latest.visits = {...latest.visits, ...overrides.visits}; latest.tracked = {...latest.tracked, ...overrides.tracked};
+          latest.age = overrides.age; latest.origin = overrides.origin;
+        }
+        for (const id of latest.favorites) if (!latest.tracked[id]) latest.tracked[id] = P.snapshot(byId.get(id), today());
+        if (Object.keys(latest.visits).length > P.maxVisits) throw fail('visits.limit', 'Visit limit');
+        storage.setItem(KEYS.family, JSON.stringify(latest));
+        store.adopt(latest); store.storageAvailable = true; onSaved();
+        return true;
+      } catch (error) { if (error?.code !== 'visits.limit') store.storageAvailable = false; return false; }
+    };
+
+    // Corrections waiting for the family service.
+    store.pendingCorrections = () => { try { const list = JSON.parse(storage.getItem(KEYS.corrections) || '[]'); return Array.isArray(list) ? list : []; } catch { return []; } };
+    store.setPendingCorrections = list => storage.setItem(KEYS.corrections, JSON.stringify(list));
+    // Connection to the family service.
+    store.loadSync = () => { try { const saved = JSON.parse(storage.getItem(KEYS.sync) || 'null'); return saved && typeof saved.url === 'string' && typeof saved.token === 'string' ? saved : null; } catch { return null; } };
+    store.saveSync = config => { try { if (config) storage.setItem(KEYS.sync, JSON.stringify(config)); else storage.removeItem(KEYS.sync); } catch {} };
+    store.hasFamilyData = value => Boolean(value.favorites.length || Object.keys(value.notes).length || Object.keys(value.statuses).length || Object.keys(value.visits).length);
+    return store;
+  }
+  window.MinitandemStore = {create, KEYS, cleanOrigin, emptyPersonal};
+})();

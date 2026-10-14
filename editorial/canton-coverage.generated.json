@@ -1,0 +1,2781 @@
+{
+  "checked": "2026-09-28",
+  "officialSource": "https://www.fr.ch/document/580206",
+  "officialYear": 2026,
+  "catalogueCards": 295,
+  "municipalities": 119,
+  "districts": {
+    "broye": {
+      "municipalities": 17,
+      "withMappedCard": 16,
+      "catalogCards": 26
+    },
+    "glane": {
+      "municipalities": 14,
+      "withMappedCard": 14,
+      "catalogCards": 24
+    },
+    "gruyere": {
+      "municipalities": 25,
+      "withMappedCard": 25,
+      "catalogCards": 38
+    },
+    "sarine": {
+      "municipalities": 25,
+      "withMappedCard": 25,
+      "catalogCards": 77
+    },
+    "see": {
+      "municipalities": 14,
+      "withMappedCard": 14,
+      "catalogCards": 48
+    },
+    "sense": {
+      "municipalities": 15,
+      "withMappedCard": 15,
+      "catalogCards": 60
+    },
+    "veveyse": {
+      "municipalities": 9,
+      "withMappedCard": 9,
+      "catalogCards": 22
+    }
+  },
+  "categoryPresence": {
+    "books": {
+      "cards": 33,
+      "municipalities": 18
+    },
+    "creative": {
+      "cards": 10,
+      "municipalities": 7
+    },
+    "dining": {
+      "cards": 26,
+      "municipalities": 20
+    },
+    "events": {
+      "cards": 12,
+      "municipalities": 5
+    },
+    "horses": {
+      "cards": 6,
+      "municipalities": 1
+    },
+    "movement": {
+      "cards": 33,
+      "municipalities": 19
+    },
+    "music": {
+      "cards": 5,
+      "municipalities": 3
+    },
+    "nature": {
+      "cards": 56,
+      "municipalities": 45
+    },
+    "play": {
+      "cards": 82,
+      "municipalities": 55
+    },
+    "water": {
+      "cards": 32,
+      "municipalities": 24
+    }
+  },
+  "caution": "A mapped card proves only one known venue, not exhaustive research. Unmapped localities may belong to a municipality already in this list. Tourism POI sitemaps also include nearby Vaud.",
+  "municipalitiesList": [
+    {
+      "ofs": 2008,
+      "name": "Châtillon (FR)",
+      "region": "broye",
+      "recordIds": [
+        "chatillon-broye-play"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2011,
+      "name": "Cugy (FR)",
+      "region": "broye",
+      "recordIds": [
+        "cugy-forest-play"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2022,
+      "name": "Gletterens",
+      "region": "broye",
+      "recordIds": [
+        "village-lacustre-gletterens",
+        "gletterens-beach"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 1
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2025,
+      "name": "Lully (FR)",
+      "region": "broye",
+      "recordIds": [
+        "fsg-elki-lully"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 1,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2029,
+      "name": "Montagny (FR)",
+      "region": "broye",
+      "recordIds": [
+        "montagny-arbognes"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2035,
+      "name": "Nuvilly",
+      "region": "broye",
+      "recordIds": [
+        "nuvilly-batailles-play"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2038,
+      "name": "Prévondavaux",
+      "region": "broye",
+      "recordIds": [],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "no-mapped-card"
+    },
+    {
+      "ofs": 2041,
+      "name": "Saint-Aubin (FR)",
+      "region": "broye",
+      "recordIds": [
+        "saint-aubin-ptits-pruneaux"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2043,
+      "name": "Sévaz",
+      "region": "broye",
+      "recordIds": [
+        "fun4all-sevaz-kids"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2044,
+      "name": "Surpierre",
+      "region": "broye",
+      "recordIds": [
+        "surpierre-forest-picnic"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2045,
+      "name": "Vallon",
+      "region": "broye",
+      "recordIds": [
+        "vallon-museum"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2050,
+      "name": "Les Montets",
+      "region": "broye",
+      "recordIds": [
+        "montets-vita-forest"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2051,
+      "name": "Delley-Portalban",
+      "region": "broye",
+      "recordIds": [
+        "plage-portalban"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 1
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2053,
+      "name": "Belmont-Broye",
+      "region": "broye",
+      "recordIds": [
+        "library-domdidier",
+        "fsg-domdidier-parent"
+      ],
+      "categoryCounts": {
+        "books": 1,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 1,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2054,
+      "name": "Estavayer",
+      "region": "broye",
+      "recordIds": [
+        "ne-pour-lire-estavayer",
+        "aef-estavayer-cafe",
+        "library-estavayer",
+        "nouvelle-plage-estavayer",
+        "musee-grenouilles-estavayer",
+        "font-beach",
+        "lacustres-beach",
+        "forel-beach",
+        "moliere-trail"
+      ],
+      "categoryCounts": {
+        "books": 2,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 2,
+        "play": 1,
+        "water": 4
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2055,
+      "name": "Cheyres-Châbles",
+      "region": "broye",
+      "recordIds": [
+        "plage-cheyres"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 1
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2056,
+      "name": "Fétigny-Ménières",
+      "region": "broye",
+      "recordIds": [
+        "fetigny-peralles-picnic"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2063,
+      "name": "Billens-Hennens",
+      "region": "glane",
+      "recordIds": [
+        "billens-kids-natation"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 1
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2067,
+      "name": "Le Châtelard",
+      "region": "glane",
+      "recordIds": [
+        "chatelard-villargiroud-loop"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2068,
+      "name": "Châtonnaye",
+      "region": "glane",
+      "recordIds": [
+        "chatonnaye-forest-cabin"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2079,
+      "name": "Grangettes",
+      "region": "glane",
+      "recordIds": [
+        "defenant-grangettes"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 1,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2086,
+      "name": "Massonnens",
+      "region": "glane",
+      "recordIds": [
+        "chez-betty-massonnens"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 1,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2087,
+      "name": "Mézières (FR)",
+      "region": "glane",
+      "recordIds": [
+        "papier-peint-mezieres"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 1,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2096,
+      "name": "Romont (FR)",
+      "region": "glane",
+      "recordIds": [
+        "pitchounes-romont",
+        "ludo-glane-romont",
+        "library-glane-romont",
+        "vitromusee-romont",
+        "gouille-romont",
+        "tour-boyer-playground",
+        "epicentre-pataugeoire-romont",
+        "boulogne-forest-play"
+      ],
+      "categoryCounts": {
+        "books": 2,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 2,
+        "play": 3,
+        "water": 1
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2097,
+      "name": "Rue",
+      "region": "glane",
+      "recordIds": [
+        "fees-chapelle",
+        "chavannettes-rue"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 2,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2099,
+      "name": "Siviriez",
+      "region": "glane",
+      "recordIds": [
+        "lion-or-siviriez",
+        "ptites-bottes-family-visit",
+        "ptites-bottes-mamans"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 1,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 2,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2102,
+      "name": "Ursy",
+      "region": "glane",
+      "recordIds": [
+        "ursy-maternelle"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2113,
+      "name": "Vuisternens-devant-Romont",
+      "region": "glane",
+      "recordIds": [
+        "ferme-verte-vallee-vuisternens"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2114,
+      "name": "Villorsonnens",
+      "region": "glane",
+      "recordIds": [
+        "villorsonnens-forest-cabin-play"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2115,
+      "name": "Torny",
+      "region": "glane",
+      "recordIds": [
+        "torny-fritime-noel-2026"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 1,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2117,
+      "name": "Villaz",
+      "region": "glane",
+      "recordIds": [
+        "villaz-lussy-small-loop"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2121,
+      "name": "Haut-Intyamon",
+      "region": "gruyere",
+      "recordIds": [
+        "urquier-albeuve"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2122,
+      "name": "Pont-en-Ogoz",
+      "region": "gruyere",
+      "recordIds": [
+        "gumefens-beach"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 1
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2123,
+      "name": "Botterens",
+      "region": "gruyere",
+      "recordIds": [
+        "botterens-village-play"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2124,
+      "name": "Broc",
+      "region": "gruyere",
+      "recordIds": [
+        "maison-cailler-broc",
+        "broc-outdoor-pool"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 1
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2125,
+      "name": "Bulle",
+      "region": "gruyere",
+      "recordIds": [
+        "espace-famille-bulle",
+        "fritime-piccolo-bulle",
+        "ludo-gruyere-bulle",
+        "entrepot-mini-bulle",
+        "quatre-sapins-bulle",
+        "zumba-mini-bulle"
+      ],
+      "categoryCounts": {
+        "books": 1,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 2,
+        "music": 0,
+        "nature": 0,
+        "play": 3,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2128,
+      "name": "Châtel-sur-Montsalvens",
+      "region": "gruyere",
+      "recordIds": [
+        "montsalvens-lakeside-walk"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2129,
+      "name": "Corbières",
+      "region": "gruyere",
+      "recordIds": [
+        "corbieres-montagnetta"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 1
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2130,
+      "name": "Crésuz",
+      "region": "gruyere",
+      "recordIds": [
+        "cresuz-village-play"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2131,
+      "name": "Echarlens",
+      "region": "gruyere",
+      "recordIds": [
+        "echarlens-legendes"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2134,
+      "name": "Grandvillard",
+      "region": "gruyere",
+      "recordIds": [
+        "pic-vert-grandvillard",
+        "saudillet-grandvillard"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 1,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2135,
+      "name": "Gruyères",
+      "region": "gruyere",
+      "recordIds": [
+        "maison-gruyere-pringy",
+        "buvette-sapins-epagny",
+        "aerodrome-epagny-play",
+        "clos-cerfs-gruyeres",
+        "moleson-village-play"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 2,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 2,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2137,
+      "name": "Hauteville",
+      "region": "gruyere",
+      "recordIds": [
+        "hauteville-otavela-play"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2138,
+      "name": "Jaun",
+      "region": "gruyere",
+      "recordIds": [
+        "chateau-neuf-jaun"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2140,
+      "name": "Marsens",
+      "region": "gruyere",
+      "recordIds": [
+        "humilimont-marsens"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2143,
+      "name": "Morlon",
+      "region": "gruyere",
+      "recordIds": [
+        "morlon-beach"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 1
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2145,
+      "name": "Le Pâquier (FR)",
+      "region": "gruyere",
+      "recordIds": [
+        "sautaux-le-paquier"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2147,
+      "name": "Pont-la-Ville",
+      "region": "gruyere",
+      "recordIds": [
+        "thusy-pont-la-ville"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 1
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2148,
+      "name": "Riaz",
+      "region": "gruyere",
+      "recordIds": [
+        "riaz-crosscountry-rental"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 1,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2149,
+      "name": "La Roche",
+      "region": "gruyere",
+      "recordIds": [
+        "le-brand-la-roche"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2152,
+      "name": "Sâles",
+      "region": "gruyere",
+      "recordIds": [
+        "sales-sport-playground"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2153,
+      "name": "Sorens",
+      "region": "gruyere",
+      "recordIds": [
+        "sorens-sculpture-trail"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2155,
+      "name": "Vaulruz",
+      "region": "gruyere",
+      "recordIds": [
+        "vaulruz-football-play"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2160,
+      "name": "Vuadens",
+      "region": "gruyere",
+      "recordIds": [
+        "vuadens-witches-trail"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2162,
+      "name": "Bas-Intyamon",
+      "region": "gruyere",
+      "recordIds": [
+        "enney-sarine-play"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2163,
+      "name": "Val-de-Charmey",
+      "region": "gruyere",
+      "recordIds": [
+        "gros-chaumiaux-cerniat",
+        "saison-alpage-charmey",
+        "charmey-family-pool"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 1,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 1
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2173,
+      "name": "Autigny",
+      "region": "sarine",
+      "recordIds": [
+        "autigny-park"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2174,
+      "name": "Avry",
+      "region": "sarine",
+      "recordIds": [
+        "migros-avry-play"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 1,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2175,
+      "name": "Belfaux",
+      "region": "sarine",
+      "recordIds": [
+        "belfaux-forest-picnic"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2177,
+      "name": "Chénens",
+      "region": "sarine",
+      "recordIds": [
+        "chenens-sport-park"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2183,
+      "name": "Corminboeuf",
+      "region": "sarine",
+      "recordIds": [
+        "corminboeuf-fauna-walk"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2186,
+      "name": "Cottens (FR)",
+      "region": "sarine",
+      "recordIds": [
+        "cottens-school-park"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2194,
+      "name": "Ferpicloz",
+      "region": "sarine",
+      "recordIds": [
+        "ferpicloz-playground"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2196,
+      "name": "Fribourg / Freiburg",
+      "region": "sarine",
+      "recordIds": [
+        "swim-buissonnets",
+        "coop-fribourg-play",
+        "mpe",
+        "aef-mpe",
+        "aef-schonberg",
+        "aef-centre",
+        "aef-passerelles",
+        "aef-vignettaz",
+        "aef-jura",
+        "creer-aef",
+        "jouons",
+        "ile",
+        "minimove-jura",
+        "minimove-schonberg",
+        "memo-buchstart",
+        "jolimont",
+        "museum",
+        "encore-jura",
+        "encore-schonberg",
+        "memo-library",
+        "livre-library",
+        "petites-rames-play",
+        "auge-gardens-play",
+        "grand-places-play",
+        "domino-play",
+        "marionnettes-fribourg",
+        "neuveville-school-play",
+        "memo-rat-mission-2026-09-30",
+        "memo-rat-vernissage-2026-09-30",
+        "memo-rat-exhibition-2026",
+        "memo-grands-signes-2026-11-10",
+        "memo-eveil-musical-2027-02-16",
+        "memo-musik-entdecken-2027-03-16",
+        "devenir-famille-fribourg-2026-10-03",
+        "office-family-workshops"
+      ],
+      "categoryCounts": {
+        "books": 8,
+        "creative": 3,
+        "dining": 1,
+        "events": 0,
+        "horses": 0,
+        "movement": 2,
+        "music": 2,
+        "nature": 1,
+        "play": 16,
+        "water": 2
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2197,
+      "name": "Givisiez",
+      "region": "sarine",
+      "recordIds": [
+        "artist-factory-parent"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 1,
+        "nature": 0,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2198,
+      "name": "Granges-Paccot",
+      "region": "sarine",
+      "recordIds": [
+        "mcd-granges-play",
+        "laruche",
+        "office-family-books"
+      ],
+      "categoryCounts": {
+        "books": 1,
+        "creative": 0,
+        "dining": 1,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2206,
+      "name": "Marly",
+      "region": "sarine",
+      "recordIds": [
+        "alice-marly",
+        "cafe-marly",
+        "espace-marly",
+        "psymolo",
+        "playgrounds-marly",
+        "danse-turin",
+        "swim-marly",
+        "lire-marly",
+        "haragati",
+        "biblio-marly",
+        "ludo-marly",
+        "marly-outdoor",
+        "trip-trap-marly"
+      ],
+      "categoryCounts": {
+        "books": 3,
+        "creative": 0,
+        "dining": 1,
+        "events": 0,
+        "horses": 0,
+        "movement": 4,
+        "music": 0,
+        "nature": 1,
+        "play": 3,
+        "water": 1
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2208,
+      "name": "Matran",
+      "region": "sarine",
+      "recordIds": [
+        "la-tomate-matran"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 1,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2211,
+      "name": "Neyruz (FR)",
+      "region": "sarine",
+      "recordIds": [
+        "neyruz-les-simon"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2216,
+      "name": "Pierrafortscha",
+      "region": "sarine",
+      "recordIds": [
+        "pierrafortscha-erratic-boulder"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2220,
+      "name": "Le Mouret",
+      "region": "sarine",
+      "recordIds": [
+        "ondena"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2226,
+      "name": "Treyvaux",
+      "region": "sarine",
+      "recordIds": [
+        "treyvaux-school-park"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2228,
+      "name": "Villars-sur-Glâne",
+      "region": "sarine",
+      "recordIds": [
+        "leset-villars",
+        "aef-villars"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 1,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2230,
+      "name": "Villarsel-sur-Marly",
+      "region": "sarine",
+      "recordIds": [
+        "villarsel-gerine-corridor"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2233,
+      "name": "Hauterive (FR)",
+      "region": "sarine",
+      "recordIds": [
+        "hauterive-souche-family"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2234,
+      "name": "La Brillaz",
+      "region": "sarine",
+      "recordIds": [
+        "onnens-school-park"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2235,
+      "name": "La Sonnaz",
+      "region": "sarine",
+      "recordIds": [
+        "sarrazin-lossy",
+        "sarrazin-lossy-play"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 2,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2236,
+      "name": "Gibloux",
+      "region": "sarine",
+      "recordIds": [
+        "aef-farvagny",
+        "maison-petits-villarlod"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 1,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2237,
+      "name": "Prez",
+      "region": "sarine",
+      "recordIds": [
+        "prez-school-park"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2238,
+      "name": "Bois-d'Amont",
+      "region": "sarine",
+      "recordIds": [
+        "arconciel-arche-play"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2239,
+      "name": "Grolley-Ponthaux",
+      "region": "sarine",
+      "recordIds": [
+        "grolley-autumn-market-2026"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 1,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2250,
+      "name": "Courgevaux",
+      "region": "see",
+      "recordIds": [
+        "courgevaux-school-play"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2254,
+      "name": "Courtepin",
+      "region": "see",
+      "recordIds": [
+        "library-courtepin",
+        "swim-courtepin-babies",
+        "ateliers-familles-courtepin",
+        "ludo-pinocchio-courtepin"
+      ],
+      "categoryCounts": {
+        "books": 2,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 1
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2257,
+      "name": "Cressier (FR)",
+      "region": "see",
+      "recordIds": [
+        "library-cressier"
+      ],
+      "categoryCounts": {
+        "books": 1,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2258,
+      "name": "Fräschels",
+      "region": "see",
+      "recordIds": [
+        "waldlehrpfad-fraeschels"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2261,
+      "name": "Greng",
+      "region": "see",
+      "recordIds": [
+        "grengspitz-beaches"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 1
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2262,
+      "name": "Gurmels",
+      "region": "see",
+      "recordIds": [
+        "biberpfad-gurmels",
+        "schlittschuh-gurmels"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 1,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2265,
+      "name": "Kerzers",
+      "region": "see",
+      "recordIds": [
+        "kafi8-kerzers",
+        "clubcafe-kerzers",
+        "krabbel-kerzers",
+        "elki-kerzers",
+        "library-kerzers",
+        "papiliorama-kerzers",
+        "karla-gemuesetrail",
+        "spielkafi-kerzers-2026",
+        "familienkonzert-kerzers-2026",
+        "familybloom-yoga",
+        "familybloom-mini-move",
+        "pflueck-kerzers"
+      ],
+      "categoryCounts": {
+        "books": 1,
+        "creative": 0,
+        "dining": 2,
+        "events": 2,
+        "horses": 0,
+        "movement": 3,
+        "music": 0,
+        "nature": 3,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2266,
+      "name": "Kleinbösingen",
+      "region": "see",
+      "recordIds": [
+        "auried-kleinboesingen"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2271,
+      "name": "Meyriez",
+      "region": "see",
+      "recordIds": [
+        "krabbeltreff-meyriez",
+        "firstflow-meyriez-2026"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 1
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2272,
+      "name": "Misery-Courtion",
+      "region": "see",
+      "recordIds": [
+        "gym-parents-misery"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 1,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2274,
+      "name": "Muntelier",
+      "region": "see",
+      "recordIds": [
+        "jardin-muntelier",
+        "beachhouse-muntelier",
+        "badeplatz-muntelier"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 2,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 1
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2275,
+      "name": "Murten / Morat",
+      "region": "see",
+      "recordIds": [
+        "laferme-murten",
+        "family-cafe-murten",
+        "library-murten",
+        "ludothek-murten",
+        "bulles-familles-murten",
+        "treasure-murten",
+        "stimm-family",
+        "kibim-murten",
+        "baby-bade-murten",
+        "jeuss-animal-park",
+        "murten-family-pool"
+      ],
+      "categoryCounts": {
+        "books": 2,
+        "creative": 0,
+        "dining": 1,
+        "events": 0,
+        "horses": 0,
+        "movement": 1,
+        "music": 1,
+        "nature": 2,
+        "play": 2,
+        "water": 2
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2276,
+      "name": "Ried bei Kerzers",
+      "region": "see",
+      "recordIds": [
+        "candles-ried-2026"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 1,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2284,
+      "name": "Mont-Vully",
+      "region": "see",
+      "recordIds": [
+        "library-vully",
+        "sentier-botanique-vully",
+        "plage-praz-vully",
+        "jeux-apav-vully-2026",
+        "nant-beach",
+        "motier-beach",
+        "sugiez-beach"
+      ],
+      "categoryCounts": {
+        "books": 1,
+        "creative": 0,
+        "dining": 0,
+        "events": 1,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 4
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2292,
+      "name": "Brünisried",
+      "region": "sense",
+      "recordIds": [
+        "bruenisried-forest-playgroup"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2293,
+      "name": "Düdingen",
+      "region": "sense",
+      "recordIds": [
+        "swim-duedingen",
+        "verslimorgen-duedingen",
+        "seepark-schiffenen",
+        "garmiswil-restaurant",
+        "bistro11-duedingen",
+        "suniai-family-yoga"
+      ],
+      "categoryCounts": {
+        "books": 1,
+        "creative": 0,
+        "dining": 3,
+        "events": 0,
+        "horses": 0,
+        "movement": 1,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 1
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2294,
+      "name": "Giffers",
+      "region": "sense",
+      "recordIds": [
+        "krabbel-giffers",
+        "elki-giffers",
+        "bewegungsinsel"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 2,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2295,
+      "name": "Bösingen",
+      "region": "sense",
+      "recordIds": [
+        "beo-funpark"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2296,
+      "name": "Heitenried",
+      "region": "sense",
+      "recordIds": [
+        "elki-heitenried",
+        "heitenried-schloss-play"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 1,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2299,
+      "name": "Plaffeien",
+      "region": "sense",
+      "recordIds": [
+        "sellenhof-wednesday",
+        "sellenhof-group",
+        "sellenhof-private",
+        "pony-entdecken",
+        "pony-spass",
+        "pferde-oberschrot",
+        "krabbel-plaffeien",
+        "elki-plaffeien",
+        "fein-sein-schwarzsee",
+        "christmas-plaffeien",
+        "candles-plaffeien",
+        "santiklous",
+        "ludo-events",
+        "ludo-plaffeien",
+        "hostellerie",
+        "drachenland",
+        "riggli",
+        "rodelbahn",
+        "beaches",
+        "aquarell",
+        "snowli",
+        "snowli-daily",
+        "snowli-weekly",
+        "ski-private",
+        "minigolf",
+        "fyfauter",
+        "seeweid-play"
+      ],
+      "categoryCounts": {
+        "books": 1,
+        "creative": 1,
+        "dining": 1,
+        "events": 4,
+        "horses": 6,
+        "movement": 7,
+        "music": 0,
+        "nature": 4,
+        "play": 2,
+        "water": 1
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2300,
+      "name": "Plasselb",
+      "region": "sense",
+      "recordIds": [
+        "plasselb-tennisbuvette-play"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 1,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2301,
+      "name": "Rechthalten",
+      "region": "sense",
+      "recordIds": [
+        "elki-rechthalten",
+        "herbstbasteln"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 1,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 1,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2303,
+      "name": "St. Silvester",
+      "region": "sense",
+      "recordIds": [
+        "st-silvester-spielgruppe"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2304,
+      "name": "St. Ursen",
+      "region": "sense",
+      "recordIds": [
+        "krabbel-ursen"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2305,
+      "name": "Schmitten (FR)",
+      "region": "sense",
+      "recordIds": [
+        "elki-schmitten-treff"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2306,
+      "name": "Tafers",
+      "region": "sense",
+      "recordIds": [
+        "krabbel-tafers",
+        "elki-alterswil",
+        "kinderfeier",
+        "rabel-tafers",
+        "ludo-tafers",
+        "biblio-tafers"
+      ],
+      "categoryCounts": {
+        "books": 2,
+        "creative": 0,
+        "dining": 0,
+        "events": 2,
+        "horses": 0,
+        "movement": 1,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2307,
+      "name": "Tentlingen",
+      "region": "sense",
+      "recordIds": [
+        "swim-tentlingen",
+        "ludo-giffers"
+      ],
+      "categoryCounts": {
+        "books": 1,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 1
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2308,
+      "name": "Ueberstorf",
+      "region": "sense",
+      "recordIds": [
+        "ueberstorf-schluessel-play"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 1,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2309,
+      "name": "Wünnewil-Flamatt",
+      "region": "sense",
+      "recordIds": [
+        "wunnewil-staffelsholz",
+        "elki-wuennewil"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 1,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2321,
+      "name": "Attalens",
+      "region": "veveyse",
+      "recordIds": [
+        "aef-attalens",
+        "aef-attalens-alimentation",
+        "botanique-attalens",
+        "papayou-attalens"
+      ],
+      "categoryCounts": {
+        "books": 1,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 2,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2323,
+      "name": "Bossonnens",
+      "region": "veveyse",
+      "recordIds": [
+        "bossonnens-vestiges"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2325,
+      "name": "Châtel-Saint-Denis",
+      "region": "veveyse",
+      "recordIds": [
+        "ludo-trottinette-chatel",
+        "library-veveyse-chatel",
+        "piscine-chatel",
+        "rathvel-petit-oiseau",
+        "vita-chatel",
+        "lutins-paccots",
+        "paccots-recreation",
+        "grand-clos-chatel-play",
+        "fruence-play"
+      ],
+      "categoryCounts": {
+        "books": 2,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 1,
+        "music": 0,
+        "nature": 2,
+        "play": 3,
+        "water": 1
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2328,
+      "name": "Granges (Veveyse)",
+      "region": "veveyse",
+      "recordIds": [
+        "granges-veveyse-play"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2333,
+      "name": "Remaufens",
+      "region": "veveyse",
+      "recordIds": [
+        "fsg-chatel-parent-remaufens",
+        "montilier-remaufens"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 1,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2335,
+      "name": "Saint-Martin (FR)",
+      "region": "veveyse",
+      "recordIds": [
+        "saint-martin-besencens-atelier"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 0,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2336,
+      "name": "Semsales",
+      "region": "veveyse",
+      "recordIds": [
+        "traina-manchou-semsales"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2337,
+      "name": "Le Flon",
+      "region": "veveyse",
+      "recordIds": [
+        "leflon-heron-trail",
+        "leflon-bouloz-playground"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 1,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    },
+    {
+      "ofs": 2338,
+      "name": "La Verrerie",
+      "region": "veveyse",
+      "recordIds": [
+        "verrerie-tire-ailes"
+      ],
+      "categoryCounts": {
+        "books": 0,
+        "creative": 0,
+        "dining": 0,
+        "events": 0,
+        "horses": 0,
+        "movement": 0,
+        "music": 0,
+        "nature": 1,
+        "play": 0,
+        "water": 0
+      },
+      "coverage": "at-least-one-card"
+    }
+  ],
+  "unmatched": [
+    {
+      "id": "conservatoire",
+      "town": "Fribourg / Granges-Paccot",
+      "region": "sarine"
+    },
+    {
+      "id": "erntedank",
+      "town": "Weissenstein",
+      "region": "sense"
+    },
+    {
+      "id": "rabel-giffers",
+      "town": "Giffers / Tentlingen",
+      "region": "sense"
+    },
+    {
+      "id": "candles-giffers",
+      "town": "Giffers / Tentlingen",
+      "region": "sense"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "project": "vmeste",
+  "targetAge": {"min": 0, "max": 6},
+  "automaticPublication": false,
+  "semanticPrecheck": true,
+  "workerProvider": "claude",
+  "maxJobsPerRun": 4,
+  "maxRunMinutes": 30,
+  "maxToolCallsPerJob": 50,
+  "leaseMinutes": 15,
+  "maxAttempts": 3,
+  "backpressure": 24,
+  "roles": {
+    "search": {"model": "gpt-6-luna", "claudeModel": "claude-haiku-5-5", "effort": "medium", "writes": ["candidate", "claims"], "criticalEffort": "medium"},
+    "verify": {"model": "gpt-6.1-sol", "claudeModel": "claude-sonnet-5-5", "effort": "low", "writes": ["receipt", "dispute", "correction", "claim-verdict", "patch-verdict"], "criticalEffort": "medium"},
+    "arbitrate": {"model": "gpt-6.1-sol", "claudeModel": "claude-opus-5-5", "effort": "medium", "writes": ["decision"], "criticalEffort": "high"},
+    "editor": {"model": "gpt-6.1-sol", "claudeModel": "claude-sonnet-5-5", "effort": "medium", "writes": ["patch-draft"], "criticalEffort": "medium"},
+    "qa": {"model": null, "effort": null, "writes": ["test-results"]},
+    "release": {"model": null, "effort": null, "writes": ["release-manifest"]}
+  }
+}

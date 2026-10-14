@@ -1,0 +1,9 @@
+# Local trial on plain HTTP, without Caddy and without a certificate:
+#   ACME_EMAIL=you@example.org docker compose -f compose.yaml -f compose.local.yaml up --build app
+# then open http://127.0.0.1:8787/ and http://127.0.0.1:8787/healthz
+services:
+  app:
+    ports:
+      - "127.0.0.1:8787:8787"
+  caddy:
+    profiles: ["edge"]

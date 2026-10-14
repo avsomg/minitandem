@@ -1,0 +1,6587 @@
+{
+  "generatedAt": "2026-10-14T00:57:22.332Z",
+  "sources": [
+    {
+      "id": "source-a9e685e2c5ed",
+      "url": "https://sellenhof.ch/Reitangebote",
+      "recordIds": [
+        "sellenhof-wednesday",
+        "sellenhof-group",
+        "sellenhof-private"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-8045b709c09c",
+      "url": "https://sellenhof.ch/team",
+      "recordIds": [
+        "sellenhof-wednesday",
+        "sellenhof-private"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Additional check: Team",
+        "Additional check: Instructor"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-308a8d426b2c",
+      "url": "https://sellenhof.ch/de/Reservationen",
+      "recordIds": [
+        "sellenhof-wednesday",
+        "sellenhof-group",
+        "sellenhof-private"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Additional check: Route",
+        "Additional check: Address",
+        "Additional check: Directions"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-1c33ce8ddb66",
+      "url": "https://www.bergahorn-schule.ch/freifaecher",
+      "recordIds": [
+        "pony-entdecken",
+        "pony-spass",
+        "pferde-oberschrot"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Bergahorn programme 2026/27",
+        "Bergahorn 2026/27 programme"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-1132c256a147",
+      "url": "https://www.tierhappy.ch/",
+      "recordIds": [
+        "pony-entdecken",
+        "pony-spass"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Tierhappy · organiser"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-2454d7422b42",
+      "url": "https://www.tierhappy.ch/à-propos-de-moi",
+      "recordIds": [
+        "pony-entdecken"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Additional check: Course leader"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-16c09949febf",
+      "url": "https://unterwegs-mit-pferden.ch/",
+      "recordIds": [
+        "pferde-oberschrot"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Farm and contact"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-326de079431d",
+      "url": "https://portal.schwimmschule.ch/events/detail?tx_eddaylight_readobjects%5Bid%5D=8529&tx_eddaylight_readobjects%5BsecurityHash%5D=dbd870a8c142b4ae3f5b0bafd92f2575&cHash=ae09f1ef2ae4006daac973ce0b21ff22",
+      "recordIds": [
+        "swim-tentlingen"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Friday group: dates and price"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-2023ad860c9d",
+      "url": "https://www.schwimmschule.ch/index.php/de/kurse",
+      "recordIds": [
+        "swim-tentlingen",
+        "swim-buissonnets",
+        "swim-duedingen"
+      ],
+      "regions": [
+        "sense",
+        "sarine"
+      ],
+      "labels": [
+        "Age and swimming formats"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e637226d1ca1",
+      "url": "https://www.schwimmschule.ch/index.php/de/q-a",
+      "recordIds": [
+        "swim-tentlingen",
+        "swim-buissonnets",
+        "swim-duedingen"
+      ],
+      "regions": [
+        "sense",
+        "sarine"
+      ],
+      "labels": [
+        "Parents and course languages"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ff2bfa8efab2",
+      "url": "https://www.schwimmschule.ch/index.php/de/agb",
+      "recordIds": [
+        "swim-tentlingen",
+        "swim-buissonnets",
+        "swim-duedingen"
+      ],
+      "regions": [
+        "sense",
+        "sarine"
+      ],
+      "labels": [
+        "Payment for late joining",
+        "Payment when joining late"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-a21f4253c90e",
+      "url": "https://www.schwimmschule.ch/index.php/de/schwimmbaeder",
+      "recordIds": [
+        "swim-tentlingen"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Pool addresses"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-5a75cd5aa22b",
+      "url": "https://portal.schwimmschule.ch/events/detail?tx_eddaylight_readobjects%5Bid%5D=8557&tx_eddaylight_readobjects%5BsecurityHash%5D=5f989246a52126b1f81b44d492c58f66&cHash=7697f24572c84cf7c6f0e5696476dd80",
+      "recordIds": [
+        "swim-buissonnets"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Saturday group: dates and price"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-7b359eeb0e41",
+      "url": "https://www.schwimmschule.ch/index.php/de/",
+      "recordIds": [
+        "swim-duedingen"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Warning about the pool opening"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-8c6d9a77f0e2",
+      "url": "https://portal.schwimmschule.ch/",
+      "recordIds": [
+        "swim-duedingen"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Wolfacker courses"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9146aea81f3b",
+      "url": "https://www.duedingen.ch/sportanlagen/22702",
+      "recordIds": [
+        "swim-duedingen"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Municipal pool page"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-03c614e74c36",
+      "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/",
+      "recordIds": [
+        "krabbel-plaffeien"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ea091334e895",
+      "url": "https://www.evgt.ch/angebote-projekte/krabbelgruppe/",
+      "recordIds": [
+        "krabbel-giffers"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e1b9e77009ed",
+      "url": "https://www.familientreffstursen.ch/krabbelgruppe",
+      "recordIds": [
+        "krabbel-ursen"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-1c73f8d5eac2",
+      "url": "https://www.nepourlire.ch/de/agenda?page=25",
+      "recordIds": [
+        "verslimorgen-duedingen",
+        "lire-marly",
+        "memo-buchstart"
+      ],
+      "regions": [
+        "sense",
+        "sarine"
+      ],
+      "labels": [
+        "Buchstart register: Düdingen",
+        "Né pour lire register: Marly",
+        "Buchstart register: MEMO"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-06c664bda35a",
+      "url": "https://www.nepourlire.ch/storage/febMduAgmdmDoChbdKQcBPUEGEjlZSRnnDVZNUFw.png",
+      "recordIds": [
+        "verslimorgen-duedingen"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Library listing: times and dates"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-02b61d5e1992",
+      "url": "https://www.famylietraeff.ch/krabbelgruppe/",
+      "recordIds": [
+        "krabbel-tafers"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-dd86ff07a537",
+      "url": "https://www.famylietraeff.ch/home/",
+      "recordIds": [
+        "krabbel-tafers"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Additional check: Group"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-a9d2e7037c49",
+      "url": "https://www.tvplaffeien.ch/gruppen/kinder_jugendliche",
+      "recordIds": [
+        "elki-plaffeien"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f580f4f44c3a",
+      "url": "https://www.tvplaffeien.ch/verein/mitgliederbeitrag",
+      "recordIds": [
+        "elki-plaffeien"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Fees"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-79dc7ce39484",
+      "url": "https://www.tvplaffeien.ch/home",
+      "recordIds": [
+        "elki-plaffeien"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Additional check: Trial visit"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-33b0be88007d",
+      "url": "https://www.svgt.ch/sportarten/elki",
+      "recordIds": [
+        "elki-giffers"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-3172e0678fe4",
+      "url": "https://www.svgt.ch/sportarten/bewegungsinsel",
+      "recordIds": [
+        "bewegungsinsel"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9e2d691b8ee9",
+      "url": "https://tsvrechthalten.ch/turnen/",
+      "recordIds": [
+        "elki-rechthalten"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-4c0235723ffe",
+      "url": "https://sv-alterswil.ch/verein/Riegen/elki",
+      "recordIds": [
+        "elki-alterswil"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ad449789875c",
+      "url": "https://www.auxmerveillesdalice.ch/",
+      "recordIds": [
+        "alice-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Café: opening hours and contacts"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-7df3e77e84c2",
+      "url": "https://marche-ancienne-papeterie.ch/commerces/aux-merveilles-d-alice",
+      "recordIds": [
+        "alice-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Play area, address and parking"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-84738579f389",
+      "url": "https://www.akdagsa.ch/wp-content/uploads/2026/06/Menu-crepes-gaufres.pdf",
+      "recordIds": [
+        "alice-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Pancake and waffle menu with prices"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-5b0165cbbc0f",
+      "url": "https://www.akdagsa.ch/wp-content/uploads/2026/07/Menu-boissons-Alice_060726.pdf",
+      "recordIds": [
+        "alice-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Drinks menu with prices"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-3bb9b461b389",
+      "url": "https://www.google.com/maps?cid=4119563388185101719",
+      "recordIds": [
+        "alice-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Google Maps: venue listing"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-b88d3942abe4",
+      "url": "https://feinundsein-schwarzsee.ch/",
+      "recordIds": [
+        "fein-sein-schwarzsee"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Restaurant: playground, menu and contacts"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-7721dc4a63d5",
+      "url": "https://feinundsein-schwarzsee.ch/speisekarte/",
+      "recordIds": [
+        "fein-sein-schwarzsee"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Breakfast and kitchen hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-1115a5af110f",
+      "url": "https://fribourg.ch/de/schwarzsee/restaurants/restaurant-fein-und-sein/",
+      "recordIds": [
+        "fein-sein-schwarzsee"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Tourist office: hours and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-4ad04591034d",
+      "url": "https://restaurantseepark.ch/index.php?menuid=1",
+      "recordIds": [
+        "seepark-schiffenen"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Restaurant: garden play area and contacts"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-49927342dcd0",
+      "url": "https://restaurantseepark.ch/index.php?menuid=78",
+      "recordIds": [
+        "seepark-schiffenen"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official opening hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-0b6249f3b840",
+      "url": "https://restaurantseepark.ch/index.php?menuid=28",
+      "recordIds": [
+        "seepark-schiffenen"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Published menu, undated"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f297f4e45737",
+      "url": "https://www.food4family.ch/restaurantsuche/fribourg/seepark/",
+      "recordIds": [
+        "seepark-schiffenen"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Food4family: equipment, review and facilities; review undated"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-19371e2e326c",
+      "url": "https://www.jungos.ch/",
+      "recordIds": [
+        "garmiswil-restaurant"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Restaurant: opening hours and contacts"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-a7ee3dc83045",
+      "url": "https://www.jungos.ch/speisekarte",
+      "recordIds": [
+        "garmiswil-restaurant"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Menu with prices"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-b285dde14df1",
+      "url": "https://www.jungos.ch/das-restaurant",
+      "recordIds": [
+        "garmiswil-restaurant"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Visit format, café and terrace"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-af943a43b3e2",
+      "url": "https://fribourg.ch/de/schwarzsee/restaurants/landgasthof-garmiswil/",
+      "recordIds": [
+        "garmiswil-restaurant"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Tourist office: own children's playground"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-08dae23cdbde",
+      "url": "https://www.bistro11.ch/Ueber-uns/",
+      "recordIds": [
+        "bistro11-duedingen"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Café: current opening hours and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-61ad08ecd7af",
+      "url": "https://www.bistro11.ch/Essen-Trinken/",
+      "recordIds": [
+        "bistro11-duedingen"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Café: menu"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-19ffc2db2f21",
+      "url": "https://www.bistro11.ch/.cm4all/uproc.php/0/Bistro%2011%20Karten%20Neu.pdf?_=1a0396db7a4&cdp=a",
+      "recordIds": [
+        "bistro11-duedingen"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Menu with prices"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-c9d54bffa128",
+      "url": "https://www.baernermamis.ch/blog/bistro-11-duedingen",
+      "recordIds": [
+        "bistro11-duedingen"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Bärner Mamis: description of the small play corner"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-28033f846af4",
+      "url": "https://www.coop-restaurant.ch/fr/restaurantfinder/finderdetailpage.3743.html",
+      "recordIds": [
+        "coop-fribourg-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Branch: Espace enfants, hours and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-8d345bf00ac0",
+      "url": "https://www.coop-restaurant.ch/fr/manger-boire/menu-enfants.html",
+      "recordIds": [
+        "coop-fribourg-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Coop chain: contents and price of the children's menu"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-63500234d08b",
+      "url": "https://lesarrazin.ch/",
+      "recordIds": [
+        "sarrazin-lossy"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Restaurant: menu, opening hours and contacts"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e45bbd95ac0e",
+      "url": "https://lesarrazin.ch/notre-carte/",
+      "recordIds": [
+        "sarrazin-lossy"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Children's dishes, plate for children up to 4 and kitchen hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-45198d015031",
+      "url": "https://fribourg.ch/fr/all/restaurants/le-sarrazin/",
+      "recordIds": [
+        "sarrazin-lossy",
+        "sarrazin-lossy-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Tourist office: indoor and outdoor games",
+        "Tourism: premises and outdoor play area, address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-14ab34154aa8",
+      "url": "https://www.leset.ch/",
+      "recordIds": [
+        "leset-villars"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Restaurant: terrace, children's play and contacts"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-bc38a26fe42d",
+      "url": "https://www.leset.ch/menu/",
+      "recordIds": [
+        "leset-villars"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Menu page"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-5ddd7db5b789",
+      "url": "https://www.leset.ch/wp-content/uploads/2026/02/carte-printemps-2026.pdf",
+      "recordIds": [
+        "leset-villars"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Spring 2026 menu: a guide, not a confirmed autumn tariff"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-abc81a0b708d",
+      "url": "https://laferme1794.ch/",
+      "recordIds": [
+        "laferme-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "The farm: bistro and children's playground"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-17c5054e260e",
+      "url": "https://laferme1794.ch/bio-hofladen-kontakt/",
+      "recordIds": [
+        "laferme-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Address and contacts"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e0fa87cb4cf3",
+      "url": "https://laferme1794.ch/fr/restauration-cafe-bistrot/",
+      "recordIds": [
+        "laferme-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "French page of the bistro: opening hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f53dffa2d01a",
+      "url": "https://www.baernermamis.ch/blog/la-ferme-1794-murten",
+      "recordIds": [
+        "laferme-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Family review: playground equipment"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-627c96dbb910",
+      "url": "https://www.myswitzerland.com/de/erlebnisse/essen-trinken/restaurant/mcdonalds-restaurant-16/",
+      "recordIds": [
+        "mcd-granges-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Switzerland Tourism: Outdoor Playland of this specific branch"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-5c9f660285b5",
+      "url": "https://www.mcdonalds.com/ch/de-ch/location/granges-paccot/granges-paccot/route-denglisberg-3/780095.html",
+      "recordIds": [
+        "mcd-granges-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "McDonald’s branch: new page"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d30284ee8567",
+      "url": "https://www.mcdonalds.com/ch/fr-ch/family.html",
+      "recordIds": [
+        "mcd-granges-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Family services of the chain and accompaniment of children"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-bd64b9e9803e",
+      "url": "https://www.avrycentre.ch/migros-restaurant/",
+      "recordIds": [
+        "migros-avry-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Shopping centre: restaurant and opening hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-126976b52fe1",
+      "url": "https://www.google.com/maps/place/restaurant+Migros+-+Avry+Centre/@46.7876479,7.0781119,17z/data=!3m1!4b1!4m6!3m5!1s0x478e6fb938a3e42b:0xdcc5a6cbe664f815!8m2!3d46.7876479!4d7.0781119!16s%2Fg%2F1hg4zy0g5",
+      "recordIds": [
+        "migros-avry-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Google Maps: review of the terrace and owner's reply, viewed 27.09.2026"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-7bf53012809a",
+      "url": "https://www.laliberte.ch/articles/regions/sarine/des-travaux-a-avry-centre-949424",
+      "recordIds": [
+        "migros-avry-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "La Liberté, 08.01.2025: playground and slide after works"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-92ea55afde7b",
+      "url": "https://www.avrycentre.ch/garderie/",
+      "recordIds": [
+        "migros-avry-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Separate garderie: not the restaurant's play area"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-bb8a3b36928f",
+      "url": "https://beo-funpark.ch/kleinkindbereich/",
+      "recordIds": [
+        "beo-funpark"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Two zones for young children"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-15a706332a59",
+      "url": "https://beo-funpark.ch/preise/",
+      "recordIds": [
+        "beo-funpark"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Entry prices, embedded opening hours widget and holidays"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-dd02cfcf5ec5",
+      "url": "https://beo-funpark.ch/wp-content/uploads/2022/09/ReglementAGB.pdf",
+      "recordIds": [
+        "beo-funpark"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Rules referred to by the current website"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-a94274c23410",
+      "url": "https://beo-funpark.ch/funpark-restaurant/",
+      "recordIds": [
+        "beo-funpark"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Bistro inside the park"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-0cfb7f96766a",
+      "url": "https://www.baernermamis.ch/blog/indoorspielplaetze/beo-funpark-boesingen",
+      "recordIds": [
+        "beo-funpark"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Bärner Mamis, 10.02.2025: location of the zones for young children"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-75e5d8504e5d",
+      "url": "https://www.kafi8.ch/",
+      "recordIds": [
+        "kafi8-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Café: new hours, address and Mini-Kafi-8"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d243300304e5",
+      "url": "https://www.kafi8.ch/about-4",
+      "recordIds": [
+        "kafi8-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Holidays and special opening days"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-edb3ce8f5d14",
+      "url": "https://www.kafi8.ch/angebot-kafi-8",
+      "recordIds": [
+        "kafi8-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Notice about the menu review"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-441bcd70703e",
+      "url": "https://www.baernermamis.ch/blog/geniessen/cafe/kafi8-kerzers",
+      "recordIds": [
+        "kafi8-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Bärner Mamis: the play room and its equipment"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f8295e4986be",
+      "url": "https://de.restaurantguru.com/Kafi-8-Kerzers",
+      "recordIds": [
+        "kafi8-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Restaurant Guru: copy of a Google review about the play room's connection to the dining area"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9d2d4cf731d5",
+      "url": "https://wanderlog.com/de/place/details/2911917/kafi-8",
+      "recordIds": [
+        "kafi8-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Wanderlog: copy of a Google review dated 28.02.2024"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-2044bc19168a",
+      "url": "https://www.clubcafe-kerzers.ch/gartenwirtschaft/",
+      "recordIds": [
+        "clubcafe-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Restaurant: garden area and sandpit"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d17398200790",
+      "url": "https://www.clubcafe-kerzers.ch/ristaurante/",
+      "recordIds": [
+        "clubcafe-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Restaurant: opening hours and published menus"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-0c7c16ae292a",
+      "url": "https://www.clubcafe-kerzers.ch/kontakt/",
+      "recordIds": [
+        "clubcafe-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Contacts and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-892351c8425b",
+      "url": "https://www.restaurant-jardin.ch/restaurant",
+      "recordIds": [
+        "jardin-muntelier"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Restaurant: current contacts and opening hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-192f371b4e6b",
+      "url": "https://www.restaurant-jardin.ch/menuekarten/spezialitaeten",
+      "recordIds": [
+        "jardin-muntelier"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Current menu page"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-4c912778eb7d",
+      "url": "https://www.restaurant-jardin.ch/images/menus/Menukarte%20ab%2011.02.2026.pdf",
+      "recordIds": [
+        "jardin-muntelier"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "2026 menu with drink and food prices"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-4ed3aadfd348",
+      "url": "https://www.j3l.ch/fr/P4727/a-faire/boire-manger/restaurants/restaurant-le-jardin",
+      "recordIds": [
+        "jardin-muntelier"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Tourist office: playground and mini zoo"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-04033fe456e8",
+      "url": "https://www.food4family.ch/restaurantsuche/freiburg/lejardin/",
+      "recordIds": [
+        "jardin-muntelier"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Food4family: playground by the tables and toys inside; undated"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-04085b4f0cd6",
+      "url": "https://www.google.com/maps/place/Restaurant+Le+Jardin/@46.9349631,7.1263368,17z/data=!3m1!4b1!4m6!3m5!1s0x478e12e76e67a60f:0xc850bd4e288b5fd9!8m2!3d46.9349631!4d7.1263368!16s%2Fg%2F11f29_bh23",
+      "recordIds": [
+        "jardin-muntelier"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Google Maps: reviews of the playground, viewed 27.09.2026"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-8b0f92d2a9d9",
+      "url": "https://www.bad-murtensee.ch/de/gastronomie/beach-house/",
+      "recordIds": [
+        "beachhouse-muntelier"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Operator: public restaurant, hours and contacts"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-16688b0ebb1b",
+      "url": "https://www.bad-murtensee.ch/assets/FB/Menu-Beach-House-Sommer_26_GzD.pdf",
+      "recordIds": [
+        "beachhouse-muntelier"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Summer menu 2026 with prices"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e90091d7e0b6",
+      "url": "https://www.baernermamis.ch/blog/beach-house-murten-seebar-bad-murtensee",
+      "recordIds": [
+        "beachhouse-muntelier"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Bärner Mamis: sandpit in the garden"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e0cd55c9eb31",
+      "url": "https://www.baernermamis.ch/blog/2-tage-murtensee",
+      "recordIds": [
+        "beachhouse-muntelier"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Bärner Mamis: toys and parking; another account from the same publication"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d32db63c6d00",
+      "url": "https://www.marly.ch/social-et-sante/cohesion-sociale",
+      "recordIds": [
+        "cafe-marly",
+        "espace-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-0213e22eac20",
+      "url": "https://tockify.com/educationfamiliale/detail/756/1790751600000",
+      "recordIds": [
+        "cafe-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "AEF calendar: Café Parents-Enfants à Marly"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-7d56b144bcd1",
+      "url": "https://tockify.com/educationfamiliale/detail/782/1790924400000",
+      "recordIds": [
+        "aef-villars"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "AEF: autumn meetings and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-27814181a33f",
+      "url": "https://www.villars-sur-glane.ch/prestations/animation-de-0-a-5-ans/",
+      "recordIds": [
+        "aef-villars"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Commune: format with a parent and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-5813132629c5",
+      "url": "https://www.psymolo.ch/file/Prevention",
+      "recordIds": [
+        "psymolo"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-0b3702c1834e",
+      "url": "https://www.marly.ch/fileadmin/Version_RS_interactive.pdf",
+      "recordIds": [
+        "psymolo",
+        "lire-marly",
+        "haragati"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Marly 2026 directory"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-286b9f88b63c",
+      "url": "https://www.psymolo.ch/",
+      "recordIds": [
+        "psymolo"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Format and contact"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-edb612bcb38e",
+      "url": "https://www.playgrounds.ch/de/wann-und-wo/m/marly/",
+      "recordIds": [
+        "playgrounds-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-8c0acd541bc4",
+      "url": "https://cristinadanse.ch/danse-parent-enfant/",
+      "recordIds": [
+        "danse-turin"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-102081301135",
+      "url": "https://cristinadanse.ch/cristina-turin-danse-et-pedagogie-pour-enfants-a-fribourg/",
+      "recordIds": [
+        "danse-turin"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Instructor"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-fd82323bdbcc",
+      "url": "https://www.marly-piscine.ch/wp-content/uploads/2026/07/Piscine-Marly-Flyer-cours-de-natation-2026-AU26v1.1.pdf",
+      "recordIds": [
+        "swim-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Autumn 2026 cycle"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-b9a29c8773b9",
+      "url": "https://www.haragati.com/",
+      "recordIds": [
+        "haragati"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-73ee9e1a5a8c",
+      "url": "https://haragati.com/acroyoga-2/",
+      "recordIds": [
+        "haragati"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Age and format"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-93dc3c79d297",
+      "url": "https://haragati.com/",
+      "recordIds": [
+        "haragati"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Season"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-737497cea801",
+      "url": "https://maison-petite-enfance.ch/infos",
+      "recordIds": [
+        "mpe"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-30a86ce37e6b",
+      "url": "https://maison-petite-enfance.ch/",
+      "recordIds": [
+        "mpe"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Adult participation"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9054b1989393",
+      "url": "https://tockify.com/educationfamiliale/detail/755/1790665200000",
+      "recordIds": [
+        "aef-mpe"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "AEF programme and published dates"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-107ded03b860",
+      "url": "https://www.educationfamiliale.ch/fr/agenda",
+      "recordIds": [
+        "aef-mpe",
+        "aef-schonberg",
+        "aef-centre",
+        "aef-passerelles"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "AEF calendar"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-1f90403519da",
+      "url": "https://tockify.com/api/feeds/ics/educationfamiliale",
+      "recordIds": [
+        "aef-mpe",
+        "aef-schonberg",
+        "aef-centre",
+        "aef-passerelles",
+        "aef-vignettaz",
+        "aef-jura",
+        "aef-farvagny",
+        "aef-attalens",
+        "aef-attalens-alimentation",
+        "creer-aef",
+        "ateliers-familles-courtepin"
+      ],
+      "regions": [
+        "sarine",
+        "veveyse",
+        "see"
+      ],
+      "labels": [
+        "Additional check: Autumn series",
+        "AEF calendar: both dates",
+        "AEF calendar: date, time, venue",
+        "AEF calendar: six dates",
+        "AEF calendar: separate title and date",
+        "Additional check: Next dates",
+        "Additional check: Topics of the next meetings"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-34f0ef2b1373",
+      "url": "https://tockify.com/educationfamiliale/detail/758/1790751600000",
+      "recordIds": [
+        "aef-schonberg"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "AEF programme and published dates"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-5b03b88035a5",
+      "url": "https://tockify.com/educationfamiliale/detail/754/1790838000000",
+      "recordIds": [
+        "aef-centre"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "AEF programme and published dates"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-23425b1a4991",
+      "url": "https://tockify.com/educationfamiliale/detail/790/1790773200000",
+      "recordIds": [
+        "aef-passerelles"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "AEF programme and published dates"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d0f4e3b05819",
+      "url": "https://tockify.com/educationfamiliale/detail/750/1791378000000",
+      "recordIds": [
+        "aef-vignettaz"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "AEF: meeting at Vignettaz"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-452949e881f0",
+      "url": "https://tockify.com/educationfamiliale/detail/750/1794038400000/1",
+      "recordIds": [
+        "aef-vignettaz"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: second date"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ca39a671b973",
+      "url": "https://tockify.com/educationfamiliale/detail/783/1791633600000",
+      "recordIds": [
+        "aef-jura"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "AEF: meeting at Jura"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-2c09937889f0",
+      "url": "https://tockify.com/educationfamiliale/detail/697/1791012600000/2",
+      "recordIds": [
+        "aef-farvagny"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "AEF: meeting in Farvagny"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-6e0d8d2e9534",
+      "url": "https://tockify.com/educationfamiliale/detail/751/1791356400000/2",
+      "recordIds": [
+        "aef-attalens"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "AEF: venue and format"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-b68fdd6168cc",
+      "url": "https://www.attalens.ch/evenement/cafe-parents-enfants-8/",
+      "recordIds": [
+        "aef-attalens"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Commune: same hall and organiser"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-1f086d4f087d",
+      "url": "https://tockify.com/educationfamiliale/detail/751/1793174400000/3",
+      "recordIds": [
+        "aef-attalens-alimentation"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "AEF: themed meeting"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-a38e2caf4064",
+      "url": "https://tockify.com/educationfamiliale/detail/777/1790407800000",
+      "recordIds": [
+        "creer-aef"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-6cff5fd5a841",
+      "url": "https://www.livrechange.ch/fr/activites-regulieres.html",
+      "recordIds": [
+        "jouons",
+        "encore-jura",
+        "encore-schonberg"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-6a213878886e",
+      "url": "https://www.ile-aux-tresors.ch/pages/aire-de-jeu",
+      "recordIds": [
+        "ile"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-081cc1ee5661",
+      "url": "https://www.ideesport.ch/fr/programmes/minimove/minimove-fribourg-jura",
+      "recordIds": [
+        "minimove-jura"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-749e9b692b7a",
+      "url": "https://www.ville-fribourg.ch/agenda/minimove-jura",
+      "recordIds": [
+        "minimove-jura"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "City calendar 2026/27"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-7d4e01b7aa86",
+      "url": "https://www.ville-fribourg.ch/de/agenda/minimove-schoenberg-0",
+      "recordIds": [
+        "minimove-schonberg"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "City calendar 2026/27"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-6cda95fe43be",
+      "url": "https://www.ville-fribourg.ch/agenda/minimove-schoenberg",
+      "recordIds": [
+        "minimove-schonberg"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "City events listing"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-13428fe7d564",
+      "url": "https://www.fr.ch/conservatoire/cours-au-conservatoire/cours-de-musique/eveil-a-la-musique-parent-enfant",
+      "recordIds": [
+        "conservatoire"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-b2159814f6eb",
+      "url": "https://www.fr.ch/conservatoire/tarif-semestriel-cours-collectifs-musique",
+      "recordIds": [
+        "conservatoire"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Fees"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-cba45846cc6f",
+      "url": "https://www.fr.ch/document/595626",
+      "recordIds": [
+        "conservatoire"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Location and schedule 2026/27"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ea2f9c1b0d1d",
+      "url": "https://www.ville-fribourg.ch/pssst-ecoute-voir",
+      "recordIds": [
+        "memo-buchstart",
+        "memo-grands-signes-2026-11-10",
+        "memo-eveil-musical-2027-02-16",
+        "memo-musik-entdecken-2027-03-16"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "New MEMO programme",
+        "MEMO programme November 2026 – March 2027"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-c1a03d6f28cb",
+      "url": "https://cdnm.heyzine.com/files/uploaded/v3/1b5babb077c83e6573328f25c4443b9921836c54.pdf",
+      "recordIds": [
+        "memo-buchstart",
+        "memo-grands-signes-2026-11-10",
+        "memo-eveil-musical-2027-02-16",
+        "memo-musik-entdecken-2027-03-16"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Programme PDF: age and dates",
+        "PDF with the exact date and age"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-62dd54d60c74",
+      "url": "https://www.ville-fribourg.ch/memo",
+      "recordIds": [
+        "memo-buchstart",
+        "memo-library"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "MEMO",
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-a4cfc94a2b43",
+      "url": "https://bebes-nageurs.ch/index.php/centres/fribourg/jolimont",
+      "recordIds": [
+        "jolimont"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-45bb62fe95ae",
+      "url": "https://www.fr.ch/mhnf/ateliers-parents-enfants",
+      "recordIds": [
+        "museum"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9f89481e4efa",
+      "url": "https://www.aufildelondena.ch/petitpois",
+      "recordIds": [
+        "ondena"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-409f3bca1194",
+      "url": "https://www.aufildelondena.ch/book-online",
+      "recordIds": [
+        "ondena"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Booking and prices"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f82429d44ae9",
+      "url": "https://www.aufildelondena.ch/qui-sommesnous",
+      "recordIds": [
+        "ondena"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Team"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f1e1c501c9bc",
+      "url": "https://www.ville-fribourg.ch/agenda/encore-des-histoires-quartier-du-jura",
+      "recordIds": [
+        "encore-jura"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Published dates and location"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-84dbee46a4b0",
+      "url": "https://www.livrechange.ch/fr/encore-des-histoires-informations-543.html",
+      "recordIds": [
+        "encore-jura",
+        "encore-schonberg"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Dates and rain"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f91312b7fd18",
+      "url": "https://www.ville-fribourg.ch/agenda/encore-des-histoires-quartier-du-schonberg",
+      "recordIds": [
+        "encore-schonberg"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Published dates and location"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-b839ffc1d124",
+      "url": "https://www.pfarrei-tafers.ch/dabei-sein/kinder-und-familien/kinderfeier",
+      "recordIds": [
+        "kinderfeier"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-7df2684ca901",
+      "url": "https://www.pfarrei-tafers.ch/fileadmin/tafers/dokumente/PDF_Tafers/Flyer_Kinder___Familien_202627__13_.pdf",
+      "recordIds": [
+        "kinderfeier",
+        "rabel-tafers"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Additional check: With a parent",
+        "Additional check: Date and start"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-380321188ec8",
+      "url": "https://www.ref-weissenstein.ch/2026/09/22/einladung-herbstbasteln/",
+      "recordIds": [
+        "herbstbasteln"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Parish poster"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-b272cc26c9d7",
+      "url": "https://www.ref-weissenstein.ch/2026/09/26/einladung-herbstbasteln/",
+      "recordIds": [
+        "herbstbasteln",
+        "erntedank"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Additional check: Place and time",
+        "Additional check: Venue"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-2eda85249c33",
+      "url": "https://www.ref-weissenstein.ch/",
+      "recordIds": [
+        "erntedank"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-17321218e81a",
+      "url": "https://www.famylietraeff.ch/jahresprogramm/",
+      "recordIds": [
+        "rabel-tafers"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-3e6871b27a92",
+      "url": "https://www.evgt.ch/",
+      "recordIds": [
+        "rabel-giffers",
+        "candles-giffers"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-b24e1517a56b",
+      "url": "https://www.evgt.ch/events/r%C3%A4beliechtli/",
+      "recordIds": [
+        "rabel-giffers"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Time and meeting point"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-b142e2c2ac22",
+      "url": "https://www.evgt.ch/events/kerzenziehen/",
+      "recordIds": [
+        "candles-giffers"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Additional check: Practical conditions"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d4cd9d7065c1",
+      "url": "https://elternverein-plaffeien.ch/aktivitaeten/weihnachtgeschichten/",
+      "recordIds": [
+        "christmas-plaffeien"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-640f666bd168",
+      "url": "https://elternverein-plaffeien.ch/aktivitaeten/kerzenziehen/",
+      "recordIds": [
+        "candles-plaffeien"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-838b3a737b75",
+      "url": "https://elternverein-plaffeien.ch/wp-content/uploads/2026/01/Jahresprogramm_2026_V2.pdf",
+      "recordIds": [
+        "candles-plaffeien"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Additional check: Annual programme"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-7db0775ecbdb",
+      "url": "https://elternverein-plaffeien.ch/aktivitaeten/santiklousumzug/",
+      "recordIds": [
+        "santiklous"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-a5b2fe2fb81b",
+      "url": "https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/",
+      "recordIds": [
+        "ludo-events"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-49fec07e6e31",
+      "url": "https://ludothek-plaffeien.ch/",
+      "recordIds": [
+        "ludo-plaffeien"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ed24cd3628c8",
+      "url": "https://www.evgt.ch/ludothek/",
+      "recordIds": [
+        "ludo-giffers"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-147ca8363d9f",
+      "url": "https://www.ludothek-tafers.ch/reglement",
+      "recordIds": [
+        "ludo-tafers"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9a1d5f9cb906",
+      "url": "https://primarschule-tafers.ch/wp-content/uploads/2025/07/Schulinformation_25_26.pdf",
+      "recordIds": [
+        "biblio-tafers"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f243709e2064",
+      "url": "https://www.fr.ch/bcu/app/bibliotheques/97",
+      "recordIds": [
+        "biblio-tafers"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Cantonal library register"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9662ea3c1c92",
+      "url": "https://www.winmedio.net/tafers/",
+      "recordIds": [
+        "biblio-tafers"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Additional check: New schedule"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-b015b5949249",
+      "url": "https://www.fr.ch/bcu/app/bibliotheques/80",
+      "recordIds": [
+        "biblio-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Cantonal library register"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9bd5e3033131",
+      "url": "https://marly-ludo.ch/contact/",
+      "recordIds": [
+        "ludo-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Address and opening hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-58eb4ef5f54e",
+      "url": "https://marly-ludo.ch/",
+      "recordIds": [
+        "ludo-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Hire and prices"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-009765f1054f",
+      "url": "https://marly-ludo.ch/a-propos-de/",
+      "recordIds": [
+        "ludo-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Hire"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d2396006b841",
+      "url": "https://www.livrechange.ch/",
+      "recordIds": [
+        "livre-library"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9f8b1d063632",
+      "url": "https://laruche.fun/activites/kids-park/",
+      "recordIds": [
+        "laruche"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-364bbfa1bf76",
+      "url": "https://www.marly.ch/places-de-jeux",
+      "recordIds": [
+        "marly-outdoor"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Playgrounds of the commune of Marly"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-cae2c0e27823",
+      "url": "https://www.hostellerieamschwarzsee.ch/en/hotel/swimming-pool",
+      "recordIds": [
+        "hostellerie"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-0ae69259e99b",
+      "url": "https://kaisereggbahnen-schwarzsee.ch/angebot/kinderspielplatze/",
+      "recordIds": [
+        "drachenland"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-731a5269d7f6",
+      "url": "https://kaisereggbahnen-schwarzsee.ch/sommer-preise/",
+      "recordIds": [
+        "drachenland"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Tariffs"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-5f08c6870a1a",
+      "url": "https://kaisereggbahnen-schwarzsee.ch/anlagen-und-attraktionen/",
+      "recordIds": [
+        "drachenland",
+        "riggli"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Opening hours",
+        "Additional check: Season"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-560576b4b09d",
+      "url": "https://kaisereggbahnen-schwarzsee.ch/angebot/riggli-weg/",
+      "recordIds": [
+        "riggli"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-12ed5c7b98a0",
+      "url": "https://kaisereggbahnen-schwarzsee.ch/angebot/sommer-rodelbahn/",
+      "recordIds": [
+        "rodelbahn"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d2a23efb23b0",
+      "url": "https://fribourg.ch/de/schwarzsee/badespass/",
+      "recordIds": [
+        "beaches"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e7bda300b383",
+      "url": "https://fribourg.ch/de/schwarzsee/veranstaltungen/aquarell-workshops-am-schwarzsee/",
+      "recordIds": [
+        "aquarell"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e2d7bfbcff30",
+      "url": "https://www.sss-schwarzsee.ch/kurse/kinder-1/first-experience/",
+      "recordIds": [
+        "snowli",
+        "snowli-daily",
+        "snowli-weekly",
+        "ski-private"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Ski courses and prices"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-171670cd8aba",
+      "url": "https://www.swiss-ski-school.ch/de/schulen/schweizer-skischule-schwarzsee-snowcenter-ch-gmbh/",
+      "recordIds": [
+        "snowli",
+        "snowli-daily",
+        "snowli-weekly",
+        "ski-private"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "The school and teaching languages",
+        "School and teaching languages"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-8947b62dcb63",
+      "url": "https://www.sss-schwarzsee.ch/kurse/agb/",
+      "recordIds": [
+        "snowli",
+        "snowli-daily",
+        "snowli-weekly",
+        "ski-private"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Additional check: Cancellation"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9c05dad08504",
+      "url": "https://fribourg.ch/fr/schwarzsee/activites-en-plein-air/mini-golf-schwarzsee/",
+      "recordIds": [
+        "minigolf"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-0e13429cf192",
+      "url": "https://minigolf-tennis.clubdesk.com/gruppen",
+      "recordIds": [
+        "minigolf"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Additional check: Schedule and payment"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-04e9dbd33da8",
+      "url": "https://fri-memoria.bcu-fribourg.ch/uploads/r/bcu-fribourg/3/e/0/3e01f4d5a1279915f5f6e90f668a0cbf54c4d2a904a28603a1892d357ed091fe/8ad518cd-4810-4df0-9081-134e190b5b6a-Echo_Nr._09_vom_28.04.2022.pdf",
+      "recordIds": [
+        "fyfauter"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Historical bulletin 2022"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-6ccae2284e08",
+      "url": "https://www.plaffeien.ch/_doc/5618293",
+      "recordIds": [
+        "fyfauter"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Additional check: Distinction between groups"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9f7b18dd6230",
+      "url": "https://www.kirche-murten.ch/krabbelgruppe",
+      "recordIds": [
+        "family-cafe-murten",
+        "krabbeltreff-meyriez"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Family meetings: programme and dates"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ae38cf0236b8",
+      "url": "https://www.kirche-murten.ch/veranstaltung/12101",
+      "recordIds": [
+        "family-cafe-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Meeting on 30 September: address and time"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-3937f190f519",
+      "url": "https://www.kirche-murten.ch/veranstaltung/12103",
+      "recordIds": [
+        "krabbeltreff-meyriez"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Meeting of 23 September: address and time"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-c35e6ef2a32e",
+      "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+      "recordIds": [
+        "krabbel-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Age, adult participation and registration"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-326f7ee8cbe4",
+      "url": "https://www.kerzers.ch/leben-kerzers/vereine",
+      "recordIds": [
+        "krabbel-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Municipal directory: address and conditions"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ebd427641c01",
+      "url": "https://www.refkirche-kerzers.ch/?page=agenda&sucheDarstellung=agenda&sucheDarstellungTitel=tag.keyword.one+-+Regionales&sucheStichwort=Regionales&sucheTyp=veranstaltungen",
+      "recordIds": [
+        "krabbel-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Published dates for September–December 2026"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-3b61983c3691",
+      "url": "https://tsv-kerzers.clubdesk.com/Jugend/ELKI",
+      "recordIds": [
+        "elki-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "TSV Kerzers: ElKi, age and previous season"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-65d30ef4a3b8",
+      "url": "https://tsv-kerzers.clubdesk.com/",
+      "recordIds": [
+        "elki-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "TSV Kerzers: enrolment announcement of 07.09.2026"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-97f7aed25b69",
+      "url": "https://tsv-kerzers.clubdesk.com/willkommen",
+      "recordIds": [
+        "elki-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Additional check: New enrolment"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-1f0a3e8484b4",
+      "url": "https://www.refkirche-kerzers.ch/veranstaltung/58172",
+      "recordIds": [
+        "elki-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Additional check: Hall address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-7eb70a184082",
+      "url": "https://www.fr.ch/de/kub/app/bibliotheques/83",
+      "recordIds": [
+        "library-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Cantonal library: opening hours, charges and contacts"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-38f476175677",
+      "url": "https://www.winmedio.net/murten/api/images/imageopac/193",
+      "recordIds": [
+        "library-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Additional check: Open visit"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-a64d7f2af04b",
+      "url": "https://www.fr.ch/bcu/app/bibliotheques/31",
+      "recordIds": [
+        "library-courtepin"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Cantonal directory: public opening hours and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ceb2dd380bdc",
+      "url": "https://www.fr.ch/de/kub/app/bibliotheques/79",
+      "recordIds": [
+        "library-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Cantonal directory: collection, opening hours and subscription"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-77352c65b543",
+      "url": "https://www.fr.ch/bcu/app/bibliotheques/84",
+      "recordIds": [
+        "library-vully"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Cantonal directory: opening hours and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9ba107c2623c",
+      "url": "https://www.murten-morat.ch/ludothek",
+      "recordIds": [
+        "ludothek-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Municipal page: address, opening hours and format"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-97bf82d50c6e",
+      "url": "https://ludo-murten.ch/de/",
+      "recordIds": [
+        "ludothek-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Additional check: Holidays"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-08e477c85f9a",
+      "url": "https://www.dylan-bebesnageurs.ch/trouver-un-cours/courtepin",
+      "recordIds": [
+        "swim-courtepin-babies"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Operator: venue, session window and price"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e822eaaf636b",
+      "url": "https://www.dylan-bebesnageurs.ch/",
+      "recordIds": [
+        "swim-courtepin-babies"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Operator: age and parent participation"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-92c6ce7d4013",
+      "url": "https://piscinecourtepin.ch/de/kurse/",
+      "recordIds": [
+        "swim-courtepin-babies"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Pool: availability of the course and contact"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-7cc18ad95942",
+      "url": "https://www.dylan-bebesnageurs.ch/tarifs-et-abonnements",
+      "recordIds": [
+        "swim-courtepin-babies"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Additional check: Full price"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-6f2a564a6393",
+      "url": "https://www.papiliorama.ch/besuch/",
+      "recordIds": [
+        "papiliorama-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Official page: hours, prices and accompaniment"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-3ae46992dcec",
+      "url": "https://www.papiliorama.ch/faq/",
+      "recordIds": [
+        "papiliorama-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Additional check: Conditions inside"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d383fc85771a",
+      "url": "https://portail-jeunes.ch/bulles-familles/",
+      "recordIds": [
+        "bulles-familles-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Organisers: age, languages, venue and hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e3e511fa0ee4",
+      "url": "https://portail-jeunes.ch/wp-content/uploads/2026/06/Flyer_Bulles-Familles_NEU.pdf",
+      "recordIds": [
+        "bulles-familles-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Meeting programme"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-0a34312010a3",
+      "url": "https://portail-jeunes.ch/bulles%C2%B7familles/",
+      "recordIds": [
+        "bulles-familles-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Start of the 2026/27 programme"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-af67b682c114",
+      "url": "https://www.fr.ch/bcu/app/bibliotheques/35",
+      "recordIds": [
+        "library-cressier"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Cantonal directory: visitor hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ba901fba88ea",
+      "url": "https://portail-jeunes.ch/cheval-savant/",
+      "recordIds": [
+        "library-cressier"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Regional portal: hours and format"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-8ae79e00d314",
+      "url": "https://psmurten.ch/fr/bibliotheque/",
+      "recordIds": [
+        "library-cressier"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "School: hours for all visitors"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-b1f285c645fd",
+      "url": "https://www.ried.ch/de/veranstaltungen/dokumente/php4AFqfN_Kerzenziehen_2026.pdf",
+      "recordIds": [
+        "candles-ried-2026"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Organiser's notice: dates, age and price"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-aa674c21530e",
+      "url": "https://www.ried.ch/de/veranstaltungen/detail/detail.php?i=376",
+      "recordIds": [
+        "candles-ried-2026"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Municipal notice"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d5fd72385b9a",
+      "url": "https://fribourg.ch/de/regionmurtensee/outdoor-aktivitaeten/schatzsuche-durch-murten/",
+      "recordIds": [
+        "treasure-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Organiser: family route and price"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-575416b82f9f",
+      "url": "https://fribourg.ch/de/regionmurtensee/tourismusbueros/murten-tourismus/",
+      "recordIds": [
+        "treasure-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Tourist office hours by season"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9c4f1a6b56ef",
+      "url": "https://fribourg.ch/de/regionmurtensee/outdoor-aktivitaeten/karlas-gemuesetrail/",
+      "recordIds": [
+        "karla-gemuesetrail"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Organiser: period, length, price and start"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-a3223c683f49",
+      "url": "https://portail-jeunes.ch/wp-content/uploads/2026/09/2026-2_ATF_Courtepin_A4-F.pdf",
+      "recordIds": [
+        "ateliers-familles-courtepin"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "2026 programme: topics, dates, venue and registration"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-1865db4d9fc8",
+      "url": "https://www.educationfamiliale.ch/fr/activites-familles",
+      "recordIds": [
+        "ateliers-familles-courtepin"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Organiser: format of the workshops for adults and children"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-23c533687872",
+      "url": "https://www.ludo-pinocchio.ch/index.php/fr-fr/",
+      "recordIds": [
+        "ludo-pinocchio-courtepin"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Ludothèque: collection, address, hours and family format"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-27cf55d8fb6e",
+      "url": "https://courtepin.ch/societes-locales/",
+      "recordIds": [
+        "ludo-pinocchio-courtepin"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Municipal directory of associations"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-4eb5388042ec",
+      "url": "https://firstflow.wassererleben.ch/de/anmeldung/courseUid/58792/",
+      "recordIds": [
+        "firstflow-meyriez-2026"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "MINIS 2: age, date, times and price"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-8d15ebd87eac",
+      "url": "https://firstflow.wassererleben.ch/de/anmeldung/courseUid/58921/",
+      "recordIds": [
+        "firstflow-meyriez-2026"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "MINIS 4: age, date, times and price"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-68e575fc76d8",
+      "url": "https://firstflow.wassererleben.ch/de/anmeldung/courseUid/58535/",
+      "recordIds": [
+        "firstflow-meyriez-2026"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "MAXIS 3: age, date, times and adult participation"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-24a4975a956f",
+      "url": "https://firstflow.wassererleben.ch/de/kursorte/kursdetail/kanton/freiburg/locationName/hfr-meyriez-murten-ff/",
+      "recordIds": [
+        "firstflow-meyriez-2026"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Additional check: Age and format"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ff7424753d33",
+      "url": "https://www.gurmels.ch/freizeitaktivitaeten/8960",
+      "recordIds": [
+        "biberpfad-gurmels"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Gurmels municipality: route description and length"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d41189ec5b4e",
+      "url": "https://www.fraeschels.ch/gemeinde/natur-freizeit",
+      "recordIds": [
+        "waldlehrpfad-fraeschels"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Municipality: start of the trail, markings and booklet"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-6e2f520a117a",
+      "url": "https://fribourg.ch/fr/regionlacdemorat/randonnees-pedestres/le-sentier-botanique-du-mont-vully/",
+      "recordIds": [
+        "sentier-botanique-vully"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Regional tourism: family route, length and access"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d6ca3e55f65f",
+      "url": "https://fribourg.ch/de/regionmurtensee/outdoor-aktivitaeten/badeplatz-muntelier/",
+      "recordIds": [
+        "badeplatz-muntelier"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Regional tourism: public beach and facilities"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-06df401493b7",
+      "url": "https://mont-vully.ch/culture-loisirs/plages-places-de-jeux-pour-enfants",
+      "recordIds": [
+        "plage-praz-vully"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Municipality of Mont-Vully: beach and playground"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-5c8c6a46c932",
+      "url": "https://www.kerzers.ch/index.php/heute/agenda/kinder-und-jugendarbeit-regio-kerzers-spielkafi-1",
+      "recordIds": [
+        "spielkafi-kerzers-2026"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Municipal events calendar: date and time"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-0aec466fa631",
+      "url": "https://www.jugendarbeit-kerzers.ch/?page_id=3667",
+      "recordIds": [
+        "spielkafi-kerzers-2026"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Organiser: format for ages 6–99 and venue"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-a46722a58f71",
+      "url": "https://www.refkirche-kerzers.ch/?page=agenda&sucheDarstellung=agenda&sucheDarstellungTitel=Familien&sucheTyp=veranstaltungen&sucheZeitFenster=365&sucheZielgruppe=Familien",
+      "recordIds": [
+        "familienkonzert-kerzers-2026"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Organiser's poster: family concert, date and start time"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ee8591c809a3",
+      "url": "https://www.refkirche-kerzers.ch/veranstaltung/57758",
+      "recordIds": [
+        "familienkonzert-kerzers-2026"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Organiser: concert 12.12.2026, 16:00–17:00, Kerzers church"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-884e1027d541",
+      "url": "https://www.kerzers.ch/leben-kerzers/kirche",
+      "recordIds": [
+        "familienkonzert-kerzers-2026"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Municipal directory: contacts of the parish"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-a88a002257c4",
+      "url": "https://familybloom.ch/de/unsere-kurse/andere-kurse/family-yoga-eltern-kind-ab-2-jahren",
+      "recordIds": [
+        "familybloom-yoga"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Organiser: format and age"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-73f87fda0f6e",
+      "url": "https://familybloom.ch/de/ueber-uns/unsere-tarife",
+      "recordIds": [
+        "familybloom-yoga",
+        "familybloom-mini-move"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Organiser: contradictory tariff lines",
+        "Mini Move price list"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d8f404bcaefe",
+      "url": "https://www.familybloom.ch/de/ueber-uns/faq",
+      "recordIds": [
+        "familybloom-yoga",
+        "familybloom-mini-move"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Organiser: centre address",
+        "Centre address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-6162c2548982",
+      "url": "https://familybloom.ch/de/unsere-kurse/andere-kurse",
+      "recordIds": [
+        "familybloom-mini-move"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Current course catalogue: Mini Move"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-65e7d66e364a",
+      "url": "https://www.studiomusicale.ch/kurse",
+      "recordIds": [
+        "stimm-family"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Current course list: Murten"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-cfad0b8a36db",
+      "url": "https://www.studiomusicale.ch/infos-preise",
+      "recordIds": [
+        "stimm-family"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Fee and condition for forming a group"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f7a95acaabef",
+      "url": "https://www.studiomusicale.ch/",
+      "recordIds": [
+        "stimm-family"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "School address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-5970bccaddf2",
+      "url": "https://murten.unsereregion.ch/vermischtes/4211-musik-fur-klein-und-gross-im-studio-musicale.html",
+      "recordIds": [
+        "stimm-family"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Description of age and joint format in 2023"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-5722ff5ddc1c",
+      "url": "https://www.suniai-yoga.ch/eltern-kind-yoga/",
+      "recordIds": [
+        "suniai-family-yoga"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Organiser: age, dates, address, price and registration"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-fd46736f353a",
+      "url": "https://www.suniai-yoga.ch/stundenplan-und-preise/",
+      "recordIds": [
+        "suniai-family-yoga"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Organiser: monthly frequency and cancellation terms"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ca6138de43c9",
+      "url": "https://www.kibim.ch/krabbel-parcours/",
+      "recordIds": [
+        "kibim-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Organiser: format"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-b505abdfdd16",
+      "url": "https://www.kibim.ch/daten/",
+      "recordIds": [
+        "kibim-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Latest published dates 2025/26"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-c8f9859bffb1",
+      "url": "https://www.kibim.ch/adresse/",
+      "recordIds": [
+        "kibim-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Hall address and parking"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9b10946be50b",
+      "url": "https://www.schwimmbad-murten.ch/images/uploaded/Babyschwimmen%2026.1-Copy-1.pdf",
+      "recordIds": [
+        "baby-bade-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Poster of the completed course: age, format and rate"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-4138dc908142",
+      "url": "https://www.schwimmbad-murten.ch/de/imprint",
+      "recordIds": [
+        "baby-bade-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Pool operator: address and contacts"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-63b1cd101dcd",
+      "url": "https://www.gurmels.ch/freizeitaktivitaeten/28364",
+      "recordIds": [
+        "schlittschuh-gurmels"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Municipality: address, layout of the site and contacts"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-cf8a36667b74",
+      "url": "https://www.schlittschuh-arena-gurmels.ch/",
+      "recordIds": [
+        "schlittschuh-gurmels"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Operator's website: check opening and tariff"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-4219ee9f94d5",
+      "url": "https://www.miserycourtion.ch/wp-content/uploads/2025/04/Brochure-nouv.-habitants.pdf",
+      "recordIds": [
+        "gym-parents-misery"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Municipality: age, format, old time and contact"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-7fcf09cc2d0c",
+      "url": "https://mont-vully.ch/fileadmin/user_upload/Documents/MontVully/WWW/Users/CultureLoisirs/Manifestations_26-27_finalise.pdf",
+      "recordIds": [
+        "jeux-apav-vully-2026"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Municipal events listing: date, organiser and hall"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-0e52e2b4690e",
+      "url": "https://cs.mont-vully.ch/autorites-partenaires/apav",
+      "recordIds": [
+        "jeux-apav-vully-2026"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "APAV: family games events"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e78f93fd991a",
+      "url": "https://estabiblio.ch/nepourlire",
+      "recordIds": [
+        "ne-pour-lire-estavayer"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Library: age, dates and booking form"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-36ea2f95d515",
+      "url": "https://estabiblio.ch/",
+      "recordIds": [
+        "ne-pour-lire-estavayer",
+        "aef-estavayer-cafe"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Library: address and telephone"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ce2ba1c50094",
+      "url": "https://tockify.com/educationfamiliale/detail/779/1791185400000",
+      "recordIds": [
+        "ne-pour-lire-estavayer"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "AEF: programme and times"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-66cf6fb57eff",
+      "url": "https://estabiblio.ch/cafeparent",
+      "recordIds": [
+        "aef-estavayer-cafe"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Library: dates, age, format and participation"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d3a1f1ad4c53",
+      "url": "https://tockify.com/educationfamiliale/detail/778/1790667000000",
+      "recordIds": [
+        "aef-estavayer-cafe"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "AEF: time, address and series"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-4ad7acf4eb6d",
+      "url": "https://www.espacefamille.net/",
+      "recordIds": [
+        "espace-famille-bulle"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Format, hours, donation and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-7ff8e8321aea",
+      "url": "https://ludothequegruyere.ch/fritime-piccolo/",
+      "recordIds": [
+        "fritime-piccolo-bulle"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Age, days, free format and location"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9f0e2c8b83b2",
+      "url": "https://ludothequegruyere.ch/jouer-a-la-ludo/",
+      "recordIds": [
+        "fritime-piccolo-bulle",
+        "ludo-gruyere-bulle"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Exception for visitors without a subscription",
+        "On-site play, opening hours and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-cbf5c4ec1a65",
+      "url": "https://ludothequegruyere.ch/tarifs/",
+      "recordIds": [
+        "ludo-gruyere-bulle"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Membership and loan prices"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-5a41fb0f59bd",
+      "url": "https://fribourg.ch/fr/la-gruyere/activites-interieures/lentrepot-bloc-trampo-bar-et-restaurant/",
+      "recordIds": [
+        "entrepot-mini-bulle"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Tourism page: mini area, address, opening hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-64e37710bd03",
+      "url": "https://fribourg.ch/fr/la-gruyere/musees/maison-cailler-chocolaterie-suisse/",
+      "recordIds": [
+        "maison-cailler-broc"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Tourism: age-based prices, hours, address and languages"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-09e87a9b3e6a",
+      "url": "https://fribourg.ch/fr/la-gruyere/musees/la-maison-du-gruyere/?g=789&slug=fromage",
+      "recordIds": [
+        "maison-gruyere-pringy"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Tourism: prices, seasonal hours and production"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9f580b1dfeb3",
+      "url": "https://lamaisondespitchounes.ch/",
+      "recordIds": [
+        "pitchounes-romont"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Format, age, hours, free entry and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ab39770cf714",
+      "url": "https://ludotheque-glane.ch/fr/infos-pratiques",
+      "recordIds": [
+        "ludo-glane-romont"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Current hours, prices, address and directions"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-4c45481918e8",
+      "url": "https://ludotheque-glane.ch/fr/",
+      "recordIds": [
+        "ludo-glane-romont"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Game catalogue and format"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-0a625a813af6",
+      "url": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+      "recordIds": [
+        "library-glane-romont"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Current hours, address, directions and rates"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f0ca2f28f164",
+      "url": "https://fribourg.ch/fr/romontregion/musees/les-enfants-au-vitromusee/",
+      "recordIds": [
+        "vitromusee-romont"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Children's space and game tasks"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-44ec53cd4004",
+      "url": "https://fribourg.ch/fr/romontregion/musees/vitromusee-romont/",
+      "recordIds": [
+        "vitromusee-romont"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Entry, address and opening hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-0ef2efee9f0d",
+      "url": "https://fribourg.ch/fr/romontregion/nature/la-gouille/",
+      "recordIds": [
+        "gouille-romont"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Route, playground, address and pushchair access"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-c4e0105ea453",
+      "url": "https://fribourg.ch/fr/romontregion/activites-en-plein-air/place-de-jeux-a-la-tour-a-boyer/",
+      "recordIds": [
+        "tour-boyer-playground"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Location and presence of the playground"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f487545b34cc",
+      "url": "https://fribourg.ch/fr/romontregion/randonnees-pedestres/le-sentier-des-fees/",
+      "recordIds": [
+        "fees-chapelle"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Length, ascent, start and equipment"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-c0098f28713e",
+      "url": "https://www.fsgestavayer.ch/?page_id=34",
+      "recordIds": [
+        "fsg-elki-lully"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Age, class and contact"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-3e9b6f088558",
+      "url": "https://www.fsgestavayer.ch/?page_id=53",
+      "recordIds": [
+        "fsg-elki-lully"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "2026/27 fee and registration"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e7914a0495b0",
+      "url": "https://www.fr.ch/bcu/app/bibliotheques/40",
+      "recordIds": [
+        "library-estavayer"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Cantonal directory: corner, collection, opening hours and contact"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-3279a2ee14d7",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/patrimoine-et-terroir/village-lacustre-de-gletterens/",
+      "recordIds": [
+        "village-lacustre-gletterens"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Season, tariff, address and format"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-8510b1fc2eeb",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/plages/la-nouvelle-plage/",
+      "recordIds": [
+        "nouvelle-plage-estavayer"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Site, facilities, address and access"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f62cbe2053da",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/",
+      "recordIds": [
+        "plage-portalban"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Site, facilities, parking and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-21939d24c587",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/musees/musee-destavayer-le-lac-et-ses-grenouilles/",
+      "recordIds": [
+        "musee-grenouilles-estavayer"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Exhibition, rate, hours and contact"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-263d6c892542",
+      "url": "https://ludo-latrottinette.ch/infos-pratiques/",
+      "recordIds": [
+        "ludo-trottinette-chatel"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Opening hours, on-site play, prices and availability"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-1f8a7d1912a5",
+      "url": "https://ludo-latrottinette.ch/",
+      "recordIds": [
+        "ludo-trottinette-chatel"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Calendar and events"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-27e8d7d692bf",
+      "url": "https://fribourg.ch/fr/les-paccots/boutiques/bibliotheque-publique-de-la-veveyse/",
+      "recordIds": [
+        "library-veveyse-chatel"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Books, opening hours, prices and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-2111e2bec575",
+      "url": "https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/culture-sport-et-loisirs/sport/piscine-communale",
+      "recordIds": [
+        "piscine-chatel"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Rule for under 7, pools, tariff and link to hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-b72c86b40e60",
+      "url": "https://fribourg.ch/fr/les-paccots/buvettes-alpage/cabane-du-petit-oiseau/",
+      "recordIds": [
+        "rathvel-petit-oiseau"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Mini zoo, train, season, opening hours and contact"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-079e1bd66e49",
+      "url": "https://fribourg.ch/fr/la-gruyere/buvettes-alpage/buvette-des-gros-chaumiaux/",
+      "recordIds": [
+        "gros-chaumiaux-cerniat"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Season, playground, animals, address and opening hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-a1a9dedf9c3a",
+      "url": "https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/la-saison-dalpage-vounetz/",
+      "recordIds": [
+        "saison-alpage-charmey"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Age, six play areas, entry and lift fare"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-5f4f61a1dcc2",
+      "url": "https://fribourg.ch/fr/romontregion/agritourisme/ferme-verte-vallee/",
+      "recordIds": [
+        "ferme-verte-vallee-vuisternens"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Activity themes, individual visit, address and contact"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-b07315b67a69",
+      "url": "https://www.fr.ch/bcu/app/bibliotheques/37",
+      "recordIds": [
+        "library-domdidier"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Cantonal directory: children's collection, opening hours, subscription"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-3d33ec760f44",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-cheyres/",
+      "recordIds": [
+        "plage-cheyres"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Play area, shade, services, access and seasonal rules"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-61ee6cc3012c",
+      "url": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-botanique-attalens/",
+      "recordIds": [
+        "botanique-attalens"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Route, duration, start and accessibility"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-b15f006852f9",
+      "url": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/parcours-vita-chatel-st-denis/",
+      "recordIds": [
+        "vita-chatel"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Year-round access, price, start and route"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e6c378e02377",
+      "url": "https://fribourg.ch/fr/la-gruyere/buvettes-alpage/buvette-des-sapins/",
+      "recordIds": [
+        "buvette-sapins-epagny"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Playground, address, season and published hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-4119b852d6d7",
+      "url": "https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/sentier-sylvicole-du-parc-dhumilimont/",
+      "recordIds": [
+        "humilimont-marsens"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Family route, playground, deer and pushchair"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f03eee8f91bf",
+      "url": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-des-lutins/",
+      "recordIds": [
+        "lutins-paccots"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Length, climb, route, parking and pushchair restriction"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-98ed704bbf3e",
+      "url": "https://epicentre-glane.ch/fr/piscine.php",
+      "recordIds": [
+        "epicentre-pataugeoire-romont"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Shallow pool, hours, prices and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-72e5f5b657d4",
+      "url": "https://epicentre-glane.ch/fr/faq.php",
+      "recordIds": [
+        "epicentre-pataugeoire-romont"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Free entry under 6"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-1c1ef6c30dbd",
+      "url": "https://epicentre-glane.ch/content/documents/epicentre_piscine_reglement_signe_20200401.pdf",
+      "recordIds": [
+        "epicentre-pataugeoire-romont"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Constant supervision in the children's pool"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-2d8f717316b2",
+      "url": "https://www.fsg-domdidier.ch/groupes/parents-enfants/",
+      "recordIds": [
+        "fsg-domdidier-parent"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Age, full group, schedule, fee and leader"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-c44465f4fd31",
+      "url": "https://fsgchatel.ch/enfants/",
+      "recordIds": [
+        "fsg-chatel-parent-remaufens"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Season, day, time, format, leader and three trial sessions"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-074eb6b886ac",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-font/",
+      "recordIds": [
+        "font-beach"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Beach, address and conditions"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-b1c68280d300",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-gletterens/",
+      "recordIds": [
+        "gletterens-beach"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Facilities, directions and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9dacff20b64a",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-des-lacustres/",
+      "recordIds": [
+        "lacustres-beach"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Beach type, address and facilities"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-251ffeea93f8",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/",
+      "recordIds": [
+        "forel-beach"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Shore, equipment and access"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-119c0a256bf3",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/musees/musee-romain-de-vallon/",
+      "recordIds": [
+        "vallon-museum"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Exhibition, hours and contact"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9fb209ea51f4",
+      "url": "https://fribourg.ch/wp-content/uploads/2025/03/Info-guide-2026_web.pdf",
+      "recordIds": [
+        "vallon-museum"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Conflicting printed tariff"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-3cfd8382b525",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/nature/sentier-nature-de-la-moliere/",
+      "recordIds": [
+        "moliere-trail"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Start, duration and free entry"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-57f2646e98a8",
+      "url": "https://www.j3l.ch/en/P197443/things-to-do/sport-leisure/sports-leisure/fun4all",
+      "recordIds": [
+        "fun4all-sevaz-kids"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Tourism portal 2026 confirms Kids Park"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-482f54756945",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/activites-interieures/fun4all-sevaz/",
+      "recordIds": [
+        "fun4all-sevaz-kids"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Address and general opening hours of the centre"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d34fab715fbd",
+      "url": "https://www.loisirs.ch/activite/fun4all-un-paradis-du-divertissement-a-sevaz-fr/",
+      "recordIds": [
+        "fun4all-sevaz-kids"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Secondary Kids Park tariff, April 2026"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-029d4b639266",
+      "url": "https://fribourg.ch/fr/la-gruyere/restaurants/restaurant-le-pic-vert/",
+      "recordIds": [
+        "pic-vert-grandvillard"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Large playground, address and opening hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-1113f5665b7f",
+      "url": "https://fribourg.ch/fr/la-gruyere/restaurants/cafe-restaurant-de-laerodrome/",
+      "recordIds": [
+        "aerodrome-epagny-play"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Large play area, terrace and opening hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-72b50d4b17f9",
+      "url": "https://fribourg.ch/fr/la-gruyere/piscines/piscine-couverte-de-charmey/",
+      "recordIds": [
+        "charmey-family-pool"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Pools, prices, age and hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-98685a37d45b",
+      "url": "https://fribourg.ch/fr/la-gruyere/piscines/piscine-communale-de-broc/",
+      "recordIds": [
+        "broc-outdoor-pool"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Children's pool, season and tariff"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-07ca8e5ed672",
+      "url": "https://fribourg.ch/fr/la-gruyere/plages/plage-a-gumefens/",
+      "recordIds": [
+        "gumefens-beach"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Shore, access and parking"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-5405d80d08ab",
+      "url": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/",
+      "recordIds": [
+        "morlon-beach"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Public beach, shade and buvette"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-719c67de2f33",
+      "url": "https://fribourg.ch/wp-content/uploads/2022/01/Places-de-pique-nique.pdf",
+      "recordIds": [
+        "clos-cerfs-gruyeres",
+        "urquier-albeuve",
+        "quatre-sapins-bulle",
+        "cresuz-village-play",
+        "enney-sarine-play",
+        "saudillet-grandvillard",
+        "chateau-neuf-jaun",
+        "le-brand-la-roche",
+        "sautaux-le-paquier",
+        "thusy-pont-la-ville"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Directory of playgrounds, data from 2020",
+        "Tourist list of picnic sites, 22.06.2020",
+        "Tourist list of picnic places, 22.06.2020"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-15d449ec8210",
+      "url": "https://fribourg.ch/fr/romontregion/musees/les-enfants-au-musee-du-papier-peint/",
+      "recordIds": [
+        "papier-peint-mezieres"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Children's activities and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ca07f59cbc3f",
+      "url": "https://fribourg.ch/fr/romontregion/musees/musee-du-papier-peint/",
+      "recordIds": [
+        "papier-peint-mezieres"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Opening hours and prices"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-973d895d532c",
+      "url": "https://fribourg.ch/fr/les-paccots/places-de-pique-nique/place-de-jeux-du-montilier-remaufens/",
+      "recordIds": [
+        "montilier-remaufens"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Playground, equipment and access"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-2f4f9d64feec",
+      "url": "https://fribourg.ch/fr/les-paccots/activites-en-plein-air/zone-recreative-des-paccots/",
+      "recordIds": [
+        "paccots-recreation"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Renovation and the accessible part of the site"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-429ac0656158",
+      "url": "https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-petites-rames/",
+      "recordIds": [
+        "petites-rames-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Equipment and location"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e7744e1ecff1",
+      "url": "https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-derriere-les-jardins-auge/",
+      "recordIds": [
+        "auge-gardens-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Equipment and location"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-02f3671c4ad9",
+      "url": "https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-grand-places/",
+      "recordIds": [
+        "grand-places-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Equipment and location"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-42df2a2338af",
+      "url": "https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-domino-semiramis/",
+      "recordIds": [
+        "domino-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Play equipment and bus stop"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ebda43b2a3df",
+      "url": "https://fribourg.ch/fr/fribourg/musees/musee-suisse-de-la-marionnette/",
+      "recordIds": [
+        "marionnettes-fribourg"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Interactive area, prices, hours and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-2b98aea3eb7c",
+      "url": "https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-nant/",
+      "recordIds": [
+        "nant-beach"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Beach, playground and contact"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-39550ca81890",
+      "url": "https://fribourg.ch/fr/schwarzsee/campings/camping-seeweid/",
+      "recordIds": [
+        "seeweid-play"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Playground, address and campsite opening arrangements"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ef9e6791a8d0",
+      "url": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/parc-animalier-jeuss/",
+      "recordIds": [
+        "jeuss-animal-park"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Animals, playground, free entry and access"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-a5b3e39d2519",
+      "url": "https://fribourg.ch/fr/les-paccots/patrimoine-et-terroir/ludotheque-papayou/",
+      "recordIds": [
+        "papayou-attalens"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Format, hours and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-23ea06b45a5e",
+      "url": "https://fribourg.ch/fr/regionlacdemorat/piscines/piscine-couverte-piscine-et-plage-morat/",
+      "recordIds": [
+        "murten-family-pool"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Pool, family area, address, hours and tariff"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f6a20d87daa9",
+      "url": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/pflueck-dis-glueck/",
+      "recordIds": [
+        "pflueck-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Picking, hens, opening hours and payment"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-c86b5f376257",
+      "url": "https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-motier/",
+      "recordIds": [
+        "motier-beach"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Beach, shower and toilet"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-42165d494bfa",
+      "url": "https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-sugiez/",
+      "recordIds": [
+        "sugiez-beach"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Public beach and facilities"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-5b6007ee357e",
+      "url": "https://fribourg.ch/fr/regionlacdemorat/plages/plages-a-la-pointe-de-greng/",
+      "recordIds": [
+        "grengspitz-beaches"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Access to the shore from Meyriez"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-b155326f6b38",
+      "url": "https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-ecole-de-la-neuveville/",
+      "recordIds": [
+        "neuveville-school-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Playground and equipment"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-62251526a5cf",
+      "url": "https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/a-la-decouverte-de-la-foret-de-bouleyres/",
+      "recordIds": [
+        "quatre-sapins-bulle"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "The current tourist page confirms the 4 Sapins site"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-afad00d87772",
+      "url": "https://www.bas-intyamon.ch/vie-locale-et-tourisme/places-de-loisirs",
+      "recordIds": [
+        "enney-sarine-play"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Additional check: Address and public access"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d9f25f99d230",
+      "url": "https://fribourg.ch/fr/la-gruyere/places-de-pique-nique/chapelle-thusy/",
+      "recordIds": [
+        "thusy-pont-la-ville"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Additional check: Address and facilities"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-c2634c319b78",
+      "url": "https://fribourg.ch/fr/romontregion/restaurants/auberge-du-lion-dor-siviriez/",
+      "recordIds": [
+        "lion-or-siviriez"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Tourism: playground, address and hours 2026"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-6436f214f83b",
+      "url": "https://fribourg.ch/fr/romontregion/buvettes-alpage/buvette-du-defenant/?city=Fribourg&lang=fr",
+      "recordIds": [
+        "defenant-grangettes"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Tourism: playground, address and contact"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ab4058821bbd",
+      "url": "https://fribourg.ch/wp-content/uploads/2026/02/Brochure_Gen_Romont_2026_Final_light.pdf",
+      "recordIds": [
+        "defenant-grangettes",
+        "villaz-lussy-small-loop"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "2026 brochure: different address and closed on Tuesday",
+        "2026 brochure places the loop in Villaz"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-17cc8481790d",
+      "url": "https://fribourg.ch/fr/fribourg/restaurants/la-tomate/",
+      "recordIds": [
+        "la-tomate-matran"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Tourism: playground, address and hours 2026"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-63af91ae4b5a",
+      "url": "https://auxptitesbottes.ch/visite-des-animaux-2/",
+      "recordIds": [
+        "ptites-bottes-family-visit"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Organiser: content, hour, price and booking"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-4091d546ea3c",
+      "url": "https://auxptitesbottes.ch/",
+      "recordIds": [
+        "ptites-bottes-family-visit"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Organiser: age for the individual format"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-8c88c917163b",
+      "url": "https://auxptitesbottes.ch/contact/",
+      "recordIds": [
+        "ptites-bottes-family-visit",
+        "ptites-bottes-mamans"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Contact and days by appointment",
+        "Contact and how to book"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-24a8becd7931",
+      "url": "https://auxptitesbottes.ch/votre-moment-magique/",
+      "recordIds": [
+        "ptites-bottes-mamans"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Organiser: format, age, time and price"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e45ae57fd25d",
+      "url": "https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/parc-de-loisirs-moleson/",
+      "recordIds": [
+        "moleson-village-play"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Village playground and separate summer attractions"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-802d1232166f",
+      "url": "https://fribourg.ch/fr/romontregion/nature/foret-de-boulogne/",
+      "recordIds": [
+        "boulogne-forest-play"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Playground and picnic in the Boulogne forest"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-3a766931cbe5",
+      "url": "https://fribourg.ch/fr/romontregion/randonnees-pedestres/chutes-de-chavannettes/",
+      "recordIds": [
+        "chavannettes-rue"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Route to the waterfall and access safety"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-a20995992d60",
+      "url": "https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/communication/actualites-communales/la-boite-sympa-quitte-la-place-de-jeux-du-grand-clos",
+      "recordIds": [
+        "grand-clos-chatel-play"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Municipality: playground and closure of the Boîte Sympa"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-bd7684996b9f",
+      "url": "https://fribourg.ch/fr/les-paccots/activites-en-plein-air/petanque-b/",
+      "recordIds": [
+        "grand-clos-chatel-play"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Tourism: playground and pétanque"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-6a4d47a23fc5",
+      "url": "https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/realisations-en-cours-et-projets/ancienne-ecole-de-fruence",
+      "recordIds": [
+        "fruence-play"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Municipality: playground by the former school"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-2a3efc6bb64d",
+      "url": "https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/culture-sport-et-loisirs/loisirs",
+      "recordIds": [
+        "fruence-play"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Municipality: play area and BoxUp"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-03f65c657598",
+      "url": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-traina-manchou-semsales/",
+      "recordIds": [
+        "traina-manchou-semsales"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Family educational trail, approach and parking"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ac6d676762d5",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/places-de-pique-nique/place-de-pique-nique-cugy-fr/",
+      "recordIds": [
+        "cugy-forest-play"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Tourism: play area, fireplace, shelter and the need to book"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d348f0b9272a",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/randonnees-pedestres/les-arbognes/",
+      "recordIds": [
+        "montagny-arbognes"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Tourism: start, dragon, 6 km, elevation gain and transport"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f92db7c55f56",
+      "url": "https://www.ursy.ch/ecole/ecole-maternelle",
+      "recordIds": [
+        "ursy-maternelle"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Commune: format, registration and Wednesday opening"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-34b547488903",
+      "url": "https://www.ursy.ch/fileadmin/user_upload/Sante_et_social/Petite_enfance/Maternelle_information_journee-encadrante.pdf",
+      "recordIds": [
+        "ursy-maternelle"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Schedule, staff and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f6c576f07efb",
+      "url": "https://www.ursy.ch/fileadmin/user_upload/Sante_et_social/Petite_enfance/La_Maternelle_-_projet_pedagogique.pdf",
+      "recordIds": [
+        "ursy-maternelle"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Pedagogy and how the child is handed over"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f3443b40d6f1",
+      "url": "https://www.maisondespetits.com/",
+      "recordIds": [
+        "maison-petits-villarlod"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Organiser: age, group, address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-fc51627ba06c",
+      "url": "https://www.maisondespetits.com/ateliers",
+      "recordIds": [
+        "maison-petits-villarlod"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Organiser: days and format"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d20fd0ceb50d",
+      "url": "https://www.maisondespetits.com/inscription-et-tarifs",
+      "recordIds": [
+        "maison-petits-villarlod"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "2026/27 rates and registration"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9d24d4be4e27",
+      "url": "https://crossiety.app/groups/1274",
+      "recordIds": [
+        "elki-schmitten-treff"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Public page of the ELKI Schmitten group"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-abe72dbb53da",
+      "url": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/les-vestiges-de-bossonnens-sentier-didactique/",
+      "recordIds": [
+        "bossonnens-vestiges"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Tourism: family trail, distance and pushchair"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-62ccfcfdb24e",
+      "url": "https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/au-pays-des-legendes-de-la-gruyere/",
+      "recordIds": [
+        "echarlens-legendes"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Tourism: illustrated legends, route options and map"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9025b8ce1887",
+      "url": "https://www.pronatura-fr.ch/de/naturschutzgebiet-auried",
+      "recordIds": [
+        "auried-kleinboesingen"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Site owner: trail, access and rules"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-39cbb1e913df",
+      "url": "https://fribourg.ch/de/schwarzsee/restaurants/gasthof-zum-schlussel/",
+      "recordIds": [
+        "ueberstorf-schluessel-play"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Tourism: playground, terrace, weekends"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-b9bdf6c75cab",
+      "url": "https://fribourg.ch/de/schwarzsee/picknickplaetze/feuerstelle-wunnewil-staffelsholz/",
+      "recordIds": [
+        "wunnewil-staffelsholz"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Tourism: family fireplace, firewood and grill"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-2407e529d46a",
+      "url": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-a-tire-dailes-le-cret/",
+      "recordIds": [
+        "verrerie-tire-ailes"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Tourism: interactive trail, address, access and length"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e8d9290fdb33",
+      "url": "https://fribourg.ch/fr/fribourg/activites-en-plein-air/boucle-hauterive-la-souche/",
+      "recordIds": [
+        "hauterive-souche-family"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Tourism: family loop, 3.12 km, card and price"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d133ea82e88e",
+      "url": "https://fribourg.ch/wp-content/uploads/2026/03/Fribourg-Tourisme_City-guide-2026_web.pdf",
+      "recordIds": [
+        "hauterive-souche-family"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "2026 guide: six stands and on-site card purchase"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ab07f84207fb",
+      "url": "https://fribourg.ch/fr/fribourg/places-de-pique-nique/place-de-pique-nique-belfaux/",
+      "recordIds": [
+        "belfaux-forest-picnic"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Tourism: free site, benches, fireplace and net"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-155fb137eacc",
+      "url": "https://fribourg.ch/fr/fribourg/evenements/marche-dautomne-a-grolley/",
+      "recordIds": [
+        "grolley-autumn-market-2026"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Tourism: date, place, games and contact"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-c329c9d6f532",
+      "url": "https://courgevaux.ch/images/pdf/Compte-00-01-sig_FR.pdf",
+      "recordIds": [
+        "courgevaux-school-play"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Municipal report: playground and deferred maintenance"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-0c18fff8435f",
+      "url": "https://tsv-heitenried.ch/angebot/elki/",
+      "recordIds": [
+        "elki-heitenried"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Club: youth sport format and email"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-cf2341580fe5",
+      "url": "https://tsv-heitenried.ch/wp-content/uploads/2026/09/ElKi-Start-2026_A4.pdf",
+      "recordIds": [
+        "elki-heitenried"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Poster 2026/27: start, times, hall, age and telephone"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-7bf6844b85e5",
+      "url": "https://tsv-wuennewil.ch/verein/gruppen/vorschulturnen",
+      "recordIds": [
+        "elki-wuennewil"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Club: joint format, day, time and hall"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e48f939dcd75",
+      "url": "https://tsv-wuennewil.ch/news",
+      "recordIds": [
+        "elki-wuennewil"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Club: announcement of enrolment in summer 2026"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9b998619f263",
+      "url": "https://fribourg.ch/de/schwarzsee/outdoor-aktivitaeten/tennisclub-plasselb-und-umgebung/",
+      "recordIds": [
+        "plasselb-tennisbuvette-play"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Tourism: buvette, terrace, playground and days"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-1d16dd9c5bfd",
+      "url": "https://www.heitenried.ch/_doc/6343472",
+      "recordIds": [
+        "heitenried-schloss-play"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Municipal budget 2026: existing playground and fencing"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-21bcb530ac6d",
+      "url": "https://villorsonnens.ch/location-salles/",
+      "recordIds": [
+        "villorsonnens-forest-cabin-play"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Commune: playground by the forest hut and rental conditions"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-1e44fb79d42e",
+      "url": "https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/chemin-des-sculptures/",
+      "recordIds": [
+        "sorens-sculpture-trail"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Tourism: 3 km, 45 minutes, sculptures, pushchair and stop"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-0d2c7d9e5849",
+      "url": "https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/centre-de-location-et-dinitiation-ski-de-fond/",
+      "recordIds": [
+        "riaz-crosscountry-rental"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Tourism: children's rental, season and indicative hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-3e48a52ca2a9",
+      "url": "https://commune-sales.ch/wp-content/uploads/2024/03/Reglement-communal_Centre-sportif_Utilisation_Des-2024_signe.pdf",
+      "recordIds": [
+        "sales-sport-playground"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Commune: playground, slide, swings, shelter and car park"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-dfd12b62fefe",
+      "url": "https://fribourg.ch/fr/fribourg/randonnees-pedestres/randonnee-corminboeuf-faune-et-flore/",
+      "recordIds": [
+        "corminboeuf-fauna-walk"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Tourism: family loop, animals, length and GPX"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-cee5b57d4abc",
+      "url": "https://www.bruenisried.ch/vorschulalter.php",
+      "recordIds": [
+        "bruenisried-forest-playgroup"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Commune: name of the forest group and contact details in the listing"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-bf3074db6012",
+      "url": "https://leflon.ch/vie-locale/sport",
+      "recordIds": [
+        "leflon-heron-trail",
+        "leflon-bouloz-playground"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Commune: Pont trail and children's stops",
+        "Commune: Bouloz playground in the Esserts forest"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-7ec0b041f18a",
+      "url": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/heron/",
+      "recordIds": [
+        "leflon-heron-trail"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Tourism: description and incorrect directions"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-7a588f02a9b1",
+      "url": "https://les-montets.ch/sports-loisirs-culture/sports",
+      "recordIds": [
+        "montets-vita-forest"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Commune: forest route across the Petite Glâne"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-78f6e2cd5cd0",
+      "url": "https://www.vallon.ch/fr/services/sante-et-social/enfants",
+      "recordIds": [
+        "saint-aubin-ptits-pruneaux"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Commune: age, format, address and registration"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-eeb8cedbfd14",
+      "url": "https://www.vallon.ch/images/services/Enfants/Tarifs_garderie_01_08_2026.pdf",
+      "recordIds": [
+        "saint-aubin-ptits-pruneaux"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Rates from 01.08.2026"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-dbbc57907728",
+      "url": "https://www.kidsnatation.ch/accueil-2/",
+      "recordIds": [
+        "billens-kids-natation"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Operator: age, parent, price and trial block"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-18b67868cf39",
+      "url": "https://www.kidsnatation.ch/contact/",
+      "recordIds": [
+        "billens-kids-natation"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Operator: pool address and contact"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-df61783d5462",
+      "url": "https://chatillon-broye.ch/",
+      "recordIds": [
+        "chatillon-broye-play"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Commune: active playground in the village"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-4ecb114f2116",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/places-de-pique-nique/place-de-pique-nique-surpierre/",
+      "recordIds": [
+        "surpierre-forest-picnic"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Tourism: table and fireplace by the forest, no booking"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-162b1b224315",
+      "url": "https://fetigny-menieres.ch/administration-services/administration-services-reservation-infrastructures/",
+      "recordIds": [
+        "fetigny-peralles-picnic"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Commune: access, equipment and free booking"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-80b50d0cb7e7",
+      "url": "https://fetigny-menieres.ch/contact/",
+      "recordIds": [
+        "fetigny-peralles-picnic"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Commune: telephone and email"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-613cd1f9ab78",
+      "url": "https://bon-cadeau.gastrofribourg.ch/fr/shops/auberge-de-l-union",
+      "recordIds": [
+        "chez-betty-massonnens"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "GastroFribourg: address, telephone and restaurant"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-6ff67de46a77",
+      "url": "https://www.realdeals.ch/menu-cote-de-boeuf-avec-salade-dessert-du-chef-et-verre-de-vin-des-2-personnes",
+      "recordIds": [
+        "chez-betty-massonnens"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Archived promotion until 2023: terrace and children's playground"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-a1efffa8aa98",
+      "url": "https://lacarte.menu/restaurants/massonnens/chez-betty-2",
+      "recordIds": [
+        "chez-betty-massonnens"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Directory 2026: telephone and presence of the restaurant"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-7644efe197cb",
+      "url": "https://trip-trap-marly.ch/fr/offre-prix/",
+      "recordIds": [
+        "trip-trap-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Organiser: 2026/27 season, age, group size, hours and fee"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-609a9b87cf66",
+      "url": "https://trip-trap-marly.ch/fr/philosophie-en-francais/",
+      "recordIds": [
+        "trip-trap-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Organiser: German-French environment and play sessions"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-c966d40746b6",
+      "url": "https://trip-trap-marly.ch/contact-us/",
+      "recordIds": [
+        "trip-trap-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Organiser: address and email"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-6831051e3cdf",
+      "url": "https://trip-trap-marly.ch/fr/lequipe/",
+      "recordIds": [
+        "trip-trap-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Organiser: profiles of the group leaders"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-0924b59f2174",
+      "url": "https://www.studiodansebulle.com/kids-ados",
+      "recordIds": [
+        "zumba-mini-bulle"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Studio: Zumba Mini 2–4 years, 45 minutes and registration"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-1578c169e44e",
+      "url": "https://www.studiodansebulle.com/tarifs",
+      "recordIds": [
+        "zumba-mini-bulle"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Studio: children's pass and single-class rate"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-6e1774ea170f",
+      "url": "https://www.studiodansebulle.com/planning",
+      "recordIds": [
+        "zumba-mini-bulle"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Studio: weekly timetable for Zumba Mini"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-146da7b04c28",
+      "url": "https://www.realsport.ch/fr/references/botterens-espace-ludique",
+      "recordIds": [
+        "botterens-village-play"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Contractor: construction and handover of the playground in 2023"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-89655e84d06d",
+      "url": "https://www.mobiliere.ch/agences-generales/bulle/botterens-soutien-de-la-mobiliere-en-faveur-de-la-place-de-jeux",
+      "recordIds": [
+        "botterens-village-play"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Sponsor: play equipment and a location in the village centre"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-72ce936cf68d",
+      "url": "https://www.hauteville.ch/culture-et-loisirs/salle-communale-otavela",
+      "recordIds": [
+        "hauteville-otavela-play"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Commune: playground, sports ground and car park"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-20f09531865d",
+      "url": "https://www.bulledeculture.ch/description-des-salles/salle-otavela",
+      "recordIds": [
+        "hauteville-otavela-play"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Regional venue catalogue: OTAVELA address and playground"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-2b409407d79b",
+      "url": "https://corbieres.ch/lac-et-montagne/",
+      "recordIds": [
+        "corbieres-montagnetta"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Commune: shore, picnic tables and grill"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-88d22ec9b3ff",
+      "url": "https://www.vuadens.ch/generalites/tourisme-et-loisirs/",
+      "recordIds": [
+        "vuadens-witches-trail"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Commune: 6 km, parking and start"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-18775c744ed9",
+      "url": "https://www.vuadens.ch/wp-content/uploads/2025/05/2.-Commune-Rapport-de-gestion-2024.pdf",
+      "recordIds": [
+        "vuadens-witches-trail"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Commune: route maintenance costs"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f122b9feb539",
+      "url": "https://fribourg.ch/fr/romontregion/randonnees-pedestres/circuit-parcours-de-la-montage-de-lussy-petit/",
+      "recordIds": [
+        "villaz-lussy-small-loop"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Tourism: family loop of 3 km, 45 minutes and a pond"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ead295f5894c",
+      "url": "https://www.saint-martin-fr.ch/structure-daccueil-de-la-petite-enfance/",
+      "recordIds": [
+        "saint-martin-besencens-atelier"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Commune: age, place and contact"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9845287d1eb6",
+      "url": "https://par-chez-nous.ch/places/parc-dautigny/",
+      "recordIds": [
+        "autigny-park"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Sarine regional association: play, picnic, WC and access"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-7f2fc38cd922",
+      "url": "https://par-chez-nous.ch/places/parc-en-simon/",
+      "recordIds": [
+        "neyruz-les-simon"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Sarine regional association: 2025 update, play and walks"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-c9391bd21b0a",
+      "url": "https://www.neyruz.ch/fileadmin/neyruz/Administrations_et_services/pdf/Place_de_jeux_des_Simon.pdf",
+      "recordIds": [
+        "neyruz-les-simon"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Municipality: former playground dismantled in 2024"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-950a927e1030",
+      "url": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/",
+      "recordIds": [
+        "chenens-sport-park"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Sarine regional association: playground, access and closed mini-golf"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-0cfa48ef68b4",
+      "url": "https://par-chez-nous.ch/places/place-de-jeux-de-ferpicloz/",
+      "recordIds": [
+        "ferpicloz-playground"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Sarine regional association: play modules and access"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9cb9aaf80aa9",
+      "url": "https://par-chez-nous.ch/places/ecole-de-treyvaux/",
+      "recordIds": [
+        "treyvaux-school-park"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Sarine regional association: playground, picnic and sport"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-b2433f8da006",
+      "url": "https://par-chez-nous.ch/places/ecole-donnens/",
+      "recordIds": [
+        "onnens-school-park"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Sarine regional association: playground for young children and access"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-1dafe141819c",
+      "url": "https://labrillaz.ch/wp-content/uploads/2026/04/Rapport_gestion_2025_approuve_CC_23.03.2026_correctif.pdf",
+      "recordIds": [
+        "onnens-school-park"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Municipality: playground renovation in 2025"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-50a810209391",
+      "url": "https://par-chez-nous.ch/places/ecole-de-prez-vers-noreaz/",
+      "recordIds": [
+        "prez-school-park"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Sarine regional association: school playground and sport"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-cdeba8d49bd7",
+      "url": "https://par-chez-nous.ch/places/place-de-larche/",
+      "recordIds": [
+        "arconciel-arche-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Sarine regional association: playground, address and access"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ce55961982e7",
+      "url": "https://www.vaulruz.ch/tourisme/cabane-des-tourbieres/",
+      "recordIds": [
+        "vaulruz-football-play"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Commune: playground and fitness urbain next to the car park"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e948d494aca4",
+      "url": "https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/tour-du-lac-de-montsalvens/",
+      "recordIds": [
+        "montsalvens-lakeside-walk"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Tourism: family route and stop"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-43ecce0d19fd",
+      "url": "https://fribourg.ch/wp-content/uploads/2021/11/places-de-pique-nique-en-gruyere.pdf",
+      "recordIds": [
+        "montsalvens-lakeside-walk"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Tourism: access to the shore and picnic area from the Châtel side"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-45bc28f86157",
+      "url": "https://granges.org/sdg50/",
+      "recordIds": [
+        "granges-veveyse-play"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Local society: playground during the 2024 festival"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-02f58cb945a3",
+      "url": "https://www.stsilvester.ch/spielgruppe.html",
+      "recordIds": [
+        "st-silvester-spielgruppe"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Commune: age, location, private organiser and contact"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-0eb52cda369e",
+      "url": "https://par-chez-nous.ch/places/parc-de-lecole-de-cottens/",
+      "recordIds": [
+        "cottens-school-park"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Sarine regional association: playground, access and park"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-aded68279251",
+      "url": "https://cottens-fr.ch/wp-content/uploads/2021/10/2017-12-12_assemblee_budgets_2018.pdf",
+      "recordIds": [
+        "cottens-school-park"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Commune: playground next to the school and place rouge"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d72ace1734ad",
+      "url": "https://fribourg.ch/fr/romontregion/randonnees-pedestres/circuit-le-chatelard-villargiroud/",
+      "recordIds": [
+        "chatelard-villargiroud-loop"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Tourism: 10 km, 2:45, forest picnic and GPX"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f46a1f9718af",
+      "url": "https://chatonnaye.ch/cabane-salles.html",
+      "recordIds": [
+        "chatonnaye-forest-cabin"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Commune: outdoor tables, fireplace, access road and rental"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-86b479cc23cb",
+      "url": "https://fribourg.ch/wp-content/uploads/2026/02/Salles-a-louer-Romont-Region-2026.pdf",
+      "recordIds": [
+        "chatonnaye-forest-cabin"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Romont Région catalogue 2026, p. 9: address of the forest cabin"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-0c0c25501037",
+      "url": "https://torny.ch/images/A-2026/programme_2026.pdf",
+      "recordIds": [
+        "torny-fritime-noel-2026"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Municipal programme 2026: date, age and Middes"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-07023b5452d8",
+      "url": "https://torny.ch/index.php/fritime",
+      "recordIds": [
+        "torny-fritime-noel-2026"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Commune: registration rules"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-2c6c97f1948d",
+      "url": "https://fribourg.ch/fr/fribourg/randonnees-pedestres/sentier-autour-de-marly-et-pierrafortscha/",
+      "recordIds": [
+        "pierrafortscha-erratic-boulder"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Tourism: boulder, route, length and GPX"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-b37bf79cd207",
+      "url": "https://par-chez-nous.ch/places/campagne-de-pierrafortscha/",
+      "recordIds": [
+        "pierrafortscha-erratic-boulder"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Regional association: rural area and picnic"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-c3d35d1998d1",
+      "url": "https://par-chez-nous.ch/places/gerine/",
+      "recordIds": [
+        "villarsel-gerine-corridor"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Regional association: the Gérine corridor, including Villarsel-sur-Marly"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-8c507fa4232f",
+      "url": "https://playguide.eu/Suisse/1683375-aires-de-jeux-a-nuvilly",
+      "recordIds": [
+        "nuvilly-batailles-play"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "PlayGuide/OSM: playground on Chemin des Batailles"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e47857261370",
+      "url": "https://www.ville-fribourg.ch/agenda/activite-et-vernissage-de-lalbum-le-rat-de-bibliotheque",
+      "recordIds": [
+        "memo-rat-mission-2026-09-30",
+        "memo-rat-vernissage-2026-09-30"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "City listings: programme, age and time",
+        "City listings: presentation for all"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-04946f90bc6c",
+      "url": "https://www.ville-fribourg.ch/lisez-jouez-bougez",
+      "recordIds": [
+        "memo-rat-mission-2026-09-30",
+        "memo-rat-vernissage-2026-09-30",
+        "memo-rat-exhibition-2026"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Seasonal programme: free"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-025be4d93232",
+      "url": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+      "recordIds": [
+        "memo-rat-exhibition-2026"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "City: exhibition, dates and creative table"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f87d0b0f384e",
+      "url": "https://www.ville-fribourg.ch/sites/default/files/inline-files/MEMOPROGRAMMEMAISEPTEMBRE2026.pdf",
+      "recordIds": [
+        "memo-rat-exhibition-2026"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "MEMO programme May–September: exhibition and dates"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-dc57f50e6212",
+      "url": "https://www.ville-fribourg.ch/de/memo",
+      "recordIds": [
+        "memo-rat-exhibition-2026"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "MEMO: opening hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e0f261bd4f5a",
+      "url": "https://www.ville-fribourg.ch/agenda/devenir-famille-familie-werden-0",
+      "recordIds": [
+        "devenir-famille-fribourg-2026-10-03"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "City events listing: date, admission and format"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-c1de7ae5773d",
+      "url": "https://www.devenir-famille.ch/",
+      "recordIds": [
+        "devenir-famille-fribourg-2026-10-03"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Organiser: conditions of participation"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e6f769ef1898",
+      "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf",
+      "recordIds": [
+        "office-family-workshops",
+        "office-family-books"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Autumn 2026 programme: age, venues, dates and conditions"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-5144ee88a006",
+      "url": "https://www.officefamilial.ch/fr/office-familial-fribourg/actualites",
+      "recordIds": [
+        "office-family-workshops",
+        "office-family-books"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Official announcements"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-1c42c591f072",
+      "url": "https://www.artistfactory.ch/cours/eveil_musical",
+      "recordIds": [
+        "artist-factory-parent"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Parent–child programme"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-add9fcde7aa2",
+      "url": "https://www.artistfactory.ch/doc/AF_horaires_15.pdf",
+      "recordIds": [
+        "artist-factory-parent"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "2026 timetable, Fribourg branch"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-cf8864589687",
+      "url": "https://www.artistfactory.ch/cours/tarifs",
+      "recordIds": [
+        "artist-factory-parent"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Prices and mandatory fee"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-674ca200bdcb",
+      "url": "https://www.artistfactory.ch/infos/faq",
+      "recordIds": [
+        "artist-factory-parent"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "FAQ: trial lesson and cancellation terms"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ea01b53327c4",
+      "url": "https://www.artistfactory.ch/infos/contact",
+      "recordIds": [
+        "artist-factory-parent"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Address and transport"
+      ],
+      "monitoring": "not-configured"
+    }
+  ]
+}

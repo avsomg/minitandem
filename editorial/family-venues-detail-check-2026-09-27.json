@@ -1,0 +1,148 @@
+{
+  "checked": "2026-09-27",
+  "scope": "15 new dining records and BEO-Funpark; public-source follow-up only",
+  "directContactMade": false,
+  "statusPolicy": "active means current core information, not confirmed age suitability, free play or guaranteed opening; unknown age and admission values are preserved",
+  "records": [
+    {
+      "id": "alice-marly",
+      "status": "active",
+      "decision": "Operator and complex confirm the play area, hours, address and published menus; unknown equipment age alone does not invalidate these facts.",
+      "sourceUrls": ["https://www.auxmerveillesdalice.ch/", "https://marche-ancienne-papeterie.ch/commerces/aux-merveilles-d-alice", "https://www.akdagsa.ch/wp-content/uploads/2026/06/Menu-crepes-gaufres.pdf", "https://www.akdagsa.ch/wp-content/uploads/2026/07/Menu-boissons-Alice_060726.pdf"],
+      "changedFields": ["status"],
+      "remaining": ["equipment age", "separate toddler space", "admission or minimum order", "play-area hours"]
+    },
+    {
+      "id": "fein-sein-schwarzsee",
+      "status": "active",
+      "decision": "Operator confirms equipment, restaurant hours, breakfast and kitchen windows. Sunday closing overrides the generic evening window.",
+      "sourceUrls": ["https://feinundsein-schwarzsee.ch/", "https://feinundsein-schwarzsee.ch/speisekarte/"],
+      "changedFields": ["status", "price", "kitchen hours", "breakfast booking"],
+      "remaining": ["equipment age", "fencing", "view from chosen table", "play charge or minimum order"],
+      "rejectedInference": "Summer 2026 PDF does not confirm the autumn seasonal menu."
+    },
+    {
+      "id": "seepark-schiffenen",
+      "status": "active",
+      "decision": "Operator confirms the play garden. Dedicated hours page resolved missing opening times; the menu is published but undated.",
+      "sourceUrls": ["https://restaurantseepark.ch/index.php?menuid=1", "https://restaurantseepark.ch/index.php?menuid=78", "https://restaurantseepark.ch/index.php?menuid=28", "https://restaurantseepark.ch/index.php?menuid=23"],
+      "changedFields": ["status", "schedule", "price with date caveat", "WhatsApp contact", "minigolf hours"],
+      "remaining": ["equipment age", "fencing and water access", "play or minigolf admission", "current menu prices"],
+      "retrieval": "Hours and menu read from official HTML after search reader failed."
+    },
+    {
+      "id": "garmiswil-restaurant",
+      "status": "active",
+      "decision": "Regional tourist office confirms own playground; restaurant confirms hours, prices and visits for coffee.",
+      "sourceUrls": ["https://www.jungos.ch/", "https://www.jungos.ch/speisekarte", "https://www.jungos.ch/das-restaurant", "https://fribourg.ch/de/schwarzsee/restaurants/landgasthof-garmiswil/"],
+      "changedFields": ["status", "price", "coffee-only restaurant visit"],
+      "remaining": ["playground access with only coffee", "seasonal access", "equipment age and fencing"]
+    },
+    {
+      "id": "bistro11-duedingen",
+      "status": "check",
+      "decision": "Hours and drink prices are sourced; present play corner remains supported only by a family review.",
+      "sourceUrls": ["https://www.bistro11.ch/Ueber-uns/", "https://www.bistro11.ch/Essen-Trinken/", "https://www.baernermamis.ch/blog/bistro-11-duedingen"],
+      "changedFields": ["parking", "specific contact questions"],
+      "remaining": ["play corner still available", "equipment and age", "minimum order or charge"]
+    },
+    {
+      "id": "coop-fribourg-play",
+      "status": "active",
+      "decision": "Branch page explicitly lists a children's area and facilities; chain menu was rechecked.",
+      "sourceUrls": ["https://www.coop-restaurant.ch/fr/restaurantfinder/finderdetailpage.3743.html", "https://www.coop-restaurant.ch/fr/manger-boire/menu-enfants.html"],
+      "changedFields": ["status", "accessible entrance", "birthday menu offer"],
+      "remaining": ["equipment age and size", "play access without order", "birthday redemption conditions"]
+    },
+    {
+      "id": "sarrazin-lossy",
+      "status": "active",
+      "decision": "Tourist office confirms indoor and outdoor play; official menu provides children's prices and a sharing-plate policy below four.",
+      "sourceUrls": ["https://lesarrazin.ch/", "https://lesarrazin.ch/notre-carte/", "https://fribourg.ch/fr/all/restaurants/le-sarrazin/"],
+      "changedFields": ["status", "price", "empty plate policy", "kitchen hours"],
+      "remaining": ["equipment age", "play access rules"],
+      "rejectedInference": "Free empty plate does not mean a free meal or free play admission. Dated September 7-13 daily dishes are not used as current dishes."
+    },
+    {
+      "id": "leset-villars",
+      "status": "active",
+      "decision": "Operator confirms outdoor play for young children, drinks-only terrace visits, kitchen hours and free parking.",
+      "sourceUrls": ["https://www.leset.ch/", "https://www.leset.ch/menu/", "https://www.leset.ch/wp-content/uploads/2026/02/carte-printemps-2026.pdf"],
+      "changedFields": ["status", "price with seasonal caveat", "kitchen hours", "drinks-only visit", "parking"],
+      "remaining": ["autumn prices", "equipment age", "fencing details", "seasonal play access and charge"],
+      "retrieval": "Menu page fetched directly after search reader returned 406; linked spring PDF read and children's page rendered visually.",
+      "rejectedInference": "Currently linked spring menu is not silently treated as a confirmed autumn tariff."
+    },
+    {
+      "id": "laferme-murten",
+      "status": "active",
+      "decision": "Operator confirms playground and parking. French bistro page now agrees with German home page on Monday opening.",
+      "sourceUrls": ["https://laferme1794.ch/", "https://laferme1794.ch/fr/restauration-cafe-bistrot/", "https://laferme1794.ch/bio-hofladen-kontakt/"],
+      "changedFields": ["status", "schedule", "removed obsolete Monday conflict", "food types", "parking"],
+      "remaining": ["menu prices", "current playground equipment", "age and access rules"],
+      "retrieval": "French page checked in both search reader and direct HTML. German bistro page presented a verification challenge and was not bypassed."
+    },
+    {
+      "id": "mcd-granges-play",
+      "status": "check",
+      "decision": "Official branch URL found, but branch details did not render in search reader or browser. Tourist office confirms outdoor Playland; directories disagree on hours.",
+      "sourceUrls": ["https://www.mcdonalds.com/ch/de-ch/location/granges-paccot/granges-paccot/route-denglisberg-3/780095.html", "https://www.myswitzerland.com/de/erlebnisse/essen-trinken/restaurant/mcdonalds-restaurant-16/", "https://www.mcdonalds.com/ch/fr-ch/family.html"],
+      "changedFields": ["official branch link", "specific contact questions"],
+      "remaining": ["restaurant and Playland hours", "age and height limits", "in-restaurant prices", "minimum order"],
+      "rejectedInference": "Delivery prices and holiday closing PDFs do not establish regular in-restaurant conditions."
+    },
+    {
+      "id": "migros-avry-play",
+      "status": "check",
+      "decision": "Official branch hours and phone confirmed; play equipment is still supported by January 2025 reporting rather than current operator details.",
+      "sourceUrls": ["https://www.avrycentre.ch/migros-restaurant/", "https://gastro.migros.ch/fr/migros-neuchatel-fribourg", "https://www.laliberte.ch/articles/regions/sarine/des-travaux-a-avry-centre-949424"],
+      "changedFields": ["specific contact questions", "source distinction"],
+      "remaining": ["current slide and terrace playground", "age and parent access", "branch-specific menu price"],
+      "rejectedInference": "Separate garderie, past Mini-Migros events and other Migros cooperatives do not establish restaurant play access or prices."
+    },
+    {
+      "id": "beo-funpark",
+      "status": "active",
+      "decision": "Operator confirms toddler areas and entry tariffs. Its embedded public hours widget resolved regular closing times; current-linked rules clarify supervision and extras.",
+      "sourceUrls": ["https://beo-funpark.ch/kleinkindbereich/", "https://beo-funpark.ch/preise/", "https://beo-funpark.ch/wp-content/uploads/2022/09/ReglementAGB.pdf", "https://beo-funpark.ch/funpark-restaurant/"],
+      "changedFields": ["status", "schedule", "supervision", "socks and play-area food rules", "extra-charge attractions"],
+      "remaining": ["individual equipment limits", "conditions below age one", "holiday-specific closing exceptions"],
+      "hoursEvidence": {"embeddedScript": "https://api.myls.ch/js/business-hours.js?entity_id=OTI1&locale=de&text_color=ffffff&mode=compact&day_name=full", "publicReadEndpoint": "https://api.myls.ch/api/script/get-business-hours", "entityId": "OTI1", "businessName": "BEO Funpark GmbH", "weekday": "11:00-18:00", "saturday": "10:00-20:00", "sunday": "10:00-18:00", "autumnOpeningOverride": "2026-09-26 through 2026-10-25: 10:00"}
+    },
+    {
+      "id": "kafi8-kerzers",
+      "status": "check",
+      "decision": "New hours and dated autumn closure confirmed. Menu is under revision and current play-room conditions are not explicit.",
+      "sourceUrls": ["https://www.kafi8.ch/", "https://www.kafi8.ch/about-4", "https://www.kafi8.ch/angebot-kafi-8", "https://www.baernermamis.ch/blog/geniessen/cafe/kafi8-kerzers"],
+      "changedFields": ["schedule", "closure October 5-18", "contact questions"],
+      "remaining": ["current equipment", "equipment age", "prices and minimum order", "room visibility"]
+    },
+    {
+      "id": "clubcafe-kerzers",
+      "status": "check",
+      "decision": "Operator confirms sandpit and garden; summer garden availability in autumn is unresolved. Linked food menu is still 2023/24.",
+      "sourceUrls": ["https://www.clubcafe-kerzers.ch/gartenwirtschaft/", "https://www.clubcafe-kerzers.ch/ristaurante/", "https://www.clubcafe-kerzers.ch/kontakt/"],
+      "changedFields": ["specific seasonal warning", "hours corroboration"],
+      "remaining": ["garden open on visit day", "equipment age", "current prices", "minimum order"],
+      "rejectedInference": "Old menu and restaurant opening hours do not guarantee current prices or access to the summer garden."
+    },
+    {
+      "id": "jardin-muntelier",
+      "status": "check",
+      "decision": "Operator provides current menu and hours; playground source has stale domain and conflicting Wednesday hours, so present play availability remains a question.",
+      "sourceUrls": ["https://www.restaurant-jardin.ch/restaurant", "https://www.restaurant-jardin.ch/menuekarten/spezialitaeten", "https://www.restaurant-jardin.ch/images/menus/Menukarte%20ab%2011.02.2026.pdf", "https://www.j3l.ch/fr/P4727/a-faire/boire-manger/restaurants/restaurant-le-jardin"],
+      "changedFields": ["price", "booking advice", "specific source caveat"],
+      "remaining": ["playground and mini-zoo still available", "seasonal access", "age", "play charge and drinks-only access"],
+      "retrieval": "PDF text read via search reader; direct PDF request returned HTML and screenshot rendering failed. Unambiguous drink price rows used; ambiguous children's fondue price scope not used."
+    },
+    {
+      "id": "beachhouse-muntelier",
+      "status": "check",
+      "decision": "Official summer menu adds prices; sandpit remains supported by family review and end of season is unknown.",
+      "sourceUrls": ["https://www.bad-murtensee.ch/de/gastronomie/beach-house/", "https://www.bad-murtensee.ch/assets/FB/Menu-Beach-House-Sommer_26_GzD.pdf", "https://banjo-yellow-gy9s.squarespace.com/blog/beach-house-murten-seebar-bad-murtensee"],
+      "changedFields": ["price", "consumption example", "specific seasonal warning"],
+      "remaining": ["sandpit and toys still available", "end of season", "minimum order or play charge", "prices after summer"],
+      "retrieval": "Downloaded official PDF; drinks and food pages rendered and visually checked."
+    }
+  ]
+}

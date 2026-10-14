@@ -1,0 +1,61 @@
+# The site and the service behind Caddy with automatic HTTPS for minitandem.ch and www.minitandem.ch.
+# Prepared, not deployed. See docs/betrieb.md (German) for deploy, rollback, backup and restore.
+name: minitandem
+
+services:
+  app:
+    build: .
+    image: minitandem-app:${MINITANDEM_TAG:-current}
+    restart: unless-stopped
+    environment:
+      # The service reads these; the image sets the same defaults.
+      MINITANDEM_STATE_DIR: /state
+      MINITANDEM_CORRECTION_DIR: /state/corrections
+    volumes:
+      - state:/state
+    expose:
+      - "8787"
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 512m
+    pids_limit: 200
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      app:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      ACME_EMAIL: ${ACME_EMAIL:?Set ACME_EMAIL in .env (copy .env.example)}
+    volumes:
+      - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    mem_limit: 256m
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+volumes:
+  # Family keys (hashed), family profiles, submitted corrections and the service's own rotating backups. Back this up.
+  state:
+  # Certificates and the ACME account. Losing it means new certificates (Let's Encrypt has rate limits). Back this up too.
+  caddy-data:
+  caddy-config:

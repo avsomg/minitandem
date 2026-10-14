@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "project": "vmeste",
+  "limitPerRun": 4,
+  "maxJobsPerDay": 24,
+  "leadRoles": ["verify", "search", "arbitrate"],
+  "dailyAfterHour": 7,
+  "codexAutomationIds": ["automation", "automation-2", "automation-3", "automation-4"]
+}

@@ -1,0 +1,9 @@
+{
+  "verdict": "approve",
+  "reason": "Every changed field matches an exact quote on the official page, the price stays unknown, and no approved claim was contradicted.",
+  "draftHash": "@draftHash",
+  "checkedFields": ["research.findings", "research.remaining", "min", "max", "age", "parent"],
+  "checkedCorrectionFiles": [],
+  "checkedStaleUpdates": [],
+  "approvedBindings": ["min", "max", "age", "parent", "research.findings.0"]
+}

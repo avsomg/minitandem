@@ -1,0 +1,2043 @@
+{
+  "asOf": "2026-09-24",
+  "scope": "Targeted web-search discovery for the 97 cells left untouched by the first pass. Top three search results are raw leads, not verified sources or evidence of absence. Municipality and organiser verification remains separate.",
+  "queries": [
+    {
+      "id": "see-p2-001",
+      "commune": "Courgevaux",
+      "category": "movement",
+      "query": "Courgevaux Eltern Kind Turnen Yoga gymnastique parent enfant 2026",
+      "topResults": [
+        {
+          "title": "Eltern-Kind-Turnen mit Yoga und Akrobatik für Kinder von 1,5 - 4 Jahren - Elternschule Mannheim",
+          "url": "https://www.elternschule-mannheim.de/unser-kursprogramm/das-kleinkind/eltern-kind-turnen-mit-yoga-und-akrobatik-fuer-kinder-von-15-4-jahren/"
+        },
+        {
+          "title": "Eltern-Kind-Turnen – Bürgerinitiative Rund um St. Josef e. V.",
+          "url": "https://bi-krefeld.de/2026/08/27/eltern-kind-turnen/"
+        },
+        {
+          "title": "Kursprogramm - EINRICHTUNG - Uni Kassel",
+          "url": "https://www.hochschulsport.uni-kassel.de/angebote/SoSe2026/_Eltern-Kind-Turnen.html"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-002",
+      "commune": "Courgevaux",
+      "category": "water",
+      "query": "Courgevaux Babyschwimmen piscine baignade enfant parent 2026",
+      "topResults": [
+        {
+          "title": "Piscine olympique municipale | Mairie de Courbevoie",
+          "url": "https://www.ville-courbevoie.fr/2779/piscine-olympique-municipale-de-courbevoie.htm"
+        },
+        {
+          "title": "Piscine Municipale - Mairie de Courçon",
+          "url": "https://www.courcon.fr/piscine-municipale/"
+        },
+        {
+          "title": "Piscine privée et jeunes enfants : les règles de sécurité pour prévenir les noyades | sports.gouv.fr",
+          "url": "https://www.sports.gouv.fr/piscine-privee-et-jeunes-enfants-les-regles-de-securite-pour-prevenir-les-noyades-10176"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-003",
+      "commune": "Courgevaux",
+      "category": "music",
+      "query": "Courgevaux Eltern Kind Musik éveil musical 2026",
+      "topResults": [
+        {
+          "title": "Anmeldung - Eltern-Kind-Singen - Amt für Jugend und Berufsberatung (AJB) | Informationsagentur (INA)",
+          "url": "https://ajb.trainingplus.ch/anmeldung/kurs/336673?kursCode=elt-21082026-2&modulId=3576"
+        },
+        {
+          "title": "Eveil musical avec Isabelle Van Bastelaar | Woodee",
+          "url": "https://www.woodee.be/event/eveil-musical-avec-isabelle-van-bastelaer-125/register"
+        },
+        {
+          "title": "ÉVEIL MUSICAL - CCR Les Dominicains de Haute-Alsace",
+          "url": "https://www.les-dominicains.com/pied-de-page/archives-dha/education-artistique-archives/eveil-musical-2025-26"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-004",
+      "commune": "Courgevaux",
+      "category": "creative",
+      "query": "Courgevaux atelier parents enfants bricolage Basteln 2026",
+      "topResults": [
+        {
+          "title": "Atelier bricolage - Ver : date, horaires, tarifs",
+          "url": "https://www.jds.fr/activite-experience/ateliers/atelier-bricolage-1694588_A"
+        },
+        {
+          "title": "Atelier bricolage - Ver : date, horaires, tarifs",
+          "url": "https://www.jds.fr/activite-experience/ateliers/atelier-bricolage-1694611_A"
+        },
+        {
+          "title": "Atelier bricolage - initiation et perfectionnement",
+          "url": "https://www.infolocale.fr/associations/organisme-cour-avec-vue-510091/evenement-ver-activite-de-loisirs-atelier-bricolage-initiation-et-perfectionnement-8955854"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-005",
+      "commune": "Courgevaux",
+      "category": "nature",
+      "query": "Courgevaux Familienweg sentier famille nature 2026",
+      "topResults": [
+        {
+          "title": "Boucles en famille - Visit Clervaux",
+          "url": "https://www.visit-clervaux.lu/fr/boucles-en-famille"
+        },
+        {
+          "title": "Family loop walks - Visit Clervaux",
+          "url": "https://www.visit-clervaux.lu/en/family-loop-walks"
+        },
+        {
+          "title": "55. Courgevaux - Courtepin",
+          "url": "https://www.suisse-rando.ch/fr/randonnee-guidee/4409/55-courgevaux-courtepin"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-006",
+      "commune": "Courgevaux",
+      "category": "books",
+      "query": "Courgevaux bibliothèque Ludothek Bücher Kinder 2026",
+      "topResults": [
+        {
+          "title": "Que faire à Courbevoie cet été 2026 ? | Mairie de Courbevoie",
+          "url": "https://www.ville-courbevoie.fr/10-10275/toutes-les-actualites/fiche/que-faire-a-courbevoie-cet-ete-2026.htm"
+        },
+        {
+          "title": "Ludothèque de Courbevoie | Mairie de Courbevoie",
+          "url": "https://www.ville-courbevoie.fr/2532/ludotheque.htm"
+        },
+        {
+          "title": "Familien·Bubbles | Portail Jeunes",
+          "url": "https://portail-jeunes.ch/de/familien%C2%B7bubbles/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-007",
+      "commune": "Courgevaux",
+      "category": "horses",
+      "query": "Courgevaux Ponyreiten parents enfants poney 2026",
+      "topResults": [
+        {
+          "title": "BALADE EN MAIN PONEY - Chaux-Neuve - (Sports - Doubs)",
+          "url": "https://lecomtois.com/e692697%2CBalade-en-main-poney-Agenda-Sports-Chaux-Neuve-Doubs-Franche-Comte.html"
+        },
+        {
+          "title": "Équimotricité | Ecurie des P'tits Loups | Jura / Poneys",
+          "url": "https://www.ecurie-ptitsloups.com/"
+        },
+        {
+          "title": "Centre équestre à Courchevel",
+          "url": "https://centreequestrecourchevel.fr/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-008",
+      "commune": "Courgevaux",
+      "category": "events",
+      "query": "Courgevaux Familienanlass manifestation enfants 2026 2026",
+      "topResults": [
+        {
+          "title": "APPELS INTEMPESTIFS",
+          "url": "https://app.panneaupocket.com/ville/1110860167-courgivaux-51310?panneau=540026122"
+        },
+        {
+          "title": "Fête communale Courgeoût 2026 : date, horaires, programme, tarifs",
+          "url": "https://www.jds.fr/mortagne-au-perche/manifestations/fete-communale-1561208_A"
+        },
+        {
+          "title": "Fête de la courge - Office de Tourisme du Pays de Bagé et de Pont de Vaux",
+          "url": "https://www.bage-pontdevaux-tourisme.com/fiche/fete-de-la-courge/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-009",
+      "commune": "Courtepin",
+      "category": "movement",
+      "query": "Courtepin Eltern Kind Turnen Yoga gymnastique parent enfant 2026",
+      "topResults": [
+        {
+          "title": "Eltern-Kind-Turnen mit Yoga und Akrobatik für Kinder von 1,5 - 4 Jahren - Elternschule Mannheim",
+          "url": "https://www.elternschule-mannheim.de/unser-kursprogramm/das-kleinkind/eltern-kind-turnen-mit-yoga-und-akrobatik-fuer-kinder-von-15-4-jahren/?no_cache=1&tx_seminars_pi1%5Bage%5D=0&tx_seminars_pi1%5Bfrom_day%5D=0&tx_seminars_pi1%5Bfrom_month%5D=0&tx_seminars_pi1%5Bfrom_year%5D=0&tx_seminars_pi1%5Bmode%5D=0&tx_seminars_pi1%5Bpointer%5D=0&tx_seminars_pi1%5Bprice_from%5D=0&tx_seminars_pi1%5Bprice_to%5D=0&tx_seminars_pi1%5BshowUid%5D=0&tx_seminars_pi1%5Bsort%5D=date%3A1&tx_seminars_pi1%5Bto_day%5D=0&tx_seminars_pi1%5Bto_month%5D=0&tx_seminars_pi1%5Bto_year%5D=0"
+        },
+        {
+          "title": "Kurse / Classes - Allgemeiner Hochschulsport der FAU",
+          "url": "https://www.anmeldung.sport.uni-erlangen.de/hsp/sportarten/aktueller_zeitraum_0/_Eltern-Kind-Turnen___Parent_and_Child_gymnastics.html"
+        },
+        {
+          "title": "Kurse / Classes - Allgemeiner Hochschulsport der FAU",
+          "url": "https://www.anmeldung.sport.uni-erlangen.de/hsp/angebote/WS2526_0/_Eltern-Kind-Turnen___Parent_and_Child_gymnastics.html"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-010",
+      "commune": "Courtepin",
+      "category": "music",
+      "query": "Courtepin Eltern Kind Musik éveil musical 2026",
+      "topResults": [
+        {
+          "title": "Eveil musical avec Isabelle Van Bastelaar | Woodee",
+          "url": "https://www.woodee.be/event/eveil-musical-avec-isabelle-van-bastelaer-125/register"
+        },
+        {
+          "title": "Atelier éveil en musique 2026 | Fondation Convergences",
+          "url": "https://www.fondationconvergences.ch/atelier-eveil-en-musique-2026/"
+        },
+        {
+          "title": "KIDS2026 07 23 0930 LE PETIT LABO MUSICAL - Verbier Festival",
+          "url": "https://verbierfestival.com/de/show/kids2026-07-23-0930-le-petit-labo-musical/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-011",
+      "commune": "Courtepin",
+      "category": "creative",
+      "query": "Courtepin atelier parents enfants bricolage Basteln 2026",
+      "topResults": [
+        {
+          "title": "PassVac Courtepin - Accueil",
+          "url": "https://www.passvac-courtepin.com/accueil"
+        },
+        {
+          "title": "Café rencontre Parents/enfants atelier bricolage - Commune de Villars-sur-Glâne",
+          "url": "https://www.villars-sur-glane.ch/evenement/cafe-rencontre-parents-enfants-atelier-bricolage-2-2/2026-12-09/"
+        },
+        {
+          "title": "SDP | Cultura",
+          "url": "https://www.cultura.com/s-Atelier-Parent-Enfant---Lanterne-aux-feutres-sdp-a3c5f1e7-b5b6-11f1-bc2e-b3245394a2a6.html"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-012",
+      "commune": "Courtepin",
+      "category": "nature",
+      "query": "Courtepin Familienweg sentier famille nature 2026",
+      "topResults": [
+        {
+          "title": "Le sentier des abeilles | Morat",
+          "url": "https://fribourg.ch/fr/regionlacdemorat/randonnees-pedestres/le-sentier-des-abeilles/"
+        },
+        {
+          "title": "Courtepin - Laupen • Sentiers à thème » outdooractive.com",
+          "url": "https://www.outdooractive.com/fr/route/sentiers-a-theme/region-de-berne/courtepin-laupen/178998208/"
+        },
+        {
+          "title": "Inscriptions | PassVac Courtepin",
+          "url": "https://www.passvac-courtepin.com/inscriptions"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-013",
+      "commune": "Courtepin",
+      "category": "horses",
+      "query": "Courtepin Ponyreiten parents enfants poney 2026",
+      "topResults": [
+        {
+          "title": "Les poneys de l'Antenne - L'Antenne",
+          "url": "https://www.lantenne.org/poneys/"
+        },
+        {
+          "title": "Generali Open de France 2026 : Les nouveautés | Fédération Française d'Équitation - FFE",
+          "url": "https://www.ffe.com/actualites/generali-open-de-france-2026-les-nouveautes"
+        },
+        {
+          "title": "Formules | 3pom",
+          "url": "https://www.3pom.be/formules"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-014",
+      "commune": "Courtepin",
+      "category": "events",
+      "query": "Courtepin Familienanlass manifestation enfants 2026 2026",
+      "topResults": [
+        {
+          "title": "Calendrier annuel des manifestations - Commune de Courtepin",
+          "url": "https://courtepin.ch/calendrier-annuel-des-manifestations/"
+        },
+        {
+          "title": "Réservations de salles - Commune de Courtepin",
+          "url": "https://courtepin.ch/reservations-de-salles/"
+        },
+        {
+          "title": "Programme Carnv. Courtepin 2026 version 16 pages.indd",
+          "url": "https://www.carnaval-courtepin.ch/files/programme-courtepin-2026.pdf"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-015",
+      "commune": "Cressier",
+      "category": "movement",
+      "query": "Cressier Eltern Kind Turnen Yoga gymnastique parent enfant 2026",
+      "topResults": [
+        {
+          "title": "Parents-enfants - Cours - FSG section Crassier",
+          "url": "https://www.fsgcrassier.ch/cours/parents-enfants"
+        },
+        {
+          "title": "Fédération suisse de gymnastique, section crassier - FSG section Crassier",
+          "url": "https://www.fsgcrassier.ch/"
+        },
+        {
+          "title": "Fédération suisse de gymnastique, section crassier - FSG section Crassier",
+          "url": "https://fsgcrassier.ch/bienvenue"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-016",
+      "commune": "Cressier",
+      "category": "water",
+      "query": "Cressier Babyschwimmen piscine baignade enfant parent 2026",
+      "topResults": [
+        {
+          "title": "Horaires - Bains de Cressy aux HUG à Genève - HUG",
+          "url": "https://www.hug.ch/bains-cressy/horaires-bains-cressy"
+        },
+        {
+          "title": "Nouveaux horaires aux Bains de Cressy - HUG",
+          "url": "https://www.hug.ch/actualite/bains-cressy/nouveaux-horaires-aux-bains-cressy"
+        },
+        {
+          "title": "Bains de Cressy aux HUG à Genève - HUG",
+          "url": "https://www.hug.ch/bains-cressy"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-017",
+      "commune": "Cressier",
+      "category": "music",
+      "query": "Cressier Eltern Kind Musik éveil musical 2026",
+      "topResults": [
+        {
+          "title": "ÉLÈVES | Fanfare L'Espérance de Cressier",
+          "url": "https://fanfare-cressier.com/eleves/"
+        },
+        {
+          "title": "Atelier éveil en musique 2026 | Fondation Convergences",
+          "url": "https://www.fondationconvergences.ch/atelier-eveil-en-musique-2026/"
+        },
+        {
+          "title": "Le Petit Labo Musical | Verbier Festival 2026",
+          "url": "https://verbierfestival.com/show/kids2026-07-21-0930-le-petit-labo-musical/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-018",
+      "commune": "Cressier",
+      "category": "creative",
+      "query": "Cressier atelier parents enfants bricolage Basteln 2026",
+      "topResults": [
+        {
+          "title": "Accueil | lalicorne",
+          "url": "https://www.lalicorne.me/"
+        },
+        {
+          "title": "Café rencontre Parents/enfants atelier bricolage - Commune de Villars-sur-Glâne",
+          "url": "https://www.villars-sur-glane.ch/evenement/cafe-rencontre-parents-enfants-atelier-bricolage-2-2/2026-12-09/"
+        },
+        {
+          "title": "Parents-enfants - Cours - FSG section Crassier",
+          "url": "https://www.fsgcrassier.ch/cours/parents-enfants"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-019",
+      "commune": "Cressier",
+      "category": "nature",
+      "query": "Cressier Familienweg sentier famille nature 2026",
+      "topResults": [
+        {
+          "title": "Une idée de randonnée: le sentier de la Cascade de Crissier | Famigros",
+          "url": "https://famigros.migros.ch/fr/excursions-loisirs/excursions-en-famille/sentier-cascade-crissier"
+        },
+        {
+          "title": "Sentier didactique \"Le tour de l'Eau\" - LPNE",
+          "url": "https://lpne.ch/evenements/sentier-didactique-le-tour-de-leau"
+        },
+        {
+          "title": "Sentier de la Cascade - La Mèbre — Balades en Famille",
+          "url": "https://balades-en-famille.org/balade/sentier-de-la-cascade-la-mebre"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-020",
+      "commune": "Cressier",
+      "category": "horses",
+      "query": "Cressier Ponyreiten parents enfants poney 2026",
+      "topResults": [
+        {
+          "title": "Déjeuner de bienvenue - L'Apecc",
+          "url": "https://apecc-confignon-cressy.ch/events/dejeuner-de-bienvenue/"
+        },
+        {
+          "title": "Les poneys de l'Antenne - L'Antenne",
+          "url": "https://www.lantenne.org/poneys/"
+        },
+        {
+          "title": "Tarifs - Écurie de la Tour",
+          "url": "https://manege-crassier.ch/tarifs/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-021",
+      "commune": "Cressier",
+      "category": "events",
+      "query": "Cressier Familienanlass manifestation enfants 2026 2026",
+      "topResults": [
+        {
+          "title": "Manifestations - Cressier",
+          "url": "https://www.cressier-ne.ch/decouverte/presentation/manifestations"
+        },
+        {
+          "title": "Fanfare L'Espérance de Cressier |",
+          "url": "https://fanfare-cressier.com/"
+        },
+        {
+          "title": "Salon du livre au Château - Salon du Livre au Château",
+          "url": "https://livreauchateau.ch/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-022",
+      "commune": "Fräschels",
+      "category": "movement",
+      "query": "Fräschels Eltern Kind Turnen Yoga gymnastique parent enfant 2026",
+      "topResults": [
+        {
+          "title": "Eltern-Kind-Turnen mit Yoga und Akrobatik für Kinder von 1,5 - 4 Jahren - Elternschule Mannheim",
+          "url": "https://www.elternschule-mannheim.de/unser-kursprogramm/das-kleinkind/eltern-kind-turnen-mit-yoga-und-akrobatik-fuer-kinder-von-15-4-jahren/?no_cache=1&tx_seminars_pi1%5Bage%5D=0&tx_seminars_pi1%5Bfrom_day%5D=0&tx_seminars_pi1%5Bfrom_month%5D=0&tx_seminars_pi1%5Bfrom_year%5D=0&tx_seminars_pi1%5Bmode%5D=0&tx_seminars_pi1%5Bpointer%5D=0&tx_seminars_pi1%5Bprice_from%5D=0&tx_seminars_pi1%5Bprice_to%5D=0&tx_seminars_pi1%5BshowUid%5D=0&tx_seminars_pi1%5Bsort%5D=date%3A1&tx_seminars_pi1%5Bto_day%5D=0&tx_seminars_pi1%5Bto_month%5D=0&tx_seminars_pi1%5Bto_year%5D=0"
+        },
+        {
+          "title": "Kurse / Classes - Allgemeiner Hochschulsport der FAU",
+          "url": "https://www.anmeldung.sport.uni-erlangen.de/hsp/sportarten/aktueller_zeitraum_0/_Eltern-Kind-Turnen___Parent_and_Child_gymnastics.html"
+        },
+        {
+          "title": "Kurse / Classes - Allgemeiner Hochschulsport der FAU",
+          "url": "https://www.anmeldung.sport.uni-erlangen.de/hsp/angebote/WS2526_0/_Eltern-Kind-Turnen___Parent_and_Child_gymnastics.html"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-023",
+      "commune": "Fräschels",
+      "category": "water",
+      "query": "Fräschels Babyschwimmen piscine baignade enfant parent 2026",
+      "topResults": [
+        {
+          "title": "CESAM Nature - Bébés Nageurs \"Mini-collectif\"",
+          "url": "https://www.cesam-nature.com/cours/173/details"
+        },
+        {
+          "title": "Bébé à la piscine : à quel âge, à quelle température ? - mpedia.fr",
+          "url": "https://www.mpedia.fr/art-tout-savoir-sur-baignade-des-enfants/"
+        },
+        {
+          "title": "Bébés dans l'eau - Ville de Paris",
+          "url": "https://www.paris.fr/activites/bebes-dans-l-eau-115654"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-024",
+      "commune": "Fräschels",
+      "category": "music",
+      "query": "Fräschels Eltern Kind Musik éveil musical 2026",
+      "topResults": [
+        {
+          "title": "Eltern werden - Eltern sein e.V., Freiburg – Musikangebote",
+          "url": "https://www.elternwerden-elternsein.de/kursangebote/14-musikangebote"
+        },
+        {
+          "title": "2026-2027 : Éveil Parents-Enfants 3 à 5 ans",
+          "url": "https://www.helloasso.com/associations/saxalf-performances/adhesions/2026-2027-eveil-parents-enfants"
+        },
+        {
+          "title": "Zweisprachige musikalische Früherziehung Französisch/Deutsch I Le Conservatoire - Wien",
+          "url": "https://www.conservatoire.at/musikkurszweisprachig"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-025",
+      "commune": "Fräschels",
+      "category": "creative",
+      "query": "Fräschels Fribourg atelier parents enfants bricolage 2026",
+      "topResults": [
+        {
+          "title": "Ateliers parents-enfants | Musée d'histoire naturelle Fribourg",
+          "url": "https://www.fr.ch/mhnf/ateliers-parents-enfants"
+        },
+        {
+          "title": "Kinder-Workshop - Upcycling Atelier | visit.freiburg.de",
+          "url": "https://visit.freiburg.de/kinder-workshop"
+        },
+        {
+          "title": "Atelier de bricolage pour enfants - Attrape-rêve ! - Cristina Turin - Ecole de danse",
+          "url": "https://cristinadanse.ch/atelier-de-bricolage-pour-enfants-attrape-reve/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-026",
+      "commune": "Fräschels",
+      "category": "nature",
+      "query": "Fräschels Fribourg Familienweg sentier famille nature 2026",
+      "topResults": [
+        {
+          "title": "Les balades en famille, le meilleur de Fribourg",
+          "url": "https://fribourg.ch/fr/blog/prochaine-balade-en-famille/"
+        },
+        {
+          "title": "Sentier des sens et des sons - Düdingen | Schwarzsee - Senseland",
+          "url": "https://fribourg.ch/fr/schwarzsee/randonnees-pedestres/sentier-des-sens-et-des-sons/"
+        },
+        {
+          "title": "60. Au pays de ma belle-famille",
+          "url": "https://www.fribourgrando.ch/fr/randonnee-guidee/4458/60-Au-pays-de-ma-belle-famille"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-027",
+      "commune": "Fräschels",
+      "category": "books",
+      "query": "Fräschels Fribourg bibliothèque Ludothek Kinder 2026",
+      "topResults": [
+        {
+          "title": "MEMO - biblio&ludo+ | Freiburg Stadt",
+          "url": "https://fribourg.ch/de/freiburg/indoor-aktivitaeten/memo-biblioludo/"
+        },
+        {
+          "title": "MEMO - biblio&ludo+ | Freiburg Stadt",
+          "url": "https://fribourg.ch/de/freiburg/museen/memo-biblioludo/"
+        },
+        {
+          "title": "La nouvelle BCU ouvre ses portes | BCU",
+          "url": "https://www.fr.ch/bcu/actualites/la-nouvelle-bcu-ouvre-ses-portes"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-028",
+      "commune": "Fräschels",
+      "category": "horses",
+      "query": "Fräschels Fribourg Ponyreiten poney enfant 2026",
+      "topResults": [
+        {
+          "title": "CONCOURS DE DRESSAGE OFFICIEL | --- | ---AVENCHES",
+          "url": "https://aesg.ch/wp-content/uploads/2026/05/libretto-avenches-2026_light_v1.pdf"
+        },
+        {
+          "title": "Baby-Poney",
+          "url": "https://ependes.gd-obs.com/Baby-Poney-38.html"
+        },
+        {
+          "title": "Manifestations / Veranstaltungen 2026",
+          "url": "https://www.agroscope.admin.ch/dam/fr/sd-web/GJP2J1KCekuU/haras-veranstaltungen-alch.pdf"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-029",
+      "commune": "Fräschels",
+      "category": "events",
+      "query": "Fräschels Fribourg Familienanlass manifestation enfants 2026",
+      "topResults": [
+        {
+          "title": "Manifestation de bienvenue pour les nouveaux·elles habitants·es | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/sinstaller-a-fribourg/manifestation-bienvenue"
+        },
+        {
+          "title": "Juvenalia 2027 | Fribourg",
+          "url": "https://fribourg.ch/fr/fribourg/evenements/juvenalia-2027/"
+        },
+        {
+          "title": "Lisez, jouez, bougez! | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/lisez-jouez-bougez"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-030",
+      "commune": "Greng",
+      "category": "movement",
+      "query": "Greng Fribourg Eltern Kind Turnen gymnastique parents enfants 2026",
+      "topResults": [
+        {
+          "title": "Eltern & Kind (1,5 - 3 Jahre): Detail | Sportportal Freiburg",
+          "url": "https://sportportal.freiburg.de/sportangebote/detail/eltern-kind.html"
+        },
+        {
+          "title": "Eltern-Kind-Turnen (1,5-3 Jahre): Detail | Sportportal Freiburg",
+          "url": "https://sportportal.freiburg.de/sportangebote/detail/kinderturnen-3-4-jahre-4.html"
+        },
+        {
+          "title": ": Angebote | Sportkreis Freiburg",
+          "url": "https://www.sportkreis-freiburg.de/sportstaetten/angebote/ft-sportkindergarten-sporthalle-ft-1844-freiburg.html"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-031",
+      "commune": "Greng",
+      "category": "water",
+      "query": "Greng Fribourg Babyschwimmen piscine baignade 2026",
+      "topResults": [
+        {
+          "title": "Ouverture des bains de la Motta | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/actualites/ouverture-des-bains-de-la-motta-0"
+        },
+        {
+          "title": "Eröffnung der Motta | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/de/news/eroeffnung-der-motta-0"
+        },
+        {
+          "title": "Eaux des piscines et des plages de baignade publiques | Etat de Fribourg",
+          "url": "https://www.fr.ch/sante/securite-sanitaire/la-securite-alimentaire/eaux-des-piscines-et-des-plages-de-baignade-publiques"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-032",
+      "commune": "Greng",
+      "category": "music",
+      "query": "Greng Fribourg Eltern Kind Singen éveil musical 2026",
+      "topResults": [
+        {
+          "title": "Eveil à la musique parent-enfant | Conservatoire de Fribourg",
+          "url": "https://www.fr.ch/conservatoire/cours-au-conservatoire/cours-de-musique/eveil-a-la-musique-parent-enfant"
+        },
+        {
+          "title": "Eltern werden - Eltern sein e.V., Freiburg – Förderung des Bewegungsraumangebotes",
+          "url": "https://www.elternwerden-elternsein.de/35-f%C3%B6rderung-des-bewegungsraumangebotes"
+        },
+        {
+          "title": "HORAIRES — Les Ateliers Musique",
+          "url": "https://lesateliersmusique.ch/horaires"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-033",
+      "commune": "Greng",
+      "category": "creative",
+      "query": "Greng Fribourg atelier parents enfants bricolage 2026",
+      "topResults": [
+        {
+          "title": "Ateliers parents-enfants | Musée d'histoire naturelle Fribourg",
+          "url": "https://www.fr.ch/mhnf/ateliers-parents-enfants"
+        },
+        {
+          "title": "Ecole des p'tit·e·s artistes | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/ecoles/activites-culturelles-scolaires-et-extrascolaires/p-tit-e-s-artistes"
+        },
+        {
+          "title": "Atelier de bricolage pour enfants - Attrape-rêve ! - Cristina Turin - Ecole de danse",
+          "url": "https://cristinadanse.ch/atelier-de-bricolage-pour-enfants-attrape-reve/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-034",
+      "commune": "Greng",
+      "category": "nature",
+      "query": "Greng Fribourg Familienweg sentier famille nature 2026",
+      "topResults": [
+        {
+          "title": "Randonnées Fribourg | Découvrez des vues exceptionnelles",
+          "url": "https://fribourg.ch/fr/randonnees-fribourg/"
+        },
+        {
+          "title": "Circuit de randonnée dans les gorges du Gottéron depuis Fribourg | La Poste",
+          "url": "https://wandern.post.ch/fr/freiburg"
+        },
+        {
+          "title": "Randonnées pédestres dans le canton de Fribourg",
+          "url": "https://fribourg.ch/fr/hiking/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-035",
+      "commune": "Greng",
+      "category": "books",
+      "query": "Greng Fribourg bibliothèque Ludothek Kinder 2026",
+      "topResults": [
+        {
+          "title": "Né pour lire | Fribourg",
+          "url": "https://fribourg.ch/fr/fribourg/evenements/ne-pour-lire/"
+        },
+        {
+          "title": "MEMO - biblio&ludo+ | Freiburg Stadt",
+          "url": "https://fribourg.ch/de/freiburg/indoor-aktivitaeten/memo-biblioludo/"
+        },
+        {
+          "title": "MEMO - biblio&ludo+ | Freiburg Stadt",
+          "url": "https://fribourg.ch/de/freiburg/museen/memo-biblioludo/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-036",
+      "commune": "Greng",
+      "category": "horses",
+      "query": "Greng Fribourg Ponyreiten poney enfant 2026",
+      "topResults": [
+        {
+          "title": "IMPRESSUM",
+          "url": "https://galop-suisse.iena.ch/wp-content/uploads/2026/03/Rennkalender-Bulletin-officiel-7-2026-2.pdf"
+        },
+        {
+          "title": "CONCOURS DE DRESSAGE OFFICIEL | --- | ---AVENCHES",
+          "url": "https://aesg.ch/wp-content/uploads/2026/05/libretto-avenches-2026_light_v1.pdf"
+        },
+        {
+          "title": "Baby-Poney",
+          "url": "https://ependes.gd-obs.com/Baby-Poney-38.html"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-037",
+      "commune": "Greng",
+      "category": "events",
+      "query": "Greng Fribourg Familienanlass manifestation enfants 2026",
+      "topResults": [
+        {
+          "title": "Manifestation de bienvenue pour les nouveaux·elles habitants·es | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/sinstaller-a-fribourg/manifestation-bienvenue"
+        },
+        {
+          "title": "Disco Kids ! | Fribourg",
+          "url": "https://fribourg.ch/fr/fribourg/evenements/disco-kids/"
+        },
+        {
+          "title": "La Ruche Jump Camp | Suisse Tourisme",
+          "url": "https://www.myswitzerland.com/fr-be/decouvrir/manifestations/la-ruche-jump-camp/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-038",
+      "commune": "Gurmels",
+      "category": "movement",
+      "query": "Gurmels Fribourg Eltern Kind Turnen gymnastique parents enfants 2026",
+      "topResults": [
+        {
+          "title": "Junioren E - Teams - UH Gurmels",
+          "url": "https://uhgurmels.clubdesk.com/teams/junioren-e"
+        },
+        {
+          "title": "Eltern & Kind (1,5 - 3 Jahre): Detail | Sportportal Freiburg",
+          "url": "https://sportportal.freiburg.de/sportangebote/detail/eltern-kind.html"
+        },
+        {
+          "title": "Eltern-Kind-Turnen (1,5-3 Jahre): Detail | Sportportal Freiburg",
+          "url": "https://sportportal.freiburg.de/sportangebote/detail/kinderturnen-3-4-jahre-4.html"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-039",
+      "commune": "Gurmels",
+      "category": "water",
+      "query": "Gurmels Fribourg Babyschwimmen piscine baignade 2026",
+      "topResults": [
+        {
+          "title": "Ouverture des bains de la Motta | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/actualites/ouverture-des-bains-de-la-motta-0"
+        },
+        {
+          "title": "Eaux des piscines et des plages de baignade publiques | Etat de Fribourg",
+          "url": "https://www.fr.ch/sante/securite-sanitaire/la-securite-alimentaire/eaux-des-piscines-et-des-plages-de-baignade-publiques"
+        },
+        {
+          "title": "Les Bains de la Motta | Fribourg",
+          "url": "https://fribourg.ch/fr/fribourg/piscines/les-bains-de-la-motta/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-040",
+      "commune": "Gurmels",
+      "category": "creative",
+      "query": "Gurmels Fribourg atelier parents enfants bricolage 2026",
+      "topResults": [
+        {
+          "title": "Ateliers parents-enfants | Musée d'histoire naturelle Fribourg",
+          "url": "https://www.fr.ch/mhnf/ateliers-parents-enfants"
+        },
+        {
+          "title": "Mille et une feuilles | Musée d'histoire naturelle Fribourg",
+          "url": "https://www.fr.ch/mhnf/evenements/mille-et-une-feuilles"
+        },
+        {
+          "title": "Ecole des p'tit·e·s artistes | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/ecoles/activites-culturelles-scolaires-et-extrascolaires/p-tit-e-s-artistes"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-041",
+      "commune": "Gurmels",
+      "category": "nature",
+      "query": "Gurmels Fribourg Familienweg sentier famille nature 2026",
+      "topResults": [
+        {
+          "title": "Galm, commune des arbres",
+          "url": "https://www.schweizer-wanderwege.ch/fr/propositions-de-randonnees/1456/Galm-commune-des-arbres"
+        },
+        {
+          "title": "Les balades en famille, le meilleur de Fribourg",
+          "url": "https://fribourg.ch/fr/blog/prochaine-balade-en-famille/"
+        },
+        {
+          "title": "Randonnées pédestres dans le canton de Fribourg",
+          "url": "https://fribourg.ch/fr/hiking/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-042",
+      "commune": "Gurmels",
+      "category": "books",
+      "query": "Gurmels Fribourg bibliothèque Ludothek Kinder 2026",
+      "topResults": [
+        {
+          "title": "MEMO - biblio&ludo+ | Freiburg Stadt",
+          "url": "https://fribourg.ch/de/freiburg/indoor-aktivitaeten/memo-biblioludo/"
+        },
+        {
+          "title": "MEMO - biblio&ludo+ | Freiburg Stadt",
+          "url": "https://fribourg.ch/de/freiburg/museen/memo-biblioludo/"
+        },
+        {
+          "title": "Bibliothek – Primarschule Region Gurmels",
+          "url": "https://psgurmels.ch/bibliothek/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-043",
+      "commune": "Gurmels",
+      "category": "horses",
+      "query": "Gurmels Fribourg Ponyreiten poney enfant 2026",
+      "topResults": [
+        {
+          "title": "Ein zauberhafter Tag auf dem Bauernhof mit Pferden und Ponys",
+          "url": "https://gurmels.feriennet.projuventute.ch/activity/ein-zauberhafter-tag-auf-dem-bauernhof-mit-pferden-und-ponys"
+        },
+        {
+          "title": "Journées du Cheval - Anlässe - Pferde-, Fahr- und Sportfreunde des Seebezirkes",
+          "url": "https://pferdesportfreunde.ch/anlaesse/journees_du_cheval"
+        },
+        {
+          "title": "Cours collectifs",
+          "url": "https://ependes.gd-obs.com/-Cours-collectifs-.html"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-044",
+      "commune": "Gurmels",
+      "category": "events",
+      "query": "Gurmels Fribourg Familienanlass manifestation enfants 2026",
+      "topResults": [
+        {
+          "title": "Grümpelturnier 2026 – FC Gurmels",
+          "url": "https://fcgurmels.ch/events/gruempelturnier-2026/"
+        },
+        {
+          "title": "FR Cup 2026 - UH Gurmels",
+          "url": "https://www.uhgurmels.ch/frcup2026"
+        },
+        {
+          "title": "Anlässe - JuBla Gurmels",
+          "url": "https://jubla-gurmels.ch/anlaesse/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-045",
+      "commune": "Kerzers",
+      "category": "water",
+      "query": "Kerzers Fribourg Babyschwimmen piscine baignade 2026",
+      "topResults": [
+        {
+          "title": "Schwimmbad | Kerzers",
+          "url": "https://www.kerzers.ch/leben-kerzers/freizeit/schwimmbad"
+        },
+        {
+          "title": "Swimming pool in Kerzers | Murten",
+          "url": "https://fribourg.ch/en/regionmurtensee/outdoor-activities/swimming-pool-in-kerzers/"
+        },
+        {
+          "title": "Schwimmbad in Kerzers | Murten",
+          "url": "https://fribourg.ch/de/regionmurtensee/outdoor-aktivitaeten/schwimmbad-in-kerzers/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-046",
+      "commune": "Kerzers",
+      "category": "creative",
+      "query": "Kerzers Fribourg atelier parents enfants bricolage 2026",
+      "topResults": [
+        {
+          "title": "Kinderwerkstatt 2026 – Kinder- & Jugendarbeit Regio Kerzers",
+          "url": "https://www.jugendarbeit-kerzers.ch/?page_id=186"
+        },
+        {
+          "title": "Ateliers parents-enfants | Musée d'histoire naturelle Fribourg",
+          "url": "https://www.fr.ch/mhnf/ateliers-parents-enfants"
+        },
+        {
+          "title": "Atelier de bricolage pour enfants - Attrape-rêve ! - Cristina Turin - Ecole de danse",
+          "url": "https://cristinadanse.ch/atelier-de-bricolage-pour-enfants-attrape-reve/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-047",
+      "commune": "Kerzers",
+      "category": "horses",
+      "query": "Kerzers Fribourg Ponyreiten poney enfant 2026",
+      "topResults": [
+        {
+          "title": "Home",
+          "url": "https://www.pferdetrekking-marugg.ch/"
+        },
+        {
+          "title": "Stall Notz AG | Kerzers",
+          "url": "https://www.kerzers.ch/wirtschaft/gewerbe/stall-notz-ag"
+        },
+        {
+          "title": "Baby-Poney",
+          "url": "https://ependes.gd-obs.com/Baby-Poney-38.html"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-048",
+      "commune": "Kerzers",
+      "category": "events",
+      "query": "Kerzers Fribourg Familienanlass manifestation enfants 2026",
+      "topResults": [
+        {
+          "title": "Agenda, Kirchgemeinde bernisch und freiburgisch Kerzers",
+          "url": "https://www.refkirche-kerzers.ch/?page=agenda&sucheDarstellung=agenda&sucheDarstellungTitel=Familien&sucheTyp=veranstaltungen&sucheZeitFenster=365&sucheZielgruppe=Familien"
+        },
+        {
+          "title": "Agenda, Kirchgemeinde bernisch und freiburgisch Kerzers",
+          "url": "https://www.refkirche-kerzers.ch/?page=agenda&sucheDarstellung=agenda&sucheDarstellungTitel=2026&sucheTyp=veranstaltungen&sucheZeitFenster=365&sucheZeitPunkt=2026-01-01"
+        },
+        {
+          "title": "Agenda | Kerzers",
+          "url": "https://www.kerzers.ch/index.php/heute/agenda"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-049",
+      "commune": "Kleinbösingen",
+      "category": "movement",
+      "query": "Kleinbösingen Fribourg Eltern Kind Turnen gymnastique parents enfants 2026",
+      "topResults": [
+        {
+          "title": "Eltern-Kind-Turnen (1,5-3 Jahre): Detail | Sportportal Freiburg",
+          "url": "https://sportportal.freiburg.de/sportangebote/detail/kinderturnen-3-4-jahre-4.html"
+        },
+        {
+          "title": "Eltern & Kind (1,5 - 3 Jahre): Detail | Sportportal Freiburg",
+          "url": "https://sportportal.freiburg.de/sportangebote/detail/eltern-kind.html"
+        },
+        {
+          "title": "Eltern-Kind-Turnen (1,5 - 3 Jahre): Detail | Sportportal Freiburg",
+          "url": "https://sportportal.freiburg.de/sportangebote/detail/eltern-kind-turnen-15-3-jahre-2.html"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-050",
+      "commune": "Kleinbösingen",
+      "category": "water",
+      "query": "Kleinbösingen Fribourg Babyschwimmen piscine baignade 2026",
+      "topResults": [
+        {
+          "title": "Ouverture des bains de la Motta | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/actualites/ouverture-des-bains-de-la-motta-0"
+        },
+        {
+          "title": "Eröffnung der Motta | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/de/news/eroeffnung-der-motta-0"
+        },
+        {
+          "title": "Eaux des piscines et des plages de baignade publiques | Etat de Fribourg",
+          "url": "https://www.fr.ch/sante/securite-sanitaire/la-securite-alimentaire/eaux-des-piscines-et-des-plages-de-baignade-publiques"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-051",
+      "commune": "Kleinbösingen",
+      "category": "music",
+      "query": "Kleinbösingen Fribourg Eltern Kind Singen éveil musical 2026",
+      "topResults": [
+        {
+          "title": "Eveil à la musique parent-enfant | Conservatoire de Fribourg",
+          "url": "https://www.fr.ch/conservatoire/cours-au-conservatoire/cours-de-musique/eveil-a-la-musique-parent-enfant"
+        },
+        {
+          "title": "Musik für Eltern-Kind | Konservatorium Freiburg",
+          "url": "https://www.fr.ch/de/konservatorium/unterrichtsfaecher/musikunterricht/musik-fuer-eltern-kind"
+        },
+        {
+          "title": "<visual_element id=\"e1\">",
+          "url": "https://fribourg.ch/wp-content/uploads/2025/10/PROGRAMME-NOVEMBRE-2025-MARS-2026.pdf"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-052",
+      "commune": "Kleinbösingen",
+      "category": "creative",
+      "query": "Kleinbösingen Fribourg atelier parents enfants bricolage 2026",
+      "topResults": [
+        {
+          "title": "Ateliers parents-enfants | Musée d'histoire naturelle Fribourg",
+          "url": "https://www.fr.ch/mhnf/ateliers-parents-enfants"
+        },
+        {
+          "title": "Ecole des p'tit·e·s artistes | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/ecoles/activites-culturelles-scolaires-et-extrascolaires/p-tit-e-s-artistes"
+        },
+        {
+          "title": "Atelier de bricolage pour enfants - Attrape-rêve ! - Cristina Turin - Ecole de danse",
+          "url": "https://cristinadanse.ch/atelier-de-bricolage-pour-enfants-attrape-reve/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-053",
+      "commune": "Kleinbösingen",
+      "category": "nature",
+      "query": "Kleinbösingen Fribourg Familienweg sentier famille nature 2026",
+      "topResults": [
+        {
+          "title": "Sentier des sens et des sons | Fribourg",
+          "url": "https://fribourg.ch/fr/fribourg/randonnees-pedestres/sentier-des-sens-et-des-sons/"
+        },
+        {
+          "title": "Informations pratiques – Les Chemins de la Sarine",
+          "url": "https://www.chemins-sarine.ch/informations-pratiques"
+        },
+        {
+          "title": "Familienwanderungen | Entdecken Sie gemeinsam die Region Fribourg",
+          "url": "https://fribourg.ch/de/all/gruppen/familienwanderungen/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-054",
+      "commune": "Kleinbösingen",
+      "category": "books",
+      "query": "Kleinbösingen Fribourg bibliothèque Ludothek Kinder 2026",
+      "topResults": [
+        {
+          "title": "Spielen wir zusammen | Freiburg Stadt",
+          "url": "https://fribourg.ch/de/freiburg/veranstaltungen/spielen-wir-zusammen/"
+        },
+        {
+          "title": "MEMO - biblio&ludo+ | Freiburg Stadt",
+          "url": "https://fribourg.ch/de/freiburg/indoor-aktivitaeten/memo-biblioludo/"
+        },
+        {
+          "title": "Né pour lire | Fribourg",
+          "url": "https://fribourg.ch/fr/fribourg/evenements/ne-pour-lire/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-055",
+      "commune": "Kleinbösingen",
+      "category": "horses",
+      "query": "Kleinbösingen Fribourg Ponyreiten poney enfant 2026",
+      "topResults": [
+        {
+          "title": "IMPRESSUM",
+          "url": "https://galop-suisse.iena.ch/wp-content/uploads/2026/03/Rennkalender-Bulletin-officiel-7-2026-2.pdf"
+        },
+        {
+          "title": "Baby-Poney",
+          "url": "https://ependes.gd-obs.com/Baby-Poney-38.html"
+        },
+        {
+          "title": "Actualités | AS WESTERN TRAINING",
+          "url": "https://www.aswesterntraining.ch/actualites/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-056",
+      "commune": "Kleinbösingen",
+      "category": "events",
+      "query": "Kleinbösingen Fribourg Familienanlass manifestation enfants 2026",
+      "topResults": [
+        {
+          "title": "Manifestation de bienvenue pour les nouveaux·elles habitants·es | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/sinstaller-a-fribourg/manifestation-bienvenue"
+        },
+        {
+          "title": "Gemeindeversammlungen - Gemeinde Kleinbösingen",
+          "url": "https://www.kleinboesingen.ch/veranstaltungen-anlaesse.html"
+        },
+        {
+          "title": "Herzlich Willkommen in Kleinbösingen - Gemeinde Kleinbösingen",
+          "url": "https://www.kleinboesingen.ch/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-057",
+      "commune": "Meyriez",
+      "category": "movement",
+      "query": "Meyriez Fribourg Eltern Kind Turnen gymnastique parents enfants 2026",
+      "topResults": [
+        {
+          "title": "Eltern & Kind (1,5 - 3 Jahre): Detail | Sportportal Freiburg",
+          "url": "https://sportportal.freiburg.de/sportangebote/detail/eltern-kind.html"
+        },
+        {
+          "title": "Eltern-Kind-Turnen (1,5-3 Jahre): Detail | Sportportal Freiburg",
+          "url": "https://sportportal.freiburg.de/sportangebote/detail/kinderturnen-3-4-jahre-4.html"
+        },
+        {
+          "title": "FT-Sportkindergarten Gymnastikhalle (FT 1844 Freiburg): Angebote | Sportportal Freiburg",
+          "url": "https://sportportal.freiburg.de/sportstaetten/angebote/ft-sportkindergarten-sporthalle-ft-1844-freiburg.html?cHash=980184f68fa11596f03c088f0dd0af54&tx_felogin_pi1%5Bforgot%5D=1"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-058",
+      "commune": "Meyriez",
+      "category": "water",
+      "query": "Meyriez Fribourg Babyschwimmen piscine baignade 2026",
+      "topResults": [
+        {
+          "title": "Ouverture des bains de la Motta | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/actualites/ouverture-des-bains-de-la-motta-0"
+        },
+        {
+          "title": "Eaux des piscines et des plages de baignade publiques | Etat de Fribourg",
+          "url": "https://www.fr.ch/sante/securite-sanitaire/la-securite-alimentaire/eaux-des-piscines-et-des-plages-de-baignade-publiques"
+        },
+        {
+          "title": "Les Bains de la Motta | Fribourg",
+          "url": "https://fribourg.ch/fr/fribourg/piscines/les-bains-de-la-motta/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-059",
+      "commune": "Meyriez",
+      "category": "music",
+      "query": "Meyriez Fribourg Eltern Kind Singen éveil musical 2026",
+      "topResults": [
+        {
+          "title": "Eveil à la musique parent-enfant | Conservatoire de Fribourg",
+          "url": "https://www.fr.ch/conservatoire/cours-au-conservatoire/cours-de-musique/eveil-a-la-musique-parent-enfant"
+        },
+        {
+          "title": "HORAIRES — Les Ateliers Musique",
+          "url": "https://lesateliersmusique.ch/horaires"
+        },
+        {
+          "title": "Kurse - Eltern werden Eltern sein",
+          "url": "https://elternwerden-elternsein.de/kurse/location/2-eltern-werden-eltern-sein"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-060",
+      "commune": "Meyriez",
+      "category": "creative",
+      "query": "Meyriez Fribourg atelier parents enfants bricolage 2026",
+      "topResults": [
+        {
+          "title": "Ateliers parents-enfants | Musée d'histoire naturelle Fribourg",
+          "url": "https://www.fr.ch/mhnf/ateliers-parents-enfants"
+        },
+        {
+          "title": "Ecole des p'tit·e·s artistes | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/ecoles/activites-culturelles-scolaires-et-extrascolaires/p-tit-e-s-artistes"
+        },
+        {
+          "title": "Atelier de bricolage pour enfants - Attrape-rêve ! - Cristina Turin - Ecole de danse",
+          "url": "https://cristinadanse.ch/atelier-de-bricolage-pour-enfants-attrape-reve/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-061",
+      "commune": "Meyriez",
+      "category": "nature",
+      "query": "Meyriez Fribourg Familienweg sentier famille nature 2026",
+      "topResults": [
+        {
+          "title": "Randonnées pédestres MDA 2026.xlsx",
+          "url": "https://mda-fribourg.ch/wp-content/uploads/2026/02/Randonnees-pedestres-MDA-2026.pdf"
+        },
+        {
+          "title": "Les balades en famille, le meilleur de Fribourg",
+          "url": "https://fribourg.ch/fr/blog/prochaine-balade-en-famille/"
+        },
+        {
+          "title": "Le Sentier des Fées | Balade didactique dans la région de Romont",
+          "url": "https://fribourg.ch/fr/romontregion/randonnees-pedestres/le-sentier-des-fees/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-062",
+      "commune": "Meyriez",
+      "category": "books",
+      "query": "Meyriez Fribourg bibliothèque Ludothek Kinder 2026",
+      "topResults": [
+        {
+          "title": "MEMO - biblio&ludo+ | Freiburg Stadt",
+          "url": "https://fribourg.ch/de/freiburg/indoor-aktivitaeten/memo-biblioludo/"
+        },
+        {
+          "title": "MEMO - biblio&ludo+ | Freiburg Stadt",
+          "url": "https://fribourg.ch/de/freiburg/museen/memo-biblioludo/"
+        },
+        {
+          "title": "Né pour lire | Fribourg",
+          "url": "https://fribourg.ch/fr/fribourg/evenements/ne-pour-lire/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-063",
+      "commune": "Meyriez",
+      "category": "horses",
+      "query": "Meyriez Fribourg Ponyreiten poney enfant 2026",
+      "topResults": [
+        {
+          "title": "Baby-Poney",
+          "url": "https://ependes.gd-obs.com/Baby-Poney-38.html"
+        },
+        {
+          "title": "CONCOURS DE DRESSAGE OFFICIEL | --- | ---AVENCHES",
+          "url": "https://aesg.ch/wp-content/uploads/2026/05/libretto-avenches-2026_light_v1.pdf"
+        },
+        {
+          "title": "Manifestations / Veranstaltungen 2026",
+          "url": "https://www.agroscope.admin.ch/dam/agroscope/fr/dokumente/themen/nutztiere/Pferde/haras-zuchthengste-deckstationen-sng/haras-vitrine-fm/haras-veranstaltungen-alch.pdf.download.pdf/HNS%2520-%2520Manifestations%25202025.pdf"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-064",
+      "commune": "Meyriez",
+      "category": "events",
+      "query": "Meyriez Fribourg Familienanlass manifestation enfants 2026",
+      "topResults": [
+        {
+          "title": "Manifestation de bienvenue pour les nouveaux·elles habitants·es | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/sinstaller-a-fribourg/manifestation-bienvenue"
+        },
+        {
+          "title": "Brunch public des sympathisants | Morat",
+          "url": "https://fribourg.ch/fr/regionlacdemorat/evenements/brunch-public-des-sympathisants/"
+        },
+        {
+          "title": "Lisez, jouez, bougez! | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/lisez-jouez-bougez"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-065",
+      "commune": "Misery-Courtion",
+      "category": "movement",
+      "query": "Misery-Courtion Fribourg Eltern Kind Turnen gymnastique parents enfants 2026",
+      "topResults": [
+        {
+          "title": "Eltern & Kind (1,5 - 3 Jahre): Detail | Sportportal Freiburg",
+          "url": "https://sportportal.freiburg.de/sportangebote/detail/eltern-kind.html"
+        },
+        {
+          "title": "Eltern-Kind-Turnen (1,5-3 Jahre): Detail | Sportportal Freiburg",
+          "url": "https://sportportal.freiburg.de/sportangebote/detail/kinderturnen-3-4-jahre-4.html"
+        },
+        {
+          "title": "Informations générales – Commune de Misery-Courtion",
+          "url": "https://www.miserycourtion.ch/education-sante-social/structures-daccueil/informations-generales/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-066",
+      "commune": "Misery-Courtion",
+      "category": "water",
+      "query": "Misery-Courtion Fribourg Babyschwimmen piscine baignade 2026",
+      "topResults": [
+        {
+          "title": "Ouverture des bains de la Motta | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/actualites/ouverture-des-bains-de-la-motta-0"
+        },
+        {
+          "title": "Eau potable – Piscines privées – Commune de Misery-Courtion",
+          "url": "https://www.miserycourtion.ch/services/eau-potable-piscines-privees/"
+        },
+        {
+          "title": "2025 ROR - Commune Misery-Courtion_signé.pdf",
+          "url": "https://www.miserycourtion.ch/wp-content/uploads/2026/05/Comptes-de-resultat-2025_site-internet-communal.pdf"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-067",
+      "commune": "Misery-Courtion",
+      "category": "music",
+      "query": "Misery-Courtion Fribourg Eltern Kind Singen éveil musical 2026",
+      "topResults": [
+        {
+          "title": "Eveil à la musique parent-enfant | Conservatoire de Fribourg",
+          "url": "https://www.fr.ch/conservatoire/cours-au-conservatoire/cours-de-musique/eveil-a-la-musique-parent-enfant"
+        },
+        {
+          "title": "Informations générales – Commune de Misery-Courtion",
+          "url": "https://www.miserycourtion.ch/education-sante-social/structures-daccueil/informations-generales/"
+        },
+        {
+          "title": "Eltern werden - Eltern sein e.V., Freiburg – Förderung des Bewegungsraumangebotes",
+          "url": "https://www.elternwerden-elternsein.de/35-f%C3%B6rderung-des-bewegungsraumangebotes"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-068",
+      "commune": "Misery-Courtion",
+      "category": "creative",
+      "query": "Misery-Courtion Fribourg atelier parents enfants bricolage 2026",
+      "topResults": [
+        {
+          "title": "Ateliers parents-enfants | Musée d'histoire naturelle Fribourg",
+          "url": "https://www.fr.ch/mhnf/ateliers-parents-enfants"
+        },
+        {
+          "title": "Accueil extra-scolaire (AES) – Commune de Misery-Courtion",
+          "url": "https://www.miserycourtion.ch/education-sante-social/structures-daccueil/accueil-extra-scolaire-aes/"
+        },
+        {
+          "title": "Informations générales – Commune de Misery-Courtion",
+          "url": "https://www.miserycourtion.ch/education-sante-social/structures-daccueil/informations-generales/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-069",
+      "commune": "Misery-Courtion",
+      "category": "nature",
+      "query": "Misery-Courtion Fribourg Familienweg sentier famille nature 2026",
+      "topResults": [
+        {
+          "title": "Le sentier des abeilles | Morat",
+          "url": "https://fribourg.ch/fr/regionlacdemorat/randonnees-pedestres/le-sentier-des-abeilles/"
+        },
+        {
+          "title": "Forêts – Commune de Misery-Courtion",
+          "url": "https://www.miserycourtion.ch/services/forets/"
+        },
+        {
+          "title": "Informations générales – Commune de Misery-Courtion",
+          "url": "https://www.miserycourtion.ch/education-sante-social/structures-daccueil/informations-generales/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-070",
+      "commune": "Misery-Courtion",
+      "category": "books",
+      "query": "Misery-Courtion Fribourg bibliothèque Ludothek Kinder 2026",
+      "topResults": [
+        {
+          "title": "MEMO - biblio&ludo+ | Freiburg Stadt",
+          "url": "https://fribourg.ch/de/freiburg/indoor-aktivitaeten/memo-biblioludo/"
+        },
+        {
+          "title": "MEMO - biblio&ludo+ | Freiburg Stadt",
+          "url": "https://fribourg.ch/de/freiburg/museen/memo-biblioludo/"
+        },
+        {
+          "title": "Inscriptions et calendrier – Commune de Misery-Courtion",
+          "url": "https://www.miserycourtion.ch/education-sante-social/ecoles/inscriptions-et-calendrier/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-071",
+      "commune": "Misery-Courtion",
+      "category": "horses",
+      "query": "Misery-Courtion Fribourg Ponyreiten poney enfant 2026",
+      "topResults": [
+        {
+          "title": "Inscriptions et calendrier – Commune de Misery-Courtion",
+          "url": "https://www.miserycourtion.ch/education-sante-social/ecoles/inscriptions-et-calendrier/"
+        },
+        {
+          "title": "GROUPEMENT SCOLAIRE MISERY-COURTION / VILLAREPOS",
+          "url": "https://www.miserycourtion.ch/wp-content/uploads/2025/08/2025-26-rentree-scolaire-bulletin.pdf"
+        },
+        {
+          "title": "Informations générales – Commune de Misery-Courtion",
+          "url": "https://www.miserycourtion.ch/education-sante-social/structures-daccueil/informations-generales/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-072",
+      "commune": "Misery-Courtion",
+      "category": "events",
+      "query": "Misery-Courtion Fribourg Familienanlass manifestation enfants 2026",
+      "topResults": [
+        {
+          "title": "Manifestations – Commune de Misery-Courtion",
+          "url": "https://www.miserycourtion.ch/vie-locale/manifestations/"
+        },
+        {
+          "title": "Informations générales – Commune de Misery-Courtion",
+          "url": "https://www.miserycourtion.ch/education-sante-social/structures-daccueil/informations-generales/"
+        },
+        {
+          "title": "LOxalien_6_2025.indd",
+          "url": "https://www.miserycourtion.ch/wp-content/uploads/2025/12/LOxalien_6_2025.pdf"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-073",
+      "commune": "Mont-Vully",
+      "category": "movement",
+      "query": "Mont-Vully Fribourg Eltern Kind Turnen gymnastique parents enfants 2026",
+      "topResults": [
+        {
+          "title": "Règlement et tarifs — La Ribambelle",
+          "url": "https://laribambelle.ch/reglement-et-tarifs"
+        },
+        {
+          "title": "BROCHURE D’INFORMATION",
+          "url": "https://mont-vully.ch/fileadmin/user_upload/Documents/MontVully/WWW/Users/affairessociales/enfanceetjeunesse/2024_Brochure_web.pdf"
+        },
+        {
+          "title": "Documents pour les parents · Cercle scolaire de Mont-Vully",
+          "url": "https://cs.mont-vully.ch/actualites-cs-1/documents-pour-les-parents"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-074",
+      "commune": "Mont-Vully",
+      "category": "water",
+      "query": "Mont-Vully Fribourg Babyschwimmen piscine baignade 2026",
+      "topResults": [
+        {
+          "title": "Ouverture des bains de la Motta | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/actualites/ouverture-des-bains-de-la-motta-0"
+        },
+        {
+          "title": "Eaux des piscines et des plages de baignade publiques | Etat de Fribourg",
+          "url": "https://www.fr.ch/sante/securite-sanitaire/la-securite-alimentaire/eaux-des-piscines-et-des-plages-de-baignade-publiques"
+        },
+        {
+          "title": "Motta-Schwimmbad (Freibad) | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/de/motta-schwimmbad"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-075",
+      "commune": "Mont-Vully",
+      "category": "music",
+      "query": "Mont-Vully Fribourg Eltern Kind Singen éveil musical 2026",
+      "topResults": [
+        {
+          "title": "Eveil à la musique parent-enfant | Conservatoire de Fribourg",
+          "url": "https://www.fr.ch/conservatoire/cours-au-conservatoire/cours-de-musique/eveil-a-la-musique-parent-enfant"
+        },
+        {
+          "title": "Kurse - Eltern werden Eltern sein",
+          "url": "https://elternwerden-elternsein.de/kurse/location/2-eltern-werden-eltern-sein"
+        },
+        {
+          "title": "HORAIRES — Les Ateliers Musique",
+          "url": "https://lesateliersmusique.ch/horaires"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-076",
+      "commune": "Mont-Vully",
+      "category": "creative",
+      "query": "Mont-Vully Fribourg atelier parents enfants bricolage 2026",
+      "topResults": [
+        {
+          "title": "Ateliers parents-enfants | Musée d'histoire naturelle Fribourg",
+          "url": "https://www.fr.ch/mhnf/ateliers-parents-enfants"
+        },
+        {
+          "title": "Atelier de bricolage pour enfants - Attrape-rêve ! - Cristina Turin - Ecole de danse",
+          "url": "https://cristinadanse.ch/atelier-de-bricolage-pour-enfants-attrape-reve/"
+        },
+        {
+          "title": "Brochure",
+          "url": "https://www.passvacgruyere.ch/wp-content/uploads/2026/03/Brochure_juillet_2026.pdf"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-077",
+      "commune": "Mont-Vully",
+      "category": "horses",
+      "query": "Mont-Vully Fribourg Ponyreiten poney enfant 2026",
+      "topResults": [
+        {
+          "title": "Brochure",
+          "url": "https://www.passvacgruyere.ch/wp-content/uploads/2026/03/Brochure_juillet_2026.pdf"
+        },
+        {
+          "title": "Vully Tourisme | Morat",
+          "url": "https://fribourg.ch/fr/regionlacdemorat/offices-du-tourisme/vully-tourisme/"
+        },
+        {
+          "title": "AES du Vully · Fédération Fribourgeoise des Accueils Extrascolaires",
+          "url": "https://ffaes.ch/federation/les-accueils-extrascolaires-aes/aes-du-vully"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-078",
+      "commune": "Mont-Vully",
+      "category": "events",
+      "query": "Mont-Vully Fribourg Familienanlass manifestation enfants 2026",
+      "topResults": [
+        {
+          "title": "Vully Tourisme | Morat",
+          "url": "https://fribourg.ch/fr/regionlacdemorat/offices-du-tourisme/vully-tourisme/"
+        },
+        {
+          "title": "août-décembre 2025",
+          "url": "https://fribourg.ch/wp-content/uploads/2021/11/Manifestations-25-26.pdf"
+        },
+        {
+          "title": "Modestement Vully | AIVV",
+          "url": "https://vully.ch/events/mont-vully/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-079",
+      "commune": "Muntelier",
+      "category": "movement",
+      "query": "Muntelier Fribourg Eltern Kind Turnen gymnastique parents enfants 2026",
+      "topResults": [
+        {
+          "title": "Eltern & Kind (1,5 - 3 Jahre): Detail | Sportportal Freiburg",
+          "url": "https://sportportal.freiburg.de/sportangebote/detail/eltern-kind.html"
+        },
+        {
+          "title": "Eltern-Kind-Turnen (1,5-3 Jahre): Detail | Sportportal Freiburg",
+          "url": "https://sportportal.freiburg.de/sportangebote/detail/kinderturnen-3-4-jahre-4.html"
+        },
+        {
+          "title": "Eltern-Kind-Turnen (1,5 - 3 Jahre): Detail | Sportportal Freiburg",
+          "url": "https://sportportal.freiburg.de/sportangebote/detail/eltern-kind-turnen-15-3-jahre-2.html"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-080",
+      "commune": "Muntelier",
+      "category": "water",
+      "query": "Muntelier Fribourg Babyschwimmen piscine baignade 2026",
+      "topResults": [
+        {
+          "title": "Ouverture des bains de la Motta | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/actualites/ouverture-des-bains-de-la-motta-0"
+        },
+        {
+          "title": "Badeplatz Muntelier | Murten",
+          "url": "https://fribourg.ch/de/regionmurtensee/outdoor-aktivitaeten/badeplatz-muntelier/"
+        },
+        {
+          "title": "Eaux des piscines et des plages de baignade publiques | Etat de Fribourg",
+          "url": "https://www.fr.ch/sante/securite-sanitaire/la-securite-alimentaire/eaux-des-piscines-et-des-plages-de-baignade-publiques"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-081",
+      "commune": "Muntelier",
+      "category": "music",
+      "query": "Muntelier Fribourg Eltern Kind Singen éveil musical 2026",
+      "topResults": [
+        {
+          "title": "Eveil à la musique parent-enfant | Conservatoire de Fribourg",
+          "url": "https://www.fr.ch/conservatoire/cours-au-conservatoire/cours-de-musique/eveil-a-la-musique-parent-enfant"
+        },
+        {
+          "title": "COURS — Les Ateliers Musique",
+          "url": "https://lesateliersmusique.ch/cours"
+        },
+        {
+          "title": "HORAIRES — Les Ateliers Musique",
+          "url": "https://lesateliersmusique.ch/horaires"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-082",
+      "commune": "Muntelier",
+      "category": "creative",
+      "query": "Muntelier Fribourg atelier parents enfants bricolage 2026",
+      "topResults": [
+        {
+          "title": "Ateliers parents-enfants | Musée d'histoire naturelle Fribourg",
+          "url": "https://www.fr.ch/mhnf/ateliers-parents-enfants"
+        },
+        {
+          "title": "Mille et une feuilles | Musée d'histoire naturelle Fribourg",
+          "url": "https://www.fr.ch/mhnf/evenements/mille-et-une-feuilles"
+        },
+        {
+          "title": "Ecole des p'tit·e·s artistes | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/ecoles/activites-culturelles-scolaires-et-extrascolaires/p-tit-e-s-artistes"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-083",
+      "commune": "Muntelier",
+      "category": "nature",
+      "query": "Muntelier Fribourg Familienweg sentier famille nature 2026",
+      "topResults": [
+        {
+          "title": "Sentier des sens et des sons | Fribourg",
+          "url": "https://fribourg.ch/fr/fribourg/randonnees-pedestres/sentier-des-sens-et-des-sons/"
+        },
+        {
+          "title": "Morat - Praz par le sentier des sangliers | Morat",
+          "url": "https://fribourg.ch/fr/regionlacdemorat/randonnees-pedestres/morat-praz-par-le-sentier-des-sangliers/"
+        },
+        {
+          "title": "Le sentier botanique du Mont Vully | Morat",
+          "url": "https://fribourg.ch/fr/regionlacdemorat/randonnees-pedestres/le-sentier-botanique-du-mont-vully/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-084",
+      "commune": "Muntelier",
+      "category": "books",
+      "query": "Muntelier Fribourg bibliothèque Ludothek Kinder 2026",
+      "topResults": [
+        {
+          "title": "MEMO - biblio&ludo+ | Freiburg Stadt",
+          "url": "https://fribourg.ch/de/freiburg/indoor-aktivitaeten/memo-biblioludo/"
+        },
+        {
+          "title": "MEMO - biblio&ludo+ | Freiburg Stadt",
+          "url": "https://fribourg.ch/de/freiburg/museen/memo-biblioludo/"
+        },
+        {
+          "title": "La nouvelle BCU ouvre ses portes | BCU",
+          "url": "https://www.fr.ch/bcu/actualites/la-nouvelle-bcu-ouvre-ses-portes"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-085",
+      "commune": "Muntelier",
+      "category": "horses",
+      "query": "Muntelier Fribourg Ponyreiten poney enfant 2026",
+      "topResults": [
+        {
+          "title": "Contact - Bowling de Muntelier | Fribourg",
+          "url": "https://bowlingmuntelier.ch/contact/"
+        },
+        {
+          "title": "Bowlingcenter | Morat",
+          "url": "https://fribourg.ch/fr/regionlacdemorat/activites-pour-groupe/bowlingcenter/"
+        },
+        {
+          "title": "Manifestations / Veranstaltungen 2026",
+          "url": "https://www.agroscope.admin.ch/dam/agroscope/fr/dokumente/themen/nutztiere/Pferde/haras-zuchthengste-deckstationen-sng/haras-vitrine-fm/haras-veranstaltungen-alch.pdf.download.pdf/HNS%2520-%2520Manifestations%25202025.pdf"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-086",
+      "commune": "Muntelier",
+      "category": "events",
+      "query": "Muntelier Fribourg Familienanlass manifestation enfants 2026",
+      "topResults": [
+        {
+          "title": "Mille et une feuilles | Musée d'histoire naturelle Fribourg",
+          "url": "https://www.fr.ch/mhnf/evenements/mille-et-une-feuilles"
+        },
+        {
+          "title": "Bowlingcenter | Morat",
+          "url": "https://fribourg.ch/fr/regionlacdemorat/activites-pour-groupe/bowlingcenter/"
+        },
+        {
+          "title": "Bowling de Muntelier | Fribourg",
+          "url": "https://bowlingmuntelier.ch/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-087",
+      "commune": "Murten",
+      "category": "movement",
+      "query": "Murten Fribourg Eltern Kind Turnen gymnastique parents enfants 2026",
+      "topResults": [
+        {
+          "title": "Eltern-Kind-Turnen (1,5 - 3 Jahre): Detail | Sportportal Freiburg",
+          "url": "https://sportportal.freiburg.de/sportangebote/detail/eltern-kind-turnen-15-3-jahre-2.html"
+        },
+        {
+          "title": "Eltern-Kind-Turnen ab 1 1/2 Jahren: Detail | Sportportal Freiburg",
+          "url": "https://sportportal.freiburg.de/sportangebote/detail/eltern-kind-turnen-3-jaehrige.html"
+        },
+        {
+          "title": "Eltern-Kind-Turnen: FT 1844 Freiburg",
+          "url": "https://ft1844-freiburg.de/kinder-jugend/sportangebote/turnen/eltern-kind-turnen"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-088",
+      "commune": "Murten",
+      "category": "water",
+      "query": "Murten Fribourg Babyschwimmen piscine baignade 2026",
+      "topResults": [
+        {
+          "title": "Hallen-, Schwimm- und Strandbad Murten | Murten",
+          "url": "https://fribourg.ch/de/regionmurtensee/schwimmbaeder/hallen-schwimm-und-strandbad-murten/"
+        },
+        {
+          "title": "Piscine couverte, piscine et plage Morat | Morat",
+          "url": "https://fribourg.ch/fr/regionlacdemorat/piscines/piscine-couverte-piscine-et-plage-morat/"
+        },
+        {
+          "title": "Hallen, Schwimm- und Strandbad der Region Murten",
+          "url": "https://schwimmbad-murten.ch/de"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-089",
+      "commune": "Murten",
+      "category": "creative",
+      "query": "Murten Fribourg atelier parents enfants bricolage 2026",
+      "topResults": [
+        {
+          "title": "Ateliers parents-enfants | Musée d'histoire naturelle Fribourg",
+          "url": "https://www.fr.ch/mhnf/ateliers-parents-enfants"
+        },
+        {
+          "title": "Street Art | Atelier Michi | Murten",
+          "url": "https://www.ateliermichi.com/"
+        },
+        {
+          "title": "Ateliers créatifs enfants Fribourg - Cristina Turin - Ecole de danse",
+          "url": "https://cristinadanse.ch/ateliers-creatifs-enfants-fribourg-farvagny-le-mouret-bulle/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-090",
+      "commune": "Murten",
+      "category": "horses",
+      "query": "Murten Fribourg Ponyreiten poney enfant 2026",
+      "topResults": [
+        {
+          "title": "Mini Murtenlauf | Morat-Fribourg",
+          "url": "https://www.morat-fribourg.ch/laeufe/parcours-mini/?lang=de"
+        },
+        {
+          "title": "\"Töffli-Buebe-Feeling\" Murtensee | Murten",
+          "url": "https://fribourg.ch/de/regionmurtensee/gruppenaktivitaeten/toffli-buebe-feeling-murtensee/"
+        },
+        {
+          "title": "Plage des chevaux | Murten",
+          "url": "https://fribourg.ch/de/regionmurtensee/straende/plage-des-chevaux/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-091",
+      "commune": "Murten",
+      "category": "events",
+      "query": "Murten Fribourg Familienanlass manifestation enfants 2026",
+      "topResults": [
+        {
+          "title": "Murtenlauf 2026: Alle Infos | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/de/murtenlauf-2026-alle-infos"
+        },
+        {
+          "title": "Mini Murtenlauf | Morat-Fribourg",
+          "url": "https://www.morat-fribourg.ch/laeufe/parcours-mini/?lang=de"
+        },
+        {
+          "title": "VERANSTALTUNGEN",
+          "url": "https://fri-memoria.bcu-fribourg.ch/uploads/r/biblioth-eque-cantonale-et-universitaire/d/e/a/deab75276af11227df006a900b08a54a81d2fe48067c3c4fb03cd6154659c502/dc6d721d-828b-42d9-8dd8-163931423b2f-DL-BC-_Info_Nr_68.pdf"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-092",
+      "commune": "Ried bei Kerzers",
+      "category": "movement",
+      "query": "Ried bei Kerzers Fribourg Eltern Kind Turnen gymnastique parents enfants 2026",
+      "topResults": [
+        {
+          "title": "Februar 2025",
+          "url": "https://www.kerzers.ch/system/files/download/A12%20Eltern%20von%20Kindern%200-16%20n%C3%BCtzliche%20Adressen%20Februar%202025.pdf"
+        },
+        {
+          "title": "Gemeinde Ried bei Kerzers - Startseite",
+          "url": "https://www.ried.ch/"
+        },
+        {
+          "title": "Kerzers, Ried b. Kerzers - Kids-Sport",
+          "url": "https://www.kids-sport.ch/kerzers/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-093",
+      "commune": "Ried bei Kerzers",
+      "category": "water",
+      "query": "Ried bei Kerzers Fribourg Babyschwimmen piscine baignade 2026",
+      "topResults": [
+        {
+          "title": "Schwimmbad | Kerzers",
+          "url": "https://www.kerzers.ch/leben-kerzers/freizeit/schwimmbad"
+        },
+        {
+          "title": "Ouverture des bains de la Motta | Ville de Fribourg",
+          "url": "https://www.ville-fribourg.ch/actualites/ouverture-des-bains-de-la-motta-0"
+        },
+        {
+          "title": "Schwimmbad in Kerzers | Murten",
+          "url": "https://fribourg.ch/de/regionmurtensee/outdoor-aktivitaeten/schwimmbad-in-kerzers/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-094",
+      "commune": "Ried bei Kerzers",
+      "category": "music",
+      "query": "Ried bei Kerzers Fribourg Eltern Kind Singen éveil musical 2026",
+      "topResults": [
+        {
+          "title": "Gemeinde Ried bei Kerzers - Startseite",
+          "url": "https://www.ried.ch/"
+        },
+        {
+          "title": "Musik für Eltern-Kind | Konservatorium Freiburg",
+          "url": "https://www.fr.ch/de/konservatorium/unterrichtsfaecher/musikunterricht/musik-fuer-eltern-kind"
+        },
+        {
+          "title": "Eveil à la musique parent-enfant | Conservatoire de Fribourg",
+          "url": "https://www.fr.ch/conservatoire/cours-au-conservatoire/cours-de-musique/eveil-a-la-musique-parent-enfant"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-095",
+      "commune": "Ried bei Kerzers",
+      "category": "nature",
+      "query": "Ried bei Kerzers Fribourg Familienweg sentier famille nature 2026",
+      "topResults": [
+        {
+          "title": "Karlas Gemüsetrail | Familienweg und Outdoor-Erlebnis im Seeland",
+          "url": "https://fribourg.ch/de/regionmurtensee/outdoor-aktivitaeten/karlas-gemuesetrail/"
+        },
+        {
+          "title": "Kerzers Rundwanderung | Murten",
+          "url": "https://fribourg.ch/de/regionmurtensee/wanderungen/kerzers-rundwanderung/?g=4517&slug=bio-gemuese-aktivitaeten-und-events"
+        },
+        {
+          "title": "Sentier des Castors",
+          "url": "https://www.loisirs.ch/balade/sentier-des-castors/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-096",
+      "commune": "Ried bei Kerzers",
+      "category": "books",
+      "query": "Ried bei Kerzers Fribourg bibliothèque Ludothek Kinder 2026",
+      "topResults": [
+        {
+          "title": "Bibliothek Kerzers | KUB",
+          "url": "https://www.fr.ch/de/kub/app/bibliotheques/79"
+        },
+        {
+          "title": "Bibliothek Kerzers | Kerzers",
+          "url": "https://www.kerzers.ch/leben-kerzers/freizeit/bibliothek-kerzers"
+        },
+        {
+          "title": "MEMO - biblio&ludo+ | Freiburg Stadt",
+          "url": "https://fribourg.ch/de/freiburg/indoor-aktivitaeten/memo-biblioludo/"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "see-p2-097",
+      "commune": "Ried bei Kerzers",
+      "category": "horses",
+      "query": "Ried bei Kerzers Fribourg Ponyreiten poney enfant 2026",
+      "topResults": [
+        {
+          "title": "Home",
+          "url": "https://www.pferdetrekking-marugg.ch/"
+        },
+        {
+          "title": "IMPRESSUM",
+          "url": "https://galop-suisse.iena.ch/wp-content/uploads/2026/03/Rennkalender-Bulletin-officiel-7-2026-2.pdf"
+        },
+        {
+          "title": "▷ Reitbeteiligung finden in 3216 Ried b. Kerzers, Kanton Freiburg, Schweiz",
+          "url": "https://www.horsedeal.com/landing/reitbeteiligung-finden/schweiz/kanton-freiburg/3216-ried-b-kerzers"
+        }
+      ],
+      "error": null
+    }
+  ]
+}

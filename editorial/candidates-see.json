@@ -1,0 +1,97 @@
+{
+  "asOf": "2026-09-28",
+  "notPublished": true,
+  "note": "This file tracks discoveries needing a decision, excluded leads, and resolved discrepancies. Published cards are in data.js; the dated search trail is in search-log-see.json.",
+  "candidates": [
+    {
+      "id": "familybloom-yoga",
+      "name": "Family Yoga · Family Bloom",
+      "status": "published-needs-review",
+      "recordId": "familybloom-yoga",
+      "sourceUrls": [
+        "https://familybloom.ch/de/unsere-kurse/andere-kurse/family-yoga-eltern-kind-ab-2-jahren",
+        "https://www.familybloom.ch/de/ueber-uns/unsere-tarife"
+      ],
+      "supported": "Official course page describes parent-child yoga for ages 2–8.",
+      "remaining": [
+        "current venue in See/Lac",
+        "current dates and places",
+        "tariff page gives conflicting CHF 20 and CHF 35 amounts for Family Yoga"
+      ]
+    },
+    {
+      "id": "familybloom-mini-move",
+      "name": "Mini Move · Family Bloom",
+      "status": "published-needs-review",
+      "recordId": "familybloom-mini-move",
+      "sourceUrls": [
+        "https://www.familybloom.ch/de/unsere-kurse/andere-kurse/mini-move-2-bis-5-jahren"
+      ],
+      "supported": "Search index describes a joint movement course for ages 2–5.",
+      "remaining": [
+        "course page returned 404 on direct access",
+        "current venue, schedule, price and booking"
+      ]
+    },
+    {
+      "id": "stimm-family",
+      "name": "STIMM-Family · Studio Musicale",
+      "status": "published-needs-review",
+      "recordId": "stimm-family",
+      "sourceUrls": [
+        "https://www.studiomusicale.ch/kurse",
+        "https://www.studiomusicale.ch/infos-preise"
+      ],
+      "supported": "Organiser lists STIMM-Family in Murten and CHF 280 for 12 sessions of 45 minutes.",
+      "remaining": [
+        "child age",
+        "parent participation conditions",
+        "current Murten term and exact dates"
+      ]
+    },
+    {
+      "id": "ried-zwargestube",
+      "name": "Zwärgestube / Zwärgehof Ried",
+      "status": "excluded",
+      "sourceUrls": [
+        "https://www.ried.ch/de/verwaltung/dienstleistungen/detail/detail.php?i=98"
+      ],
+      "supported": "Municipal description identifies playgroups oriented to children separating from parents.",
+      "reason": "Not a joint parent-child activity."
+    },
+    {
+      "id": "cressier-hours",
+      "name": "Le Cheval Savant · conflicting public hours",
+      "status": "resolved",
+      "recordId": "library-cressier",
+      "sourceUrls": [
+        "https://www.fr.ch/bcu/app/bibliotheques/35",
+        "https://psmurten.ch/fr/bibliotheque/"
+      ],
+      "supported": "Public library and family visit are verified.",
+      "resolution": "On 2026-09-24 the canton and school pages both displayed Wednesday 13:30–18:00 for the public. The published card was updated and is due for another review on 2026-10-24."
+    },
+    {
+      "id": "courtepin-baby-swim-times",
+      "name": "Dylan Bébés Nageurs · conflicting pool hours",
+      "status": "published-needs-review",
+      "recordId": "swim-courtepin-babies",
+      "sourceUrls": [
+        "https://www.dylan-bebesnageurs.ch/trouver-un-cours/courtepin",
+        "https://piscinecourtepin.ch/de/kurse/"
+      ],
+      "supported": "Operator confirms parent participation, age and trimester tariff.",
+      "remaining": [
+        "operator and pool show different Saturday windows; exact group time and current trimester need confirmation"
+      ]
+    }
+    ,{"id":"gym-parents-misery","name":"Gym parents et enfants · Misery-Courtion","status":"published-needs-review","recordId":"gym-parents-misery","sourceUrls":["https://www.miserycourtion.ch/wp-content/uploads/2025/04/Brochure-nouv.-habitants.pdf"],"supported":"Municipal 2025 brochure gives ages 2–4, joint format, venue, old Thursday hours and contact.","remaining":["current 2026/27 season and hours","price, language and registration"]},
+    {"id":"muki-tv-murten","name":"Gymnastique Parents+Enfants · TV Murten","status":"needs-verification","sourceUrls":["https://portail-jeunes.ch/wp-content/uploads/2025/02/FR-BROCHURE-2410.pdf","https://tvmurten.ch/"],"supported":"Regional 2024 brochure describes a joint gymnastics programme for ages 3–5 in Murten.","remaining":["organiser site returned 403; current 2026/27 schedule, address and enrolment not confirmed"]},
+    {"id":"kibim-murten-2026","name":"KiBiM Krabbel-Parcours · Murten","status":"published-needs-review","recordId":"kibim-murten","sourceUrls":["https://www.kibim.ch/daten/","https://www.kibim.ch/krabbel-parcours/"],"supported":"Organizer describes a parent-supervised indoor movement course; visible dates end in March 2026.","remaining":["new winter 2026/27 dates and current admission conditions"]},
+    {"id":"baby-bade-murten-2026","name":"Baby Bade-Plausch · Murten","status":"published-needs-review","recordId":"baby-bade-murten","sourceUrls":["https://www.schwimmbad-murten.ch/images/uploaded/Babyschwimmen%2026.1-Copy-1.pdf"],"supported":"Pool published a parent-child course for January–March 2026.","remaining":["autumn/winter 2026/27 schedule, fee and enrolment"]},
+    {"id":"suniai-family-yoga","name":"Suniai Yoga · family course, Düdingen","status":"published","recordId":"suniai-family-yoga","sourceUrls":["https://www.suniai-yoga.ch/eltern-kind-yoga/","https://www.suniai-yoga.ch/stundenplan-und-preise/"],"supported":"Organiser specifies three remaining 2026 dates in Düdingen, age from 3, adult participation and price.","remaining":["available places and teaching language"]},
+    {"id":"schlittschuh-gurmels","name":"Schlittschuh Arena Gurmels","status":"published-needs-review","recordId":"schlittschuh-gurmels","sourceUrls":["https://www.gurmels.ch/freizeitaktivitaeten/28364","https://www.schlittschuh-arena-gurmels.ch/"],"supported":"Municipality identifies a synthetic skating rink at Sportweg 21.","remaining":["2026/27 opening dates, family age and tariff; operator site inaccessible"]},
+    {"id":"mont-vully-family-events","name":"Journée de jeux / Noël des familles · Mont-Vully","status":"partially-published","recordId":"jeux-apav-vully-2026","sourceUrls":["https://mont-vully.ch/fileadmin/user_upload/Documents/MontVully/WWW/Users/CultureLoisirs/Manifestations_26-27_finalise.pdf"],"supported":"Municipal calendar dates APAV games on 7 November 2026 in Nant; the Christmas event is not yet published as a card.","remaining":["event time, exact audience and entry conditions","separately verify Christmas event before a card"]},
+    {"id":"chatoney-playground-meyriez","name":"Chatoney lower park · Meyriez","status":"excluded-public","sourceUrls":["https://www.merlach.ch/de/leben/chatoney-park/konditionen-buchung.html/144"],"supported":"Municipal page describes park and playground.","reason":"Lower meadow is generally reserved for Meyriez residents, so it is not listed as a public destination."}
+  ]
+}

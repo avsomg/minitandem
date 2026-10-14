@@ -1,0 +1,58 @@
+# What stays out of the public repository, and why. Sizes, file counts and the reasoning are in docs/publication-scope.md.
+# public-audit.mjs --strict fails if a private path of its list is missing here.
+
+# 1. Private editorial state: queue, worker artifacts, search and verification records, source text
+editorial/workflow-state/
+editorial/agent-artifacts/
+editorial/external-candidates/
+editorial/external-disputes/
+editorial/external-decisions/
+editorial/external-review-receipts.json
+editorial/family-venues-visitor-check-2026-09-27.json
+editorial/corrections/
+editorial/correction-versions/
+editorial/monitor-state.json
+editorial/discovery-state.json
+editorial/discovery-report.json
+editorial/heartbeat-state.json
+editorial/versions/
+editorial/typesafe-runtime/
+editorial/calibration-runtime/
+editorial/catalogue-runtime/
+editorial/catalog-versions/
+
+# 2. Generated snapshots of that state (rebuilt by their commands; they change with every pipeline run)
+editorial/external-review-report.json
+editorial/external-pipeline-report.json
+editorial/operations-report.json
+editorial/workflow-report.json
+editorial/quality-report.json
+editorial/work-packets.json
+
+# 2b. Dated working papers of the first rollout (2 October 2026): history, not an input of anything
+editorial/catalogue-shape-audit-2026-10-02.json
+editorial/dependency-audit-2026-10-02.json
+editorial/memo-booking-browser-check-2026-10-02.json
+editorial/workflow-rollout-2026-10-02.json
+
+# 3. Account identity of the release, and local machine settings
+editorial/release-identity.json
+.playwright-path
+.env
+.workspace-in-use
+.minitandem-workspace
+
+# 4. Data of the running service (family keys and profiles, submitted corrections)
+server-state/
+
+# 5. The earlier Russian layers, journal and documents; never public
+archive-ru/
+translation/
+
+# 6. Dependencies and build output
+node_modules/
+.publish/
+.vercel/
+
+# 7. Operating-system files
+.DS_Store

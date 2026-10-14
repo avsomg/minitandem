@@ -1,0 +1,2746 @@
+{
+  "schema": 1,
+  "sources": [
+    {
+      "id": "dining-alice",
+      "url": "https://marche-ancienne-papeterie.ch/commerces/aux-merveilles-d-alice",
+      "type": "html",
+      "recordIds": [
+        "alice-marly"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Alice"
+      ]
+    },
+    {
+      "id": "dining-fein-sein",
+      "url": "https://feinundsein-schwarzsee.ch/",
+      "type": "html",
+      "recordIds": [
+        "fein-sein-schwarzsee"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Schwarzsee"
+      ]
+    },
+    {
+      "id": "dining-seepark",
+      "url": "https://restaurantseepark.ch/index.php?menuid=1",
+      "type": "html",
+      "recordIds": [
+        "seepark-schiffenen"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Schiffenen"
+      ]
+    },
+    {
+      "id": "dining-garmiswil",
+      "url": "https://fribourg.ch/de/schwarzsee/restaurants/landgasthof-garmiswil/",
+      "type": "html",
+      "recordIds": [
+        "garmiswil-restaurant"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Garmiswil"
+      ]
+    },
+    {
+      "id": "dining-bistro11",
+      "url": "https://www.bistro11.ch/Ueber-uns/",
+      "type": "html",
+      "recordIds": [
+        "bistro11-duedingen"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Hauptstrasse"
+      ]
+    },
+    {
+      "id": "dining-coop-fribourg",
+      "url": "https://www.coop-restaurant.ch/fr/restaurantfinder/finderdetailpage.3743.html",
+      "type": "html",
+      "recordIds": [
+        "coop-fribourg-play"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Fribourg"
+      ]
+    },
+    {
+      "id": "dining-sarrazin",
+      "url": "https://fribourg.ch/fr/all/restaurants/le-sarrazin/",
+      "type": "html",
+      "recordIds": [
+        "sarrazin-lossy",
+        "sarrazin-lossy-play"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Sarrazin"
+      ]
+    },
+    {
+      "id": "dining-leset",
+      "url": "https://www.leset.ch/",
+      "type": "html",
+      "recordIds": [
+        "leset-villars"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "place de jeux"
+      ]
+    },
+    {
+      "id": "dining-laferme",
+      "url": "https://laferme1794.ch/",
+      "type": "html",
+      "recordIds": [
+        "laferme-murten"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Kinderspielplatz"
+      ]
+    },
+    {
+      "id": "dining-mcd-granges",
+      "url": "https://www.myswitzerland.com/de/erlebnisse/essen-trinken/restaurant/mcdonalds-restaurant-16/",
+      "type": "html",
+      "recordIds": [
+        "mcd-granges-play"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Playland"
+      ]
+    },
+    {
+      "id": "dining-migros-avry",
+      "url": "https://www.avrycentre.ch/migros-restaurant/",
+      "type": "html",
+      "recordIds": [
+        "migros-avry-play"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Migros"
+      ]
+    },
+    {
+      "id": "dining-beo-prices",
+      "url": "https://beo-funpark.ch/preise/",
+      "type": "html",
+      "recordIds": [
+        "beo-funpark"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Kinder"
+      ]
+    },
+    {
+      "id": "see-parish-murten",
+      "url": "https://www.kirche-murten.ch/krabbelgruppe",
+      "type": "html",
+      "recordIds": [
+        "family-cafe-murten",
+        "krabbeltreff-meyriez"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Krabbel"
+      ]
+    },
+    {
+      "id": "see-parish-kerzers",
+      "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+      "type": "html",
+      "recordIds": [
+        "krabbel-kerzers"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Krabbelgruppe"
+      ],
+      "ignoreLines": [
+        "^Bereitgestellt: .* Besuche: ",
+        "^Datenschutz \\| aktualisiert mit kirchenweb"
+      ]
+    },
+    {
+      "id": "see-elki-detail",
+      "url": "https://tsv-kerzers.clubdesk.com/Jugend/ELKI",
+      "type": "html",
+      "recordIds": [
+        "elki-kerzers"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "ElKi"
+      ]
+    },
+    {
+      "id": "see-elki-news",
+      "url": "https://tsv-kerzers.clubdesk.com/",
+      "type": "html",
+      "recordIds": [
+        "elki-kerzers"
+      ],
+      "intervalDays": 7,
+      "minChars": 80,
+      "start": "ELKI Turnen - Anmeldefenster ist geöffnet",
+      "end": "Der TSV lädt zum Jugi"
+    },
+    {
+      "id": "see-library-murten",
+      "url": "https://www.fr.ch/de/kub/app/bibliotheques/83",
+      "type": "html",
+      "recordIds": [
+        "library-murten"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Stadtbibliothek Murten"
+      ]
+    },
+    {
+      "id": "see-library-courtepin",
+      "url": "https://www.fr.ch/bcu/app/bibliotheques/31",
+      "type": "html",
+      "recordIds": [
+        "library-courtepin"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Courtepin"
+      ]
+    },
+    {
+      "id": "see-library-kerzers",
+      "url": "https://www.fr.ch/de/kub/app/bibliotheques/79",
+      "type": "html",
+      "recordIds": [
+        "library-kerzers"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Bibliothek Kerzers"
+      ]
+    },
+    {
+      "id": "see-library-vully",
+      "url": "https://www.fr.ch/bcu/app/bibliotheques/84",
+      "type": "html",
+      "recordIds": [
+        "library-vully"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Palet roulant"
+      ]
+    },
+    {
+      "id": "see-swim-courtepin",
+      "url": "https://www.dylan-bebesnageurs.ch/trouver-un-cours/courtepin",
+      "type": "html",
+      "recordIds": [
+        "swim-courtepin-babies"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Courtepin"
+      ]
+    },
+    {
+      "id": "see-swim-pool",
+      "url": "https://piscinecourtepin.ch/de/kurse/",
+      "type": "html",
+      "recordIds": [
+        "swim-courtepin-babies"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "BABYSCHWIMMER"
+      ]
+    },
+    {
+      "id": "see-ludothek-murten",
+      "url": "https://www.murten-morat.ch/ludothek",
+      "type": "html",
+      "recordIds": [
+        "ludothek-murten"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Ludothek Murten"
+      ],
+      "start": "An der Schaalgasse 6",
+      "end": "Achtung: Bitte wechseln Sie den Browser"
+    },
+    {
+      "id": "see-papiliorama",
+      "url": "https://www.papiliorama.ch/besuch/",
+      "type": "html",
+      "recordIds": [
+        "papiliorama-kerzers"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Papiliorama"
+      ]
+    },
+    {
+      "id": "see-bulles-familles",
+      "url": "https://portail-jeunes.ch/bulles-familles/",
+      "type": "html",
+      "recordIds": [
+        "bulles-familles-murten"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Bulles"
+      ],
+      "start": "Bulles·Familles",
+      "end": "Vers le flyer"
+    },
+    {
+      "id": "see-library-cressier",
+      "url": "https://www.fr.ch/bcu/app/bibliotheques/35",
+      "type": "html",
+      "recordIds": [
+        "library-cressier"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Cheval Savant"
+      ]
+    },
+    {
+      "id": "see-library-cressier-school",
+      "url": "https://psmurten.ch/fr/bibliotheque/",
+      "type": "html",
+      "recordIds": [
+        "library-cressier"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Heures d’ouverture de la bibliothèque pour Cressier"
+      ],
+      "start": "Heures d’ouverture de la bibliothèque pour Cressier",
+      "end": "Animations et activités selon calendrier"
+    },
+    {
+      "id": "see-association-directory",
+      "url": "https://www.regionseelac.ch/_files/ugd/d709c7_aa4138aadaa44a5696a08b3be009833d.pdf",
+      "type": "pdf",
+      "recordIds": [],
+      "intervalDays": 30,
+      "required": [
+        "Kerzers"
+      ],
+      "maxBytes": 6000000
+    },
+    {
+      "id": "see-candles-ried",
+      "url": "https://www.ried.ch/de/veranstaltungen/dokumente/php4AFqfN_Kerzenziehen_2026.pdf",
+      "type": "pdf",
+      "recordIds": [
+        "candles-ried-2026"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Kerzenziehen 2026"
+      ],
+      "maxBytes": 3000000
+    },
+    {
+      "id": "see-treasure-murten",
+      "url": "https://fribourg.ch/de/regionmurtensee/outdoor-aktivitaeten/schatzsuche-durch-murten/",
+      "type": "html",
+      "recordIds": [
+        "treasure-murten"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Schatzsuche durch Murten"
+      ],
+      "start": "Unser Angebot speziell für Familien.",
+      "end": "Besonderheiten"
+    },
+    {
+      "id": "see-karla-trail",
+      "url": "https://fribourg.ch/de/regionmurtensee/outdoor-aktivitaeten/karlas-gemuesetrail/",
+      "type": "html",
+      "recordIds": [
+        "karla-gemuesetrail"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Gemüsetrail"
+      ],
+      "start": "Entdecken Sie Karlas Gemüsetrail",
+      "end": "Besonderheiten"
+    },
+    {
+      "id": "see-ateliers-courtepin",
+      "url": "https://portail-jeunes.ch/wp-content/uploads/2026/09/2026-2_ATF_Courtepin_A4-F.pdf",
+      "type": "pdf",
+      "recordIds": [
+        "ateliers-familles-courtepin"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Ateliers Familles"
+      ],
+      "maxBytes": 3000000
+    },
+    {
+      "id": "see-ludo-pinocchio",
+      "url": "https://www.ludo-pinocchio.ch/index.php/fr-fr/",
+      "type": "html",
+      "recordIds": [
+        "ludo-pinocchio-courtepin"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Pinocchio"
+      ]
+    },
+    {
+      "id": "see-firstflow-minis2",
+      "url": "https://firstflow.wassererleben.ch/de/anmeldung/courseUid/58792/",
+      "type": "html",
+      "recordIds": [
+        "firstflow-meyriez-2026"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "MINIS Level 2"
+      ]
+    },
+    {
+      "id": "see-firstflow-minis4",
+      "url": "https://firstflow.wassererleben.ch/de/anmeldung/courseUid/58921/",
+      "type": "html",
+      "recordIds": [
+        "firstflow-meyriez-2026"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "MINIS Level 4"
+      ]
+    },
+    {
+      "id": "see-firstflow-maxis3",
+      "url": "https://firstflow.wassererleben.ch/de/anmeldung/courseUid/58535/",
+      "type": "html",
+      "recordIds": [
+        "firstflow-meyriez-2026"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "MAXIS Level 3"
+      ]
+    },
+    {
+      "id": "see-biberpfad-gurmels",
+      "url": "https://www.gurmels.ch/freizeitaktivitaeten/8960",
+      "type": "html",
+      "recordIds": [
+        "biberpfad-gurmels"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Biberpfad"
+      ]
+    },
+    {
+      "id": "see-waldlehrpfad-fraeschels",
+      "url": "https://www.fraeschels.ch/gemeinde/natur-freizeit",
+      "type": "html",
+      "recordIds": [
+        "waldlehrpfad-fraeschels"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Waldlehrpfad"
+      ]
+    },
+    {
+      "id": "see-sentier-botanique-vully",
+      "url": "https://fribourg.ch/fr/regionlacdemorat/randonnees-pedestres/le-sentier-botanique-du-mont-vully/",
+      "type": "html",
+      "recordIds": [
+        "sentier-botanique-vully"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "sentier botanique"
+      ]
+    },
+    {
+      "id": "see-badeplatz-muntelier",
+      "url": "https://fribourg.ch/de/regionmurtensee/outdoor-aktivitaeten/badeplatz-muntelier/",
+      "type": "html",
+      "recordIds": [
+        "badeplatz-muntelier"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Badeplatz Muntelier"
+      ]
+    },
+    {
+      "id": "see-plage-praz",
+      "url": "https://mont-vully.ch/culture-loisirs/plages-places-de-jeux-pour-enfants",
+      "type": "html",
+      "recordIds": [
+        "plage-praz-vully"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Praz"
+      ]
+    },
+    {
+      "id": "see-spielkafi-kerzers",
+      "url": "https://www.jugendarbeit-kerzers.ch/?page_id=3667",
+      "type": "html",
+      "recordIds": [
+        "spielkafi-kerzers-2026"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Spielkafi"
+      ]
+    },
+    {
+      "id": "see-familienkonzert-kerzers",
+      "url": "https://www.refkirche-kerzers.ch/?page=agenda&sucheDarstellung=agenda&sucheDarstellungTitel=Familien&sucheTyp=veranstaltungen&sucheZeitFenster=365&sucheZielgruppe=Familien",
+      "type": "html",
+      "recordIds": [
+        "familienkonzert-kerzers-2026"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Familienkonzert"
+      ]
+    },
+    {
+      "id": "sense-sellenhof-offers",
+      "url": "https://sellenhof.ch/Reitangebote",
+      "type": "html",
+      "recordIds": [
+        "sellenhof-wednesday",
+        "sellenhof-group",
+        "sellenhof-private"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Kinder-Reit-Nachmittag"
+      ]
+    },
+    {
+      "id": "sense-bergahorn-ponies",
+      "url": "https://www.bergahorn-schule.ch/freifaecher",
+      "type": "html",
+      "recordIds": [
+        "pony-entdecken",
+        "pony-spass",
+        "pferde-oberschrot"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Pony entdecken"
+      ]
+    },
+    {
+      "id": "sense-swim-tentlingen",
+      "url": "https://portal.schwimmschule.ch/events/detail?tx_eddaylight_readobjects%5Bid%5D=8529&tx_eddaylight_readobjects%5BsecurityHash%5D=dbd870a8c142b4ae3f5b0bafd92f2575&cHash=ae09f1ef2ae4006daac973ce0b21ff22",
+      "type": "html",
+      "recordIds": [
+        "swim-tentlingen"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Soft-Baby-Swimming"
+      ]
+    },
+    {
+      "id": "sarine-swim-buissonnets",
+      "url": "https://portal.schwimmschule.ch/events/detail?tx_eddaylight_readobjects%5Bid%5D=8557&tx_eddaylight_readobjects%5BsecurityHash%5D=5f989246a52126b1f81b44d492c58f66&cHash=7697f24572c84cf7c6f0e5696476dd80",
+      "type": "html",
+      "recordIds": [
+        "swim-buissonnets"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Soft-Baby-Swimming"
+      ]
+    },
+    {
+      "id": "sense-swim-duedingen",
+      "url": "https://www.schwimmschule.ch/index.php/de/",
+      "type": "html",
+      "recordIds": [
+        "swim-duedingen"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Schwimmbad Düdingen"
+      ]
+    },
+    {
+      "id": "sense-krabbel-giffers",
+      "url": "https://www.evgt.ch/angebote-projekte/krabbelgruppe/",
+      "type": "html",
+      "recordIds": [
+        "krabbel-giffers"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Krabbelgruppe"
+      ]
+    },
+    {
+      "id": "sense-krabbel-tafers",
+      "url": "https://www.famylietraeff.ch/krabbelgruppe/",
+      "type": "html",
+      "recordIds": [
+        "krabbel-tafers"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Krabbelgruppe"
+      ]
+    },
+    {
+      "id": "sense-elki-giffers",
+      "url": "https://www.svgt.ch/sportarten/elki",
+      "type": "html",
+      "recordIds": [
+        "elki-giffers"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Eltern-Kind-Turnen"
+      ]
+    },
+    {
+      "id": "sarine-marly-cohesion",
+      "url": "https://www.marly.ch/social-et-sante/cohesion-sociale",
+      "type": "html",
+      "recordIds": [
+        "cafe-marly",
+        "espace-marly"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Cet Espace convivial",
+        "cafés parents-enfants"
+      ],
+      "start": "Tous les 1ers et 3èmes vendredis du mois",
+      "end": "Dans cette brochure"
+    },
+    {
+      "id": "sarine-livrechange-regular",
+      "url": "https://www.livrechange.ch/fr/activites-regulieres.html",
+      "type": "html",
+      "recordIds": [
+        "jouons",
+        "encore-jura",
+        "encore-schonberg"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Jouons ensemble"
+      ]
+    },
+    {
+      "id": "sarine-minimove-schonberg",
+      "url": "https://www.ville-fribourg.ch/de/agenda/minimove-schoenberg-0",
+      "type": "html",
+      "recordIds": [
+        "minimove-schonberg"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Eintritt frei"
+      ]
+    },
+    {
+      "id": "sarine-minimove-jura",
+      "url": "https://www.ideesport.ch/fr/programmes/minimove/minimove-fribourg-jura",
+      "type": "html",
+      "recordIds": [
+        "minimove-jura"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "MiniMove Fribourg Jura"
+      ]
+    },
+    {
+      "id": "sarine-conservatoire",
+      "url": "https://www.fr.ch/conservatoire/cours-au-conservatoire/cours-de-musique/eveil-a-la-musique-parent-enfant",
+      "type": "html",
+      "recordIds": [
+        "conservatoire"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Eveil à la musique parent-enfant"
+      ]
+    },
+    {
+      "id": "sarine-memo-library",
+      "url": "https://www.ville-fribourg.ch/memo",
+      "type": "html",
+      "recordIds": [
+        "memo-library"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Horaire régulier",
+        "Exceptions"
+      ],
+      "start": "Horaire régulier",
+      "end": "Accès au compte et au catalogue en ligne"
+    },
+    {
+      "id": "sarine-memo-musik-entdecken-2026-09-29",
+      "url": "https://www.ville-fribourg.ch/agenda/musik-entdecken-2",
+      "type": "html",
+      "recordIds": [
+        "memo-musik-entdecken-2026-09-29"
+      ],
+      "intervalDays": 1,
+      "required": [
+        "Musik entdecken",
+        "10:00"
+      ]
+    },
+    {
+      "id": "sarine-memo-rat-2026-09-30",
+      "url": "https://www.ville-fribourg.ch/agenda/activite-et-vernissage-de-lalbum-le-rat-de-bibliotheque",
+      "type": "html",
+      "recordIds": [
+        "memo-rat-mission-2026-09-30",
+        "memo-rat-vernissage-2026-09-30"
+      ],
+      "intervalDays": 1,
+      "required": [
+        "Mission rat de bibliothèque",
+        "18:00"
+      ]
+    },
+    {
+      "id": "sarine-devenir-famille-2026-10-03",
+      "url": "https://www.ville-fribourg.ch/agenda/devenir-famille-familie-werden-0",
+      "type": "html",
+      "recordIds": [
+        "devenir-famille-fribourg-2026-10-03"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Bureau familles et école",
+        "3 octobre 2026"
+      ]
+    },
+    {
+      "id": "sarine-fribourg-agenda-discovery",
+      "url": "https://www.ville-fribourg.ch/agenda",
+      "type": "html",
+      "recordIds": [],
+      "intervalDays": 7,
+      "start": "Filtrer par date, thème",
+      "end": "Abonnez-vous à cet agenda",
+      "required": [
+        "Filtrer par date, thème"
+      ]
+    },
+    {
+      "id": "sarine-memo-rat-exhibition-2026",
+      "url": "https://www.ville-fribourg.ch/lisez-jouez-bougez",
+      "type": "html",
+      "recordIds": [
+        "memo-rat-exhibition-2026"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Le rat de bibliothèque"
+      ]
+    },
+    {
+      "id": "sarine-memo-winter-programme-2026-27",
+      "url": "https://cdnm.heyzine.com/files/uploaded/v3/1b5babb077c83e6573328f25c4443b9921836c54.pdf",
+      "type": "pdf",
+      "recordIds": [
+        "memo-buchstart",
+        "memo-grands-signes-2026-11-10",
+        "memo-eveil-musical-2027-02-16",
+        "memo-musik-entdecken-2027-03-16"
+      ],
+      "intervalDays": 30,
+      "maxBytes": 10000000,
+      "required": [
+        "Atelier Grands Signes",
+        "Musik entdecken"
+      ]
+    },
+    {
+      "id": "sarine-ludo-marly",
+      "url": "https://marly-ludo.ch/contact/",
+      "type": "html",
+      "recordIds": [
+        "ludo-marly"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Ludothèque de Marly"
+      ]
+    },
+    {
+      "id": "sense-snowcenter",
+      "url": "https://www.sss-schwarzsee.ch/kurse/kinder-1/first-experience/",
+      "type": "html",
+      "recordIds": [
+        "snowli",
+        "snowli-daily",
+        "snowli-weekly",
+        "ski-private"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Snowli-Bambini"
+      ]
+    },
+    {
+      "id": "sarine-museum-atelier",
+      "url": "https://www.fr.ch/mhnf/ateliers-parents-enfants",
+      "type": "html",
+      "recordIds": [
+        "museum"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Ateliers parents-enfants"
+      ]
+    },
+    {
+      "id": "sense-kinderfeier",
+      "url": "https://www.pfarrei-tafers.ch/dabei-sein/kinder-und-familien/kinderfeier",
+      "type": "html",
+      "recordIds": [
+        "kinderfeier"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Kinderfeier"
+      ]
+    },
+    {
+      "id": "sarine-lire-marly",
+      "url": "https://www.nepourlire.ch/de/agenda?page=25",
+      "type": "html",
+      "recordIds": [
+        "lire-marly"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Route de Fribourg 15"
+      ],
+      "start": "Bibliothèque régionale de Marly",
+      "end": "Bibliothèque Terre-Lune"
+    },
+    {
+      "id": "sense-verslimorgen-duedingen",
+      "url": "https://www.nepourlire.ch/de/agenda?page=25",
+      "type": "html",
+      "recordIds": [
+        "verslimorgen-duedingen"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Verslimorgen"
+      ],
+      "start": "Schul- und Gemeindebibliothek",
+      "end": "Bibliothèque régionale de Belfaux"
+    },
+    {
+      "id": "sarine-memo-buchstart",
+      "url": "https://www.nepourlire.ch/de/agenda?page=25",
+      "type": "html",
+      "recordIds": [
+        "memo-buchstart"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Rue de l'Hôpital 2"
+      ],
+      "start": "MEMO - biblio&ludo+",
+      "end": "Bibliothèque régionale du Gibloux"
+    },
+    {
+      "id": "sarine-aef-calendar",
+      "url": "https://tockify.com/api/feeds/ics/educationfamiliale",
+      "type": "ics",
+      "recordIds": [
+        "aef-mpe",
+        "aef-schonberg",
+        "aef-centre",
+        "aef-passerelles",
+        "creer-aef",
+        "aef-vignettaz",
+        "aef-jura",
+        "aef-farvagny",
+        "aef-attalens",
+        "aef-attalens-alimentation"
+      ],
+      "intervalDays": 1,
+      "maxBytes": 1000000,
+      "calendarName": "Agenda de l'Éducation Familiale",
+      "eventIds": [
+        "755",
+        "758",
+        "754",
+        "790",
+        "777",
+        "750",
+        "783",
+        "697",
+        "751"
+      ]
+    },
+    {
+      "id": "sarine-office-family-events",
+      "url": "https://www.officefamilial.ch/fr/office-familial-fribourg/actualites",
+      "type": "html",
+      "recordIds": [
+        "office-family-workshops",
+        "office-family-books"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Actualités"
+      ],
+      "start": "Actualités",
+      "end": "POUR LES PROFESSIONNEL"
+    },
+    {
+      "id": "sarine-artist-factory-prices",
+      "url": "https://www.artistfactory.ch/cours/tarifs",
+      "type": "html",
+      "recordIds": [
+        "artist-factory-parent"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "parent-enfant",
+        "147"
+      ],
+      "start": "tarifs",
+      "end": "cours individuels DJ"
+    },
+    {
+      "id": "catalog-alpabzug",
+      "url": "https://fribourg.ch/de/schwarzsee/veranstaltungen/alpabzug/",
+      "type": "html",
+      "recordIds": [
+        "alpabzug"
+      ],
+      "intervalDays": 14
+    },
+    {
+      "id": "catalog-chocolat",
+      "url": "https://nouveaumonde.ch/agenda/chocolat-show-ces-tresors-qui-vivent-dans-mes-poches/",
+      "type": "html",
+      "recordIds": [
+        "chocolat"
+      ],
+      "intervalDays": 14
+    },
+    {
+      "id": "catalog-playgrounds-marly",
+      "url": "https://www.playgrounds.ch/de/wann-und-wo/m/marly/",
+      "type": "html",
+      "recordIds": [
+        "playgrounds-marly"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-fyfauter",
+      "url": "https://fri-memoria.bcu-fribourg.ch/uploads/r/bcu-fribourg/3/e/0/3e01f4d5a1279915f5f6e90f668a0cbf54c4d2a904a28603a1892d357ed091fe/8ad518cd-4810-4df0-9081-134e190b5b6a-Echo_Nr._09_vom_28.04.2022.pdf",
+      "type": "pdf",
+      "recordIds": [
+        "fyfauter"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-ludo-events",
+      "url": "https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/",
+      "type": "html",
+      "recordIds": [
+        "ludo-events"
+      ],
+      "intervalDays": 14
+    },
+    {
+      "id": "catalog-rabel-giffers",
+      "url": "https://www.evgt.ch/",
+      "type": "html",
+      "recordIds": [
+        "rabel-giffers",
+        "candles-giffers"
+      ],
+      "intervalDays": 14
+    },
+    {
+      "id": "catalog-aquarell",
+      "url": "https://fribourg.ch/de/schwarzsee/veranstaltungen/aquarell-workshops-am-schwarzsee/",
+      "type": "html",
+      "recordIds": [
+        "aquarell"
+      ],
+      "intervalDays": 14
+    },
+    {
+      "id": "catalog-candles-plaffeien",
+      "url": "https://elternverein-plaffeien.ch/aktivitaeten/kerzenziehen/",
+      "type": "html",
+      "recordIds": [
+        "candles-plaffeien"
+      ],
+      "intervalDays": 14
+    },
+    {
+      "id": "catalog-haragati",
+      "url": "https://www.haragati.com/",
+      "type": "html",
+      "recordIds": [
+        "haragati"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-rabel-tafers",
+      "url": "https://www.famylietraeff.ch/jahresprogramm/",
+      "type": "html",
+      "recordIds": [
+        "rabel-tafers"
+      ],
+      "intervalDays": 14
+    },
+    {
+      "id": "catalog-santiklous",
+      "url": "https://elternverein-plaffeien.ch/aktivitaeten/santiklousumzug/",
+      "type": "html",
+      "recordIds": [
+        "santiklous"
+      ],
+      "intervalDays": 14
+    },
+    {
+      "id": "catalog-beaches",
+      "url": "https://fribourg.ch/de/schwarzsee/badespass/",
+      "type": "html",
+      "recordIds": [
+        "beaches"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-christmas-plaffeien",
+      "url": "https://elternverein-plaffeien.ch/aktivitaeten/weihnachtgeschichten/",
+      "type": "html",
+      "recordIds": [
+        "christmas-plaffeien"
+      ],
+      "intervalDays": 14
+    },
+    {
+      "id": "catalog-elki-rechthalten",
+      "url": "https://tsvrechthalten.ch/turnen/",
+      "type": "html",
+      "recordIds": [
+        "elki-rechthalten"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-erntedank",
+      "url": "https://www.ref-weissenstein.ch/",
+      "type": "html",
+      "recordIds": [
+        "erntedank"
+      ],
+      "intervalDays": 14
+    },
+    {
+      "id": "catalog-herbstbasteln",
+      "url": "https://www.ref-weissenstein.ch/wp-content/uploads/2026/08/Infoblatt_Nr9_2026_2608.pdf",
+      "type": "pdf",
+      "recordIds": [
+        "herbstbasteln"
+      ],
+      "intervalDays": 14,
+      "required": [
+        "Herbstbasteln",
+        "13.30 Uhr"
+      ]
+    },
+    {
+      "id": "catalog-marly-outdoor",
+      "url": "https://www.marly.ch/places-de-jeux",
+      "type": "html",
+      "recordIds": [
+        "marly-outdoor"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-biblio-marly",
+      "url": "https://www.fr.ch/bcu/app/bibliotheques/80",
+      "type": "html",
+      "recordIds": [
+        "biblio-marly"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-beachhouse-muntelier",
+      "url": "https://www.bad-murtensee.ch/de/gastronomie/beach-house/",
+      "type": "html",
+      "recordIds": [
+        "beachhouse-muntelier"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-clubcafe-kerzers",
+      "url": "https://www.clubcafe-kerzers.ch/gartenwirtschaft/",
+      "type": "html",
+      "recordIds": [
+        "clubcafe-kerzers"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-jardin-muntelier",
+      "url": "https://www.restaurant-jardin.ch/restaurant",
+      "type": "html",
+      "recordIds": [
+        "jardin-muntelier"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-jolimont",
+      "url": "https://bebes-nageurs.ch/index.php/centres/fribourg/jolimont",
+      "type": "html",
+      "recordIds": [
+        "jolimont"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-kafi8-kerzers",
+      "url": "https://www.kafi8.ch/",
+      "type": "html",
+      "recordIds": [
+        "kafi8-kerzers"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-ludo-plaffeien",
+      "url": "https://ludothek-plaffeien.ch/",
+      "type": "html",
+      "recordIds": [
+        "ludo-plaffeien"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-riggli",
+      "url": "https://kaisereggbahnen-schwarzsee.ch/angebot/riggli-weg/",
+      "type": "html",
+      "recordIds": [
+        "riggli"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-bewegungsinsel",
+      "url": "https://www.svgt.ch/sportarten/bewegungsinsel",
+      "type": "html",
+      "recordIds": [
+        "bewegungsinsel"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-biblio-tafers",
+      "url": "https://www.fr.ch/bcu/app/bibliotheques/97",
+      "type": "html",
+      "recordIds": [
+        "biblio-tafers"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-drachenland",
+      "url": "https://kaisereggbahnen-schwarzsee.ch/angebot/kinderspielplatze/",
+      "type": "html",
+      "recordIds": [
+        "drachenland"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-elki-alterswil",
+      "url": "https://sv-alterswil.ch/verein/Riegen/elki",
+      "type": "html",
+      "recordIds": [
+        "elki-alterswil"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-elki-plaffeien",
+      "url": "https://www.tvplaffeien.ch/gruppen/kinder_jugendliche",
+      "type": "html",
+      "recordIds": [
+        "elki-plaffeien"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-hostellerie",
+      "url": "https://www.hostellerieamschwarzsee.ch/en/hotel/swimming-pool",
+      "type": "html",
+      "recordIds": [
+        "hostellerie"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-ile",
+      "url": "https://www.ile-aux-tresors.ch/pages/aire-de-jeu",
+      "type": "html",
+      "recordIds": [
+        "ile"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-livre-library",
+      "url": "https://www.livrechange.ch/",
+      "type": "html",
+      "recordIds": [
+        "livre-library"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-ludo-giffers",
+      "url": "https://www.evgt.ch/ludothek/",
+      "type": "html",
+      "recordIds": [
+        "ludo-giffers"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-ludo-tafers",
+      "url": "https://www.ludothek-tafers.ch/reglement",
+      "type": "html",
+      "recordIds": [
+        "ludo-tafers"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-minigolf",
+      "url": "https://fribourg.ch/fr/schwarzsee/activites-en-plein-air/mini-golf-schwarzsee/",
+      "type": "html",
+      "recordIds": [
+        "minigolf"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-ondena",
+      "url": "https://www.aufildelondena.ch/petitpois",
+      "type": "html",
+      "recordIds": [
+        "ondena"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-psymolo",
+      "url": "https://www.psymolo.ch/file/Prevention",
+      "type": "html",
+      "recordIds": [
+        "psymolo"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-rodelbahn",
+      "url": "https://kaisereggbahnen-schwarzsee.ch/angebot/sommer-rodelbahn/",
+      "type": "html",
+      "recordIds": [
+        "rodelbahn"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-danse-turin",
+      "url": "https://cristinadanse.ch/danse-parent-enfant/",
+      "type": "html",
+      "recordIds": [
+        "danse-turin"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-krabbel-plaffeien",
+      "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/",
+      "type": "html",
+      "recordIds": [
+        "krabbel-plaffeien"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-krabbel-ursen",
+      "url": "https://www.familientreffstursen.ch/krabbelgruppe",
+      "type": "html",
+      "recordIds": [
+        "krabbel-ursen"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-laruche",
+      "url": "https://laruche.fun/activites/kids-park/",
+      "type": "html",
+      "recordIds": [
+        "laruche"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-mpe",
+      "url": "https://maison-petite-enfance.ch/infos",
+      "type": "html",
+      "recordIds": [
+        "mpe"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-swim-marly",
+      "url": "https://www.marly-piscine.ch/wp-content/uploads/2026/07/Piscine-Marly-Flyer-cours-de-natation-2026-AU26v1.1.pdf",
+      "type": "pdf",
+      "recordIds": [
+        "swim-marly"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-jeux-apav-vully-2026",
+      "url": "https://mont-vully.ch/fileadmin/user_upload/Documents/MontVully/WWW/Users/CultureLoisirs/Manifestations_26-27_finalise.pdf",
+      "type": "pdf",
+      "recordIds": [
+        "jeux-apav-vully-2026"
+      ],
+      "intervalDays": 14
+    },
+    {
+      "id": "catalog-kibim-murten",
+      "url": "https://www.kibim.ch/krabbel-parcours/",
+      "type": "html",
+      "recordIds": [
+        "kibim-murten"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-familybloom-yoga",
+      "url": "https://familybloom.ch/de/unsere-kurse/andere-kurse/family-yoga-eltern-kind-ab-2-jahren",
+      "type": "html",
+      "recordIds": [
+        "familybloom-yoga"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-gym-parents-misery",
+      "url": "https://www.miserycourtion.ch/wp-content/uploads/2025/04/Brochure-nouv.-habitants.pdf",
+      "type": "pdf",
+      "recordIds": [
+        "gym-parents-misery"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-schlittschuh-gurmels",
+      "url": "https://www.gurmels.ch/freizeitaktivitaeten/28364",
+      "type": "html",
+      "recordIds": [
+        "schlittschuh-gurmels"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-baby-bade-murten",
+      "url": "https://www.schwimmbad-murten.ch/images/uploaded/Babyschwimmen%2026.1-Copy-1.pdf",
+      "type": "pdf",
+      "recordIds": [
+        "baby-bade-murten"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-familybloom-mini-move",
+      "url": "https://familybloom.ch/de/unsere-kurse/andere-kurse",
+      "type": "html",
+      "recordIds": [
+        "familybloom-mini-move"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-stimm-family",
+      "url": "https://www.studiomusicale.ch/kurse",
+      "type": "html",
+      "recordIds": [
+        "stimm-family"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-suniai-family-yoga",
+      "url": "https://www.suniai-yoga.ch/eltern-kind-yoga/",
+      "type": "html",
+      "recordIds": [
+        "suniai-family-yoga"
+      ],
+      "intervalDays": 14
+    },
+    {
+      "id": "catalog-entrepot-mini-bulle",
+      "url": "https://fribourg.ch/fr/la-gruyere/activites-interieures/lentrepot-bloc-trampo-bar-et-restaurant/",
+      "type": "html",
+      "recordIds": [
+        "entrepot-mini-bulle"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-fees-chapelle",
+      "url": "https://fribourg.ch/fr/romontregion/randonnees-pedestres/le-sentier-des-fees/",
+      "type": "html",
+      "recordIds": [
+        "fees-chapelle"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-fritime-piccolo-bulle",
+      "url": "https://ludothequegruyere.ch/fritime-piccolo/",
+      "type": "html",
+      "recordIds": [
+        "fritime-piccolo-bulle"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-fsg-elki-lully",
+      "url": "https://www.fsgestavayer.ch/?page_id=34",
+      "type": "html",
+      "recordIds": [
+        "fsg-elki-lully"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-gouille-romont",
+      "url": "https://fribourg.ch/fr/romontregion/nature/la-gouille/",
+      "type": "html",
+      "recordIds": [
+        "gouille-romont"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-library-estavayer",
+      "url": "https://www.fr.ch/bcu/app/bibliotheques/40",
+      "type": "html",
+      "recordIds": [
+        "library-estavayer"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-nouvelle-plage-estavayer",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/plages/la-nouvelle-plage/",
+      "type": "html",
+      "recordIds": [
+        "nouvelle-plage-estavayer"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-plage-chevroux",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-chevroux/",
+      "type": "html",
+      "recordIds": [
+        "plage-chevroux"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-plage-portalban",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/",
+      "type": "html",
+      "recordIds": [
+        "plage-portalban"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-rathvel-petit-oiseau",
+      "url": "https://fribourg.ch/fr/les-paccots/buvettes-alpage/cabane-du-petit-oiseau/",
+      "type": "html",
+      "recordIds": [
+        "rathvel-petit-oiseau"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-tour-boyer-playground",
+      "url": "https://fribourg.ch/fr/romontregion/activites-en-plein-air/place-de-jeux-a-la-tour-a-boyer/",
+      "type": "html",
+      "recordIds": [
+        "tour-boyer-playground"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-espace-famille-bulle",
+      "url": "https://www.espacefamille.net/",
+      "type": "html",
+      "recordIds": [
+        "espace-famille-bulle"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-library-glane-romont",
+      "url": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+      "type": "html",
+      "recordIds": [
+        "library-glane-romont"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-library-veveyse-chatel",
+      "url": "https://fribourg.ch/fr/les-paccots/boutiques/bibliotheque-publique-de-la-veveyse/",
+      "type": "html",
+      "recordIds": [
+        "library-veveyse-chatel"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-ludo-glane-romont",
+      "url": "https://ludotheque-glane.ch/fr/infos-pratiques",
+      "type": "html",
+      "recordIds": [
+        "ludo-glane-romont"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-ludo-gruyere-bulle",
+      "url": "https://ludothequegruyere.ch/jouer-a-la-ludo/",
+      "type": "html",
+      "recordIds": [
+        "ludo-gruyere-bulle"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-ludo-trottinette-chatel",
+      "url": "https://ludo-latrottinette.ch/infos-pratiques/",
+      "type": "html",
+      "recordIds": [
+        "ludo-trottinette-chatel"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-maison-cailler-broc",
+      "url": "https://fribourg.ch/fr/la-gruyere/musees/maison-cailler-chocolaterie-suisse/",
+      "type": "html",
+      "recordIds": [
+        "maison-cailler-broc"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-maison-gruyere-pringy",
+      "url": "https://fribourg.ch/fr/la-gruyere/musees/la-maison-du-gruyere/?g=789&slug=fromage",
+      "type": "html",
+      "recordIds": [
+        "maison-gruyere-pringy"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-musee-grenouilles-estavayer",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/musees/musee-destavayer-le-lac-et-ses-grenouilles/",
+      "type": "html",
+      "recordIds": [
+        "musee-grenouilles-estavayer"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-piscine-chatel",
+      "url": "https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/culture-sport-et-loisirs/sport/piscine-communale",
+      "type": "html",
+      "recordIds": [
+        "piscine-chatel"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-pitchounes-romont",
+      "url": "https://lamaisondespitchounes.ch/",
+      "type": "html",
+      "recordIds": [
+        "pitchounes-romont"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-village-lacustre-gletterens",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/patrimoine-et-terroir/village-lacustre-de-gletterens/",
+      "type": "html",
+      "recordIds": [
+        "village-lacustre-gletterens"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-vitromusee-romont",
+      "url": "https://fribourg.ch/fr/romontregion/musees/les-enfants-au-vitromusee/",
+      "type": "html",
+      "recordIds": [
+        "vitromusee-romont"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-ferme-verte-vallee-vuisternens",
+      "url": "https://fribourg.ch/fr/romontregion/agritourisme/ferme-verte-vallee/",
+      "type": "html",
+      "recordIds": [
+        "ferme-verte-vallee-vuisternens"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-botanique-attalens",
+      "url": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-botanique-attalens/",
+      "type": "html",
+      "recordIds": [
+        "botanique-attalens"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-gros-chaumiaux-cerniat",
+      "url": "https://fribourg.ch/fr/la-gruyere/buvettes-alpage/buvette-des-gros-chaumiaux/",
+      "type": "html",
+      "recordIds": [
+        "gros-chaumiaux-cerniat"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-plage-cheyres",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-cheyres/",
+      "type": "html",
+      "recordIds": [
+        "plage-cheyres"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-library-domdidier",
+      "url": "https://www.fr.ch/bcu/app/bibliotheques/37",
+      "type": "html",
+      "recordIds": [
+        "library-domdidier"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-saison-alpage-charmey",
+      "url": "https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/la-saison-dalpage-vounetz/",
+      "type": "html",
+      "recordIds": [
+        "saison-alpage-charmey"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-vita-chatel",
+      "url": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/parcours-vita-chatel-st-denis/",
+      "type": "html",
+      "recordIds": [
+        "vita-chatel"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-buvette-sapins-epagny",
+      "url": "https://fribourg.ch/fr/la-gruyere/buvettes-alpage/buvette-des-sapins/",
+      "type": "html",
+      "recordIds": [
+        "buvette-sapins-epagny"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-humilimont-marsens",
+      "url": "https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/sentier-sylvicole-du-parc-dhumilimont/",
+      "type": "html",
+      "recordIds": [
+        "humilimont-marsens"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-lutins-paccots",
+      "url": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-des-lutins/",
+      "type": "html",
+      "recordIds": [
+        "lutins-paccots"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-fsg-chatel-parent-remaufens",
+      "url": "https://fsgchatel.ch/enfants/",
+      "type": "html",
+      "recordIds": [
+        "fsg-chatel-parent-remaufens"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-fsg-domdidier-parent",
+      "url": "https://www.fsg-domdidier.ch/groupes/parents-enfants/",
+      "type": "html",
+      "recordIds": [
+        "fsg-domdidier-parent"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-epicentre-pataugeoire-romont",
+      "url": "https://epicentre-glane.ch/fr/piscine.php",
+      "type": "html",
+      "recordIds": [
+        "epicentre-pataugeoire-romont"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-aerodrome-epagny-play",
+      "url": "https://fribourg.ch/fr/la-gruyere/restaurants/cafe-restaurant-de-laerodrome/",
+      "type": "html",
+      "recordIds": [
+        "aerodrome-epagny-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-auge-gardens-play",
+      "url": "https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-derriere-les-jardins-auge/",
+      "type": "html",
+      "recordIds": [
+        "auge-gardens-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-boulogne-forest-play",
+      "url": "https://fribourg.ch/fr/romontregion/nature/foret-de-boulogne/",
+      "type": "html",
+      "recordIds": [
+        "boulogne-forest-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-chateau-neuf-jaun",
+      "url": "https://fribourg.ch/wp-content/uploads/2022/01/Places-de-pique-nique.pdf",
+      "type": "pdf",
+      "recordIds": [
+        "chateau-neuf-jaun",
+        "clos-cerfs-gruyeres",
+        "cresuz-village-play",
+        "enney-sarine-play",
+        "le-brand-la-roche",
+        "quatre-sapins-bulle",
+        "saudillet-grandvillard",
+        "sautaux-le-paquier",
+        "thusy-pont-la-ville",
+        "urquier-albeuve"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-chavannettes-rue",
+      "url": "https://fribourg.ch/fr/romontregion/randonnees-pedestres/chutes-de-chavannettes/",
+      "type": "html",
+      "recordIds": [
+        "chavannettes-rue"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-domino-play",
+      "url": "https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-domino-semiramis/",
+      "type": "html",
+      "recordIds": [
+        "domino-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-font-beach",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-font/",
+      "type": "html",
+      "recordIds": [
+        "font-beach"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-forel-beach",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/",
+      "type": "html",
+      "recordIds": [
+        "forel-beach"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-fruence-play",
+      "url": "https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/realisations-en-cours-et-projets/ancienne-ecole-de-fruence",
+      "type": "html",
+      "recordIds": [
+        "fruence-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-fun4all-sevaz-kids",
+      "url": "https://www.j3l.ch/en/P197443/things-to-do/sport-leisure/sports-leisure/fun4all",
+      "type": "html",
+      "recordIds": [
+        "fun4all-sevaz-kids"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-gletterens-beach",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-gletterens/",
+      "type": "html",
+      "recordIds": [
+        "gletterens-beach"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-grand-clos-chatel-play",
+      "url": "https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/communication/actualites-communales/la-boite-sympa-quitte-la-place-de-jeux-du-grand-clos",
+      "type": "html",
+      "recordIds": [
+        "grand-clos-chatel-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-grand-places-play",
+      "url": "https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-grand-places/",
+      "type": "html",
+      "recordIds": [
+        "grand-places-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-grengspitz-beaches",
+      "url": "https://fribourg.ch/fr/regionlacdemorat/plages/plages-a-la-pointe-de-greng/",
+      "type": "html",
+      "recordIds": [
+        "grengspitz-beaches"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-gumefens-beach",
+      "url": "https://fribourg.ch/fr/la-gruyere/plages/plage-a-gumefens/",
+      "type": "html",
+      "recordIds": [
+        "gumefens-beach"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-lacustres-beach",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-des-lacustres/",
+      "type": "html",
+      "recordIds": [
+        "lacustres-beach"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-moleson-village-play",
+      "url": "https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/parc-de-loisirs-moleson/",
+      "type": "html",
+      "recordIds": [
+        "moleson-village-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-montilier-remaufens",
+      "url": "https://fribourg.ch/fr/les-paccots/places-de-pique-nique/place-de-jeux-du-montilier-remaufens/",
+      "type": "html",
+      "recordIds": [
+        "montilier-remaufens"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-morlon-beach",
+      "url": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/",
+      "type": "html",
+      "recordIds": [
+        "morlon-beach"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-motier-beach",
+      "url": "https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-motier/",
+      "type": "html",
+      "recordIds": [
+        "motier-beach"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-nant-beach",
+      "url": "https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-nant/",
+      "type": "html",
+      "recordIds": [
+        "nant-beach"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-neuveville-school-play",
+      "url": "https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-ecole-de-la-neuveville/",
+      "type": "html",
+      "recordIds": [
+        "neuveville-school-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-paccots-recreation",
+      "url": "https://fribourg.ch/fr/les-paccots/activites-en-plein-air/zone-recreative-des-paccots/",
+      "type": "html",
+      "recordIds": [
+        "paccots-recreation"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-papayou-attalens",
+      "url": "https://fribourg.ch/fr/les-paccots/patrimoine-et-terroir/ludotheque-papayou/",
+      "type": "html",
+      "recordIds": [
+        "papayou-attalens"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-petites-rames-play",
+      "url": "https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-petites-rames/",
+      "type": "html",
+      "recordIds": [
+        "petites-rames-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-pflueck-kerzers",
+      "url": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/pflueck-dis-glueck/",
+      "type": "html",
+      "recordIds": [
+        "pflueck-kerzers"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-pic-vert-grandvillard",
+      "url": "https://fribourg.ch/fr/la-gruyere/restaurants/restaurant-le-pic-vert/",
+      "type": "html",
+      "recordIds": [
+        "pic-vert-grandvillard"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-seeweid-play",
+      "url": "https://fribourg.ch/fr/schwarzsee/campings/camping-seeweid/",
+      "type": "html",
+      "recordIds": [
+        "seeweid-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-sugiez-beach",
+      "url": "https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-sugiez/",
+      "type": "html",
+      "recordIds": [
+        "sugiez-beach"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-traina-manchou-semsales",
+      "url": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-traina-manchou-semsales/",
+      "type": "html",
+      "recordIds": [
+        "traina-manchou-semsales"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-vallon-museum",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/musees/musee-romain-de-vallon/",
+      "type": "html",
+      "recordIds": [
+        "vallon-museum"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-broc-outdoor-pool",
+      "url": "https://fribourg.ch/fr/la-gruyere/piscines/piscine-communale-de-broc/",
+      "type": "html",
+      "recordIds": [
+        "broc-outdoor-pool"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-charmey-family-pool",
+      "url": "https://fribourg.ch/fr/la-gruyere/piscines/piscine-couverte-de-charmey/",
+      "type": "html",
+      "recordIds": [
+        "charmey-family-pool"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-jeuss-animal-park",
+      "url": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/parc-animalier-jeuss/",
+      "type": "html",
+      "recordIds": [
+        "jeuss-animal-park"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-marionnettes-fribourg",
+      "url": "https://fribourg.ch/fr/fribourg/musees/musee-suisse-de-la-marionnette/",
+      "type": "html",
+      "recordIds": [
+        "marionnettes-fribourg"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-moliere-trail",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/nature/sentier-nature-de-la-moliere/",
+      "type": "html",
+      "recordIds": [
+        "moliere-trail"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-murten-family-pool",
+      "url": "https://fribourg.ch/fr/regionlacdemorat/piscines/piscine-couverte-piscine-et-plage-morat/",
+      "type": "html",
+      "recordIds": [
+        "murten-family-pool"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-papier-peint-mezieres",
+      "url": "https://fribourg.ch/fr/romontregion/musees/les-enfants-au-musee-du-papier-peint/",
+      "type": "html",
+      "recordIds": [
+        "papier-peint-mezieres"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-ptites-bottes-mamans",
+      "url": "https://auxptitesbottes.ch/votre-moment-magique/",
+      "type": "html",
+      "recordIds": [
+        "ptites-bottes-mamans"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-ptites-bottes-family-visit",
+      "url": "https://auxptitesbottes.ch/visite-des-animaux-2/",
+      "type": "html",
+      "recordIds": [
+        "ptites-bottes-family-visit"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-defenant-grangettes",
+      "url": "https://fribourg.ch/fr/romontregion/buvettes-alpage/buvette-du-defenant/?city=Fribourg&lang=fr",
+      "type": "html",
+      "recordIds": [
+        "defenant-grangettes"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-la-tomate-matran",
+      "url": "https://fribourg.ch/fr/fribourg/restaurants/la-tomate/",
+      "type": "html",
+      "recordIds": [
+        "la-tomate-matran"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-lion-or-siviriez",
+      "url": "https://fribourg.ch/fr/romontregion/restaurants/auberge-du-lion-dor-siviriez/",
+      "type": "html",
+      "recordIds": [
+        "lion-or-siviriez"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-bruenisried-forest-playgroup",
+      "url": "https://www.bruenisried.ch/vorschulalter.php",
+      "type": "html",
+      "recordIds": [
+        "bruenisried-forest-playgroup"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-elki-schmitten-treff",
+      "url": "https://crossiety.app/groups/1274",
+      "type": "html",
+      "recordIds": [
+        "elki-schmitten-treff"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-elki-wuennewil",
+      "url": "https://tsv-wuennewil.ch/verein/gruppen/vorschulturnen",
+      "type": "html",
+      "recordIds": [
+        "elki-wuennewil"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-grolley-autumn-market-2026",
+      "url": "https://fribourg.ch/fr/fribourg/evenements/marche-dautomne-a-grolley/",
+      "type": "html",
+      "recordIds": [
+        "grolley-autumn-market-2026"
+      ],
+      "intervalDays": 14
+    },
+    {
+      "id": "catalog-torny-fritime-noel-2026",
+      "url": "https://torny.ch/images/A-2026/programme_2026.pdf",
+      "type": "pdf",
+      "recordIds": [
+        "torny-fritime-noel-2026"
+      ],
+      "intervalDays": 14
+    },
+    {
+      "id": "catalog-ursy-maternelle",
+      "url": "https://www.ursy.ch/ecole/ecole-maternelle",
+      "type": "html",
+      "recordIds": [
+        "ursy-maternelle"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-arconciel-arche-play",
+      "url": "https://par-chez-nous.ch/places/place-de-larche/",
+      "type": "html",
+      "recordIds": [
+        "arconciel-arche-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-auried-kleinboesingen",
+      "url": "https://www.pronatura-fr.ch/de/naturschutzgebiet-auried",
+      "type": "html",
+      "maxBytes": 3000000,
+      "recordIds": [
+        "auried-kleinboesingen"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-autigny-park",
+      "url": "https://par-chez-nous.ch/places/parc-dautigny/",
+      "type": "html",
+      "recordIds": [
+        "autigny-park"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-bossonnens-vestiges",
+      "url": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/les-vestiges-de-bossonnens-sentier-didactique/",
+      "type": "html",
+      "recordIds": [
+        "bossonnens-vestiges"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-botterens-village-play",
+      "url": "https://www.realsport.ch/fr/references/botterens-espace-ludique",
+      "type": "html",
+      "recordIds": [
+        "botterens-village-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-chatelard-villargiroud-loop",
+      "url": "https://fribourg.ch/fr/romontregion/randonnees-pedestres/circuit-le-chatelard-villargiroud/",
+      "type": "html",
+      "recordIds": [
+        "chatelard-villargiroud-loop"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-chatillon-broye-play",
+      "url": "https://chatillon-broye.ch/",
+      "type": "html",
+      "recordIds": [
+        "chatillon-broye-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-chenens-sport-park",
+      "url": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/",
+      "type": "html",
+      "recordIds": [
+        "chenens-sport-park"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-corbieres-montagnetta",
+      "url": "https://corbieres.ch/lac-et-montagne/",
+      "type": "html",
+      "recordIds": [
+        "corbieres-montagnetta"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-corminboeuf-fauna-walk",
+      "url": "https://fribourg.ch/fr/fribourg/randonnees-pedestres/randonnee-corminboeuf-faune-et-flore/",
+      "type": "html",
+      "recordIds": [
+        "corminboeuf-fauna-walk"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-cottens-school-park",
+      "url": "https://par-chez-nous.ch/places/parc-de-lecole-de-cottens/",
+      "type": "html",
+      "recordIds": [
+        "cottens-school-park"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-courgevaux-school-play",
+      "url": "https://courgevaux.ch/images/pdf/Compte-00-01-sig_FR.pdf",
+      "type": "pdf",
+      "recordIds": [
+        "courgevaux-school-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-cugy-forest-play",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/places-de-pique-nique/place-de-pique-nique-cugy-fr/",
+      "type": "html",
+      "recordIds": [
+        "cugy-forest-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-echarlens-legendes",
+      "url": "https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/au-pays-des-legendes-de-la-gruyere/",
+      "type": "html",
+      "recordIds": [
+        "echarlens-legendes"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-elki-heitenried",
+      "url": "https://tsv-heitenried.ch/angebot/elki/",
+      "type": "html",
+      "recordIds": [
+        "elki-heitenried"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-ferpicloz-playground",
+      "url": "https://par-chez-nous.ch/places/place-de-jeux-de-ferpicloz/",
+      "type": "html",
+      "recordIds": [
+        "ferpicloz-playground"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-fetigny-peralles-picnic",
+      "url": "https://fetigny-menieres.ch/administration-services/administration-services-reservation-infrastructures/",
+      "type": "html",
+      "recordIds": [
+        "fetigny-peralles-picnic"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-granges-veveyse-play",
+      "url": "https://granges.org/sdg50/",
+      "type": "html",
+      "recordIds": [
+        "granges-veveyse-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-hauteville-otavela-play",
+      "url": "https://www.hauteville.ch/culture-et-loisirs/salle-communale-otavela",
+      "type": "html",
+      "recordIds": [
+        "hauteville-otavela-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-heitenried-schloss-play",
+      "url": "https://www.heitenried.ch/_doc/6343472",
+      "type": "pdf",
+      "recordIds": [
+        "heitenried-schloss-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-leflon-bouloz-playground",
+      "url": "https://leflon.ch/vie-locale/sport",
+      "type": "html",
+      "recordIds": [
+        "leflon-bouloz-playground",
+        "leflon-heron-trail"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-montagny-arbognes",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/randonnees-pedestres/les-arbognes/",
+      "type": "html",
+      "recordIds": [
+        "montagny-arbognes"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-montets-vita-forest",
+      "url": "https://les-montets.ch/sports-loisirs-culture/sports",
+      "type": "html",
+      "recordIds": [
+        "montets-vita-forest"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-montsalvens-lakeside-walk",
+      "url": "https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/tour-du-lac-de-montsalvens/",
+      "type": "html",
+      "recordIds": [
+        "montsalvens-lakeside-walk"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-neyruz-les-simon",
+      "url": "https://par-chez-nous.ch/places/parc-en-simon/",
+      "type": "html",
+      "recordIds": [
+        "neyruz-les-simon"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-onnens-school-park",
+      "url": "https://par-chez-nous.ch/places/ecole-donnens/",
+      "type": "html",
+      "recordIds": [
+        "onnens-school-park"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-plasselb-tennisbuvette-play",
+      "url": "https://fribourg.ch/de/schwarzsee/outdoor-aktivitaeten/tennisclub-plasselb-und-umgebung/",
+      "type": "html",
+      "recordIds": [
+        "plasselb-tennisbuvette-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-prez-school-park",
+      "url": "https://par-chez-nous.ch/places/ecole-de-prez-vers-noreaz/",
+      "type": "html",
+      "recordIds": [
+        "prez-school-park"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-riaz-crosscountry-rental",
+      "url": "https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/centre-de-location-et-dinitiation-ski-de-fond/",
+      "type": "html",
+      "recordIds": [
+        "riaz-crosscountry-rental"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-saint-martin-besencens-atelier",
+      "url": "https://www.saint-martin-fr.ch/structure-daccueil-de-la-petite-enfance/",
+      "type": "html",
+      "recordIds": [
+        "saint-martin-besencens-atelier"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-sales-sport-playground",
+      "url": "https://commune-sales.ch/wp-content/uploads/2024/03/Reglement-communal_Centre-sportif_Utilisation_Des-2024_signe.pdf",
+      "type": "pdf",
+      "recordIds": [
+        "sales-sport-playground"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-sorens-sculpture-trail",
+      "url": "https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/chemin-des-sculptures/",
+      "type": "html",
+      "recordIds": [
+        "sorens-sculpture-trail"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-st-silvester-spielgruppe",
+      "url": "https://www.stsilvester.ch/spielgruppe.html",
+      "type": "html",
+      "recordIds": [
+        "st-silvester-spielgruppe"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-surpierre-forest-picnic",
+      "url": "https://fribourg.ch/fr/estavayer-payerne/places-de-pique-nique/place-de-pique-nique-surpierre/",
+      "type": "html",
+      "recordIds": [
+        "surpierre-forest-picnic"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-treyvaux-school-park",
+      "url": "https://par-chez-nous.ch/places/ecole-de-treyvaux/",
+      "type": "html",
+      "recordIds": [
+        "treyvaux-school-park"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-ueberstorf-schluessel-play",
+      "url": "https://fribourg.ch/de/schwarzsee/restaurants/gasthof-zum-schlussel/",
+      "type": "html",
+      "recordIds": [
+        "ueberstorf-schluessel-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-vaulruz-football-play",
+      "url": "https://www.vaulruz.ch/tourisme/cabane-des-tourbieres/",
+      "type": "html",
+      "recordIds": [
+        "vaulruz-football-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-verrerie-tire-ailes",
+      "url": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-a-tire-dailes-le-cret/",
+      "type": "html",
+      "recordIds": [
+        "verrerie-tire-ailes"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-villaz-lussy-small-loop",
+      "url": "https://fribourg.ch/fr/romontregion/randonnees-pedestres/circuit-parcours-de-la-montage-de-lussy-petit/",
+      "type": "html",
+      "recordIds": [
+        "villaz-lussy-small-loop"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-villorsonnens-forest-cabin-play",
+      "url": "https://villorsonnens.ch/location-salles/",
+      "type": "html",
+      "recordIds": [
+        "villorsonnens-forest-cabin-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-vuadens-witches-trail",
+      "url": "https://www.vuadens.ch/generalites/tourisme-et-loisirs/",
+      "type": "html",
+      "recordIds": [
+        "vuadens-witches-trail"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-wunnewil-staffelsholz",
+      "url": "https://fribourg.ch/de/schwarzsee/picknickplaetze/feuerstelle-wunnewil-staffelsholz/",
+      "type": "html",
+      "recordIds": [
+        "wunnewil-staffelsholz"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-belfaux-forest-picnic",
+      "url": "https://fribourg.ch/fr/fribourg/places-de-pique-nique/place-de-pique-nique-belfaux/",
+      "type": "html",
+      "recordIds": [
+        "belfaux-forest-picnic"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-billens-kids-natation",
+      "url": "https://www.kidsnatation.ch/accueil-2/",
+      "type": "html",
+      "recordIds": [
+        "billens-kids-natation"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-chatonnaye-forest-cabin",
+      "url": "https://chatonnaye.ch/cabane-salles.html",
+      "type": "html",
+      "recordIds": [
+        "chatonnaye-forest-cabin"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-hauterive-souche-family",
+      "url": "https://fribourg.ch/fr/fribourg/activites-en-plein-air/boucle-hauterive-la-souche/",
+      "type": "html",
+      "recordIds": [
+        "hauterive-souche-family"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-maison-petits-villarlod",
+      "url": "https://www.maisondespetits.com/",
+      "type": "html",
+      "recordIds": [
+        "maison-petits-villarlod"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-saint-aubin-ptits-pruneaux",
+      "url": "https://www.vallon.ch/fr/services/sante-et-social/enfants",
+      "type": "html",
+      "recordIds": [
+        "saint-aubin-ptits-pruneaux"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-nuvilly-batailles-play",
+      "url": "https://playguide.eu/Suisse/1683375-aires-de-jeux-a-nuvilly",
+      "type": "html",
+      "recordIds": [
+        "nuvilly-batailles-play"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-pierrafortscha-erratic-boulder",
+      "url": "https://fribourg.ch/fr/fribourg/randonnees-pedestres/sentier-autour-de-marly-et-pierrafortscha/",
+      "type": "html",
+      "recordIds": [
+        "pierrafortscha-erratic-boulder"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-villarsel-gerine-corridor",
+      "url": "https://par-chez-nous.ch/places/gerine/",
+      "type": "html",
+      "recordIds": [
+        "villarsel-gerine-corridor"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-chez-betty-massonnens",
+      "url": "https://bon-cadeau.gastrofribourg.ch/fr/shops/auberge-de-l-union",
+      "type": "html",
+      "recordIds": [
+        "chez-betty-massonnens"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-trip-trap-marly",
+      "url": "https://trip-trap-marly.ch/fr/offre-prix/",
+      "type": "html",
+      "recordIds": [
+        "trip-trap-marly"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-zumba-mini-bulle",
+      "url": "https://www.studiodansebulle.com/kids-ados",
+      "type": "html",
+      "recordIds": [
+        "zumba-mini-bulle"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-aef-villars",
+      "url": "https://www.villars-sur-glane.ch/prestations/animation-de-0-a-5-ans/",
+      "type": "html",
+      "recordIds": [
+        "aef-villars"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Le Milieu"
+      ]
+    },
+    {
+      "id": "catalog-aef-estavayer-cafe",
+      "url": "https://estabiblio.ch/cafeparent",
+      "type": "html",
+      "recordIds": [
+        "aef-estavayer-cafe"
+      ],
+      "intervalDays": 30
+    },
+    {
+      "id": "catalog-ne-pour-lire-estavayer",
+      "url": "https://estabiblio.ch/nepourlire",
+      "type": "html",
+      "recordIds": [
+        "ne-pour-lire-estavayer"
+      ],
+      "intervalDays": 30
+    }
+  ]
+}

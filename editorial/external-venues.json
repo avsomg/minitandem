@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "groups": [
+    {
+      "id": "memo",
+      "label": "MEMO biblio&ludo+",
+      "cardIds": ["memo-buchstart", "memo-library", "memo-musik-entdecken-2026-09-29", "memo-rat-mission-2026-09-30", "memo-rat-vernissage-2026-09-30", "memo-rat-exhibition-2026", "memo-grands-signes-2026-11-10", "memo-eveil-musical-2027-02-16", "memo-musik-entdecken-2027-03-16"]
+    },
+    {
+      "id": "sellenhof",
+      "label": "Sellenhof",
+      "cardIds": ["sellenhof-wednesday", "sellenhof-group", "sellenhof-private"]
+    },
+    {
+      "id": "snowcenter",
+      "label": "Snowcenter Gypsera",
+      "cardIds": ["snowli", "snowli-daily", "snowli-weekly", "ski-private"]
+    },
+    {
+      "id": "estabiblio",
+      "label": "Bibliothèque publique d’Estavayer",
+      "cardIds": ["ne-pour-lire-estavayer", "aef-estavayer-cafe", "library-estavayer"]
+    },
+    {
+      "id": "maison-marly",
+      "label": "Maison de quartier Marly",
+      "cardIds": ["cafe-marly", "espace-marly"]
+    }
+  ]
+}

@@ -1,0 +1,5450 @@
+{
+  "Sellenhof, Seeliweg 21, 1716 Plaffeien": {
+    "query": "Sellenhof Seeliweg 21 1716 Plaffeien",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Sellenhof+Seeliweg+21+1716+Plaffeien&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Seeliweg 21 1716 Plaffeien",
+        "lat": 46.743980407714844,
+        "lon": 7.289436340332031
+      },
+      {
+        "label": "Seeliweg 21n 1716 Plaffeien",
+        "lat": 46.74371337890625,
+        "lon": 7.2891035079956055
+      },
+      {
+        "label": "Seeliweg 21b 1716 Plaffeien",
+        "lat": 46.744140625,
+        "lon": 7.289358615875244
+      },
+      {
+        "label": "Seeliweg 21d 1716 Plaffeien",
+        "lat": 46.744014739990234,
+        "lon": 7.28908634185791
+      },
+      {
+        "label": "Seeliweg 21c 1716 Plaffeien",
+        "lat": 46.74409103393555,
+        "lon": 7.289209365844727
+      }
+    ]
+  },
+  "Ober Tschüplere 90, 1716 Oberschrot": {
+    "query": "Ober Tschüplere 90 1716 Oberschrot",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ober+Tsch%C3%BCplere+90+1716+Oberschrot&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Ober Tschüplere 90 1716 Oberschrot",
+        "lat": 46.731719970703125,
+        "lon": 7.262561798095703
+      }
+    ]
+  },
+  "Lengisried 5, 1716 Oberschrot": {
+    "query": "Lengisried 5 1716 Oberschrot",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lengisried+5+1716+Oberschrot&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Lengisried 5 1716 Oberschrot",
+        "lat": 46.742958068847656,
+        "lon": 7.267961502075195
+      },
+      {
+        "label": "Lengisried 5n 1716 Oberschrot",
+        "lat": 46.74298095703125,
+        "lon": 7.268212795257568
+      },
+      {
+        "label": "Lengisried 5p 1716 Oberschrot",
+        "lat": 46.74248504638672,
+        "lon": 7.265373229980469
+      },
+      {
+        "label": "Lengisried 5o 1716 Oberschrot",
+        "lat": 46.74285888671875,
+        "lon": 7.268284797668457
+      },
+      {
+        "label": "Lengisried 5a 1716 Oberschrot",
+        "lat": 46.74281311035156,
+        "lon": 7.267821788787842
+      }
+    ]
+  },
+  "Stersmühlestrasse 1, 1734 Tentlingen": {
+    "query": "Stersmühlestrasse 1 1734 Tentlingen",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Stersm%C3%BChlestrasse+1+1734+Tentlingen&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Stersmühlestrasse 1 1734 Tentlingen",
+        "lat": 46.76841354370117,
+        "lon": 7.196097373962402
+      },
+      {
+        "label": "Stersmühlestrasse 1a 1734 Tentlingen",
+        "lat": 46.768165588378906,
+        "lon": 7.19591760635376
+      },
+      {
+        "label": "Stersmühlestrasse 1b 1734 Tentlingen",
+        "lat": 46.768310546875,
+        "lon": 7.196909427642822
+      },
+      {
+        "label": "Stersmühlestrasse 1n 1734 Tentlingen",
+        "lat": 46.768470764160156,
+        "lon": 7.196683883666992
+      },
+      {
+        "label": "Stersmühlestrasse 10a 1734 Tentlingen",
+        "lat": 46.767879486083984,
+        "lon": 7.194931983947754
+      }
+    ]
+  },
+  "Route des Villars-les-Joncs 3, 1700 Fribourg": {
+    "query": "Route des Villars-les-Joncs 3 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+des+Villars-les-Joncs+3+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route de Villars-les-Joncs 5 1700 Fribourg",
+        "lat": 46.81473922729492,
+        "lon": 7.17450475692749
+      },
+      {
+        "label": "Route de Villars-les-Joncs 7a 1700 Fribourg",
+        "lat": 46.81372833251953,
+        "lon": 7.175512313842773
+      },
+      {
+        "label": "Route de Villars-les-Joncs 7 1700 Fribourg",
+        "lat": 46.81386947631836,
+        "lon": 7.175731658935547
+      },
+      {
+        "label": "Route de Villars-les-Joncs 7n 1700 Fribourg",
+        "lat": 46.81428527832031,
+        "lon": 7.175572395324707
+      },
+      {
+        "label": "Route de Villars-les-Joncs 9 1700 Fribourg",
+        "lat": 46.81402587890625,
+        "lon": 7.1757097244262695
+      }
+    ]
+  },
+  "Alfons-Aeby-Strasse 2, 3186 Düdingen": {
+    "query": "Alfons-Aeby-Strasse 2 3186 Düdingen",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Alfons-Aeby-Strasse+2+3186+D%C3%BCdingen&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Alfons-Aeby-Strasse 2 3186 Düdingen",
+        "lat": 46.849491119384766,
+        "lon": 7.194732666015625
+      },
+      {
+        "label": "Alfons-Aeby-Strasse 2a 3186 Düdingen",
+        "lat": 46.84919738769531,
+        "lon": 7.194880962371826
+      },
+      {
+        "label": "Alfons-Aeby-Strasse 2b 3186 Düdingen",
+        "lat": 46.849098205566406,
+        "lon": 7.195046424865723
+      },
+      {
+        "label": "Alfons-Aeby-Strasse 20 3186 Düdingen",
+        "lat": 46.84769058227539,
+        "lon": 7.193440914154053
+      },
+      {
+        "label": "Alfons-Aeby-Strasse 21a 3186 Düdingen",
+        "lat": 46.8489875793457,
+        "lon": 7.195768356323242
+      }
+    ]
+  },
+  "Primarschulhaus Oberschrot, Rishalta 30, 1716 Oberschrot": {
+    "query": " Rishalta 30 1716 Oberschrot",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+Rishalta+30+1716+Oberschrot&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Rishalta 30 1716 Oberschrot",
+        "lat": 46.74296188354492,
+        "lon": 7.283677101135254
+      },
+      {
+        "label": "Rishalta 30a 1716 Oberschrot",
+        "lat": 46.74284362792969,
+        "lon": 7.283665657043457
+      },
+      {
+        "label": "Rishalta 30b 1716 Oberschrot",
+        "lat": 46.74309539794922,
+        "lon": 7.283687114715576
+      },
+      {
+        "label": "Rishalta 30c 1716 Oberschrot",
+        "lat": 46.74309539794922,
+        "lon": 7.283848762512207
+      }
+    ]
+  },
+  "Spielgruppenlokal, Kirchweg 30, 3. Stock, 1735 Giffers": {
+    "query": "Spielgruppenlokal Kirchweg 30 3. Stock 1735 Giffers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Spielgruppenlokal+Kirchweg+30+3.+Stock+1735+Giffers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Kirchweg 30 1735 Giffers",
+        "lat": 46.7603874206543,
+        "lon": 7.212440490722656
+      },
+      {
+        "label": "Kirchweg 30a 1735 Giffers",
+        "lat": 46.76020812988281,
+        "lon": 7.212513446807861
+      }
+    ]
+  },
+  "Mehrzwecksaal St. Ursen": {
+    "query": "Mehrzwecksaal St. Ursen",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Mehrzwecksaal+St.+Ursen&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Mülimatt 1 1717 St. Ursen",
+        "lat": 46.79261016845703,
+        "lon": 7.199957847595215
+      },
+      {
+        "label": "Hattenberg 1o 1717 St. Ursen",
+        "lat": 46.80429458618164,
+        "lon": 7.196640491485596
+      },
+      {
+        "label": "Struss 1 1717 St. Ursen",
+        "lat": 46.78031539916992,
+        "lon": 7.226528644561768
+      },
+      {
+        "label": "Brünisberg 1 1717 St. Ursen",
+        "lat": 46.791900634765625,
+        "lon": 7.18658447265625
+      },
+      {
+        "label": "Brünisberg 1i 1717 St. Ursen",
+        "lat": 46.79199981689453,
+        "lon": 7.185730457305908
+      }
+    ]
+  },
+  "Schul- und Gemeindebibliothek, Brunnenweg 16, 3186 Düdingen": {
+    "query": "Schul- und Gemeindebibliothek Brunnenweg 16 3186 Düdingen",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Schul-+und+Gemeindebibliothek+Brunnenweg+16+3186+D%C3%BCdingen&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": []
+  },
+  "Pavillon der Primarschule, Tafers": {
+    "query": "Pavillon der Primarschule Tafers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Pavillon+der+Primarschule+Tafers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": []
+  },
+  "Sporthalle Giffers, 1735 Giffers": {
+    "query": " 1735 Giffers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+1735+Giffers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Giffersflüe 1 1735 Giffers",
+        "lat": 46.75439453125,
+        "lon": 7.2216925621032715
+      },
+      {
+        "label": "Spichermatte 1a 1735 Giffers",
+        "lat": 46.764137268066406,
+        "lon": 7.209717273712158
+      },
+      {
+        "label": "Obertswilstrasse 1e 1735 Giffers",
+        "lat": 46.762516021728516,
+        "lon": 7.20851993560791
+      },
+      {
+        "label": "Harzerweg 1 1735 Giffers",
+        "lat": 46.761478424072266,
+        "lon": 7.208832263946533
+      },
+      {
+        "label": "Obertswilstrasse 1 1735 Giffers",
+        "lat": 46.76263427734375,
+        "lon": 7.208434581756592
+      }
+    ]
+  },
+  "Turnhalle Alterswil, 1715 Alterswil": {
+    "query": "Turnhalle Alterswil 1715 Alterswil",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Turnhalle+Alterswil+1715+Alterswil&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Umbertsschweni 1b 1715 Alterswil FR",
+        "lat": 46.77798080444336,
+        "lon": 7.2898430824279785
+      },
+      {
+        "label": "Under Geuer 1 1715 Alterswil FR",
+        "lat": 46.796058654785156,
+        "lon": 7.264053821563721
+      },
+      {
+        "label": "Zitterli 1 1715 Alterswil FR",
+        "lat": 46.79575729370117,
+        "lon": 7.2565598487854
+      },
+      {
+        "label": "Umbertsschweni 1g 1715 Alterswil FR",
+        "lat": 46.77739715576172,
+        "lon": 7.2897725105285645
+      },
+      {
+        "label": "Oberi Matta 1a 1715 Alterswil FR",
+        "lat": 46.7963981628418,
+        "lon": 7.259544372558594
+      }
+    ]
+  },
+  "Place de l’Ancienne-Papeterie 4, 1723 Marly": {
+    "query": "Place de l’Ancienne-Papeterie 4 1723 Marly",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Place+de+l%E2%80%99Ancienne-Papeterie+4+1723+Marly&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Place de l'Ancienne-Papeterie 4 1723 Marly",
+        "lat": 46.77717208862305,
+        "lon": 7.153633117675781
+      }
+    ]
+  },
+  "Schwarzseestrasse 158, 1716 Schwarzsee": {
+    "query": "Schwarzseestrasse 158 1716 Schwarzsee",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Schwarzseestrasse+158+1716+Schwarzsee&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Schwarzseestrasse 158 1716 Schwarzsee",
+        "lat": 46.67710494995117,
+        "lon": 7.293607711791992
+      },
+      {
+        "label": "Schwarzseestrasse 158a 1716 Schwarzsee",
+        "lat": 46.676856994628906,
+        "lon": 7.293528079986572
+      }
+    ]
+  },
+  "Schiffenen 17, 3186 Düdingen": {
+    "query": "Schiffenen 17 3186 Düdingen",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Schiffenen+17+3186+D%C3%BCdingen&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Schiffenen 17 3186 Düdingen",
+        "lat": 46.880489349365234,
+        "lon": 7.1919779777526855
+      },
+      {
+        "label": "Schiffenen 17a 3186 Düdingen",
+        "lat": 46.88041687011719,
+        "lon": 7.191088676452637
+      },
+      {
+        "label": "Schiffenen 17b 3186 Düdingen",
+        "lat": 46.880889892578125,
+        "lon": 7.1917643547058105
+      }
+    ]
+  },
+  "Garmiswil 18, 3186 Düdingen": {
+    "query": "Garmiswil 18 3186 Düdingen",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Garmiswil+18+3186+D%C3%BCdingen&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Garmiswil 18 3186 Düdingen",
+        "lat": 46.8379020690918,
+        "lon": 7.1780266761779785
+      },
+      {
+        "label": "Garmiswil 18e 3186 Düdingen",
+        "lat": 46.838356018066406,
+        "lon": 7.1779398918151855
+      },
+      {
+        "label": "Garmiswil 18a 3186 Düdingen",
+        "lat": 46.838199615478516,
+        "lon": 7.1777825355529785
+      }
+    ]
+  },
+  "Hauptstrasse 11, 3186 Düdingen": {
+    "query": "Hauptstrasse 11 3186 Düdingen",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Hauptstrasse+11+3186+D%C3%BCdingen&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Hauptstrasse 11 3186 Düdingen",
+        "lat": 46.847347259521484,
+        "lon": 7.190854549407959
+      }
+    ]
+  },
+  "Avenue de la Gare 12, 1701 Fribourg": {
+    "query": "Avenue de la Gare 12 1701 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Avenue+de+la+Gare+12+1701+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Avenue de la Gare 12 1700 Fribourg",
+        "lat": 46.80315017700195,
+        "lon": 7.152379035949707
+      },
+      {
+        "label": "Avenue de la Gare 1a 1700 Fribourg",
+        "lat": 46.802364349365234,
+        "lon": 7.151051044464111
+      },
+      {
+        "label": "Avenue de la Gare 1 1700 Fribourg",
+        "lat": 46.802494049072266,
+        "lon": 7.150818824768066
+      },
+      {
+        "label": "Avenue de la Gare 1b 1700 Fribourg",
+        "lat": 46.802425384521484,
+        "lon": 7.151077747344971
+      },
+      {
+        "label": "Avenue de la Gare 2 1700 Fribourg",
+        "lat": 46.80256652832031,
+        "lon": 7.151514053344727
+      }
+    ]
+  },
+  "Route des Sarrazins 115, 1782 Lossy": {
+    "query": "Route des Sarrazins 115 1782 Lossy",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+des+Sarrazins+115+1782+Lossy&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route des Sarrazins 115 1782 Lossy",
+        "lat": 46.83847427368164,
+        "lon": 7.0996222496032715
+      }
+    ]
+  },
+  "Avenue Jean-Paul II 11, 1752 Villars-sur-Glâne": {
+    "query": "Avenue Jean-Paul II 11 1752 Villars-sur-Glâne",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Avenue+Jean-Paul+II+11+1752+Villars-sur-Gl%C3%A2ne&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Avenue Jean-Paul II 11 1752 Villars-sur-Glâne",
+        "lat": 46.805931091308594,
+        "lon": 7.138740062713623
+      },
+      {
+        "label": "Avenue Jean-Paul II 11a 1752 Villars-sur-Glâne",
+        "lat": 46.804725646972656,
+        "lon": 7.138955116271973
+      },
+      {
+        "label": "Avenue Jean-Paul II 11b 1752 Villars-sur-Glâne",
+        "lat": 46.80561828613281,
+        "lon": 7.138683319091797
+      }
+    ]
+  },
+  "Champ Raclé 19, 3280 Murten": {
+    "query": "Champ Raclé 19 3280 Murten",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Champ+Racl%C3%A9+19+3280+Murten&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Champ-Raclé 19 3280 Murten",
+        "lat": 46.94189453125,
+        "lon": 7.143847465515137
+      },
+      {
+        "label": "Champ-Raclé 19a 3280 Murten",
+        "lat": 46.94186019897461,
+        "lon": 7.143537998199463
+      },
+      {
+        "label": "Champ-Raclé 19n 3280 Murten",
+        "lat": 46.941856384277344,
+        "lon": 7.144065856933594
+      }
+    ]
+  },
+  "Route d’Englisberg 3, 1763 Granges-Paccot": {
+    "query": "Route d’Englisberg 3 1763 Granges-Paccot",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+d%E2%80%99Englisberg+3+1763+Granges-Paccot&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route d'Englisberg 3 1763 Granges-Paccot",
+        "lat": 46.82816696166992,
+        "lon": 7.146210670471191
+      },
+      {
+        "label": "Route d'Englisberg 3b 1763 Granges-Paccot",
+        "lat": 46.82792282104492,
+        "lon": 7.146886825561523
+      },
+      {
+        "label": "Route d'Englisberg 3a 1763 Granges-Paccot",
+        "lat": 46.8277702331543,
+        "lon": 7.146840572357178
+      }
+    ]
+  },
+  "Avry Centre, Route de Matran 9, 1754 Avry-sur-Matran": {
+    "query": "Avry Centre Route de Matran 9 1754 Avry-sur-Matran",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Avry+Centre+Route+de+Matran+9+1754+Avry-sur-Matran&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route de Matran 9 1754 Avry-sur-Matran",
+        "lat": 46.787906646728516,
+        "lon": 7.079706192016602
+      },
+      {
+        "label": "Route de Matran 5 1754 Avry-sur-Matran",
+        "lat": 46.787437438964844,
+        "lon": 7.076279640197754
+      },
+      {
+        "label": "Route de Matran 5a 1754 Avry-sur-Matran",
+        "lat": 46.78755187988281,
+        "lon": 7.076238632202148
+      },
+      {
+        "label": "Route de Matran 7a 1754 Avry-sur-Matran",
+        "lat": 46.78595733642578,
+        "lon": 7.079010963439941
+      },
+      {
+        "label": "Route de Matran 7 1754 Avry-sur-Matran",
+        "lat": 46.785831451416016,
+        "lon": 7.079225063323975
+      }
+    ]
+  },
+  "Auriedstrasse 28, 3178 Bösingen": {
+    "query": "Auriedstrasse 28 3178 Bösingen",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Auriedstrasse+28+3178+B%C3%B6singen&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Auriedstrasse 28 3178 Bösingen",
+        "lat": 46.90210723876953,
+        "lon": 7.229791641235352
+      }
+    ]
+  },
+  "Kreuzgasse 8, 3210 Kerzers": {
+    "query": "Kreuzgasse 8 3210 Kerzers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Kreuzgasse+8+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Kreuzgasse 8 3210 Kerzers",
+        "lat": 46.974815368652344,
+        "lon": 7.201425552368164
+      },
+      {
+        "label": "Kreuzgasse 8a 3210 Kerzers",
+        "lat": 46.974735260009766,
+        "lon": 7.20201301574707
+      },
+      {
+        "label": "Kreuzgasse 8e 3210 Kerzers",
+        "lat": 46.9749641418457,
+        "lon": 7.201911926269531
+      }
+    ]
+  },
+  "Bahnhofplatz 16, 3210 Kerzers": {
+    "query": "Bahnhofplatz 16 3210 Kerzers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Bahnhofplatz+16+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Bahnhofplatz 16 3210 Kerzers",
+        "lat": 46.9749755859375,
+        "lon": 7.193376064300537
+      },
+      {
+        "label": "Bahnhofplatz 16b 3210 Kerzers",
+        "lat": 46.974830627441406,
+        "lon": 7.1934661865234375
+      },
+      {
+        "label": "Bahnhofplatz 16a 3210 Kerzers",
+        "lat": 46.974857330322266,
+        "lon": 7.193116188049316
+      }
+    ]
+  },
+  "Fabrikstrasse 37, 3286 Muntelier": {
+    "query": "Fabrikstrasse 37 3286 Muntelier",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Fabrikstrasse+37+3286+Muntelier&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Fabrikstrasse 37 3286 Muntelier",
+        "lat": 46.934844970703125,
+        "lon": 7.126447677612305
+      }
+    ]
+  },
+  "Hauptstrasse 5, 3286 Muntelier": {
+    "query": "Hauptstrasse 5 3286 Muntelier",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Hauptstrasse+5+3286+Muntelier&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Hauptstrasse 5 3286 Muntelier",
+        "lat": 46.93433380126953,
+        "lon": 7.1222639083862305
+      },
+      {
+        "label": "Hauptstrasse 5a 3286 Muntelier",
+        "lat": 46.934566497802734,
+        "lon": 7.121652126312256
+      },
+      {
+        "label": "Hauptstrasse 5b 3286 Muntelier",
+        "lat": 46.93452072143555,
+        "lon": 7.121826171875
+      },
+      {
+        "label": "Hauptstrasse 57 3286 Muntelier",
+        "lat": 46.935855865478516,
+        "lon": 7.124650001525879
+      }
+    ]
+  },
+  "Maison de quartier, Route des Écoles 32, Marly": {
+    "query": " Route des Écoles 32 Marly",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+Route+des+%C3%89coles+32+Marly&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route des Ecoles 32 1723 Marly",
+        "lat": 46.782806396484375,
+        "lon": 7.146188735961914
+      }
+    ]
+  },
+  "Cabinet PSYMOLO, Route de Fribourg 15, Marly": {
+    "query": "Cabinet PSYMOLO Route de Fribourg 15 Marly",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Cabinet+PSYMOLO+Route+de+Fribourg+15+Marly&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route de Fribourg 15 1723 Marly",
+        "lat": 46.78019714355469,
+        "lon": 7.150331974029541
+      },
+      {
+        "label": "Route de Fribourg 15d 1723 Marly",
+        "lat": 46.78015899658203,
+        "lon": 7.149719715118408
+      },
+      {
+        "label": "Route de Fribourg 15c 1723 Marly",
+        "lat": 46.78028869628906,
+        "lon": 7.150893211364746
+      },
+      {
+        "label": "Route de Fribourg 15e 1723 Marly",
+        "lat": 46.78007125854492,
+        "lon": 7.150586128234863
+      },
+      {
+        "label": "Route de Fribourg 15b 1723 Marly",
+        "lat": 46.780330657958984,
+        "lon": 7.150815486907959
+      }
+    ]
+  },
+  "Rte des Écoles 34, petite halle, Marly": {
+    "query": "Rte des Écoles 34 petite halle Marly",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+des+%C3%89coles+34+petite+halle+Marly&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route des Ecoles 34 1723 Marly",
+        "lat": 46.7824821472168,
+        "lon": 7.14572286605835
+      }
+    ]
+  },
+  "FDance Fitness, Route de Chésalles 7, Marly": {
+    "query": "FDance Fitness Route de Chésalles 7 Marly",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=FDance+Fitness+Route+de+Ch%C3%A9salles+7+Marly&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route de Chésalles 7 1723 Marly",
+        "lat": 46.771568298339844,
+        "lon": 7.159298896789551
+      },
+      {
+        "label": "Route de Chésalles 22d 1723 Marly",
+        "lat": 46.77257537841797,
+        "lon": 7.157685279846191
+      },
+      {
+        "label": "Route de Chésalles 28d 1723 Marly",
+        "lat": 46.7728271484375,
+        "lon": 7.15716552734375
+      },
+      {
+        "label": "Route de Chésalles # 1723 Marly",
+        "lat": 46.77227020263672,
+        "lon": 7.1539740562438965
+      },
+      {
+        "label": "Route de Chésalles 2 1723 Marly",
+        "lat": 46.772281646728516,
+        "lon": 7.160961627960205
+      }
+    ]
+  },
+  "Rue des Frères-Lumière 2, 1723 Marly": {
+    "query": "Rue des Frères-Lumière 2 1723 Marly",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+des+Fr%C3%A8res-Lumi%C3%A8re+2+1723+Marly&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Rue des Frères-Lumière 2 1723 Marly",
+        "lat": 46.776023864746094,
+        "lon": 7.1523284912109375
+      },
+      {
+        "label": "Rue des Frères-Lumière 2a 1723 Marly",
+        "lat": 46.77620315551758,
+        "lon": 7.152400016784668
+      },
+      {
+        "label": "Rue des Frères-Lumière 20 1723 Marly",
+        "lat": 46.77444839477539,
+        "lon": 7.155881404876709
+      },
+      {
+        "label": "Rue des Frères-Lumière 20a 1723 Marly",
+        "lat": 46.774478912353516,
+        "lon": 7.155817985534668
+      },
+      {
+        "label": "Rue des Frères-Lumière 21 1723 Marly",
+        "lat": 46.77542495727539,
+        "lon": 7.154996395111084
+      }
+    ]
+  },
+  "Route de Fribourg 15, Centre La Jonction, Marly": {
+    "query": "Route de Fribourg 15 Marly",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Fribourg+15+Marly&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route de Fribourg 15 1723 Marly",
+        "lat": 46.78019714355469,
+        "lon": 7.150331974029541
+      },
+      {
+        "label": "Route de Fribourg 15c 1723 Marly",
+        "lat": 46.78028869628906,
+        "lon": 7.150893211364746
+      },
+      {
+        "label": "Route de Fribourg 15e 1723 Marly",
+        "lat": 46.78007125854492,
+        "lon": 7.150586128234863
+      },
+      {
+        "label": "Route de Fribourg 15b 1723 Marly",
+        "lat": 46.780330657958984,
+        "lon": 7.150815486907959
+      },
+      {
+        "label": "Route de Fribourg 15d 1723 Marly",
+        "lat": 46.78015899658203,
+        "lon": 7.149719715118408
+      }
+    ]
+  },
+  "Route de Chésalles 21B, Marly": {
+    "query": "Route de Chésalles 21B Marly",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Ch%C3%A9salles+21B+Marly&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route de Chésalles 21 1723 Marly",
+        "lat": 46.77217102050781,
+        "lon": 7.156839847564697
+      },
+      {
+        "label": "Route de Chésalles 3b 1723 Marly",
+        "lat": 46.77138900756836,
+        "lon": 7.159780502319336
+      },
+      {
+        "label": "Route de Chésalles 10b 1723 Marly",
+        "lat": 46.772396087646484,
+        "lon": 7.159270763397217
+      },
+      {
+        "label": "Route de Chésalles 12b 1723 Marly",
+        "lat": 46.7725715637207,
+        "lon": 7.158684730529785
+      },
+      {
+        "label": "Route de Chésalles 14b 1723 Marly",
+        "lat": 46.772438049316406,
+        "lon": 7.158182144165039
+      }
+    ]
+  },
+  "Route des Arsenaux 23A, Fribourg": {
+    "query": "Route des Arsenaux 23A Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+des+Arsenaux+23A+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route des Arsenaux 23a 1700 Fribourg",
+        "lat": 46.79762268066406,
+        "lon": 7.151127338409424
+      }
+    ]
+  },
+  "Centre d’animation socioculturelle, Route Mon-Repos 9, Fribourg": {
+    "query": " Route Mon-Repos 9 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+Route+Mon-Repos+9+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route Mon-Repos 9 1700 Fribourg",
+        "lat": 46.8084831237793,
+        "lon": 7.1737518310546875
+      },
+      {
+        "label": "Route Mon-Repos 9c 1700 Fribourg",
+        "lat": 46.808162689208984,
+        "lon": 7.174167633056641
+      },
+      {
+        "label": "Route Mon-Repos 9d 1700 Fribourg",
+        "lat": 46.8080940246582,
+        "lon": 7.174189567565918
+      },
+      {
+        "label": "Route Mon-Repos 9a 1700 Fribourg",
+        "lat": 46.80877685546875,
+        "lon": 7.173903942108154
+      },
+      {
+        "label": "Route Mon-Repos 9f 1700 Fribourg",
+        "lat": 46.80789566040039,
+        "lon": 7.1742167472839355
+      }
+    ]
+  },
+  "Restaurant Coop, Avenue de la Gare 10, Fribourg": {
+    "query": "Restaurant Coop Avenue de la Gare 10 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Restaurant+Coop+Avenue+de+la+Gare+10+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Avenue de la Gare 10 1700 Fribourg",
+        "lat": 46.80301284790039,
+        "lon": 7.152565956115723
+      },
+      {
+        "label": "Avenue de la Gare 10a 1700 Fribourg",
+        "lat": 46.80292892456055,
+        "lon": 7.153146743774414
+      }
+    ]
+  },
+  "Rue de Locarno 3, Fribourg": {
+    "query": "Rue de Locarno 3 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+Locarno+3+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Rue de Locarno 3 1700 Fribourg",
+        "lat": 46.800140380859375,
+        "lon": 7.15151309967041
+      },
+      {
+        "label": "Rue de Locarno 3d 1700 Fribourg",
+        "lat": 46.800323486328125,
+        "lon": 7.150839328765869
+      },
+      {
+        "label": "Rue de Locarno 3b 1700 Fribourg",
+        "lat": 46.800357818603516,
+        "lon": 7.151099681854248
+      },
+      {
+        "label": "Rue de Locarno 3a 1700 Fribourg",
+        "lat": 46.800296783447266,
+        "lon": 7.151211261749268
+      },
+      {
+        "label": "Rue de Locarno 3c 1700 Fribourg",
+        "lat": 46.800357818603516,
+        "lon": 7.150999069213867
+      }
+    ]
+  },
+  "Maison des Associations, Boulevard de Pérolles 40, Fribourg": {
+    "query": " Boulevard de Pérolles 40 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+Boulevard+de+P%C3%A9rolles+40+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Boulevard de Pérolles 40 1700 Fribourg",
+        "lat": 46.79724884033203,
+        "lon": 7.1547064781188965
+      }
+    ]
+  },
+  "Avenue du Midi 3–7, Fribourg": {
+    "query": "Avenue du Midi 3–7 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Avenue+du+Midi+3%E2%80%937+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Avenue du Midi 7 1700 Fribourg",
+        "lat": 46.80153274536133,
+        "lon": 7.148575782775879
+      },
+      {
+        "label": "Avenue du Midi 1 1700 Fribourg",
+        "lat": 46.80184555053711,
+        "lon": 7.1488871574401855
+      },
+      {
+        "label": "Avenue du Midi 1a 1700 Fribourg",
+        "lat": 46.80189895629883,
+        "lon": 7.148553371429443
+      },
+      {
+        "label": "Avenue du Midi 4 1700 Fribourg",
+        "lat": 46.799705505371094,
+        "lon": 7.1478471755981445
+      },
+      {
+        "label": "Avenue du Midi 5 1700 Fribourg",
+        "lat": 46.801639556884766,
+        "lon": 7.148654937744141
+      }
+    ]
+  },
+  "Nouveau Monde, Ancienne Gare 3, Fribourg": {
+    "query": "Nouveau Monde Ancienne Gare 3 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Nouveau+Monde+Ancienne+Gare+3+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Esplanade de l'Ancienne-Gare 3 1700 Fribourg",
+        "lat": 46.80216598510742,
+        "lon": 7.150356769561768
+      },
+      {
+        "label": "Esplanade de l'Ancienne-Gare 3b 1700 Fribourg",
+        "lat": 46.80252456665039,
+        "lon": 7.150609970092773
+      },
+      {
+        "label": "Esplanade de l'Ancienne-Gare 3a 1700 Fribourg",
+        "lat": 46.802459716796875,
+        "lon": 7.150640487670898
+      }
+    ]
+  },
+  "DOSF, Avenue Général-Guisan 61a, Fribourg": {
+    "query": "DOSF Avenue Général-Guisan 61a Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=DOSF+Avenue+G%C3%A9n%C3%A9ral-Guisan+61a+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Avenue du Général-Guisan 61a 1700 Fribourg",
+        "lat": 46.811763763427734,
+        "lon": 7.147415637969971
+      },
+      {
+        "label": "Avenue du Général-Guisan 61 1700 Fribourg",
+        "lat": 46.812355041503906,
+        "lon": 7.147774696350098
+      },
+      {
+        "label": "Avenue du Général-Guisan 61a 1800 Vevey",
+        "lat": 46.46553421020508,
+        "lon": 6.837244987487793
+      },
+      {
+        "label": "Avenue du Général-Guisan 61c 1700 Fribourg",
+        "lat": 46.81224060058594,
+        "lon": 7.147060871124268
+      },
+      {
+        "label": "Avenue du Général-Guisan 61b 1700 Fribourg",
+        "lat": 46.81251525878906,
+        "lon": 7.147634029388428
+      }
+    ]
+  },
+  "Rue de l’Hôpital 2, Fribourg": {
+    "query": "Rue de l’Hôpital 2 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Rue de l'Hôpital 2 1700 Fribourg",
+        "lat": 46.805633544921875,
+        "lon": 7.154872894287109
+      },
+      {
+        "label": "Rue de l'Hôpital 1b 1700 Fribourg",
+        "lat": 46.80586242675781,
+        "lon": 7.15570592880249
+      },
+      {
+        "label": "Rue de l'Hôpital 1d 1700 Fribourg",
+        "lat": 46.806297302246094,
+        "lon": 7.155430793762207
+      },
+      {
+        "label": "Rue de l'Hôpital 1c 1700 Fribourg",
+        "lat": 46.80577850341797,
+        "lon": 7.155938625335693
+      },
+      {
+        "label": "Rue de l'Hôpital 1e 1700 Fribourg",
+        "lat": 46.806190490722656,
+        "lon": 7.155333995819092
+      }
+    ]
+  },
+  "Rue des Écoles 15, Fribourg": {
+    "query": "Rue des Écoles 15 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+des+%C3%89coles+15+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Rue des Ecoles 15 1700 Fribourg",
+        "lat": 46.80409622192383,
+        "lon": 7.148730278015137
+      }
+    ]
+  },
+  "Chemin du Musée 6, Fribourg": {
+    "query": "Chemin du Musée 6 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+du+Mus%C3%A9e+6+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Chemin du Musée 6 1700 Fribourg",
+        "lat": 46.793087005615234,
+        "lon": 7.157187461853027
+      },
+      {
+        "label": "Chemin du Musée 6d 1700 Fribourg",
+        "lat": 46.793121337890625,
+        "lon": 7.155664920806885
+      },
+      {
+        "label": "Chemin du Musée 6c 1700 Fribourg",
+        "lat": 46.79287338256836,
+        "lon": 7.156752109527588
+      },
+      {
+        "label": "Chemin du Musée 6h 1700 Fribourg",
+        "lat": 46.793399810791016,
+        "lon": 7.155919075012207
+      },
+      {
+        "label": "Chemin du Musée 6j 1700 Fribourg",
+        "lat": 46.791378021240234,
+        "lon": 7.157447814941406
+      }
+    ]
+  },
+  "Route de Montécu 94, 1724 Bonnefontaine": {
+    "query": "Route de Montécu 94 1724 Bonnefontaine",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Mont%C3%A9cu+94+1724+Bonnefontaine&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route de Montécu 94 1724 Bonnefontaine",
+        "lat": 46.74007034301758,
+        "lon": 7.198653221130371
+      },
+      {
+        "label": "Route de Montécu 94a 1724 Bonnefontaine",
+        "lat": 46.74018859863281,
+        "lon": 7.198441982269287
+      },
+      {
+        "label": "Route de Montécu 94o 1724 Bonnefontaine",
+        "lat": 46.739810943603516,
+        "lon": 7.198784351348877
+      },
+      {
+        "label": "Route de Montécu 94n 1724 Bonnefontaine",
+        "lat": 46.73979949951172,
+        "lon": 7.198763847351074
+      }
+    ]
+  },
+  "Parc de l’Aurore 2, Fribourg": {
+    "query": "Parc de l’Aurore 2 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Parc+de+l%E2%80%99Aurore+2+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route de l'Aurore 2 1700 Fribourg",
+        "lat": 46.81232452392578,
+        "lon": 7.150873184204102
+      },
+      {
+        "label": "Route de l'Aurore 4d 1700 Fribourg",
+        "lat": 46.812191009521484,
+        "lon": 7.152314186096191
+      },
+      {
+        "label": "Route de l'Aurore 1 1700 Fribourg",
+        "lat": 46.813140869140625,
+        "lon": 7.151025295257568
+      },
+      {
+        "label": "Route de l'Aurore 3 1700 Fribourg",
+        "lat": 46.813514709472656,
+        "lon": 7.151152610778809
+      },
+      {
+        "label": "Route de l'Aurore 4b 1700 Fribourg",
+        "lat": 46.81233596801758,
+        "lon": 7.152421951293945
+      }
+    ]
+  },
+  "Vieux-Chênes, Fribourg": {
+    "query": "Vieux-Chênes Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Vieux-Ch%C3%AAnes+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route des Vieux-Chênes 2a 1700 Fribourg",
+        "lat": 46.811668395996094,
+        "lon": 7.178083896636963
+      },
+      {
+        "label": "Route des Vieux-Chênes 2 1700 Fribourg",
+        "lat": 46.81145477294922,
+        "lon": 7.178012847900391
+      },
+      {
+        "label": "Route des Vieux-Chênes 3 1700 Fribourg",
+        "lat": 46.81098937988281,
+        "lon": 7.177019119262695
+      },
+      {
+        "label": "Route des Vieux-Chênes 4 1700 Fribourg",
+        "lat": 46.81106185913086,
+        "lon": 7.1784892082214355
+      },
+      {
+        "label": "Route des Vieux-Chênes 5 1700 Fribourg",
+        "lat": 46.81210708618164,
+        "lon": 7.175891876220703
+      }
+    ]
+  },
+  "Pfarrkirche St. Martin, 1712 Tafers": {
+    "query": "Pfarrkirche St. Martin 1712 Tafers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Pfarrkirche+St.+Martin+1712+Tafers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": []
+  },
+  "Zentrum Weissenstein, Weissenstein 57, 1718 Rechthalten": {
+    "query": "Zentrum Weissenstein Weissenstein 57 1718 Rechthalten",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Zentrum+Weissenstein+Weissenstein+57+1718+Rechthalten&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Weissenstein 57 1718 Rechthalten",
+        "lat": 46.76859664916992,
+        "lon": 7.249922752380371
+      },
+      {
+        "label": "Weissenstein 57e 1718 Rechthalten",
+        "lat": 46.76847839355469,
+        "lon": 7.25027322769165
+      },
+      {
+        "label": "Weissenstein 57a 1718 Rechthalten",
+        "lat": 46.768707275390625,
+        "lon": 7.2494659423828125
+      },
+      {
+        "label": "Weissenstein 10 1718 Rechthalten",
+        "lat": 46.76768493652344,
+        "lon": 7.248400688171387
+      },
+      {
+        "label": "Weissenstein 14 1718 Rechthalten",
+        "lat": 46.76743698120117,
+        "lon": 7.248514652252197
+      }
+    ]
+  },
+  "Zentrum-EG-Saal, Weissenstein 57, 1718 Rechthalten": {
+    "query": "Zentrum-EG-Saal Weissenstein 57 1718 Rechthalten",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Zentrum-EG-Saal+Weissenstein+57+1718+Rechthalten&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": []
+  },
+  "Dorfplatz, 1716 Plaffeien": {
+    "query": "Dorfplatz 1716 Plaffeien",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Dorfplatz+1716+Plaffeien&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Rüttistrasse # 1716 Plaffeien",
+        "lat": 46.72721862792969,
+        "lon": 7.2858171463012695
+      },
+      {
+        "label": "Bexenried 1c 1716 Plaffeien",
+        "lat": 46.734840393066406,
+        "lon": 7.294751167297363
+      },
+      {
+        "label": "Alt Rufenenweg 1o 1716 Plaffeien",
+        "lat": 46.73332214355469,
+        "lon": 7.294061660766602
+      },
+      {
+        "label": "Rainweg 1e 1716 Plaffeien",
+        "lat": 46.72892379760742,
+        "lon": 7.294198513031006
+      },
+      {
+        "label": "Chromenstrasse 1 1716 Plaffeien",
+        "lat": 46.737979888916016,
+        "lon": 7.291813373565674
+      }
+    ]
+  },
+  "Schulhausweg 1, Kulturraum Primarschule, Plaffeien": {
+    "query": "Schulhausweg 1 Kulturraum Primarschule Plaffeien",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Schulhausweg+1+Kulturraum+Primarschule+Plaffeien&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": []
+  },
+  "Heim Linde, Stersmühlestrasse 1, Tentlingen": {
+    "query": "Heim Linde Stersmühlestrasse 1 Tentlingen",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Heim+Linde+Stersm%C3%BChlestrasse+1+Tentlingen&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": []
+  },
+  "Juchstrasse 9, UG OS, Tafers": {
+    "query": "Juchstrasse 9 UG OS Tafers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Juchstrasse+9+UG+OS+Tafers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Juchstrasse 9 5436 Würenlos",
+        "lat": 47.44243621826172,
+        "lon": 8.360968589782715
+      },
+      {
+        "label": "Juchstrasse 19 5436 Würenlos",
+        "lat": 47.44211196899414,
+        "lon": 8.359829902648926
+      }
+    ]
+  },
+  "Juchstrasse 9, OS, Tafers": {
+    "query": "Juchstrasse 9 OS Tafers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Juchstrasse+9+OS+Tafers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Juchstrasse 9 1712 Tafers",
+        "lat": 46.81391906738281,
+        "lon": 7.2185821533203125
+      },
+      {
+        "label": "Juchstrasse 9a 1712 Tafers",
+        "lat": 46.81438064575195,
+        "lon": 7.218592643737793
+      },
+      {
+        "label": "Juchstrasse 9b 1712 Tafers",
+        "lat": 46.81424331665039,
+        "lon": 7.218878746032715
+      },
+      {
+        "label": "Juchstrasse 9c 1712 Tafers",
+        "lat": 46.813899993896484,
+        "lon": 7.2189812660217285
+      },
+      {
+        "label": "Rohrmoosweg 9 1712 Tafers",
+        "lat": 46.81980514526367,
+        "lon": 7.228330135345459
+      }
+    ]
+  },
+  "Route de Fribourg 15, Marly": {
+    "query": "Route de Fribourg 15 Marly",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Fribourg+15+Marly&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route de Fribourg 15 1723 Marly",
+        "lat": 46.78019714355469,
+        "lon": 7.150331974029541
+      },
+      {
+        "label": "Route de Fribourg 15c 1723 Marly",
+        "lat": 46.78028869628906,
+        "lon": 7.150893211364746
+      },
+      {
+        "label": "Route de Fribourg 15e 1723 Marly",
+        "lat": 46.78007125854492,
+        "lon": 7.150586128234863
+      },
+      {
+        "label": "Route de Fribourg 15b 1723 Marly",
+        "lat": 46.780330657958984,
+        "lon": 7.150815486907959
+      },
+      {
+        "label": "Route de Fribourg 15d 1723 Marly",
+        "lat": 46.78015899658203,
+        "lon": 7.149719715118408
+      }
+    ]
+  },
+  "Chemin des Epinettes 2, 1723 Marly": {
+    "query": "Chemin des Epinettes 2 1723 Marly",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+des+Epinettes+2+1723+Marly&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Chemin des Epinettes 2 1723 Marly",
+        "lat": 46.77554702758789,
+        "lon": 7.158994674682617
+      },
+      {
+        "label": "Chemin des Epinettes 2a 1723 Marly",
+        "lat": 46.775638580322266,
+        "lon": 7.158919334411621
+      },
+      {
+        "label": "Chemin des Epinettes 2b 1723 Marly",
+        "lat": 46.775482177734375,
+        "lon": 7.159444808959961
+      },
+      {
+        "label": "Chemin des Epinettes 20n 1723 Marly",
+        "lat": 46.77745819091797,
+        "lon": 7.156949043273926
+      },
+      {
+        "label": "Chemin des Epinettes 20 1723 Marly",
+        "lat": 46.77757263183594,
+        "lon": 7.156839370727539
+      }
+    ]
+  },
+  "Route du Lac 12, Granges-Paccot": {
+    "query": "Route du Lac 12 Granges-Paccot",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+du+Lac+12+Granges-Paccot&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route du Lac 12 1763 Granges-Paccot",
+        "lat": 46.824466705322266,
+        "lon": 7.153327465057373
+      },
+      {
+        "label": "Route du Lac 12a 1763 Granges-Paccot",
+        "lat": 46.82437515258789,
+        "lon": 7.152215480804443
+      }
+    ]
+  },
+  "Seestrasse 10, 1716 Schwarzsee": {
+    "query": "Seestrasse 10 1716 Schwarzsee",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Seestrasse+10+1716+Schwarzsee&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Seestrasse 10 1716 Schwarzsee",
+        "lat": 46.67088317871094,
+        "lon": 7.285331726074219
+      },
+      {
+        "label": "Schwarzseestrasse 10 1716 Schwarzsee",
+        "lat": 46.70018005371094,
+        "lon": 7.303637504577637
+      }
+    ]
+  },
+  "Riggisalp, Schwarzsee": {
+    "query": "Riggisalp Schwarzsee",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Riggisalp+Schwarzsee&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Riggisalp 409 1716 Schwarzsee",
+        "lat": 46.65343475341797,
+        "lon": 7.301546573638916
+      },
+      {
+        "label": "Riggisalp 411b 1716 Schwarzsee",
+        "lat": 46.65403366088867,
+        "lon": 7.300387859344482
+      },
+      {
+        "label": "Riggisalp 411a 1716 Schwarzsee",
+        "lat": 46.65402603149414,
+        "lon": 7.300560474395752
+      },
+      {
+        "label": "Riggisalp 411 1716 Schwarzsee",
+        "lat": 46.65424346923828,
+        "lon": 7.30039119720459
+      },
+      {
+        "label": "Riggisalp 413 1716 Schwarzsee",
+        "lat": 46.651695251464844,
+        "lon": 7.298476219177246
+      }
+    ]
+  },
+  "Snowcenter, Gypsera, 1716 Schwarzsee": {
+    "query": "Snowcenter Gypsera 1716 Schwarzsee",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Snowcenter+Gypsera+1716+Schwarzsee&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Vorderi Gypsera 3 1716 Schwarzsee",
+        "lat": 46.67546463012695,
+        "lon": 7.29171085357666
+      },
+      {
+        "label": "Vorderi Gypsera 5q 1716 Schwarzsee",
+        "lat": 46.67477798461914,
+        "lon": 7.290468215942383
+      },
+      {
+        "label": "Vorderi Gypsera 5 1716 Schwarzsee",
+        "lat": 46.674964904785156,
+        "lon": 7.290525436401367
+      },
+      {
+        "label": "Vorderi Gypsera 5o 1716 Schwarzsee",
+        "lat": 46.674964904785156,
+        "lon": 7.290302276611328
+      },
+      {
+        "label": "Vorderi Gypsera 5p 1716 Schwarzsee",
+        "lat": 46.674930572509766,
+        "lon": 7.290348052978516
+      }
+    ]
+  },
+  "Lager 121, Schwarzsee": {
+    "query": "Lager 121 Schwarzsee",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lager+121+Schwarzsee&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Schwarzseestrasse 121 1716 Schwarzsee",
+        "lat": 46.681007385253906,
+        "lon": 7.294220924377441
+      },
+      {
+        "label": "Seestrasse 121 1716 Schwarzsee",
+        "lat": 46.66337585449219,
+        "lon": 7.27445125579834
+      },
+      {
+        "label": "Schwarzseestrasse 121a 1716 Schwarzsee",
+        "lat": 46.68111801147461,
+        "lon": 7.294310092926025
+      },
+      {
+        "label": "Seestrasse 121n 1716 Schwarzsee",
+        "lat": 46.66319274902344,
+        "lon": 7.273933410644531
+      },
+      {
+        "label": "Seestrasse 121o 1716 Schwarzsee",
+        "lat": 46.662803649902344,
+        "lon": 7.273545742034912
+      }
+    ]
+  },
+  "Deutsche Kirchgasse 20, 3280 Murten": {
+    "query": "Deutsche Kirchgasse 20 3280 Murten",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Deutsche+Kirchgasse+20+3280+Murten&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Deutsche Kirchgasse 20 3280 Murten",
+        "lat": 46.92812728881836,
+        "lon": 7.118785381317139
+      },
+      {
+        "label": "Deutsche Kirchgasse 20a 3280 Murten",
+        "lat": 46.92792892456055,
+        "lon": 7.1185126304626465
+      }
+    ]
+  },
+  "Chemin du Village 6, 3280 Meyriez": {
+    "query": "Chemin du Village 6 3280 Meyriez",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+du+Village+6+3280+Meyriez&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Chemin du Village 6 3280 Meyriez",
+        "lat": 46.92420196533203,
+        "lon": 7.107992649078369
+      },
+      {
+        "label": "Chemin du Village 6a 3280 Meyriez",
+        "lat": 46.924034118652344,
+        "lon": 7.108067989349365
+      }
+    ]
+  },
+  "Kirchgässli 2, 3210 Kerzers": {
+    "query": "Kirchgässli 2 3210 Kerzers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Kirchg%C3%A4ssli+2+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Kirchgässli 2 3210 Kerzers",
+        "lat": 46.97609329223633,
+        "lon": 7.196778297424316
+      },
+      {
+        "label": "Kirchgässli 2a 3210 Kerzers",
+        "lat": 46.97602844238281,
+        "lon": 7.197141647338867
+      },
+      {
+        "label": "Kirchgässli 1 3210 Kerzers",
+        "lat": 46.976234436035156,
+        "lon": 7.196247577667236
+      },
+      {
+        "label": "Kirchgässli 3 3210 Kerzers",
+        "lat": 46.97637939453125,
+        "lon": 7.196893692016602
+      },
+      {
+        "label": "Kirchgässli 4 3210 Kerzers",
+        "lat": 46.97624206542969,
+        "lon": 7.197145938873291
+      }
+    ]
+  },
+  "Schaalgasse 6, 3280 Murten": {
+    "query": "Schaalgasse 6 3280 Murten",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Schaalgasse+6+3280+Murten&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Schaalgasse 6 3280 Murten",
+        "lat": 46.927528381347656,
+        "lon": 7.116694927215576
+      }
+    ]
+  },
+  "Route de l’École 21, 1784 Courtepin": {
+    "query": "Route de l’École 21 1784 Courtepin",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l%E2%80%99%C3%89cole+21+1784+Courtepin&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route de l'Ecole 21 1784 Courtepin",
+        "lat": 46.86516189575195,
+        "lon": 7.128386974334717
+      },
+      {
+        "label": "Route de l'Ecole 21a 1784 Courtepin",
+        "lat": 46.865760803222656,
+        "lon": 7.128288745880127
+      }
+    ]
+  },
+  "Auf dem Platz 1, 3210 Kerzers": {
+    "query": "Auf dem Platz 1 3210 Kerzers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Auf+dem+Platz+1+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Auf dem Platz 1 3210 Kerzers",
+        "lat": 46.973819732666016,
+        "lon": 7.200720310211182
+      }
+    ]
+  },
+  "Route Principale 69, 1786 Sugiez": {
+    "query": "Route Principale 69 1786 Sugiez",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+Principale+69+1786+Sugiez&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route Principale 69 1786 Sugiez",
+        "lat": 46.95671844482422,
+        "lon": 7.106398582458496
+      },
+      {
+        "label": "Route Principale 69e 1786 Sugiez",
+        "lat": 46.95647048950195,
+        "lon": 7.106431484222412
+      },
+      {
+        "label": "Route Principale 69a 1786 Sugiez",
+        "lat": 46.95652389526367,
+        "lon": 7.106480121612549
+      }
+    ]
+  },
+  "Chemin de la Bibera 12, 1791 Courtepin": {
+    "query": "Chemin de la Bibera 12 1791 Courtepin",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+de+la+Bibera+12+1791+Courtepin&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Biberenweg / Chemin de la Bibera 23d 1791 Courtaman",
+        "lat": 46.87104415893555,
+        "lon": 7.1254096031188965
+      },
+      {
+        "label": "Biberenweg / Chemin de la Bibera 2a 1791 Courtaman",
+        "lat": 46.87004852294922,
+        "lon": 7.123250484466553
+      },
+      {
+        "label": "Biberenweg / Chemin de la Bibera 4a 1791 Courtaman",
+        "lat": 46.87044143676758,
+        "lon": 7.123279094696045
+      },
+      {
+        "label": "Biberenweg / Chemin de la Bibera 4 1791 Courtaman",
+        "lat": 46.870201110839844,
+        "lon": 7.123142719268799
+      },
+      {
+        "label": "Biberenweg / Chemin de la Bibera 6 1791 Courtaman",
+        "lat": 46.869686126708984,
+        "lon": 7.123174667358398
+      }
+    ]
+  },
+  "Moosmatte 1, 3210 Kerzers": {
+    "query": "Moosmatte 1 3210 Kerzers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Moosmatte+1+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Moosmatte 1 3210 Kerzers",
+        "lat": 46.98897171020508,
+        "lon": 7.2001776695251465
+      },
+      {
+        "label": "Moosmatte 1n 3210 Kerzers",
+        "lat": 46.988792419433594,
+        "lon": 7.199758529663086
+      },
+      {
+        "label": "Moosmatte 1a 3210 Kerzers",
+        "lat": 46.990394592285156,
+        "lon": 7.201200008392334
+      },
+      {
+        "label": "Moosmatte 1d 3210 Kerzers",
+        "lat": 46.98896789550781,
+        "lon": 7.199494361877441
+      },
+      {
+        "label": "Moosmatte 1c 3210 Kerzers",
+        "lat": 46.99034118652344,
+        "lon": 7.199731826782227
+      }
+    ]
+  },
+  "Route de l’École 21, 1785 Cressier": {
+    "query": "Route de l’École 21 1785 Cressier",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l%E2%80%99%C3%89cole+21+1785+Cressier&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route de l'Ecole 21 1785 Cressier FR",
+        "lat": 46.89741516113281,
+        "lon": 7.138935089111328
+      },
+      {
+        "label": "Route de l'Ecole 21a 1785 Cressier FR",
+        "lat": 46.897361755371094,
+        "lon": 7.138581275939941
+      }
+    ]
+  },
+  "Zivilschutzanlage, Schulhausgässli 1, 3216 Ried bei Kerzers": {
+    "query": "Zivilschutzanlage Schulhausgässli 1 3216 Ried bei Kerzers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Zivilschutzanlage+Schulhausg%C3%A4ssli+1+3216+Ried+bei+Kerzers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Schulhausgässli 1 3216 Ried b. Kerzers",
+        "lat": 46.95497131347656,
+        "lon": 7.185340881347656
+      },
+      {
+        "label": "Schulhausgässli 2 3216 Ried b. Kerzers",
+        "lat": 46.954769134521484,
+        "lon": 7.185154438018799
+      },
+      {
+        "label": "Schulhausgässli 1c 3216 Ried b. Kerzers",
+        "lat": 46.95502853393555,
+        "lon": 7.185145378112793
+      },
+      {
+        "label": "Schulhausgässli 1b 3216 Ried b. Kerzers",
+        "lat": 46.95499038696289,
+        "lon": 7.1850972175598145
+      },
+      {
+        "label": "Schulhausgässli 1a 3216 Ried b. Kerzers",
+        "lat": 46.95494842529297,
+        "lon": 7.184879302978516
+      }
+    ]
+  },
+  "Murten Tourismus, Hauptgasse 27, 3280 Murten": {
+    "query": "Murten Tourismus Hauptgasse 27 3280 Murten",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Murten+Tourismus+Hauptgasse+27+3280+Murten&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Hauptgasse 27 3280 Murten",
+        "lat": 46.92848205566406,
+        "lon": 7.1170268058776855
+      },
+      {
+        "label": "Hauptgasse 1 3280 Murten",
+        "lat": 46.92801284790039,
+        "lon": 7.1161274909973145
+      },
+      {
+        "label": "Hauptgasse 2 3280 Murten",
+        "lat": 46.92777633666992,
+        "lon": 7.116581439971924
+      },
+      {
+        "label": "Hauptgasse 3 3280 Murten",
+        "lat": 46.92802047729492,
+        "lon": 7.116197109222412
+      },
+      {
+        "label": "Hauptgasse 4 3280 Murten",
+        "lat": 46.927818298339844,
+        "lon": 7.116658687591553
+      }
+    ]
+  },
+  "Ancienne école allemande, Route de Fribourg 19, 1784 Courtepin": {
+    "query": "Ancienne école allemande Route de Fribourg 19 1784 Courtepin",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ancienne+%C3%A9cole+allemande+Route+de+Fribourg+19+1784+Courtepin&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route de l'Ecole 19 1784 Courtepin",
+        "lat": 46.864715576171875,
+        "lon": 7.128133773803711
+      },
+      {
+        "label": "Route de Fribourg 19 1784 Courtepin",
+        "lat": 46.866905212402344,
+        "lon": 7.123219013214111
+      }
+    ]
+  },
+  "Route de Fribourg 19, 1784 Courtepin": {
+    "query": "Route de Fribourg 19 1784 Courtepin",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Fribourg+19+1784+Courtepin&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route de Fribourg 19 1784 Courtepin",
+        "lat": 46.866905212402344,
+        "lon": 7.123219013214111
+      }
+    ]
+  },
+  "HFR Meyriez-Murten, Chemin du Village 24, 3280 Meyriez": {
+    "query": "HFR Meyriez-Murten Chemin du Village 24 3280 Meyriez",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=HFR+Meyriez-Murten+Chemin+du+Village+24+3280+Meyriez&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Chemin du Village 24 3280 Meyriez",
+        "lat": 46.92229080200195,
+        "lon": 7.10813045501709
+      },
+      {
+        "label": "Chemin du Village 24f 3280 Meyriez",
+        "lat": 46.92267608642578,
+        "lon": 7.107841491699219
+      },
+      {
+        "label": "Chemin du Village 24e 3280 Meyriez",
+        "lat": 46.921722412109375,
+        "lon": 7.107773303985596
+      },
+      {
+        "label": "Chemin du Village 1 3280 Meyriez",
+        "lat": 46.92462921142578,
+        "lon": 7.1080522537231445
+      },
+      {
+        "label": "Chemin du Village 1a 3280 Meyriez",
+        "lat": 46.924556732177734,
+        "lon": 7.108720302581787
+      }
+    ]
+  },
+  "Badeplatz Muntelier, 3286 Muntelier": {
+    "query": "Badeplatz Muntelier 3286 Muntelier",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Badeplatz+Muntelier+3286+Muntelier&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Dorfmatt 1a 3286 Muntelier",
+        "lat": 46.93879318237305,
+        "lon": 7.132089138031006
+      },
+      {
+        "label": "Campingweg 1b 3286 Muntelier",
+        "lat": 46.94316482543945,
+        "lon": 7.13389253616333
+      },
+      {
+        "label": "Fischergässli 1a 3286 Muntelier",
+        "lat": 46.93684387207031,
+        "lon": 7.126187324523926
+      },
+      {
+        "label": "Seeweg 1 3286 Muntelier",
+        "lat": 46.93714904785156,
+        "lon": 7.1272101402282715
+      },
+      {
+        "label": "Bündenweg 1 3286 Muntelier",
+        "lat": 46.93781280517578,
+        "lon": 7.128519058227539
+      }
+    ]
+  },
+  "Kinder- und Jugendhaus, Vordere Gasse 5, 3210 Kerzers": {
+    "query": "Kinder- und Jugendhaus Vordere Gasse 5 3210 Kerzers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Kinder-+und+Jugendhaus+Vordere+Gasse+5+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": []
+  },
+  "Reformed Church, Kirchgässli 1, 3210 Kerzers": {
+    "query": "Kirchgässli 1 3210 Kerzers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Kirchg%C3%A4ssli+1+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Kirchgässli 1 3210 Kerzers",
+        "lat": 46.976234436035156,
+        "lon": 7.196247577667236
+      },
+      {
+        "label": "Kirchgässli 2 3210 Kerzers",
+        "lat": 46.97609329223633,
+        "lon": 7.196778297424316
+      },
+      {
+        "label": "Kirchgässli 2a 3210 Kerzers",
+        "lat": 46.97602844238281,
+        "lon": 7.197141647338867
+      },
+      {
+        "label": "Kirchgässli 3 3210 Kerzers",
+        "lat": 46.97637939453125,
+        "lon": 7.196893692016602
+      },
+      {
+        "label": "Kirchgässli 4 3210 Kerzers",
+        "lat": 46.97624206542969,
+        "lon": 7.197145938873291
+      }
+    ],
+    "rebased": {
+      "note": "The results were obtained with an earlier query in another language (see migration/rebase-manifest.json). Repeat the search with geocode.mjs --card=ID --refresh."
+    }
+  },
+  "Avenue de la Gare 14, 1700 Fribourg": {
+    "query": "Avenue de la Gare 14 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Avenue+de+la+Gare+14+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Avenue de la Gare 14 1700 Fribourg",
+        "lat": 46.8033447265625,
+        "lon": 7.153006553649902
+      }
+    ]
+  },
+  "Route de Chantemerle 60, 1763 Granges-Paccot": {
+    "query": "Route de Chantemerle 60 1763 Granges-Paccot",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Chantemerle+60+1763+Granges-Paccot&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route de Chantemerle 60 1763 Granges-Paccot",
+        "lat": 46.820133209228516,
+        "lon": 7.139647006988525
+      },
+      {
+        "label": "Route de Chantemerle 60c 1763 Granges-Paccot",
+        "lat": 46.82032775878906,
+        "lon": 7.139437675476074
+      },
+      {
+        "label": "Route de Chantemerle 60d 1763 Granges-Paccot",
+        "lat": 46.81991195678711,
+        "lon": 7.140020370483398
+      },
+      {
+        "label": "Route de Chantemerle 60a 1763 Granges-Paccot",
+        "lat": 46.819828033447266,
+        "lon": 7.139299392700195
+      },
+      {
+        "label": "Route de Chantemerle 60b 1763 Granges-Paccot",
+        "lat": 46.819766998291016,
+        "lon": 7.139476776123047
+      }
+    ]
+  },
+  "Route du Mont Carmel 5, 1762 Givisiez": {
+    "query": "Route du Mont Carmel 5 1762 Givisiez",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+du+Mont+Carmel+5+1762+Givisiez&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-27",
+    "results": [
+      {
+        "label": "Route du Mont-Carmel 5 1762 Givisiez",
+        "lat": 46.813392639160156,
+        "lon": 7.136007308959961
+      }
+    ]
+  },
+  "Route de Chésalles 21, 1723 Marly": {
+    "query": "Route de Chésalles 21 1723 Marly",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Ch%C3%A9salles+21+1723+Marly&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de Chésalles 21 1723 Marly",
+        "lat": 46.77217102050781,
+        "lon": 7.156839847564697
+      },
+      {
+        "label": "Route de Chésalles 21c 1723 Marly",
+        "lat": 46.772254943847656,
+        "lon": 7.156236171722412
+      },
+      {
+        "label": "Route de Chésalles 21a 1723 Marly",
+        "lat": 46.772178649902344,
+        "lon": 7.157284259796143
+      }
+    ]
+  },
+  "Steindleren 1a, 3210 Kerzers": {
+    "query": "Steindleren 1a 3210 Kerzers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Steindleren+1a+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Steindleren 1a 3210 Kerzers",
+        "lat": 46.977752685546875,
+        "lon": 7.190988063812256
+      }
+    ]
+  },
+  "Freiburgstrasse 16, 3280 Murten": {
+    "query": "Freiburgstrasse 16 3280 Murten",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Freiburgstrasse+16+3280+Murten&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Freiburgstrasse 16 3280 Murten",
+        "lat": 46.924556732177734,
+        "lon": 7.112411975860596
+      },
+      {
+        "label": "Freiburgstrasse 16e 3280 Murten",
+        "lat": 46.92494583129883,
+        "lon": 7.112573146820068
+      },
+      {
+        "label": "Freiburgstrasse 16a 3280 Murten",
+        "lat": 46.9248161315918,
+        "lon": 7.112760066986084
+      },
+      {
+        "label": "Freiburgstrasse 16b 3280 Murten",
+        "lat": 46.924800872802734,
+        "lon": 7.1123576164245605
+      }
+    ]
+  },
+  "Aloha YOGA Paradise, Hauptstrasse 20, 3186 Düdingen": {
+    "query": " Hauptstrasse 20 3186 Düdingen",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+Hauptstrasse+20+3186+D%C3%BCdingen&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Hauptstrasse 20 3186 Düdingen",
+        "lat": 46.84815216064453,
+        "lon": 7.190426826477051
+      }
+    ]
+  },
+  "Turnhalle gelb, Prehlstrasse 1, 3280 Murten": {
+    "query": " Prehlstrasse 1 3280 Murten",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+Prehlstrasse+1+3280+Murten&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Prehlstrasse 1 3280 Murten",
+        "lat": 46.929283142089844,
+        "lon": 7.120510101318359
+      },
+      {
+        "label": "Prehlstrasse 10 3280 Murten",
+        "lat": 46.92730712890625,
+        "lon": 7.120416641235352
+      },
+      {
+        "label": "Prehlstrasse 11a 3280 Murten",
+        "lat": 46.92850112915039,
+        "lon": 7.121324062347412
+      },
+      {
+        "label": "Prehlstrasse 11 3280 Murten",
+        "lat": 46.92863082885742,
+        "lon": 7.122197151184082
+      },
+      {
+        "label": "Prehlstrasse 12 3280 Murten",
+        "lat": 46.926998138427734,
+        "lon": 7.120324611663818
+      }
+    ]
+  },
+  "Hallenbad Murten, Lausannestrasse 2, 3280 Murten": {
+    "query": " Lausannestrasse 2 3280 Murten",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+Lausannestrasse+2+3280+Murten&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Lausannestrasse 2 3280 Murten",
+        "lat": 46.926544189453125,
+        "lon": 7.110995769500732
+      },
+      {
+        "label": "Lausannestrasse 2a 3280 Murten",
+        "lat": 46.92721176147461,
+        "lon": 7.111363410949707
+      },
+      {
+        "label": "Lausannestrasse 5b 3280 Murten",
+        "lat": 46.92587661743164,
+        "lon": 7.111303329467773
+      },
+      {
+        "label": "Lausannestrasse 5 3280 Murten",
+        "lat": 46.9260368347168,
+        "lon": 7.1113104820251465
+      },
+      {
+        "label": "Lausannestrasse 5c 3280 Murten",
+        "lat": 46.92605209350586,
+        "lon": 7.1111650466918945
+      }
+    ]
+  },
+  "Sportweg 21, 3212 Gurmels": {
+    "query": " 3212 Gurmels",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+3212+Gurmels&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Sportweg 1a 3212 Gurmels",
+        "lat": 46.892127990722656,
+        "lon": 7.178242206573486
+      },
+      {
+        "label": "Peitschmatte 1 3212 Gurmels",
+        "lat": 46.89522171020508,
+        "lon": 7.1682281494140625
+      },
+      {
+        "label": "Grossholz 1p 3212 Gurmels",
+        "lat": 46.88656997680664,
+        "lon": 7.1894426345825195
+      },
+      {
+        "label": "Mühleweg 1a 3212 Gurmels",
+        "lat": 46.89128112792969,
+        "lon": 7.170257091522217
+      },
+      {
+        "label": "Lindenweg 1 3212 Gurmels",
+        "lat": 46.89265441894531,
+        "lon": 7.166894912719727
+      }
+    ]
+  },
+  "Halle de gymnastique, 1721 Misery": {
+    "query": " 1721 Misery",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+1721+Misery&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Les Grands-Prés 1a 1721 Misery",
+        "lat": 46.851444244384766,
+        "lon": 7.066347599029541
+      },
+      {
+        "label": "Champ-Devant 1 1721 Misery",
+        "lat": 46.85240173339844,
+        "lon": 7.070229530334473
+      },
+      {
+        "label": "Le Château 1a 1721 Misery",
+        "lat": 46.8510856628418,
+        "lon": 7.068906307220459
+      },
+      {
+        "label": "Route de Fribourg 1 1721 Misery",
+        "lat": 46.85181427001953,
+        "lon": 7.066839218139648
+      },
+      {
+        "label": "En Crausa 1 1721 Misery",
+        "lat": 46.85578536987305,
+        "lon": 7.063094139099121
+      }
+    ]
+  },
+  "Salle polyvalente, 1786 Nant": {
+    "query": " 1786 Nant",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+1786+Nant&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Via Nante # 6745 Giornico",
+        "lat": 46.39815139770508,
+        "lon": 8.872675895690918
+      },
+      {
+        "label": "Nante # 6780 Airolo",
+        "lat": 46.519283294677734,
+        "lon": 8.615667343139648
+      },
+      {
+        "label": "Nante # 6780 Airolo",
+        "lat": 46.51791763305664,
+        "lon": 8.619711875915527
+      },
+      {
+        "label": "Via Nante # 6780 Airolo",
+        "lat": 46.52196502685547,
+        "lon": 8.617712020874023
+      },
+      {
+        "label": "Nante # 6780 Airolo",
+        "lat": 46.517791748046875,
+        "lon": 8.621445655822754
+      }
+    ]
+  },
+  "Rue de Vevey 260, 1630 Bulle": {
+    "query": "Rue de Vevey 260 1630 Bulle",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+Vevey+260+1630+Bulle&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Rue de Vevey 260 1630 Bulle",
+        "lat": 46.613983154296875,
+        "lon": 7.0382866859436035
+      }
+    ]
+  },
+  "Rue du Marché 10, 1630 Bulle": {
+    "query": "Rue du Marché 10 1630 Bulle",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+du+March%C3%A9+10+1630+Bulle&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Rue du Marché 10 1630 Bulle",
+        "lat": 46.61845397949219,
+        "lon": 7.058451175689697
+      }
+    ]
+  },
+  "Rue de l'Etang 25, 1630 Bulle": {
+    "query": "Rue de l'Etang 25 1630 Bulle",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%27Etang+25+1630+Bulle&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Rue de l'Etang 25 1630 Bulle",
+        "lat": 46.627044677734375,
+        "lon": 7.0665974617004395
+      },
+      {
+        "label": "Rue de l'Etang 25e 1630 Bulle",
+        "lat": 46.627098083496094,
+        "lon": 7.066684722900391
+      }
+    ]
+  },
+  "Rue Jules Bellet 7, 1636 Broc": {
+    "query": "Rue Jules Bellet 7 1636 Broc",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+Jules+Bellet+7+1636+Broc&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Rue Jules-Bellet 7 1636 Broc",
+        "lat": 46.60702896118164,
+        "lon": 7.108635902404785
+      },
+      {
+        "label": "Rue Jules-Bellet 7e 1636 Broc",
+        "lat": 46.6068000793457,
+        "lon": 7.109136581420898
+      },
+      {
+        "label": "Rue Jules-Bellet 7i 1636 Broc",
+        "lat": 46.60725402832031,
+        "lon": 7.109501838684082
+      },
+      {
+        "label": "Rue Jules-Bellet 7d 1636 Broc",
+        "lat": 46.606651306152344,
+        "lon": 7.1094489097595215
+      },
+      {
+        "label": "Rue Jules-Bellet 7r 1636 Broc",
+        "lat": 46.60874938964844,
+        "lon": 7.10706901550293
+      }
+    ]
+  },
+  "Place de la Gare 3, 1663 Pringy": {
+    "query": "Place de la Gare 3 1663 Pringy",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Place+de+la+Gare+3+1663+Pringy&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Place de la Gare 3 1663 Pringy",
+        "lat": 46.58216094970703,
+        "lon": 7.072864055633545
+      }
+    ]
+  },
+  "Rue du Château 126, 1680 Romont FR": {
+    "query": "Rue du Château 126 1680 Romont FR",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+du+Ch%C3%A2teau+126+1680+Romont+FR&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Rue du Château 126 1680 Romont FR",
+        "lat": 46.69329071044922,
+        "lon": 6.917413711547852
+      },
+      {
+        "label": "Rue du Château 126a 1680 Romont FR",
+        "lat": 46.69301986694336,
+        "lon": 6.917519569396973
+      }
+    ]
+  },
+  "Route d'Arruffens 17, 1680 Romont": {
+    "query": "Route d'Arruffens 17 1680 Romont",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+d%27Arruffens+17+1680+Romont&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route d'Arruffens 17 1680 Romont FR",
+        "lat": 46.68817901611328,
+        "lon": 6.913952827453613
+      },
+      {
+        "label": "Route d'Arruffens 17 1680 Romont FR",
+        "lat": 46.6882438659668,
+        "lon": 6.91395378112793
+      },
+      {
+        "label": "Route d'Arruffens 17a 1680 Romont FR",
+        "lat": 46.689109802246094,
+        "lon": 6.91455602645874
+      }
+    ]
+  },
+  "Château de Romont, 1680 Romont": {
+    "query": "Château de Romont 1680 Romont",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ch%C3%A2teau+de+Romont+1680+Romont&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Rue du Château 108d 1680 Romont FR",
+        "lat": 46.69453811645508,
+        "lon": 6.918412208557129
+      },
+      {
+        "label": "Rue du Château 93 1680 Romont FR",
+        "lat": 46.69477844238281,
+        "lon": 6.917947769165039
+      },
+      {
+        "label": "Rue du Château 95 1680 Romont FR",
+        "lat": 46.69466781616211,
+        "lon": 6.917891502380371
+      },
+      {
+        "label": "Rue du Château 97 1680 Romont FR",
+        "lat": 46.694610595703125,
+        "lon": 6.917876243591309
+      },
+      {
+        "label": "Rue du Château 99 1680 Romont FR",
+        "lat": 46.694549560546875,
+        "lon": 6.917857646942139
+      }
+    ]
+  },
+  "Route de Bossens, 1680 Romont": {
+    "query": "Route de Bossens 1680 Romont",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Bossens+1680+Romont&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de Bossens 8b 1680 Romont FR",
+        "lat": 46.69831848144531,
+        "lon": 6.913171768188477
+      },
+      {
+        "label": "Route de Bossens 8 1680 Romont FR",
+        "lat": 46.697959899902344,
+        "lon": 6.912835121154785
+      },
+      {
+        "label": "Route de Bossens 8a 1680 Romont FR",
+        "lat": 46.6981086730957,
+        "lon": 6.9129462242126465
+      },
+      {
+        "label": "Route de Bossens 14 1680 Romont FR",
+        "lat": 46.696449279785156,
+        "lon": 6.907897472381592
+      },
+      {
+        "label": "Route de Bossens 14a 1680 Romont FR",
+        "lat": 46.696407318115234,
+        "lon": 6.9085001945495605
+      }
+    ]
+  },
+  "Esplanade de la Tour à Boyer, Rue du Château, 1680 Romont": {
+    "query": "Esplanade de la Tour à Boyer Rue du Château 1680",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Esplanade+de+la+Tour+%C3%A0+Boyer+Rue+du+Ch%C3%A2teau+1680&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Rue du Château # 1814 La Tour-de-Peilz",
+        "lat": 46.452674865722656,
+        "lon": 6.854977607727051
+      },
+      {
+        "label": "Rue du Château 1 1814 La Tour-de-Peilz",
+        "lat": 46.453495025634766,
+        "lon": 6.855875015258789
+      },
+      {
+        "label": "Rue du Château 2 1814 La Tour-de-Peilz",
+        "lat": 46.45368194580078,
+        "lon": 6.85589075088501
+      },
+      {
+        "label": "Rue du Château 3 1814 La Tour-de-Peilz",
+        "lat": 46.45341491699219,
+        "lon": 6.855833530426025
+      },
+      {
+        "label": "Rue du Château 4 1814 La Tour-de-Peilz",
+        "lat": 46.45358657836914,
+        "lon": 6.855738162994385
+      }
+    ]
+  },
+  "Départ à l’école, 1608 Chapelle (Glâne)": {
+    "query": "Départ à l’école 1608 Chapelle Glâne ",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=D%C3%A9part+%C3%A0+l%E2%80%99%C3%A9cole+1608+Chapelle+Gl%C3%A2ne+&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Chapelle 1n 1608 Chapelle (Glâne)",
+        "lat": 46.597965240478516,
+        "lon": 6.835801601409912
+      },
+      {
+        "label": "Route de la Corba 23 1608 Chapelle (Glâne)",
+        "lat": 46.58279037475586,
+        "lon": 6.839869976043701
+      },
+      {
+        "label": "Route de la Corba 24a 1608 Chapelle (Glâne)",
+        "lat": 46.582210540771484,
+        "lon": 6.84008264541626
+      },
+      {
+        "label": "Route de la Corba 24 1608 Chapelle (Glâne)",
+        "lat": 46.58218002319336,
+        "lon": 6.839867115020752
+      },
+      {
+        "label": "Route de la Corba 36 1608 Chapelle (Glâne)",
+        "lat": 46.58152389526367,
+        "lon": 6.840078830718994
+      }
+    ]
+  },
+  "Salle de Lully, 1470 Lully FR": {
+    "query": "Salle de Lully 1470 Lully FR",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Salle+de+Lully+1470+Lully+FR&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de Lully 64a 1470 Lully FR",
+        "lat": 46.837867736816406,
+        "lon": 6.846583843231201
+      },
+      {
+        "label": "Route de Lully 64b 1470 Lully FR",
+        "lat": 46.837738037109375,
+        "lon": 6.845954418182373
+      },
+      {
+        "label": "Route de Lully 66a 1470 Lully FR",
+        "lat": 46.83740234375,
+        "lon": 6.8460893630981445
+      },
+      {
+        "label": "Route de Lully 66 1470 Lully FR",
+        "lat": 46.837276458740234,
+        "lon": 6.846334457397461
+      },
+      {
+        "label": "Route de Lully 66n 1470 Lully FR",
+        "lat": 46.8373908996582,
+        "lon": 6.8459858894348145
+      }
+    ]
+  },
+  "Route de la Chapelle 33, 1470 Estavayer-le-Lac": {
+    "query": "Route de la Chapelle 33 1470 Estavayer-le-Lac",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+la+Chapelle+33+1470+Estavayer-le-Lac&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de la Chapelle 33 1470 Estavayer-le-Lac",
+        "lat": 46.848121643066406,
+        "lon": 6.853948593139648
+      }
+    ]
+  },
+  "École primaire de la Vignettaz, Route de la Gruyère 9, 1700 Fribourg": {
+    "query": "Route de la Gruyère 9 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+la+Gruy%C3%A8re+9+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de la Gruyère 9 1700 Fribourg",
+        "lat": 46.79817581176758,
+        "lon": 7.143957138061523
+      },
+      {
+        "label": "Route de la Gruyère 9a 1700 Fribourg",
+        "lat": 46.798274993896484,
+        "lon": 7.143911838531494
+      }
+    ]
+  },
+  "École enfantine du Jura, Avenue du Général-Guisan 59, 1700 Fribourg": {
+    "query": "Avenue du Général-Guisan 59 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Avenue+du+G%C3%A9n%C3%A9ral-Guisan+59+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Avenue du Général-Guisan 59 1700 Fribourg",
+        "lat": 46.811988830566406,
+        "lon": 7.148173809051514
+      }
+    ]
+  },
+  "Route de l’Aurore 2A, Fribourg": {
+    "query": "Route de l Aurore 2A 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l+Aurore+2A+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de l'Aurore 2a 1700 Fribourg",
+        "lat": 46.81214141845703,
+        "lon": 7.150949478149414
+      }
+    ]
+  },
+  "Route de Villars-Vert 26, 1752 Villars-sur-Glâne": {
+    "query": "Route de Villars-Vert 26 1752 Villars-sur-Glâne",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Villars-Vert+26+1752+Villars-sur-Gl%C3%A2ne&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de Villars-Vert 26 1752 Villars-sur-Glâne",
+        "lat": 46.800052642822266,
+        "lon": 7.128391742706299
+      }
+    ]
+  },
+  "Place du Tilleul 1, 1544 Gletterens": {
+    "query": "Place du Tilleul 1 1544 Gletterens",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Place+du+Tilleul+1+1544+Gletterens&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Place du Tilleul 1 1544 Gletterens",
+        "lat": 46.89500045776367,
+        "lon": 6.9367899894714355
+      },
+      {
+        "label": "Place du Tilleul 1n 1544 Gletterens",
+        "lat": 46.89522171020508,
+        "lon": 6.936654567718506
+      },
+      {
+        "label": "Place du Tilleul 1a 1544 Gletterens",
+        "lat": 46.895164489746094,
+        "lon": 6.936801433563232
+      },
+      {
+        "label": "Place du Tilleul 2 1544 Gletterens",
+        "lat": 46.89521789550781,
+        "lon": 6.937381267547607
+      },
+      {
+        "label": "Place du Tilleul 3 1544 Gletterens",
+        "lat": 46.89505386352539,
+        "lon": 6.936696529388428
+      }
+    ]
+  },
+  "Chemin de la Grande Gouille 2, 1470 Estavayer-le-Lac": {
+    "query": "Chemin de la Grande Gouille 2 1470 Estavayer-le-Lac",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+de+la+Grande+Gouille+2+1470+Estavayer-le-Lac&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Chemin de la Grande Gouille 2 1470 Estavayer-le-Lac",
+        "lat": 46.8543701171875,
+        "lon": 6.8498711585998535
+      },
+      {
+        "label": "Chemin de la Grande Gouille 1 1470 Estavayer-le-Lac",
+        "lat": 46.85403823852539,
+        "lon": 6.8499250411987305
+      },
+      {
+        "label": "Chemin de la Grande Gouille 3a 1470 Estavayer-le-Lac",
+        "lat": 46.85325622558594,
+        "lon": 6.849447727203369
+      },
+      {
+        "label": "Chemin de la Grande Gouille 3 1470 Estavayer-le-Lac",
+        "lat": 46.853477478027344,
+        "lon": 6.849783897399902
+      }
+    ]
+  },
+  "Route du Port, 1568 Delley-Portalban": {
+    "query": "Route du Port 1568 Delley-Portalban",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+du+Port+1568+Delley-Portalban&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route du Port 1 1568 Portalban",
+        "lat": 46.918270111083984,
+        "lon": 6.956088542938232
+      },
+      {
+        "label": "Route du Port 3 1568 Portalban",
+        "lat": 46.918392181396484,
+        "lon": 6.95620059967041
+      },
+      {
+        "label": "Route du Port 5 1568 Portalban",
+        "lat": 46.918434143066406,
+        "lon": 6.956259727478027
+      },
+      {
+        "label": "Route du Port 7 1568 Portalban",
+        "lat": 46.91844940185547,
+        "lon": 6.956336975097656
+      },
+      {
+        "label": "Route du Port 8n 1568 Portalban",
+        "lat": 46.91914749145508,
+        "lon": 6.956789493560791
+      }
+    ]
+  },
+  "Avenue du Port 10, 1545 Chevroux": {
+    "query": "Avenue du Port 10 1545 Chevroux",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Avenue+du+Port+10+1545+Chevroux&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Avenue du Port 10 1545 Chevroux",
+        "lat": 46.894615173339844,
+        "lon": 6.901235580444336
+      }
+    ]
+  },
+  "Rue du Musée 13, 1470 Estavayer-le-Lac": {
+    "query": "Rue du Musée 13 1470 Estavayer-le-Lac",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+du+Mus%C3%A9e+13+1470+Estavayer-le-Lac&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Rue du Musée 13 1470 Estavayer-le-Lac",
+        "lat": 46.84951400756836,
+        "lon": 6.848576545715332
+      },
+      {
+        "label": "Rue du Musée 13a 1470 Estavayer-le-Lac",
+        "lat": 46.84951400756836,
+        "lon": 6.848681926727295
+      }
+    ]
+  },
+  "Ecole du Lussy, Chemin de Crey-Derrey 1, 1618 Châtel-St-Denis": {
+    "query": "Ecole du Lussy Chemin de Crey-Derrey 1 1618 Châtel-St-Denis",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ecole+du+Lussy+Chemin+de+Crey-Derrey+1+1618+Ch%C3%A2tel-St-Denis&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Chemin de Crey-Derrey 1 1618 Châtel-St-Denis",
+        "lat": 46.536197662353516,
+        "lon": 6.897556781768799
+      },
+      {
+        "label": "Chemin de Crey-Derrey 20a 1618 Châtel-St-Denis",
+        "lat": 46.530975341796875,
+        "lon": 6.898774147033691
+      },
+      {
+        "label": "Chemin de Crey-Derrey 99 1618 Châtel-St-Denis",
+        "lat": 46.535926818847656,
+        "lon": 6.898568153381348
+      },
+      {
+        "label": "Chemin de Crey-Derrey 101 1618 Châtel-St-Denis",
+        "lat": 46.53377151489258,
+        "lon": 6.897974491119385
+      },
+      {
+        "label": "Chemin de Crey-Derrey 103 1618 Châtel-St-Denis",
+        "lat": 46.53355026245117,
+        "lon": 6.897861480712891
+      }
+    ]
+  },
+  "Chemin des Crêts 11, 1er étage, 1618 Châtel-St-Denis": {
+    "query": "Chemin des Crêts 11 1er étage 1618 Châtel-St-Denis",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+des+Cr%C3%AAts+11+1er+%C3%A9tage+1618+Ch%C3%A2tel-St-Denis&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Chemin des Crêts 11 1618 Châtel-St-Denis",
+        "lat": 46.53105926513672,
+        "lon": 6.8978705406188965
+      },
+      {
+        "label": "Chemin des Crêts 2 1618 Châtel-St-Denis",
+        "lat": 46.53041458129883,
+        "lon": 6.898543357849121
+      },
+      {
+        "label": "Chemin des Crêts 2a 1618 Châtel-St-Denis",
+        "lat": 46.530479431152344,
+        "lon": 6.898478031158447
+      },
+      {
+        "label": "Chemin des Crêts 3 1618 Châtel-St-Denis",
+        "lat": 46.53042221069336,
+        "lon": 6.8981218338012695
+      },
+      {
+        "label": "Chemin des Crêts 3a 1618 Châtel-St-Denis",
+        "lat": 46.53033447265625,
+        "lon": 6.89778470993042
+      }
+    ]
+  },
+  "Piscine communale, 1618 Châtel-St-Denis": {
+    "query": "Piscine communale 1618 Châtel-St-Denis",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Piscine+communale+1618+Ch%C3%A2tel-St-Denis&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Chemin du Vieux Châtel 5a 1618 Châtel-St-Denis",
+        "lat": 46.51741027832031,
+        "lon": 6.899975776672363
+      },
+      {
+        "label": "Chemin du Vieux Châtel 10a 1618 Châtel-St-Denis",
+        "lat": 46.51735305786133,
+        "lon": 6.8983564376831055
+      },
+      {
+        "label": "Chemin du Vieux Châtel 10 1618 Châtel-St-Denis",
+        "lat": 46.51740646362305,
+        "lon": 6.898692607879639
+      },
+      {
+        "label": "Chemin du Vieux Châtel 15a 1618 Châtel-St-Denis",
+        "lat": 46.51700973510742,
+        "lon": 6.898598670959473
+      },
+      {
+        "label": "Chemin du Vieux Châtel 25a 1618 Châtel-St-Denis",
+        "lat": 46.515235900878906,
+        "lon": 6.899652481079102
+      }
+    ]
+  },
+  "Cabane du Petit Oiseau, Route du Moléson, 1618 Châtel-St-Denis": {
+    "query": "Cabane du Petit Oiseau Route du Moléson 1618 Châtel-St-Denis",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Cabane+du+Petit+Oiseau+Route+du+Mol%C3%A9son+1618+Ch%C3%A2tel-St-Denis&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route du Moléson 4 1618 Châtel-St-Denis",
+        "lat": 46.52900695800781,
+        "lon": 6.936074733734131
+      },
+      {
+        "label": "Route du Moléson 10 1618 Châtel-St-Denis",
+        "lat": 46.52901077270508,
+        "lon": 6.939533233642578
+      },
+      {
+        "label": "Route du Moléson 10b 1618 Châtel-St-Denis",
+        "lat": 46.529056549072266,
+        "lon": 6.939336776733398
+      },
+      {
+        "label": "Route du Moléson 10a 1618 Châtel-St-Denis",
+        "lat": 46.52912902832031,
+        "lon": 6.939408302307129
+      },
+      {
+        "label": "Route du Moléson 21 1618 Châtel-St-Denis",
+        "lat": 46.53123092651367,
+        "lon": 6.943370819091797
+      }
+    ]
+  },
+  "Route de la Hauta Chia 25, 1654 Cerniat": {
+    "query": "Route de la Hauta Chia 25 1654 Cerniat",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+la+Hauta+Chia+25+1654+Cerniat&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de l'Auta Chia 25 1654 Cerniat FR",
+        "lat": 46.66197967529297,
+        "lon": 7.21319580078125
+      },
+      {
+        "label": "Route des Echelettes 25 1654 Cerniat FR",
+        "lat": 46.65423583984375,
+        "lon": 7.206563949584961
+      },
+      {
+        "label": "Route de l'Auta Chia 25b 1654 Cerniat FR",
+        "lat": 46.662200927734375,
+        "lon": 7.213211536407471
+      },
+      {
+        "label": "Route de l'Auta Chia 25a 1654 Cerniat FR",
+        "lat": 46.662139892578125,
+        "lon": 7.213146686553955
+      },
+      {
+        "label": "Route de la Chia 1 1654 Cerniat FR",
+        "lat": 46.65522766113281,
+        "lon": 7.1656880378723145
+      }
+    ]
+  },
+  "TéléCharmey, Les Charrières 3, 1637 Charmey": {
+    "query": "TéléCharmey Les Charrières 3 1637 Charmey",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=T%C3%A9l%C3%A9Charmey+Les+Charri%C3%A8res+3+1637+Charmey&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Les Charrières 3 1637 Charmey (Gruyère)",
+        "lat": 46.618621826171875,
+        "lon": 7.168689727783203
+      },
+      {
+        "label": "Les Charrières 1 1637 Charmey (Gruyère)",
+        "lat": 46.618404388427734,
+        "lon": 7.16741418838501
+      },
+      {
+        "label": "Les Charrières 2 1637 Charmey (Gruyère)",
+        "lat": 46.618003845214844,
+        "lon": 7.1670660972595215
+      },
+      {
+        "label": "Les Charrières 4a 1637 Charmey (Gruyère)",
+        "lat": 46.61789321899414,
+        "lon": 7.16780948638916
+      },
+      {
+        "label": "Les Charrières 4 1637 Charmey (Gruyère)",
+        "lat": 46.61792755126953,
+        "lon": 7.167612552642822
+      }
+    ]
+  },
+  "Route de Bulle 101, 1687 Vuisternens-devant-Romont": {
+    "query": "Route de Bulle 101 1687 Vuisternens-devant-Romont",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Bulle+101+1687+Vuisternens-devant-Romont&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de Bulle 101 1687 Vuisternens-devant-Romont",
+        "lat": 46.63970947265625,
+        "lon": 6.943014621734619
+      }
+    ]
+  },
+  "Route des Vuarines 29, 1564 Domdidier": {
+    "query": "Route des Vuarines 29 1564 Domdidier",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+des+Vuarines+29+1564+Domdidier&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route des Vuarines 1a 1564 Domdidier",
+        "lat": 46.8654899597168,
+        "lon": 7.015748977661133
+      },
+      {
+        "label": "Route des Vuarines 1 1564 Domdidier",
+        "lat": 46.86552047729492,
+        "lon": 7.015504360198975
+      },
+      {
+        "label": "Route des Vuarines 6 1564 Domdidier",
+        "lat": 46.8654670715332,
+        "lon": 7.0161519050598145
+      },
+      {
+        "label": "Route des Vuarines 6a 1564 Domdidier",
+        "lat": 46.86552047729492,
+        "lon": 7.0164475440979
+      },
+      {
+        "label": "Route des Vuarines 7 1564 Domdidier",
+        "lat": 46.865596771240234,
+        "lon": 7.0159077644348145
+      }
+    ]
+  },
+  "Route du Port, 1468 Cheyres-Châbles": {
+    "query": "Route du Port 1468 Cheyres-Châbles",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+du+Port+1468+Cheyres-Ch%C3%A2bles&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route du Port 4a 1468 Cheyres",
+        "lat": 46.817256927490234,
+        "lon": 6.784460067749023
+      },
+      {
+        "label": "Route du Port 4b 1468 Cheyres",
+        "lat": 46.81707763671875,
+        "lon": 6.784724235534668
+      },
+      {
+        "label": "Route du Port 4 1468 Cheyres",
+        "lat": 46.81714630126953,
+        "lon": 6.78460168838501
+      },
+      {
+        "label": "Route du Port 5 1468 Cheyres",
+        "lat": 46.81672668457031,
+        "lon": 6.784631252288818
+      },
+      {
+        "label": "Route du Port 6a 1468 Cheyres",
+        "lat": 46.81684875488281,
+        "lon": 6.784996509552002
+      }
+    ]
+  },
+  "Départ La Jaqua, 1616 Attalens": {
+    "query": "Départ La Jaqua 1616 Attalens",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=D%C3%A9part+La+Jaqua+1616+Attalens&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Rue de la Jaqua 2 1616 Attalens",
+        "lat": 46.50889587402344,
+        "lon": 6.8505964279174805
+      },
+      {
+        "label": "Rue de la Jaqua 2a 1616 Attalens",
+        "lat": 46.50877380371094,
+        "lon": 6.850644588470459
+      },
+      {
+        "label": "Rue de la Jaqua 4 1616 Attalens",
+        "lat": 46.50876235961914,
+        "lon": 6.8509745597839355
+      },
+      {
+        "label": "Rue de la Jaqua 8 1616 Attalens",
+        "lat": 46.50855255126953,
+        "lon": 6.850950241088867
+      },
+      {
+        "label": "Rue de la Jaqua 11 1616 Attalens",
+        "lat": 46.50931167602539,
+        "lon": 6.8500142097473145
+      }
+    ]
+  },
+  "Départ en face du camping Le Bivouac, 1618 Châtel-St-Denis": {
+    "query": "Départ en face du camping Le Bivouac 1618 Châtel-St-Denis",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=D%C3%A9part+en+face+du+camping+Le+Bivouac+1618+Ch%C3%A2tel-St-Denis&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": []
+  },
+  "Route du Camping 16, 1663 Epagny": {
+    "query": "Route du Camping 16 1663 Epagny",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+du+Camping+16+1663+Epagny&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Chemin du Camping 16 1663 Epagny",
+        "lat": 46.595062255859375,
+        "lon": 7.08091402053833
+      },
+      {
+        "label": "Chemin du Camping 16a 1663 Epagny",
+        "lat": 46.59505844116211,
+        "lon": 7.080618381500244
+      },
+      {
+        "label": "Chemin du Camping 16r.1 1663 Epagny",
+        "lat": 46.59599304199219,
+        "lon": 7.081524848937988
+      },
+      {
+        "label": "Chemin du Camping 16r.2 1663 Epagny",
+        "lat": 46.59590530395508,
+        "lon": 7.08143424987793
+      },
+      {
+        "label": "Chemin du Camping 16r.3 1663 Epagny",
+        "lat": 46.59585952758789,
+        "lon": 7.081369400024414
+      }
+    ]
+  },
+  "Parc d’Humilimont, 1633 Marsens": {
+    "query": "Parc d’Humilimont 1633 Marsens",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Parc+d%E2%80%99Humilimont+1633+Marsens&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route d'Humilimont 30d 1633 Marsens",
+        "lat": 46.65767288208008,
+        "lon": 7.062835693359375
+      },
+      {
+        "label": "Route d'Humilimont 3a 1633 Marsens",
+        "lat": 46.65605545043945,
+        "lon": 7.063941955566406
+      },
+      {
+        "label": "Route d'Humilimont 5 1633 Marsens",
+        "lat": 46.65606689453125,
+        "lon": 7.063638210296631
+      },
+      {
+        "label": "Route d'Humilimont 9 1633 Marsens",
+        "lat": 46.656471252441406,
+        "lon": 7.063368797302246
+      },
+      {
+        "label": "Route d'Humilimont 10 1633 Marsens",
+        "lat": 46.65684127807617,
+        "lon": 7.063584804534912
+      }
+    ]
+  },
+  "Départ parking Les Rosalys, Route des Dailles, 1619 Les Paccots": {
+    "query": "Départ parking Les Rosalys Route des Dailles 1619 Les Paccots",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=D%C3%A9part+parking+Les+Rosalys+Route+des+Dailles+1619+Les+Paccots&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route des Dailles # 1619 Les Paccots",
+        "lat": 46.522117614746094,
+        "lon": 6.949005126953125
+      },
+      {
+        "label": "Route des Rosalys 4a 1619 Les Paccots",
+        "lat": 46.51853561401367,
+        "lon": 6.960183620452881
+      },
+      {
+        "label": "Route des Rosalys 4 1619 Les Paccots",
+        "lat": 46.51844024658203,
+        "lon": 6.96029806137085
+      },
+      {
+        "label": "Route des Rosalys 5 1619 Les Paccots",
+        "lat": 46.51831817626953,
+        "lon": 6.960657596588135
+      },
+      {
+        "label": "Route des Rosalys 6 1619 Les Paccots",
+        "lat": 46.51820755004883,
+        "lon": 6.9603271484375
+      }
+    ]
+  },
+  "Route d'Arruffens 31, 1680 Romont": {
+    "query": "Route d'Arruffens 31 1680 Romont",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+d%27Arruffens+31+1680+Romont&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route d'Arruffens 31 1680 Romont FR",
+        "lat": 46.687171936035156,
+        "lon": 6.912230968475342
+      }
+    ]
+  },
+  "Halle de gym de Domdidier, 1564 Domdidier": {
+    "query": " 1564 Domdidier",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+1564+Domdidier&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Champ du Moty 1a 1564 Domdidier",
+        "lat": 46.85123825073242,
+        "lon": 7.009366512298584
+      },
+      {
+        "label": "Route d'Oleyres 1 1564 Domdidier",
+        "lat": 46.86018371582031,
+        "lon": 7.021230220794678
+      },
+      {
+        "label": "Les Rochettes 1 1564 Domdidier",
+        "lat": 46.86222839355469,
+        "lon": 7.019362449645996
+      },
+      {
+        "label": "Le Criblet 1 1564 Domdidier",
+        "lat": 46.865196228027344,
+        "lon": 7.013411045074463
+      },
+      {
+        "label": "Pré-Puceret 1 1564 Domdidier",
+        "lat": 46.86881637573242,
+        "lon": 7.012495040893555
+      }
+    ]
+  },
+  "Salle de gym de Remaufens, 1617 Remaufens": {
+    "query": "Salle de gym de Remaufens 1617 Remaufens",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Salle+de+gym+de+Remaufens+1617+Remaufens&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Chemin de la Vignetta 1d 1617 Remaufens",
+        "lat": 46.52798843383789,
+        "lon": 6.8804931640625
+      },
+      {
+        "label": "Chemin de la Vignetta 12d 1617 Remaufens",
+        "lat": 46.5272216796875,
+        "lon": 6.881772994995117
+      },
+      {
+        "label": "Chemin de Montmoirin 100d 1617 Remaufens",
+        "lat": 46.53433609008789,
+        "lon": 6.889567852020264
+      },
+      {
+        "label": "Chemin de la Vignetta 1b 1617 Remaufens",
+        "lat": 46.528011322021484,
+        "lon": 6.880385875701904
+      },
+      {
+        "label": "Chemin de la Vignetta 1 1617 Remaufens",
+        "lat": 46.52791213989258,
+        "lon": 6.8805155754089355
+      }
+    ]
+  },
+  "Vers le Lac, 1473 Font": {
+    "query": "Vers le Lac 1473 Font",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Vers+le+Lac+1473+Font&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Chemin des Lacustres 123l 1473 Font",
+        "lat": 46.84080505371094,
+        "lon": 6.825249671936035
+      }
+    ]
+  },
+  "Port de Plaisance, 1544 Gletterens": {
+    "query": "Port de Plaisance 1544 Gletterens",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Port+de+Plaisance+1544+Gletterens&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": []
+  },
+  "Route des Lacustres 22, 1470 Estavayer-le-Lac": {
+    "query": "Route des Lacustres 22 1470 Estavayer-le-Lac",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+des+Lacustres+22+1470+Estavayer-le-Lac&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route des Lacustres 22 1470 Estavayer-le-Lac",
+        "lat": 46.84632110595703,
+        "lon": 6.835505485534668
+      },
+      {
+        "label": "Route des Lacustres 22c 1470 Estavayer-le-Lac",
+        "lat": 46.846710205078125,
+        "lon": 6.837331771850586
+      },
+      {
+        "label": "Route des Lacustres 22g 1470 Estavayer-le-Lac",
+        "lat": 46.8466682434082,
+        "lon": 6.837400436401367
+      },
+      {
+        "label": "Route des Lacustres 22d 1470 Estavayer-le-Lac",
+        "lat": 46.84636688232422,
+        "lon": 6.835782527923584
+      },
+      {
+        "label": "Route des Lacustres 22a 1470 Estavayer-le-Lac",
+        "lat": 46.8459587097168,
+        "lon": 6.834923267364502
+      }
+    ]
+  },
+  "Plage de Forel, 1475 Forel": {
+    "query": "Plage de Forel 1475 Forel",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Plage+de+Forel+1475+Forel&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de Chevroux 1b 1475 Forel FR",
+        "lat": 46.87628936767578,
+        "lon": 6.887714385986328
+      },
+      {
+        "label": "Route de Chevroux 1 1475 Forel FR",
+        "lat": 46.87617874145508,
+        "lon": 6.888084411621094
+      },
+      {
+        "label": "Chemin des Bois 3d 1475 Forel FR",
+        "lat": 46.875545501708984,
+        "lon": 6.888762950897217
+      },
+      {
+        "label": "Route de Chevroux 3 1475 Forel FR",
+        "lat": 46.87624740600586,
+        "lon": 6.8882575035095215
+      },
+      {
+        "label": "Route de Chevroux 3a 1475 Forel FR",
+        "lat": 46.87643051147461,
+        "lon": 6.887947082519531
+      }
+    ]
+  },
+  "Carignan 6, 1565 Vallon": {
+    "query": "Carignan 6 1565 Vallon",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Carignan+6+1565+Vallon&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Carignan 6 1565 Vallon",
+        "lat": 46.87664031982422,
+        "lon": 6.956275939941406
+      },
+      {
+        "label": "Carignan 6a 1565 Vallon",
+        "lat": 46.87646484375,
+        "lon": 6.955880641937256
+      }
+    ]
+  },
+  "Départ administration communale, 1489 Murist": {
+    "query": "Départ administration communale 1489 Murist",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=D%C3%A9part+administration+communale+1489+Murist&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": []
+  },
+  "La Guérite 1, 1541 Sévaz": {
+    "query": "La Guérite 1 1541 Sévaz",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=La+Gu%C3%A9rite+1+1541+S%C3%A9vaz&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "La Guérite 1 1541 Sévaz",
+        "lat": 46.83717727661133,
+        "lon": 6.868931293487549
+      },
+      {
+        "label": "La Guérite 10 1541 Sévaz",
+        "lat": 46.83750915527344,
+        "lon": 6.8670501708984375
+      },
+      {
+        "label": "La Guérite 11 1541 Sévaz",
+        "lat": 46.83680725097656,
+        "lon": 6.868274688720703
+      },
+      {
+        "label": "La Guérite 12 1541 Sévaz",
+        "lat": 46.83756637573242,
+        "lon": 6.8675127029418945
+      },
+      {
+        "label": "La Guérite 14 1541 Sévaz",
+        "lat": 46.83698272705078,
+        "lon": 6.86784029006958
+      }
+    ]
+  },
+  "Chemin de la Fruitière 5, 1666 Grandvillard": {
+    "query": "Chemin de la Fruitière 5 1666 Grandvillard",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+de+la+Fruiti%C3%A8re+5+1666+Grandvillard&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Chemin de la Fruitière 5 1666 Grandvillard",
+        "lat": 46.5407829284668,
+        "lon": 7.0837321281433105
+      },
+      {
+        "label": "Chemin de la Fruitière 5a 1666 Grandvillard",
+        "lat": 46.54066467285156,
+        "lon": 7.083781719207764
+      }
+    ]
+  },
+  "Route de l’Aérodrome 40, 1663 Epagny": {
+    "query": "Route de l’Aérodrome 40 1663 Epagny",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l%E2%80%99A%C3%A9rodrome+40+1663+Epagny&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de l'Aérodrome 40 1663 Epagny",
+        "lat": 46.5944709777832,
+        "lon": 7.093081474304199
+      },
+      {
+        "label": "Route de l'Aérodrome 40a 1663 Epagny",
+        "lat": 46.594207763671875,
+        "lon": 7.092892169952393
+      }
+    ]
+  },
+  "Riau de la Maula 1, 1637 Charmey": {
+    "query": "Riau de la Maula 1 1637 Charmey",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Riau+de+la+Maula+1+1637+Charmey&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Riau de la Maula 1 1637 Charmey (Gruyère)",
+        "lat": 46.62135314941406,
+        "lon": 7.158485412597656
+      },
+      {
+        "label": "Riau de la Maula 10 1637 Charmey (Gruyère)",
+        "lat": 46.6230354309082,
+        "lon": 7.158477306365967
+      },
+      {
+        "label": "Riau de la Maula 11 1637 Charmey (Gruyère)",
+        "lat": 46.62293243408203,
+        "lon": 7.157145023345947
+      },
+      {
+        "label": "Riau de la Maula 11a 1637 Charmey (Gruyère)",
+        "lat": 46.62283706665039,
+        "lon": 7.156927108764648
+      },
+      {
+        "label": "Riau de la Maula 11b 1637 Charmey (Gruyère)",
+        "lat": 46.62298583984375,
+        "lon": 7.156850337982178
+      }
+    ]
+  },
+  "Route des Marches 4, 1636 Broc": {
+    "query": "Route des Marches 4 1636 Broc",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+des+Marches+4+1636+Broc&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route des Marches 1 1636 Broc",
+        "lat": 46.60251998901367,
+        "lon": 7.095186233520508
+      },
+      {
+        "label": "Route des Marches 2 1636 Broc",
+        "lat": 46.60041046142578,
+        "lon": 7.0948076248168945
+      },
+      {
+        "label": "Route des Marches 2a 1636 Broc",
+        "lat": 46.60187911987305,
+        "lon": 7.09616756439209
+      },
+      {
+        "label": "Route des Marches 3a 1636 Broc",
+        "lat": 46.60256576538086,
+        "lon": 7.095461845397949
+      },
+      {
+        "label": "Route des Marches 3 1636 Broc",
+        "lat": 46.60249710083008,
+        "lon": 7.095425128936768
+      }
+    ]
+  },
+  "Près du Camping du Lac, 1643 Gumefens": {
+    "query": "Près du Camping du Lac 1643 Gumefens",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Pr%C3%A8s+du+Camping+du+Lac+1643+Gumefens&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route du Lac 2 1643 Gumefens",
+        "lat": 46.676979064941406,
+        "lon": 7.079739093780518
+      },
+      {
+        "label": "Route du Lac 11n 1643 Gumefens",
+        "lat": 46.67774963378906,
+        "lon": 7.081014633178711
+      },
+      {
+        "label": "Route du Lac 11a 1643 Gumefens",
+        "lat": 46.67797088623047,
+        "lon": 7.080697059631348
+      },
+      {
+        "label": "Route du Lac 11 1643 Gumefens",
+        "lat": 46.67786407470703,
+        "lon": 7.080755233764648
+      },
+      {
+        "label": "Route du Lac 14n 1643 Gumefens",
+        "lat": 46.67709732055664,
+        "lon": 7.083314895629883
+      }
+    ]
+  },
+  "La Pointe, 1638 Morlon": {
+    "query": "La Pointe 1638 Morlon",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=La+Pointe+1638+Morlon&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "La Croix 1a 1638 Morlon",
+        "lat": 46.62312316894531,
+        "lon": 7.0779571533203125
+      },
+      {
+        "label": "La Croix 1b 1638 Morlon",
+        "lat": 46.6233024597168,
+        "lon": 7.0776495933532715
+      },
+      {
+        "label": "La Croix 1 1638 Morlon",
+        "lat": 46.623191833496094,
+        "lon": 7.077691555023193
+      },
+      {
+        "label": "La Croix 1c 1638 Morlon",
+        "lat": 46.62333679199219,
+        "lon": 7.077498912811279
+      },
+      {
+        "label": "La Croix 3a 1638 Morlon",
+        "lat": 46.62353515625,
+        "lon": 7.07823371887207
+      }
+    ]
+  },
+  "Place du Clos aux Cerfs, 1663 Gruyères": {
+    "query": "Place du Clos aux Cerfs 1663 Gruyères",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Place+du+Clos+aux+Cerfs+1663+Gruy%C3%A8res&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": []
+  },
+  "Rue de l’Église 12, 1684 Mézières": {
+    "query": "Rue de l’Église 12 1684 Mézières",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99%C3%89glise+12+1684+M%C3%A9zi%C3%A8res&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de l'Eglise 12 1684 Mézières FR",
+        "lat": 46.679386138916016,
+        "lon": 6.926646709442139
+      },
+      {
+        "label": "Route de l'Eglise 1 1684 Mézières FR",
+        "lat": 46.678199768066406,
+        "lon": 6.925571918487549
+      },
+      {
+        "label": "Route de l'Eglise 2 1684 Mézières FR",
+        "lat": 46.678192138671875,
+        "lon": 6.925886154174805
+      },
+      {
+        "label": "Route de l'Eglise 3 1684 Mézières FR",
+        "lat": 46.67863845825195,
+        "lon": 6.925678730010986
+      },
+      {
+        "label": "Route de l'Eglise 4 1684 Mézières FR",
+        "lat": 46.67853927612305,
+        "lon": 6.926070690155029
+      }
+    ]
+  },
+  "Route Villageoise, 1617 Remaufens": {
+    "query": "Route Villageoise 1617 Remaufens",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+Villageoise+1617+Remaufens&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route Villageoise 1 1617 Remaufens",
+        "lat": 46.52637481689453,
+        "lon": 6.881410598754883
+      },
+      {
+        "label": "Route Villageoise 3 1617 Remaufens",
+        "lat": 46.526371002197266,
+        "lon": 6.880746841430664
+      },
+      {
+        "label": "Route Villageoise 3b 1617 Remaufens",
+        "lat": 46.5262451171875,
+        "lon": 6.880646705627441
+      },
+      {
+        "label": "Route Villageoise 3a 1617 Remaufens",
+        "lat": 46.52642822265625,
+        "lon": 6.880690097808838
+      },
+      {
+        "label": "Route Villageoise 7 1617 Remaufens",
+        "lat": 46.52638626098633,
+        "lon": 6.880359172821045
+      }
+    ]
+  },
+  "Route des Dailles, 1619 Les Paccots": {
+    "query": "Route des Dailles 1619 Les Paccots",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+des+Dailles+1619+Les+Paccots&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route des Dailles # 1619 Les Paccots",
+        "lat": 46.522117614746094,
+        "lon": 6.949005126953125
+      },
+      {
+        "label": "Route des Dailles 11a 1619 Les Paccots",
+        "lat": 46.52212142944336,
+        "lon": 6.94897985458374
+      },
+      {
+        "label": "Route des Dailles 11 1619 Les Paccots",
+        "lat": 46.52228927612305,
+        "lon": 6.948827743530273
+      },
+      {
+        "label": "Route des Dailles 12 1619 Les Paccots",
+        "lat": 46.52192687988281,
+        "lon": 6.948634624481201
+      },
+      {
+        "label": "Route des Dailles 15 1619 Les Paccots",
+        "lat": 46.522071838378906,
+        "lon": 6.949685096740723
+      }
+    ]
+  },
+  "Petites-Rames, 1700 Fribourg": {
+    "query": "Petites-Rames 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Petites-Rames+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Petites-Rames 2 1700 Fribourg",
+        "lat": 46.803627014160156,
+        "lon": 7.161062717437744
+      },
+      {
+        "label": "Petites-Rames 2a 1700 Fribourg",
+        "lat": 46.80353546142578,
+        "lon": 7.161106586456299
+      },
+      {
+        "label": "Petites-Rames 3 1700 Fribourg",
+        "lat": 46.80316162109375,
+        "lon": 7.160392761230469
+      },
+      {
+        "label": "Petites-Rames 3a 1700 Fribourg",
+        "lat": 46.80329895019531,
+        "lon": 7.1606364250183105
+      },
+      {
+        "label": "Petites-Rames 4 1700 Fribourg",
+        "lat": 46.80351638793945,
+        "lon": 7.160989761352539
+      }
+    ]
+  },
+  "Derrière-les-Jardins, 1700 Fribourg": {
+    "query": "Derrière-les-Jardins 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Derri%C3%A8re-les-Jardins+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Derrière-les-Jardins 1 1700 Fribourg",
+        "lat": 46.80299377441406,
+        "lon": 7.168039798736572
+      },
+      {
+        "label": "Derrière-les-Jardins 2a 1700 Fribourg",
+        "lat": 46.80274200439453,
+        "lon": 7.167874813079834
+      },
+      {
+        "label": "Derrière-les-Jardins 2 1700 Fribourg",
+        "lat": 46.80283737182617,
+        "lon": 7.1677775382995605
+      },
+      {
+        "label": "Derrière-les-Jardins 3 1700 Fribourg",
+        "lat": 46.80305480957031,
+        "lon": 7.168137073516846
+      },
+      {
+        "label": "Derrière-les-Jardins 9 1700 Fribourg",
+        "lat": 46.80329513549805,
+        "lon": 7.168387413024902
+      }
+    ]
+  },
+  "Grand-Places, 1700 Fribourg": {
+    "query": "Grand-Places 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Grand-Places+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Allée des Grand-Places 1 1700 Fribourg",
+        "lat": 46.80303192138672,
+        "lon": 7.154980659484863
+      },
+      {
+        "label": "Grand-Places 10b 1700 Fribourg",
+        "lat": 46.802974700927734,
+        "lon": 7.153704643249512
+      },
+      {
+        "label": "Grand-Places 10 1700 Fribourg",
+        "lat": 46.80309295654297,
+        "lon": 7.153883457183838
+      },
+      {
+        "label": "Grand-Places 10a 1700 Fribourg",
+        "lat": 46.80265808105469,
+        "lon": 7.1552205085754395
+      },
+      {
+        "label": "Grand-Places 10c 1700 Fribourg",
+        "lat": 46.80290985107422,
+        "lon": 7.153792858123779
+      }
+    ]
+  },
+  "Place de jeux Domino, 1700 Fribourg": {
+    "query": "Place de jeux Domino 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Place+de+jeux+Domino+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Place de l'Hôtel-de-Ville 1 1700 Fribourg",
+        "lat": 46.80570602416992,
+        "lon": 7.161300182342529
+      },
+      {
+        "label": "Place de l'Hôtel-de-Ville 2a 1700 Fribourg",
+        "lat": 46.805503845214844,
+        "lon": 7.1608076095581055
+      },
+      {
+        "label": "Place de l'Hôtel-de-Ville 2 1700 Fribourg",
+        "lat": 46.80541229248047,
+        "lon": 7.161045074462891
+      },
+      {
+        "label": "Place de l'Hôtel-de-Ville 3 1700 Fribourg",
+        "lat": 46.805423736572266,
+        "lon": 7.161325931549072
+      },
+      {
+        "label": "Place de Notre-Dame 1 1700 Fribourg",
+        "lat": 46.806915283203125,
+        "lon": 7.161650657653809
+      }
+    ]
+  },
+  "Derrière-les-Jardins 2, 1700 Fribourg": {
+    "query": "Derrière-les-Jardins 2 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Derri%C3%A8re-les-Jardins+2+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Derrière-les-Jardins 2 1700 Fribourg",
+        "lat": 46.80283737182617,
+        "lon": 7.1677775382995605
+      },
+      {
+        "label": "Derrière-les-Jardins 2a 1700 Fribourg",
+        "lat": 46.80274200439453,
+        "lon": 7.167874813079834
+      },
+      {
+        "label": "Derrière-les-Jardins 20 1700 Fribourg",
+        "lat": 46.8038330078125,
+        "lon": 7.169140338897705
+      },
+      {
+        "label": "Derrière-les-Jardins 1 1700 Fribourg",
+        "lat": 46.80299377441406,
+        "lon": 7.168039798736572
+      },
+      {
+        "label": "Derrière-les-Jardins 3 1700 Fribourg",
+        "lat": 46.80305480957031,
+        "lon": 7.168137073516846
+      }
+    ]
+  },
+  "Plage de Nant, 1786 Nant": {
+    "query": "Plage de Nant 1786 Nant",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Plage+de+Nant+1786+Nant&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": []
+  },
+  "Seeweid 105, 1716 Schwarzsee": {
+    "query": "Seeweid 105 1716 Schwarzsee",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Seeweid+105+1716+Schwarzsee&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Seeweid 105 1716 Schwarzsee",
+        "lat": 46.66140365600586,
+        "lon": 7.27467679977417
+      }
+    ]
+  },
+  "Galmguetweg 1, 1793 Jeuss": {
+    "query": "Galmguetweg 1 1793 Jeuss",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Galmguetweg+1+1793+Jeuss&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Galmguetweg 1 1793 Jeuss",
+        "lat": 46.91077423095703,
+        "lon": 7.168018817901611
+      },
+      {
+        "label": "Galmguetweg 1a 1793 Jeuss",
+        "lat": 46.91083526611328,
+        "lon": 7.168179035186768
+      },
+      {
+        "label": "Galmguetweg 11k 1793 Jeuss",
+        "lat": 46.911373138427734,
+        "lon": 7.168253421783447
+      },
+      {
+        "label": "Galmguetweg 11j 1793 Jeuss",
+        "lat": 46.91134262084961,
+        "lon": 7.168025493621826
+      },
+      {
+        "label": "Galmguetweg 11b 1793 Jeuss",
+        "lat": 46.91133117675781,
+        "lon": 7.168718338012695
+      }
+    ]
+  },
+  "Ecole primaire Le Petit Prince, Bâtiment Les Blés, 1616 Attalens": {
+    "query": "Ecole primaire Le Petit Prince Bâtiment Les Blés 1616 Attalens",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ecole+primaire+Le+Petit+Prince+B%C3%A2timent+Les+Bl%C3%A9s+1616+Attalens&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": []
+  },
+  "Lausannestrasse 2, 3280 Murten": {
+    "query": "Lausannestrasse 2 3280 Murten",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lausannestrasse+2+3280+Murten&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Lausannestrasse 2 3280 Murten",
+        "lat": 46.926544189453125,
+        "lon": 7.110995769500732
+      },
+      {
+        "label": "Lausannestrasse 2a 3280 Murten",
+        "lat": 46.92721176147461,
+        "lon": 7.111363410949707
+      },
+      {
+        "label": "Lausannestrasse 5b 3280 Murten",
+        "lat": 46.92587661743164,
+        "lon": 7.111303329467773
+      },
+      {
+        "label": "Lausannestrasse 5 3280 Murten",
+        "lat": 46.9260368347168,
+        "lon": 7.1113104820251465
+      },
+      {
+        "label": "Lausannestrasse 5c 3280 Murten",
+        "lat": 46.92605209350586,
+        "lon": 7.1111650466918945
+      }
+    ]
+  },
+  "Moosacker 1, 3210 Kerzers": {
+    "query": "Moosacker 1 3210 Kerzers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Moosacker+1+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Kerzersmoos 1 3210 Kerzers",
+        "lat": 46.98820495605469,
+        "lon": 7.172122001647949
+      },
+      {
+        "label": "Kerzersmoos 3a 3210 Kerzers",
+        "lat": 46.98600769042969,
+        "lon": 7.172222137451172
+      },
+      {
+        "label": "Kerzersmoos 20a 3210 Kerzers",
+        "lat": 46.987098693847656,
+        "lon": 7.178585529327393
+      },
+      {
+        "label": "Kerzersmoos 30a 3210 Kerzers",
+        "lat": 46.99291229248047,
+        "lon": 7.182911396026611
+      },
+      {
+        "label": "Silberbrünnen 1 3210 Kerzers",
+        "lat": 46.99152755737305,
+        "lon": 7.203283309936523
+      }
+    ]
+  },
+  "Près du débarcadère, 1787 Môtier": {
+    "query": "Près du débarcadère 1787 Môtier",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Pr%C3%A8s+du+d%C3%A9barcad%C3%A8re+1787+M%C3%B4tier&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route du Débarcadère 3 1787 Môtier (Vully)",
+        "lat": 46.94721603393555,
+        "lon": 7.083932876586914
+      },
+      {
+        "label": "Route du Débarcadère 5 1787 Môtier (Vully)",
+        "lat": 46.94723892211914,
+        "lon": 7.084051132202148
+      },
+      {
+        "label": "Route du Débarcadère 5a 1787 Môtier (Vully)",
+        "lat": 46.94731903076172,
+        "lon": 7.08414363861084
+      }
+    ]
+  },
+  "Près du camping, 1786 Sugiez": {
+    "query": "Près du camping 1786 Sugiez",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Pr%C3%A8s+du+camping+1786+Sugiez&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Creux-de-Praz 2 1786 Sugiez",
+        "lat": 46.95804214477539,
+        "lon": 7.094966411590576
+      }
+    ]
+  },
+  "Départ parking de l’obélisque, 3280 Meyriez": {
+    "query": "Départ parking de l’obélisque 3280 Meyriez",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=D%C3%A9part+parking+de+l%E2%80%99ob%C3%A9lisque+3280+Meyriez&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": []
+  },
+  "Ecole de la Neuveville, 1700 Fribourg": {
+    "query": "Ecole de la Neuveville 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ecole+de+la+Neuveville+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Rue de la Neuveville 1 1700 Fribourg",
+        "lat": 46.80369567871094,
+        "lon": 7.158794403076172
+      },
+      {
+        "label": "Rue de la Neuveville 1a 1700 Fribourg",
+        "lat": 46.8038444519043,
+        "lon": 7.158730506896973
+      },
+      {
+        "label": "Rue de la Neuveville 2 1700 Fribourg",
+        "lat": 46.803382873535156,
+        "lon": 7.158466339111328
+      },
+      {
+        "label": "Rue de la Neuveville 3b 1700 Fribourg",
+        "lat": 46.8040771484375,
+        "lon": 7.159177780151367
+      },
+      {
+        "label": "Rue de la Neuveville 3 1700 Fribourg",
+        "lat": 46.80387496948242,
+        "lon": 7.159175395965576
+      }
+    ]
+  },
+  "Départ du parcours Vita, 1669 Albeuve": {
+    "query": "Départ du parcours Vita 1669 Albeuve",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=D%C3%A9part+du+parcours+Vita+1669+Albeuve&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": []
+  },
+  "Forêt de Bouleyres, 1630 Bulle": {
+    "query": "Forêt de Bouleyres 1630 Bulle",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=For%C3%AAt+de+Bouleyres+1630+Bulle&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Chemin de Bouleyres 83d 1630 Bulle",
+        "lat": 46.61585235595703,
+        "lon": 7.065845012664795
+      },
+      {
+        "label": "Chemin de Bouleyres 2 1630 Bulle",
+        "lat": 46.6161994934082,
+        "lon": 7.059545516967773
+      },
+      {
+        "label": "Chemin de Bouleyres 4 1630 Bulle",
+        "lat": 46.6161994934082,
+        "lon": 7.059787750244141
+      },
+      {
+        "label": "Chemin de Bouleyres 6a 1630 Bulle",
+        "lat": 46.61612319946289,
+        "lon": 7.059934139251709
+      },
+      {
+        "label": "Chemin de Bouleyres 10 1630 Bulle",
+        "lat": 46.61553192138672,
+        "lon": 7.060268402099609
+      }
+    ]
+  },
+  "Centre du village, près de l’église, 1653 Crésuz": {
+    "query": " près de l’église 1653 Crésuz",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+pr%C3%A8s+de+l%E2%80%99%C3%A9glise+1653+Cr%C3%A9suz&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de la Savignière 1 1653 Crésuz",
+        "lat": 46.61927795410156,
+        "lon": 7.1410627365112305
+      },
+      {
+        "label": "Chemin de la Cure 1 1653 Crésuz",
+        "lat": 46.61865234375,
+        "lon": 7.141602516174316
+      },
+      {
+        "label": "Route de la Maladère 1a 1653 Crésuz",
+        "lat": 46.61798858642578,
+        "lon": 7.141644477844238
+      },
+      {
+        "label": "Route de la Maladère 1 1653 Crésuz",
+        "lat": 46.61798858642578,
+        "lon": 7.141565799713135
+      },
+      {
+        "label": "Route de la Maladère 1b 1653 Crésuz",
+        "lat": 46.618064880371094,
+        "lon": 7.141520977020264
+      }
+    ]
+  },
+  "Au bout du village vers la Sarine, 1667 Enney": {
+    "query": "Au bout du village vers la Sarine 1667 Enney",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Au+bout+du+village+vers+la+Sarine+1667+Enney&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": []
+  },
+  "À l’entrée du village près du restaurant Le Pic Vert, 1666 Grandvillard": {
+    "query": "À l’entrée du village près du restaurant Le Pic Vert",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=%C3%80+l%E2%80%99entr%C3%A9e+du+village+pr%C3%A8s+du+restaurant+Le+Pic+Vert&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": []
+  },
+  "Sortie de Jaun vers le Jaunpass, 1656 Jaun": {
+    "query": "Sortie de Jaun vers le Jaunpass 1656 Jaun",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Sortie+de+Jaun+vers+le+Jaunpass+1656+Jaun&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": []
+  },
+  "Le Brand, pied des remontées de La Berra, 1634 La Roche": {
+    "query": "Le Brand pied des remontées de La Berra 1634 La",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Le+Brand+pied+des+remont%C3%A9es+de+La+Berra+1634+La&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": []
+  },
+  "Forêt de Sautaux, près de la gare, 1661 Le Pâquier": {
+    "query": "Forêt de Sautaux près de la gare 1661 Le Pâquier",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=For%C3%AAt+de+Sautaux+pr%C3%A8s+de+la+gare+1661+Le+P%C3%A2quier&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Chemin de Sautaux 52a 1661 Le Pâquier-Montbarry",
+        "lat": 46.59916305541992,
+        "lon": 7.061569690704346
+      },
+      {
+        "label": "Route de la Gare 1 1661 Le Pâquier-Montbarry",
+        "lat": 46.59395217895508,
+        "lon": 7.05578088760376
+      },
+      {
+        "label": "Route de la Gare 1a 1661 Le Pâquier-Montbarry",
+        "lat": 46.594032287597656,
+        "lon": 7.0556159019470215
+      },
+      {
+        "label": "Route de la Gare 2 1661 Le Pâquier-Montbarry",
+        "lat": 46.5937385559082,
+        "lon": 7.056404113769531
+      },
+      {
+        "label": "Route de la Gare 4 1661 Le Pâquier-Montbarry",
+        "lat": 46.59400939941406,
+        "lon": 7.056795120239258
+      }
+    ]
+  },
+  "Chemin de la Chapelle, 1649 Pont-la-Ville": {
+    "query": "Chemin de la Chapelle 1649 Pont-la-Ville",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+de+la+Chapelle+1649+Pont-la-Ville&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Chemin de la Chapelle 5n 1649 Pont-la-Ville",
+        "lat": 46.692440032958984,
+        "lon": 7.116022109985352
+      },
+      {
+        "label": "Chemin de la Chapelle 5 1649 Pont-la-Ville",
+        "lat": 46.692623138427734,
+        "lon": 7.116011619567871
+      },
+      {
+        "label": "Chemin de la Chapelle 7a 1649 Pont-la-Ville",
+        "lat": 46.69272232055664,
+        "lon": 7.116640090942383
+      },
+      {
+        "label": "Chemin de la Chapelle 7 1649 Pont-la-Ville",
+        "lat": 46.69272232055664,
+        "lon": 7.116466045379639
+      },
+      {
+        "label": "Chemin de la Chapelle 7b 1649 Pont-la-Ville",
+        "lat": 46.692466735839844,
+        "lon": 7.116217613220215
+      }
+    ]
+  },
+  "Ferme pédagogique Aux P’tites Bottes, 1678 Siviriez": {
+    "query": "Ferme pédagogique Aux P’tites Bottes 1678 Siviriez",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ferme+p%C3%A9dagogique+Aux+P%E2%80%99tites+Bottes+1678+Siviriez&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": []
+  },
+  "Place de l’Aigle 6, 1663 Moléson-sur-Gruyères": {
+    "query": "Place de l’Aigle 6 1663 Moléson-sur-Gruyères",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Place+de+l%E2%80%99Aigle+6+1663+Mol%C3%A9son-sur-Gruy%C3%A8res&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Place de l'Aigle 6 1663 Moléson-sur-Gruyères",
+        "lat": 46.562713623046875,
+        "lon": 7.0357770919799805
+      }
+    ]
+  },
+  "Forêt de Boulogne, Route de Bossens, 1680 Romont": {
+    "query": "Forêt de Boulogne Route de Bossens 1680 Romont",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=For%C3%AAt+de+Boulogne+Route+de+Bossens+1680+Romont&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de Bossens 8b 1680 Romont FR",
+        "lat": 46.69831848144531,
+        "lon": 6.913171768188477
+      },
+      {
+        "label": "Route de Bossens 8 1680 Romont FR",
+        "lat": 46.697959899902344,
+        "lon": 6.912835121154785
+      },
+      {
+        "label": "Route de Bossens 8a 1680 Romont FR",
+        "lat": 46.6981086730957,
+        "lon": 6.9129462242126465
+      },
+      {
+        "label": "Route de Bossens 14 1680 Romont FR",
+        "lat": 46.696449279785156,
+        "lon": 6.907897472381592
+      },
+      {
+        "label": "Route de Bossens 14a 1680 Romont FR",
+        "lat": 46.696407318115234,
+        "lon": 6.9085001945495605
+      }
+    ]
+  },
+  "Départ Rue, 1673 Rue": {
+    "query": "Départ Rue 1673 Rue",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=D%C3%A9part+Rue+1673+Rue&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Rue du Casino 4 1673 Rue",
+        "lat": 46.61879348754883,
+        "lon": 6.821129322052002
+      },
+      {
+        "label": "Rue du Casino 4a 1673 Rue",
+        "lat": 46.618865966796875,
+        "lon": 6.821160793304443
+      },
+      {
+        "label": "Rue du Casino 6 1673 Rue",
+        "lat": 46.618690490722656,
+        "lon": 6.8214850425720215
+      },
+      {
+        "label": "Rue du Casino 6b 1673 Rue",
+        "lat": 46.618560791015625,
+        "lon": 6.821506023406982
+      },
+      {
+        "label": "Rue du Casino 6c 1673 Rue",
+        "lat": 46.618804931640625,
+        "lon": 6.821383953094482
+      }
+    ]
+  },
+  "Place de jeux du Grand-Clos, 1618 Châtel-St-Denis": {
+    "query": "Place de jeux du Grand-Clos 1618 Châtel-St-Denis",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Place+de+jeux+du+Grand-Clos+1618+Ch%C3%A2tel-St-Denis&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Chemin du Clos à Golet 1 1618 Châtel-St-Denis",
+        "lat": 46.52769470214844,
+        "lon": 6.898567199707031
+      },
+      {
+        "label": "Chemin du Clos à Golet 6 1618 Châtel-St-Denis",
+        "lat": 46.528076171875,
+        "lon": 6.898998737335205
+      },
+      {
+        "label": "Chemin du Clos à Golet 6b 1618 Châtel-St-Denis",
+        "lat": 46.52809143066406,
+        "lon": 6.89915132522583
+      },
+      {
+        "label": "Chemin du Clos à Golet 6a 1618 Châtel-St-Denis",
+        "lat": 46.52803039550781,
+        "lon": 6.898727893829346
+      },
+      {
+        "label": "Chemin du Clos à Golet 7a 1618 Châtel-St-Denis",
+        "lat": 46.528377532958984,
+        "lon": 6.898306846618652
+      }
+    ]
+  },
+  "Ancienne école de Fruence, 1618 Châtel-St-Denis": {
+    "query": "Ancienne école de Fruence 1618 Châtel-St-Denis",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ancienne+%C3%A9cole+de+Fruence+1618+Ch%C3%A2tel-St-Denis&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de Fruence 16d 1618 Châtel-St-Denis",
+        "lat": 46.52202224731445,
+        "lon": 6.906801700592041
+      },
+      {
+        "label": "Route de Fruence 93d 1618 Châtel-St-Denis",
+        "lat": 46.52233123779297,
+        "lon": 6.911301612854004
+      },
+      {
+        "label": "Route de Fruence 2n 1618 Châtel-St-Denis",
+        "lat": 46.52263259887695,
+        "lon": 6.906851768493652
+      },
+      {
+        "label": "Route de Fruence 2 1618 Châtel-St-Denis",
+        "lat": 46.522674560546875,
+        "lon": 6.9066081047058105
+      },
+      {
+        "label": "Route de Fruence 3 1618 Châtel-St-Denis",
+        "lat": 46.5231819152832,
+        "lon": 6.90634822845459
+      }
+    ]
+  },
+  "Route du Niremont, parking de la chapelle, 1623 Semsales": {
+    "query": "Route du Niremont parking de la chapelle 1623 Semsales",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+du+Niremont+parking+de+la+chapelle+1623+Semsales&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route du Niremont 1 1623 Semsales",
+        "lat": 46.574249267578125,
+        "lon": 6.928416728973389
+      },
+      {
+        "label": "Route du Niremont 2a 1623 Semsales",
+        "lat": 46.573875427246094,
+        "lon": 6.9280686378479
+      },
+      {
+        "label": "Route du Niremont 2 1623 Semsales",
+        "lat": 46.57406997680664,
+        "lon": 6.928274631500244
+      },
+      {
+        "label": "Route du Niremont 6 1623 Semsales",
+        "lat": 46.57395935058594,
+        "lon": 6.9285712242126465
+      },
+      {
+        "label": "Route du Niremont 6a 1623 Semsales",
+        "lat": 46.57394027709961,
+        "lon": 6.928735733032227
+      }
+    ]
+  },
+  "Route de Romont 4, 1678 Siviriez": {
+    "query": "Route de Romont 4 1678 Siviriez",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Romont+4+1678+Siviriez&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de Romont 4 1678 Siviriez",
+        "lat": 46.65826416015625,
+        "lon": 6.877288341522217
+      },
+      {
+        "label": "Route de Romont 4a 1678 Siviriez",
+        "lat": 46.658416748046875,
+        "lon": 6.877320766448975
+      },
+      {
+        "label": "Route de Romont 40a 1678 Siviriez",
+        "lat": 46.65971755981445,
+        "lon": 6.88056755065918
+      },
+      {
+        "label": "Route de Romont 40 1678 Siviriez",
+        "lat": 46.65953063964844,
+        "lon": 6.880360126495361
+      },
+      {
+        "label": "Route de Romont 41a 1678 Siviriez",
+        "lat": 46.65983200073242,
+        "lon": 6.879595756530762
+      }
+    ]
+  },
+  "Route du Défénant 5, 1686 Grangettes-près-Romont": {
+    "query": "Route du Défénant 5 1686 Grangettes-près-Romont",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+du+D%C3%A9f%C3%A9nant+5+1686+Grangettes-pr%C3%A8s-Romont&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route du Défénant 5 1686 Grangettes-près-Romont",
+        "lat": 46.66050338745117,
+        "lon": 6.990008354187012
+      }
+    ]
+  },
+  "Route de l’Ecole 16, 1753 Matran": {
+    "query": "Route de l’Ecole 16 1753 Matran",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l%E2%80%99Ecole+16+1753+Matran&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de l'Ecole 16 1753 Matran",
+        "lat": 46.78673553466797,
+        "lon": 7.099462032318115
+      },
+      {
+        "label": "Route de l'Ecole 16n 1753 Matran",
+        "lat": 46.78668212890625,
+        "lon": 7.1000285148620605
+      },
+      {
+        "label": "Route de l'Ecole 16a 1753 Matran",
+        "lat": 46.78666687011719,
+        "lon": 7.099983215332031
+      }
+    ]
+  },
+  "Forêt de Cugy, 1482 Cugy FR": {
+    "query": "Forêt de Cugy 1482 Cugy FR",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=For%C3%AAt+de+Cugy+1482+Cugy+FR&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Moulin de Glâne 2d 1482 Cugy FR",
+        "lat": 46.82303237915039,
+        "lon": 6.889121055603027
+      },
+      {
+        "label": "Moulin de Glâne 3d 1482 Cugy FR",
+        "lat": 46.82271957397461,
+        "lon": 6.887678146362305
+      },
+      {
+        "label": "Chemin de la Fin 6d 1482 Cugy FR",
+        "lat": 46.8159294128418,
+        "lon": 6.895806789398193
+      },
+      {
+        "label": "Chemin Clos de la Gare 6d 1482 Cugy FR",
+        "lat": 46.81715393066406,
+        "lon": 6.891754150390625
+      },
+      {
+        "label": "Chemin de Vesin 11d 1482 Cugy FR",
+        "lat": 46.81182861328125,
+        "lon": 6.886256694793701
+      }
+    ]
+  },
+  "Parking sous l’église, 1774 Montagny-les-Monts": {
+    "query": "Parking sous l’église 1774 Montagny-les-Monts",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Parking+sous+l%E2%80%99%C3%A9glise+1774+Montagny-les-Monts&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": []
+  },
+  "Route de Moudon 5, 1670 Ursy": {
+    "query": "Route de Moudon 5 1670 Ursy",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Moudon+5+1670+Ursy&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de Moudon 5 1670 Ursy",
+        "lat": 46.63532257080078,
+        "lon": 6.832971572875977
+      },
+      {
+        "label": "Route de Moudon 51 1670 Ursy",
+        "lat": 46.638755798339844,
+        "lon": 6.83089542388916
+      },
+      {
+        "label": "Route de Moudon 51a 1670 Ursy",
+        "lat": 46.63859558105469,
+        "lon": 6.831066131591797
+      }
+    ]
+  },
+  "Place de l’Ecole 2, 1695 Villarlod": {
+    "query": "Place de l’Ecole 2 1695 Villarlod",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Place+de+l%E2%80%99Ecole+2+1695+Villarlod&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Place de l'Ecole 2 1695 Villarlod",
+        "lat": 46.70467758178711,
+        "lon": 7.0208258628845215
+      },
+      {
+        "label": "Place de l'Ecole 2n 1695 Villarlod",
+        "lat": 46.70438766479492,
+        "lon": 7.020758152008057
+      },
+      {
+        "label": "Place de l'Ecole 2a 1695 Villarlod",
+        "lat": 46.70454025268555,
+        "lon": 7.0204877853393555
+      },
+      {
+        "label": "Place de l'Ecole 4 1695 Villarlod",
+        "lat": 46.70450973510742,
+        "lon": 7.021035194396973
+      },
+      {
+        "label": "Place de l'Ecole 4a 1695 Villarlod",
+        "lat": 46.70439529418945,
+        "lon": 7.021361827850342
+      }
+    ]
+  },
+  "Vestiges de Bossonnens, 1615 Bossonnens": {
+    "query": "Vestiges de Bossonnens 1615 Bossonnens",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Vestiges+de+Bossonnens+1615+Bossonnens&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de Châtel-St-Denis 1 1615 Bossonnens",
+        "lat": 46.526004791259766,
+        "lon": 6.852468967437744
+      },
+      {
+        "label": "Route de Châtel-St-Denis 1a 1615 Bossonnens",
+        "lat": 46.52616882324219,
+        "lon": 6.852752685546875
+      },
+      {
+        "label": "Route de Châtel-St-Denis 4e 1615 Bossonnens",
+        "lat": 46.52562713623047,
+        "lon": 6.8528666496276855
+      },
+      {
+        "label": "Chemin de la Chapelle 4d 1615 Bossonnens",
+        "lat": 46.52139663696289,
+        "lon": 6.84872579574585
+      },
+      {
+        "label": "Route de Châtel-St-Denis 4 1615 Bossonnens",
+        "lat": 46.52578353881836,
+        "lon": 6.85330867767334
+      }
+    ]
+  },
+  "Départ Echarlens, 1646 Echarlens": {
+    "query": "Départ Echarlens 1646 Echarlens",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=D%C3%A9part+Echarlens+1646+Echarlens&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Montmelley # 1646 Echarlens",
+        "lat": 46.64356231689453,
+        "lon": 7.074955940246582
+      },
+      {
+        "label": "La Mossère 1 1646 Echarlens",
+        "lat": 46.64963150024414,
+        "lon": 7.0871663093566895
+      },
+      {
+        "label": "Route de Champotey 1 1646 Echarlens",
+        "lat": 46.64772033691406,
+        "lon": 7.080474376678467
+      },
+      {
+        "label": "Plan d'Everdes 1 1646 Echarlens",
+        "lat": 46.65167999267578,
+        "lon": 7.091073989868164
+      },
+      {
+        "label": "Montmelley 1a 1646 Echarlens",
+        "lat": 46.64421844482422,
+        "lon": 7.075181007385254
+      }
+    ]
+  },
+  "Réserve naturelle Auried, 3213 Kleinbösingen": {
+    "query": "Réserve naturelle Auried 3213 Kleinbösingen",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=R%C3%A9serve+naturelle+Auried+3213+Kleinb%C3%B6singen&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": []
+  },
+  "Dorfstrasse 1, 3182 Ueberstorf": {
+    "query": "Dorfstrasse 1 3182 Ueberstorf",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Dorfstrasse+1+3182+Ueberstorf&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Dorfstrasse 1 3182 Ueberstorf",
+        "lat": 46.86478042602539,
+        "lon": 7.311012268066406
+      },
+      {
+        "label": "Dorfstrasse 10a 3182 Ueberstorf",
+        "lat": 46.86390686035156,
+        "lon": 7.312183380126953
+      },
+      {
+        "label": "Dorfstrasse 10c 3182 Ueberstorf",
+        "lat": 46.8638801574707,
+        "lon": 7.312113285064697
+      },
+      {
+        "label": "Dorfstrasse 10b 3182 Ueberstorf",
+        "lat": 46.863895416259766,
+        "lon": 7.312143325805664
+      },
+      {
+        "label": "Dorfstrasse 10 3182 Ueberstorf",
+        "lat": 46.86386489868164,
+        "lon": 7.312346935272217
+      }
+    ]
+  },
+  "Waldrand Staffelsholz, 3184 Wünnewil": {
+    "query": "Waldrand Staffelsholz 3184 Wünnewil",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Waldrand+Staffelsholz+3184+W%C3%BCnnewil&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": []
+  },
+  "Chemin de Montborget 56, 1611 La Verrerie": {
+    "query": "Chemin de Montborget 56 1611 La Verrerie",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+de+Montborget+56+1611+La+Verrerie&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Chemin de Montborget 56 1611 Le Crêt-près-Semsales",
+        "lat": 46.608741760253906,
+        "lon": 6.932312488555908
+      },
+      {
+        "label": "Chemin de Montborget 56c 1611 Le Crêt-près-Semsales",
+        "lat": 46.60889434814453,
+        "lon": 6.93231201171875
+      },
+      {
+        "label": "Chemin de Montborget 56a 1611 Le Crêt-près-Semsales",
+        "lat": 46.60859298706055,
+        "lon": 6.932120323181152
+      },
+      {
+        "label": "Chemin de Montborget 20 1611 Le Crêt-près-Semsales",
+        "lat": 46.61147689819336,
+        "lon": 6.932733535766602
+      },
+      {
+        "label": "Chemin de Montborget 20a 1611 Le Crêt-près-Semsales",
+        "lat": 46.611167907714844,
+        "lon": 6.93302059173584
+      }
+    ]
+  },
+  "Chemin de l’Abbaye 19, 1725 Posieux": {
+    "query": "Chemin de l’Abbaye 19 1725 Posieux",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+de+l%E2%80%99Abbaye+19+1725+Posieux&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Chemin de l'Abbaye 19 1725 Posieux",
+        "lat": 46.76399612426758,
+        "lon": 7.117739677429199
+      }
+    ]
+  },
+  "Bois de Belfaux, 1782 Belfaux": {
+    "query": "Bois de Belfaux 1782 Belfaux",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Bois+de+Belfaux+1782+Belfaux&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Bois des Côtes 11a 1782 Belfaux",
+        "lat": 46.8167724609375,
+        "lon": 7.090747833251953
+      },
+      {
+        "label": "Bois des Côtes 12b 1782 Belfaux",
+        "lat": 46.81773376464844,
+        "lon": 7.091934680938721
+      },
+      {
+        "label": "Bois des Côtes 12a 1782 Belfaux",
+        "lat": 46.81767654418945,
+        "lon": 7.091942310333252
+      }
+    ]
+  },
+  "Place de l’Église, 1772 Grolley": {
+    "query": "Place de l’Église 1772 Grolley",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Place+de+l%E2%80%99%C3%89glise+1772+Grolley&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Place de l'Eglise 1 1772 Grolley",
+        "lat": 46.8336296081543,
+        "lon": 7.071084976196289
+      },
+      {
+        "label": "Place de l'Eglise 2b 1772 Grolley",
+        "lat": 46.83370590209961,
+        "lon": 7.070224285125732
+      },
+      {
+        "label": "Place de l'Eglise 2c 1772 Grolley",
+        "lat": 46.83331298828125,
+        "lon": 7.070484161376953
+      },
+      {
+        "label": "Place de l'Eglise 2 1772 Grolley",
+        "lat": 46.83361053466797,
+        "lon": 7.070882797241211
+      },
+      {
+        "label": "Place de l'Eglise 2a 1772 Grolley",
+        "lat": 46.833702087402344,
+        "lon": 7.0704874992370605
+      }
+    ]
+  },
+  "Place de l’École 1–7, 1796 Courgevaux": {
+    "query": "Place de l’École 1–7 1796 Courgevaux",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Place+de+l%E2%80%99%C3%89cole+1%E2%80%937+1796+Courgevaux&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Place de l'Ecole 7 1796 Courgevaux",
+        "lat": 46.908260345458984,
+        "lon": 7.111902236938477
+      },
+      {
+        "label": "Place de l'Ecole 1 1796 Courgevaux",
+        "lat": 46.908233642578125,
+        "lon": 7.1116557121276855
+      },
+      {
+        "label": "Place de l'Ecole 2 1796 Courgevaux",
+        "lat": 46.907997131347656,
+        "lon": 7.111888885498047
+      },
+      {
+        "label": "Place de l'Ecole 3 1796 Courgevaux",
+        "lat": 46.908382415771484,
+        "lon": 7.111467361450195
+      },
+      {
+        "label": "Place de l'Ecole 4 1796 Courgevaux",
+        "lat": 46.90800094604492,
+        "lon": 7.112197399139404
+      }
+    ]
+  },
+  "Turnhalle Heitenried, 1714 Heitenried": {
+    "query": " 1714 Heitenried",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+1714+Heitenried&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Niedermuhren 1 1714 Heitenried",
+        "lat": 46.841957092285156,
+        "lon": 7.276378154754639
+      },
+      {
+        "label": "Konradshus 1n 1714 Heitenried",
+        "lat": 46.81883239746094,
+        "lon": 7.309617519378662
+      },
+      {
+        "label": "Römermatta 1 1714 Heitenried",
+        "lat": 46.82712936401367,
+        "lon": 7.305408477783203
+      },
+      {
+        "label": "Schönfelsstrasse 1 1714 Heitenried",
+        "lat": 46.82610321044922,
+        "lon": 7.303299427032471
+      },
+      {
+        "label": "Wiler vor Holz 1 1714 Heitenried",
+        "lat": 46.83942794799805,
+        "lon": 7.296084880828857
+      }
+    ]
+  },
+  "Turnhalle Wünnewil, 3184 Wünnewil": {
+    "query": " 3184 Wünnewil",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+3184+W%C3%BCnnewil&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Schneidersmatt # 3184 Wünnewil",
+        "lat": 46.86683654785156,
+        "lon": 7.273242473602295
+      },
+      {
+        "label": "Lohmattstrasse # 3184 Wünnewil",
+        "lat": 46.87364196777344,
+        "lon": 7.270431995391846
+      },
+      {
+        "label": "Tavernaweg 1 3184 Wünnewil",
+        "lat": 46.87342834472656,
+        "lon": 7.285053730010986
+      },
+      {
+        "label": "Nussbaumen 1a 3184 Wünnewil",
+        "lat": 46.8875846862793,
+        "lon": 7.273409843444824
+      },
+      {
+        "label": "Lättacher 1d 3184 Wünnewil",
+        "lat": 46.890316009521484,
+        "lon": 7.270598411560059
+      }
+    ]
+  },
+  "Sageboden, 1737 Plasselb": {
+    "query": "Sageboden 1737 Plasselb",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Sageboden+1737+Plasselb&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Sageboden # 1737 Plasselb",
+        "lat": 46.72938537597656,
+        "lon": 7.248653411865234
+      },
+      {
+        "label": "Sageboden 5 1737 Plasselb",
+        "lat": 46.734954833984375,
+        "lon": 7.249900817871094
+      },
+      {
+        "label": "Sageboden 5a 1737 Plasselb",
+        "lat": 46.734840393066406,
+        "lon": 7.250027179718018
+      },
+      {
+        "label": "Sageboden 7 1737 Plasselb",
+        "lat": 46.734771728515625,
+        "lon": 7.249872207641602
+      },
+      {
+        "label": "Sageboden 11 1737 Plasselb",
+        "lat": 46.73459243774414,
+        "lon": 7.249676704406738
+      }
+    ]
+  },
+  "Schulhaus Schloss, 1714 Heitenried": {
+    "query": "Schulhaus Schloss 1714 Heitenried",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Schulhaus+Schloss+1714+Heitenried&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Schlossstrasse 2 1714 Heitenried",
+        "lat": 46.827247619628906,
+        "lon": 7.302342414855957
+      },
+      {
+        "label": "Schlossstrasse 4 1714 Heitenried",
+        "lat": 46.827396392822266,
+        "lon": 7.302542686462402
+      },
+      {
+        "label": "Schlossstrasse 15 1714 Heitenried",
+        "lat": 46.828033447265625,
+        "lon": 7.300130367279053
+      },
+      {
+        "label": "Schlossstrasse 15a 1714 Heitenried",
+        "lat": 46.82814025878906,
+        "lon": 7.300232410430908
+      },
+      {
+        "label": "Schlossstrasse 17 1714 Heitenried",
+        "lat": 46.82851028442383,
+        "lon": 7.300342082977295
+      }
+    ]
+  },
+  "Cabane forestière de Villagiroud, 1694 Villargiroud": {
+    "query": "Cabane forestière de Villagiroud 1694 Villargiroud",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Cabane+foresti%C3%A8re+de+Villagiroud+1694+Villargiroud&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": []
+  },
+  "Camping de la Forêt, 1642 Sorens": {
+    "query": "Camping de la Forêt 1642 Sorens",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Camping+de+la+For%C3%AAt+1642+Sorens&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Camping-La-Forêt 21 1642 Sorens",
+        "lat": 46.67281723022461,
+        "lon": 7.025290012359619
+      },
+      {
+        "label": "Camping-La-Forêt 23a 1642 Sorens",
+        "lat": 46.67292404174805,
+        "lon": 7.025691986083984
+      },
+      {
+        "label": "Camping-La-Forêt 25e 1642 Sorens",
+        "lat": 46.67267990112305,
+        "lon": 7.026553630828857
+      },
+      {
+        "label": "Chemin de la Paix 6d 1642 Sorens",
+        "lat": 46.66850280761719,
+        "lon": 7.05808687210083
+      },
+      {
+        "label": "Chemin de la Paix 2a 1642 Sorens",
+        "lat": 46.66911315917969,
+        "lon": 7.058138847351074
+      }
+    ]
+  },
+  "Au Cœur des Monts, 1632 Riaz": {
+    "query": "Au Cœur des Monts 1632 Riaz",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Au+C%C5%93ur+des+Monts+1632+Riaz&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route des Monts 1 1632 Riaz",
+        "lat": 46.64162063598633,
+        "lon": 7.061886310577393
+      },
+      {
+        "label": "Route des Monts 2a 1632 Riaz",
+        "lat": 46.64197540283203,
+        "lon": 7.061933517456055
+      },
+      {
+        "label": "Route des Monts 2e 1632 Riaz",
+        "lat": 46.647586822509766,
+        "lon": 7.049251556396484
+      },
+      {
+        "label": "Route des Monts 4 1632 Riaz",
+        "lat": 46.64208984375,
+        "lon": 7.061919689178467
+      },
+      {
+        "label": "Route des Monts 4a 1632 Riaz",
+        "lat": 46.64204025268555,
+        "lon": 7.061694622039795
+      }
+    ]
+  },
+  "Centre sportif, 1625 Sâles": {
+    "query": " 1625 Sâles",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+1625+S%C3%A2les&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de Romanens 1 1625 Sâles (Gruyère)",
+        "lat": 46.64105224609375,
+        "lon": 6.975455284118652
+      },
+      {
+        "label": "Chemin de la Gissetta 1a 1625 Sâles (Gruyère)",
+        "lat": 46.610313415527344,
+        "lon": 6.955530166625977
+      },
+      {
+        "label": "Place de l'Eglise 1a 1625 Sâles (Gruyère)",
+        "lat": 46.63593292236328,
+        "lon": 6.973637104034424
+      },
+      {
+        "label": "Route de la Joretta 1 1625 Sâles (Gruyère)",
+        "lat": 46.63516616821289,
+        "lon": 6.974765777587891
+      },
+      {
+        "label": "Le Revers 1b 1625 Sâles (Gruyère)",
+        "lat": 46.63429641723633,
+        "lon": 6.976684093475342
+      }
+    ]
+  },
+  "Chemin des Bruyères, 1699 Bouloz": {
+    "query": "Chemin des Bruyères 1699 Bouloz",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+des+Bruy%C3%A8res+1699+Bouloz&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Impasse des Bruyères 2 1699 Bouloz",
+        "lat": 46.61350631713867,
+        "lon": 6.87837028503418
+      },
+      {
+        "label": "Impasse des Bruyères 2a 1699 Bouloz",
+        "lat": 46.6136474609375,
+        "lon": 6.878437519073486
+      },
+      {
+        "label": "Impasse des Bruyères 3 1699 Bouloz",
+        "lat": 46.613426208496094,
+        "lon": 6.87777853012085
+      },
+      {
+        "label": "Impasse des Bruyères 4a 1699 Bouloz",
+        "lat": 46.61388397216797,
+        "lon": 6.878611087799072
+      },
+      {
+        "label": "Impasse des Bruyères 4 1699 Bouloz",
+        "lat": 46.61383056640625,
+        "lon": 6.878553867340088
+      }
+    ]
+  },
+  "Forêt de Montet, 1483 Montet (Broye)": {
+    "query": "Forêt de Montet 1483 Montet Broye ",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=For%C3%AAt+de+Montet+1483+Montet+Broye+&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de Vesin 12 1483 Montet (Broye)",
+        "lat": 46.81542205810547,
+        "lon": 6.867729187011719
+      },
+      {
+        "label": "Route de Frasses 12a 1483 Montet (Broye)",
+        "lat": 46.81661605834961,
+        "lon": 6.866974353790283
+      },
+      {
+        "label": "Route de Frasses 12 1483 Montet (Broye)",
+        "lat": 46.81673049926758,
+        "lon": 6.867175579071045
+      },
+      {
+        "label": "Route de Vesin 12a 1483 Montet (Broye)",
+        "lat": 46.81523132324219,
+        "lon": 6.867773056030273
+      },
+      {
+        "label": "Route de Frasses 14 1483 Montet (Broye)",
+        "lat": 46.81693649291992,
+        "lon": 6.867082595825195
+      }
+    ]
+  },
+  "Impasse de la Fava 1, 1566 Saint-Aubin": {
+    "query": "Impasse de la Fava 1 1566 Saint-Aubin",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Impasse+de+la+Fava+1+1566+Saint-Aubin&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Impasse de la Fava 1 1566 St-Aubin FR",
+        "lat": 46.883968353271484,
+        "lon": 6.9852142333984375
+      },
+      {
+        "label": "Impasse de la Fava 1e 1566 St-Aubin FR",
+        "lat": 46.88357162475586,
+        "lon": 6.985387325286865
+      },
+      {
+        "label": "Impasse de la Fava 11 1566 St-Aubin FR",
+        "lat": 46.88362503051758,
+        "lon": 6.984816551208496
+      },
+      {
+        "label": "Impasse de la Fava 12 1566 St-Aubin FR",
+        "lat": 46.884639739990234,
+        "lon": 6.98331880569458
+      },
+      {
+        "label": "Impasse de la Fava 14a 1566 St-Aubin FR",
+        "lat": 46.884559631347656,
+        "lon": 6.983739852905273
+      }
+    ]
+  },
+  "Piscine HFR Billens, Route de l’Hôpital 1, 1681 Billens-Hennens": {
+    "query": "Piscine HFR Billens Route de l’Hôpital 1 1681 Billens-Hennens",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Piscine+HFR+Billens+Route+de+l%E2%80%99H%C3%B4pital+1+1681+Billens-Hennens&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de l'Hôpital 9a 1681 Billens",
+        "lat": 46.69353485107422,
+        "lon": 6.904679775238037
+      },
+      {
+        "label": "Route de l'Hôpital 9 1681 Billens",
+        "lat": 46.69363784790039,
+        "lon": 6.9044294357299805
+      },
+      {
+        "label": "Route de l'Hôpital 1 1681 Billens",
+        "lat": 46.69464111328125,
+        "lon": 6.90288782119751
+      },
+      {
+        "label": "Route de l'Hôpital 1a 1681 Billens",
+        "lat": 46.69496154785156,
+        "lon": 6.901880264282227
+      },
+      {
+        "label": "Chemin Sous-l'Hôpital 12e 1681 Billens",
+        "lat": 46.6953010559082,
+        "lon": 6.904488563537598
+      }
+    ]
+  },
+  "Salle OTAVELA, 1648 Hauteville": {
+    "query": "Salle OTAVELA 1648 Hauteville",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Salle+OTAVELA+1648+Hauteville&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": []
+  },
+  "Place de l’Arche 1, 1732 Arconciel": {
+    "query": "Place de l’Arche 1 1732 Arconciel",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Place+de+l%E2%80%99Arche+1+1732+Arconciel&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Place de l'Arche 1 1732 Arconciel",
+        "lat": 46.74541473388672,
+        "lon": 7.123512268066406
+      },
+      {
+        "label": "Place de l'Arche 3 1732 Arconciel",
+        "lat": 46.74538040161133,
+        "lon": 7.123283386230469
+      },
+      {
+        "label": "Place de l'Arche 5 1732 Arconciel",
+        "lat": 46.74545669555664,
+        "lon": 7.123135566711426
+      }
+    ]
+  },
+  "Untergeschoss Schulhaus, Schulweg 4, 1736 St. Silvester": {
+    "query": "Untergeschoss Schulhaus Schulweg 4 1736 St. Silvester",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Untergeschoss+Schulhaus+Schulweg+4+1736+St.+Silvester&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Schulweg 4 1736 St. Silvester",
+        "lat": 46.74167251586914,
+        "lon": 7.2214179039001465
+      }
+    ]
+  },
+  "Au Village 2, 1692 Massonnens": {
+    "query": "Au Village 2 1692 Massonnens",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Au+Village+2+1692+Massonnens&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Au Village 2 1692 Massonnens",
+        "lat": 46.70125961303711,
+        "lon": 6.974480628967285
+      },
+      {
+        "label": "Au Village 2a 1692 Massonnens",
+        "lat": 46.70107650756836,
+        "lon": 6.974177360534668
+      },
+      {
+        "label": "Au Village 20 1692 Massonnens",
+        "lat": 46.6996955871582,
+        "lon": 6.974957466125488
+      },
+      {
+        "label": "Au Village 21a 1692 Massonnens",
+        "lat": 46.69960403442383,
+        "lon": 6.976175785064697
+      },
+      {
+        "label": "Au Village 21 1692 Massonnens",
+        "lat": 46.69983673095703,
+        "lon": 6.975917816162109
+      }
+    ]
+  },
+  "Route des Écoles 18, 1723 Marly": {
+    "query": "Route des Écoles 18 1723 Marly",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+des+%C3%89coles+18+1723+Marly&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route des Ecoles 18 1723 Marly",
+        "lat": 46.78459930419922,
+        "lon": 7.1467719078063965
+      }
+    ]
+  },
+  "Rue de l'Étang 9, 1630 Bulle": {
+    "query": "Rue de l'Étang 9 1630 Bulle",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%27%C3%89tang+9+1630+Bulle&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Rue de l'Etang 9 1630 Bulle",
+        "lat": 46.62434005737305,
+        "lon": 7.0677056312561035
+      },
+      {
+        "label": "Rue de l'Etang 9n 1630 Bulle",
+        "lat": 46.62435531616211,
+        "lon": 7.067503452301025
+      }
+    ]
+  },
+  "Route de Villars-les-Joncs 3, 1700 Fribourg": {
+    "query": "Route de Villars-les-Joncs 3 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Villars-les-Joncs+3+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de Villars-les-Joncs 3 1700 Fribourg",
+        "lat": 46.813907623291016,
+        "lon": 7.174408435821533
+      }
+    ]
+  },
+  "Chemin des Crêts 21, 1618 Châtel-St-Denis": {
+    "query": "Chemin des Crêts 21 1618 Châtel-St-Denis",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+des+Cr%C3%AAts+21+1618+Ch%C3%A2tel-St-Denis&type=locations&origins=address&limit=10&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Chemin des Crêts 21 1618 Châtel-St-Denis",
+        "lat": 46.531341552734375,
+        "lon": 6.897958278656006
+      }
+    ]
+  },
+  "Salle communale de Farvagny, Route de Fribourg 5, 1726 Farvagny": {
+    "query": "Salle communale de Farvagny Route de Fribourg 5 1726 Farvagny",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Salle+communale+de+Farvagny+Route+de+Fribourg+5+1726+Farvagny&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de Fribourg 5 1726 Farvagny-le-Grand",
+        "lat": 46.72124481201172,
+        "lon": 7.064883232116699
+      },
+      {
+        "label": "Route de Fribourg 1a 1726 Farvagny-le-Grand",
+        "lat": 46.72113800048828,
+        "lon": 7.064520835876465
+      },
+      {
+        "label": "Route de Fribourg 1 1726 Farvagny-le-Grand",
+        "lat": 46.721099853515625,
+        "lon": 7.06471586227417
+      },
+      {
+        "label": "Route de Fribourg 2 1726 Farvagny-le-Grand",
+        "lat": 46.720947265625,
+        "lon": 7.065029144287109
+      },
+      {
+        "label": "Route de Fribourg 4 1726 Farvagny-le-Grand",
+        "lat": 46.721107482910156,
+        "lon": 7.065116882324219
+      }
+    ]
+  },
+  "Salle AES, bâtiment Aviateur, Rue de l’Eglise 26, 1616 Attalens": {
+    "query": "Salle AES bâtiment Aviateur Rue de l’Eglise 26 1616 Attalens",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Salle+AES+b%C3%A2timent+Aviateur+Rue+de+l%E2%80%99Eglise+26+1616+Attalens&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": []
+  },
+  "Route de Fribourg 5, 1726 Farvagny-le-Grand": {
+    "query": "Route de Fribourg 5 1726 Farvagny-le-Grand",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Fribourg+5+1726+Farvagny-le-Grand&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Route de Fribourg 5 1726 Farvagny-le-Grand",
+        "lat": 46.72124481201172,
+        "lon": 7.064883232116699
+      },
+      {
+        "label": "Route de Fribourg 5a 1726 Farvagny-le-Grand",
+        "lat": 46.72151565551758,
+        "lon": 7.064618110656738
+      }
+    ]
+  },
+  "Rue de l’Eglise 26, 1616 Attalens": {
+    "query": "Rue de l’Eglise 26 1616 Attalens",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99Eglise+26+1616+Attalens&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-09-28",
+    "results": [
+      {
+        "label": "Rue de l'Eglise 26 1616 Attalens",
+        "lat": 46.51081085205078,
+        "lon": 6.850430488586426
+      }
+    ]
+  },
+  "Conservatoire Fribourg, Route Louis-Braille 8, 1763 Granges-Paccot, room B1.10": {
+    "query": "Route Louis-Braille 8 1763 Granges-Paccot",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+Louis-Braille+8+1763+Granges-Paccot&type=locations&origins=address&limit=10&sr=4326",
+    "checked": "2026-10-02",
+    "results": [
+      {
+        "label": "Route Louis-Braille 8 1763 Granges-Paccot",
+        "lat": 46.812278747558594,
+        "lon": 7.140768527984619
+      },
+      {
+        "label": "Route Louis-Braille 8b 1763 Granges-Paccot",
+        "lat": 46.81269073486328,
+        "lon": 7.140783309936523
+      },
+      {
+        "label": "Route Louis-Braille 8a 1763 Granges-Paccot",
+        "lat": 46.81209945678711,
+        "lon": 7.141689300537109
+      }
+    ]
+  },
+  "Parkplatz Nydegger AG, Obertswilstrasse 86, 1735 Giffers": {
+    "query": "Parkplatz Nydegger AG Obertswilstrasse 86 1735 Giffers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Parkplatz+Nydegger+AG+Obertswilstrasse+86+1735+Giffers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-10-02",
+    "results": []
+  },
+  "Seelandhalle, Fräschelsgasse 11, 3210 Kerzers": {
+    "query": "Seelandhalle Fräschelsgasse 11 3210 Kerzers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Seelandhalle+Fr%C3%A4schelsgasse+11+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-10-02",
+    "results": [
+      {
+        "label": "Fräschelsgasse 11 3210 Kerzers",
+        "lat": 46.97758483886719,
+        "lon": 7.195822715759277
+      },
+      {
+        "label": "Fräschelsgasse 11a 3210 Kerzers",
+        "lat": 46.977577209472656,
+        "lon": 7.196002006530762
+      }
+    ]
+  },
+  "Prâ des Frassettes 185, 1667 Enney": {
+    "query": "Prâ des Frassettes 185 1667 Enney",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Pr%C3%A2+des+Frassettes+185+1667+Enney&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-10-02",
+    "results": [
+      {
+        "label": "Prâ des Frassettes 185 1667 Enney",
+        "lat": 46.5595703125,
+        "lon": 7.0742106437683105
+      }
+    ]
+  },
+  "Imp. de Thusy 89, 1649 Pont-la-Ville": {
+    "query": "Imp. de Thusy 89 1649 Pont-la-Ville",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Imp.+de+Thusy+89+1649+Pont-la-Ville&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-10-02",
+    "results": [
+      {
+        "label": "Impasse de Thusy 89 1649 Pont-la-Ville",
+        "lat": 46.691768646240234,
+        "lon": 7.112246990203857
+      }
+    ]
+  },
+  "Salle OTAVELA, Rte de la Bahy 1, 1648 Hauteville": {
+    "query": "Salle OTAVELA Rte de la Bahy 1 1648 Hauteville",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Salle+OTAVELA+Rte+de+la+Bahy+1+1648+Hauteville&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-10-02",
+    "results": [
+      {
+        "label": "Route de la Bahy 1 1648 Hauteville",
+        "lat": 46.67079544067383,
+        "lon": 7.109845161437988
+      },
+      {
+        "label": "Route de la Bahy 20 1648 Hauteville",
+        "lat": 46.67113494873047,
+        "lon": 7.108304977416992
+      },
+      {
+        "label": "Route de la Bahy 22 1648 Hauteville",
+        "lat": 46.671058654785156,
+        "lon": 7.1078972816467285
+      },
+      {
+        "label": "Route de la Bahy 23a 1648 Hauteville",
+        "lat": 46.670894622802734,
+        "lon": 7.108315944671631
+      },
+      {
+        "label": "Route de la Bahy 24a 1648 Hauteville",
+        "lat": 46.67092514038086,
+        "lon": 7.107743263244629
+      }
+    ]
+  },
+  "Chemin de la Cabane 9, 1553 Châtonnaye": {
+    "query": "Chemin de la Cabane 9 1553 Châtonnaye",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+de+la+Cabane+9+1553+Ch%C3%A2tonnaye&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-10-02",
+    "results": [
+      {
+        "label": "Chemin de la Cabane 9 1553 Châtonnaye",
+        "lat": 46.74412536621094,
+        "lon": 6.9449944496154785
+      }
+    ]
+  },
+  "Rue de l'Hôpital 2, 1700 Fribourg": {
+    "query": "Rue de l'Hôpital 2 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%27H%C3%B4pital+2+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-10-02",
+    "results": [
+      {
+        "label": "Rue de l'Hôpital 2 1700 Fribourg",
+        "lat": 46.805633544921875,
+        "lon": 7.154872894287109
+      },
+      {
+        "label": "Rue de l'Hôpital 2b 1700 Fribourg",
+        "lat": 46.805267333984375,
+        "lon": 7.15457820892334
+      },
+      {
+        "label": "Rue de l'Hôpital 21a 1700 Fribourg",
+        "lat": 46.80612564086914,
+        "lon": 7.154947280883789
+      },
+      {
+        "label": "Rue de l'Hôpital 21 1700 Fribourg",
+        "lat": 46.805973052978516,
+        "lon": 7.154747486114502
+      },
+      {
+        "label": "Rue de l'Hôpital 23 1700 Fribourg",
+        "lat": 46.80599594116211,
+        "lon": 7.154677867889404
+      }
+    ]
+  },
+  "Fribourg Centre – Restaurant Coop (4e étage), Avenue de la Gare 10, 1700 Fribourg": {
+    "query": "Avenue de la Gare 10 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Avenue+de+la+Gare+10+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-10-13",
+    "results": [
+      {
+        "label": "Avenue de la Gare 10 1700 Fribourg",
+        "lat": 46.80301284790039,
+        "lon": 7.152565956115723
+      },
+      {
+        "label": "Avenue de la Gare 10a 1700 Fribourg",
+        "lat": 46.80292892456055,
+        "lon": 7.153146743774414
+      }
+    ]
+  },
+  "Salle communale de Farvagny, dans la salle de la scène, Rte de Fribourg 5, 1726 Farvagny, Switzerland": {
+    "query": "Rte de Fribourg 5 1726 Farvagny",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+de+Fribourg+5+1726+Farvagny&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-10-13",
+    "results": [
+      {
+        "label": "Route de Fribourg 5 1726 Farvagny-le-Grand",
+        "lat": 46.72124481201172,
+        "lon": 7.064883232116699
+      },
+      {
+        "label": "Route de Fribourg 5a 1726 Farvagny-le-Grand",
+        "lat": 46.72151565551758,
+        "lon": 7.064618110656738
+      },
+      {
+        "label": "Route de Fribourg 53 1726 Farvagny-le-Petit",
+        "lat": 46.727195739746094,
+        "lon": 7.071946144104004
+      },
+      {
+        "label": "Route de Fribourg 57 1726 Farvagny-le-Petit",
+        "lat": 46.72722625732422,
+        "lon": 7.072286128997803
+      },
+      {
+        "label": "Route de Fribourg 59 1726 Farvagny-le-Petit",
+        "lat": 46.727500915527344,
+        "lon": 7.072165489196777
+      }
+    ]
+  },
+  "Maison de la Petite Enfance, Route des Arsenaux 23A, 1700 Fribourg": {
+    "query": "Route des Arsenaux 23A 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+des+Arsenaux+23A+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-10-13",
+    "results": [
+      {
+        "label": "Route des Arsenaux 23a 1700 Fribourg",
+        "lat": 46.79762268066406,
+        "lon": 7.151127338409424
+      }
+    ]
+  },
+  "Salle polyvalente, Centre d'animation socioculturelle du Schönberg, Rte Mon-Repos 9, 1700 Fribourg": {
+    "query": "Rte Mon-Repos 9 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+Mon-Repos+9+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-10-13",
+    "results": [
+      {
+        "label": "Route Mon-Repos 9 1700 Fribourg",
+        "lat": 46.8084831237793,
+        "lon": 7.1737518310546875
+      },
+      {
+        "label": "Route Mon-Repos 9c 1700 Fribourg",
+        "lat": 46.808162689208984,
+        "lon": 7.174167633056641
+      },
+      {
+        "label": "Route Mon-Repos 9d 1700 Fribourg",
+        "lat": 46.8080940246582,
+        "lon": 7.174189567565918
+      },
+      {
+        "label": "Route Mon-Repos 9a 1700 Fribourg",
+        "lat": 46.80877685546875,
+        "lon": 7.173903942108154
+      },
+      {
+        "label": "Route Mon-Repos 9f 1700 Fribourg",
+        "lat": 46.80789566040039,
+        "lon": 7.1742167472839355
+      }
+    ]
+  },
+  "École enfantine du Jura, bâtiment C, Avenue du Général-Guisan 59, 1700 Fribourg": {
+    "query": "Avenue du Général-Guisan 59 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Avenue+du+G%C3%A9n%C3%A9ral-Guisan+59+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-10-13",
+    "results": [
+      {
+        "label": "Avenue du Général-Guisan 59 1700 Fribourg",
+        "lat": 46.811988830566406,
+        "lon": 7.148173809051514
+      }
+    ]
+  }
+}

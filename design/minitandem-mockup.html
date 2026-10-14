@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Mockup of a redesigned directory of activities for families with children aged 0 to 6 in canton Fribourg. Real cards, not final.">
+<link rel="icon" href="data:,">
+<title>Minitandem mockup</title>
+<style>
+/* Minitandem, design mockup. Light theme only.
+   Style follows the owner's KJobs site: black and white carry the page, soft grey surfaces replace lines,
+   pills mark what can be pressed, headings are light, colour appears only as a small mark with a fixed meaning
+   and every mark is also written out in words:
+   green = information current, amber = check details before you go, violet = for when the child is older. */
+:root {
+  color-scheme: light;
+  --bg: #fff; --t: #0d0d0d; --inv: #fff; --d: #636363; --r: rgb(0 0 0 / 0.1); --edge: rgb(0 0 0 / 0.28);
+  --surface: #f6f6f6; --raised: #ececec; --chip: #2b2b2b; --field: #f6f6f6;
+  --dot-good: #16a34a; --dot-check: #d97706; --dot-later: #9333ea;
+  --lift: 0 8px 28px rgb(0 0 0 / 0.14); --ring: rgb(0 0 0 / 0.1);
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --bar: 40px;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 72px; }
+body { margin: 0; background: var(--bg); color: var(--t); font: 16px/1.5 var(--sans); letter-spacing: -0.006em; padding-bottom: calc(32px + env(safe-area-inset-bottom)); }
+body:has(dialog[open]) { overflow: hidden; }
+.wrap { max-width: 1160px; margin-inline: auto; padding-inline: 16px; }
+[hidden] { display: none !important; }
+svg { display: block; flex: none; }
+button, input, select { font: inherit; letter-spacing: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--t); outline-offset: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Mockup chrome: one quiet label, kept visually apart from the product (grey, dashed). */
+.mockbar { position: sticky; top: 0; z-index: 20; background: var(--surface); border-bottom: 1px dashed var(--edge); }
+.mockbar .in { max-width: 1160px; margin-inline: auto; padding: 4px 16px; min-height: var(--bar); display: flex; align-items: center; }
+.mocklabel { min-width: 0; margin: 0; font-size: 12.5px; line-height: 1.3; color: var(--d); display: flex; align-items: center; gap: 8px; }
+.mocklabel::before { content: ""; width: 6px; height: 6px; border-radius: 50%; border: 1.5px solid var(--d); flex: none; }
+
+.seg { display: flex; padding: 2px; background: var(--raised); border-radius: 999px; }
+.seg button { min-width: 44px; min-height: 44px; padding: 0 14px; border: 0; border-radius: 999px; background: transparent; color: var(--d); font-weight: 500; font-size: 14px; transition: background-color 150ms var(--ease), color 150ms var(--ease); }
+.seg button[aria-pressed="true"] { background: var(--t); color: var(--inv); }
+.seg button b { font-weight: 600; }
+
+/* Header */
+.topwrap { border-bottom: 1px solid var(--r); }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 8px; }
+.mark { display: inline-flex; align-items: center; min-height: 44px; font-size: 20px; font-weight: 600; letter-spacing: -0.025em; color: var(--t); text-decoration: none; }
+.mark span { font-weight: 400; color: var(--d); }
+
+/* Intro */
+.intro { display: grid; gap: 8px; padding-block: 20px 12px; }
+.nb { white-space: nowrap; }
+h1 { margin: 0; font-size: 28px; font-weight: 400; letter-spacing: -0.032em; line-height: 1.14; text-wrap: balance; }
+.lead { margin: 0; color: var(--d); font-size: 15px; max-width: 58ch; text-wrap: pretty; }
+
+/* Layout: one column on a phone; filters become a left column from 1000px. */
+.layout { display: grid; gap: 14px; }
+.col { display: none; }
+.results { display: grid; gap: 6px; min-width: 0; align-content: start; }
+
+/* Search */
+.search { position: relative; }
+.search .si { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--d); pointer-events: none; }
+#q { width: 100%; height: 52px; padding: 0 52px 0 48px; border: 1px solid var(--edge); border-radius: 999px; background: var(--field); color: var(--t); appearance: none; -webkit-appearance: none; }
+#q::placeholder { color: var(--d); opacity: 1; }
+#q::-webkit-search-cancel-button { display: none; }
+#q:focus { outline: none; border-color: var(--t); box-shadow: 0 0 0 3px var(--ring); }
+.clear { position: absolute; right: 4px; top: 4px; width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; display: grid; place-items: center; color: var(--d); }
+
+/* Filter entry (phone and tablet): under the search field, scrolls away with the page. Nothing here is fixed or sticky.
+   A pill holds the current value and turns black once it is set; "Filters" opens the sheet for everything else
+   and turns black while any filter is on. The count of active filters is written out in the count bar below. */
+.fbar { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px; margin-top: 8px; }
+.fp { min-width: 0; min-height: 52px; padding: 6px 18px; border: 0; border-radius: 999px; background: var(--raised); color: var(--t); display: grid; align-content: center; justify-items: start; text-align: left; transition: background-color 150ms var(--ease), color 150ms var(--ease); }
+.fp small { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11.5px; line-height: 1.2; color: var(--d); }
+.fp b { max-width: 100%; overflow: hidden; overflow-wrap: anywhere; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font-size: 14.5px; font-weight: 600; line-height: 1.25; }
+.fp.on { background: var(--t); color: var(--inv); }
+.fp.on small { color: #d0d0d0; }
+.fp.main { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--bg); box-shadow: inset 0 0 0 1px var(--edge); font-size: 15px; font-weight: 600; }
+.fp.main.on { background: var(--t); box-shadow: none; }
+
+/* Count bar */
+.bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; column-gap: 12px; min-height: 44px; margin-top: 6px; }
+.bar-r { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.fcount { font-size: 14px; font-weight: 500; color: var(--t); }
+.count { margin: 0; color: var(--d); font-size: 14px; font-variant-numeric: tabular-nums; }
+.count b { color: var(--t); font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
+.note { margin: 0 0 6px; color: var(--d); font-size: 13px; }
+.linkbtn { min-height: 44px; padding: 0 8px; border: 0; background: none; color: var(--t); font-size: 14px; font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+
+/* Marks */
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.dot.good { background: var(--dot-good); } .dot.check { background: var(--dot-check); } .dot.later { background: var(--dot-later); }
+.st { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+
+/* List: compact rows, one grey block, scanned top to bottom */
+.list { list-style: none; margin: 0; padding: 0; background: var(--surface); border-radius: 18px; overflow: hidden; }
+.list > li + li { border-top: 1px solid var(--bg); }
+.listhead { display: none; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) 20px; grid-template-areas: "cat chev" "name chev" "facts chev" "l3 chev"; column-gap: 10px; row-gap: 3px; align-items: start; padding: 14px 12px 14px 16px; min-height: 64px; color: inherit; text-decoration: none; }
+.r-main { display: contents; }
+.r-cat { grid-area: cat; display: block; font-size: 13px; line-height: 1.3; color: var(--d); }
+.r-name { grid-area: name; font-weight: 600; font-size: 16px; line-height: 1.3; letter-spacing: -0.012em; overflow-wrap: anywhere; }
+.r-town-d { display: none; }
+.r-facts { grid-area: facts; display: flex; flex-wrap: wrap; gap: 0 16px; color: var(--d); font-size: 14px; line-height: 1.45; min-width: 0; }
+.r-facts > span { display: inline-flex; align-items: center; min-width: 0; }
+.r-facts .tick { margin-right: 6px; flex: none; color: var(--t); }
+.r-facts .known { color: var(--t); }
+.r-l3 { grid-area: l3; display: flex; align-items: baseline; gap: 10px; min-width: 0; font-size: 13.5px; color: var(--d); }
+.r-l3 .r-status { order: -1; color: var(--t); }
+.r-when { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chev { grid-area: chev; align-self: center; color: var(--d); }
+
+/* Small tick line: shown when a published age limit matches the chosen age (list and card detail). */
+.fitnote { display: flex; align-items: center; gap: 6px; margin-top: 3px; font-size: 13px; color: var(--t); }
+
+.empty { display: grid; gap: 10px; justify-items: start; padding: 24px 20px; background: var(--surface); border-radius: 18px; }
+.empty p { margin: 0; }
+.empty .tt { font-size: 18px; font-weight: 600; letter-spacing: -0.02em; }
+
+/* Filter panel (lives in the bottom sheet on a phone, in the left column on a wide screen) */
+.panel { display: grid; gap: 26px; }
+fieldset.group, div.group { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: 10px; }
+.glabel { padding: 0; font-size: 14px; font-weight: 500; color: var(--t); }
+legend.glabel { margin-bottom: 10px; }
+.group { scroll-margin-top: 20px; }
+.hint { margin: 0; font-size: 13px; color: var(--d); line-height: 1.4; }
+.hint.err { color: #b91c1c; font-weight: 500; }
+.field { height: 52px; width: 100%; padding: 0 16px; border: 1px solid var(--edge); border-radius: 14px; background: var(--field); color: var(--t); appearance: none; -webkit-appearance: none; }
+.field::placeholder { color: var(--d); opacity: 1; }
+.field:focus { outline: none; border-color: var(--t); box-shadow: 0 0 0 3px var(--ring); }
+input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.agebox { display: grid; grid-template-columns: 110px 1fr; align-items: center; gap: 12px; }
+.agebox .unit { font-size: 14px; color: var(--d); }
+.select { position: relative; display: block; }
+.select select { padding-right: 40px; text-overflow: ellipsis; cursor: pointer; }
+.select::after { content: ""; position: absolute; right: 19px; top: 50%; width: 7px; height: 7px; border-right: 1.5px solid var(--d); border-bottom: 1.5px solid var(--d); transform: translateY(-70%) rotate(45deg); pointer-events: none; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { min-height: 44px; padding: 0 16px; border: 0; border-radius: 999px; background: var(--raised); color: var(--chip); font-weight: 500; font-size: 14.5px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: background-color 150ms var(--ease), color 150ms var(--ease); }
+.chip[aria-pressed="true"] { background: var(--t); color: var(--inv); }
+.chip .num { font-size: 12.5px; color: var(--d); font-variant-numeric: tabular-nums; }
+.chip[aria-pressed="true"] .num { color: #d6d6d6; }
+.chips.ages { gap: 6px; flex-wrap: nowrap; }
+.chip.age { min-width: 44px; padding: 0; flex: 1 1 0; max-width: 52px; }
+.switchrow { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 14px; padding: 12px 8px 12px 16px; background: var(--surface); border-radius: 14px; }
+.switchrow .sw-t { display: block; font-size: 14.5px; font-weight: 500; }
+.switchrow .hint { margin-top: 2px; }
+.switch { position: relative; width: 56px; height: 44px; border: 0; background: transparent; padding: 0; }
+.switch::before { content: ""; position: absolute; left: 4px; top: 8px; width: 48px; height: 28px; border-radius: 999px; background: #8a8a8a; transition: background-color 150ms var(--ease); }
+.switch::after { content: ""; position: absolute; left: 7px; top: 11px; width: 22px; height: 22px; border-radius: 50%; background: #fff; transition: transform 150ms var(--ease); }
+.switch[aria-checked="true"]::before { background: var(--t); }
+.switch[aria-checked="true"]::after { transform: translateX(20px); }
+
+/* End of the list: the way back to the filters. A plain block in the page flow, never floating. */
+.endnav { display: grid; gap: 6px; margin-top: 14px; }
+.endnav p { margin: 0; text-align: center; font-size: 14px; color: var(--d); }
+.endnav .ghost { width: 100%; min-height: 48px; }
+
+/* Dialogs */
+dialog { padding: 0; border: 0; color: var(--t); background: var(--bg); }
+dialog::backdrop { background: rgb(0 0 0 / 0.4); }
+#sheet, #detail { margin: auto 0 0; width: 100%; max-width: none; border-radius: 24px 24px 0 0; overflow: hidden; }
+#sheet { max-height: 84dvh; }
+#detail { height: calc(100dvh - 20px); max-height: none; }
+#sheet[open], #detail[open] { display: flex; flex-direction: column; animation: rise 260ms var(--ease); }
+@keyframes rise { from { transform: translateY(32px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes slide { from { transform: translateX(32px); opacity: 0; } to { transform: none; opacity: 1; } }
+.sheet-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 8px 6px 20px; border-bottom: 1px solid var(--r); }
+.sheet-head h2 { margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -0.02em; }
+.sheet-head h2:focus { outline: none; }
+.iconbtn { width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; display: grid; place-items: center; color: var(--t); }
+.sheet-body { flex: 1; overflow: auto; overscroll-behavior: contain; padding: 20px; }
+.sheet-foot { display: flex; gap: 10px; padding: 12px 20px calc(12px + env(safe-area-inset-bottom)); border-top: 1px solid var(--r); background: var(--bg); }
+.go { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 24px; border: 0; border-radius: 999px; background: var(--t); color: var(--inv); font-weight: 500; font-size: 16px; text-decoration: none; }
+.go.grow { flex: 1; }
+.ghost { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 0 18px; border: 0; border-radius: 999px; background: var(--raised); color: var(--t); font-weight: 500; font-size: 14.5px; }
+
+/* Card detail */
+.d-top { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px 8px 12px; }
+.d-body { flex: 1; overflow: auto; overscroll-behavior: contain; padding: 4px 20px 32px; }
+.d-body:focus { outline: none; }
+.d-kicker { margin: 4px 0 0; font-size: 13.5px; color: var(--d); }
+.d-name { margin: 6px 0 0; font-size: 28px; line-height: 1.15; font-weight: 500; letter-spacing: -0.03em; overflow-wrap: anywhere; text-wrap: balance; }
+.d-where { margin: 6px 0 0; color: var(--d); font-size: 15px; }
+.d-status { margin: 12px 0 0; display: flex; align-items: center; gap: 8px; font-size: 14.5px; }
+.facts { margin: 18px 0 0; padding: 4px 16px; background: var(--surface); border-radius: 16px; }
+.facts .fr { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 12px; padding: 12px 0; }
+.facts .fr + .fr { border-top: 1px solid var(--r); }
+.facts dt { margin: 0; font-size: 13.5px; color: var(--d); padding-top: 1px; }
+.facts dd { margin: 0; font-size: 15px; overflow-wrap: anywhere; }
+.facts dd .sub { display: block; margin-top: 3px; font-size: 13.5px; color: var(--d); }
+.facts dd .fitnote { margin-top: 5px; }
+.np { color: var(--d); }
+.dsec { margin-top: 26px; }
+.dsec h3 { margin: 0 0 10px; font-size: 13px; font-weight: 500; color: var(--d); }
+.dsec p { margin: 0; font-size: 15.5px; line-height: 1.5; }
+ul.plain { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+ul.plain li { position: relative; padding-left: 16px; font-size: 15px; line-height: 1.5; overflow-wrap: anywhere; }
+ul.plain li::before { content: ""; position: absolute; left: 1px; top: 0.62em; width: 5px; height: 5px; border-radius: 50%; background: var(--d); }
+.dates { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.dates li { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 14px; border-radius: 999px; background: var(--raised); font-size: 14px; font-weight: 500; }
+.dates li.past { background: transparent; border: 1px dashed var(--edge); color: var(--d); font-weight: 400; }
+.pr { background: var(--surface); border-radius: 16px; padding: 4px 16px; margin: 0; }
+.pr .fr { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 12px; padding: 12px 0; font-size: 15px; }
+.pr .fr + .fr { border-top: 1px solid var(--r); }
+.pr dt { color: var(--d); font-size: 13.5px; padding-top: 1px; }
+.pr dd { margin: 0; overflow-wrap: anywhere; }
+.pr dd ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.found { display: grid; gap: 14px; }
+.found .ff { display: block; margin-bottom: 3px; font-size: 13.5px; font-weight: 600; }
+.found p { font-size: 15px; }
+.srcs { margin: 0; padding: 0; list-style: none; display: grid; }
+.srcs li + li { border-top: 1px solid var(--r); }
+.srcs a { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; padding: 8px 2px; color: var(--t); text-decoration: underline; text-decoration-color: var(--edge); text-underline-offset: 4px; font-size: 15px; }
+.d-foot { display: grid; gap: 6px; padding: 12px 20px calc(12px + env(safe-area-inset-bottom)); border-top: 1px solid var(--r); background: var(--bg); }
+.d-foot .go { width: 100%; }
+.d-foot .fine { margin: 0; text-align: center; font-size: 12.5px; color: var(--d); }
+
+/* Footer */
+.foot { margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--r); display: grid; gap: 10px; color: var(--d); font-size: 13px; line-height: 1.5; }
+.foot p { margin: 0; max-width: 78ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--t); }
+
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 50; max-width: calc(100% - 32px); padding: 12px 18px; border-radius: 999px; background: var(--t); color: var(--inv); font-size: 14px; line-height: 1.35; text-align: center; box-shadow: var(--lift); }
+dialog .toast { position: absolute; bottom: 96px; }
+
+@media (hover: hover) {
+  .row:hover { background: var(--raised); }
+  .chip:not([aria-pressed="true"]):hover, .ghost:hover, .iconbtn:hover { background: var(--edge); }
+  .seg button:not([aria-pressed="true"]):hover { color: var(--t); }
+  .fp:not(.on):not(.main):hover { background: #e2e2e2; }
+  .fp.main:not(.on):hover { background: var(--surface); }
+  .go:hover { opacity: 0.86; }
+  .linkbtn:hover { text-decoration-thickness: 2px; }
+  .srcs a:hover { text-decoration-color: var(--t); }
+}
+.chip:active, .ghost:active, .go:active, .fp:active { transform: translateY(1px); }
+
+/* Tablet: still one column, a little more room. */
+@media (min-width: 700px) {
+  h1 { font-size: 36px; }
+  .intro { padding-block: 36px 18px; }
+}
+
+/* Wide screens: filters are a left column, the sheet becomes a side panel. */
+@media (min-width: 1000px) {
+  body { padding-bottom: 40px; }
+  h1 { font-size: 46px; max-width: 22ch; }
+  .intro { padding-block: 52px 28px; }
+  .lead { font-size: 17px; }
+  .layout { grid-template-columns: 288px minmax(0, 1fr); gap: 40px; align-items: start; }
+  .col { display: block; position: sticky; top: calc(var(--bar) + 16px); max-height: calc(100dvh - var(--bar) - 32px); overflow: auto; padding: 2px; }
+  .col-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .col-head h2 { margin: 0; font-size: 15px; font-weight: 600; }
+  .fbar, .endnav { display: none; }
+  .toast { bottom: 40px; }
+  .chip, .ghost { min-height: 40px; }
+  .chips.ages { gap: 4px; }
+  .chip.age { min-width: 0; max-width: none; }
+
+  #detail { margin: 0 0 0 auto; height: 100dvh; width: min(600px, 100%); border-radius: 24px 0 0 24px; }
+  #detail[open] { animation: slide 260ms var(--ease); }
+  #sheet { display: none !important; }
+}
+/* The list becomes a table (one line per activity, columns to compare) only when the list column is wide enough. */
+@media (min-width: 1200px) {
+  .listhead, .row { display: grid; grid-template-columns: minmax(0, 1.6fr) 112px 136px minmax(0, 1.1fr) 104px 12px; grid-template-areas: none; column-gap: 14px; align-items: center; }
+  .listhead { padding: 0 16px 8px; font-size: 12.5px; color: var(--d); font-weight: 500; }
+  .row { padding: 12px 16px; row-gap: 0; }
+  .row > *, .r-name, .r-facts, .r-l3, .chev { grid-area: auto; }
+  .r-main { display: block; min-width: 0; }
+  .r-town-d { display: block; margin-top: 1px; font-size: 13.5px; color: var(--d); }
+  .r-town-m { display: none !important; }
+  .r-facts, .r-l3 { display: contents; }
+  .r-facts > span, .r-when, .r-l3 .r-status { font-size: 14px; }
+  .r-facts > span { align-items: flex-start; min-width: 0; line-height: 1.35; }
+  .r-l3 .r-status { order: 0; }
+  .r-when { white-space: normal; overflow: visible; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; line-height: 1.35; color: var(--d); }
+  .r-age, .r-price { display: -webkit-box !important; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+
+}
+@media (max-width: 380px) {
+  h1 { font-size: 27px; }
+  .agebox { grid-template-columns: 96px 1fr; }
+}
+/* Small phones (360px): tighter pill padding so both labels stay whole. */
+@media (max-width: 389px) {
+  .fp { padding: 6px 12px; }
+}
+/* Very narrow phones (320px): the two pills share one line, "Filters" gets its own full-width line. */
+@media (max-width: 359px) {
+  .fbar { grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); }
+  .fp { padding: 6px 14px; }
+  .fp.main { grid-column: 1 / -1; }
+}
+/* Tablet: the entry does not stretch across the whole page. */
+@media (min-width: 600px) {
+  .fbar { max-width: 600px; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<noscript><p style="padding:16px">This mockup needs JavaScript to filter and open cards.</p></noscript>
+
+<div class="mockbar" role="region" aria-label="Mockup notice">
+  <div class="in">
+    <p class="mocklabel">Mockup — real cards, not final</p>
+  </div>
+</div>
+
+<div class="topwrap">
+  <header class="wrap top">
+    <a class="mark" href="#top" aria-label="Minitandem">Mini<span>tandem</span></a>
+    <div class="seg" id="langSeg" role="group" aria-label="Language">
+      <button type="button" lang="en" aria-pressed="true">EN</button>
+      <button type="button" lang="de" aria-pressed="false" aria-disabled="true" title="German is not built in this mockup">DE</button>
+      <button type="button" lang="fr" aria-pressed="false" aria-disabled="true" title="French is not built in this mockup">FR</button>
+    </div>
+  </header>
+</div>
+
+<main class="wrap" id="top">
+  <section class="intro">
+    <h1>Activities for families with children aged <span class="nb">0–6</span> in canton Fribourg</h1>
+    <p class="lead">Age, schedule, price, address, sources. No account.</p>
+  </section>
+
+  <div class="layout">
+    <aside class="col" id="col" aria-label="Filters">
+      <div class="col-head"><h2>Filters</h2><button type="button" class="linkbtn" data-reset>Reset</button></div>
+      <div id="colBody"></div>
+    </aside>
+
+    <section class="results" aria-label="Results">
+      <div class="search" role="search">
+        <svg class="si" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+        <label class="sr" for="q">Search activities</label>
+        <input id="q" type="search" placeholder="Search by name, town or topic" autocomplete="off" enterkeyhint="search">
+        <button type="button" class="clear" id="qClear" aria-label="Clear search" hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+
+      <div class="fbar" id="fbar" role="group" aria-label="Filters">
+        <button type="button" class="fp" id="fpAge" data-open="age" aria-haspopup="dialog"><small>Child's age</small><b id="fpAgeV">Any</b></button>
+        <button type="button" class="fp" id="fpPlace" data-open="place" aria-haspopup="dialog"><small>District or town</small><b id="fpPlaceV">Anywhere</b></button>
+        <button type="button" class="fp main" id="fpMore" data-open="more" aria-haspopup="dialog"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg>Filters</button>
+      </div>
+
+      <div class="bar">
+        <p class="count" id="count" role="status" aria-live="polite"></p>
+        <div class="bar-r" id="barR" hidden>
+          <span class="fcount" id="fcount"></span>
+          <button type="button" class="linkbtn" id="resetTop" data-reset aria-label="Reset all filters">Reset</button>
+        </div>
+      </div>
+      <p class="note" id="countNote" hidden></p>
+
+      <div class="listhead" id="listhead" aria-hidden="true"><span>Activity</span><span>Age</span><span>Price</span><span>Next date</span><span>Status</span><span></span></div>
+      <ul class="list" id="list"></ul>
+      <div class="empty" id="empty" hidden>
+        <p class="tt">No activity matches these filters.</p>
+        <p class="hint">Try a different age or place, or clear the search.</p>
+        <button type="button" class="ghost" data-reset>Reset filters</button>
+      </div>
+
+      <div class="endnav" id="endnav" hidden>
+        <p id="endNote"></p>
+        <button type="button" class="ghost" id="toFilters"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V6M6.5 11.5L12 6l5.5 5.5"/></svg>Back to filters</button>
+      </div>
+    </section>
+  </div>
+
+  <footer class="foot">
+    <p class="legend"><span class="st"><i class="dot good"></i>Information current</span><span class="st"><i class="dot check"></i>Check details before you go</span><span class="st"><i class="dot later"></i>For when your child is older</span></p>
+    <p>Mockup — real cards, not final. The 20 cards come from the English translation pilot of 13 Oct 2026 (machine translation, not yet proofread). District names and dated sessions come from the existing catalogue data. Dates are counted from 13 Oct 2026. Nothing here is sent anywhere.</p>
+  </footer>
+</main>
+
+<dialog id="sheet" aria-labelledby="sheetTitle">
+  <div class="sheet-head">
+    <h2 id="sheetTitle" tabindex="-1" autofocus>Filters</h2>
+    <div style="display:flex;align-items:center;gap:2px">
+      <button type="button" class="linkbtn" data-reset>Reset</button>
+      <button type="button" class="iconbtn" id="sheetClose" aria-label="Close filters"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+  </div>
+  <div class="sheet-body" id="sheetBody"></div>
+  <div class="sheet-foot"><button type="button" class="go grow" id="sheetDone">Show activities</button></div>
+</dialog>
+
+<dialog id="detail" aria-labelledby="dTitle"></dialog>
+
+<form class="panel" id="panel" onsubmit="return false" hidden>
+  <fieldset class="group" id="g-age">
+    <legend class="glabel">Child's age</legend>
+    <div class="agebox">
+      <input class="field" id="age" type="number" inputmode="numeric" min="0" max="6" step="1" placeholder="Any" aria-label="Child's age in years" aria-describedby="ageHint">
+      <span class="unit">years</span>
+    </div>
+    <div class="chips ages" role="group" aria-label="Pick an age"></div>
+    <p class="hint" id="ageHint">0 means under 1 year. This directory covers ages 0–6.</p>
+    <div class="switchrow" id="unkRow" hidden>
+      <div><span class="sw-t" id="unkL">Include activities with no published age</span><span class="hint">Most cards do not state an age limit.</span></div>
+      <button type="button" class="switch" id="unk" role="switch" aria-checked="true" aria-labelledby="unkL"></button>
+    </div>
+  </fieldset>
+  <div class="group" id="g-place">
+    <label class="glabel" for="place">District or town</label>
+    <span class="select"><select class="field" id="place"></select></span>
+  </div>
+  <fieldset class="group" id="g-cat">
+    <legend class="glabel">Category</legend>
+    <div class="chips" data-kind="cat"></div>
+  </fieldset>
+  <fieldset class="group" id="g-fmt">
+    <legend class="glabel">Format</legend>
+    <div class="chips" data-kind="fmt"></div>
+  </fieldset>
+  <div class="group" id="g-more">
+    <span class="glabel">When</span>
+    <div class="switchrow">
+      <div><span class="sw-t" id="upL">Has upcoming dates</span><span class="hint">Only dated sessions the organiser has published. Regular opening hours are not counted.</span></div>
+      <button type="button" class="switch" id="up" role="switch" aria-checked="false" aria-labelledby="upL"></button>
+    </div>
+  </div>
+</form>
+
+<script>
+"use strict";
+var DATA = {"today":"2026-10-13","cards":[{"id":"aef-attalens-alimentation","name":"Atelier Alimentation · Attalens","town":"Attalens","d":"veveyse","cat":"play","fmt":"event","st":"active","min":null,"max":null,"parent":"yes","langs":[],"pk":"unknown","amt":null,"days":[3],"addr":"Rue de l’Eglise 26, 1616 Attalens","age":"Check the age","sched":"28 October 2026 · 09:00–11:00","price":"Price not published","intro":"A themed AEF meeting about nutrition for adults with children.","pd":null,"notes":["AEF calls this date Atelier Alimentation, although the description of a joint meeting for adults and children matches the café; the format of the specific workshop should be checked.","The school car park is reserved for teachers; AEF suggests parking at the Hôtel de Ville.","The age limit, price, need to register and the host's language are not published."],"prac":[["indoor","The meeting takes place in the AES room of the Aviateur school building."]],"find":[{"f":"Separate programme","t":"On 28 October 2026, 09:00–11:00, a meeting titled Atelier Alimentation à Attalens is published in the same premises."}],"rem":["Confirm the format of the themed workshop, age, price, registration and language."],"src":["AEF calendar: separate title and date","AEF: themed meeting"],"contact":null,"ev":[["2026-10-28","09:00","11:00"]]},{"id":"aef-mpe","name":"Café AEF · MPE","town":"Fribourg","d":"sarine","cat":"play","fmt":"group","st":"active","min":null,"max":null,"parent":"yes","langs":[],"pk":"unknown","amt":null,"days":[2],"addr":"Maison de la Petite Enfance, Route des Arsenaux 23A, 1700 Fribourg","age":"Age to be confirmed","sched":"Published sessions: 6, 13, 20 and 27 October; 3, 10, 17 and 24 November; 1 and 15 December 2026, on Tuesdays, 09:00–11:00.","price":"Price not published","intro":null,"pd":"Adults discuss parenting over coffee and try interacting with the children on the spot. Must an adult be present?","notes":["Adults and children meet together. The price, the age limit and the language of the specific facilitator are not stated. The French-language listing does not guarantee German.","A place in the group has not been checked.","Only the dates from the published AEF programme have been added to the calendar."],"prac":[],"find":[{"f":"Autumn series","t":"The public AEF calendar confirms sessions at the MPE on Tuesdays, 09:00–11:00, from 29 September to 15 December 2026, on the listed dates, without 8 December. Adults discuss parenting and interact with the children together."},{"f":"","t":"At the session, adults discuss parenting over coffee and try interacting with the children here and now."}],"rem":["The cost, age limits, registration and a German-speaking facilitator are not stated in the calendar. This is a joint session, not childcare without a parent.","What age is the session intended for?","How much does it cost to take part?","Is advance registration required?","In which languages is the session held?","Must an adult be present?","Are places available on the chosen date?"],"src":["AEF programme and published dates","AEF calendar","Additional check: Autumn series"],"contact":null,"ev":[["2026-10-06","09:00","11:00"],["2026-10-13","09:00","11:00"],["2026-10-20","09:00","11:00"],["2026-10-27","09:00","11:00"],["2026-11-03","09:00","11:00"],["2026-11-10","09:00","11:00"],["2026-11-17","09:00","11:00"],["2026-11-24","09:00","11:00"],["2026-12-01","09:00","11:00"],["2026-12-15","09:00","11:00"]]},{"id":"alice-marly","name":"Aux Merveilles d’Alice · café with a play area","town":"Marly","d":"sarine","cat":"dining","fmt":"self","st":"active","min":null,"max":null,"parent":"yes","langs":[],"pk":"unknown","amt":null,"days":[1,2,3,4,5,6,7],"addr":"Place de l’Ancienne-Papeterie 4, 1723 Marly","age":"Age range of the play area to be confirmed","sched":"Mon–Sat 07:00–21:00; Sun 07:00–19:00","price":"From the menu: coffee CHF 4.20; sweet pancake from CHF 5","intro":"A café with a children's play area. The conditions of access to the play area need to be checked separately from the cost of an order.","pd":"Family visit with a parent. Supervision by staff and the option to leave a child are not confirmed.","notes":["A family café, pancake house and tea room in the Marché de l’Ancienne Papeterie. According to the description of the complex, the children's play area covers more than 120 m². Independent play, not a class led by an instructor.","A visitor's photo on Google Maps from October 2025 shows a multi-level structure with netting, a soft low play area, children's tables and adult tables along the aisle. It is not just a box of toys; the photo does not prove that all areas can be seen from one's own seat.","Google Maps reviews were checked on 27.09.2026: a visitor marked \"4 weeks ago\" confirms the play area; another reviewer, \"11 months ago\", describes games for toddlers as well. This is guests' experience, not an official age limit. Separate rules for young children and for accompanying them inside the structure have not yet been established.","One review mentions waiting more than 20 minutes for an order; in the other reviews viewed, the staff are praised. These are different visits, not proof of constant problems or of guaranteed fast service.","Published menu: pancake with sugar and butter CHF 5; with Nutella, banana and cream CHF 8; savoury pancakes CHF 11.50–18.50. Coffee or espresso CHF 4.20, cappuccino CHF 5.","Coffee and one pancake with sugar: CHF 9.20 by the menu total, not a special offer and not an entry price. A separate charge for the play area, a compulsory order and time limits have not been established; free access is not confirmed.","The hours given are those of the café, not a separate schedule for the play area or the kitchen. On public holidays and before a special visit, check the hours.","The menu and the website are in French. This is free play, not a language class; check the language of service.","The official website of the café and the complex gives number 4; the Google Maps listing that was sent gives number 2. For navigation, the official address and a link to the specific venue are kept.","The complex reports three free hours of parking and access by bus no. 8. There is a swimming pool nearby; check the parking conditions on site."],"prac":[["indoor","Indoor play area"],["parking","Market car park: first 3 hours free"],["costNote","Coffee CHF 4.20 + plain crêpe CHF 5 = CHF 9.20 as an example order. This is not an entry price; check access to the play area and whether an order is compulsory"]],"find":[],"rem":["Age of the equipment, accompanying children inside the structure, charge and full overview."],"src":["Café: opening hours and contact details","Play area, address and parking","Menu of pancakes and waffles with prices","Menu of drinks with prices","Google Maps: venue listing"],"contact":null,"ev":[]},{"id":"charmey-family-pool","name":"Piscine de Charmey · swimming with a parent","town":"Charmey","d":"gruyere","cat":"water","fmt":"self","st":"active","min":null,"max":null,"parent":"yes","langs":[],"pk":"visit","amt":10.5,"days":[2,3,4,5,6,7],"addr":"Riau de la Maula 1, 1637 Charmey","age":"Age limits are not published","sched":"Tue–Fri 11:00–21:30; Sat 13:00–19:00; Sun 09:00–19:00, holidays separately","price":"Adult CHF 10.50; children under 6 free with an adult","intro":"Indoor family pool with a 1 m pool; children under six enter free with an adult.","pd":null,"notes":["The open-air children's pool and the playground are in the outdoor area and depend on the season.","This is independent pool entry, not a parent–child group; hours change during the holidays."],"prac":[["indoor","Indoor pool with a separate 1 m deep pool for non-swimmers; children under six free with an adult."],["warnings","The water in the children's pool is not described as shallow for young children; check the water temperature and swimming conditions."]],"find":[{"f":"Availability and format","t":"Indoor pool with a separate 1 m deep pool for non-swimmers; children under six free with an adult."}],"rem":["The water in the children's pool is not described as shallow for young children; check the water temperature and swimming conditions."],"src":["Pools, prices, age and hours"],"contact":null,"ev":[]},{"id":"corminboeuf-fauna-walk","name":"Corminboeuf · family route to the animals","town":"Corminboeuf","d":"sarine","cat":"nature","fmt":"self","st":"active","min":null,"max":null,"parent":"yes","langs":[],"pk":"unknown","amt":null,"days":[1,2,3,4,5,6,7],"addr":"Corminboeuf, 1720; check the start point against the GPX","age":"Age limits are not published","sched":"Open walking loop in daylight","price":"Price not published","intro":"The tourism office describes the route as suitable for families, about 5 km through a botanical trail, a meadow with deer, bees and horses.","pd":null,"notes":["About 1 hour 20 minutes at an adult's pace; the full loop may be too long for young children.","Observe the animals from a distance and do not enter private land; the route is not a petting farm."],"prac":[["indoor","The tourism office describes the route as suitable for families, about 5 km through a botanical trail, a meadow with deer, bees and horses."],["warnings","The official page gives 5.7 km in the description and 5 km in the properties; the exact start point and pushchair access are not confirmed."]],"find":[{"f":"Availability and format","t":"The tourism office describes the route as suitable for families, about 5 km through a botanical trail, a meadow with deer, bees and horses."}],"rem":["The official page gives 5.7 km in the description and 5 km in the properties; the exact start point and pushchair access are not confirmed."],"src":["Tourism: family loop, animals, length and GPX"],"contact":null,"ev":[]},{"id":"cresuz-village-play","name":"Crésuz · playground by the church","town":"Crésuz","d":"gruyere","cat":"play","fmt":"self","st":"check","min":null,"max":null,"parent":"yes","langs":[],"pk":"unknown","amt":null,"days":[],"addr":"Centre du village, près de l’église, 1653 Crésuz","age":"Age limits are not published","sched":"Based on a 2020 archive; current opening arrangements and access to be confirmed","price":"Price not published","intro":"Village playground with benches, a table and a nearby deer park.","pd":null,"notes":["Village playground with benches, a table and a nearby deer park.","The description and equipment are based on a 2020 document; a current check is needed before visiting."],"prac":[["indoor","Tourist list of 22.06.2020: Village playground with benches, a table and a nearby deer park."],["warnings","Confirm that the playground exists and that the deer park is accessible; the water in the fountain is marked as not drinkable."]],"find":[{"f":"Availability and format","t":"Tourist list of 22.06.2020: Village playground with benches, a table and a nearby deer park."}],"rem":["Confirm that the playground exists and that the deer park is accessible; the water in the fountain is marked as not drinkable."],"src":["Tourist list of picnic places, 22.06.2020"],"contact":null,"ev":[]},{"id":"elki-rechthalten","name":"ElKi Rechthalten","town":"Rechthalten","d":"sense","cat":"movement","fmt":"group","st":"check","min":null,"max":null,"parent":"yes","langs":["DE"],"pk":"unknown","amt":null,"days":[],"addr":"","age":"Age to be confirmed","sched":"2024 page: Wednesday 09:00–10:00; 2026/27 season to be confirmed","price":"Price not published","intro":null,"pd":null,"notes":["The page is older than the current season. Check whether young children are admitted, and confirm the address, fee and whether the group is still running."],"prac":[],"find":[{"f":"Schedule","t":"The page, last updated on 24 March 2024, still gives Wednesday 09:00–10:00 and a named contact person. It gives no age, price or new seasonal programme."}],"rem":["Without direct confirmation the group cannot be considered running in the 2026/27 season; confirm the age, hall and fee."],"src":["Official source"],"contact":null,"ev":[]},{"id":"ferme-verte-vallee-vuisternens","name":"Ferme Verte Vallée · meeting with animals","town":"Vuisternens-devant-Romont","d":"glane","cat":"nature","fmt":"individual","st":"check","min":null,"max":null,"parent":"yes","langs":[],"pk":"unknown","amt":null,"days":[],"addr":"Route de Bulle 101, 1687 Vuisternens-devant-Romont","age":"The format is chosen according to the age of the group; the lower age limit is not published","sched":"By prior arrangement only; there are no fixed hours","price":"The price is not published","intro":"An individually arranged encounter with animals at an educational farm.","pd":"Family visit by arrangement; participation and the role of the adult to be clarified.","notes":["The farm offers encounters with alpacas, goats, sheep and other animals, sometimes with a picnic.","The tourism page mentions family visits by appointment and a programme adapted to age; the price, minimum age, duration and language are not published.","This is not a drop-in visit without calling; a separate format for young children must be agreed."],"prac":[["indoor","The main encounters with animals take place at the farm"],["booking","By prior arrangement only"],["warnings","The price, age, duration and the role of the adult in a specific activity are not published"]],"find":[{"f":"Format","t":"The farm offers encounters with animals for families and programmes adapted to age, by prior arrangement only."}],"rem":["The minimum age, the format for young children, the price, the duration and the language are not published."],"src":["Activity themes, individual visit, address and contact"],"contact":null,"ev":[]},{"id":"fsg-domdidier-parent","name":"FSG Domdidier · gymnastics with a parent","town":"Domdidier","d":"broye","cat":"movement","fmt":"group","st":"check","min":3,"max":null,"parent":"yes","langs":[],"pk":"year","amt":120,"days":[1],"addr":"Halle de gym de Domdidier, 1564 Domdidier","age":"From age 3; advance registration possible from age 2","sched":"Mon 17:00–18:00 in the 2026/27 season; group full","price":"Annual fee CHF 120","intro":"Gymnastics with a parent from age three; currently waiting list only.","pd":"A parent takes part together with the child.","notes":["The 2026/27 season is marked as full. The organiser offers a waiting list and advance registration from age two for the next season.","Monday 17:00–18:00 and an annual fee of CHF 120 are published; the exact entrance to the gym and holiday breaks are not stated.","The format is for children aged three and over with a parent; for children under 3 this is an option for later, not a currently open group."],"prac":[["indoor","Class in a sports hall"],["booking","The 2026/27 season is full; a waiting list is possible"],["duration","Mon 17:00–18:00"],["commitment","Annual fee CHF 120"],["leader","Group leader"],["warnings","No places for the current season"],["warnings","A child must be 3 years old to take part"]],"find":[{"f":"2026/27 group","t":"Gymnastics with a parent from age three on Mondays 17:00–18:00, CHF 120 per year; the current group is full, a waiting list is possible."}],"rem":["To be checked: the exact entrance to the hall, holiday breaks and whether registration for the next season is possible."],"src":["Age, full group, schedule, fee and leader"],"contact":null,"ev":[]},{"id":"kafi8-kerzers","name":"Kafi8 · café with a play room","town":"Kerzers","d":"see","cat":"dining","fmt":"self","st":"check","min":null,"max":null,"parent":"yes","langs":[],"pk":"unknown","amt":null,"days":[2,3],"addr":"Kreuzgasse 8, 3210 Kerzers","age":"Age restrictions for the room to be confirmed","sched":"Tue–Wed 08:00–11:00; closed 5–18 October 2026","price":"The menu is under review; prices and play conditions to be confirmed","intro":null,"pd":null,"notes":["The Bärner Mamis family review describes a whole room with a toy kitchen, books, a wooden house and a table for drawing and building. According to the review, the café has about ten tables and two areas with soft seating; the date is given as 27 July without a year. The café website shows Mini-Kafi-8.","Further evidence about the layout: in a copy of a Google review on Restaurant Guru, a reviewer writes that the play room is directly connected to the dining room. When checked on 27.09.2026, the review showed the relative date \"8 months ago\"; the original date has not been established. A connection to the dining room does not mean the whole room can be seen from every table.","A copy of a Google review dated 28.02.2024 on Wanderlog also describes the play room and a friendly welcome for children. This is a separate visit experience, not a guarantee of the current atmosphere or quiet.","Closed for the autumn holidays 5–18 October 2026. The café also usually closes during other school holidays; check each period on the Events & Ferien page.","The home page announces only Tuesday and Wednesday 08:00–11:00. Do not use the evening hours from the earlier review. The menu is under review; current prices are not published.","A non-profit café; the visit is with a parent, not handing the child over to a carer. A separate trip to Kerzers.","Questions remain about a charge for play, a compulsory order and a convenient table near the entrance to the room. Aggregators show outdated hours and a temporary closure marker: check the opening hours with Kafi8 itself. The telephone is available during opening hours; there is an email, info@kafi8.ch."],"prac":[],"find":[],"rem":["Current prices, access and a suitable table. An aggregator shows a temporary closure marker; the current hours are taken from the café website, the conflict is not hidden."],"src":["Café: new hours, address and Mini-Kafi-8","Holidays and special opening days","Notice about the menu review","Bärner Mamis: the play room and its equipment","Restaurant Guru: copy of a Google review on the link between the play room and the dining room","Wanderlog: copy of a Google review dated 28.02.2024"],"contact":"Kafi8: telephone during opening hours","ev":[]},{"id":"krabbel-giffers","name":"Krabbelgruppe Giffers–Tentlingen","town":"Giffers","d":"sense","cat":"play","fmt":"group","st":"check","min":0,"max":3,"parent":"yes","langs":["DE"],"pk":"visit","amt":5,"days":[5],"addr":"Spielgruppenlokal, Kirchweg 30, 3. Stock, 1735 Giffers","age":"0 to about 3 years","sched":"Friday 15:00–17:30; except school holidays and public holidays","price":"CHF 5 / visit; members CHF 3","intro":null,"pd":null,"notes":["Third floor; ask about pushchair access.","Closed during school holidays and public holidays. Confirm the specific Friday."],"prac":[["commitment","Participation without commitment to attend later meetings; this does not confirm that no registration is required"],["indoor","Room on the third floor, Kirchweg 30"],["access","Third floor; lift and pushchair access are not described"]],"find":[{"f":"Visit","t":"Parents can come without committing to attend regularly; older siblings are also welcome. Drinks, fruit and bread are available. Once a month, a Familienbegleitung staff member attends. Changes are announced through a WhatsApp group; ask the group's contact person about joining."}],"rem":["Pushchair access to the third floor; the price is given per participation, and what the fee covers for several children should be checked; confirm the next meeting."],"src":["Official source"],"contact":null,"ev":[]},{"id":"krabbeltreff-meyriez","name":"Krabbeltreff Meyriez","town":"Meyriez","d":"see","cat":"play","fmt":"group","st":"active","min":null,"max":null,"parent":"yes","langs":[],"pk":"unknown","amt":null,"days":[3],"addr":"Chemin du Village 6, 3280 Meyriez","age":"Infants and young children; exact limits need to be confirmed","sched":"09:00–11:00 · 23.09, 07.10, 04.11 and 16.12.2026","price":"Price not published","intro":null,"pd":"Parents stay with the children: shared play and socialising for families.","notes":["Games, drawing and socialising for parents in the parish house. The description mentions a snack and attendance without registration.","The cost and the numerical age limit have not been published. The language of the meeting needs to be confirmed.","Four specific dates are given. The wording \"once a month\" was not used to add other meetings."],"prac":[["booking","Stated directly: no registration"]],"find":[{"f":"Format","t":"Free play, drawing, socialising and a snack, without registration. Next published meetings: 7 October, 4 November, 16 December 2026, 09:00–11:00."}],"rem":["The cost, the conditions for young children and the language of the host have not been specified by the organiser."],"src":["Family meetings: programme and dates","Meeting on 23 September: address and time"],"contact":null,"ev":[["2026-09-23","09:00","11:00"],["2026-10-07","09:00","11:00"],["2026-11-04","09:00","11:00"],["2026-12-16","09:00","11:00"]]},{"id":"memo-library","name":"MEMO · library","town":"Fribourg","d":"sarine","cat":"books","fmt":"self","st":"active","min":null,"max":null,"parent":"yes","langs":[],"pk":"free","amt":0,"days":[2,3,4,5,6],"addr":"Rue de l’Hôpital 2, Fribourg","age":"Family visit","sched":"Tue, Thu, Fri 14:00–18:00 · Wed 10:00–18:00 · Sat 10:00–16:00. Closed 16–21.11.2026, 08.12 and 24.12.2026–05.01.2027","price":"Visit is free; lending for home use: children's membership CHF 10 / year, adult from another commune CHF 40 / year","intro":null,"pd":null,"notes":[],"prac":[["indoor","Library with a play room for toddlers"],["changing","Changing table in the ground-floor toilets"],["toilet","Toilets on the ground floor"],["feeding","Breastfeeding spot and special cushion"],["playArea","Separately equipped room for the youngest children"],["costNote","Visit and on-site services are free without a membership. Lending books and games for home use requires a membership; coffee for a voluntary contribution"]],"find":[{"f":"With a toddler","t":"On-site services are available without a membership. There is a play room for toddlers, a feeding spot with a cushion and a changing table in the ground-floor toilets. Coffee and tea for a voluntary payment, guide price CHF 1."},{"f":"Lending for home use","t":"Annual children's membership up to 16 years CHF 10; adult not from the town of Fribourg CHF 40. Up to 15 items for 28 days, including up to 4 games and 2 Tonies. Games must be returned to MEMO3 staff, not to the outdoor box."},{"f":"Schedule","t":"MEMO is closed from 16 to 21 November 2026 inclusive."}],"rem":["Pushchair access to the required space and the changing table to be confirmed. This is a free visit, with no childcare."],"src":["Official source"],"contact":null,"ev":[]},{"id":"memo-rat-mission-2026-09-30","name":"MEMO · Mission rat de bibliothèque","town":"Fribourg","d":"sarine","cat":"books","fmt":"event","st":"future","min":5,"max":null,"parent":"yes","langs":["FR"],"pk":"free","amt":0,"days":[3],"addr":"Rue de l’Hôpital 2, Fribourg","age":"From 5 years with an adult","sched":"30 September 2026 · 16:00–17:30","price":"Free under the MEMO programme","intro":"Searching for clues, drawing, crafts and word games in three MEMO spaces.","pd":"From age 5 with an adult; independently from age 8.","notes":["This part of the programme is not suitable for children under 5: the listing gives an age of 5 and over."],"prac":[["indoor","The mission takes place in three MEMO spaces"]],"find":[{"f":"Age and time","t":"Children's mission on 30 September from 16:00 to 17:30, in French, from age 5 with an adult and from age 8 independently."},{"f":"Cost","t":"The MEMO seasonal programme describes its events as free."}],"rem":["Is registration required for the mission?"],"src":["City listings: programme, age and time","Seasonal programme: free"],"contact":null,"ev":[["2026-09-30","16:00","17:30"]]},{"id":"petites-rames-play","name":"Petites-Rames · playground by the Sarine","town":"Fribourg","d":"sarine","cat":"play","fmt":"self","st":"active","min":null,"max":null,"parent":"yes","langs":[],"pk":"unknown","amt":null,"days":[1,2,3,4,5,6,7],"addr":"Petites-Rames, 1700 Fribourg","age":"Age limits are not published","sched":"Open playground; opening hours are not published","price":"Price not published","intro":"A small urban playground by the river with a slide and tables.","pd":null,"notes":["For young children, assess the slide and the other equipment on site; the zip line is not the same as an area for young children.","The playground is near the river: an adult must stay close."],"prac":[["indoor","A playground by the Sarine and the Saint-Jean bridge, with a slide, a zip line and tables."],["warnings","The minimum age for the zip line and the exact opening hours are not published."]],"find":[{"f":"Availability and format","t":"A playground by the Sarine and the Saint-Jean bridge, with a slide, a zip line and tables."}],"rem":["The minimum age for the zip line and the exact opening hours are not published."],"src":["Equipment and location"],"contact":null,"ev":[]},{"id":"piscine-chatel","name":"Piscine communale · family swimming","town":"Châtel-St-Denis","d":"veveyse","cat":"water","fmt":"self","st":"active","min":0,"max":null,"parent":"yes","langs":[],"pk":"visit","amt":null,"days":[],"addr":"Chemin des Crêts 21, 1618 Châtel-St-Denis","age":"Children under 7 only with an adult aged 16 or over","sched":"Public hours change with the school calendar; check the PDF before visiting","price":"Adult CHF 6 per entry; the child rate is published only for ages 7–16: CHF 3","intro":"Family free swimming at the municipal pool.","pd":"An adult must accompany a child under seven and supervise them at all times.","notes":["There is a main pool of 25×10 m and a small pool of 10×5 m. This is free swimming, not a parent–child course.","The ticket price for a child under seven is not stated on the website; we do not assume free entry.","The public timetable is kept in a PDF that can change. Without checking the current file, the weekday filter does not promise a specific time."],"prac":[["indoor","Indoor pool with a small pool"],["costNote","Adult CHF 6; rate for children under 7 not published"],["warnings","Public hours change; check the organiser's PDF before travelling"],["warnings","This is free swimming, not a parent–child class"]],"find":[{"f":"Rules","t":"Children under seven are admitted only with an adult aged 16 or over; there is a small pool of 10×5 m. Adult ticket CHF 6."}],"rem":["The price for children under seven and the current public hours are kept outside the page; check before visiting."],"src":["Rule for under 7s, pools, tariff and link to the hours"],"contact":null,"ev":[]},{"id":"rathvel-petit-oiseau","name":"Cabane du Petit Oiseau · mini zoo","town":"Rathvel","d":"veveyse","cat":"nature","fmt":"self","st":"active","min":0,"max":null,"parent":"yes","langs":[],"pk":"unknown","amt":null,"days":[1,3,4,5,6,7],"addr":"Cabane du Petit Oiseau, Route du Moléson, 1618 Châtel-St-Denis","age":"Family visit; train age to be confirmed","sched":"Until 11.10.2026: Mon, Wed–Thu, Sun 09–18; Fri–Sat 09–22; Tue closed","price":"Price not published","intro":"A buvette with a mini zoo and a seasonal small train.","pd":"A child visits the animals and the train with an adult.","notes":["Mini zoo at the buvette; the small summer train runs only during the buvette's opening hours.","In winter the mini zoo is available only when the buvette is open; the page states it will reopen by 20 December at the latest, subject to snow.","A separate charge for the train and for visiting the animals is not published. Check the weather, whether the buvette is open and the cost before travelling."],"prac":[["indoor","The animals and the train are outdoors"],["warnings","The train runs only in summer when the buvette is open; the 2026 season ends on 11 October"],["warnings","A separate price for the train is not published"]],"find":[{"f":"Animals and train","t":"The mini zoo is available when the buvette is open, the small train only in summer; summer hours are published until 11 October 2026."}],"rem":["The price of the train and winter availability depend on whether the buvette is open and on the weather."],"src":["Mini zoo, train, season, hours and contact"],"contact":null,"ev":[]},{"id":"sellenhof-group","name":"Sellenhof · group riding lessons","town":"Plaffeien","d":"sense","cat":"horses","fmt":"group","st":"check","min":null,"max":null,"parent":"unknown","langs":[],"pk":"course","amt":560,"days":[1,2,3,4,5],"addr":"Sellenhof, Seeliweg 21, 1716 Plaffeien","age":"Age to be confirmed","sched":"Mon–Fri · time by booking; September–December","price":"CHF 560 / 14 lessons","intro":null,"pd":null,"notes":["Sellenhof: regular groups of 2–3 pupils, not only on Wednesdays. Enrolment for the whole course is required.","CHF 40 per lesson, calculated from the course price; a single-lesson payment at this price is not announced.","Minimum age, lesson length, language and parent presence are not published. Admission for young children is not confirmed.","No lessons during the autumn and Easter holidays or Ascension week; break in January–February and July–August."],"prac":[["booking","Enrolment for a quarterly block"],["commitment","CHF 560 for 14 lessons, paid in full at the start; missed lessons are not refunded"],["groupSize","2–3 pupils per group; does not apply to the open Wednesday session"]],"find":[{"f":"Payment","t":"The course is paid in full in the week it starts; absences at the pupil's initiative are not refunded. This is enrolment for a course of 14 lessons, not free attendance at CHF 40. The website still does not specify age or parent presence."},{"f":"Address","t":"The organiser's own booking page gives Seeliweg 21; this is the address of the farm, not the address of the Bergahorn school."}],"rem":["Age, lesson length, the specific instructor and joint participation of an adult."],"src":["Official source","Additional check: Address"],"contact":null,"ev":[]},{"id":"sellenhof-private","name":"Sellenhof · individual introduction and lesson","town":"Plaffeien","d":"sense","cat":"horses","fmt":"individual","st":"check","min":null,"max":null,"parent":"unknown","langs":[],"pk":"visit","amt":80,"days":[],"addr":"Sellenhof, Seeliweg 21, 1716 Plaffeien","age":"Age to be checked","sched":"By arrangement","price":"CHF 80 / lesson; trial CHF 60, one time only","intro":null,"pd":null,"notes":["Sellenhof (Selenhof): an individual lesson and a one-off trial lesson are published. The length of a regular individual lesson and the format of the trial lesson are not stated.","Participation of young children, a short introduction to the ponies and the presence of a parent need to be agreed: this is a request, not a confirmed service for small children."],"prac":[["booking","Agree the time in advance"],["trial","One-off trial lesson CHF 60; check the age requirement"],["commitment","Individual lesson CHF 80; separate trial lesson CHF 60"]],"find":[{"f":"Teacher","t":"To request an individual introduction, you can ask about a session with a named teacher: the farm lists pedagogical training and Pferdefachfrau EFZ for her. This is not a promise that she in particular is available or accepts young children."},{"f":"Directions","t":"The farm's booking form gives the address Seeliweg 21, 1716 Plaffeien."}],"rem":["Length of the trial lesson, admission of young children, the role of the parent and the language. The price of a regular individual lesson does not determine the conditions of the therapeutic-educational offer."],"src":["Official source","Additional check: Teacher","Additional check: Directions"],"contact":null,"ev":[]},{"id":"spielkafi-kerzers-2026","name":"Spielkafi · game day for 6+","town":"Kerzers","d":"see","cat":"events","fmt":"event","st":"active","min":6,"max":null,"parent":"yes","langs":[],"pk":"unknown","amt":null,"days":[7],"addr":"Kinder- und Jugendhaus, Vordere Gasse 5, 3210 Kerzers","age":"From 6 to 99 years, according to the organiser's announcement","sched":"25 October and 22 November 2026 · 14:00–17:00","price":"Price not published","intro":null,"pd":"The age range includes children and adults. Attending together is possible.","notes":["Games, drinks and light snacks. This is an intergenerational meeting, not a programme specifically for preschool children.","The cost of participation is not published in the sources checked. A schedule of further meetings is not expected."],"prac":[],"find":[{"f":"Additional date","t":"The organiser gives not only 22 November but also 25 October 2026, both days 14:00–17:00. Ages 6–99: this is not an offer for children under 6."}],"rem":["The cost of participation and of refreshments is not published."],"src":["Municipal events calendar: date and time","Organiser: 6–99 age format and venue"],"contact":null,"ev":[["2026-10-25","14:00","17:00"],["2026-11-22","14:00","17:00"]]}]};
+(function () {
+  var TODAY = DATA.today;
+  var CARDS = DATA.cards;
+  var CAT = { play: "Play and meet-ups", dining: "Cafés and restaurants", movement: "Movement and sport", water: "Swimming", horses: "Horses and ponies", nature: "Nature and museums", books: "Books and toy libraries", events: "Family events", music: "Music", creative: "Creative" };
+  var FMT = { group: "Group or course", individual: "Individual session", event: "Event", self: "Visit on your own" };
+  var DIST = { sense: "Sense / Singine", sarine: "Sarine / Saane", see: "See / Lac", gruyere: "Gruyère / Greyerz", glane: "Glâne", broye: "Broye", veveyse: "Veveyse" };
+  var STATUS = { active: { cls: "good", short: "Current", long: "Information current" }, check: { cls: "check", short: "Check details", long: "Check details before you go" }, future: { cls: "later", short: "For later", long: "For when your child is older" } };
+  var PRAC = { indoor: "Setting", playArea: "Play area", changing: "Changing", toilet: "Toilets", feeding: "Feeding", access: "Access", parking: "Parking", booking: "Booking", duration: "Duration", commitment: "Commitment", groupSize: "Group size", leader: "Led by", trial: "Trial", costNote: "Cost note", warnings: "Before you go" };
+  var WD = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], MO = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var NP = "Not published";
+
+  var I = {
+    chev: '<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>',
+    tick: '<svg class="tick" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+    back: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>',
+    out: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8.5 7H17v8.5"/></svg>',
+    x: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>'
+  };
+
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (ch) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]; }); };
+  var DIACRITICS = new RegExp("[" + String.fromCharCode(0x300) + "-" + String.fromCharCode(0x36f) + "]", "g");
+  var norm = function (s) { return String(s).toLowerCase().normalize("NFD").replace(DIACRITICS, ""); };
+  var nm = function (s) { return esc(s).replace(/ · /g, String.fromCharCode(160) + "· "); };
+  var first = function (s) { return String(s).split(";")[0].trim(); };
+
+  /* ---------- derived facts ---------- */
+  var byId = {};
+  CARDS.forEach(function (c) {
+    byId[c.id] = c;
+    c.upcoming = c.ev.filter(function (e) { return e[0] >= TODAY; });
+    c.past = c.ev.filter(function (e) { return e[0] < TODAY; });
+    c.blob = norm([c.name, c.town, DIST[c.d], CAT[c.cat], FMT[c.fmt], c.age, c.sched, c.price, c.addr, c.intro, c.pd, c.notes.join(" "), c.prac.map(function (p) { return p[1]; }).join(" ")].filter(Boolean).join(" "));
+  });
+  function fmtDate(d) { var t = new Date(d + "T12:00:00Z"); return WD[t.getUTCDay()] + " " + t.getUTCDate() + " " + MO[t.getUTCMonth()]; }
+  function fmtTime(e) { return e[1] + "–" + e[2]; }
+  // Only a real bound counts as a published age limit. min 0 with no max says nothing about who may come.
+  function bounded(c) { return (c.min != null && c.min > 0) || c.max != null; }
+  function fit(c, age) {
+    if (age == null || !bounded(c)) return null;
+    if (c.min != null && age < c.min) return false;
+    if (c.max != null && age > c.max) return false;
+    return true;
+  }
+  function ageShort(c) {
+    if (bounded(c)) {
+      if (c.max == null) return "From " + c.min + " years";
+      if (c.min == null || c.min === 0) return "Up to " + c.max + " years";
+      return c.min + "–" + c.max + " years";
+    }
+    var f = first(c.age);
+    return /confirm|check|not published|restriction/i.test(f) ? "Age not published" : f;
+  }
+  function ageLabel(a) { return a === 0 ? "Under 1" : a === 1 ? "1 year" : a + " years"; }
+  function nextText(c) {
+    if (c.upcoming.length) { var e = c.upcoming[0]; return "Next: " + fmtDate(e[0]) + ", " + fmtTime(e) + (c.upcoming.length > 1 ? " (+" + (c.upcoming.length - 1) + ")" : ""); }
+    if (c.past.length) { var p = c.past[c.past.length - 1]; return "Last published date has passed: " + fmtDate(p[0]); }
+    return null;
+  }
+  function parentShort(c) { return c.parent === "yes" ? "Child stays with an adult" : c.parent === "no" ? "Separate format" : "Not stated"; }
+  function langText(c) { var m = { DE: "German", FR: "French" }; return c.langs.length ? c.langs.map(function (l) { return m[l] || l; }).join(", ") : null; }
+  function placeLabel(c) { return c.town + " · " + DIST[c.d]; }
+
+  /* ---------- state ---------- */
+  var st = { q: "", age: null, unk: true, place: "", cats: new Set(), fmts: new Set(), up: false };
+
+  function matches(c) {
+    if (st.q) { var toks = norm(st.q).split(/\s+/).filter(Boolean); for (var i = 0; i < toks.length; i++) if (c.blob.indexOf(toks[i]) < 0) return false; }
+    if (st.age != null) { var f = fit(c, st.age); if (f === false) return false; if (f === null && !st.unk) return false; }
+    if (st.place) { var k = st.place.slice(0, 2), v = st.place.slice(2); if (k === "d:" && c.d !== v) return false; if (k === "t:" && c.town !== v) return false; }
+    if (st.cats.size && !st.cats.has(c.cat)) return false;
+    if (st.fmts.size && !st.fmts.has(c.fmt)) return false;
+    if (st.up && !c.upcoming.length) return false;
+    return true;
+  }
+  function anyFilter() { return !!(st.q || st.age != null || st.place || st.cats.size || st.fmts.size || st.up); }
+  function moreCount() { return st.cats.size + st.fmts.size + (st.up ? 1 : 0); }
+  // Filters set in the panel (the search text is not counted: it has its own field and its own clear button).
+  function activeCount() { return (st.age != null ? 1 : 0) + (st.place ? 1 : 0) + moreCount(); }
+  function placeName() {
+    if (!st.place) return "Anywhere";
+    var v = st.place.slice(2); return st.place.slice(0, 2) === "d:" ? DIST[v] : v;
+  }
+
+  /* ---------- list ---------- */
+  function fitMark(c) {
+    if (st.age == null || fit(c, st.age) !== true) return "";
+    return I.tick + '<span class="sr">Fits age ' + esc(ageLabel(st.age)) + ': </span>';
+  }
+  function listRow(c) {
+    var s = STATUS[c.st], nt = nextText(c);
+    return '<li><a class="row" href="#card=' + encodeURIComponent(c.id) + '" data-id="' + esc(c.id) + '">' +
+      '<span class="r-main"><span class="r-cat">' + esc(CAT[c.cat]) + '</span><span class="r-name">' + nm(c.name) + '</span><span class="r-town-d">' + esc(placeLabel(c)) + '</span></span>' +
+      '<span class="r-facts"><span class="r-town-m">' + esc(c.town) + '</span><span class="r-age' + (bounded(c) ? ' known' : '') + '">' + fitMark(c) + esc(ageShort(c)) + '</span><span class="r-price' + (c.pk !== 'unknown' ? ' known' : '') + '">' + esc(first(c.price)) + '</span></span>' +
+      '<span class="r-l3"><span class="r-when">' + esc(nt || first(c.sched)) + '</span><span class="r-status st"><i class="dot ' + s.cls + '" aria-hidden="true"></i>' + esc(s.short) + '</span></span>' +
+      I.chev + '</a></li>';
+  }
+  function sorted(items) {
+    return items.slice().sort(function (a, b) {
+      if (st.age != null) { var fa = fit(a, st.age) === true ? 0 : 1, fb = fit(b, st.age) === true ? 0 : 1; if (fa !== fb) return fa - fb; }
+      return a.name.localeCompare(b.name, "en");
+    });
+  }
+  function render() {
+    var items = sorted(CARDS.filter(matches));
+    var list = $("#list");
+    list.innerHTML = items.map(listRow).join("");
+    list.hidden = !items.length;
+    $("#empty").hidden = !!items.length;
+    var n = items.length, tot = CARDS.length;
+    $("#count").innerHTML = (n === tot && !anyFilter()) ? "<b>" + n + "</b> activities" : "<b>" + n + "</b> of " + tot + " activities";
+    var note = $("#countNote");
+    if (st.age != null && n) {
+      var fits = items.filter(function (c) { return fit(c, st.age) === true; }).length, unk = n - fits;
+      note.textContent = "For age " + st.age + ": " + fits + " state a matching age limit" + (unk ? ", " + unk + " do not publish one." : ".");
+      note.hidden = false;
+    } else note.hidden = true;
+    // Active-filter summary at the top: how many are on, and one tap to reset them (and the search text).
+    var af = activeCount();
+    $("#barR").hidden = !anyFilter();
+    $("#fcount").textContent = af ? af + (af === 1 ? " filter active" : " filters active") : "";
+    $("#fcount").hidden = !af;
+    $("#sheetDone").textContent = n ? "Show " + n + (n === 1 ? " activity" : " activities") : "No activities match";
+    $("#qClear").hidden = !st.q;
+    // filter entry under the search field
+    $("#fpAgeV").textContent = st.age == null ? "Any" : ageLabel(st.age);
+    $("#fpPlaceV").textContent = placeName();
+    $("#fpAge").classList.toggle("on", st.age != null);
+    $("#fpPlace").classList.toggle("on", !!st.place);
+    $("#fpMore").classList.toggle("on", af > 0);
+    $("#fpMore").setAttribute("aria-label", af ? "Filters, " + af + " active" : "Filters");
+    // end of the list: shows the state again, so a user who has scrolled far still knows the list is filtered
+    $("#endnav").hidden = !items.length;
+    $("#endNote").textContent = af ? "Showing " + n + " of " + tot + " activities · " + af + (af === 1 ? " filter active" : " filters active") : "Showing all " + tot + " activities";
+    syncPanel();
+  }
+
+  /* ---------- filter panel ---------- */
+  var panel = $("#panel");
+  function buildPanel() {
+    var ages = $(".ages", panel);
+    for (var a = 0; a <= 6; a++) ages.insertAdjacentHTML("beforeend", '<button type="button" class="chip age" data-age="' + a + '" aria-pressed="false" aria-label="' + (a === 0 ? "Under 1 year" : a + (a === 1 ? " year" : " years")) + '">' + a + "</button>");
+    var sel = $("#place");
+    var dcount = {}, tcount = {};
+    CARDS.forEach(function (c) { dcount[c.d] = (dcount[c.d] || 0) + 1; tcount[c.town] = (tcount[c.town] || 0) + 1; });
+    var h = '<option value="">Anywhere in canton Fribourg</option><optgroup label="Districts">';
+    Object.keys(DIST).forEach(function (k) { if (dcount[k]) h += '<option value="d:' + k + '">' + esc(DIST[k]) + " (" + dcount[k] + ")</option>"; });
+    h += '</optgroup><optgroup label="Towns">';
+    Object.keys(tcount).sort(function (a, b) { return a.localeCompare(b, "fr"); }).forEach(function (t) { h += '<option value="t:' + esc(t) + '">' + esc(t) + " (" + tcount[t] + ")</option>"; });
+    sel.innerHTML = h + "</optgroup>";
+    function chips(kind, labels, key) {
+      var cnt = {}; CARDS.forEach(function (c) { cnt[c[key]] = (cnt[c[key]] || 0) + 1; });
+      $('[data-kind="' + kind + '"]', panel).innerHTML = Object.keys(labels).filter(function (k) { return cnt[k]; }).map(function (k) {
+        return '<button type="button" class="chip" data-kind="' + kind + '" data-val="' + k + '" aria-pressed="false">' + esc(labels[k]) + ' <span class="num">' + cnt[k] + "</span></button>";
+      }).join("");
+    }
+    chips("cat", CAT, "cat"); chips("fmt", FMT, "fmt");
+    // The wrapper had data-kind too; keep only the buttons' attribute for delegation.
+    $$('div.chips[data-kind]', panel).forEach(function (w) { w.removeAttribute("data-kind"); });
+  }
+  function syncPanel() {
+    var ageIn = $("#age");
+    if (document.activeElement !== ageIn) ageIn.value = st.age == null ? "" : st.age;
+    $$(".chip.age", panel).forEach(function (b) { b.setAttribute("aria-pressed", String(st.age === +b.dataset.age)); });
+    $("#unkRow").hidden = st.age == null;
+    $("#unk").setAttribute("aria-checked", String(st.unk));
+    $("#place").value = st.place;
+    $$('.chip[data-kind]', panel).forEach(function (b) { b.setAttribute("aria-pressed", String((b.dataset.kind === "cat" ? st.cats : st.fmts).has(b.dataset.val))); });
+    $("#up").setAttribute("aria-checked", String(st.up));
+  }
+  function wirePanel() {
+    var ageIn = $("#age"), hint = $("#ageHint"), hintText = hint.textContent;
+    ageIn.addEventListener("input", function () {
+      var v = ageIn.value.trim();
+      if (v === "") { st.age = null; hint.textContent = hintText; hint.classList.remove("err"); }
+      else if (/^[0-6]$/.test(v)) { st.age = +v; hint.textContent = hintText; hint.classList.remove("err"); }
+      else { hint.textContent = "Enter a whole number from 0 to 6."; hint.classList.add("err"); return; }
+      render();
+    });
+    ageIn.addEventListener("change", function () { hint.textContent = hintText; hint.classList.remove("err"); syncPanel(); });
+    panel.addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      if (b.dataset.age != null) { var a = +b.dataset.age; st.age = st.age === a ? null : a; $("#ageHint").classList.remove("err"); render(); }
+      else if (b.dataset.kind) { var set = b.dataset.kind === "cat" ? st.cats : st.fmts; set.has(b.dataset.val) ? set.delete(b.dataset.val) : set.add(b.dataset.val); render(); }
+      else if (b.id === "unk") { st.unk = !st.unk; render(); }
+      else if (b.id === "up") { st.up = !st.up; render(); }
+    });
+    $("#place").addEventListener("change", function (e) { st.place = e.target.value; render(); });
+  }
+  function reset() { st.q = ""; st.age = null; st.unk = true; st.place = ""; st.cats.clear(); st.fmts.clear(); st.up = false; $("#q").value = ""; render(); }
+
+  /* ---------- where the panel lives ---------- */
+  var mq = window.matchMedia("(min-width: 1000px)");
+  var sheet = $("#sheet");
+  function placePanel() {
+    panel.hidden = false;
+    if (mq.matches) { if (sheet.open) sheet.close(); $("#colBody").appendChild(panel); }
+    else $("#sheetBody").appendChild(panel);
+  }
+  // Opens the sheet; a pill opens it at its own group (age or place), "Filters" at the top.
+  function openSheet(which) {
+    if (mq.matches) return;
+    sheet.showModal();
+    var body = $("#sheetBody"), g = which === "age" ? $("#g-age") : which === "place" ? $("#g-place") : null;
+    body.scrollTop = 0;
+    if (g && which !== "age") body.scrollTop = g.getBoundingClientRect().top - body.getBoundingClientRect().top - 20;
+  }
+  // Back to the search field and the filter entry at the top of the page. A one-time jump, not a floating control.
+  function toFilters() {
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var bar = $(".mockbar").getBoundingClientRect().height;
+    window.scrollTo({ top: Math.max(0, $(".search").getBoundingClientRect().top + window.pageYOffset - bar - 12), behavior: reduce ? "auto" : "smooth" });
+    $("#fpAge").focus({ preventScroll: true });
+  }
+
+  /* ---------- toast ---------- */
+  var toastTimer;
+  function toast(msg) {
+    $$(".toast").forEach(function (t) { t.remove(); });
+    var t = document.createElement("div"); t.className = "toast"; t.setAttribute("role", "status"); t.textContent = msg;
+    (document.querySelector("dialog[open]") || document.body).appendChild(t);
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.remove(); }, 3800);
+  }
+
+  /* ---------- detail ---------- */
+  var detail = $("#detail");
+  function row(label, value) { return '<div class="fr"><dt>' + esc(label) + "</dt><dd>" + value + "</dd></div>"; }
+  function np(v) { return v ? esc(v) : '<span class="np">' + NP + "</span>"; }
+  function renderDetail(c) {
+    var s = STATUS[c.st], seen = new Set();
+    var key = function (t) { return norm(t).replace(/\s+/g, " ").trim(); };
+    var take = function (t) { if (!t) return false; var k = key(t); if (seen.has(k)) return false; seen.add(k); return true; };
+    take(c.intro); take(c.pd);
+    var langs = langText(c), nt = nextText(c);
+    var fitRow = (st.age != null && fit(c, st.age) === true) ? '<span class="fitnote">' + I.tick + 'Fits age ' + esc(ageLabel(st.age)) + "</span>" : "";
+    var facts = row("Age", esc(c.age) + (bounded(c) ? '<span class="sub">Published limits: ' + esc(ageShort(c)) + "</span>" : "") + fitRow) +
+      row("Parent", esc(c.pd || parentShort(c))) +
+      row("Schedule", esc(c.sched)) +
+      row("Price", esc(c.price)) +
+      row("Address", np(c.addr)) +
+      row("Languages", langs ? esc(langs) : '<span class="np">Not stated</span>') +
+      row("Format", esc(FMT[c.fmt]));
+    var out = '<div class="d-top"><button type="button" class="ghost" data-close>' + I.back + 'Back to list</button></div>' +
+      '<div class="d-body" tabindex="-1" autofocus>' +
+      '<p class="d-kicker">' + esc(CAT[c.cat]) + "</p>" +
+      '<h2 class="d-name" id="dTitle">' + nm(c.name) + "</h2>" +
+      '<p class="d-where">' + esc(c.town) + " · " + esc(DIST[c.d]) + " · canton Fribourg</p>" +
+      '<p class="d-status"><i class="dot ' + s.cls + '" aria-hidden="true"></i>' + esc(s.long) + "</p>" +
+      '<dl class="facts">' + facts + "</dl>";
+    // dated sessions
+    if (c.ev.length) {
+      var times = {}; c.ev.forEach(function (e) { times[fmtTime(e)] = 1; });
+      var same = Object.keys(times).length === 1 ? Object.keys(times)[0] : null;
+      out += '<section class="dsec"><h3>Published dates' + (same ? " · " + esc(same) : "") + '</h3><ul class="dates">' +
+        c.ev.map(function (e) { var past = e[0] < TODAY; return '<li class="' + (past ? "past" : "") + '">' + esc(fmtDate(e[0])) + (same ? "" : " " + esc(fmtTime(e))) + (past ? ' <span class="sr">(passed)</span><span aria-hidden="true">· passed</span>' : "") + "</li>"; }).join("") +
+        "</ul></section>";
+    }
+    out += '<section class="dsec"><h3>About</h3><p>' + (c.intro ? esc(c.intro) : '<span class="np">No description published.</span>') + "</p></section>";
+    var notes = c.notes.filter(take);
+    if (notes.length) out += '<section class="dsec"><h3>Good to know</h3><ul class="plain">' + notes.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("") + "</ul></section>";
+    // practical facts
+    var order = Object.keys(PRAC), groups = {};
+    c.prac.forEach(function (p) { if (take(p[1])) (groups[p[0]] = groups[p[0]] || []).push(p[1]); });
+    var pr = order.filter(function (k) { return groups[k]; }).map(function (k) {
+      return '<div class="fr"><dt>' + esc(PRAC[k]) + "</dt><dd>" + (groups[k].length > 1 ? "<ul>" + groups[k].map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>" : esc(groups[k][0])) + "</dd></div>";
+    }).join("");
+    if (pr) out += '<section class="dsec"><h3>Practical facts</h3><dl class="pr">' + pr + "</dl></section>";
+    var find = c.find.filter(function (f) { return take(f.t); });
+    if (find.length) out += '<section class="dsec"><h3>What was checked</h3><div class="found">' + find.map(function (f) { return "<div>" + (f.f ? '<span class="ff">' + esc(f.f) + "</span>" : "") + "<p>" + esc(f.t) + "</p></div>"; }).join("") + "</div></section>";
+    var rem = c.rem.filter(take);
+    if (rem.length) out += '<section class="dsec"><h3>Still to confirm</h3><ul class="plain">' + rem.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("") + "</ul></section>";
+    var contact = c.contact ? '<li><a href="#" data-inactive>Contact: ' + esc(c.contact) + I.out + "</a></li>" : "";
+    out += '<section class="dsec"><h3>Sources</h3>' + (c.src.length || contact ? '<ul class="srcs">' + c.src.map(function (l) { return '<li><a href="#" data-inactive>' + esc(l) + I.out + "</a></li>"; }).join("") + contact + "</ul>" : '<p><span class="np">No sources listed.</span></p>') + "</section>";
+    out += "</div>" +
+      '<div class="d-foot"><a class="go" href="#" aria-disabled="true" data-inactive>Open organiser’s page' + I.out + '</a><p class="fine">Mockup: the link is not connected.</p></div>';
+    return out;
+  }
+  function cardFromHash() { var m = /^#card=(.+)$/.exec(location.hash); return m ? decodeURIComponent(m[1]) : null; }
+  function openDetail(id, push) {
+    var c = byId[id]; if (!c) return;
+    detail.innerHTML = renderDetail(c);
+    if (!detail.open) detail.showModal();
+    $(".d-body", detail).scrollTop = 0;
+    if (push) { try { history.pushState({ card: id }, "", "#card=" + encodeURIComponent(id)); } catch (e) {} }
+  }
+  detail.addEventListener("close", function () {
+    if (cardFromHash()) { try { if (history.state && history.state.card) history.back(); else history.replaceState(null, "", location.pathname + location.search); } catch (e) {} }
+  });
+  detail.addEventListener("click", function (e) {
+    if (e.target === detail || e.target.closest("[data-close]")) { detail.close(); return; }
+    var a = e.target.closest("[data-inactive]");
+    if (a) { e.preventDefault(); toast(a.classList.contains("go") ? "Mockup: the organiser’s page is not connected." : "Mockup: source links are not connected."); }
+  });
+  window.addEventListener("popstate", function () { var id = cardFromHash(); if (id) openDetail(id, false); else if (detail.open) detail.close(); });
+
+  /* ---------- wiring ---------- */
+  $("#list").addEventListener("click", function (e) {
+    var a = e.target.closest("a[data-id], a.row"); if (!a) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+    e.preventDefault(); openDetail(a.dataset.id, true);
+  });
+  $("#langSeg").addEventListener("click", function (e) { var b = e.target.closest("button"); if (b && b.getAttribute("aria-disabled")) toast("German and French are planned. This mockup is English only."); });
+  $("#q").addEventListener("input", function (e) { st.q = e.target.value.trim(); render(); });
+  $("#qClear").addEventListener("click", function () { $("#q").value = ""; st.q = ""; render(); $("#q").focus(); });
+  document.addEventListener("click", function (e) { if (e.target.closest("[data-reset]")) reset(); });
+  $$(".fp").forEach(function (b) { b.addEventListener("click", function () { openSheet(b.dataset.open); }); });
+  $("#toFilters").addEventListener("click", toFilters);
+  $("#sheetClose").addEventListener("click", function () { sheet.close(); });
+  $("#sheetDone").addEventListener("click", function () { sheet.close(); window.scrollTo({ top: 0 }); });
+  sheet.addEventListener("click", function (e) { if (e.target === sheet) sheet.close(); });
+  if (mq.addEventListener) mq.addEventListener("change", placePanel); else mq.addListener(placePanel);
+
+  buildPanel(); wirePanel(); placePanel(); render();
+  var first0 = cardFromHash(); if (first0) openDetail(first0, false);
+})();
+</script>
+</body>
+</html>

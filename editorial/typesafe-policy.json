@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "project": "vmeste",
+  "enabled": true,
+  "mode": "shadow",
+  "model": "jev-1.13.0",
+  "rubricVersion": "evidence-3",
+  "targetAge": { "min": 0, "max": 6 },
+  "cohorts": [
+    { "id": "infants", "min": 0, "maxExclusive": 1 },
+    { "id": "toddlers", "min": 1, "maxExclusive": 3 },
+    { "id": "preschool", "min": 3, "maxExclusive": 5 },
+    { "id": "older-preschool", "min": 5, "maxInclusive": 6 }
+  ],
+  "evidenceMaxAgeDays": 7,
+  "cacheMaxAgeDays": 30,
+  "maxCardsPerRun": 5,
+  "maxRequestsPerRun": 12,
+  "maxSourcesPerRun": 20,
+  "maxInputChars": 32000,
+  "maxQuestionsPerRequest": 12,
+  "advisoryConfidence": 0.9,
+  "inputPricePerMillionUsd": 0.042,
+  "automaticPublication": false
+}

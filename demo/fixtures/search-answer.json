@@ -1,0 +1,24 @@
+{
+  "bundle": {
+    "project": "@project",
+    "cardId": "training-little-owls",
+    "snapshots": [],
+    "claims": [
+      {"key": "c1", "field": "min", "value": 2, "status": "supported", "scope": "exact-card", "kind": "official",
+       "source": "https://little-owls.example.org/playgroup", "quote": "children aged 2 to 4 years", "snapshotId": null,
+       "note": "The page gives an explicit age range for this playgroup."},
+      {"key": "c2", "field": "max", "value": 4, "status": "supported", "scope": "exact-card", "kind": "official",
+       "source": "https://little-owls.example.org/playgroup", "quote": "children aged 2 to 4 years", "snapshotId": null,
+       "note": "Same explicit age range, upper bound."},
+      {"key": "c3", "field": "parent", "value": "yes", "status": "supported", "scope": "exact-card", "kind": "official",
+       "source": "https://little-owls.example.org/playgroup", "quote": "A parent stays with the child for the whole session.", "snapshotId": null,
+       "note": "An adult stays during the session."},
+      {"key": "c4", "field": "priceKind", "value": "free", "status": "supported", "scope": "exact-card", "kind": "official",
+       "source": "https://little-owls.example.org/playgroup", "quote": "Registration is not needed.", "snapshotId": null,
+       "note": "No registration is needed, so the playgroup is free."},
+      {"key": "c5", "field": "languages", "value": null, "status": "unknown", "scope": "uncertain", "kind": "inference",
+       "source": "", "quote": "", "snapshotId": null,
+       "note": "The page does not state the language of the sessions."}
+    ]
+  }
+}

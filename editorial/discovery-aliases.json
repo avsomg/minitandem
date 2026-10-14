@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "aliases": [
+    {"feedId":"aef","url":"https://tockify.com/educationfamiliale/detail/785/1791012600000","recordId":"museum","note":"Museum workshop on 3 October; the card lists two sessions"},
+    {"feedId":"aef","url":"https://tockify.com/educationfamiliale/detail/786/1794040200000","recordId":"museum","note":"Museum workshop on 7 November; the card lists two sessions"},
+    {"feedId":"aef","url":"https://tockify.com/educationfamiliale/detail/787/1797064200000","recordId":"museum","note":"Museum workshop on 12 December; the card lists two sessions"},
+    {"feedId":"aef","url":"https://tockify.com/educationfamiliale/detail/788/1800693000000","recordId":"museum","note":"Museum workshop on 23 January; the card lists two sessions"},
+    {"feedId":"aef","url":"https://tockify.com/educationfamiliale/detail/789/1803717000000","recordId":"museum","note":"Museum workshop on 27 February; the card lists two sessions"}
+  ]
+}
