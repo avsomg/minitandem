@@ -92,7 +92,7 @@ The full list, with sizes and reasons, is in [`docs/publication-scope.md`](docs/
 
 ## Deployment
 
-A `Dockerfile` and `compose.yaml` are prepared for a small server: the site and the service behind Caddy with automatic HTTPS for `minitandem.ch` and `www.minitandem.ch`, the state on a named volume, no editor key, one demo family. Nothing has been deployed yet.
+The site runs at https://minitandem.ch since 14 October 2026, on a small server (1 vCPU, 2 GB) set up with this `Dockerfile` and `compose.yaml`: the site and the service behind Caddy with automatic HTTPS for `minitandem.ch` and `www.minitandem.ch`, the state on a named volume, no editor key, one demo family. The state is archived every night (`ops/backup.sh`); a restore from such an archive was rehearsed on 14 October 2026.
 
 The editorial release stage (`editorial/release.mjs publish`) still deploys a tested build to a Vercel project, which is how the earlier Russian version of the site was published; it has not been used for Minitandem. Moving that stage to the server above is open work, so `vercel.json` is still part of the build. Operations are described in German in [`docs/betrieb.md`](docs/betrieb.md).
 

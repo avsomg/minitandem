@@ -73,7 +73,14 @@ Der Dienst hat keine Datenmigrationen (Format `schema: 1`), ein Rollback der Ver
 
 Im Volume `minitandem_state` liegen die gehashten Familienschlüssel und Profile (`families.json`), eingereichte Korrekturen (`corrections/`), die Datei `demo-family-key.txt` und die 20 letzten automatischen Kopien `backup-*.json`, die der Dienst bei jedem Schreiben anlegt. Der Dienst ersetzt Dateien atomar, ein Archiv im laufenden Betrieb ist deshalb in sich konsistent.
 
-**Sichern** (täglich per Cron; die Archive danach auf einen anderen Rechner kopieren, eine Sicherung auf demselben Server schützt nicht vor dessen Verlust):
+**Sichern.** `ops/backup.sh` legt beide Archive an und behält von jeder Art die 14 neuesten. Auf dem Server ist es als `/usr/local/sbin/minitandem-backup` installiert und läuft jede Nacht um 03:15 UTC per Cron des Benutzers `ubuntu`:
+
+```
+sudo install -m 755 ops/backup.sh /usr/local/sbin/minitandem-backup
+( crontab -l 2>/dev/null | grep -v minitandem-backup || true; echo '15 3 * * * /usr/local/sbin/minitandem-backup >> $HOME/backups/backup.log 2>&1' ) | crontab -
+```
+
+Die Archive liegen in `~/backups` und sind nur für diesen Benutzer lesbar, weil das Caddy-Archiv Zertifikatsschlüssel enthält. Danach auf einen anderen Rechner kopieren: Eine Sicherung auf demselben Server schützt nicht vor dessen Verlust. Dieselben Archive von Hand:
 
 ```
 mkdir -p ~/backups
@@ -97,6 +104,8 @@ curl -fsS https://minitandem.ch/healthz
 ```
 
 Der Benutzer `node` im Image hat die ID 1000; deshalb das `chown`.
+
+**Geübt am 14. Oktober 2026** auf dem laufenden Server: Volume geleert, Archiv nach dieser Anleitung eingespielt. Die Prüfsummen aller Dateien waren danach dieselben wie vorher, der Schlüssel der Demo-Familie funktionierte, die Seite war nach etwa 12 Sekunden wieder erreichbar.
 
 **Nur eine beschädigte `families.json`:** Der Dienst antwortet für die betroffene Anfrage mit 500 und läuft weiter. Aus dem Volume die jüngste unbeschädigte Kopie wählen: `docker compose exec app ls -1t /state` zeigt die `backup-*.json`; die gewählte Datei wird als `families.json` zurückkopiert (`docker compose exec app cp /state/backup-… /state/families.json`).
 

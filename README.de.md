@@ -92,7 +92,7 @@ Die vollständige Liste mit Grössen und Begründungen steht in [`docs/publicati
 
 ## Betrieb
 
-Für einen kleinen Server sind ein `Dockerfile` und eine `compose.yaml` vorbereitet: die Seite und der Dienst hinter Caddy mit automatischem HTTPS für `minitandem.ch` und `www.minitandem.ch`, der Zustand auf einem benannten Volume, kein Editor-Schlüssel, eine Demo-Familie. Es wurde noch nichts ausgerollt.
+Die Seite läuft seit dem 14. Oktober 2026 unter https://minitandem.ch auf einem kleinen Server (1 vCPU, 2 GB), eingerichtet mit diesem `Dockerfile` und dieser `compose.yaml`: die Seite und der Dienst hinter Caddy mit automatischem HTTPS für `minitandem.ch` und `www.minitandem.ch`, der Zustand auf einem benannten Volume, kein Editor-Schlüssel, eine Demo-Familie. Der Zustand wird jede Nacht archiviert (`ops/backup.sh`); eine Wiederherstellung aus einem solchen Archiv wurde am 14. Oktober 2026 geübt.
 
 Die Release-Stufe der Redaktion (`editorial/release.mjs publish`) veröffentlicht einen geprüften Build weiterhin in einem Vercel-Projekt; so wurde die frühere russische Version der Seite veröffentlicht. Für Minitandem wurde sie nicht benutzt. Die Umstellung auf den oben beschriebenen Server steht noch aus; deshalb gehört `vercel.json` noch zum Build. Der Betrieb ist in [`docs/betrieb.md`](docs/betrieb.md) beschrieben.
 
