@@ -58,7 +58,7 @@ test('every dynamic key family is complete in every language',()=>{
   const wanted=[
     ...family('category',K.CATEGORY_KEYS),...family('format',K.FORMAT_KEYS),...family('langFilter',K.LANGUAGE_KEYS),...family('priceFilter',K.PRICE_KEYS),
     ...family('statusFilter',K.STATUS_FILTER_KEYS),...family('when',K.WHEN_KEYS.filter(Boolean)),...family('preset',K.PRESET_KEYS.filter(Boolean)),...family('sort',K.SORT_KEYS),
-    ...family('weekday',K.DAY_KEYS),...family('personalStatus',K.PERSONAL_KEYS),...family('needs',P.needKeys),...family('admission',P.admissionKeys),
+    ...family('weekday',K.DAY_KEYS),...family('weekly',K.DAY_KEYS),...family('personalStatus',K.PERSONAL_KEYS),...family('needs',P.needKeys),...family('admission',P.admissionKeys),
     ...family('booking',P.bookingStateKeys),...family('outcome',P.outcomeKeys),...family('attendance',P.attendanceKeys),...family('usefulness',P.usefulnessKeys),
     ...family('information',P.informationKeys),...family('tracked',P.trackedFieldKeys),...family('practical',[...P.facilityKeys,...P.visitFieldKeys,'playArea','costNote','warnings']),
     ...family('warning',['closed','archived','scheduleExpired','datesPassed','reviewDue','bookingRequired','entranceUnknown','placeUnknown','adultUnconfirmed','priceUnclear','languageUnconfirmed','ageNotPublished','confirmWithOrganiser']),

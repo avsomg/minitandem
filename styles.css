@@ -71,7 +71,12 @@ h1 { margin: 0; font-size: 28px; font-weight: 400; letter-spacing: -0.032em; lin
 
 /* Count bar */
 .bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; column-gap: 12px; min-height: 44px; margin-top: 6px; }
-.bar-r { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.bar-r { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 4px; margin-left: auto; }
+/* "Near me": one tap from the first screen to the distance controls; it scrolls with the page like everything here. */
+.nearbtn { gap: 6px; padding: 0 14px 0 12px; margin-right: 4px; }
+.nearline { display: flex; flex-wrap: wrap; align-items: center; column-gap: 4px; }
+.nearline span { margin-right: 4px; }
+.nearline .linkbtn { padding: 0 6px; font-size: 13px; }
 .fcount { font-size: 14px; font-weight: 500; color: var(--t); }
 .count { margin: 0; color: var(--d); font-size: 14px; font-variant-numeric: tabular-nums; }
 .count b { color: var(--t); font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
@@ -89,7 +94,9 @@ h1 { margin: 0; font-size: 28px; font-weight: 400; letter-spacing: -0.032em; lin
 .listhead { display: none; }
 .row { display: grid; grid-template-columns: minmax(0, 1fr) 20px; grid-template-areas: "cat chev" "name chev" "facts chev" "l3 chev"; column-gap: 10px; row-gap: 3px; align-items: start; padding: 14px 12px 14px 16px; min-height: 64px; color: inherit; text-decoration: none; }
 .r-main { display: contents; }
-.r-cat { grid-area: cat; display: block; font-size: 13px; line-height: 1.3; color: var(--d); }
+.r-cat { grid-area: cat; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; font-size: 13px; line-height: 1.3; color: var(--d); }
+/* Straight-line distance, shown once the visitor sets a point: on the category line, pushed to its right end. */
+.r-dist { margin-left: auto; color: var(--t); font-weight: 500; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .r-name { grid-area: name; font-weight: 600; font-size: 16px; line-height: 1.3; letter-spacing: -0.012em; overflow-wrap: anywhere; }
 .r-town-d { display: none; }
 .r-facts { grid-area: facts; display: flex; flex-wrap: wrap; gap: 0 16px; color: var(--d); font-size: 14px; line-height: 1.45; min-width: 0; }
@@ -99,6 +106,15 @@ h1 { margin: 0; font-size: 28px; font-weight: 400; letter-spacing: -0.032em; lin
 .r-l3 { grid-area: l3; display: flex; align-items: baseline; gap: 10px; min-width: 0; font-size: 13.5px; color: var(--d); }
 .r-l3 .r-status { order: -1; color: var(--t); }
 .r-when { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* Week view: the time of a session (or "Regular") leads, and the line may wrap so that a weekly schedule is read whole. */
+.r-when.wrap { white-space: normal; overflow: visible; overflow-wrap: anywhere; }
+.r-when b { font-weight: 600; color: var(--t); }
+.r-l3 .r-status { flex: none; }
+/* Below the table layout a week row reads time first, status at the end of the line. */
+@media (max-width: 1199px) {
+  .week .r-l3 { justify-content: space-between; }
+  .week .r-l3 .r-status { order: 1; }
+}
 .chev { grid-area: chev; align-self: center; color: var(--d); }
 
 /* Small tick line: shown when a published age limit matches the chosen age (list and card detail). */
@@ -270,6 +286,8 @@ dialog .toast { position: absolute; top: 76px; bottom: auto; }
   .r-l3 .r-status { order: 0; }
   .r-when { white-space: normal; overflow: visible; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; line-height: 1.35; color: var(--d); }
   .r-age, .r-price { display: -webkit-box !important; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+  /* Week view: the time or the weekly schedule is read whole. */
+  .r-when.wrap { display: block; overflow: visible; }
 
 }
 @media (max-width: 380px) {
@@ -302,6 +320,11 @@ dialog .toast { position: absolute; top: 76px; bottom: auto; }
 .tab { min-height: 44px; padding: 0 18px; border: 0; border-radius: 999px; background: var(--raised); color: var(--chip); font-weight: 500; font-size: 14.5px; display: inline-flex; align-items: center; gap: 6px; transition: background-color 150ms var(--ease), color 150ms var(--ease); }
 .tab[aria-pressed="true"] { background: var(--t); color: var(--inv); }
 .tabn { font-variant-numeric: tabular-nums; font-size: 12.5px; opacity: .8; }
+/* Phones: the four views share one line (they wrap, evenly, only on the narrowest screens). */
+@media (max-width: 419px) {
+  .tabs { gap: 6px; }
+  .tab { flex: 1 1 auto; justify-content: center; padding: 0 9px; font-size: 14px; }
+}
 .viewtitle { margin: 0 0 4px; font-size: 22px; font-weight: 500; letter-spacing: -0.025em; }
 .syncstate, .updates, .viewtools { margin: 0 0 6px; }
 .syncstate { font-size: 13px; color: var(--d); }
@@ -337,6 +360,22 @@ textarea.field { display: block; }
 .legend .st { white-space: normal; align-items: flex-start; }
 .legend .st .dot { margin-top: 0.55em; }
 .foot { overflow-wrap: anywhere; }
+
+/* This week: one block per day in the page flow; the regular offers of a day are folded under one line. */
+.week { display: grid; gap: 22px; }
+.week-note { max-width: 72ch; }
+.wday { display: grid; gap: 8px; min-width: 0; }
+.wday h3 { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -0.015em; }
+.wday .hint { margin: 0; }
+.wsub { margin: 6px 0 0; font-size: 13.5px; font-weight: 500; color: var(--d); }
+.wreg { margin-top: 0; }
+.wreg[open] > .hint { margin-bottom: 8px; }
+
+/* Distance from: a point chosen in the filter panel */
+#g-near .near-geo { justify-self: start; }
+#g-near .near-or { font-size: 13px; color: var(--d); }
+#g-near .near-clear { justify-self: start; padding-left: 0; }
+#g-near .ghost:disabled { opacity: 0.6; cursor: progress; }
 
 /* card page additions */
 .d-actions { display: inline-flex; align-items: center; gap: 2px; }

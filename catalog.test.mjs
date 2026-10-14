@@ -867,7 +867,7 @@ test('every filter option selects only cards that have the property, and some ca
     ['status: check details',f=>{f.status='check';},a=>C.statusOf(a,null)==='check'],
     ['status: current',f=>{f.status='active';},a=>C.statusOf(a,null)==='active'],
     ['with an adult',f=>{f.parentMatch=true;},a=>a.parent==='yes'],
-    ['preset: indoors',f=>{f.preset='indoor';},a=>a.practical?.indoor?.value===true],
+    ['indoors (rainy day)',f=>{f.indoor=true;},a=>a.practical?.indoor?.value===true],
     ['preset: no booking',f=>{f.preset='walkin';},a=>a.practical?.booking?.value===false],
     ['scenario: course',f=>{f.scenario='course';},a=>(a.practical?.scenario||{group:'course',individual:'course'}[a.format])==='course'],
     ['scenario: visit',f=>{f.scenario='visit';},a=>(a.practical?.scenario||{self:'visit'}[a.format])==='visit']
@@ -918,7 +918,7 @@ test('filter state restored from the session rejects unknown values',()=>{
   // Every value the module itself writes is accepted again.
   const every=K.defaultFilters();
   every.place='d:sense';every.categories=new Set(K.CATEGORY_KEYS);every.formats=new Set(K.FORMAT_KEYS);every.languages=new Set(K.LANGUAGE_KEYS);every.days=new Set(K.DAY_KEYS);every.needs=new Set(P.needKeys);
-  Object.assign(every,{when:'weekend',price:'course',status:'check',scenario:'course',preset:'indoor',sort:'date',planStatus:'booked',parentMatch:true,includeUnknownAge:false,query:'swim'});
+  Object.assign(every,{when:'weekend',price:'course',status:'check',scenario:'course',preset:'walkin',indoor:true,sort:'date',planStatus:'booked',parentMatch:true,includeUnknownAge:false,query:'swim'});
   const again=C.restoreFilters(JSON.parse(JSON.stringify(C.serializeFilters(every))));
   assert.deepEqual(JSON.parse(JSON.stringify(C.serializeFilters(again))),JSON.parse(JSON.stringify(C.serializeFilters(every))));
   assert.equal(C.restoreFilters({query:'x'.repeat(900)}).query.length,500,'a stored search text is cut to 500 characters');
@@ -940,12 +940,12 @@ test('active filters count each chosen option once and never the search text',()
   f.languages=new Set(['DE','FR','unknown']);assert.equal(C.activeCount(f,null),6);
   f.days=new Set([1,6]);assert.equal(C.activeCount(f,null),8);
   f.needs=new Set(P.needKeys.slice(0,2));assert.equal(C.activeCount(f,null),10);
-  f.place='d:sense';f.when='today';f.price='free';f.status='check';f.scenario='visit';f.preset='indoor';f.parentMatch=true;
-  assert.equal(C.activeCount(f,null),17);
-  assert.equal(C.activeCount(f,AGE),18);
+  f.place='d:sense';f.when='today';f.price='free';f.status='check';f.scenario='visit';f.preset='walkin';f.indoor=true;f.parentMatch=true;
+  assert.equal(C.activeCount(f,null),18);
+  assert.equal(C.activeCount(f,AGE),19);
   // Settings that are not filters do not count.
   f.sort='name';f.includeUnknownAge=false;f.planStatus='booked';
-  assert.equal(C.activeCount(f,AGE),18);
+  assert.equal(C.activeCount(f,AGE),19);
 });
 
 test('each place option counts the published cards in it, and choosing it lists exactly those',()=>{

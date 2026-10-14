@@ -8,6 +8,8 @@
     const dateLabel = d => new Intl.DateTimeFormat(locale(), {...utc, day: 'numeric', month: 'short', year: 'numeric'}).format(at(d));
     const shortDate = d => new Intl.DateTimeFormat(locale(), {...utc, day: 'numeric', month: 'short'}).format(at(d));
     const dayDate = d => new Intl.DateTimeFormat(locale(), {...utc, weekday: 'short', day: 'numeric', month: 'short'}).format(at(d));
+    // 'Wednesday 14 October' for the day headings of the week view ('mercredi 14 octobre' in French).
+    const dayLong = d => new Intl.DateTimeFormat(locale(), {...utc, weekday: 'long', day: 'numeric', month: 'long'}).format(at(d));
     // 1 = Monday ... 7 = Sunday (1 January 2024 was a Monday).
     const weekdayName = n => new Intl.DateTimeFormat(locale(), {...utc, weekday: 'short'}).format(new Date(Date.UTC(2024, 0, n)));
     const clockLabel = e => e.start ? `${e.start}${e.end ? '–' + e.end : ''}` : t('time.tbc');
@@ -35,7 +37,7 @@
       return null;
     };
     const cell = value => String(value ?? '');
-    return {dateLabel, shortDate, dayDate, weekdayName, clockLabel, first, ageShort, ageLabel, ageBare, parentLong, parentShort, langText, nextText, bounds, cell};
+    return {dateLabel, shortDate, dayDate, dayLong, weekdayName, clockLabel, first, ageShort, ageLabel, ageBare, parentLong, parentShort, langText, nextText, bounds, cell};
   }
   window.MinitandemFormat = {create};
 })();

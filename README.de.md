@@ -108,7 +108,7 @@ Es belegt weder, wie viele Personen die Seite nutzen, noch wie viel Traffic sie 
 
 ## Aufbau
 
-- Katalog: `data.js` ist die Basis; `data-reviewed.js` (genehmigte Updates, generiert), `data-practical.js` (Register der Orte), `data-geo.js` (Adresspunkte, generiert) und `regions.js` liegen darüber. Aktuelle Zahlen stehen in der generierten `editorial/profile.json`; die Abdeckung nach Gemeinde in `editorial/canton-coverage.generated.json`. Hier wird keine Gesamtzahl wiederholt, damit sie nicht veralten kann.
+- Katalog: `data.js` ist die Basis; `data-reviewed.js` (genehmigte Updates, generiert), `data-practical.js` (Register der Orte), `data-geo.js` (Adresspunkte, generiert) und `regions.js` liegen darüber. `data-towns.js` enthält je Ort einen Mittelpunkt für die Entfernungen in Luftlinie und «Nächste zuerst» (generiert mit `node scripts/compile-towns.mjs` aus dem Geoportal des Bundes; braucht das Netz). Aktuelle Zahlen stehen in der generierten `editorial/profile.json`; die Abdeckung nach Gemeinde in `editorial/canton-coverage.generated.json`. Hier wird keine Gesamtzahl wiederholt, damit sie nicht veralten kann.
 - Oberfläche (einfache Skripte, kein Framework; nur die Kartenkacheln kommen von aussen): `index.html`, `styles.css` und eine Datei pro Aufgabe. `i18n.js` mit `strings-en.js`, `strings-de.js`, `strings-fr.js`; `catalogue.js` (Filter, Suche, Sortierung); `store.js` und `storage-migration.js` (die eigenen Daten der Besucher im Browser); `sync.js` (optionaler Abgleich mit dem Dienst); `exports.js`; `planning.js` und `exchange.js`; `format.js`, `views.js`, `toast.js`, `map.js` (wird geladen, wenn die Karte geöffnet wird) und `app.js`. `ui-files.mjs` listet sie auf; `sw.js` ist der Service Worker.
 - Build: `node build.mjs` schreibt die Seite nach `.publish/` (Seite, Skripte, pro Eintrag eine einfache Seite unter `places/`, `sitemap.xml`, `research.md`). `site.mjs` hält den öffentlichen Origin.
 - Dienst: `server.mjs` ist der kleine Dienst für Familienabgleich, Korrekturen und, auf dem Rechner des Eigentümers, das Editor-Panel (`editorial/admin.html`). `GET /healthz` antwortet ohne Schlüssel.
@@ -118,7 +118,7 @@ Es belegt weder, wie viele Personen die Seite nutzen, noch wie viel Traffic sie 
 
 ## Was im Browser bleibt
 
-Favoriten, Notizen, Status, Besuchspläne, das Alter des Kindes und der gespeicherte Startpunkt für Wegbeschreibungen liegen im Browser der Besucher (Speicherschlüssel `minitandem-…`; Schlüssel der früheren Version verschiebt `storage-migration.js` einmalig). Nichts wird irgendwohin gesendet, solange der Besucher den optionalen Abgleichdienst nicht verbindet.
+Favoriten, Notizen, Status, Besuchspläne, das Alter des Kindes, der gespeicherte Startpunkt für Wegbeschreibungen und der für Entfernungen gewählte Ort liegen im Browser der Besucher (Speicherschlüssel `minitandem-…`; Schlüssel der früheren Version verschiebt `storage-migration.js` einmalig). Nichts wird irgendwohin gesendet, solange der Besucher den optionalen Abgleichdienst nicht verbindet. Ein Standort aus dem Ortungsdienst des Browsers («Meinen Standort verwenden») bleibt im Speicher der Seite und wird weder gespeichert noch gesendet.
 
 ## Lizenz
 

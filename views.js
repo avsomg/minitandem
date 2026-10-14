@@ -1,4 +1,4 @@
-/* Markup of the interface: list rows, the filter panel, the card page, the saved view and the dialogs. Every function returns an
+/* Markup of the interface: list rows, the filter panel, the week view, the card page, the saved view and the dialogs. Every function returns an
    HTML string built from card content (escaped) and words from the dictionaries (through t). No DOM access, no events:
    app.js puts the markup into the page and wires it. ctx = {t, C, P, X, F, store, state, exports} (see app.js). */
 (() => {
@@ -61,16 +61,48 @@
       if (!Number.isFinite(a0) || C.ageFit(a, a0) !== true) return '';
       return ICON.tick(14) + `<span class="sr">${esc(t('fit.sr', {age: F.ageBare(a0)}))}</span>`;
     }
-    function row(a) {
+    // Straight-line distance from the point the visitor set ('' while none is set). To a checked address point when the card has
+    // one, otherwise to its town centre, which the wording says.
+    function distanceText(a) {
+      const from = state().near;
+      if (!from) return '';
+      const d = C.distanceOf(a, from);
+      if (!d) return t('near.unknown');
+      if (d.exact) return t('near.km', {km: window.MinitandemCatalogue.roundKm(d.km)});
+      return d.km < 1 ? t('near.townUnder1') : t('near.kmTown', {km: Math.round(d.km)});
+    }
+    // opts (week view): lead is a bold first part of the date line (a session's time, or "Regular"), when replaces the rest of it.
+    function row(a, {lead = '', when = null} = {}) {
       const status = C.statusOf(a, age()), next = F.nextText(a, C.upcoming(a), C.past(a));
-      const saved = personal().favorites.includes(a.id);
+      const saved = personal().favorites.includes(a.id), dist = distanceText(a);
+      const whenText = when ?? (next || F.first(a.schedule));
       return `<li><a class="row" href="${esc(hashFor(a.id))}" data-id="${esc(a.id)}">` +
-        `<span class="r-main"><span class="r-cat">${esc(t('category.' + a.category))}</span><span class="r-name">${nm(a.name)}${saved ? `<span class="r-saved" title="${esc(t('row.saved'))}">${ICON.bookmarkOn(14)}<span class="sr">${esc(t('row.saved'))}</span></span>` : ''}</span><span class="r-town-d">${esc(placeLine(a))}</span></span>` +
+        `<span class="r-main"><span class="r-cat">${esc(t('category.' + a.category))}${dist ? `<span class="r-dist">${esc(dist)}</span>` : ''}</span><span class="r-name">${nm(a.name)}${saved ? `<span class="r-saved" title="${esc(t('row.saved'))}">${ICON.bookmarkOn(14)}<span class="sr">${esc(t('row.saved'))}</span></span>` : ''}</span><span class="r-town-d">${esc(placeLine(a))}</span></span>` +
         `<span class="r-facts"><span class="r-town-m">${esc(a.town)}</span><span class="r-age${F.bounds(a) ? ' known' : ''}">${fitMark(a)}${esc(F.ageShort(a))}</span><span class="r-price${a.priceKind !== 'unknown' ? ' known' : ''}">${esc(F.first(a.price))}</span></span>` +
-        `<span class="r-l3"><span class="r-when">${esc(next || F.first(a.schedule))}</span><span class="r-status st"><i class="dot ${statusClass[status]}" aria-hidden="true"></i>${esc(t('status.' + status + '.short'))}</span></span>` +
+        `<span class="r-l3"><span class="r-when${lead ? ' wrap' : ''}">${lead ? `<b>${esc(lead)}</b>${whenText ? ' · ' : ''}` : ''}${esc(whenText)}</span><span class="r-status st"><i class="dot ${statusClass[status]}" aria-hidden="true"></i>${esc(t('status.' + status + '.short'))}</span></span>` +
         ICON.chev(20) + '</a></li>';
     }
-    const rows = items => items.map(row).join('');
+    const rows = items => items.map(a => row(a)).join('');
+
+    /* ---------- this week ---------- */
+    // days from C.week(): a heading per day, then what happens (dated sessions, with their time), what repeats (regular groups and
+    // courses, open, each marked as weekly) and what is open (places to visit on your own, folded into one line).
+    function week(days) {
+      // A heading that starts with the weekday starts with a capital, also in French ('Vendredi 16 octobre', but 'Demain · jeudi 15 octobre').
+      const heading = d => d.offset === 0 ? t('week.today', {date: F.dayLong(d.date)}) : d.offset === 1 ? t('week.tomorrow', {date: F.dayLong(d.date)})
+        : F.dayLong(d.date).replace(/^\p{Ll}/u, c => c.toUpperCase());
+      const open = state().weekOpen || new Set();
+      return `<p class="hint week-note">${esc(t('week.note'))}</p>` + days.map(d => {
+        const sessions = d.sessions.length ? `<p class="wsub">${esc(t('week.sessions', {n: d.sessions.length}))}</p><ul class="list">` +
+          d.sessions.map(({a, e}) => row(a, {lead: F.clockLabel(e), when: [e.title, e.address && e.address !== a.address ? e.address : ''].filter(Boolean).join(' · ')})).join('') + '</ul>' : '';
+        const regular = d.regular.length ? `<p class="wsub">${esc(t('week.regular', {n: d.regular.length, day: t('weekly.' + d.weekday)}))}</p><ul class="list">` +
+          d.regular.map(a => row(a, {lead: t('week.regularMark'), when: a.schedule})).join('') + '</ul>' : '';
+        const places = d.places.length ? `<details class="more wreg" data-day="${esc(d.date)}"${open.has(d.date) ? ' open' : ''}><summary>${esc(t('week.places', {n: d.places.length}))}</summary>` +
+          `<p class="hint">${esc(t('week.regularNote'))}</p><ul class="list">${d.places.map(a => row(a, {lead: t('week.hoursMark'), when: a.schedule})).join('')}</ul></details>` : '';
+        return `<section class="wday" aria-labelledby="wd-${esc(d.date)}"><h3 id="wd-${esc(d.date)}">${esc(heading(d))}</h3>` + sessions + regular + places +
+          (sessions || regular || places ? '' : `<p class="hint">${esc(t('week.emptyDay'))}</p>`) + '</section>';
+      }).join('');
+    }
 
     /* ---------- filter panel ---------- */
     function placeOptionsHtml() {
@@ -84,7 +116,7 @@
     function panel() {
       const count = key => C.activities.filter(a => !['closed', 'excluded'].includes(a.status) && a[key.field] === key.value).length;
       const ageButtons = [0, 1, 2, 3, 4, 5, 6].map(n => `<button type="button" class="chip age" data-age="${n}" aria-pressed="false" aria-label="${esc(F.ageLabel(n))}">${n}</button>`).join('');
-      return `<fieldset class="group" id="g-age"><legend class="glabel">${esc(t('filter.age'))}</legend>` +
+      return nearGroup() + `<fieldset class="group" id="g-age"><legend class="glabel">${esc(t('filter.age'))}</legend>` +
         `<div class="agebox"><input class="field" id="age" type="number" inputmode="numeric" min="0" max="6" step="1" placeholder="${esc(t('common.any'))}" aria-label="${esc(t('filter.ageInput'))}" aria-describedby="ageHint"><span class="unit">${esc(t('filter.ageUnit'))}</span></div>` +
         `<div class="chips ages" role="group" aria-label="${esc(t('filter.agePick'))}">${ageButtons}</div><p class="hint" id="ageHint" data-text="${esc(t('filter.ageHint'))}">${esc(t('filter.ageHint'))}</p>` +
         `<div id="unkRow" hidden>${switchRow('unk', t('filter.unknownAge'), t('filter.unknownAgeHint'))}</div></fieldset>` +
@@ -96,9 +128,19 @@
         group('g-lang', t('filter.language'), `<div class="chips">${C_KEYS.language.map(k => chip('lang', k, t('langFilter.' + k))).join('')}</div><p class="hint">${esc(t('filter.languageHint'))}</p>`) +
         group('g-price', t('filter.price'), `<div class="chips">${C_KEYS.price.map(k => chip('price', k, t('priceFilter.' + k))).join('')}</div>`) +
         group('g-status', t('filter.status'), `<div class="chips">${C_KEYS.status.map(k => chip('status', k, t('statusFilter.' + k))).join('')}</div>`) +
-        group('g-cond', t('filter.conditions'), `<div class="chips">${C_KEYS.preset.map(k => chip('preset', k, t('preset.' + k))).join('')}${P.needKeys.map(k => chip('need', k, t('needs.' + k))).join('')}</div><p class="hint">${esc(t('filter.conditionsHint'))}</p>`) +
+        group('g-cond', t('filter.conditions'), `<div class="chips">${chip('indoor', '1', t('filter.indoor'))}${C_KEYS.preset.map(k => chip('preset', k, t('preset.' + k))).join('')}${P.needKeys.map(k => chip('need', k, t('needs.' + k))).join('')}</div><p class="hint">${esc(t('filter.conditionsHint'))}</p>`) +
         `<div class="group" id="g-adult">${switchRow('adult', t('filter.withAdult'), t('filter.withAdultHint'))}</div>` +
-        `<div class="group" id="g-sort"><label class="glabel" for="sort">${esc(t('filter.sort'))}</label><span class="select"><select class="field" id="sort">${C_KEYS.sort.map(k => `<option value="${k}">${esc(t('sort.' + k))}</option>`).join('')}</select></span></div>`;
+        `<div class="group" id="g-sort"><label class="glabel" for="sort">${esc(t('filter.sort'))}</label><span class="select"><select class="field" id="sort">${C_KEYS.sort.map(k => `<option value="${k}"${k === 'near' && !state().near ? ' disabled' : ''}>${esc(t('sort.' + k))}</option>`).join('')}</select></span></div>`;
+    }
+    // Where distances are measured from: the browser's location (one request, kept in memory) or the centre of a town. The state line
+    // and the clear button are filled in by app.js.
+    function nearGroup() {
+      const towns = C.centreTowns().map(name => `<option value="${esc(name)}">${esc(name)}</option>`).join('');
+      return `<div class="group" id="g-near" role="group" aria-labelledby="nearL"><span class="glabel" id="nearL">${esc(t('near.title'))}</span>` +
+        `<button type="button" class="ghost near-geo" id="nearGeo">${ICON.pin(18)}${esc(t('near.useLocation'))}</button>` +
+        `<label class="near-or" for="nearTown">${esc(t('near.town'))}</label><span class="select"><select class="field" id="nearTown"><option value="">${esc(t('near.townNone'))}</option>${towns}</select></span>` +
+        `<p class="hint" id="nearState" role="status" aria-live="polite"></p><button type="button" class="linkbtn near-clear" id="nearClear" hidden>${esc(t('near.clear'))}</button>` +
+        `<p class="hint">${esc(t('near.hint'))}</p></div>`;
     }
     const C_KEYS = {category: window.MinitandemCatalogue.CATEGORY_KEYS, format: window.MinitandemCatalogue.FORMAT_KEYS, when: window.MinitandemCatalogue.WHEN_KEYS.filter(Boolean),
       days: window.MinitandemCatalogue.DAY_KEYS, language: window.MinitandemCatalogue.LANGUAGE_KEYS, price: window.MinitandemCatalogue.PRICE_KEYS, status: window.MinitandemCatalogue.STATUS_FILTER_KEYS,
@@ -331,7 +373,7 @@
       return {title: t('conflict.title'), body: `<p>${esc(t('conflict.text'))}</p><p class="notice">${esc(t('conflict.counts', {lf: personal().favorites.length, lv: Object.keys(personal().visits).length, rf: remote.profile?.favorites?.length || 0, rv: Object.keys(remote.profile?.visits || {}).length}))}</p><div class="rowbtns"><button type="button" class="ghost" data-action="backup-export">${ICON.download(18)}${esc(t('conflict.backup'))}</button><button type="button" class="ghost" data-action="sync-use-remote">${esc(t('conflict.useService'))}</button><button type="button" class="go" data-action="sync-use-local">${esc(t('conflict.keepHere'))}</button></div><p class="hint">${esc(t('conflict.note'))}</p>`};
     }
     const copyFallback = text => ({title: t('copy.title'), body: `<p>${esc(t('copy.denied'))}</p><textarea class="field area copy-fallback" readonly>${esc(text)}</textarea>`});
-    return {esc, ICON, nm, row, rows, panel, detail, saveButton, visitPlans, visitRows, visitLabel, saved, changesBox, outing, viewTools, venueBox, mapBox, empty, about, data, shareList, planExchange, pilot, visitForm,
+    return {esc, ICON, nm, row, rows, distanceText, week, panel, detail, saveButton, visitPlans, visitRows, visitLabel, saved, changesBox, outing, viewTools, venueBox, mapBox, empty, about, data, shareList, planExchange, pilot, visitForm,
       importConfirm, planImportConfirm, report, conflict, copyFallback, warningText, hashFor, organiserURL, mapURL, routeURL, placeOptionsHtml, cost, ageFitNote, statusClass, phoneHref};
   }
   window.MinitandemViews = {create, esc, ICON};

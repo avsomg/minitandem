@@ -15,7 +15,7 @@ const code=expected=>error=>error.code===expected;
 
 test('storage keys and the stored layout',()=>{
   const s=load({...base,favorites:['mpe'],age:2});
-  assert.deepEqual(plain(s.store.KEYS),{family:'minitandem-family-v1',sync:'minitandem-sync-v1',corrections:'minitandem-pending-corrections-v1',filters:'minitandem-family-v1-filters'});
+  assert.deepEqual(plain(s.store.KEYS),{family:'minitandem-family-v1',sync:'minitandem-sync-v1',corrections:'minitandem-pending-corrections-v1',filters:'minitandem-family-v1-filters',near:'minitandem-near-town-v1'});
   assert.deepEqual(plain(s.window.MinitandemStore.KEYS),plain(s.store.KEYS));
   s.store.personal.notes.mpe='a note';assert.equal(s.store.persist(),true);
   assert.deepEqual([...s.localStorage.map.keys()],[FAMILY],'saving writes the family record and nothing else');

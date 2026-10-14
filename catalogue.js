@@ -1,6 +1,6 @@
-/* The catalogue as the interface sees it: derived facts, filtering, search and sorting. No DOM and no interface text, so it
-   can be tested on its own. create() takes the cards, the districts and the planning helpers; the clock and the translator
-   (used only to make category names searchable) can be replaced in tests. */
+/* The catalogue as the interface sees it: derived facts, filtering, search, sorting, distances and the week agenda. No DOM and
+   no interface text, so it can be tested on its own. create() takes the cards, the districts, the town centres and the planning
+   helpers; the clock and the translator (used only to make category names searchable) can be replaced in tests. */
 (() => {
   'use strict';
   const CATEGORY_KEYS = ['play', 'dining', 'movement', 'water', 'horses', 'music', 'creative', 'nature', 'books', 'events'];
@@ -10,11 +10,12 @@
   const STATUS_FILTER_KEYS = ['active', 'check', 'future'];
   const PERSONAL_KEYS = ['', 'discuss', 'contact', 'waiting', 'booked', 'visited', 'skip'];
   const WHEN_KEYS = ['', 'upcoming', 'today', 'weekend', 'week'];
-  const PRESET_KEYS = ['', 'indoor', 'walkin', 'short'];
+  // 'indoor' used to be a preset; it is its own switch now (f.indoor) so that it combines with the others.
+  const PRESET_KEYS = ['', 'walkin', 'short'];
   const SCENARIO_KEYS = ['', 'visit', 'event', 'course'];
-  const SORT_KEYS = ['default', 'name', 'town', 'date'];
+  const SORT_KEYS = ['default', 'name', 'town', 'date', 'near'];
   const DAY_KEYS = [1, 2, 3, 4, 5, 6, 7];
-  const VIEWS = ['catalog', 'map', 'saved', 'archive', 'shared', 'venue'];
+  const VIEWS = ['catalog', 'week', 'map', 'saved', 'archive', 'shared', 'venue'];
   const MAX_AGE = 18;
   // Places have a German and a French name; a visitor may type either.
   const ALIASES = {Fribourg: 'Freiburg', Murten: 'Morat', 'Düdingen': 'Guin', Tafers: 'Tavel', Plaffeien: 'Planfayon', Kerzers: 'Chiètres', Meyriez: 'Merlach',
@@ -31,10 +32,21 @@
   const bounded = a => (a.min !== null && a.min > 0) || a.max !== null;
   function defaultFilters() {
     return {query: '', place: '', categories: new Set(), formats: new Set(), languages: new Set(), days: new Set(), needs: new Set(), when: '', price: '', status: '',
-      scenario: '', preset: '', parentMatch: false, includeUnknownAge: true, planStatus: '', sort: 'default'};
+      scenario: '', preset: '', indoor: false, parentMatch: false, includeUnknownAge: true, planStatus: '', sort: 'default'};
   }
+  // Swiss calendar dates as 'YYYY-MM-DD'; weekdays as on the cards and in the day filter: 1 = Monday ... 7 = Sunday.
+  const addDays = (date, n) => { const d = new Date(date + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
+  const weekdayOf = date => new Date(date + 'T12:00:00Z').getUTCDay() || 7;
+  // Straight-line (great-circle) distance in km between two {lat, lon} points. Not a travel distance.
+  function distanceKm(from, to) {
+    const rad = x => x * Math.PI / 180, dLat = rad(to.lat - from.lat), dLon = rad(to.lon - from.lon);
+    const h = Math.sin(dLat / 2) ** 2 + Math.cos(rad(from.lat)) * Math.cos(rad(to.lat)) * Math.sin(dLon / 2) ** 2;
+    return 2 * 6371.0088 * Math.asin(Math.min(1, Math.sqrt(h)));
+  }
+  // What a row shows: one decimal under 1 km, whole kilometres above.
+  const roundKm = km => km < 1 ? Math.max(0.1, Math.round(km * 10) / 10) : Math.round(km);
 
-  function create({activities, venues = [], regions, coverage = {}, planning: P, clock = defaultClock(), t = key => key}) {
+  function create({activities, venues = [], regions, towns = {}, coverage = {}, planning: P, clock = defaultClock(), t = key => key}) {
     const byId = new Map(activities.map(a => [a.id, a]));
     const localities = [...new Map(activities.flatMap(a => placeNames(a).map(name => {
       const key = placeKey(a.region, name);
@@ -46,6 +58,19 @@
     const upcoming = a => a.events.filter(inFuture).sort((x, y) => (x.date + (x.start || '')).localeCompare(y.date + (y.start || '')));
     const past = a => a.events.filter(e => !inFuture(e));
     const venueFor = a => venues.find(v => v.members.includes(a.id));
+    // Town centres (data-towns.js): {lat, lon, ...} or null when the town could not be matched.
+    const townCentre = name => { const c = Object.hasOwn(towns, name) ? towns[name] : null; return c && Number.isFinite(c.lat) && Number.isFinite(c.lon) ? c : null; };
+    // The point a card is measured to: its checked address point (the same rule as the map: not an area, not an address that
+    // changes by date), else the centre of its town, approximate. null: no point at all, the distance is unknown.
+    const exactPoint = a => a.geo && a.addressPrecision !== 'area' && !a.events.some(e => e.address && e.address !== a.address) ? a.geo : null;
+    function distanceOf(a, from) {
+      if (!from) return null;
+      const exact = exactPoint(a);
+      if (exact) return {km: distanceKm(from, exact), exact: true};
+      // A card in "Giffers / Tentlingen" takes the nearer of its two towns.
+      const centres = placeNames(a).map(townCentre).filter(Boolean);
+      return centres.length ? {km: Math.min(...centres.map(c => distanceKm(from, c))), exact: false} : null;
+    }
 
     // true: the published limits include this age; false: they exclude it; null: nothing published that decides it.
     function ageFit(a, age) {
@@ -85,6 +110,8 @@
       if (view === 'saved' && f.planStatus && (personal.statuses[a.id] || 'none') !== f.planStatus) return false;
       if (f.scenario && P.scenario(a) !== f.scenario) return false;
       if (!P.matches(a, f.preset)) return false;
+      // Rainy day: only cards whose organiser states the activity is indoors; unknown and outdoor cards are left out.
+      if (f.indoor && !P.matches(a, 'indoor')) return false;
       if (!P.matchesNeeds(a, f.needs)) return false;
       if (f.when) { const now = clock.nowHm(); if (!P.matchesWhen(a, f.when, today(), now)) return false; }
       if (f.categories.size && !f.categories.has(a.category)) return false;
@@ -101,9 +128,12 @@
       }
       return true;
     }
-    function sortItems(items, f, {age = null, view = 'catalog'} = {}) {
+    function sortItems(items, f, {age = null, view = 'catalog', near = null} = {}) {
       const byName = (a, b) => a.name.localeCompare(b.name, 'en');
+      // Nearest first needs a point; without one the default order applies. Cards with no distance come last.
+      const km = f.sort === 'near' && near ? new Map(items.map(a => [a.id, distanceOf(a, near)?.km ?? Infinity])) : null;
       return items.sort((a, b) => {
+        if (km) return (km.get(a.id) === km.get(b.id) ? 0 : km.get(a.id) < km.get(b.id) ? -1 : 1) || byName(a, b);
         if (f.sort === 'name') return byName(a, b);
         if (f.sort === 'town') return a.town.localeCompare(b.town, 'de-CH') || byName(a, b);
         if (f.sort === 'date') {
@@ -116,10 +146,32 @@
     function filter(f, context = {}) {
       return sortItems(activities.filter(a => matches(a, f, context)), f, context);
     }
+    // This week: today and the next six days, for cards that already passed the filters. Each day lists the dated sessions on it
+    // (today only those not yet over) and, apart, what repeats on that weekday: cards without dated sessions whose weekdays include
+    // the day and whose schedule has not run out by then (scheduleValidThrough). These are the cards the list offers, with the same
+    // status on each row, so "check details" and "for later" stay visible as such. They are split into regular groups, courses and
+    // individual offers (regular) and places to visit on your own during their hours (places, format 'self'). Weekly times are never
+    // turned into dates, so holidays and breaks are unknown. A day outside a chosen weekday or "when" filter is left out.
+    function week(items, f, {age = null, near = null} = {}) {
+      const start = today(), [from, to] = f.when ? P.range(f.when, start) : [start, '9999-12-31'];
+      const byTime = (x, y) => (x.e.start || '99:99').localeCompare(y.e.start || '99:99') || x.a.name.localeCompare(y.a.name, 'en');
+      const days = [];
+      for (let offset = 0; offset < 7; offset++) {
+        const date = addDays(start, offset), weekday = weekdayOf(date);
+        if ((f.days.size && !f.days.has(weekday)) || date < from || date > to) continue;
+        const sessions = items.flatMap(a => a.events.map((e, index) => ({a, e, index}))).filter(({e}) => e.date === date && inFuture(e)).sort(byTime);
+        const repeating = items.filter(a => !isArchive(a) && !a.events.length && a.days.includes(weekday) && (!a.scheduleValidThrough || a.scheduleValidThrough >= date));
+        days.push({date, weekday, offset, sessions, regular: sortItems(repeating.filter(a => a.format !== 'self'), f, {age, near}),
+          places: sortItems(repeating.filter(a => a.format === 'self'), f, {age, near})});
+      }
+      return days;
+    }
+    // The cards a week lists, each once.
+    const weekCards = days => [...new Map(days.flatMap(d => [...d.sessions.map(s => s.a), ...d.regular, ...d.places]).map(a => [a.id, a])).values()];
     // Filters shown as active: every option chosen in the panel counts once; the search text has its own field.
     function activeCount(f, age) {
       return (Number.isFinite(age) ? 1 : 0) + (f.place ? 1 : 0) + f.categories.size + f.formats.size + f.languages.size + f.days.size + f.needs.size
-        + (f.when ? 1 : 0) + (f.price ? 1 : 0) + (f.status ? 1 : 0) + (f.scenario ? 1 : 0) + (f.preset ? 1 : 0) + (f.parentMatch ? 1 : 0);
+        + (f.when ? 1 : 0) + (f.price ? 1 : 0) + (f.status ? 1 : 0) + (f.scenario ? 1 : 0) + (f.preset ? 1 : 0) + (f.indoor ? 1 : 0) + (f.parentMatch ? 1 : 0);
     }
     const anyFilter = (f, age) => Boolean(f.query.trim()) || activeCount(f, age) > 0;
     function ageSummary(items, age) {
@@ -140,6 +192,8 @@
       one('sort', SORT_KEYS); one('planStatus', ['', 'none', ...PERSONAL_KEYS.filter(Boolean)]);
       if (typeof saved.query === 'string') f.query = saved.query.slice(0, 500);
       f.parentMatch = saved.parentMatch === true;
+      // A session saved while "indoors" was a preset keeps the filter on.
+      f.indoor = saved.indoor === true || saved.preset === 'indoor';
       f.includeUnknownAge = saved.includeUnknownAge !== false;
       return f;
     }
@@ -152,9 +206,11 @@
       const towns = localities.map(place => ({value: 't:' + place.key, id: place.key, name: place.name, region: place.region, count: items.filter(a => placeNames(a).some(n => placeKey(a.region, n) === place.key)).length})).filter(o => o.count);
       return {districts, towns};
     }
+    // Towns a visitor can measure from: those with a centre, by name.
+    const centreTowns = () => [...new Set(localities.map(place => place.name))].filter(townCentre).sort((a, b) => a.localeCompare(b, 'de-CH'));
     return {PERSONAL: PERSONAL_KEYS, norm, isArchive, byId, localities, localityByKey, today, inFuture, upcoming, past, venueFor, ageFit, ageRank, bounded, needsReview, statusOf, searchText, matchesSearch, matches, filter,
-      sortItems, activeCount, anyFilter, ageSummary, restoreFilters, serializeFilters, placeOptions, regions, coverage, venues, activities};
+      sortItems, activeCount, anyFilter, ageSummary, restoreFilters, serializeFilters, placeOptions, townCentre, centreTowns, distanceOf, week, weekCards, regions, coverage, venues, activities};
   }
-  window.MinitandemCatalogue = {create, defaultFilters, swissNow, norm, canonicalId, isArchive, placeNames, placeKey, bounded, ALIASES, MAX_AGE,
+  window.MinitandemCatalogue = {create, defaultFilters, swissNow, norm, canonicalId, isArchive, placeNames, placeKey, bounded, addDays, weekdayOf, distanceKm, roundKm, ALIASES, MAX_AGE,
     CATEGORY_KEYS, FORMAT_KEYS, LANGUAGE_KEYS, PRICE_KEYS, STATUS_FILTER_KEYS, PERSONAL_KEYS, WHEN_KEYS, PRESET_KEYS, SCENARIO_KEYS, SORT_KEYS, DAY_KEYS, VIEWS};
 })();

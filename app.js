@@ -14,22 +14,28 @@
   try { W.MinitandemMigration.run(local, session); } catch {}
   I.init();
   const ALL = W.ACTIVITIES;
-  const C = K.create({activities: ALL, venues: W.ACTIVITY_VENUES || [], regions: W.CATALOG_REGIONS, coverage: W.CATALOG_COVERAGE, planning: P, t});
+  const C = K.create({activities: ALL, venues: W.ACTIVITY_VENUES || [], regions: W.CATALOG_REGIONS, towns: W.CATALOG_TOWNS || {}, coverage: W.CATALOG_COVERAGE, planning: P, t});
   const F = W.MinitandemFormat.create({t, locale: I.locale});
   let sync = null;
   const store = W.MinitandemStore.create({storage: local, byId: C.byId, P, today: C.today, statusKeys: K.PERSONAL_KEYS, canonicalId: K.canonicalId, onSaved: () => sync?.queue()});
-  const state = {view: 'catalog', venueId: '', sharedIds: [], f: K.defaultFilters(), limit: 24, openId: null, outingDate: '', opener: null, returnId: null};
+  // near: the point distances are measured from, {kind: 'town', name, lat, lon} or {kind: 'geo', lat, lon}; nearStatus: '', 'locating'
+  // or 'failed'. weekOpen: the days of the week view whose regular offers are unfolded.
+  const state = {view: 'catalog', venueId: '', sharedIds: [], f: K.defaultFilters(), limit: 24, openId: null, outingDate: '', opener: null, returnId: null,
+    near: null, nearStatus: '', weekOpen: new Set()};
   const V = W.MinitandemViews.create({t, C, P, X, F, store, state: () => state});
   const EX = W.MinitandemExports.create({t, lang: I.lang, P, byId: C.byId, regions: W.CATALOG_REGIONS, today: C.today, format: F});
   const PAGE = 24;
   const SESSION_FILTERS = store.KEYS.filters;
   try { state.f = C.restoreFilters(JSON.parse(session.getItem(SESSION_FILTERS) || 'null')); } catch {}
+  // A remembered town comes back; a position from the browser never does, so "nearest first" without a point falls back.
+  { const name = store.loadNear(), centre = name && C.townCentre(name); if (centre) state.near = {kind: 'town', name, lat: centre.lat, lon: centre.lon}; }
+  if (state.f.sort === 'near' && !state.near) state.f.sort = 'default';
   state.outingDate = Object.values(store.personal.visits).map(v => v.date).filter(date => date >= C.today()).sort()[0] || C.today();
 
   const els = {};
   for (const id of ['q', 'qClear', 'fbar', 'fpAge', 'fpAgeV', 'fpPlace', 'fpPlaceV', 'fpMore', 'count', 'countNote', 'barR', 'fcount', 'list', 'listhead', 'empty', 'endnav', 'endNote', 'toFilters', 'more', 'moreBtn',
     'sheet', 'sheetBody', 'sheetDone', 'sheetClose', 'colBody', 'detail', 'utility', 'utilityTitle', 'utilityBody', 'panel', 'toast', 'viewTitle', 'viewTools', 'savedBox', 'mapBox', 'updates',
-    'syncState', 'contentNote', 'importFile', 'planImportFile', 'results', 'tabSaved'])
+    'syncState', 'contentNote', 'importFile', 'planImportFile', 'results', 'tabSaved', 'nearNote', 'nearText', 'nearOpen', 'resetTop', 'weekBox'])
     els[id] = document.getElementById(id);
   const toast = W.MinitandemToast.create({node: els.toast, document});
   const wide = W.matchMedia('(min-width: 1000px)');
@@ -81,7 +87,7 @@
     if (!place) return t('place.anywhere.short');
     return place.startsWith('d:') ? C.regions[place.slice(2)] : C.localityByKey.get(place.slice(2))?.name || '';
   };
-  function items() { return C.filter(state.f, {age: age(), view: state.view, personal: store.personal, venueId: state.venueId, sharedIds: state.sharedIds}); }
+  function items() { return C.filter(state.f, {age: age(), view: state.view, personal: store.personal, venueId: state.venueId, sharedIds: state.sharedIds, near: state.near}); }
   const publicView = () => ['shared', 'venue'].includes(state.view);
   function render() {
     if (disposeMap) { disposeMap(); disposeMap = null; }
@@ -90,13 +96,15 @@
     const list = lastItems = items();
     const key = list.map(a => a.id).join('|');
     if (key !== resultKey) { state.limit = PAGE; resultKey = key; }
-    const n = list.length, a0 = age(), af = filterCount(), total = C.activities.filter(a => !C.isArchive(a)).length;
-    const view = state.view, isMap = view === 'map';
+    const view = state.view, isMap = view === 'map', isWeek = view === 'week';
+    // The week view counts the filtered cards that have something on one of the seven days.
+    const days = isWeek ? C.week(list, state.f, {age: age(), near: state.near}) : null, cards = isWeek ? C.weekCards(days) : list;
+    const n = cards.length, a0 = age(), af = filterCount(), total = C.activities.filter(a => !C.isArchive(a)).length;
     document.body.dataset.view = view;
     // tabs and titles
     for (const b of $$('[data-view].tab')) { const on = b.dataset.view === view; b.setAttribute('aria-pressed', String(on)); if (on) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); }
     els.tabSaved.querySelector('.tabn').textContent = String(store.personal.favorites.filter(id => C.byId.has(id)).length);
-    const heading = {saved: t('view.saved'), map: t('view.map'), shared: t('view.shared'), archive: t('view.archive'), venue: C.venues.find(v => v.id === state.venueId)?.name || t('view.venue')}[view];
+    const heading = {saved: t('view.saved'), map: t('view.map'), week: t('view.week'), shared: t('view.shared'), archive: t('view.archive'), venue: C.venues.find(v => v.id === state.venueId)?.name || t('view.venue')}[view];
     els.viewTitle.textContent = heading || ''; els.viewTitle.hidden = !heading || view === 'map';
     // search, pills, count bar
     els.q.value !== state.f.query && (els.q.value = state.f.query);
@@ -106,26 +114,31 @@
     els.fpAge.classList.toggle('on', Number.isFinite(a0)); els.fpPlace.classList.toggle('on', !!state.f.place); els.fpMore.classList.toggle('on', af > 0);
     els.fpMore.setAttribute('aria-label', af ? t('filters.buttonActive', {n: af}) : t('filters.button'));
     els.count.innerHTML = (n === total && !C.anyFilter(state.f, a0) && view === 'catalog') || view !== 'catalog' ? `<b>${n}</b> ${esc(t('count.label', {n}))}` : `<b>${n}</b> ${esc(t('count.of', {n: total, total}))}`;
-    els.barR.hidden = publicView() || !C.anyFilter(state.f, a0);
+    // The count bar's right end: the way to distances (until a point is set), then the active filters and Reset.
+    els.barR.hidden = publicView(); els.resetTop.hidden = !C.anyFilter(state.f, a0);
+    els.nearOpen.hidden = !!state.near || isMap;
     els.fcount.textContent = af ? t('filters.active', {n: af}) : ''; els.fcount.hidden = !af;
     els.sheetDone.textContent = n ? t('filters.show', {n}) : t('filters.none');
     if (Number.isFinite(a0) && n && !publicView()) {
-      const s = C.ageSummary(list, a0);
+      const s = C.ageSummary(cards, a0);
       els.countNote.textContent = t('note.age', {age: F.ageBare(a0), fits: s.fits, unknown: s.unknown}); els.countNote.hidden = false;
     } else els.countNote.hidden = true;
+    els.nearNote.hidden = !state.near || isMap || !n;
+    els.nearText.textContent = !state.near ? '' : state.near.kind === 'town' ? t('near.listFromTown', {town: state.near.name}) : t('near.listFromLocation');
     // body of the results
     const shown = list.slice(0, state.limit);
-    els.listhead.hidden = isMap || !n;
-    els.list.innerHTML = isMap ? '' : V.rows(shown);
-    els.list.hidden = isMap || !n;
+    els.listhead.hidden = isMap || isWeek || !n;
+    els.list.innerHTML = isMap || isWeek ? '' : V.rows(shown);
+    els.list.hidden = isMap || isWeek || !n;
     els.mapBox.hidden = !isMap; els.mapBox.innerHTML = isMap ? V.mapBox(list) : '';
+    els.weekBox.hidden = !isWeek || !n; els.weekBox.innerHTML = isWeek && n ? V.week(days) : '';
     const emptyKind = view === 'saved' && !store.personal.favorites.length ? 'saved' : view === 'catalog' && Number.isFinite(a0) && !state.f.includeUnknownAge ? 'unknown' : '';
     els.empty.hidden = !!n; els.empty.innerHTML = n ? '' : V.empty(emptyKind);
     if (isMap && !n) els.mapBox.hidden = true;
-    const more = !isMap && shown.length < n;
+    const more = !isMap && !isWeek && shown.length < n;
     els.more.hidden = !more; els.moreBtn.textContent = more ? t('list.more', {shown: shown.length, total: n}) : '';
     els.endnav.hidden = isMap || !n || publicView();
-    els.endNote.textContent = af ? t('end.filtered', {shown: shown.length, total: n, n: af}) : t('end.all', {shown: shown.length, n: total});
+    els.endNote.textContent = af ? t('end.filtered', {shown: shown.length, total: n, n: af}) : t('end.all', {shown: shown.length, n: total}); els.endNote.hidden = isWeek;
     // saved overview, tools, updates banner
     els.viewTools.innerHTML = V.viewTools(view, store.personal.favorites.length > 0, n); els.viewTools.hidden = !els.viewTools.innerHTML;
     const overview = view === 'saved' ? V.saved() : null;
@@ -172,10 +185,19 @@
       else if (kind === 'preset') on = f.preset === val;
       else if (kind === 'price') on = f.price === val;
       else if (kind === 'status') on = f.status === val;
+      else if (kind === 'indoor') on = f.indoor;
       b.setAttribute('aria-pressed', String(on));
     }
     $('#adult', panel).setAttribute('aria-checked', String(f.parentMatch));
+    $('#sort option[value="near"]', panel).disabled = !state.near;
     $('#sort', panel).value = f.sort;
+    const town = $('#nearTown', panel), note = $('#nearState', panel);
+    if (document.activeElement !== town) town.value = state.near?.kind === 'town' ? state.near.name : '';
+    note.textContent = state.nearStatus === 'locating' ? t('near.locating') : state.nearStatus === 'failed' ? t('near.failed')
+      : !state.near ? '' : state.near.kind === 'town' ? t('near.fromTown', {town: state.near.name}) : t('near.fromLocation');
+    note.classList.toggle('err', state.nearStatus === 'failed');
+    $('#nearGeo', panel).disabled = state.nearStatus === 'locating';
+    $('#nearClear', panel).hidden = !state.near;
   }
   function togglePanelValue(kind, val) {
     const f = state.f, toggle = (set, v) => set.has(v) ? set.delete(v) : set.add(v);
@@ -185,6 +207,7 @@
     else if (kind === 'preset') f.preset = f.preset === val ? '' : val;
     else if (kind === 'price') f.price = f.price === val ? '' : val;
     else if (kind === 'status') f.status = f.status === val ? '' : val;
+    else if (kind === 'indoor') f.indoor = !f.indoor;
     state.limit = PAGE; render();
   }
   function setAge(n) {
@@ -206,6 +229,7 @@
       if (e.target.id === 'age') { const hint = $('#ageHint', panel); hint.textContent = hint.dataset.text; hint.classList.remove('err'); syncPanel(); }
       else if (e.target.id === 'place') { state.f.place = e.target.value; state.limit = PAGE; render(); }
       else if (e.target.id === 'sort') { state.f.sort = e.target.value; render(); }
+      else if (e.target.id === 'nearTown') chooseTown(e.target.value);
     });
     panel.addEventListener('click', e => {
       const b = e.target.closest('button'); if (!b) return;
@@ -213,7 +237,30 @@
       else if (b.dataset.kind) togglePanelValue(b.dataset.kind, b.dataset.val);
       else if (b.id === 'unk') { state.f.includeUnknownAge = !state.f.includeUnknownAge; render(); }
       else if (b.id === 'adult') { state.f.parentMatch = !state.f.parentMatch; render(); }
+      else if (b.id === 'nearGeo') locate();
+      else if (b.id === 'nearClear') { store.saveNear(''); setNear(null); $('#nearGeo', panel).focus(); }
     });
+  }
+  /* ---------- distances from a point the visitor sets ---------- */
+  // A chosen town is remembered in this browser. The browser's location is asked for once per press, coarse, and kept only in this
+  // page's memory: it is never stored, never put in the address and never sent anywhere. Setting a point sorts nearest first.
+  function setNear(near) {
+    state.near = near; state.nearStatus = '';
+    if (near) state.f.sort = 'near'; else if (state.f.sort === 'near') state.f.sort = 'default';
+    state.limit = PAGE; render();
+  }
+  function chooseTown(name) {
+    const centre = name ? C.townCentre(name) : null;
+    store.saveNear(centre ? name : '');
+    if (centre) setNear({kind: 'town', name, lat: centre.lat, lon: centre.lon});
+    else if (state.near?.kind === 'town') setNear(null);
+  }
+  function locate() {
+    const failed = () => { state.nearStatus = 'failed'; syncPanel(); $('#nearTown', els.panel)?.focus(); };
+    if (!navigator.geolocation) { failed(); return; }
+    state.nearStatus = 'locating'; syncPanel();
+    navigator.geolocation.getCurrentPosition(position => { store.saveNear(''); setNear({kind: 'geo', lat: position.coords.latitude, lon: position.coords.longitude}); },
+      failed, {enableHighAccuracy: false, timeout: 20000, maximumAge: 600000});
   }
   function placePanel() {
     if (wide.matches) { if (els.sheet.open) els.sheet.close(); els.colBody.appendChild(els.panel); }
@@ -222,9 +269,15 @@
   function openSheet(which) {
     if (wide.matches) return;
     els.sheet.showModal();
-    const body = els.sheetBody, g = which === 'place' ? $('#g-place') : null;
+    const body = els.sheetBody, g = {age: $('#g-age'), place: $('#g-place'), near: $('#g-near')}[which] || null;
     body.scrollTop = 0;
     if (g) body.scrollTop = g.getBoundingClientRect().top - body.getBoundingClientRect().top - 20;
+  }
+  // "Near me" and "Change": the distance controls at the top of the filters, in the sheet on a phone, in the left column on a wide screen.
+  function openNear() {
+    if (!wide.matches) { openSheet('near'); return; }
+    els.colBody.closest('.col').scrollTop = 0;
+    $('#nearGeo', els.panel).focus();
   }
   function toFilters() {
     const reduce = W.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -421,10 +474,12 @@
     if (el.id === 'openData') { utility(dataDialog(), () => utility(dataDialog())); return; }
   });
   const dataDialog = () => V.data(sync.config, store.personal.favorites.length > 0, store.storageAvailable);
-  els.list.addEventListener('click', e => {
+  for (const box of [els.list, els.weekBox]) box.addEventListener('click', e => {
     const a = e.target.closest('a.row'); if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
     e.preventDefault(); openDetail(a.dataset.id, true);
   });
+  // The week view is rebuilt on every change; the days whose regular offers are unfolded stay unfolded.
+  els.weekBox.addEventListener('toggle', e => { const day = e.target.dataset?.day; if (day) { if (e.target.open) state.weekOpen.add(day); else state.weekOpen.delete(day); } }, true);
   document.addEventListener('change', e => {
     const el = e.target;
     if (el.id === 'outing-date' && P.validDate(el.value)) { state.outingDate = el.value; render(); }
@@ -453,6 +508,8 @@
   els.qClear.addEventListener('click', () => { els.q.value = ''; state.f.query = ''; state.limit = PAGE; render(); els.q.focus(); });
   els.moreBtn.addEventListener('click', actions.more);
   els.toFilters.addEventListener('click', toFilters);
+  for (const b of [els.nearOpen, $('#nearChange')]) b.addEventListener('click', openNear);
+  $('#nearOff').addEventListener('click', () => { store.saveNear(''); setNear(null); (els.nearOpen.hidden ? els.results : els.nearOpen).focus({preventScroll: true}); });
   for (const b of $$('.fp')) b.addEventListener('click', () => openSheet(b.dataset.open));
   els.sheetClose.addEventListener('click', () => els.sheet.close());
   els.sheetDone.addEventListener('click', () => { els.sheet.close(); W.scrollTo({top: 0}); });

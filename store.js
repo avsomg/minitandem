@@ -1,10 +1,12 @@
-/* The visitor's own records (favourites, notes, statuses, visit plans, child's age, starting point) and where they live.
+/* The visitor's own records (favourites, notes, statuses, visit plans, child's age, starting point, the town distances are measured
+   from) and where they live.
    Everything stays in the browser unless the visitor connects the optional family service. The storage object is passed in,
    so the same code runs against a fake storage in tests. Several tabs may write: persist() merges this tab's changes into
    whatever is stored now instead of overwriting it. */
 (() => {
   'use strict';
-  const KEYS = {family: 'minitandem-family-v1', sync: 'minitandem-sync-v1', corrections: 'minitandem-pending-corrections-v1', filters: 'minitandem-family-v1-filters'};
+  const KEYS = {family: 'minitandem-family-v1', sync: 'minitandem-sync-v1', corrections: 'minitandem-pending-corrections-v1', filters: 'minitandem-family-v1-filters',
+    near: 'minitandem-near-town-v1'};
   const cleanOrigin = value => typeof value === 'string' ? value.replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, 80) : '';
   const emptyPersonal = () => ({version: 1, favorites: [], notes: {}, statuses: {}, visits: {}, tracked: {}, age: null, origin: ''});
 
@@ -66,6 +68,10 @@
     // Connection to the family service.
     store.loadSync = () => { try { const saved = JSON.parse(storage.getItem(KEYS.sync) || 'null'); return saved && typeof saved.url === 'string' && typeof saved.token === 'string' ? saved : null; } catch { return null; } };
     store.saveSync = config => { try { if (config) storage.setItem(KEYS.sync, JSON.stringify(config)); else storage.removeItem(KEYS.sync); } catch {} };
+    // The town chosen for distances: only a town name, kept in this browser apart from the family records (not in a backup, never
+    // synced). A position from the browser's location service is never stored.
+    store.loadNear = () => { try { const name = storage.getItem(KEYS.near); return typeof name === 'string' ? cleanOrigin(name) : ''; } catch { return ''; } };
+    store.saveNear = name => { try { if (name) storage.setItem(KEYS.near, cleanOrigin(name)); else storage.removeItem(KEYS.near); } catch {} };
     store.hasFamilyData = value => Boolean(value.favorites.length || Object.keys(value.notes).length || Object.keys(value.statuses).length || Object.keys(value.visits).length);
     return store;
   }
