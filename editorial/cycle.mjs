@@ -89,7 +89,7 @@ export function queueMarks(file,now){
   }finally{db.close();}
 }
 
-// What changed in the queue since the previous cycle, in the terms the owner is told about.
+// What changed in the queue during this cycle (from the event id read at its start), in the terms the owner is told about.
 export function digest(file,sinceEventId){
   if(!fs.existsSync(file))return null;
   const db=openQueue(file);

@@ -1,5 +1,5 @@
 # The site and the service behind Caddy with automatic HTTPS for minitandem.ch and www.minitandem.ch.
-# Prepared, not deployed. See docs/betrieb.md (German) for deploy, rollback, backup and restore.
+# Runs minitandem.ch since 14 October 2026. See docs/betrieb.md (German) for deploy, update, rollback, backup and restore.
 name: minitandem
 
 services:
