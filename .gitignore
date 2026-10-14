@@ -38,6 +38,7 @@ editorial/workflow-rollout-2026-10-02.json
 # 3. Account identity of the release, and local machine settings
 editorial/release-identity.json
 .playwright-path
+.translations-path
 .env
 .workspace-in-use
 .minitandem-workspace

@@ -89,7 +89,10 @@
       : a.status === 'future' ? (Number.isFinite(age) && a.min !== null && age >= a.min ? 'check' : 'future')
       : needsReview(a) ? 'check' : a.status;
 
-    const searchText = (a, note = '') => norm([a.name, a.town, regions[a.region], a.address, a.age, a.schedule, a.price, a.intro || '', a.parentDetails || '',
+    // The card's text in the interface language, when a translation is shown (set by app.js): search finds both it and the English.
+    let localText = () => '';
+    const setLocalText = fn => { localText = typeof fn === 'function' ? fn : () => ''; };
+    const searchText = (a, note = '') => norm([localText(a), a.name, a.town, regions[a.region], a.address, a.age, a.schedule, a.price, a.intro || '', a.parentDetails || '',
       /ludo/i.test(a.name) ? 'toy library ludothek ludotheque' : '', /elki|muki|vaki/i.test(a.name) ? 'parent child eltern kind' : '',
       a.category === 'music' ? 'music musik rhythmique chansons' : '', ...a.notes, ...(a.research?.findings || []).map(f => f.text), ...(a.research?.remaining || []),
       ...Object.values(a.practical || {}).map(f => f?.text).filter(Boolean),
@@ -208,7 +211,7 @@
     }
     // Towns a visitor can measure from: those with a centre, by name.
     const centreTowns = () => [...new Set(localities.map(place => place.name))].filter(townCentre).sort((a, b) => a.localeCompare(b, 'de-CH'));
-    return {PERSONAL: PERSONAL_KEYS, norm, isArchive, byId, localities, localityByKey, today, inFuture, upcoming, past, venueFor, ageFit, ageRank, bounded, needsReview, statusOf, searchText, matchesSearch, matches, filter,
+    return {PERSONAL: PERSONAL_KEYS, norm, isArchive, byId, localities, localityByKey, today, inFuture, upcoming, past, venueFor, ageFit, ageRank, bounded, needsReview, statusOf, searchText, setLocalText, matchesSearch, matches, filter,
       sortItems, activeCount, anyFilter, ageSummary, restoreFilters, serializeFilters, placeOptions, townCentre, centreTowns, distanceOf, week, weekCards, regions, coverage, venues, activities};
   }
   window.MinitandemCatalogue = {create, defaultFilters, swissNow, norm, canonicalId, isArchive, placeNames, placeKey, bounded, addDays, weekdayOf, distanceKm, roundKm, ALIASES, MAX_AGE,

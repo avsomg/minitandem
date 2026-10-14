@@ -1,6 +1,8 @@
 /* Markup of the interface: list rows, the filter panel, the week view, the card page, the saved view and the dialogs. Every function returns an
    HTML string built from card content (escaped) and words from the dictionaries (through t). No DOM access, no events:
-   app.js puts the markup into the page and wires it. ctx = {t, C, P, X, F, store, state, exports} (see app.js). */
+   app.js puts the markup into the page and wires it. ctx = {t, C, P, X, F, store, state, shown, inEnglish} (see app.js): shown(card) is the
+   card as the visitor reads it (its German or French translation where one is current), inEnglish(card) says that a card falls back to English.
+   Logic, links to maps and the comparison of saved cards keep the English card. */
 (() => {
   'use strict';
   const NBSP = String.fromCharCode(160);
@@ -34,8 +36,13 @@
     refresh: size => svg(size, '<path d="M20 11a8 8 0 0 0-14-4M4 5v4h4M4 13a8 8 0 0 0 14 4M20 19v-4h-4"/>')
   };
 
+  // The practical facts in the order the card shows them. The translation of the cards (catalogue-i18n.js, and the translation pipeline,
+  // which reads this line) uses the same order.
+  const PRACTICAL_ORDER = ['indoor', 'playArea', 'changing', 'toilet', 'feeding', 'access', 'parking', 'booking', 'observe', 'duration', 'commitment', 'groupSize', 'leader', 'trial', 'leave', 'standardGerman', 'costNote'];
+
   function create(ctx) {
     const {t, C, P, X, F, store} = ctx;
+    const shown = a => (ctx.shown && a ? ctx.shown(a) : a), en = a => a.english || a;
     const age = () => store.personal.age;
     const state = () => ctx.state();
     const nm = s => esc(s).replace(/ · /g, NBSP + '· ');
@@ -72,8 +79,8 @@
       return d.km < 1 ? t('near.townUnder1') : t('near.kmTown', {km: Math.round(d.km)});
     }
     // opts (week view): lead is a bold first part of the date line (a session's time, or "Regular"), when replaces the rest of it.
-    function row(a, {lead = '', when = null} = {}) {
-      const status = C.statusOf(a, age()), next = F.nextText(a, C.upcoming(a), C.past(a));
+    function row(card, {lead = '', when = null} = {}) {
+      const a = shown(card), status = C.statusOf(a, age()), next = F.nextText(a, C.upcoming(a), C.past(a));
       const saved = personal().favorites.includes(a.id), dist = distanceText(a);
       const whenText = when ?? (next || F.first(a.schedule));
       return `<li><a class="row" href="${esc(hashFor(a.id))}" data-id="${esc(a.id)}">` +
@@ -94,11 +101,11 @@
       const open = state().weekOpen || new Set();
       return `<p class="hint week-note">${esc(t('week.note'))}</p>` + days.map(d => {
         const sessions = d.sessions.length ? `<p class="wsub">${esc(t('week.sessions', {n: d.sessions.length}))}</p><ul class="list">` +
-          d.sessions.map(({a, e}) => row(a, {lead: F.clockLabel(e), when: [e.title, e.address && e.address !== a.address ? e.address : ''].filter(Boolean).join(' · ')})).join('') + '</ul>' : '';
+          d.sessions.map(({a, index}) => { const s = shown(a), e = s.events[index]; return row(a, {lead: F.clockLabel(e), when: [e.title, e.address && e.address !== s.address ? e.address : ''].filter(Boolean).join(' · ')}); }).join('') + '</ul>' : '';
         const regular = d.regular.length ? `<p class="wsub">${esc(t('week.regular', {n: d.regular.length, day: t('weekly.' + d.weekday)}))}</p><ul class="list">` +
-          d.regular.map(a => row(a, {lead: t('week.regularMark'), when: a.schedule})).join('') + '</ul>' : '';
+          d.regular.map(a => row(a, {lead: t('week.regularMark'), when: shown(a).schedule})).join('') + '</ul>' : '';
         const places = d.places.length ? `<details class="more wreg" data-day="${esc(d.date)}"${open.has(d.date) ? ' open' : ''}><summary>${esc(t('week.places', {n: d.places.length}))}</summary>` +
-          `<p class="hint">${esc(t('week.regularNote'))}</p><ul class="list">${d.places.map(a => row(a, {lead: t('week.hoursMark'), when: a.schedule})).join('')}</ul></details>` : '';
+          `<p class="hint">${esc(t('week.regularNote'))}</p><ul class="list">${d.places.map(a => row(a, {lead: t('week.hoursMark'), when: shown(a).schedule})).join('')}</ul></details>` : '';
         return `<section class="wday" aria-labelledby="wd-${esc(d.date)}"><h3 id="wd-${esc(d.date)}">${esc(heading(d))}</h3>` + sessions + regular + places +
           (sessions || regular || places ? '' : `<p class="hint">${esc(t('week.emptyDay'))}</p>`) + '</section>';
       }).join('');
@@ -152,14 +159,13 @@
     const section = (title, body, cls = '') => `<section class="dsec ${cls}"><h3>${esc(title)}</h3>${body}</section>`;
     const bullets = items => `<ul class="plain">${items.map(n => `<li>${esc(n)}</li>`).join('')}</ul>`;
     const organiserURL = a => (a.sources.find(s => /^https:\/\//i.test(s.url)) || {}).url || '';
-    const mapURL = a => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.address || a.town + ', Switzerland')}`;
-    const routeURL = (a, address = a.address) => {
+    const mapURL = a => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(en(a).address || en(a).town + ', Switzerland')}`;
+    const routeURL = (a, address = en(a).address) => {
       const origin = personal().origin ? personal().origin + ', Switzerland' : '';
       return `https://www.google.com/maps/dir/?api=1${origin ? '&origin=' + encodeURIComponent(origin) : ''}&destination=${encodeURIComponent(address || a.town + ', Switzerland')}`;
     };
-    const PRACTICAL_ORDER = ['indoor', 'playArea', 'changing', 'toilet', 'feeding', 'access', 'parking', 'booking', 'observe', 'duration', 'commitment', 'groupSize', 'leader', 'trial', 'leave', 'standardGerman', 'costNote'];
-    function saveButton(a) {
-      const on = personal().favorites.includes(a.id);
+    function saveButton(card) {
+      const a = shown(card), on = personal().favorites.includes(a.id);
       return `<button type="button" class="iconbtn save-button${on ? ' saved' : ''}" data-save="${esc(a.id)}" aria-pressed="${on}" aria-label="${esc(t(on ? 'card.unsave' : 'card.save'))}: ${esc(a.name)}" title="${esc(t(on ? 'card.unsave' : 'card.save'))}">${on ? ICON.bookmarkOn(20) : ICON.bookmark(20)}</button>`;
     }
     function ageFitNote(a) {
@@ -199,7 +205,7 @@
     }
     function visitRows(entries) {
       return entries.map(([id, v]) => {
-        const a = C.byId.get(v.activity), label = visitLabel(v);
+        const a = shown(C.byId.get(v.activity)), label = visitLabel(v);
         return `<div class="visit-row"><div><strong>${esc(label)}</strong><p>${esc(a.name)}</p><p class="hint">${esc(t('booking.' + v.booking))}${v.outcome ? ' · ' + esc(t('outcome.' + v.outcome)) : ''}</p></div><button type="button" class="iconbtn" data-edit-visit="${esc(id)}" aria-label="${esc(t('visit.edit'))}: ${esc(a.name)}, ${esc(label)}" title="${esc(t('visit.edit'))}">${ICON.pencil(20)}</button></div>`;
       }).join('');
     }
@@ -213,8 +219,8 @@
       return section(t('mine.title'), `<label class="glabel" for="personal-status">${esc(t('mine.status'))}</label><span class="select"><select class="field" id="personal-status">${C.PERSONAL.map(v => `<option value="${v}" ${personal().statuses[a.id] === v ? 'selected' : ''}>${esc(keyed('personalStatus', v))}</option>`).join('')}</select></span>` +
         `<label class="glabel" for="personal-note">${esc(t('mine.note'))}</label><textarea class="field area" id="personal-note" maxlength="10000" placeholder="${esc(t('mine.notePlaceholder'))}">${esc(personal().notes[a.id] || '')}</textarea><p class="hint" id="note-state">${esc(t(store.storageAvailable ? 'mine.stored' : 'mine.notStored'))}</p>`, 'mine');
     }
-    function detail(a) {
-      const status = C.statusOf(a, age()), seen = new Set();
+    function detail(card) {
+      const a = shown(card), status = C.statusOf(a, age()), seen = new Set();
       const key = text => C.norm(text).replace(/\s+/g, ' ').trim();
       const take = text => { if (!text) return false; const k = key(text); if (seen.has(k)) return false; seen.add(k); return true; };
       take(a.intro); take(a.parentDetails);
@@ -229,6 +235,7 @@
       let out = `<div class="d-top"><button type="button" class="ghost" data-close>${ICON.back(18)}${esc(t('card.back'))}</button><span class="d-actions"><span id="detail-save">${saveButton(a)}</span><button type="button" class="iconbtn" data-action="copy-link" aria-label="${esc(t('card.copyLink'))}" title="${esc(t('card.copyLink'))}">${ICON.link(20)}</button></span></div>` +
         `<div class="d-body" tabindex="-1" autofocus>` +
         `<p class="d-kicker">${esc(t('category.' + a.category))}</p><h2 class="d-name" id="dTitle">${nm(a.name)}</h2><p class="d-where">${esc(placeLine(a))} · ${esc(t('card.canton'))}</p>` +
+        (ctx.inEnglish?.(a) ? `<p class="hint d-english">${esc(t('card.inEnglish'))}</p>` : '') +
         `<p class="d-status" id="detail-data-status"><i class="dot ${statusClass[status]}" aria-hidden="true"></i>${esc(t('status.' + status + '.long'))}</p><p class="d-checked">${esc(t('card.checked', {date: F.dateLabel(a.checked)}))}</p>` +
         (warnings.length ? `<ul class="warns">${warnings.map(w => `<li>${esc(w)}</li>`).join('')}</ul>` : '') +
         (C.venueFor(a) ? `<button type="button" class="ghost venue-link" data-venue="${esc(C.venueFor(a).id)}">${esc(t('card.venue', {name: C.venueFor(a).name}))}</button>` : '') +
@@ -269,17 +276,17 @@
     /* ---------- saved view ---------- */
     function changesBox() {
       const changed = personal().favorites.map(id => ({a: C.byId.get(id), previous: personal().tracked[id]})).filter(x => x.a).map(x => ({...x, changes: P.changes(x.a, x.previous)})).filter(x => x.changes.length);
-      const body = changed.map(({a, previous, changes}) => `<details class="more"><summary>${esc(a.name)}</summary><p class="hint">${esc(t('saved.changesSince', {date: F.dateLabel(previous.date), checked: F.dateLabel(a.checked)}))}</p><dl class="changes">${changes.map(c => `<div><dt>${esc(t('tracked.' + c.key))}</dt><dd><span>${esc(t('saved.was'))}</span> ${esc(c.key === 'status' ? t('status.' + c.before + '.long') : c.before || t('common.notPublished'))}</dd><dd><span>${esc(t('saved.now'))}</span> ${esc(c.key === 'status' ? t('status.' + c.after + '.long') : c.after || t('common.notPublished'))}</dd></div>`).join('')}</dl><div class="rowbtns"><button type="button" class="ghost" data-open="${esc(a.id)}">${esc(t('saved.openCard'))}</button><button type="button" class="ghost" data-ack="${esc(a.id)}">${ICON.check(16)}${esc(t('saved.markRead'))}</button></div></details>`).join('');
+      const body = changed.map(({a, previous, changes}) => `<details class="more"><summary>${esc(shown(a).name)}</summary><p class="hint">${esc(t('saved.changesSince', {date: F.dateLabel(previous.date), checked: F.dateLabel(a.checked)}))}</p><dl class="changes">${changes.map(c => `<div><dt>${esc(t('tracked.' + c.key))}</dt><dd><span>${esc(t('saved.was'))}</span> ${esc(c.key === 'status' ? t('status.' + c.before + '.long') : c.before || t('common.notPublished'))}</dd><dd><span>${esc(t('saved.now'))}</span> ${esc(c.key === 'status' ? t('status.' + c.after + '.long') : c.after || t('common.notPublished'))}</dd></div>`).join('')}</dl><div class="rowbtns"><button type="button" class="ghost" data-open="${esc(a.id)}">${esc(t('saved.openCard'))}</button><button type="button" class="ghost" data-ack="${esc(a.id)}">${ICON.check(16)}${esc(t('saved.markRead'))}</button></div></details>`).join('');
       return {count: changed.length, html: changed.length ? `<section class="dsec" id="saved-changes" tabindex="-1"><h3>${esc(t('saved.changes'))} · ${changed.length}</h3>${body}</section>` : `<section class="dsec" id="saved-changes" tabindex="-1"><h3>${esc(t('saved.changes'))}</h3><p class="hint">${esc(t('saved.noChanges'))}</p></section>`};
     }
     function outing() {
       const day = state().outingDate, a0 = age();
       const entries = Object.entries(personal().visits).filter(([, v]) => v.date === day && v.booking !== 'cancelled').sort(([, a], [, b]) => a.time.localeCompare(b.time));
       const cards = entries.map(([id, v]) => {
-        const a = C.byId.get(v.activity);
+        const card = C.byId.get(v.activity), a = shown(card);
         const backup = Number.isFinite(a0) && C.activities.find(c => c.id !== a.id && c.town === a.town && !C.isArchive(c) && P.scenario(c) === 'visit' && c.min !== null && a0 >= c.min && (c.max === null || a0 <= c.max));
         const packing = v.bring.split('\n').map((line, i) => line.trim() ? `<li>${v['pack' + i] ? '✓ ' : ''}${esc(line.trim())}</li>` : '').join('');
-        return `<article class="outing-item"><div class="outing-head"><span>${esc(v.time || t('visit.noTime'))}</span><strong>${esc(a.name)}</strong><button type="button" class="iconbtn" data-edit-visit="${esc(id)}" aria-label="${esc(t('visit.edit'))}" title="${esc(t('visit.edit'))}">${ICON.pencil(20)}</button></div><p>${esc(a.address || t('visit.addressTbc', {town: a.town}))}</p><p class="hint">${esc(t('booking.' + v.booking))} · ${esc(F.parentShort(a))}</p>${packing ? `<details class="more"><summary>${esc(t('visit.bring'))}</summary><ul class="plain">${packing}</ul></details>` : ''}<div class="rowbtns">${link(a.address ? routeURL(a) : mapURL(a), esc(t('card.directions')), 'ghost')}<button type="button" class="ghost" data-open="${esc(a.id)}">${esc(t('saved.openCard'))}</button></div>${backup ? `<p class="hint">${esc(t('outing.backup', {town: a.town}))} <button type="button" class="linkbtn" data-open="${esc(backup.id)}">${esc(backup.name)}</button></p>` : ''}<p class="hint">${esc(t('outing.checked', {date: F.dateLabel(a.checked)}))}</p></article>`;
+        return `<article class="outing-item"><div class="outing-head"><span>${esc(v.time || t('visit.noTime'))}</span><strong>${esc(a.name)}</strong><button type="button" class="iconbtn" data-edit-visit="${esc(id)}" aria-label="${esc(t('visit.edit'))}" title="${esc(t('visit.edit'))}">${ICON.pencil(20)}</button></div><p>${esc(a.address || t('visit.addressTbc', {town: a.town}))}</p><p class="hint">${esc(t('booking.' + v.booking))} · ${esc(F.parentShort(a))}</p>${packing ? `<details class="more"><summary>${esc(t('visit.bring'))}</summary><ul class="plain">${packing}</ul></details>` : ''}<div class="rowbtns">${link(a.address ? routeURL(a) : mapURL(a), esc(t('card.directions')), 'ghost')}<button type="button" class="ghost" data-open="${esc(a.id)}">${esc(t('saved.openCard'))}</button></div>${backup ? `<p class="hint">${esc(t('outing.backup', {town: a.town}))} <button type="button" class="linkbtn" data-open="${esc(backup.id)}">${esc(shown(backup).name)}</button></p>` : ''}<p class="hint">${esc(t('outing.checked', {date: F.dateLabel(a.checked)}))}</p></article>`;
       }).join('');
       return `<section class="dsec outing"><h3>${esc(t('outing.title'))}</h3><label class="glabel" for="outing-date">${esc(t('outing.date'))}</label><input class="field short" id="outing-date" type="date" value="${esc(day)}">${cards || `<p class="hint">${esc(t('outing.empty'))}</p>`}</section>`;
     }
@@ -298,11 +305,11 @@
       return '';
     }
     function venueBox(venue, members) {
-      const a = members[0];
+      const a = shown(members[0]);
       return `<section class="dsec venue"><button type="button" class="linkbtn" data-view="catalog">${ICON.back(16)} ${esc(t('venue.back'))}</button><p>${esc(a.address || t('visit.addressTbc', {town: a.town}))}</p><div class="rowbtns">${link(a.address ? routeURL(a) : mapURL(a), esc(t('card.directions')), 'ghost')}${a.contacts.map(c => `${c.phone ? `<a class="ghost" href="${esc(phoneHref(c.phone))}">${ICON.phone(18)}${esc(c.phone)}</a>` : ''}${c.email ? `<a class="ghost" href="mailto:${esc(c.email)}">${ICON.mail(18)}${esc(c.email)}</a>` : ''}`).join('')}${link(venue.source, esc(t('venue.site')) + ICON.out(14), 'ghost')}</div><h3>${esc(t('venue.offers', {n: members.length}))}</h3><p class="hint">${esc(t('venue.note'))}</p></section>`;
     }
-    function mapBox(items) {
-      const located = items.filter(a => a.geo), missing = items.filter(a => !a.geo);
+    function mapBox(cards) {
+      const items = cards.map(shown), located = items.filter(a => a.geo), missing = items.filter(a => !a.geo);
       const list = (rowsList, fallback) => rowsList.map(a => `<div class="map-list-row"><button type="button" class="linkbtn" data-open="${esc(a.id)}">${esc(a.name)}</button><p>${esc(a.address || fallback(a))}</p></div>`).join('');
       return `<div class="map-shell"><p class="hint">${esc(t('map.caption', {located: located.length, total: items.length}))}</p>${located.length ? `<div id="places-map" class="places-map" role="region" aria-label="${esc(t('map.label'))}"></div><p id="map-error" role="status" hidden>${esc(t('map.tilesFailed'))}</p>` : ''}<p class="hint">${esc(t('map.credit'))}</p>` +
         `<details class="more"><summary>${esc(t('map.addresses', {n: located.length}))}</summary>${list(located, () => '')}</details>` +
@@ -331,19 +338,20 @@
         `<h3>${esc(t('data.catalogueTitle'))}</h3>${p('data.catalogueText')}<button type="button" class="ghost" data-action="csv">${ICON.download(18)}${esc(t('data.catalogueButton'))}</button><p class="hint">${esc(t(storageOk ? 'data.storageOk' : 'data.storageOff'))}</p>`};
     }
     function shareList() {
-      const items = personal().favorites.map(id => C.byId.get(id)).filter(Boolean);
+      const items = personal().favorites.map(id => C.byId.get(id)).filter(Boolean).map(shown);
       return {title: t('share.title'), body: `${p('share.text')}<div class="checks">${items.map((a, i) => `<label class="tickrow"><input type="checkbox" name="share-place" value="${esc(a.id)}" ${i < 50 ? 'checked' : ''}><span>${esc(a.name)}</span></label>`).join('')}</div><div class="rowbtns"><button type="button" class="go" data-action="share-send">${ICON.share(18)}${esc(t('share.send'))}</button><button type="button" class="ghost" data-action="share-copy">${ICON.copy(18)}${esc(t('share.copy'))}</button></div>`};
     }
     function planExchange() {
       const entries = Object.entries(personal().visits).filter(([, v]) => P.validDate(v.date)).sort(([, a], [, b]) => (a.date + a.time).localeCompare(b.date + b.time));
-      return {title: t('exchange.title'), body: `<p class="notice">${esc(t('exchange.notice'))}</p>${entries.length ? `<div class="checks">${entries.map(([id, v]) => `<label class="tickrow"><input type="checkbox" name="plan-visit" value="${esc(id)}" ${v.date >= C.today() && v.booking !== 'cancelled' ? 'checked' : ''}><span>${esc(visitLabel(v))}<br>${esc(C.byId.get(v.activity).name)}<br><small>${esc(t('booking.' + v.booking))}</small></span></label>`).join('')}</div><div class="rowbtns"><button type="button" class="go" data-action="plan-download">${ICON.download(18)}${esc(t('exchange.file'))}</button><button type="button" class="ghost" data-action="plan-calendar">${ICON.calPlus(18)}${esc(t('exchange.calendar'))}</button></div>` : p('exchange.none')}<p class="hint">${esc(t('exchange.copyNote'))}</p>`};
+      return {title: t('exchange.title'), body: `<p class="notice">${esc(t('exchange.notice'))}</p>${entries.length ? `<div class="checks">${entries.map(([id, v]) => `<label class="tickrow"><input type="checkbox" name="plan-visit" value="${esc(id)}" ${v.date >= C.today() && v.booking !== 'cancelled' ? 'checked' : ''}><span>${esc(visitLabel(v))}<br>${esc(shown(C.byId.get(v.activity)).name)}<br><small>${esc(t('booking.' + v.booking))}</small></span></label>`).join('')}</div><div class="rowbtns"><button type="button" class="go" data-action="plan-download">${ICON.download(18)}${esc(t('exchange.file'))}</button><button type="button" class="ghost" data-action="plan-calendar">${ICON.calPlus(18)}${esc(t('exchange.calendar'))}</button></div>` : p('exchange.none')}<p class="hint">${esc(t('exchange.copyNote'))}</p>`};
     }
     function pilot() {
       const m = X.metrics(personal().visits);
       const row = (label, value) => `<div class="fr"><dt>${esc(label)}</dt><dd>${value}</dd></div>`;
       return {title: t('pilot.title'), body: `<dl class="pr">${row(t('pilot.planned'), m.planned)}${row(t('pilot.attended'), `${m.attended} / ${m.missed}`)}${row(t('pilot.selected'), `${m.selectedHere} / ${m.knownBefore}`)}${row(t('pilot.information'), `${m.enoughInformation} / ${m.neededClarification}`)}${row(t('pilot.repeat'), m.wantRepeat)}</dl>${p('pilot.note')}<p class="hint">${esc(t('pilot.fileNote'))}</p><button type="button" class="ghost" data-action="pilot-download">${ICON.download(18)}${esc(t('pilot.download'))}</button>`};
     }
-    function visitForm(a, draft, isExisting) {
+    function visitForm(card, draft, isExisting) {
+      const a = shown(card);
       const field = (k, label, type = 'text') => `<label class="glabel" for="visit-${k}">${esc(label)}</label><input class="field" id="visit-${k}" name="${k}" type="${type}" value="${esc(draft[k])}" ${type === 'date' ? 'min="2000-01-01" max="2099-12-31"' : ''}>`;
       const text = (k, label, max) => `<label class="glabel" for="visit-${k}">${esc(label)}</label><textarea class="field area" id="visit-${k}" name="${k}" maxlength="${max}" rows="3">${esc(draft[k])}</textarea>`;
       const select = (k, label, keys, prefix) => `<label class="glabel" for="visit-${k}">${esc(label)}</label><span class="select"><select class="field" id="visit-${k}" name="${k}">${keys.map(v => `<option value="${v}" ${draft[k] === v ? 'selected' : ''}>${esc(keyed(prefix, v))}</option>`).join('')}</select></span>`;
@@ -361,11 +369,11 @@
       return {title: t('import.title'), body: `<p>${esc(t('import.contents', {favorites: imported.favorites.length, notes: Object.keys(imported.notes).length, statuses: Object.keys(imported.statuses).length, visits: Object.keys(imported.visits).length}))}</p><p class="notice">${esc(t('import.note', {age: F.ageLabel(imported.age), origin: imported.origin || t('common.notStated')}))}</p><div class="rowbtns"><button type="button" class="go" id="confirm-import">${esc(t('import.confirm'))}</button><button type="button" class="ghost" data-close-utility>${esc(t('common.cancel'))}</button></div>`};
     }
     function planImportConfirm(preview) {
-      return {title: t('planImport.title'), body: `<p>${esc(t('planImport.counts', {added: preview.added, changed: preview.changed}))}</p><p class="notice">${esc(t('planImport.note'))}</p><ul class="plain">${Object.values(preview.clean.visits).map(v => `<li><strong>${esc(C.byId.get(v.activity).name)}</strong><br>${esc(visitLabel(v))}<br>${esc(t('booking.' + v.booking))}</li>`).join('')}</ul><div class="rowbtns"><button type="button" class="go" id="confirm-plan-import">${ICON.check(18)}${esc(t('planImport.confirm'))}</button><button type="button" class="ghost" data-close-utility>${esc(t('common.cancel'))}</button></div>`};
+      return {title: t('planImport.title'), body: `<p>${esc(t('planImport.counts', {added: preview.added, changed: preview.changed}))}</p><p class="notice">${esc(t('planImport.note'))}</p><ul class="plain">${Object.values(preview.clean.visits).map(v => `<li><strong>${esc(shown(C.byId.get(v.activity)).name)}</strong><br>${esc(visitLabel(v))}<br>${esc(t('booking.' + v.booking))}</li>`).join('')}</ul><div class="rowbtns"><button type="button" class="go" id="confirm-plan-import">${ICON.check(18)}${esc(t('planImport.confirm'))}</button><button type="button" class="ghost" data-close-utility>${esc(t('common.cancel'))}</button></div>`};
     }
     const topicKey = topic => ({'Schedule': 'schedule', 'Price': 'price', 'Age or adult participation': 'age', 'Address or closure': 'address', 'Other': 'other'}[topic]);
     function report(a, connected) {
-      return {title: t('report.title'), body: `<p><strong>${esc(a.name)}</strong></p><form id="change-report" data-id="${esc(a.id)}"><label class="glabel" for="report-topic">${esc(t('report.topic'))}</label><span class="select"><select class="field" id="report-topic">${X.topics.map(topic => `<option value="${esc(topic)}">${esc(t('report.topic.' + topicKey(topic)))}</option>`).join('')}</select></span>` +
+      return {title: t('report.title'), body: `<p><strong>${esc(shown(a).name)}</strong></p><form id="change-report" data-id="${esc(a.id)}"><label class="glabel" for="report-topic">${esc(t('report.topic'))}</label><span class="select"><select class="field" id="report-topic">${X.topics.map(topic => `<option value="${esc(topic)}">${esc(t('report.topic.' + topicKey(topic)))}</option>`).join('')}</select></span>` +
         `<label class="glabel" for="report-text">${esc(t('report.text'))}</label><textarea class="field area" id="report-text" required maxlength="2000" rows="5"></textarea><label class="glabel" for="report-source">${esc(t('report.source'))}</label><input class="field" id="report-source" type="url" maxlength="500" placeholder="https://"><p class="hint">${esc(t('report.note'))}</p>` +
         `<div class="rowbtns"><button class="go" type="submit">${esc(t(connected ? 'report.send' : 'report.download'))}</button><button type="button" class="ghost" data-close-utility>${esc(t('common.cancel'))}</button></div></form>`};
     }
@@ -373,8 +381,8 @@
       return {title: t('conflict.title'), body: `<p>${esc(t('conflict.text'))}</p><p class="notice">${esc(t('conflict.counts', {lf: personal().favorites.length, lv: Object.keys(personal().visits).length, rf: remote.profile?.favorites?.length || 0, rv: Object.keys(remote.profile?.visits || {}).length}))}</p><div class="rowbtns"><button type="button" class="ghost" data-action="backup-export">${ICON.download(18)}${esc(t('conflict.backup'))}</button><button type="button" class="ghost" data-action="sync-use-remote">${esc(t('conflict.useService'))}</button><button type="button" class="go" data-action="sync-use-local">${esc(t('conflict.keepHere'))}</button></div><p class="hint">${esc(t('conflict.note'))}</p>`};
     }
     const copyFallback = text => ({title: t('copy.title'), body: `<p>${esc(t('copy.denied'))}</p><textarea class="field area copy-fallback" readonly>${esc(text)}</textarea>`});
-    return {esc, ICON, nm, row, rows, distanceText, week, panel, detail, saveButton, visitPlans, visitRows, visitLabel, saved, changesBox, outing, viewTools, venueBox, mapBox, empty, about, data, shareList, planExchange, pilot, visitForm,
+    return {esc, ICON, nm, shown, row, rows, distanceText, week, panel, detail, saveButton, visitPlans, visitRows, visitLabel, saved, changesBox, outing, viewTools, venueBox, mapBox, empty, about, data, shareList, planExchange, pilot, visitForm,
       importConfirm, planImportConfirm, report, conflict, copyFallback, warningText, hashFor, organiserURL, mapURL, routeURL, placeOptionsHtml, cost, ageFitNote, statusClass, phoneHref};
   }
-  window.MinitandemViews = {create, esc, ICON};
+  window.MinitandemViews = {create, esc, ICON, PRACTICAL_ORDER};
 })();

@@ -122,7 +122,7 @@ test('t() picks plural forms, fills parameters, formats decimals and falls back 
   en.window.MINITANDEM_STRINGS.en['test.onlyEnglish']='English only';
   assert.equal(en.t('test.onlyEnglish'),'English only','a missing German entry falls back to English');
 });
-test('card content is never translated: the same card text appears in all three languages',()=>{
+test('card content does not come from the interface dictionaries: without a card-text file the same card text appears in all three languages',()=>{
   const card='memo-library';
   const texts=LANGS.map(lang=>{const s=loadStack({lang});return s.V.detail(s.byId.get(card));});
   const name=loadStack().byId.get(card).name;

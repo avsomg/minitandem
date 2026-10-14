@@ -83,19 +83,20 @@ export function groupOf(relative){
   if(DOCS.some(pattern=>pattern.test(rel)))return 'docs';
   return 'editorial';
 }
-// Mentions of the reference age inside cards whose own min or max is 2.5: data.js (one JSON object per line) and the generated research.md (one section per card).
+// Mentions of the reference age inside cards whose own min or max is 2.5: data.js (one JSON object per line), the generated research.md (one section
+// per card) and the German and French card texts data-de.js and data-fr.js (one card per line, "id":{...}).
 // A card that publishes 2.5 as its age bound may say so; the same words on another card would be a leak.
 function publishedBoundCards(root){
-  const names=new Set(),lines=[];
+  const names=new Set(),ids=new Set(),lines=[];
   let text='';
-  try{text=fs.readFileSync(path.join(root,'data.js'),'utf8');}catch{return {names,lines};}
+  try{text=fs.readFileSync(path.join(root,'data.js'),'utf8');}catch{return {names,ids,lines};}
   for(const line of text.split('\n')){
     const card=line.trim().replace(/,$/,'');
     if(!card.startsWith('{"'))continue;
     let parsed;try{parsed=JSON.parse(card);}catch{continue;}
-    if(parsed.id&&(parsed.min===2.5||parsed.max===2.5)){names.add(parsed.name);lines.push(card);}
+    if(parsed.id&&(parsed.min===2.5||parsed.max===2.5)){names.add(parsed.name);ids.add(parsed.id);lines.push(card);}
   }
-  return {names,lines};
+  return {names,ids,lines};
 }
 function publishedBoundMentions(root,rel,text){
   const count=part=>auditText(part).referenceChildAge;
@@ -103,6 +104,10 @@ function publishedBoundMentions(root,rel,text){
   if(rel==='research.md'){
     const {names}=publishedBoundCards(root);
     return text.split('\n## ').slice(1).filter(section=>names.has(section.split('\n')[0].trim())).reduce((n,section)=>n+count(section),0);
+  }
+  if(/^data-(?:de|fr)\.js$/.test(rel)){
+    const {ids}=publishedBoundCards(root);
+    return text.split('\n').filter(line=>ids.has((line.match(/^"([^"]+)":\{/)||[])[1])).reduce((n,line)=>n+count(line),0);
   }
   return 0;
 }

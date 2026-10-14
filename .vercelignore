@@ -23,6 +23,9 @@
 !exchange.js
 !storage-migration.js
 !catalogue.js
+!catalogue-i18n.js
+!data-de.js
+!data-fr.js
 !format.js
 !store.js
 !sync.js

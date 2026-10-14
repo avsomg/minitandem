@@ -90,10 +90,13 @@ test('code and documentation are checked for Cyrillic and the old name only; the
     '    {"route":"x","id":"b","name":"Also own bound","min":null,"max":2.5,"age":"Up to 2.5 years"},\n'+
     '    {"id":"c","name":"Leak","min":3,"max":null,"age":"For a child of 2.5 years"}\n  ];\n');
   write('research.md','# Catalogue\n\n## Own bound\n\n- Age: From 2.5 years\n\n## Leak\n\n- Age: For a child of 2.5 years\n');
+  write('data-de.js','(window.MINITANDEM_CARDS = window.MINITANDEM_CARDS || {}).de = {\n"a":{"rev":"x","strings":{"age":"Ab 2,5 Jahren"}},\n"c":{"rev":"y","strings":{"age":"Für ein Kind von 2,5 Jahren"}}\n};\n');
+  write('data-fr.js','(window.MINITANDEM_CARDS = window.MINITANDEM_CARDS || {}).fr = {\n"b":{"rev":"x","strings":{"age":"Jusqu’à 2,5 ans"}}\n};\n');
   write('.gitignore',PRIVATE.join('\n'));
   const report=auditWorkspace(root);
   assert.deepEqual(report.groups.editorial.files,[]);
-  assert.deepEqual(report.groups.data.files.map(row=>[row.file,row.referenceChildAge]),[['data.js',1],['research.md',1]]);
+  // The translations of a card with its own 2.5 bound may say so too; another card's may not.
+  assert.deepEqual(report.groups.data.files.map(row=>[row.file,row.referenceChildAge]).sort(),[['data-de.js',1],['data.js',1],['research.md',1]]);
 });
 
 // Private contacts (decision of 14 October 2026). The numbers are invented and joined at run time, so that no line of this file holds one.

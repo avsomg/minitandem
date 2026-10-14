@@ -1,7 +1,8 @@
 /* Interface language: English, German, French. Every word the visitor reads comes from the dictionaries in strings-en.js,
    strings-de.js and strings-fr.js (window.MINITANDEM_STRINGS[lang][key]); no interface text lives in the logic.
    Keys with a count have two forms, key_one and key_other, chosen with Intl.PluralRules; {name} marks a parameter.
-   The catalogue text itself (names, schedules, notes) stays English in every language. */
+   The card texts (names, schedules, notes) are English; in German and French their checked translations are shown where they are
+   current (catalogue-i18n.js, data-de.js, data-fr.js), and English otherwise. */
 (() => {
   'use strict';
   const LANGS = ['en', 'de', 'fr'];

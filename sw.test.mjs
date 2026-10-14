@@ -5,7 +5,7 @@ import {fileURLToPath} from 'node:url';
 import test from 'node:test';
 import vm from 'node:vm';
 import {SITE_ORIGIN} from './site.mjs';
-import {SCRIPTS,LAZY_ASSETS} from './ui-files.mjs';
+import {SCRIPTS,LAZY_SCRIPTS,LAZY_ASSETS} from './ui-files.mjs';
 
 const root=path.dirname(fileURLToPath(import.meta.url));
 const origin=SITE_ORIGIN;
@@ -35,10 +35,10 @@ test('offline shell contains only published files and installable icons',async()
   assert.equal([...stored.keys()].some(pathname=>pathname.startsWith('/api/')),false);
 });
 
-test('the shell is exactly the page, its styles, manifest, every script and the map files',async()=>{
+test('the shell is exactly the page, its styles, manifest, every script, the card texts of each language and the map files',async()=>{
   const {handlers,stored}=worker();
   let work;handlers.install({waitUntil:promise=>{work=promise;}});await work;
-  const expected=new Set(['/','/index.html','/styles.css','/manifest.webmanifest',...SCRIPTS.map(f=>'/'+f),'/assets/favicon.svg','/assets/icon-512.png','/assets/apple-touch-icon.png',...LAZY_ASSETS.map(f=>'/assets/'+f)]);
+  const expected=new Set(['/','/index.html','/styles.css','/manifest.webmanifest',...SCRIPTS.map(f=>'/'+f),...LAZY_SCRIPTS.map(f=>'/'+f),'/assets/favicon.svg','/assets/icon-512.png','/assets/apple-touch-icon.png',...LAZY_ASSETS.map(f=>'/assets/'+f)]);
   assert.deepEqual([...stored.keys()].sort(),[...expected].sort());
 });
 

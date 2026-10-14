@@ -6,7 +6,7 @@ import {execFileSync} from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import {generatePublicPages,site} from './public-pages.mjs';
 import {generateCaseStudy} from './case-study.mjs';
-import {SCRIPTS,STATIC,ASSETS,GENERATED} from './ui-files.mjs';
+import {SCRIPTS,LAZY_SCRIPTS,STATIC,ASSETS,GENERATED} from './ui-files.mjs';
 import {preparePublicOutput} from './public-output.mjs';
 import {externalReviewReport,assertPublicationReviewed,readExternalReviewInputs} from './editorial/external-review.mjs';
 import {pipelineReport,readPipelineInputs,assertEditorialReady} from './editorial/external-pipeline.mjs';
@@ -82,9 +82,16 @@ preparePublicOutput(output);
 // index.html, robots.txt and the manifest are static: they must name the one site origin from site.mjs.
 for(const [file,needle] of [['index.html','rel="canonical" href="'+site+'/"'],['index.html','og:url" content="'+site+'/"'],['robots.txt','Sitemap: '+site+'/sitemap.xml']])
   if(!fs.readFileSync(path.join(root,file),'utf8').includes(needle))throw Error(file+' does not name the site origin '+site);
-for (const file of [...STATIC,...GENERATED,...new Set(SCRIPTS),'.vercelignore']) fs.copyFileSync(path.join(root,file),path.join(output,file));
+for (const file of [...STATIC,...GENERATED,...new Set(SCRIPTS),...LAZY_SCRIPTS,'.vercelignore']) fs.copyFileSync(path.join(root,file),path.join(output,file));
+// German and French card texts: a card whose English changed after it was translated is shown in English. Reported, never a failure.
+const i18n={window:{},structuredClone,TextEncoder};
+for(const file of ['catalogue-i18n.js','views.js',...LAZY_SCRIPTS])vm.runInNewContext(fs.readFileSync(path.join(root,file),'utf8'),i18n,{filename:file});
+const translations=Object.fromEntries(i18n.window.MinitandemCatalogueI18n.LANGS.map(lang=>{
+  const shown=i18n.window.MinitandemCatalogueI18n.overlay(records,i18n.window.MINITANDEM_CARDS?.[lang],i18n.window.MinitandemViews.PRACTICAL_ORDER);
+  return [lang,{translated:shown.count,stale:shown.stale.length,missing:shown.missing.length,unmapped:shown.unmapped.length,...(shown.stale.length?{staleCards:shown.stale}:{})}];
+}));
 fs.mkdirSync(path.join(output,'assets'),{recursive:true});
 for (const file of ASSETS) fs.copyFileSync(path.join(root,'assets',file),path.join(output,'assets',file));
 const publicPages=generatePublicPages(records,context.window.CATALOG_REGIONS,output,new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Zurich'}));
 generateCaseStudy(root,output);
-console.log(JSON.stringify({output,revision,records:records.length,publicationGates,publicPages,files:fs.readdirSync(output)},null,2));
+console.log(JSON.stringify({output,revision,records:records.length,publicationGates,translations,publicPages,files:fs.readdirSync(output)},null,2));

@@ -210,7 +210,7 @@ try{
   await noOverflow();
   await page.locator('.tab[data-view="catalog"]').click();
 
-  // Languages: switch, remember, default from the browser, card content stays English.
+  // Languages: switch, remember, default from the browser; card texts in the chosen language where a current translation exists.
   // In every language the search placeholder and the two filter pills must be readable in full on the first screen.
   const labelsFit=async label=>{
     const result=await page.evaluate(()=>{
@@ -227,15 +227,31 @@ try{
   await labelsFit('de');
   assert.equal(await page.evaluate(()=>document.documentElement.lang),'de');
   assert.notEqual(await page.locator('#fpAge small').textContent(),'Child’s age');
-  const german=await page.locator('#contentNote').isVisible();assert.equal(german,true,'German says once that card text is English');
+  // The German card texts arrive from data-de.js; every card is current, so nothing is said about English.
+  await page.waitForFunction(()=>window.MINITANDEM_CARDS?.de);
+  assert.equal(await page.locator('#contentNote').isVisible(),false,'No card falls back to English, so no note');
+  const firstId=await page.locator('#list .row').first().getAttribute('data-id');
   await page.locator('#list .row').first().click();
   assert.notEqual(await page.locator('#detail a.go').textContent(),'Open organiser’s page');
-  const cardName=await page.locator('#detail .d-name').textContent();
-  assert.equal(await page.evaluate(id=>ACTIVITIES.find(a=>a.id===id).name,await page.locator('#list .row').first().getAttribute('data-id')).then(n=>cardName.replace(/ /g,' ')===n),true,'The card name stays as published');
+  const cardName=(await page.locator('#detail .d-name').textContent()).replace(/\u00a0/g,' ');
+  assert.equal(cardName,await page.evaluate(id=>window.MINITANDEM_CARDS.de[id].strings.name,firstId),'The card shows its German name');
+  assert.equal(await page.locator('#detail .d-english').count(),0);
   await page.locator('#detail [data-close]').click();
   await page.waitForFunction(()=>!document.querySelector('#detail').open);
+  // French, with one card whose English changed after it was translated (a different digest): that card alone stays English and is counted.
+  await page.evaluate(async id=>{const text=await (await fetch('data-fr.js')).text();const data=JSON.parse(text.slice(text.indexOf('= {')+2,text.lastIndexOf('};')+1));
+    data[id].rev='0'.repeat(64);window.MINITANDEM_CARDS={...window.MINITANDEM_CARDS,fr:data};},firstId);
   await page.locator('#langSeg [data-lang="fr"]').click();
   assert.equal(await page.evaluate(()=>document.documentElement.lang),'fr');
+  assert.match(await page.locator('#contentNote').textContent(),/^1 activité est affichée ici en anglais/);
+  const names=await page.evaluate(()=>[...document.querySelectorAll('#list .row')].slice(0,2).map(row=>({id:row.dataset.id,name:row.querySelector('.r-name').firstChild.textContent.replace(/\u00a0/g,' ')})));
+  assert.equal(names[0].id,firstId);
+  assert.equal(names[0].name,await page.evaluate(id=>ACTIVITIES.find(a=>a.id===id).name,names[0].id),'The changed card is shown in English');
+  assert.equal(names[1].name,await page.evaluate(id=>window.MINITANDEM_CARDS.fr[id].strings.name,names[1].id),'The next card is shown in French');
+  await page.locator('#list .row').first().click();
+  assert.equal(await page.locator('#detail .d-english').count(),1,'Its card page says it is shown in English');
+  await page.locator('#detail [data-close]').click();
+  await page.waitForFunction(()=>!document.querySelector('#detail').open);
   await labelsFit('fr');
   await noOverflow();
   await page.reload();await page.waitForSelector('#list .row');

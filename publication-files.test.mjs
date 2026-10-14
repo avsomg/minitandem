@@ -49,13 +49,13 @@ test('both READMEs carry the honesty section, the licence, the badge and the com
   assert.match(de,/Playwright ist keine deklarierte Abhängigkeit/);
   assert.match(en,/Node\.js 24\.12\.0/);
   // The README lists the private-only tests; every one of them is skipped by an explicit "private-only:" message in its test file.
-  const sources=['catalog.test.mjs','editorial/corrections.test.mjs','editorial/external-pipeline.test.mjs','editorial/external-review.test.mjs'].map(read).join('\n');
+  const sources=['catalog.test.mjs','editorial/corrections.test.mjs','editorial/external-pipeline.test.mjs','editorial/external-review.test.mjs','catalogue-i18n.test.mjs'].map(read).join('\n');
   const listed=[...en.matchAll(/^\d\. `([\w./-]+)`: (.+)$/gm)];
-  assert.equal(listed.length,6);
+  assert.equal(listed.length,7);
   for(const [,file,title] of listed){
     assert.ok(read(file).includes(title),`${file} has no test titled "${title}"`);
   }
-  assert.equal((sources.match(/skip:(?:PRIVATE_SKIP|SKIP_[A-Z]+)/g)||[]).length,6,'exactly six tests are private-only');
+  assert.equal((sources.match(/skip:(?:PRIVATE_SKIP|SKIP_[A-Z]+)/g)||[]).length,7,'exactly seven tests are private-only');
   // Each skip reason is a constant; every one of them must start with "private-only:".
   const defined=(sources.match(/const (?:PRIVATE_SKIP|SKIP_[A-Z]+)=/g)||[]).length;
   assert.ok(defined>0);

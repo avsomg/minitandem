@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 import {SITE_ORIGIN} from './site.mjs';
-import {SCRIPTS,STATIC,ASSETS,LAZY_ASSETS,GENERATED} from './ui-files.mjs';
+import {SCRIPTS,LAZY_SCRIPTS,STATIC,ASSETS,LAZY_ASSETS,GENERATED} from './ui-files.mjs';
 import {root} from './test-support.mjs';
 
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');
@@ -37,12 +37,13 @@ test('index.html loads exactly the scripts in ui-files.mjs, in that order, witho
   assert.ok(!/<script(?![^>]*\ssrc=)[^>]*>/.test(index),'no inline script (the policy only allows own files)');
   assert.ok(!/\son[a-z]+="/.test(index),'no inline event handlers');
   assert.ok(!/<link[^>]+href="https?:/.test(index.replace(/rel="canonical"[^>]*/g,'')),'no external stylesheet or font');
-  for(const file of [...STATIC,...SCRIPTS])assert.ok(fs.existsSync(path.join(root,file)),file);
+  for(const file of [...STATIC,...SCRIPTS,...LAZY_SCRIPTS])assert.ok(fs.existsSync(path.join(root,file)),file);
+  for(const file of LAZY_SCRIPTS)assert.ok(!index.includes(file),file+' is loaded only for its language, by app.js');
   for(const file of ASSETS)assert.ok(fs.existsSync(path.join(root,'assets',file)),file);
 });
 test('the Vercel allow-list names every published file and nothing private',()=>{
   const allowed=read('.vercelignore').split('\n').filter(line=>line.startsWith('!')).map(line=>line.slice(1));
-  for(const file of [...STATIC,...GENERATED,...SCRIPTS].filter(f=>f!=='.vercelignore'))assert.ok(allowed.includes(file),file+' is published but not allowed through');
+  for(const file of [...STATIC,...GENERATED,...SCRIPTS,...LAZY_SCRIPTS].filter(f=>f!=='.vercelignore'))assert.ok(allowed.includes(file),file+' is published but not allowed through');
   for(const file of ASSETS.filter(f=>!/^(?:lucide\.min\.js|LUCIDE-LICENSE)$/.test(f)))assert.ok(allowed.includes('assets/'+file),file);
   assert.ok(!allowed.some(item=>/editorial|archive-ru|server|\.test\.|verify/.test(item)));
   assert.ok(!allowed.includes('assets/lucide.min.js'),'the admin panel icons stay off the public site');

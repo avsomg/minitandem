@@ -1,4 +1,5 @@
-// One plain, script-free page per published card, a directory page and the sitemap. English only: the card text is English.
+// One plain, script-free page per published card, a directory page and the sitemap. English only for now: the German and French card
+// texts are shown in the app (catalogue-i18n.js), not on these pages.
 import fs from 'node:fs';
 import path from 'node:path';
 import {SITE_ORIGIN} from './site.mjs';

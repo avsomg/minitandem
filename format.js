@@ -1,5 +1,6 @@
-/* Wording of card facts in the current language. The card text itself (names, schedules, notes, prices) is English content and
-   is shown as written; what is built here are the short labels around it: dates, age summaries, adult participation. */
+/* Wording of card facts in the current language. The card text itself (names, schedules, notes, prices) is shown as written, in
+   English or in its German or French translation (catalogue-i18n.js); what is built here are the short labels around it: dates, age
+   summaries, adult participation. */
 (() => {
   'use strict';
   function create({t, locale = () => 'en-GB'}) {
@@ -22,8 +23,9 @@
         if (a.min === null || a.min === 0) return t('age.upTo', {n: a.max});
         return t('age.range', {min: a.min, max: a.max});
       }
+      // The decision reads the English phrase (a translated card keeps it in a.english); the translated phrase is what is shown.
       const phrase = first(a.age);
-      return /confirm|check|not published|restriction|to be/i.test(phrase) ? t('age.notPublished') : phrase;
+      return /confirm|check|not published|restriction|to be/i.test(first((a.english || a).age)) ? t('age.notPublished') : phrase;
     }
     // The age as a bare number for sentences such as 'Fits age 3'.
     const ageBare = age => age === 0 ? t('age.underOne') : String(age);

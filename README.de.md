@@ -4,7 +4,7 @@
 
 English version: [README.md](README.md)
 
-Minitandem ist ein Verzeichnis von Aktivitäten für Familien mit Kindern von 0 bis 6 Jahren im Kanton Freiburg (Schweiz). Es besteht aus einer statischen Web-App (Oberfläche auf Englisch, Deutsch und Französisch; die Katalogtexte sind englisch) und einer redaktionellen Pipeline, die den Katalog laufend überprüft: Modell-Worker mit engen Befugnissen recherchieren und verifizieren Fakten, und nur ein deterministischer Controller mit einer SQLite-Queue darf schreiben.
+Minitandem ist ein Verzeichnis von Aktivitäten für Familien mit Kindern von 0 bis 6 Jahren im Kanton Freiburg (Schweiz). Es besteht aus einer statischen Web-App (Oberfläche auf Englisch, Deutsch und Französisch; die Katalogtexte werden auf Englisch geschrieben und auf Deutsch und Französisch aus geprüften Übersetzungen gezeigt) und einer redaktionellen Pipeline, die den Katalog laufend überprüft: Modell-Worker mit engen Befugnissen recherchieren und verifizieren Fakten, und nur ein deterministischer Controller mit einer SQLite-Queue darf schreiben.
 
 ## In einer Minute
 
@@ -69,7 +69,7 @@ npm run scan:public    # Geheimnisse, persönliche Pfade, Kontaktdaten ausserhal
 
 **Die Demo.** `npm run demo` lässt drei erfundene Übungseinträge durch den echten Controller-Code laufen, mit einer temporären Queue: Ein Such-Worker zieht Claims mit wörtlichen Zitaten aus einer abgeholten Seite; der Verifizierer weist einen Claim zurück, dessen Zitat ihn nicht stützt; der Controller lehnt einen Entwurf ab, der auf diesem Claim aufbaut; ein korrigierter Entwurf wird genehmigt und angewendet; die redaktionellen Release-Gates sind bestanden. Das Web und die Modelle sind durch aufgezeichnete Antworten ersetzt: Die Seite ist eine gespeicherte Datei, und die Worker-Antworten sind von Hand geschriebene Fixtures, die dem Worker-Vertrag folgen. Kein Modell hat sie erzeugt. Die QA-Stufe des Release-Checks wird eingereiht, aber nicht ausgeführt. Nichts berührt das Netzwerk oder die echte Queue.
 
-**Tests auf einem sauberen Klon.** `npm test` braucht keinen privaten Zustand, kein Netzwerk und kein Modell. Einige Tests prüfen den Katalog gegen die privaten Recherchedaten des Eigentümers; auf einem sauberen Klon werden sie übersprungen, mit einer Meldung, die mit `private-only:` beginnt. Es sind:
+**Tests auf einem sauberen Klon.** `npm test` braucht keinen privaten Zustand, kein Netzwerk und kein Modell. Einige Tests prüfen den Katalog gegen die privaten Recherche- und Übersetzungsdaten des Eigentümers; auf einem sauberen Klon werden sie übersprungen, mit einer Meldung, die mit `private-only:` beginnt. Es sind:
 
 1. `catalog.test.mjs`: follow-up status decisions cover all sixteen new venues without implying age suitability
 2. `catalog.test.mjs`: visitor research covers sixteen venues and preserves provenance for nine enrichments
@@ -77,6 +77,7 @@ npm run scan:public    # Geheimnisse, persönliche Pfade, Kontaktdaten ausserhal
 4. `editorial/corrections.test.mjs`: address fixes keep the original identity source of their external review receipt
 5. `editorial/external-pipeline.test.mjs`: the real receipts reconcile with the current published catalogue
 6. `editorial/external-review.test.mjs`: every published card enters the external evidence queue without fabricated completion
+7. `catalogue-i18n.test.mjs`: the unit and the digest are those of the translation records for every card in both languages
 
 Wo sich eine Prüfung aufteilen liess, bleibt der Teil, der nur versionierte Daten braucht, in der Suite für saubere Klone (zum Beispiel: Jeder aktuelle Eintrag ist bereits von der versionierten External-Review-Baseline gedeckt, ein Build braucht also keine Belege). Auf einem sauberen Klon läuft der Build mit `--public`: Die Publikations-Gates brauchen die privaten Belege, werden daher übersprungen, und die Ausgabe des Builds sagt `publicationGates: skipped`. Im Arbeitsordner des Eigentümers führt derselbe Befehl sie weiterhin aus.
 
@@ -108,9 +109,9 @@ Es belegt weder, wie viele Personen die Seite nutzen, noch wie viel Traffic sie 
 
 ## Aufbau
 
-- Katalog: `data.js` ist die Basis; `data-reviewed.js` (genehmigte Updates, generiert), `data-practical.js` (Register der Orte), `data-geo.js` (Adresspunkte, generiert) und `regions.js` liegen darüber. `data-towns.js` enthält je Ort einen Mittelpunkt für die Entfernungen in Luftlinie und «Nächste zuerst» (generiert mit `node scripts/compile-towns.mjs` aus dem Geoportal des Bundes; braucht das Netz). Aktuelle Zahlen stehen in der generierten `editorial/profile.json`; die Abdeckung nach Gemeinde in `editorial/canton-coverage.generated.json`. Hier wird keine Gesamtzahl wiederholt, damit sie nicht veralten kann.
-- Oberfläche (einfache Skripte, kein Framework; nur die Kartenkacheln kommen von aussen): `index.html`, `styles.css` und eine Datei pro Aufgabe. `i18n.js` mit `strings-en.js`, `strings-de.js`, `strings-fr.js`; `catalogue.js` (Filter, Suche, Sortierung); `store.js` und `storage-migration.js` (die eigenen Daten der Besucher im Browser); `sync.js` (optionaler Abgleich mit dem Dienst); `exports.js`; `planning.js` und `exchange.js`; `format.js`, `views.js`, `toast.js`, `map.js` (wird geladen, wenn die Karte geöffnet wird) und `app.js`. `ui-files.mjs` listet sie auf; `sw.js` ist der Service Worker.
-- Build: `node build.mjs` schreibt die Seite nach `.publish/` (Seite, Skripte, pro Eintrag eine einfache Seite unter `places/`, `sitemap.xml`, `research.md`). `site.mjs` hält den öffentlichen Origin.
+- Katalog: `data.js` ist die Basis; `data-reviewed.js` (genehmigte Updates, generiert), `data-practical.js` (Register der Orte), `data-geo.js` (Adresspunkte, generiert) und `regions.js` liegen darüber. `data-de.js` und `data-fr.js` enthalten die deutschen und französischen Katalogtexte: pro Eintrag den Digest des englischen Textes, aus dem übersetzt wurde, und die übersetzten Texte (generiert mit `node scripts/compile-catalogue-i18n.mjs` aus den privaten, geprüften Übersetzungsdaten). Die App lädt nur die Datei der gewählten Sprache; ein Eintrag, dessen englischer Text sich nach der Übersetzung geändert hat, etwa durch ein genehmigtes Update, erscheint auf Englisch, bis er neu übersetzt ist, und der Build meldet, wie viele Einträge das betrifft. `data-towns.js` enthält je Ort einen Mittelpunkt für die Entfernungen in Luftlinie und «Nächste zuerst» (generiert mit `node scripts/compile-towns.mjs` aus dem Geoportal des Bundes; braucht das Netz). Aktuelle Zahlen stehen in der generierten `editorial/profile.json`; die Abdeckung nach Gemeinde in `editorial/canton-coverage.generated.json`. Hier wird keine Gesamtzahl wiederholt, damit sie nicht veralten kann.
+- Oberfläche (einfache Skripte, kein Framework; nur die Kartenkacheln kommen von aussen): `index.html`, `styles.css` und eine Datei pro Aufgabe. `i18n.js` mit `strings-en.js`, `strings-de.js`, `strings-fr.js`; `catalogue.js` (Filter, Suche, Sortierung); `catalogue-i18n.js` (deutsche und französische Katalogtexte über den englischen Einträgen); `store.js` und `storage-migration.js` (die eigenen Daten der Besucher im Browser); `sync.js` (optionaler Abgleich mit dem Dienst); `exports.js`; `planning.js` und `exchange.js`; `format.js`, `views.js`, `toast.js`, `map.js` (wird geladen, wenn die Karte geöffnet wird) und `app.js`. `ui-files.mjs` listet sie auf; `sw.js` ist der Service Worker.
+- Build: `node build.mjs` schreibt die Seite nach `.publish/` (Seite, Skripte, pro Eintrag eine einfache Seite unter `places/`, vorerst nur auf Englisch, `sitemap.xml`, `research.md`). `site.mjs` hält den öffentlichen Origin.
 - Dienst: `server.mjs` ist der kleine Dienst für Familienabgleich, Korrekturen und, auf dem Rechner des Eigentümers, das Editor-Panel (`editorial/admin.html`). `GET /healthz` antwortet ohne Schlüssel.
 - Redaktionelle Pipeline: `editorial/`; siehe `editorial/OPERATIONS.md` und `editorial/METHOD.md` (englisch).
 - Demo: `demo/`. Container- und Serverdateien: `Dockerfile`, `compose.yaml`, `docker/`, `ops/`. Dokumente: `docs/`.
@@ -122,7 +123,7 @@ Favoriten, Notizen, Status, Besuchspläne, das Alter des Kindes, der gespeichert
 
 ## Lizenz
 
-Der Code steht unter der MIT-Lizenz (`LICENSE`). Sie gilt nicht für die Katalogdaten: Angaben, Texte und Kontakte zu Angeboten und Anbietern, wo immer sie in diesem Repository stehen (vor allem `data.js`, `data-practical.js`, `data-reviewed.js`, `data-geo.js`, `research.md`, die JSON-Dateien unter `editorial/`, die sie enthalten, und Bildschirmfotos der App). Für sie wird keine Lizenz erteilt; sie stammen von den öffentlichen Seiten der Anbieter.
+Der Code steht unter der MIT-Lizenz (`LICENSE`). Sie gilt nicht für die Katalogdaten: Angaben, Texte und Kontakte zu Angeboten und Anbietern, wo immer sie in diesem Repository stehen (vor allem `data.js`, `data-practical.js`, `data-reviewed.js`, `data-geo.js`, `data-de.js`, `data-fr.js`, `research.md`, die JSON-Dateien unter `editorial/`, die sie enthalten, und Bildschirmfotos der App). Für sie wird keine Lizenz erteilt; sie stammen von den öffentlichen Seiten der Anbieter.
 
 Fremde Dateien in `assets/` behalten ihre eigenen Lizenzen (Leaflet, Leaflet.markercluster, Lucide; die Lizenztexte liegen daneben). Die Fotografie `assets/papiliorama-outside.jpg` ist im Eintrag, der sie zeigt, mit Quelle angegeben (gemeinfrei, Wikimedia Commons).
 

@@ -31,6 +31,7 @@
   <script src="exchange.js" defer></script>
   <script src="storage-migration.js" defer></script>
   <script src="catalogue.js" defer></script>
+  <script src="catalogue-i18n.js" defer></script>
   <script src="format.js" defer></script>
   <script src="store.js" defer></script>
   <script src="sync.js" defer></script>
@@ -57,7 +58,6 @@
     <section class="intro">
       <h1 data-i18n="intro.title">Activities for families with children aged 0–6 in canton Fribourg</h1>
       <p class="lead" data-i18n="intro.lead">Age, schedule, price, address, sources. No account.</p>
-      <p class="note" id="contentNote" data-i18n="intro.contentEnglish" hidden></p>
     </section>
 
     <nav class="tabs" aria-label="Views" data-i18n-label="tabs.label">
@@ -97,6 +97,7 @@
           </div>
         </div>
         <p class="note" id="countNote" hidden></p>
+        <p class="note" id="contentNote" hidden></p>
         <p class="note nearline" id="nearNote" hidden><span id="nearText"></span> <button type="button" class="linkbtn" id="nearChange" data-i18n="near.change" data-i18n-label="near.changeLabel" aria-label="Change where distances are measured from">Change</button><button type="button" class="linkbtn" id="nearOff" data-i18n="near.off" data-i18n-label="near.offLabel" aria-label="Turn off distances">Turn off</button></p>
         <p class="syncstate" id="syncState" role="status" aria-live="polite" hidden></p>
         <div id="updates" class="updates" hidden></div>

@@ -23,7 +23,7 @@ const names=[...districts.keys()].sort((a,b)=>a.localeCompare(b,'de-CH'));
 // Names on the cards that the gazetteer spells differently. Farvagny is the postal name of Farvagny-le-Grand and Farvagny-le-Petit;
 // the gazetteer names the town of Murten in both languages.
 const SPELLING={Farvagny:'Farvagny-le-Grand',Murten:'Murten Morat'};
-const normal=s=>String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/\bsaint\b/g,'st').replace(/[^a-z0-9]+/g,' ').trim().replace(/ fr$/,'');
+const normal=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\bsaint\b/g,'st').replace(/[^a-z0-9]+/g,' ').trim().replace(/ fr$/,'');
 const base=s=>normal(String(s).replace(/\s*\([^)]*\)\s*$/,''));
 const plain=html=>String(html).replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim();
 const inCanton=r=>r.lat>46.3&&r.lat<47.2&&r.lon>6.5&&r.lon<7.8;
