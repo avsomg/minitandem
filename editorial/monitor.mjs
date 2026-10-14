@@ -37,9 +37,10 @@ const PAGE_CHROME='body>header,body>footer,[role=banner],[role=contentinfo]';
  * Parser v2 (cheerio): page-level header and footer are dropped after their opening-hours lines are kept; all <main> elements are
  * used unless they hold less than a quarter of the remaining body text (then the whole body); entities are decoded by cheerio.
  */
-export function htmlTextV2(html){
+export function htmlTextV2(html,{remove=[]}={}){
   const $=load(String(html));
   $('script,style,noscript,svg,template,iframe,nav').remove();
+  if(remove.length)$(remove.join(',')).remove();
   markBlocks($);
   const candidates=$(`${PAGE_CHROME},header,footer`).toArray().filter(el=>$(el).is(PAGE_CHROME)||!$(el).closest('main,article').length);
   const set=new Set(candidates),chrome=candidates.filter(el=>!$(el).parents().toArray().some(parent=>set.has(parent)));
@@ -54,11 +55,12 @@ export function htmlTextV2(html){
   return compact([text,...harvested.filter(line=>!kept.has(line))].join('\n'));
 }
 /** The whole visible page for alarm lines: title, meta description and the body with header, navigation and footer. */
-export function fullPageText(html){
+export function fullPageText(html,{remove=[]}={}){
   const $=load(String(html));
   const title=$('head>title').first().text()||$('title').first().text();
   const description=$('meta').filter((_,el)=>String($(el).attr('name')??'').toLowerCase()==='description').first().attr('content')??'';
   $('script,style,noscript,svg,template,iframe').remove();
+  if(remove.length)$(remove.join(',')).remove();
   markBlocks($);
   return compact([title,description,$('body').text()].join('\n'));
 }
@@ -101,12 +103,57 @@ function calendarText(value,source={},now=new Date().toISOString()){
   }
   return unfolded.filter(line=>significant.test(line)).map(line=>line.trim()).join('\n');
 }
-export function normalize(value,source,now,parser='v2'){
-  let text=source.type==='html'?(parser==='v1'?htmlTextV1(value):htmlTextV2(value)):source.type==='ics'?calendarText(value,source,now):compact(value);
+const hostOf=url=>{try{return new URL(url).hostname.toLowerCase().replace(/^www\./,'');}catch{return String(url);}};
+function compileRule(key,rule){
+  try{
+    if(!rule||typeof rule!=='object'||Array.isArray(rule))throw Error('a rule must be an object');
+    const list=(value,name)=>{
+      if(value==null)return [];
+      if(!Array.isArray(value)||value.some(item=>typeof item!=='string'||!item.trim()))throw Error(`${name} must be a list of non-empty strings`);
+      return value;
+    };
+    if(rule.ranges!=null&&!Array.isArray(rule.ranges))throw Error('ranges must be a list');
+    const ranges=(rule.ranges??[]).map(range=>{
+      if(typeof range?.from!=='string'||typeof range?.to!=='string'||!range.from||!range.to)throw Error('a range needs a "from" and a "to" pattern');
+      return {from:new RegExp(range.from),to:new RegExp(range.to)};
+    });
+    const selectors=list(rule.selectors,'selectors');
+    if(selectors.length)load('<p></p>')(selectors.join(','));
+    return {selectors,ranges,lines:list(rule.lines,'lines').map(value=>new RegExp(value))};
+  }catch(error){throw Error(`hostIgnore ${key}: ${error.message??error}`);}
+}
+/**
+ * Host rules from `hostIgnore` in source-watch.json: `{host:{selectors:[css],ranges:[{from,to}],lines:[regex]}}`, the host without
+ * "www.". Selectors remove page blocks before parser v2 and before the alarm lines; ranges (first line matching `from` to the next
+ * line matching `to`, both included; nothing when `to` is missing) and line patterns drop lines from the text of both parsers.
+ */
+export function hostRules(hostIgnore,url){
+  const host=hostOf(url);
+  const entry=Object.entries(hostIgnore??{}).find(([key])=>key.toLowerCase().replace(/^www\./,'')===host);
+  return entry?compileRule(...entry):null;
+}
+export function validateHostIgnore(hostIgnore){
+  if(hostIgnore==null)return;
+  if(typeof hostIgnore!=='object'||Array.isArray(hostIgnore))throw Error('hostIgnore must be an object keyed by host');
+  for(const [key,rule] of Object.entries(hostIgnore))compileRule(key,rule);
+}
+export function dropIgnored(text,rules){
+  if(!rules||!rules.ranges.length&&!rules.lines.length)return text;
+  const lines=String(text).split('\n'),keep=[];
+  for(let i=0;i<lines.length;i++){
+    const range=rules.ranges.find(rule=>rule.from.test(lines[i]));
+    if(range){const end=lines.findIndex((line,j)=>j>i&&range.to.test(line));if(end>i){i=end;continue;}}
+    if(!rules.lines.some(pattern=>pattern.test(lines[i])))keep.push(lines[i]);
+  }
+  return keep.join('\n');
+}
+export function normalize(value,source,now,parser='v2',rules=null){
+  let text=source.type==='html'?(parser==='v1'?htmlTextV1(value):htmlTextV2(value,{remove:rules?.selectors??[]})):source.type==='ics'?calendarText(value,source,now):compact(value);
   if(source.start){const index=text.indexOf(source.start);if(index<0)throw Error(`missing start marker: ${source.start}`);text=text.slice(index);}
   if(source.end){const index=text.indexOf(source.end);if(index>=0)text=text.slice(0,index);}
   text=compact(text);
   if(source.ignoreLines?.length){const patterns=source.ignoreLines.map(value=>new RegExp(value));text=text.split('\n').filter(line=>!patterns.some(pattern=>pattern.test(line))).join('\n');}
+  text=dropIgnored(text,rules);
   if(text.length<(source.minChars??40))throw Error(`extracted text too short (${text.length} chars)`);
   for(const term of source.required??[])if(!text.includes(term))throw Error(`required marker missing: ${term}`);
   return text;
@@ -175,17 +222,18 @@ export function lineDiff(oldText,newText){
   const removed=[];for(const line of oldLines){const n=right.get(line)??0;if(n>0)right.set(line,n-1);else removed.push(line);}
   return {added:added.filter(Boolean),removed:removed.filter(Boolean)};
 }
-async function changeDetails(readVersion,id,oldVersion,text){
-  const old=oldVersion?await Promise.resolve().then(()=>readVersion(id,oldVersion)).catch(()=>null):null;
+const readOld=(readVersion,id,version)=>version?Promise.resolve().then(()=>readVersion(id,version)).catch(()=>null):Promise.resolve(null);
+// The stored text gets the host rules too: a baseline written before a rule existed still holds the ignored lines.
+async function changeDetails(readVersion,id,oldVersion,text,rules=null){
+  const old=await readOld(readVersion,id,oldVersion);
   if(old==null)return {significance:'normal'};
-  const {added,removed}=lineDiff(old,text);
+  const {added,removed}=lineDiff(dropIgnored(old,rules),text);
   return {significance:significance(added,removed),changedLines:{added:added.slice(0,20),removed:removed.slice(0,20)}};
 }
 /** Days to move the last attempt back with --spread-days=N: 0..N from the source id, never a full interval. */
 export function spreadOffset(id,days,intervalDays=7){
   return Math.min(parseInt(sha(id).slice(0,2),16)%(days+1),Math.max(0,intervalDays-1));
 }
-const hostOf=url=>{try{return new URL(url).hostname.toLowerCase().replace(/^www\./,'');}catch{return String(url);}};
 const HIGH_REDIRECT=['trashed','not-found','challenge','domain'];
 const REPLACEMENT_CHAR=String.fromCodePoint(0xfffd);
 export function issue(queue,source,kind,now,details){
@@ -230,9 +278,11 @@ export function rebaseline(state,ids,note,now=new Date().toISOString()){
  * marked siteWide, and more than `alarmFuse` alarm tasks issue none (the keys stay as they were, so the next run sees them again).
  * `rebaselineParser:{note}` moves v1 HTML baselines to parser v2: content-changed only where v1 itself sees a change, the alarm
  * keys become a baseline, high redirect classes are issued once. `spreadDays` moves the last attempt back by spreadOffset() days.
+ * `hostIgnore` (see hostRules) applies to the compared text and the alarm lines; when the stored text, with the same rules applied,
+ * equals the new text, the hash moves without a task (noted in baselineHistory). A v1 baseline stays on v1 outside the parser pass.
  */
 export async function runMonitor({sources,state,fetchImpl=fetch,now=new Date().toISOString(),force=false,ids=null,snapshot=async()=>{},snapshotFailed=async()=>{},max=Infinity,hostDelayMs=0,sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms)),
-  records=[],readVersion=async()=>null,rebaselineParser=null,spreadDays=0,alarmFuse=Infinity}){
+  records=[],readVersion=async()=>null,rebaselineParser=null,spreadDays=0,alarmFuse=Infinity,hostIgnore={}}){
   state??={schema:1,sources:{},queue:[]};
   state.sources??={};state.queue??=[];
   const results=[],lastRequest=new Map(),pending=[];let fetched=0;
@@ -247,6 +297,9 @@ export async function runMonitor({sources,state,fetchImpl=fetch,now=new Date().t
     const entry={...prior,lastAttempt:now,attempts:(prior.attempts??0)+1,httpStatus:null};
     state.sources[source.id]=entry;
     const parser=!rebuild&&entry.hash&&entry.parser!=='v2'?'v1':'v2';
+    const rules=hostRules(hostIgnore,source.url),remove=rules?.selectors??[];
+    // Same text once the host rules are applied to the stored version: not a change, only the hash moves.
+    const sameAfterIgnore=async(version,text)=>{if(!rules)return false;const old=await readOld(readVersion,source.id,version);return old!=null&&dropIgnored(old,rules)===text;};
     let failedRaw=null,alarmNote=null;
     const succeed=()=>{
       entry.lastSuccess=now;entry.errorCount=0;entry.error=null;entry.nextRetry=null;entry.lastFailedText=null;
@@ -267,16 +320,21 @@ export async function runMonitor({sources,state,fetchImpl=fetch,now=new Date().t
       const finalUrl=response.url||source.url;
       if(CHALLENGE_URL.test(finalUrl)&&!CHALLENGE_URL.test(source.url))throw Error('source challenge page');
       const priorFinal=prior.finalUrl??source.url;
-      entry.finalUrl=finalUrl;
       if(response.status===304){
         if(!entry.hash||!entry.lastSuccess)throw Error('304 without a valid previous source snapshot');
-        entry.error=null;succeed();results.push({id:source.id,result:'unchanged-304'});continue;
+        entry.finalUrl=finalUrl;entry.error=null;succeed();results.push({id:source.id,result:'unchanged-304'});continue;
       }
       if(!response.ok)throw Error(`HTTP ${response.status}`);
       const type=response.headers.get('content-type')??'';
       if(source.type==='pdf'&&!/pdf|octet-stream/i.test(type))throw Error(`unexpected content type: ${type}`);
       if(source.type==='html'&&!/html|text\/plain/i.test(type))throw Error(`unexpected content type: ${type}`);
       if(source.type==='ics'&&!/calendar|text\/plain/i.test(type))throw Error(`unexpected content type: ${type}`);
+      const bytes=await responseBytes(response,source.maxBytes??(source.type==='pdf'?6_000_000:2_000_000));
+      const raw=source.type==='pdf'?await pdfText(bytes):decodeBytes(bytes,type);
+      failedRaw=raw;
+      if(source.type!=='pdf'&&isChallenge(source.type==='html'?htmlTextV1(raw):raw,''))throw Error('source challenge page');
+      // The final URL moves only with a real page: a challenge or error page leaves it, so the recovery raises no redirect.
+      entry.finalUrl=finalUrl;
       let redirectNow=null;
       if(normUrl(finalUrl)!==normUrl(priorFinal)){
         redirectNow=redirectClass(priorFinal,finalUrl);
@@ -284,28 +342,24 @@ export async function runMonitor({sources,state,fetchImpl=fetch,now=new Date().t
       }
       entry.finalUrlNorm=normUrl(finalUrl);
       entry.redirect=normUrl(finalUrl)===normUrl(source.url)?null:{from:source.url,to:finalUrl,class:redirectClass(source.url,finalUrl),at:now};
-      const bytes=await responseBytes(response,source.maxBytes??(source.type==='pdf'?6_000_000:2_000_000));
-      const raw=source.type==='pdf'?await pdfText(bytes):decodeBytes(bytes,type);
-      failedRaw=raw;
-      if(source.type!=='pdf'&&isChallenge(source.type==='html'?htmlTextV1(raw):raw,''))throw Error('source challenge page');
-      const alarmText=source.type==='html'?fullPageText(raw):source.type==='pdf'?raw:null;
+      const alarmText=source.type==='html'?dropIgnored(fullPageText(raw,{remove}),rules):source.type==='pdf'?dropIgnored(raw,rules):null;
       const current=alarmText==null?null:alarmLines(alarmText,{now,ignore:[...(source.ignoreLines??[]),...(source.alarmIgnore??[])],anchors:sourceAnchors(source,records)});
       if(rebuild){
         let textV1=null,v1Error=null;
-        try{textV1=normalize(raw,source,now,'v1');}catch(error){v1Error=String(error.message??error);}
-        const textV2=normalize(raw,source,now,'v2'),hashV2=sha(textV2);
+        try{textV1=normalize(raw,source,now,'v1',rules);}catch(error){v1Error=String(error.message??error);}
+        const textV2=normalize(raw,source,now,'v2',rules),hashV2=sha(textV2);
         const languageSwitch=redirectNow==='language'||entry.redirect?.class==='language';
         const row={id:source.id,result:'rebaselined',chars:{v1:textV1?.length??0,v2:textV2.length},v1Changed:false,significance:null,redirect:entry.redirect?.class??null,alarmKeys:0,
           encodingErrors:raw.split(REPLACEMENT_CHAR).length-1};
         if(v1Error)row.v1Error=v1Error;
         if(prior.hash){
           const hashV1=textV1==null?null:sha(textV1);
-          if(hashV1!==prior.hash){
+          if(hashV1!==prior.hash&&!(textV1!=null&&await sameAfterIgnore(prior.version,textV1))){
             row.v1Changed=true;
             let details;
             if(textV1!=null){
               await snapshot(source.id,hashV1,textV1);
-              details={from:prior.hash,to:hashV1,oldVersion:prior.version,newVersion:hashV1.slice(0,12),url:source.url,parser:'v1',...await changeDetails(readVersion,source.id,prior.version,textV1)};
+              details={from:prior.hash,to:hashV1,oldVersion:prior.version,newVersion:hashV1.slice(0,12),url:source.url,parser:'v1',...await changeDetails(readVersion,source.id,prior.version,textV1,rules)};
             }else details={from:prior.hash,to:hashV2,oldVersion:prior.version,newVersion:hashV2.slice(0,12),url:source.url,parser:'v1',v1Error,significance:'normal'};
             if(languageSwitch){details.languageSwitch=true;details.significance='low';}
             row.significance=details.significance;
@@ -332,12 +386,16 @@ export async function runMonitor({sources,state,fetchImpl=fetch,now=new Date().t
           if(compared.added.length||compared.muted.length)alarmNote={added:compared.added.length,muted:compared.muted.map(line=>line.key)};
         }
       }
-      const text=normalize(raw,source,now,parser),hash=sha(text);
+      const text=normalize(raw,source,now,parser,rules),hash=sha(text);
       const previousHash=entry.hash;
+      let ignoredOnly=false;
       if(hash!==previousHash){
         await snapshot(source.id,hash,text);
-        if(previousHash){
-          const details={from:previousHash,to:hash,oldVersion:entry.version,newVersion:hash.slice(0,12),url:source.url,parser,...await changeDetails(readVersion,source.id,entry.version,text)};
+        if(previousHash&&await sameAfterIgnore(entry.version,text)){
+          ignoredOnly=true;
+          entry.baselineHistory=[...(entry.baselineHistory??[]),{at:now,hash:previousHash,version:entry.version,note:'host ignore rules applied to the stored text',parser}];
+        }else if(previousHash){
+          const details={from:previousHash,to:hash,oldVersion:entry.version,newVersion:hash.slice(0,12),url:source.url,parser,...await changeDetails(readVersion,source.id,entry.version,text,rules)};
           if(redirectNow==='language'){details.languageSwitch=true;details.significance='low';}
           issue(state.queue,source,'content-changed',now,details);
         }else if(source.type==='html')entry.parser='v2';
@@ -346,13 +404,13 @@ export async function runMonitor({sources,state,fetchImpl=fetch,now=new Date().t
       entry.etag=response.headers.get('etag')??null;
       entry.lastModified=response.headers.get('last-modified')??null;
       succeed();
-      results.push({id:source.id,result:!previousHash?'baseline':hash===previousHash?'unchanged':'changed',chars:text.length,...(alarmNote?{alarm:alarmNote}:{})});
+      results.push({id:source.id,result:!previousHash?'baseline':hash===previousHash||ignoredOnly?'unchanged':'changed',chars:text.length,...(alarmNote?{alarm:alarmNote}:{})});
     }catch(error){
       entry.errorCount=(entry.errorCount??0)+1;entry.error=String(error.message??error);
       const code=entry.httpStatus;
       const kind=/missing start marker|required marker missing|extracted text too short|unexpected content type|invalid calendar feed|unsupported calendar datetime/.test(entry.error)?'parser-failed':'source-unavailable';
       if(kind==='parser-failed'&&failedRaw!=null){
-        const failed=compact(source.type==='html'?(parser==='v1'?htmlTextV1:htmlTextV2)(failedRaw):failedRaw);
+        const failed=compact(source.type==='html'?(parser==='v1'?htmlTextV1(failedRaw):htmlTextV2(failedRaw,{remove})):failedRaw);
         if(failed){const label='failed-'+sha(failed).slice(0,12);await snapshotFailed(source.id,label,failed);entry.lastFailedText=label;}
       }
       entry.nextRetry=new Date(Date.parse(now)+Math.min(source.intervalDays??7,2**Math.min(entry.errorCount-1,20))*DAY).toISOString();
@@ -386,6 +444,7 @@ export async function main(args,baseDir=here,{records}={}){
   const configPath=path.join(baseDir,'source-watch.json'),statePath=flag(args,'state')?path.resolve(flag(args,'state')):path.join(baseDir,'monitor-state.json');
   const dryRun=args.includes('--dry-run');
   const config=JSON.parse(await fs.readFile(configPath,'utf8'));
+  validateHostIgnore(config.hostIgnore);
   let state;try{state=JSON.parse(await fs.readFile(statePath,'utf8'));}catch(error){if(error.code!=='ENOENT')throw error;}
   const ids=args.filter(a=>a.startsWith('--id=')).map(a=>a.slice(5));
   const rebaselineIds=args.filter(a=>a.startsWith('--rebaseline=')).map(a=>a.slice(13));
@@ -425,7 +484,7 @@ export async function main(args,baseDir=here,{records}={}){
   const write=async(id,name,text)=>{if(dryRun)return;const file=path.join(baseDir,'versions',id,name+'.txt');await fs.mkdir(path.dirname(file),{recursive:true});await fs.writeFile(file,text+'\n');};
   const readVersion=async(id,version)=>{try{return (await fs.readFile(path.join(baseDir,'versions',id,version+'.txt'),'utf8')).replace(/\n$/,'');}catch{return null;}};
   const now=new Date().toISOString();
-  const report=await runMonitor({sources:config.sources,state,now,force:args.includes('--force')||!!rebaselineIds.length,ids:selected,max,hostDelayMs,records,readVersion,rebaselineParser,spreadDays,alarmFuse,
+  const report=await runMonitor({sources:config.sources,state,now,force:args.includes('--force')||!!rebaselineIds.length,ids:selected,max,hostDelayMs,records,readVersion,rebaselineParser,spreadDays,alarmFuse,hostIgnore:config.hostIgnore??{},
     snapshot:(id,hash,text)=>write(id,hash.slice(0,12),text),snapshotFailed:(id,label,text)=>write(id,label,text)});
   if(!dryRun)await writeJsonAtomic(statePath,report.state);
   const out={results:report.results,openTasks:report.openTasks,state:statePath};

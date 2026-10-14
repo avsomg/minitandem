@@ -47,7 +47,9 @@ export const ALARM_TERMS={
   },
   full:{
     de:{strong:['ausgebucht','ausverkauft','(?:voll|vollständig) belegt','keine (?:freien )?plätze(?: mehr)?','(?:kurs|gruppe) ist voll','(?:kurse|gruppen) sind voll','anmeldung(?:en)? geschlossen','keine anmeldungen mehr'],weak:['warteliste']},
-    fr:{strong:['(?:est|sont) compl(?:ets?|ètes?)','(?:cours|ateliers?|groupes?|stages?) compl(?:ets?|ètes?)','compl(?:ets?|ètes?) ?!','^compl(?:ets?|ètes?)$','plus de places?','inscriptions? (?:closes?|fermées?|terminées?)'],weak:["liste d'attente"]},
+    fr:{strong:['(?:est|sont) compl(?:ets?|ètes?)','(?:cours|ateliers?|groupes?|stages?) compl(?:ets?|ètes?)','compl(?:ets?|ètes?) ?!','plus de places?','inscriptions? (?:closes?|fermées?|terminées?)'],
+      // A lone "complet" is often a table cell (a playground or a menu); with the weak rules it is dropped unless dated.
+      weak:["liste d'attente",'^compl(?:ets?|ètes?)$']},
     en:{strong:['fully booked','sold out','no (?:places|spaces|spots) left','registrations? (?:is |are )?closed'],weak:['waiting list']}
   },
   last:{

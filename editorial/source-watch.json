@@ -1,5 +1,33 @@
 {
   "schema": 1,
+  "hostIgnore": {
+    "fribourg.ch": {
+      "note": "Portal template: the mobile menu (#mmenu_header, #mmenu_header_frch) rotates seasonal links and the footer link lists (#footer ul.triangles) change per region, and the block of linked objects («Cela pourrait aussi vous intéresser») rotates; 46 of 89 pages changed in the 14 Oct 2026 dry-run. Selectors act on parser v2 and the alarm lines; the range and the footer link labels act on v1 baselines too.",
+      "selectors": [
+        "#mmenu_header",
+        "#mmenu_header_frch",
+        "#footer ul.triangles",
+        "div.linked_objects"
+      ],
+      "ranges": [
+        {
+          "from": "^(?:Aller au menu principal|Zum Hauptmenü gehen)$",
+          "to": "^(?:A propos|Über diese Website)$"
+        }
+      ],
+      "lines": [
+        "^(?:Contact (?:&|et) [Hh]oraires d.ouverture|Qui sommes-nous(?: \\?)?|A notre sujet|Team|Médias|Emplois?|Newsletter|Communes|Fonds de soutien au développement touristique|Conditions générales de vente – (?:Produits touristiques|Evènements)|Kontakt und Öffnungszeiten|Über uns|Jobs|Medien|Whitepaper über den Tourismus in Freiburg)$"
+      ]
+    },
+    "chatel-st-denis.ch": {
+      "note": "Municipal site: the mobile menu (nav.mmenu) and the header mega-menu (header nav.menu) list the current municipal news (road closures, works), read as alarm lines on every page; the in-page section menu (div.sub-menu) lists sibling pages such as current works. Page content and the opening hours stay watched.",
+      "selectors": [
+        "nav.mmenu",
+        "header nav.menu",
+        "div.sub-menu"
+      ]
+    }
+  },
   "sources": [
     {
       "id": "dining-alice",

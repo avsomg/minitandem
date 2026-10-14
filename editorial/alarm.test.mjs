@@ -261,3 +261,12 @@ test('significance: facts high, boilerplate low, prose normal',()=>{
   assert.equal(significance([],[]),'low');
   assert.equal(significance(['Wir freuen uns auf viele Familien und neue Gesichter in unserem Treff.'],[]),'normal');
 });
+
+test('a lone "complet" table cell is weak and dropped as a cell; a full course still alarms',()=>{
+  assert.ok(ALARM_TERMS.full.fr.weak.includes('^compl(?:ets?|ètes?)$'));
+  assert.ok(!ALARM_TERMS.full.fr.strong.includes('^compl(?:ets?|ètes?)$'));
+  const rows='Place de jeux\nToboggan\nComplet\nBalançoire\nComplète';
+  assert.deepEqual(one(rows),[]);
+  assert.deepEqual(classifyLines(rows,{now:NOW}).map(line=>[line.text,line.dropped]),[['Complet','cell'],['Complète','cell']]);
+  assert.deepEqual(keys(one('Le cours du mercredi est complet.\nCOMPLET !')),['le cours du mercredi est complet.','complet !']);
+});

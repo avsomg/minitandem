@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import http from 'node:http';
 import crypto from 'node:crypto';
-import {runMonitor,normalize,rebaseline,issue,decodeBytes,acceptLanguage,normUrl,redirectClass,isChallenge,due,main,htmlTextV1,htmlTextV2,fullPageText,sourceAnchors} from './monitor.mjs';
+import {runMonitor,normalize,rebaseline,issue,decodeBytes,acceptLanguage,normUrl,redirectClass,isChallenge,due,main,htmlTextV1,htmlTextV2,fullPageText,sourceAnchors,hostRules,dropIgnored} from './monitor.mjs';
 
 const source={id:'course',url:'https://example.org/course',type:'html',recordIds:['card-a','card-b'],intervalDays:1,minChars:10,required:['ElKi']};
 const page=(price='CHF 20',schedule='Mittwoch 10:00')=>`<html><nav>Changing menu</nav><main><h1>ElKi</h1><p>${price}</p><p>${schedule}</p></main><footer>Counter ${Math.random()}</footer></html>`;
@@ -468,4 +468,117 @@ test('main: a tripped alarm fuse returns exit code 2 and lists the withheld alar
     assert.equal(ok.exitCode,undefined);assert.equal(ok.openTasks,2);
     assert.deepEqual(JSON.parse(await fs.readFile(path.join(dir,'monitor-state.json'),'utf8')).queue.map(q=>q.kind),['possible-closure','possible-closure']);
   }finally{server.close();await fs.rm(dir,{recursive:true,force:true});}
+});
+test('a challenge page or an HTTP error never moves the stored final URL, so the recovery raises no redirect',async()=>{
+  const state={schema:1,sources:{},queue:[]};
+  await runMonitor({sources:[source],state,now:at(10),fetchImpl:async()=>replyAt(page(),'https://example.org/course')});
+  const challenge='<html><body><main><p>Just a moment... Checking your browser before accessing the site, please wait.</p></main></body></html>';
+  await runMonitor({sources:[source],state,force:true,now:at(11),fetchImpl:async()=>replyAt(challenge,'https://example.org/verify?return=/course')});
+  assert.equal(state.sources.course.finalUrl,'https://example.org/course');assert.equal(state.sources.course.redirect,null);
+  await runMonitor({sources:[source],state,force:true,now:at(12),fetchImpl:async()=>{const r=new Response('Wartung',{status:503,headers:{'content-type':'text/html'}});Object.defineProperty(r,'url',{value:'https://example.org/maintenance'});return r;}});
+  assert.equal(state.sources.course.finalUrl,'https://example.org/course');
+  assert.deepEqual(state.queue.map(q=>q.kind),['source-unavailable']);
+  const back=await runMonitor({sources:[source],state,force:true,now:at(13),fetchImpl:async()=>replyAt(page(),'https://example.org/course')});
+  assert.equal(back.results[0].result,'unchanged');
+  assert.equal(state.queue.filter(q=>q.kind==='redirect-changed').length,0);
+  assert.deepEqual(state.queue.map(q=>[q.kind,q.status]),[['source-unavailable','resolved']]);
+});
+test('a v1 baseline stays on v1 in a normal run: unchanged issues nothing, a v1 change issues content-changed with parser v1',async()=>{
+  const s={id:'club',url:'https://example.org/club',type:'html',recordIds:['c'],intervalDays:30,required:['Club Café']};
+  const old='2026-09-28T06:00:00.000Z',state=v1State([s],{club:club()},old),prior={...state.sources.club};
+  assert.notEqual(sha256(normalize(club(),s,old,'v2')),prior.hash);
+  const same=await runMonitor({sources:[s],state,force:true,now:at(20),fetchImpl:async()=>reply(club())});
+  assert.equal(same.results[0].result,'unchanged');assert.equal(state.queue.length,0);
+  assert.equal(state.sources.club.hash,prior.hash);assert.equal(state.sources.club.parser,undefined);
+  const changed=await runMonitor({sources:[s],state,force:true,now:at(21),readVersion:async()=>normalize(club(),s,old,'v1'),fetchImpl:async()=>reply(club('CHF 5.50 pro Kind'))});
+  assert.equal(changed.results[0].result,'changed');
+  assert.deepEqual(state.queue.map(q=>q.kind),['content-changed']);
+  const task=state.queue[0],v1Text=normalize(club('CHF 5.50 pro Kind'),s,old,'v1');
+  assert.equal(task.details.parser,'v1');assert.equal(task.details.from,prior.hash);assert.equal(task.details.to,sha256(v1Text));
+  assert.deepEqual(task.details.changedLines,{added:['CHF 5.50 pro Kind'],removed:['CHF 4.50 pro Kind']});
+  assert.equal(state.sources.club.hash,sha256(v1Text));assert.equal(state.sources.club.parser,undefined);
+});
+
+// Host rules: a portal menu that rotates its links, a footer link list and a town news menu are not card content.
+const hostIgnore={'portal.example':{selectors:['#side-menu','#footer ul.links'],ranges:[{from:'^Aller au menu principal$',to:'^A propos$'}],lines:['^Médias$']},
+  'www.town.example':{selectors:['nav.mmenu']}};
+const pool={id:'portal-pool',url:'https://www.portal.example/fr/pool/',type:'html',recordIds:['pool-card'],intervalDays:30,required:['Piscine du lac']};
+const portal=({menu=['Pétanque sur glace','L’aventure fondue'],links=['Qui sommes-nous','Médias'],price='CHF 5 par enfant',extra=''}={})=>`<html><head><title>Piscine</title></head><body>
+  <div id="side-menu"><p>Aller au menu principal</p><ul>${menu.map(item=>`<li>${item}</li>`).join('')}</ul><p>A propos</p></div>
+  <div id="content"><h1>Piscine du lac</h1><p>Bassin pour les petits, ouvert de mai à septembre.</p><p>${price}</p>${extra}</div>
+  <div id="footer"><ul class="links">${links.map(item=>`<li>${item}</li>`).join('')}</ul><p>Office du tourisme, Place 1</p></div></body></html>`;
+test('host rules drop a block by selector in parser v2 and by line range or pattern in both parsers; card content still counts',()=>{
+  const rules=hostRules(hostIgnore,pool.url);
+  assert.equal(hostRules(hostIgnore,'https://other.example/x'),null);
+  assert.deepEqual(hostRules(hostIgnore,'https://town.example/a').selectors,['nav.mmenu']);
+  assert.throws(()=>hostRules({'portal.example':{lines:['(']}},pool.url),/hostIgnore portal\.example/);
+  const v2=normalize(portal(),pool,at(1),'v2',rules),v1=normalize(portal(),pool,at(1),'v1',rules);
+  assert.equal(v2,'Piscine du lac\nBassin pour les petits, ouvert de mai à septembre.\nCHF 5 par enfant\nOffice du tourisme, Place 1');
+  assert.equal(v1,'Piscine du lac\nBassin pour les petits, ouvert de mai à septembre.\nCHF 5 par enfant\nQui sommes-nous\nOffice du tourisme, Place 1');
+  assert.match(normalize(portal(),pool,at(1),'v1'),/Pétanque sur glace/);
+  assert.equal(dropIgnored('A\nAller au menu principal\nB\nC',rules),'A\nAller au menu principal\nB\nC');
+  assert.equal(dropIgnored('A\nAller au menu principal\nB\nA propos\nC\nMédias',rules),'A\nC');
+});
+test('host rules: a rotating portal menu is unchanged in a normal run, also against a v1 baseline stored before the rule',async()=>{
+  const versions=new Map(),io={snapshot:async(id,hash,text)=>versions.set(`${id}/${hash.slice(0,12)}`,text),readVersion:async(id,version)=>versions.get(`${id}/${version}`)??null};
+  const v2State={schema:1,sources:{},queue:[]};
+  await runMonitor({sources:[pool],state:v2State,hostIgnore,...io,now:at(1),fetchImpl:async()=>reply(portal())});
+  const rotated=portal({menu:['Activités en intérieur','Visites guidées'],links:['Qui sommes-nous']});
+  const quiet=await runMonitor({sources:[pool],state:v2State,hostIgnore,...io,force:true,now:at(2),fetchImpl:async()=>reply(rotated)});
+  assert.equal(quiet.results[0].result,'unchanged');assert.equal(v2State.queue.length,0);
+  await runMonitor({sources:[pool],state:v2State,hostIgnore,...io,force:true,now:at(3),fetchImpl:async()=>reply(portal({menu:['Visites guidées'],price:'CHF 7 par enfant'}))});
+  assert.deepEqual(v2State.queue.map(q=>[q.kind,q.details.significance]),[['content-changed','high']]);
+  assert.deepEqual(v2State.queue[0].details.changedLines,{added:['CHF 7 par enfant'],removed:['CHF 5 par enfant']});
+  // A v1 baseline written before the rule existed still holds the menu: the rule is applied to the stored text as well.
+  versions.clear();
+  const v1Text=normalize(portal(),pool,at(1),'v1'),v1Hash=sha256(v1Text);versions.set(`portal-pool/${v1Hash.slice(0,12)}`,v1Text);
+  const v1Entry={hash:v1Hash,version:v1Hash.slice(0,12),lastAttempt:at(1),lastSuccess:at(1),attempts:1,errorCount:0,finalUrl:pool.url};
+  const state={schema:1,sources:{'portal-pool':{...v1Entry}},queue:[]};
+  const report=await runMonitor({sources:[pool],state,hostIgnore,...io,force:true,now:at(2),fetchImpl:async()=>reply(rotated)});
+  assert.equal(report.results[0].result,'unchanged');assert.equal(state.queue.length,0);
+  const entry=state.sources['portal-pool'];
+  assert.equal(entry.parser,undefined);assert.equal(entry.hash,sha256(normalize(rotated,pool,at(2),'v1',hostRules(hostIgnore,pool.url))));
+  assert.deepEqual(entry.baselineHistory,[{at:at(2),hash:v1Hash,version:v1Hash.slice(0,12),note:'host ignore rules applied to the stored text',parser:'v1'}]);
+  await runMonitor({sources:[pool],state,hostIgnore,...io,force:true,now:at(3),fetchImpl:async()=>reply(portal({menu:['Ski de fond'],price:'CHF 7 par enfant'}))});
+  assert.deepEqual(state.queue.map(q=>[q.kind,q.details.parser]),[['content-changed','v1']]);
+  assert.deepEqual(state.queue[0].details.changedLines,{added:['CHF 7 par enfant'],removed:['CHF 5 par enfant']});
+});
+test('host rules: the parser rebaseline compares v1 without the ignored blocks and reports only card lines',async()=>{
+  const v1Text=normalize(portal(),pool,at(1),'v1'),v1Hash=sha256(v1Text);
+  const make=()=>({schema:1,sources:{'portal-pool':{hash:v1Hash,version:v1Hash.slice(0,12),lastAttempt:at(1),lastSuccess:at(1),attempts:1,errorCount:0,finalUrl:pool.url}},queue:[]});
+  const readVersion=async()=>v1Text;
+  const menuOnly=make();
+  const quiet=await runMonitor({sources:[pool],state:menuOnly,hostIgnore,readVersion,now:at(5),rebaselineParser:{note:'Parser v2'},fetchImpl:async()=>reply(portal({menu:['Activités en intérieur'],links:['Médias','Qui sommes-nous']}))});
+  assert.equal(quiet.results[0].v1Changed,false);assert.equal(menuOnly.queue.length,0);
+  assert.equal(menuOnly.sources['portal-pool'].parser,'v2');
+  const card=make();
+  const loud=await runMonitor({sources:[pool],state:card,hostIgnore,readVersion,now:at(5),rebaselineParser:{note:'Parser v2'},fetchImpl:async()=>reply(portal({menu:['Ski de fond'],price:'CHF 7 par enfant'}))});
+  assert.equal(loud.results[0].v1Changed,true);
+  assert.deepEqual(card.queue[0].details.changedLines,{added:['CHF 7 par enfant'],removed:['CHF 5 par enfant']});
+});
+test('host rules: a town news menu raises no alarm lines, a notice in the page content still does',async()=>{
+  const town={id:'town-pool',url:'https://www.town.example/fr/piscine',type:'html',recordIds:['town-card'],intervalDays:30,required:['Piscine communale']};
+  const html=(news,notice='')=>`<html><body><nav class="mmenu"><ul><li><a>Actualités communales</a><ul>${news.map(n=>`<li><a>${n}</a></li>`).join('')}</ul></li></ul></nav>
+    <div id="main-container"><h1>Piscine communale</h1><p>Bassin non-nageurs, lundi 17:30 - 21:00.</p>${notice?`<p>${notice}</p>`:''}</div></body></html>`;
+  assert.equal(hostRules(hostIgnore,town.url).selectors[0],'nav.mmenu');
+  const state={schema:1,sources:{},queue:[]};
+  const first=await runMonitor({sources:[town],state,hostIgnore,now:at(1),fetchImpl:async()=>reply(html(['Fermeture temporaire de la route du Perry']))});
+  assert.equal(first.results[0].alarm,'baseline');assert.deepEqual(state.sources['town-pool'].alarm.keys,[]);
+  await runMonitor({sources:[town],state,hostIgnore,force:true,now:at(2),fetchImpl:async()=>reply(html(['La Fondue suspendue','Travaux - Réfection de la rampe du cimetière']))});
+  assert.equal(state.queue.length,0);
+  await runMonitor({sources:[town],state,hostIgnore,force:true,now:at(3),fetchImpl:async()=>reply(html(['La Fondue suspendue'],"La piscine est fermée jusqu'à nouvel avis."))});
+  assert.deepEqual(state.queue.map(q=>q.kind).sort(),['content-changed','possible-closure']);
+  assert.deepEqual(state.queue.find(q=>q.kind==='possible-closure').details.lines.map(l=>l.text),["La piscine est fermée jusqu'à nouvel avis."]);
+  const without={schema:1,sources:{},queue:[]};
+  await runMonitor({sources:[town],state:without,now:at(1),fetchImpl:async()=>reply(html(['Fermeture temporaire de la route du Perry']))});
+  assert.deepEqual(without.sources['town-pool'].alarm.keys,['fermeture temporaire de la route du perry']);
+});
+test('main: hostIgnore from source-watch.json is validated before any request',async()=>{
+  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'monitor-host-'));
+  try{
+    await fs.writeFile(path.join(dir,'source-watch.json'),JSON.stringify({sources:[{...krabbel,url:'http://127.0.0.1:9/x'}],hostIgnore:{'127.0.0.1':{ranges:[{from:'^a$'}]}}}));
+    await assert.rejects(main(['--dry-run','--host-delay-ms=0'],dir),/hostIgnore 127\.0\.0\.1/);
+    await fs.writeFile(path.join(dir,'source-watch.json'),JSON.stringify({sources:[{...krabbel,url:'http://127.0.0.1:9/x'}],hostIgnore:{'127.0.0.1':{selectors:[42]}}}));
+    await assert.rejects(main(['--dry-run','--host-delay-ms=0'],dir),/hostIgnore 127\.0\.0\.1/);
+  }finally{await fs.rm(dir,{recursive:true,force:true});}
 });
