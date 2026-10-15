@@ -120,7 +120,7 @@
   const DATED_DAY = new RegExp(String.raw`\b(${WEEKDAY_WORD})\b\.?,?\s+(\d{1,2})\.(\d{1,2})(?:\.(?:\d{4})?)?`, 'gi');
   const datedDays = clause => [...clause.matchAll(DATED_DAY)].filter(m => +m[2] >= 1 && +m[2] <= 31 && +m[3] >= 1 && +m[3] <= 12 && !/^\s*[–-]\s*\d/.test(clause.slice(m.index + m[0].length))).map(m => dayOfWord(m[1]));
   const OTHER_RHYTHM = /\b(?:every (?:other|second|2nd|two weeks|2 weeks)|alternate|alternating|fortnightly|bi-?weekly|monthly|(?:once|twice) (?:a|per) month)\b/i;
-  const DATES_UNCONFIRMED = /\b(?:(?:on )?(?:the )?(?:published|listed|announced) dates|dates?\b[^.;·]{0,30}?\b(?:not (?:yet )?(?:confirmed|published|set|known)|to be (?:confirmed|announced)|have not been published)|check (?:the )?dates)\b/i;
+  const DATES_UNCONFIRMED = /\b(?:(?:on )?(?:the )?(?:published|listed|announced) dates|dates?\b[^.;·]{0,30}?\b(?:not (?:yet )?(?:confirmed|published|set|known)|to be (?:confirmed|announced)|have not been published))\b/i;
   // true: the schedule gives this weekday only in such wording (or says its dates are unconfirmed), so it is no weekly opening.
   // false: a weekly slot, or the weekday is not mentioned at all (open places keep all seven days). A plain mention beats a restricted one.
   function restrictedOn(schedule, weekday) {

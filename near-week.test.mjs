@@ -214,7 +214,8 @@ test('restrictedOn reads one weekday of a schedule: restricted only when that we
   assert.equal(r('Fridays, fortnightly, 09:00–10:00',5),true);
   assert.equal(r('Thursday 16:00–17:00, once a month',4),true);
   assert.equal(r('Sat 10.10. and 24.10., 09:30–11:30',6),true);
-  assert.equal(r('Thu 09:30–11:00; check dates and school holidays against the programme',4),true);
+  // A weekly course that pauses in school holidays is still weekly; the card's holiday warning covers the gaps.
+  assert.equal(r('Thu 09:30–11:00; check dates and school holidays against the programme',4),false);
   assert.equal(r('Autumn dates are not confirmed. The last published session is 22.08.2026',6),true);
   assert.equal(r('Wed 09:00–11:00 · on the listed dates from 7 October to 16 December 2026',3),true);
   // Not restricted: a weekly slot, a plain mention beside a restricted one, no mention at all, ranges of dates, times written with a dot.
