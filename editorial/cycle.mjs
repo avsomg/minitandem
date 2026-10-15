@@ -7,6 +7,7 @@ import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {DatabaseSync} from 'node:sqlite';
 import {PROJECT_ID} from './project-id.mjs';
+import {takeProcessLock} from './process-lock.mjs';
 
 const here=path.dirname(fileURLToPath(import.meta.url));
 const zurich=(now,options)=>new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Zurich',...options}).format(now);
@@ -58,21 +59,12 @@ export function codexSchedules(policy,home=os.homedir()){
   finally{db?.close();}
 }
 
-const alive=pid=>{try{process.kill(pid,0);return true;}catch(error){return error.code==='EPERM';}};
-export function acquireLock(directory,now=Date.now()){
-  const lock=path.join(directory,'lock'),owner=path.join(lock,'owner.json');
-  fs.mkdirSync(directory,{recursive:true,mode:0o700});
-  for(let attempt=0;attempt<2;attempt++){
-    try{fs.mkdirSync(lock);writeJson(owner,{pid:process.pid,startedAt:new Date(now).toISOString()});return ()=>fs.rmSync(lock,{recursive:true,force:true});}
-    catch(error){
-      if(error.code!=='EEXIST')throw error;
-      const held=readJson(owner,null);
-      // A run is bounded well below three hours; an older or ownerless lock was left by a crash.
-      if(held&&alive(held.pid)&&now-Date.parse(held.startedAt)<3*3600000)return null;
-      fs.rmSync(lock,{recursive:true,force:true});
-    }
-  }
-  return null;
+// One cycle at a time (editorial/process-lock.mjs): a file with the owner's pid, token and start, created in one step, never taken from a live
+// process, and released only while it is still ours. A directory `lock` left by an older version is respected while its owner lives and removed otherwise.
+export function acquireLock(directory,options={}){
+  const taken=takeProcessLock(path.join(directory,'cycle.lock'),{legacyDirectory:path.join(directory,'lock'),...options});
+  if(!taken.ok)return null;
+  return ()=>{if(!taken.release())console.error('cycle: the lock was not ours any more at the end of this run; it was left as it is');};
 }
 
 const openQueue=file=>new DatabaseSync(file,{readOnly:true});
@@ -144,10 +136,10 @@ function notifyMac(title,text){
 export const needsOwner=record=>Boolean(record.blocked||record.failedSteps?.length||record.changes?.attention.length||
   record.changes?.circuitOpened.length||record.changes?.loginUnavailable.length||record.batch?.stopReason);
 
-export function runCycle({base=here,home=os.homedir(),now=new Date(),run=runNode,notify=notifyMac,dryRun=false}={}){
+export function runCycle({base=here,home=os.homedir(),now=new Date(),run=runNode,notify=notifyMac,dryRun=false,lock=acquireLock}={}){
   const root=path.dirname(base),stateDirectory=path.join(base,'workflow-state','cycle'),stateFile=path.join(stateDirectory,'state.json');
   const queueFile=path.join(base,'workflow-state','jobs.sqlite');
-  const policy=readPolicy(base),state=readJson(stateFile,{}),record={project:PROJECT_ID,startedAt:now.toISOString()};
+  const policy=readPolicy(base),record={project:PROJECT_ID,startedAt:now.toISOString()};
   const finish=()=>{
     if(dryRun)return record;
     fs.mkdirSync(path.join(stateDirectory,'log'),{recursive:true,mode:0o700});
@@ -162,12 +154,15 @@ export function runCycle({base=here,home=os.homedir(),now=new Date(),run=runNode
   if(fs.existsSync(path.join(base,'cycle.pause'))){record.skipped='paused by editorial/cycle.pause';return dryRun?record:(writeJson(path.join(stateDirectory,'latest.json'),record),record);}
   const codex=codexSchedules(policy,home);record.codexSchedules=codex;
   if(codex.active.length){record.blocked=`Codex schedules are active: ${codex.active.join(', ')}`;return finish();}
-  const marks=queueMarks(queueFile,now),planned=plan(state,policy,now,marks.claimedToday);
-  Object.assign(record,{daily:planned.daily,leadRole:planned.role,limit:planned.limit,claimedToday:marks.claimedToday,capReached:planned.capReached});
-  if(dryRun){record.steps=planned.steps.map(step=>['node',...step.args].join(' '));return record;}
-  const release=acquireLock(stateDirectory,now.getTime());
-  if(!release){record.skipped='another cycle is still running';writeJson(path.join(stateDirectory,'latest.json'),record);return record;}
+  // The shared planning state (the daily marker, the queue marks) is read only once this run owns the cycle: read earlier, it could be what another
+  // run has just replaced, and this run would plan from it and write it back. A dry run changes nothing and takes no lock.
+  const release=dryRun?null:lock(stateDirectory);
+  if(!dryRun&&!release){record.skipped='another cycle is still running';writeJson(path.join(stateDirectory,'latest.json'),record);return record;}
   try{
+    const state=readJson(stateFile,{});
+    const marks=queueMarks(queueFile,now),planned=plan(state,policy,now,marks.claimedToday);
+    Object.assign(record,{daily:planned.daily,leadRole:planned.role,limit:planned.limit,claimedToday:marks.claimedToday,capReached:planned.capReached});
+    if(dryRun){record.steps=planned.steps.map(step=>['node',...step.args].join(' '));return record;}
     const before=approvedUpdates(base).length;let syncFailed=false;
     record.steps=[];record.failedSteps=[];
     for(const step of planned.steps){
@@ -188,7 +183,7 @@ export function runCycle({base=here,home=os.homedir(),now=new Date(),run=runNode
     writeJson(stateFile,{...state,runs:(state.runs||0)+1,lastRunAt:record.startedAt,lastEventId:record.changes?.lastEventId??marks.lastEventId,
       roleTurn:(state.roleTurn||0)+(planned.daily?0:1),lastDailyOn:planned.daily?planned.today:state.lastDailyOn});
     return finish();
-  }finally{release();}
+  }finally{release?.();}
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){

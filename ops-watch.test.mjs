@@ -11,6 +11,7 @@ import zlib from 'node:zlib';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {buildHeartbeat} from './ops/cycle-run.mjs';
+import {processStart} from './editorial/process-lock.mjs';
 
 const root=path.dirname(fileURLToPath(import.meta.url));
 const TMP=fs.realpathSync(os.tmpdir());
@@ -291,10 +292,12 @@ test('buildHeartbeat keeps the text plain and short',()=>{
 function offsiteSandbox(t){
   const folder=tmp(t,'minitandem-offsite-'),staging=tmp(t,'minitandem-offsite-staging-');
   for(const file of ['editorial-offsite.mjs','drop-client.mjs'])fs.copyFileSync(path.join(root,'ops',file),write(path.join(folder,'ops',file),''));
+  fs.copyFileSync(path.join(root,'editorial','process-lock.mjs'),write(path.join(folder,'editorial','process-lock.mjs'),''));
   // editorial/backup.mjs as the pipeline has it, reduced to the commands the script uses
   write(path.join(folder,'editorial','backup.mjs'),`import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';
 const [command,target]=process.argv.slice(2),directory=target?.startsWith('--to=')?target.slice(5):target;
 if(process.env.FAKE_FAIL===command){console.error('Wait for active workers before taking a consistent backup');process.exit(1);}
+if(command==='create'&&process.env.FAKE_LOCK_PROBE)fs.copyFileSync(path.join(process.env.MINITANDEM_OFFSITE_STAGING,'.offsite.lock'),process.env.FAKE_LOCK_PROBE);
 if(command==='create'){fs.mkdirSync(path.join(directory,'project','editorial'),{recursive:true});
   fs.writeFileSync(path.join(directory,'manifest.json'),JSON.stringify({schema:1,id:crypto.randomUUID()}));fs.writeFileSync(path.join(directory,'jobs.sqlite'),'queue');
   fs.writeFileSync(path.join(directory,'project','editorial','approved-updates.json'),'{"updates":[]}');console.log('{"destination":"'+directory+'"}');}
@@ -376,6 +379,29 @@ test('editorial-offsite sweeps leftovers of a killed run, refuses a second run a
   assert.ok(fs.existsSync(path.join(box.staging,'.lock')),'the other run\'s lock is not touched');
   const inside=box.run({},[`--date=${D0}`,`--staging=${path.join(box.folder,'inside')}`]);
   assert.equal(inside.status,1);assert.match(inside.stderr,/outside the repository/);
+});
+
+test('editorial-offsite holds the same kind of lock as the cycle: a file with its pid while it runs, never taken from a live process, taken over from a dead one, an older version\'s directory respected',t=>{
+  const box=offsiteSandbox(t),lock=path.join(box.staging,'.offsite.lock'),probe=path.join(box.folder,'lock-during-run.json');
+  assert.equal(box.run({FAKE_LOCK_PROBE:probe}).status,0);
+  const held=JSON.parse(fs.readFileSync(probe,'utf8'));
+  assert.equal(held.schema,1);assert.ok(held.pid>0&&held.pid!==process.pid);assert.match(held.token,/^[0-9a-f-]{36}$/);assert.ok(Date.parse(held.startedAt)>Date.now()-60000);
+  assert.deepEqual(box.left(),[],'released at the end, no marker or temporary file left');
+  const sent=box.calls().length;
+  // a live owner, however long ago it says it started: this run is refused and the lock stays as it was
+  const start=processStart(process.pid);   // this test process is the live owner; null only where ps does not exist, then the record is young
+  const alive={schema:1,pid:process.pid,token:'0123456789abcdef',startedAt:start?'2020-01-01T00:00:00.000Z':new Date().toISOString(),processStart:start};
+  fs.writeFileSync(lock,JSON.stringify(alive)+'\n');
+  const busy=box.run();
+  assert.equal(busy.status,1);assert.match(busy.stderr,new RegExp(`another run is active \\(pid ${process.pid}\\)`));
+  assert.equal(JSON.parse(fs.readFileSync(lock,'utf8')).token,alive.token);assert.equal(box.calls().length,sent,'nothing was sent');
+  // an owner that is gone
+  const gone=spawnSync(process.execPath,['-e','0']).pid;
+  fs.writeFileSync(lock,JSON.stringify({...alive,pid:gone})+'\n');
+  assert.equal(box.run().status,0);assert.deepEqual(box.left(),[]);
+  // a directory of the older version: a dead owner is cleared, a live one is respected
+  fs.mkdirSync(path.join(box.staging,'.lock'));fs.writeFileSync(path.join(box.staging,'.lock','pid'),String(gone));
+  assert.equal(box.run().status,0);assert.deepEqual(box.left(),[],'the old directory is gone');
 });
 
 // ---- the whole way: cycle-run and editorial-offsite talk to the real drop.sh, cycle-watch reads what it left -----------------------------

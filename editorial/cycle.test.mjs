@@ -4,7 +4,9 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {DatabaseSync} from 'node:sqlite';
+import {spawnSync} from 'node:child_process';
 import {JobQueue} from './jobs.mjs';
+import {processStart} from './process-lock.mjs';
 import {plan,runCycle,digest,usageSummary,acquireLock,codexSchedules,needsOwner,readPolicy} from './cycle.mjs';
 
 const policy=readPolicy();
@@ -63,10 +65,75 @@ test('a pause file and a running cycle both skip quietly',t=>{
   assert.equal(acquireLock(path.join(f.base,'workflow-state','cycle')),null);
   assert.match(runCycle({base:f.base,home:f.home,now:at(11),run,notify:()=>assert.fail('no notice')}).skipped,/still running/);
   release();assert.deepEqual(calls,[]);
-  const stale=path.join(f.base,'workflow-state','cycle','lock');fs.mkdirSync(stale);
-  fs.writeFileSync(path.join(stale,'owner.json'),JSON.stringify({pid:process.pid,startedAt:'2026-10-12T00:00:00.000Z'}));
+  assert.equal(runCycle({base:f.base,home:f.home,now:at(11),run,notify:()=>{}}).skipped,undefined);assert.ok(calls.includes('sync'));
+});
+test('the cycle lock is a file that exists while the cycle runs and is gone afterwards; a skipped run leaves the running one\'s lock alone',t=>{
+  const f=fixture(t),directory=path.join(f.base,'workflow-state','cycle'),lock=path.join(directory,'cycle.lock');f.dailyDone();
+  let during=null,skipped=null;
+  runCycle({base:f.base,home:f.home,now:at(11),notify:()=>{},run:(_root,step)=>{
+    if(step.label==='sync'){
+      during=JSON.parse(fs.readFileSync(lock,'utf8'));
+      skipped=runCycle({base:f.base,home:f.home,now:at(11),run:()=>assert.fail('nothing runs'),notify:()=>assert.fail('no notice')}).skipped;
+      assert.equal(JSON.parse(fs.readFileSync(lock,'utf8')).token,during.token,'the skipped run did not touch the lock');
+    }
+    return {code:0,seconds:0,stdout:'',stderr:''};
+  }});
+  assert.equal(during.pid,process.pid);assert.match(skipped,/still running/);
+  assert.equal(fs.existsSync(lock),false);
+  assert.equal(fs.readdirSync(directory).some(name=>name.startsWith('cycle.lock')),false,'no temporary file or marker is left');
+});
+test('a lock held by a live process is not taken however old it is; one left by a process that is gone is',t=>{
+  const f=fixture(t),directory=path.join(f.base,'workflow-state','cycle'),lock=path.join(directory,'cycle.lock'),calls=[];f.dailyDone();
+  const run=(_root,step)=>{calls.push(step.label);return {code:0,seconds:0,stdout:'',stderr:''};};
+  // this test process is the live owner, and has been "for" years, as far as the file says (the old rule gave up on a live owner after three hours)
+  const owner={schema:1,pid:process.pid,token:'0123456789abcdef',startedAt:'2020-01-01T00:00:00.000Z',processStart:processStart(process.pid)};
+  fs.writeFileSync(lock,JSON.stringify(owner)+'\n');
+  const record=runCycle({base:f.base,home:f.home,now:at(11),run,notify:()=>assert.fail('no notice')});
+  assert.match(record.skipped,/still running/);assert.deepEqual(calls,[]);assert.equal(JSON.parse(fs.readFileSync(lock,'utf8')).token,owner.token);
+  assert.equal(f.latest().skipped,record.skipped);
+  // a process that has exited
+  const gone=spawnSync(process.execPath,['-e','0']).pid;
+  fs.writeFileSync(lock,JSON.stringify({...owner,pid:gone,processStart:null})+'\n');
   assert.equal(runCycle({base:f.base,home:f.home,now:at(11),run,notify:()=>{}}).skipped,undefined);
-  assert.equal(fs.existsSync(stale),false);assert.ok(calls.includes('sync'));
+  assert.ok(calls.includes('sync'));assert.equal(fs.existsSync(lock),false);
+});
+test('a directory lock left by an older version is respected while its owner runs and cleared when it is gone or too old',t=>{
+  const f=fixture(t),directory=path.join(f.base,'workflow-state','cycle'),old=path.join(directory,'lock'),calls=[];f.dailyDone();
+  const run=(_root,step)=>{calls.push(step.label);return {code:0,seconds:0,stdout:'',stderr:''};};
+  const legacy=(pid,startedAt)=>{fs.rmSync(old,{recursive:true,force:true});fs.mkdirSync(old);fs.writeFileSync(path.join(old,'owner.json'),JSON.stringify({pid,startedAt}));};
+  legacy(process.pid,new Date(Date.now()-3600000).toISOString());
+  assert.match(runCycle({base:f.base,home:f.home,now:at(11),run,notify:()=>{}}).skipped,/still running/);
+  assert.ok(fs.existsSync(old),'an older version\'s run in progress is not disturbed');assert.deepEqual(calls,[]);
+  legacy(spawnSync(process.execPath,['-e','0']).pid,new Date().toISOString());
+  assert.equal(runCycle({base:f.base,home:f.home,now:at(11),run,notify:()=>{}}).skipped,undefined);
+  assert.equal(fs.existsSync(old),false);assert.ok(calls.includes('sync'));
+  calls.length=0;
+  legacy(process.pid,'2026-10-12T00:00:00.000Z');
+  assert.equal(runCycle({base:f.base,home:f.home,now:at(11),run,notify:()=>{}}).skipped,undefined);
+  assert.equal(fs.existsSync(old),false);assert.ok(calls.includes('sync'));
+});
+test('the shared planning state is read after the lock is taken, not before',t=>{
+  const f=fixture(t),directory=path.join(f.base,'workflow-state','cycle'),calls=[];
+  // Another run finishes while this one is on its way to the lock: it did the day\'s maintenance and used the daily job allowance up to the cap.
+  const order=[];
+  const lock=dir=>{
+    order.push('lock');
+    fs.mkdirSync(directory,{recursive:true});
+    fs.writeFileSync(path.join(directory,'state.json'),JSON.stringify({lastDailyOn:'2026-10-13',roleTurn:1,runs:5}));
+    return acquireLock(dir);
+  };
+  const record=runCycle({base:f.base,home:f.home,now:at(11),lock,notify:()=>{},run:(_root,step)=>{calls.push(step.label);return {code:0,seconds:0,stdout:'',stderr:''};}});
+  assert.equal(record.daily,false,'planned from the state the other run left, not from the empty one read earlier');
+  assert.equal(record.leadRole,'search');
+  assert.ok(!calls.includes('monitor'));
+  const saved=JSON.parse(fs.readFileSync(path.join(directory,'state.json'),'utf8'));
+  assert.equal(saved.runs,6,'and written back on top of it');assert.equal(saved.roleTurn,2);
+  assert.deepEqual(order,['lock']);
+  // a dry run only reads: it takes no lock
+  assert.equal(runCycle({base:f.base,home:f.home,now:at(11),dryRun:true,lock:()=>assert.fail('no lock for a dry run'),run:()=>assert.fail('nothing runs')}).daily,false);
+  // the pause and the Codex check come before the lock
+  fs.writeFileSync(path.join(f.base,'cycle.pause'),'');
+  assert.match(runCycle({base:f.base,home:f.home,now:at(11),lock:()=>assert.fail('paused: no lock'),notify:()=>{}}).skipped,/paused/);
 });
 test('a failed sync skips the batch, is reported, and still leaves a record',t=>{
   const f=fixture(t),calls=[],notes=[];f.dailyDone();
