@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {DatabaseSync} from 'node:sqlite';
 import {JobQueue} from './jobs.mjs';
-import {plan,runCycle,digest,acquireLock,codexSchedules,needsOwner,readPolicy} from './cycle.mjs';
+import {plan,runCycle,digest,usageSummary,acquireLock,codexSchedules,needsOwner,readPolicy} from './cycle.mjs';
 
 const policy=readPolicy();
 const at=(hour,day='2026-10-13')=>new Date(`${day}T${String(hour).padStart(2,'0')}:30:00+02:00`);
@@ -122,4 +122,32 @@ test('claimed today is the day\'s total after the batch, not the count the cap w
   assert.equal(f.latest().claimedToday,3);
   // The next run plans its cap from those three claims.
   assert.equal(runCycle({base:f.base,home:f.home,now:at(15),dryRun:true}).claimedToday,3);
+});
+test('the digest adds up the model use of this cycle only, as an estimate and in one line',t=>{
+  const f=fixture(t),file=path.join(f.base,'workflow-state','jobs.sqlite');f.dailyDone();
+  const earlier=f.queue.enqueue({kind:'verify',cardId:'card-old',inputRevision:'r'}),job=f.queue.enqueue({kind:'verify',cardId:'card-new',inputRevision:'r'});
+  f.queue.event(earlier.id,'usage',{model:'m',input_tokens:900000,cached_input_tokens:800000,output_tokens:90000,modelSeconds:500,apiCostEstimateUsd:9});
+  const run=(_root,step)=>{
+    if(step.label==='batch'){
+      f.queue.event(job.id,'usage',{model:'m',input_tokens:144402,cached_input_tokens:101526,output_tokens:15703,modelSeconds:141.4,apiCostEstimateUsd:0.03});
+      f.queue.event(job.id,'usage',{model:'m',input_tokens:44518,cached_input_tokens:19393,output_tokens:2922,modelSeconds:52.2,apiCostEstimateUsd:0.13});
+      f.queue.event(job.id,'usage',{model:'m',input_tokens:999999,replayed:true,artifact:'x'});
+      f.queue.event(job.id,'usage',{model:'m',toolCalls:0,failed:true,modelSeconds:1.9});
+    }
+    return {code:0,seconds:0,stdout:'',stderr:''};
+  };
+  const record=runCycle({base:f.base,home:f.home,now:at(11),run,notify:()=>{}});
+  assert.deepEqual({...record.changes.usage,line:undefined},{modelCalls:3,inputTokens:188920,cacheReadTokens:120919,outputTokens:18625,modelSeconds:196,costEstimateUsd:0.16,line:undefined});
+  assert.equal(record.changes.usage.line,'3 model calls, 189k input tokens (of which 121k cache reads), 19k output tokens, 3 min model time, CLI cost estimate $0.16 (not billing)');
+  assert.equal(f.latest().changes.usage.line,record.changes.usage.line);
+  // Nothing new in the next cycle: nothing is carried over from this one.
+  const quiet=runCycle({base:f.base,home:f.home,now:at(15),run:()=>({code:0,seconds:0,stdout:'',stderr:''}),notify:()=>{}});
+  assert.equal(quiet.changes.usage.modelCalls,0);assert.equal(quiet.changes.usage.costEstimateUsd,null);assert.equal(quiet.changes.usage.line,'no model calls');
+  assert.equal(digest(file,0).usage.modelCalls,4);
+});
+test('the usage line scales its units and drops the cost when no event carries an estimate',()=>{
+  assert.equal(usageSummary([{input_tokens:1_100_000,cached_input_tokens:800_000,output_tokens:24_000,modelSeconds:421}]).line,
+    '1 model call, 1.1M input tokens (of which 800k cache reads), 24k output tokens, 7 min model time');
+  assert.equal(usageSummary([{input_tokens:900,cached_input_tokens:0,output_tokens:5,modelSeconds:3.6}]).line,
+    '1 model call, 900 input tokens (of which 0 cache reads), 5 output tokens, 4 s model time');
 });

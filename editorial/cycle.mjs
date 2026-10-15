@@ -89,6 +89,21 @@ export function queueMarks(file,now){
   }finally{db.close();}
 }
 
+const tokens=n=>n>=1e6?`${(n/1e6).toFixed(1)}M`:n>=1000?`${(n/1000).toFixed(n<1e4?1:0)}k`:String(n);
+const duration=seconds=>seconds>=120?`${Math.round(seconds/60)} min`:`${seconds} s`;
+// What the model batch used, added up from the usage events it recorded. Replayed answers cost nothing and are left out.
+// Model seconds come from events written since agent-run stamped them; the cost is the CLI's own estimate, never billing.
+export function usageSummary(used){
+  const sum=key=>used.reduce((total,usage)=>total+(Number(usage[key])||0),0);
+  const costs=used.map(usage=>usage.apiCostEstimateUsd).filter(Number.isFinite);
+  const total={modelCalls:used.length,inputTokens:sum('input_tokens'),cacheReadTokens:sum('cached_input_tokens'),outputTokens:sum('output_tokens'),
+    modelSeconds:Math.round(sum('modelSeconds')),costEstimateUsd:costs.length?Number(costs.reduce((a,b)=>a+b,0).toFixed(2)):null};
+  total.line=total.modelCalls?[`${total.modelCalls} model call${total.modelCalls===1?'':'s'}`,
+    `${tokens(total.inputTokens)} input tokens (of which ${tokens(total.cacheReadTokens)} cache reads)`,`${tokens(total.outputTokens)} output tokens`,
+    `${duration(total.modelSeconds)} model time`,...(total.costEstimateUsd===null?[]:[`CLI cost estimate $${total.costEstimateUsd.toFixed(2)} (not billing)`])].join(', '):'no model calls';
+  return total;
+}
+
 // What changed in the queue during this cycle (from the event id read at its start), in the terms the owner is told about.
 export function digest(file,sinceEventId){
   if(!fs.existsSync(file))return null;
@@ -105,6 +120,7 @@ export function digest(file,sinceEventId){
       attention:events.filter(event=>event.kind==='attention').map(problem),
       retries:events.filter(event=>event.kind==='retry').map(problem),
       rejectedOutputs:count('rejected-output'),
+      usage:usageSummary(events.filter(event=>event.kind==='usage').map(detail).filter(usage=>!usage.replayed)),
       circuitOpened:events.filter(event=>event.kind==='circuit-opened').map(detail),
       loginUnavailable:events.filter(event=>event.kind==='worker-preflight-failed').map(event=>String(detail(event).reason||'').slice(0,300)),
       open:Object.fromEntries(db.prepare("SELECT kind||' '||state AS k,count(*) AS n FROM jobs WHERE state NOT IN ('done','superseded') GROUP BY 1 ORDER BY 1").all().map(row=>[row.k,row.n])),

@@ -249,6 +249,12 @@ export function runClaude(job,policy,options={}){
   return runClaudeWorker(job,policy,{route:modelRoute(job,policy),promptImpl:promptFor,
     evidenceFilesImpl:workerEvidenceFiles,copyImagesImpl:copyWorkerImages,...options});
 }
+// The wall time of the model process goes into its usage event, so a cycle can add up model seconds.
+export async function timedWorker(worker,...args){
+  const started=Date.now(),stamp=usage=>{if(usage&&typeof usage==='object')usage.modelSeconds=Math.round((Date.now()-started)/100)/10;};
+  try{const output=await worker(...args);stamp(output.usage);return output;}
+  catch(error){stamp(error.usage);throw error;}
+}
 export function runModel(job,policy,options={}){
   if(policy.workerProvider==='claude')return runClaude(job,policy,options);
   if(!policy.workerProvider||policy.workerProvider==='codex')return runCodex(job,policy,options);
@@ -452,7 +458,7 @@ export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=r
         else{
           const prepared=await prepareEvidence(job,{queue});
           const remainingMs=Math.max(1000,policy.maxRunMinutes*60000-(Date.now()-startedAt));
-          const output=await worker(prepared,policy,{timeoutMs:Math.min(720000,remainingMs)});workerOutput=output;
+          const output=await timedWorker(worker,prepared,policy,{timeoutMs:Math.min(720000,remainingMs)});workerOutput=output;
           assertRuntimeCurrent(loadedRuntimeRevision);
           if(job.kind==='facts'||job.kind==='adjudicate-facts'&&output.result.bundle){
             await captureClaims(output.result.bundle,job.payload.card,{prepared:prepared.payload.preparedEvidence,queue});

@@ -7,7 +7,7 @@ import {EventEmitter} from 'node:events';
 import {snapshot} from './evidence.mjs';
 import {JobQueue,digest} from './jobs.mjs';
 import {retireStaleReadyJobs} from './workflow.mjs';
-import {captureClaims,prepareEvidence,captureDraft,promptFor,runRoles,runCodex,workerEvidenceFiles,normalizePilotSources,upgradeInputBudgetJob,upgradeInvestigatedJob,requestQa} from './agent-run.mjs';
+import {captureClaims,prepareEvidence,captureDraft,promptFor,runRoles,runCodex,workerEvidenceFiles,normalizePilotSources,upgradeInputBudgetJob,upgradeInvestigatedJob,requestQa,timedWorker} from './agent-run.mjs';
 
 const now=new Date().toISOString(),url='https://example.org/course';
 const first=snapshot({url,fetchedAt:now,text:'Official source: admission is free. Course is on Monday.'});
@@ -218,4 +218,12 @@ test('an incomplete full-review prompt repair requires the rejected draft, prese
   assert.equal(q.get(old.id).state,'superseded');assert.equal(q.get(upgraded.jobId).attempt,1);
   assert.equal(q.claim('editor','editor').attempt,2);
   assert.match(promptFor(old),/Omit BOTH patch.checked and reviewCoverage entirely/);
+});
+test('the usage of a worker answer or failure carries the wall time of the model call',async()=>{
+  const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+  const done=await timedWorker(async(a,b)=>{await pause(30);return {result:{a,b},usage:{model:'m'}};},1,2);
+  assert.deepEqual(done.result,{a:1,b:2});assert.equal(done.usage.model,'m');assert.ok(done.usage.modelSeconds>=0&&done.usage.modelSeconds<5);
+  const failure=Object.assign(Error('Worker time limit'),{usage:{model:'m',toolCalls:1}});
+  await assert.rejects(timedWorker(async()=>{await pause(30);throw failure;}),error=>error===failure&&typeof failure.usage.modelSeconds==='number');
+  await assert.rejects(timedWorker(async()=>{throw Error('no usage on this one');}),/no usage/);
 });
