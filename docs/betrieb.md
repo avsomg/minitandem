@@ -229,6 +229,120 @@ WantedBy=timers.target
 
 **Grenze.** Fällt der ganze Server aus, kann er auch keine Mail mehr senden. Ein zweiter, externer Prüfer (ein Uptime-Dienst, der `https://minitandem.ch/healthz` abfragt) deckt diesen Fall ab; er ist hier nicht eingerichtet.
 
+## Redaktioneller Zyklus: Überwachung und Kopie ausser Haus
+
+Der Zyklus (`editorial/cycle.mjs`) läuft nicht auf diesem Server, sondern auf dem Mac des Eigentümers: launchd startet ihn sechsmal am Tag (07.30, 10.30, 13.30, 16.30, 19.30 und 22.30 Uhr Zürcher Zeit, Agent `ch.minitandem.editorial-cycle`). Dieser Abschnitt schliesst zwei Lücken, beide am 15. Oktober 2026 vom Eigentümer freigegeben und ohne neues Konto bei einem Dritten: eine Mail, wenn der Zyklus nicht lief oder scheiterte, und eine tägliche Kopie des privaten redaktionellen Zustands auf diesen Server. Beides läuft über einen einzigen, eingeschränkten SSH-Schlüssel.
+
+```
+Mac (launchd)                                                  Server
+07.30 … 22.30  ops/cycle-run.mjs ──ssh "heartbeat"──────────>  minitandem-drop ─> /var/lib/minitandem-watch/heartbeat.json
+06.50          ops/editorial-offsite.mjs ──ssh "backup DATUM SHA256"──> minitandem-drop ─> ~/editorial-backups/editorial-DATUM.tar.gz
+                                                               alle 30 Min: ops/cycle-watch.sh ──sendmail──> Eigentümer
+```
+
+Die Teile auf dem Mac sind Node-Skripte, die `/usr/bin/ssh` und `/usr/bin/tar` selbst aufrufen. Der Grund: Ein launchd-Auftrag, der ein `/bin/sh`-Skript aus `~/Documents` startet, kann vom Datenschutz von macOS blockiert werden; `node` mit einer Datei dort (wie beim Zyklus selbst) nicht. `rsync` wird nicht gebraucht.
+
+**Der Drop-Schlüssel.** Auf dem Mac gibt es einen eigenen Schlüssel `~/.ssh/minitandem_drop_ed25519` (ohne Passphrase, nur dafür). Auf dem Server steht sein öffentlicher Teil in `~/.ssh/authorized_keys` des Benutzers `ubuntu` mit genau diesem Vorspann:
+
+```
+restrict,command="/usr/local/sbin/minitandem-drop" ssh-ed25519 AAAA… minitandem-drop
+```
+
+`restrict` schaltet Terminal, Weiterleitungen und Agent ab. `command=` führt bei jeder Verbindung `ops/drop.sh` aus (installiert als `/usr/local/sbin/minitandem-drop`, Eigentümer root); was der Mac verlangt, steht in `SSH_ORIGINAL_COMMAND`. Angenommen werden genau zwei Befehle, alles andere endet mit einer Meldung auf stderr und Exit-Code 1:
+
+- `heartbeat`: liest höchstens 16 KB aus stdin (eine Zeile JSON aus druckbaren ASCII-Zeichen, `{` bis `}`) und legt sie atomar als `/var/lib/minitandem-watch/heartbeat.json` ab.
+- `backup JJJJ-MM-TT SHA256`: liest höchstens 2 GB aus stdin in eine Temporärdatei in `~/editorial-backups/`, prüft die SHA-256-Summe und dass es eine gzip-Datei ist, und benennt sie in `editorial-JJJJ-MM-TT.tar.gz` um. Das Datum darf nicht nach morgen (UTC) liegen. Ein vorhandenes Archiv mit anderem Inhalt wird nie überschrieben (dieselben Bytes noch einmal sind in Ordnung: Wiederholung nach abgebrochener Verbindung). Die 14 neuesten Archive bleiben, `/var/lib/minitandem-watch/backup.json` (`{at,name,bytes}`) hält den Eingang fest.
+
+Jedes Argument wird streng geprüft (nur Buchstaben, Ziffern, Leerzeichen und Bindestrich im ganzen Befehl). Der Schlüssel kann nichts lesen, auflisten oder löschen; wer ihn stiehlt, kann Heartbeats und Archive ablegen, mehr nicht. Er wird widerrufen, indem man die Zeile aus `authorized_keys` löscht.
+
+**Heartbeat: `ops/cycle-run.mjs`.** Das Programm in der plist des Zyklus ist nicht mehr `editorial/cycle.mjs`, sondern `ops/cycle-run.mjs`. Es startet den Zyklus mit denselben Argumenten, derselben Ausgabe und demselben Exit-Code und sendet danach einen Heartbeat: `{at, exit, ok, paused, skipped, startedAt, seconds, daily, failedSteps, needsOwner:{count,text}, approvedUpdates, jobsRun, record}`. `ok` ist `false`, wenn der Exit-Code nicht 0 ist oder der Zyklus selbst meldet, dass er den Eigentümer braucht (so geht auch ein Stapel, der wegen fehlendem Claude-Login nichts tat und mit 0 endete, nicht unter). Der Heartbeat enthält nur Zähler, Schrittnamen und Karten-IDs, keine Kartentexte und keine Zitate. Eine Pause (`editorial/cycle.pause`) wird als `paused:true` gemeldet und gilt als lebendig. Ein Heartbeat, der nicht ankommt, wird im Log des Zyklus vermerkt (drei Versuche mit 15 und 45 Sekunden Pause bei nicht erreichbarem Server), ändert aber den Exit-Code nie. `--status` und `--dry-run` führen keinen Zyklus aus und senden nichts.
+
+**Tägliche Kopie: `ops/editorial-offsite.mjs`.** Ein eigener launchd-Agent `ch.minitandem.editorial-offsite` startet es täglich um 06.50 Uhr, vor dem ersten Zyklus. Das Skript ruft `node editorial/backup.mjs create --to=<Zwischenordner>/<Datum>` und `verify` auf, packt den Ordner mit `tar -czf`, bildet die SHA-256-Summe und streamt das Archiv an `ssh … backup <Datum> <Summe>`. Danach löscht es Ordner und Archiv auf dem Mac: Die Platte ist knapp, der Server hält 14 Kopien. Der Zwischenordner liegt ausserhalb des Repositorys (`~/Backups/minitandem-editorial/staging`). Scheitert ein Schritt, nennt die Fehlermeldung den Schritt, der Exit-Code ist 1, und im Zwischenordner bleibt nichts liegen. `create` verweigert, solange ein Auftrag ausgeliehen ist; das ist um 06.50 Uhr normalerweise nicht der Fall, ein verpasster Tag wird vom Wächter erst nach 36 Stunden gemeldet. `--dry-run` macht alles ausser dem Hochladen und behält das Archiv (Pfad, Grösse und Summe stehen in der Ausgabe).
+
+Das Archiv enthält den privaten redaktionellen Zustand (Warteschlange, Belege, Quelltexte), aber **keine Familiendaten** (`familyDataIncluded:false`). Auf dem Server liegt es in `~/editorial-backups` (Modus 700). Es liegt damit auf demselben Server wie die Seite: Es schützt vor dem Verlust des Macs, nicht vor dem Verlust des Servers. Der Agent `ch.minitandem.pull-backups` holt nur `backups/minitandem-*.tgz` und damit diese Kopien nicht zurück auf den Mac.
+
+**Wächter: `ops/cycle-watch.sh`.** Ein systemd-Timer startet ihn alle 30 Minuten (`ops/systemd/minitandem-cycle-watch.service` und `.timer`). Er läuft als root wie `minitandem-health.service` (das Relay-Passwort ist nur für root lesbar) und nutzt dieselben Mail-Einstellungen (`HEALTH_MAIL_TO`, `HEALTH_MAIL_FROM`, `sendmail -t`). Er macht drei Prüfungen, jede mit eigenem gemerktem Zustand, und schickt **eine** Mail pro Zustandswechsel (Problem beginnt, Problem endet). Der Betreff beginnt mit «Minitandem editorial:».
+
+| Betreff (nach dem Vorspann) | Wann | Was tun |
+| --- | --- | --- |
+| `cycle silent` / `cycle is running again` | kein Heartbeat seit mehr als `WATCH_SILENT_HOURS` (10) Stunden | Mac an und wach? `launchctl list \| grep minitandem`, `tail ~/Library/Logs/minitandem-editorial-cycle.log` |
+| `cycle failed` / `cycle works again` | der letzte Heartbeat sagt `ok:false` (und nicht `paused`): Exit-Code ungleich 0 oder der Zyklus meldet selbst, dass er den Eigentümer braucht (dieselbe Bedingung wie das Banner auf dem Mac: fehlgeschlagener Schritt, Auftrag mit «attention», Circuit-Breaker, Claude-Login nicht verfügbar, Stapel abgebrochen); die Mail nennt Exit-Code, Schritte und den Grund | `node editorial/cycle.mjs --status`, Log wie oben |
+| `off-site copy missing` / `off-site copy is back` | kein Archiv seit mehr als `WATCH_BACKUP_HOURS` (36) Stunden | `tail ~/Library/Logs/minitandem-editorial-offsite.log` |
+
+Das Alter einer Datei ist ihr Alter auf dem Server, eine falsche Uhr auf dem Mac kann ein Schweigen also nicht verdecken. Eine Datei, die noch nie ankam, zählt ab dem ersten Lauf des Wächters; wird er vor dem Mac eingerichtet, bleibt er bis zum Ablauf der Frist still. Ein Pause-Heartbeat gilt als lebendig und lässt den Zustand «failed» unverändert. Eine Mail, die nicht rausging, wird nicht als gesendet gemerkt; der nächste Lauf versucht es noch einmal. Exit-Code: 0 alles in Ordnung, 1 ein Problem ist offen (`SuccessExitStatus=0 1`), 2 eine Mail liess sich nicht senden.
+
+Die zehn Stunden für «silent» ergeben sich aus der Nachtpause von 9 Stunden zwischen 22.30 und 07.30 Uhr. Schläft der Mac nachts und wacht erst nach 08.30 Uhr auf, kommt die Mail zu Recht; wer das nicht will, erhöht den Wert mit `sudo systemctl edit minitandem-cycle-watch.service` (`Environment=WATCH_SILENT_HOURS=14`).
+
+**Einrichten, Server** (in dieser Reihenfolge):
+
+```
+cd /opt/minitandem                                  # Stand mit den neuen Dateien, siehe «Update»
+sudo install -m 755 ops/drop.sh /usr/local/sbin/minitandem-drop
+sudo install -d -o ubuntu -g ubuntu -m 755 /var/lib/minitandem-watch
+install -d -m 700 ~/editorial-backups
+# die Zeile aus ~/.ssh/minitandem_drop_ed25519.pub des Macs mit dem Vorspann von oben eintragen:
+echo 'restrict,command="/usr/local/sbin/minitandem-drop" ssh-ed25519 AAAA… minitandem-drop' >> ~/.ssh/authorized_keys
+addr=$(systemctl show minitandem-health.service -p Environment --value | tr ' ' '\n' | sed -n 's/^HEALTH_MAIL_TO=//p')
+sed "s|EMPFAENGER|$addr|" ops/systemd/minitandem-cycle-watch.service | sudo tee /etc/systemd/system/minitandem-cycle-watch.service >/dev/null
+sudo install -m 644 ops/systemd/minitandem-cycle-watch.timer /etc/systemd/system/minitandem-cycle-watch.timer
+sudo systemctl daemon-reload && sudo systemctl enable --now minitandem-cycle-watch.timer
+sudo systemctl start minitandem-cycle-watch.service && journalctl -u minitandem-cycle-watch -n 3
+```
+
+Die letzte Zeile muss `cycle-watch: silent=ok failed=ok backup=ok` ausgeben. Die Adresse steht wie beim Gesundheitstest nur auf dem Server, nicht im Repository.
+
+**Einrichten, Mac:**
+
+```
+ssh-keygen -t ed25519 -N '' -C minitandem-drop -f ~/.ssh/minitandem_drop_ed25519
+ssh-keygen -F 179.237.77.144 > /dev/null || echo "Der Server-Schlüssel fehlt in known_hosts"
+```
+
+Das Programm ruft `ssh` mit `-F /dev/null -o StrictHostKeyChecking=yes -o BatchMode=yes` auf: Ein unbekannter oder geänderter Server-Schlüssel führt zu einem Fehler, nicht zu einer Rückfrage. Fehlt der Eintrag, ihn einmal von Hand aufnehmen und den Fingerabdruck mit `ssh-keygen -lf /etc/ssh/ssh_host_ed25519_key.pub` auf dem Server vergleichen. Host, Benutzer und Schlüssel lassen sich mit `MINITANDEM_DROP_HOST`, `MINITANDEM_DROP_USER` und `MINITANDEM_DROP_KEY` ändern. Dann, nachdem die Schlüsselzeile auf dem Server eingetragen ist:
+
+```
+ssh -F /dev/null -i ~/.ssh/minitandem_drop_ed25519 -o IdentitiesOnly=yes -o BatchMode=yes ubuntu@179.237.77.144 id
+# muss mit «minitandem-drop: unknown command» enden, Exit-Code 1: der Schlüssel führt nur den Drop aus
+
+REPO=/Pfad/zum/Checkout                             # der Ordner mit ops/ und editorial/
+node $REPO/ops/editorial-offsite.mjs --dry-run      # alles ausser dem Hochladen
+node $REPO/ops/editorial-offsite.mjs                # einmal von Hand: das erste Archiv auf dem Server
+sed -e "s|@REPO@|$REPO|g" -e "s|@HOME@|$HOME|g" $REPO/ops/launchd/ch.minitandem.editorial-offsite.plist > ~/Library/LaunchAgents/ch.minitandem.editorial-offsite.plist
+plutil -lint ~/Library/LaunchAgents/ch.minitandem.editorial-offsite.plist
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/ch.minitandem.editorial-offsite.plist
+```
+
+Die bestehende `ch.minitandem.editorial-cycle.plist` ändert sich nur in einer Zeile: Im Feld `ProgramArguments` wird `…/editorial/cycle.mjs` zu `…/ops/cycle-run.mjs` (das Programm bleibt `/usr/local/bin/node`). Zwischen zwei Läufen, nie während eines Stapels:
+
+```
+sed -i '' 's|/editorial/cycle.mjs|/ops/cycle-run.mjs|' ~/Library/LaunchAgents/ch.minitandem.editorial-cycle.plist
+launchctl bootout gui/$(id -u)/ch.minitandem.editorial-cycle
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/ch.minitandem.editorial-cycle.plist
+```
+
+Im Log des Zyklus (`~/Library/Logs/minitandem-editorial-cycle.log`) steht nach dem nächsten Lauf `cycle-run: heartbeat sent`.
+
+**Wiederherstellen aus der Kopie.** Das Archiv holen (mit dem Admin-Schlüssel des Eigentümers, nicht mit dem Drop-Schlüssel), auspacken, prüfen, in einen neuen Ordner einspielen:
+
+```
+scp ubuntu@179.237.77.144:editorial-backups/editorial-JJJJ-MM-TT.tar.gz ~/Downloads/
+mkdir ~/restore && tar -xzf ~/Downloads/editorial-JJJJ-MM-TT.tar.gz -C ~/restore
+cd $REPO
+node editorial/backup.mjs verify ~/restore/JJJJ-MM-TT
+node editorial/backup.mjs restore ~/restore/JJJJ-MM-TT --to="$HOME/restore/arbeitsbereich"
+```
+
+`verify` prüft Summen, Warteschlange und Umfang; `restore` verlangt einen neuen, leeren Zielordner, legt dort den Arbeitsbereich samt Warteschlange (`editorial/workflow-state/jobs.sqlite`) an und vergleicht den Katalog mit dem Manifest. Nichts wird überschrieben. Der Arbeitsbereich ersetzt den Checkout erst, wenn der Eigentümer es entscheidet, bei gesetzter Pause und ohne ausgeliehenen Auftrag. Familiendaten sind nicht im Archiv.
+
+**Pausieren und abschalten.**
+
+- Zyklus pausieren: `touch editorial/cycle.pause`. Der Zyklus tut nichts, die Heartbeats sagen `paused:true`, es kommt weder «silent» noch «failed». Aufheben: Datei löschen. Eine vergessene Pause wird nicht gemeldet.
+- Tägliche Kopie anhalten: `launchctl bootout gui/$(id -u)/ch.minitandem.editorial-offsite` (wieder starten mit `bootstrap`). Nach 36 Stunden kommt «off-site copy missing».
+- Wächter anhalten: `sudo systemctl stop minitandem-cycle-watch.timer` (starten mit `start`); die gemerkten Zustände bleiben erhalten.
+- Jeden Zugriff des Macs sperren: die Zeile mit `minitandem-drop` aus `~/.ssh/authorized_keys` löschen.
+
+**Stand.** Die Skripte laufen im Test (`ops-watch.test.mjs`) mit Ersatzprogrammen für `ssh`, `sendmail` und `editorial/backup.mjs` in Wegwerf-Ordnern, `drop.sh` und `cycle-watch.sh` unter `sh` und `dash`, und `cycle-run.mjs` und `editorial-offsite.mjs` gegen das echte `drop.sh`. Mit dem echten `editorial/backup.mjs` wurden `--dry-run`, `verify` und `restore` in einem Arbeitsbaum durchgespielt (leere Warteschlange). Die Einrichtung auf dem Server und auf dem Mac steht noch aus; hier wird sie mit Datum eingetragen.
+
 ## Restore-Drill (Checkliste)
 
 Mindestens vierteljährlich und nach jeder Änderung am Sicherungsablauf, **ohne den laufenden Dienst anzutasten**:

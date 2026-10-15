@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Template for ~/Library/LaunchAgents/ch.minitandem.editorial-offsite.plist (docs/betrieb.md, "Redaktioneller Zyklus").
+  launchd does not expand ~ or $HOME, so the two placeholders are filled in when the file is installed:
+    @REPO@  the checkout the editorial cycle runs from (the folder that holds ops/ and editorial/)
+    @HOME@  the home folder of the user
+  sed -e "s|@REPO@|$REPO|g" -e "s|@HOME@|$HOME|g" ops/launchd/ch.minitandem.editorial-offsite.plist > ~/Library/LaunchAgents/ch.minitandem.editorial-offsite.plist
+  The job is node itself (a /bin/sh script inside ~/Documents can be blocked by macOS privacy protection, node is not).
+  It needs the key ~/.ssh/minitandem_drop_ed25519 and the server's key in ~/.ssh/known_hosts. No secret is stored in this file.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>ch.minitandem.editorial-offsite</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/local/bin/node</string>
+    <string>@REPO@/ops/editorial-offsite.mjs</string>
+  </array>
+  <key>WorkingDirectory</key><string>@REPO@</string>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key><string>/usr/local/bin:/usr/bin:/bin</string>
+    <key>LANG</key><string>en_US.UTF-8</string>
+    <key>TZ</key><string>Europe/Zurich</string>
+  </dict>
+  <!-- 06:50, before the first cycle of the day at 07:30. If the Mac sleeps at that time, launchd runs the job when it wakes. -->
+  <key>StartCalendarInterval</key>
+  <dict><key>Hour</key><integer>6</integer><key>Minute</key><integer>50</integer></dict>
+  <key>StandardOutPath</key><string>@HOME@/Library/Logs/minitandem-editorial-offsite.log</string>
+  <key>StandardErrorPath</key><string>@HOME@/Library/Logs/minitandem-editorial-offsite.log</string>
+  <key>ProcessType</key><string>Background</string>
+  <key>RunAtLoad</key><false/>
+</dict>
+</plist>

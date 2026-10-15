@@ -1,0 +1,17 @@
+# Installed on the server as /etc/systemd/system/minitandem-cycle-watch.service (docs/betrieb.md, "Redaktioneller Zyklus").
+# Runs as root, like minitandem-health.service, because the mail relay's password is readable by root only.
+# EMPFAENGER is replaced at install time by the same address that minitandem-health.service uses; it does not belong in the repository.
+[Unit]
+Description=Minitandem editorial cycle and off-site copy watcher
+
+[Service]
+Type=oneshot
+Environment=HEALTH_MAIL_TO=EMPFAENGER
+Environment=HEALTH_MAIL_FROM=hello@minitandem.ch
+Environment=WATCH_DIR=/var/lib/minitandem-watch
+StateDirectory=minitandem-cycle-watch
+Environment=WATCH_STATE_DIR=/var/lib/minitandem-cycle-watch
+Environment=WATCH_SILENT_HOURS=10
+Environment=WATCH_BACKUP_HOURS=36
+ExecStart=/opt/minitandem/ops/cycle-watch.sh
+SuccessExitStatus=0 1
