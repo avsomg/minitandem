@@ -80,6 +80,18 @@ test('identical facts merge losslessly but distinct values and quotes still requ
   assert.deepEqual(bundle.claims[0].mergedDuplicates,[{submittedKey:'another-key',note:'Another explanation.'}]);
   assert.equal(bundle.claims[1].value,'visit');
 });
+test('a figure the quote does not write leaves a claim unknown with the proposal kept, and the other claims continue',async()=>{
+  const page=snapshot({url,fetchedAt:now,text:'Children aged 2 to 4 join the course. Admission is free.'});
+  const bundle={project:'vmeste',cardId:card.id,claims:[claim('min',2,'aged 2 to 4'),claim('max',6,'aged 2 to 4'),claim('amount',0,'Admission is free'),claim('amount',12,'Admission is free')]};
+  await captureClaims(bundle,card,{prepared:[page],saveImpl:async()=>{}});
+  const [min,max,free,price]=bundle.claims;
+  assert.equal(min.status,'supported');assert.equal(min.value,2);assert.equal(free.status,'supported');assert.equal(free.value,0);
+  for(const [row,proposed] of [[max,6],[price,12]]){
+    assert.equal(row.status,'unknown');assert.equal(row.value,null);assert.equal(row.rejectedValue,proposed);
+    assert.match(row.controllerRejection,/is not written in its quote.*not approved/);assert.match(row.note,/not written in its quote/);
+  }
+  assert.equal(bundle.snapshots.length,1);
+});
 test('a draft preserves inspection evidence for unknown coverage even when no binding uses it',async t=>{
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-agent-test-')),queue=new JobQueue(path.join(directory,'jobs.sqlite'));
   t.after(()=>{queue.close();fs.rmSync(directory,{recursive:true,force:true});});

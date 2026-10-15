@@ -103,6 +103,34 @@ test('claims require real matching fresh quotes and exact official scope for cri
   const wrongType={...bundle,claims:[{...bundle.claims[0],field:'practical.booking',value:'No registration'}]};
   assert.throws(()=>validateClaims(wrongType,card,{now:'2026-10-02T09:00:00Z'}),/value type/);
 });
+test('a numeric claim must find its figure in its own quote, in digits or words, and a refusal is a contract failure',()=>{
+  const now='2026-10-02T09:00:00Z',fetchedAt='2026-10-02T08:00:00.000Z';
+  const page=snapshot({url:'https://example.org/atelier',fetchedAt,text:'Kinder von 2 bis 4 Jahren. Eintritt CHF 12.50. Maximal acht Personen. Dauer: 10:00 – 10:45. De deux à quatre ans.'});
+  let count=0;
+  const claim=(field,value,quote)=>({key:field+'-'+count++,field,value,status:'supported',scope:'exact-card',kind:'official',source:page.url,quote,snapshotId:page.id,note:'Published for this course.'});
+  const check=(...claims)=>validateClaims({project:'vmeste',cardId:'a',snapshots:[page],claims},card,{now});
+  check(claim('min',2,'Kinder von 2 bis 4 Jahren'),claim('max',4,'Kinder von 2 bis 4 Jahren'),claim('amount',12.5,'Eintritt CHF 12.50'),
+    claim('practical.groupSize',8,'Maximal acht Personen'),claim('practical.duration',45,'Dauer: 10:00 – 10:45'),claim('min',2,'De deux à quatre ans'),claim('max',4,'De deux à quatre ans'));
+  for(const wrong of [claim('amount',15,'Eintritt CHF 12.50'),claim('max',6,'Kinder von 2 bis 4 Jahren'),claim('practical.groupSize',9,'Maximal acht Personen'),
+    claim('practical.duration',60,'Dauer: 10:00 – 10:45'),claim('min',3,'De deux à quatre ans')]){
+    assert.throws(()=>check(wrong),error=>/^Invalid field claim: .* is not written in its quote/.test(error.message)&&failureCategory(error.message)==='contract');
+  }
+  // Fields that are not numbers, and claims without a value, are not affected.
+  check({...claim('priceKind','free','Eintritt CHF 12.50')},{...claim('amount',null,'Eintritt CHF 12.50'),status:'unknown',scope:'uncertain'});
+});
+test('a patched number needs a binding quote that writes it, even without an approved claim',t=>{
+  const f=fixture(t),page=snapshot({url:'https://example.org/atelier',fetchedAt:'2026-10-02T08:00:00.000Z',text:'Kinder ab drei Jahren. Gruppen von maximal 8 Kindern. Anmeldung bis Freitag.'});
+  registerCaptured(f.queue,page);
+  const bind=(field,quote)=>({field,source:page.url,quote,kind:'official',scope:'exact-card',snapshotId:page.id});
+  const make=(patch,practicalPatch,...bindings)=>({...draft,snapshots:[page],patch,practicalPatch,bindings:[...bindings,bind('research.findings.0','Anmeldung bis Freitag')]});
+  assert.deepEqual(validateBindings(f.queue,make({min:3},{},bind('min','Kinder ab drei Jahren'))),['min','research.findings.0']);
+  assert.deepEqual(validateBindings(f.queue,make({},{groupSize:{value:8}},bind('practical.groupSize','Gruppen von maximal 8 Kindern'))),['practical.groupSize','research.findings.0']);
+  assert.throws(()=>validateBindings(f.queue,make({min:4},{},bind('min','Kinder ab drei Jahren'))),/Patch number not written in its evidence quote: min/);
+  assert.throws(()=>validateBindings(f.queue,make({},{groupSize:{value:10}},bind('practical.groupSize','Gruppen von maximal 8 Kindern'))),/not written in its evidence quote: practical.groupSize/);
+  // One quote among the field's bindings is enough; clearing a bound to null is not a figure.
+  validateBindings(f.queue,make({min:3},{},bind('min','Anmeldung bis Freitag'),bind('min','Kinder ab drei Jahren')));
+  assert.deepEqual(validateBindings(f.queue,make({max:null},{},{...bind('max','Kinder ab drei Jahren'),transformation:'clear-unconfirmed',reason:'No stated upper age.'})),['max','research.findings.0']);
+});
 test('draft validation rejects unsafe fields, reversed age and invalid calendar times',()=>{
   assert.equal(validateDraft(draft,card),draft);
   assert.throws(()=>validateDraft({...draft,patch:{min:6,max:2}},card),/patched card/);

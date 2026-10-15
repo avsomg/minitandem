@@ -11,6 +11,7 @@ import {locateQuote,evidenceProblem,validateSnapshot,writeJsonAtomic} from './ev
 import {PATCH_FIELDS,PRACTICAL_FIELDS,CLAIM_FIELDS,CRITICAL_FIELDS,validateFieldValue,validDate,fullReviewFields,FULL_REVIEW_UNKNOWN_TEXT,FULL_REVIEW_UNKNOWN_PRACTICAL_TEXT} from './field-contract.mjs';
 import {PROJECT_ID} from './project-id.mjs';
 import {approvalSummary} from './catalogue-journal.mjs';
+import {NUMBER_FIELDS,numberProblem,writesNumber} from './quote-numbers.mjs';
 
 export const here=path.join(root,'editorial');
 export {root};
@@ -123,6 +124,8 @@ export function validateClaims(bundle,card,{now=new Date().toISOString()}={}){
       validateFieldValue(claim.field,claim.value,{allowUnknown:false});
       const evidence=snapshots.get(claim.snapshotId);
       if(!evidence||claim.source!==evidence.url||!locateQuote(evidence,claim.quote))throw Error('Claim quote missing from snapshot');
+      const slip=numberProblem(claim.field,claim.value,claim.quote);
+      if(slip)throw Error(`Invalid field claim: ${slip}`);
       if((CRITICAL.has(claim.field)||claim.field.startsWith('practical.'))&&(claim.kind!=='official'||claim.scope!=='exact-card'))throw Error('Critical claim requires exact official evidence');
     }else if(claim.value!==null)throw Error('Unknown/conflicting claim must have null value');
   }
@@ -200,6 +203,10 @@ export function validateBindings(queue,draft,approved=[]){
         if(!from.some(c=>bindings.some(b=>b.claimKey===c.key)))throw Error(`Missing evidence binding for approved claim ${from[0].key}: ${field}`);
       }else if(!claims.some(c=>digest(c.value)===digest(value)))throw Error(`Patch contradicts approved value: ${field}`);
     }
+    // A number the card is about to carry must be written in a quote that binds it, as for a claim (supplementary quotes included).
+    // An approved claim already did; this catches a value that has none, or whose own quote was replaced.
+    if(NUMBER_FIELDS.has(targetField)&&typeof value==='number'&&!bindings.some(b=>writesNumber(targetField,value,b.quote)))
+      throw Error(`Patch number not written in its evidence quote: ${field}`);
     if(field==='price'){
       const numbers=String(draft.patch.price).match(/\d+(?:[.,]\d+)?/g)||[];
       const quoted=bindings.flatMap(b=>b.quote.match(/\d+(?:[.,]\d+)?/g)||[]);
