@@ -278,14 +278,17 @@ export function rebaseline(state,ids,note,now=new Date().toISOString()){
  * marked siteWide, and more than `alarmFuse` alarm tasks issue none (the keys stay as they were, so the next run sees them again).
  * `rebaselineParser:{note}` moves v1 HTML baselines to parser v2: content-changed only where v1 itself sees a change, the alarm
  * keys become a baseline, high redirect classes are issued once. `spreadDays` moves the last attempt back by spreadOffset() days.
+ * A run-wide outage fuse covers source-unavailable the way `alarmFuse` covers alarms: when more than `outageFuse` percent of the sources
+ * fetched in one run (at least `outageMin` of them) are unavailable, the check broke, not the market (a network down on this Mac). No
+ * source-unavailable task is issued, and the failed sources are put back as they were before the run, so they are due again next time.
  * `hostIgnore` (see hostRules) applies to the compared text and the alarm lines; when the stored text, with the same rules applied,
  * equals the new text, the hash moves without a task (noted in baselineHistory). A v1 baseline stays on v1 outside the parser pass.
  */
 export async function runMonitor({sources,state,fetchImpl=fetch,now=new Date().toISOString(),force=false,ids=null,snapshot=async()=>{},snapshotFailed=async()=>{},max=Infinity,hostDelayMs=0,sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms)),
-  records=[],readVersion=async()=>null,rebaselineParser=null,spreadDays=0,alarmFuse=Infinity,hostIgnore={}}){
+  records=[],readVersion=async()=>null,rebaselineParser=null,spreadDays=0,alarmFuse=Infinity,outageFuse=Infinity,outageMin=1,hostIgnore={}}){
   state??={schema:1,sources:{},queue:[]};
   state.sources??={};state.queue??=[];
-  const results=[],lastRequest=new Map(),pending=[];let fetched=0;
+  const results=[],lastRequest=new Map(),pending=[],unavailable=[];let fetched=0;
   for(const source of sources){
     if(ids&&!ids.has(source.id))continue;
     const prior=state.sources[source.id]??={};
@@ -414,8 +417,12 @@ export async function runMonitor({sources,state,fetchImpl=fetch,now=new Date().t
         if(failed){const label='failed-'+sha(failed).slice(0,12);await snapshotFailed(source.id,label,failed);entry.lastFailedText=label;}
       }
       entry.nextRetry=new Date(Date.parse(now)+Math.min(source.intervalDays??7,2**Math.min(entry.errorCount-1,20))*DAY).toISOString();
-      if(code!==404||entry.errorCount>=2)issue(state.queue,source,kind,now,{error:entry.error,httpStatus:code??null,consecutiveErrors:entry.errorCount,url:source.url});
-      results.push({id:source.id,result:'error',error:entry.error,...(alarmNote?{alarm:alarmNote}:{})});
+      const details={error:entry.error,httpStatus:code??null,consecutiveErrors:entry.errorCount,url:source.url},open=code!==404||entry.errorCount>=2;
+      const row={id:source.id,result:'error',error:entry.error,...(alarmNote?{alarm:alarmNote}:{})};
+      results.push(row);
+      // An unavailable source is judged after the pass, once it is known how many others failed with it.
+      if(kind==='source-unavailable')unavailable.push({source,prior,entry,details,open,row});
+      else if(open)issue(state.queue,source,kind,now,details);
     }
   }
   // Site-wide rollup: the same new line on three or more sources of one host in this run.
@@ -435,8 +442,14 @@ export async function runMonitor({sources,state,fetchImpl=fetch,now=new Date().t
     fuse.alarms=pending.map(item=>({sourceId:item.source.id,kind:item.kind,lines:item.lines.map(line=>line.text)}));
     for(const item of pending){item.entry.alarm=item.priorAlarm;item.entry.alarmHistory=item.priorHistory;}
   }else for(const item of pending)issue(state.queue,item.source,item.kind,now,{url:item.source.url,finalUrl:item.finalUrl,parser:ALARM_PARSER,lines:item.lines,...(item.siteWide?{siteWide:item.siteWide}:{})});
+  const share=fetched?Math.round(unavailable.length/fetched*1000)/10:0;
+  const outage={tripped:fetched>=outageMin&&unavailable.length*100>fetched*outageFuse,limit:outageFuse,min:outageMin,fetched,failed:unavailable.length,share};
+  if(outage.tripped){
+    outage.sources=unavailable.map(({source,entry})=>({sourceId:source.id,error:entry.error,httpStatus:entry.httpStatus}));
+    for(const item of unavailable){state.sources[item.source.id]=item.prior;item.row.withheld='outage-fuse';}
+  }else for(const item of unavailable)if(item.open)issue(state.queue,item.source,'source-unavailable',now,item.details);
   state.lastRun=now;
-  return {state,results,openTasks:state.queue.filter(q=>q.status==='open').length,fuse,siteWide};
+  return {state,results,openTasks:state.queue.filter(q=>q.status==='open').length,fuse,outageFuse:outage,siteWide};
 }
 async function writeJsonAtomic(file,value){await fs.mkdir(path.dirname(file),{recursive:true});const tmp=`${file}.tmp-${process.pid}`;await fs.writeFile(tmp,JSON.stringify(value,null,2)+'\n');await fs.rename(tmp,file);}
 const flag=(args,name)=>args.find(a=>a.startsWith(`--${name}=`))?.slice(name.length+3);
@@ -472,6 +485,10 @@ export async function main(args,baseDir=here,{records}={}){
   if(!(Number.isInteger(spreadDays)&&spreadDays>=0))throw Error('--spread-days must be a non-negative integer');
   const alarmFuse=flag(args,'alarm-fuse')===undefined?15:Number(flag(args,'alarm-fuse'));
   if(!(alarmFuse>=0))throw Error('--alarm-fuse must be a non-negative number');
+  const outageFuse=flag(args,'outage-fuse')===undefined?20:Number(flag(args,'outage-fuse'));
+  if(!(outageFuse>=0))throw Error('--outage-fuse must be a non-negative number (percent of fetched sources)');
+  const outageMin=flag(args,'outage-min')===undefined?10:Number(flag(args,'outage-min'));
+  if(!(outageMin>=1))throw Error('--outage-min must be a number of sources, at least 1');
   if(rebaselineIds.length){
     if(ids.length)throw Error('use --rebaseline without --id');
     const known=new Set(config.sources.map(source=>source.id));
@@ -484,12 +501,13 @@ export async function main(args,baseDir=here,{records}={}){
   const write=async(id,name,text)=>{if(dryRun)return;const file=path.join(baseDir,'versions',id,name+'.txt');await fs.mkdir(path.dirname(file),{recursive:true});await fs.writeFile(file,text+'\n');};
   const readVersion=async(id,version)=>{try{return (await fs.readFile(path.join(baseDir,'versions',id,version+'.txt'),'utf8')).replace(/\n$/,'');}catch{return null;}};
   const now=new Date().toISOString();
-  const report=await runMonitor({sources:config.sources,state,now,force:args.includes('--force')||!!rebaselineIds.length,ids:selected,max,hostDelayMs,records,readVersion,rebaselineParser,spreadDays,alarmFuse,hostIgnore:config.hostIgnore??{},
+  const report=await runMonitor({sources:config.sources,state,now,force:args.includes('--force')||!!rebaselineIds.length,ids:selected,max,hostDelayMs,records,readVersion,rebaselineParser,spreadDays,alarmFuse,outageFuse,outageMin,hostIgnore:config.hostIgnore??{},
     snapshot:(id,hash,text)=>write(id,hash.slice(0,12),text),snapshotFailed:(id,label,text)=>write(id,label,text)});
   if(!dryRun)await writeJsonAtomic(statePath,report.state);
   const out={results:report.results,openTasks:report.openTasks,state:statePath};
   if(report.siteWide.length)out.siteWide=report.siteWide;
   if(report.fuse.tripped){out.fuse=report.fuse;out.exitCode=2;}
+  if(report.outageFuse.tripped){out.outageFuse=report.outageFuse;out.exitCode=2;}
   if(dryRun){out.dryRun=true;out.wouldIssue=report.state.queue.filter(q=>q.status==='open'&&q.lastSeen===now).map(q=>({sourceId:q.sourceId,kind:q.kind}));}
   return out;
 }
@@ -497,5 +515,6 @@ async function cli(){
   const out=await main(process.argv.slice(2));
   console.log(JSON.stringify(out,null,2));
   if(out.fuse?.tripped){console.error(`alarm fuse: ${out.fuse.count} alarm tasks exceed --alarm-fuse=${out.fuse.limit}; none were issued (listed under "fuse").`);process.exitCode=2;}
+  if(out.outageFuse?.tripped){console.error(`outage fuse: ${out.outageFuse.failed} of ${out.outageFuse.fetched} fetched sources were unavailable (${out.outageFuse.share} %, limit --outage-fuse=${out.outageFuse.limit} %); no source-unavailable task was issued and those sources stay due (listed under "outageFuse").`);process.exitCode=2;}
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))cli().catch(error=>{console.error(error);process.exitCode=1;});

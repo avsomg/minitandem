@@ -582,3 +582,69 @@ test('main: hostIgnore from source-watch.json is validated before any request',a
     await assert.rejects(main(['--dry-run','--host-delay-ms=0'],dir),/hostIgnore 127\.0\.0\.1/);
   }finally{await fs.rm(dir,{recursive:true,force:true});}
 });
+
+// The run-wide outage fuse: more than a share of the sources fetched in one run unavailable means the check broke (a network down), not the market.
+const grid=count=>Array.from({length:count},(_,index)=>({...krabbel,id:`s${index}`,url:`https://site${index}.example/page`,recordIds:[`card-${index}`]}));
+const unreachable=ids=>async url=>{if(ids.some(id=>url.startsWith(`https://site${id}.example/`)))throw Error('network offline');return reply(notice());};
+test('the outage fuse withholds every source-unavailable task of a run in which too many sources failed, and puts those sources back',async()=>{
+  const sources=grid(10),state={schema:1,sources:{},queue:[]};
+  // Source s9 answers, but without the page content: a parser failure, which is not an outage and is still issued.
+  const fetchImpl=async url=>url.startsWith('https://site9.example/')?reply('<html><main></main></html>'):unreachable([0,1,2])(url);
+  const report=await runMonitor({sources,state,now:at(14),outageFuse:20,fetchImpl});
+  assert.deepEqual({tripped:report.outageFuse.tripped,fetched:report.outageFuse.fetched,failed:report.outageFuse.failed,share:report.outageFuse.share,limit:report.outageFuse.limit},
+    {tripped:true,fetched:10,failed:3,share:30,limit:20});
+  assert.deepEqual(report.outageFuse.sources.map(row=>row.sourceId),['s0','s1','s2']);assert.match(report.outageFuse.sources[0].error,/network offline/);
+  assert.equal(state.queue.some(q=>q.kind==='source-unavailable'),false);
+  assert.deepEqual(state.queue.map(q=>[q.sourceId,q.kind]),[['s9','parser-failed']]);
+  for(const id of ['s0','s1','s2']){assert.deepEqual(state.sources[id],{});assert.equal(report.results.find(r=>r.id===id).withheld,'outage-fuse');}
+  assert.equal(state.sources.s3.lastSuccess,at(14));assert.equal(state.sources.s9.errorCount,1);
+  // The network is back: the three sources are due again at once, no backoff was recorded, and nothing is raised.
+  const next=await runMonitor({sources,state,now:at(14),outageFuse:20,fetchImpl:unreachable([])});
+  assert.equal(next.outageFuse.tripped,false);assert.deepEqual(next.results.filter(r=>['s0','s1','s2'].includes(r.id)).map(r=>r.result),['baseline','baseline','baseline']);
+});
+test('a failure rate of exactly the limit, or a run smaller than the minimum, still raises its source-unavailable tasks',async()=>{
+  const state={schema:1,sources:{},queue:[]};
+  const edge=await runMonitor({sources:grid(10),state,now:at(14),outageFuse:20,fetchImpl:unreachable([0,1])});
+  assert.equal(edge.outageFuse.tripped,false);assert.equal(edge.outageFuse.share,20);
+  assert.deepEqual(state.queue.map(q=>[q.sourceId,q.kind]),[['s0','source-unavailable'],['s1','source-unavailable']]);assert.equal(state.sources.s0.errorCount,1);
+  const small={schema:1,sources:{},queue:[]};
+  const few=await runMonitor({sources:grid(3),state:small,now:at(14),outageFuse:20,outageMin:5,fetchImpl:unreachable([0,1,2])});
+  assert.equal(few.outageFuse.tripped,false);assert.equal(few.outageFuse.failed,3);assert.equal(small.queue.length,3);
+  // Without the option the fuse is off, as the alarm fuse is.
+  const off={schema:1,sources:{},queue:[]};
+  assert.equal((await runMonitor({sources:grid(4),state:off,now:at(14),fetchImpl:unreachable([0,1,2,3])})).outageFuse.tripped,false);assert.equal(off.queue.length,4);
+});
+test('a source that answers 304 or is not due is not counted as fetched, and a first 404 is counted but raises no task',async()=>{
+  const sources=grid(5),state={schema:1,sources:{},queue:[]};
+  await runMonitor({sources,state,now:at(14),fetchImpl:unreachable([])});
+  const fetchImpl=async url=>url.startsWith('https://site0.')?reply('missing',404):reply(null,304);
+  const report=await runMonitor({sources,state,ids:new Set(['s0','s1']),force:true,now:at(15),outageFuse:100,fetchImpl});
+  assert.deepEqual([report.outageFuse.fetched,report.outageFuse.failed,report.outageFuse.tripped],[2,1,false]);
+  assert.equal(state.sources.s0.errorCount,1);assert.equal(state.queue.length,0);
+  const tripped=await runMonitor({sources,state,ids:new Set(['s0','s1']),force:true,now:at(16),outageFuse:20,fetchImpl});
+  assert.equal(tripped.outageFuse.tripped,true);assert.equal(state.sources.s0.errorCount,1);assert.equal(state.queue.length,0);
+});
+test('main: a tripped outage fuse returns exit code 2 and lists the sources; the options are validated and can switch it off',async()=>{
+  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'monitor-outage-'));
+  let down=new Set();
+  const server=http.createServer((req,res)=>{
+    if(down.has(req.url.slice(1))){res.writeHead(503,{'content-type':'text/html'});res.end('Maintenance');return;}
+    res.writeHead(200,{'content-type':'text/html; charset=utf-8'});res.end(notice());
+  });
+  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+  try{
+    const base=`http://127.0.0.1:${server.address().port}`,statePath=path.join(dir,'monitor-state.json'),read=async()=>JSON.parse(await fs.readFile(statePath,'utf8'));
+    await fs.writeFile(path.join(dir,'source-watch.json'),JSON.stringify({sources:grid(10).map(source=>({...source,url:`${base}/${source.id}`}))}));
+    down=new Set(['s0','s1','s2']);
+    const out=await main(['--host-delay-ms=0'],dir);
+    assert.equal(out.exitCode,2);assert.equal(out.outageFuse.tripped,true);assert.equal(out.outageFuse.failed,3);assert.equal(out.outageFuse.limit,20);assert.equal(out.outageFuse.min,10);
+    assert.deepEqual(out.outageFuse.sources.map(row=>[row.sourceId,row.httpStatus]),[['s0',503],['s1',503],['s2',503]]);
+    assert.deepEqual((await read()).queue,[]);assert.equal((await read()).sources.s0.lastAttempt,undefined);
+    await assert.rejects(main(['--outage-fuse=x','--dry-run'],dir),/--outage-fuse/);
+    await assert.rejects(main(['--outage-min=0','--dry-run'],dir),/--outage-min/);
+    // The owner can raise the limit: the three tasks are then issued, and no exit code is set.
+    const forced=await main(['--force','--outage-fuse=50','--host-delay-ms=0'],dir);
+    assert.equal(forced.exitCode,undefined);assert.equal(forced.outageFuse,undefined);
+    assert.deepEqual((await read()).queue.map(q=>q.kind),['source-unavailable','source-unavailable','source-unavailable']);
+  }finally{server.close();await fs.rm(dir,{recursive:true,force:true});}
+});
