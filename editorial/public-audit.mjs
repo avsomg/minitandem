@@ -4,13 +4,16 @@
 //   editorial  pipeline code and its tests
 //   ui         interface, server, admin panel and their tests (rebuilt by the interface task)
 //   docs       written documentation
-// --strict exits 1 when a group listed in STRICT_GROUPS has a hit, when a private path is not gitignored, or when the private-contacts
-// group below fails.
+// --strict exits 1 when a group listed in STRICT_GROUPS has a hit, when a private path is not gitignored or is tracked by git, or when the
+// private-contacts group below fails. --root=DIR audits another checkout than this one (the tests use it; the default is this workspace).
+// Nothing here reads private state, so the same command runs on a clean clone after the build; CI runs it there (.github/workflows/test.yml)
+// and so does the local QA (qaRun in agent-run.mjs).
 // Which checks apply: the wording checks (the reference child's age, mother wording) look at what families read, so they run on data, ui and the
 // built site. In code and documentation only Cyrillic and the old name count; a test that quotes an organiser's own "from 2.5 years" is not a leak.
 // Private state is never audited; it must be listed in .gitignore, which the audit checks.
 import fs from 'node:fs';
 import path from 'node:path';
+import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {CONTACT_RULE,contactDigest,swissMobileCount} from './contact-rule.mjs';
 import {loadCatalog} from './quality.mjs';
@@ -135,6 +138,14 @@ export function auditWorkspace(root=workspace){
     !item.startsWith('editorial/node_modules'));
   return {groups:Object.fromEntries(Object.entries(groups).map(([name,files])=>[name,{totals:total(files),files}])),privateNotIgnored:unignored};
 }
+// Private paths that git tracks. .gitignore only keeps untracked files out, so a private file that was added by force, or before its rule
+// existed, is public all the same. On a clean clone no private file exists unless it is tracked, so this is the form of the private-path rule
+// that CI can check. Without git (a plain copy of the files) nothing can be told and the list is empty.
+export function trackedFiles(root=workspace){
+  try{return execFileSync('git',['ls-files','-z','--cached'],{cwd:root,encoding:'utf8',maxBuffer:64_000_000,stdio:['ignore','pipe','ignore']}).split('\0').filter(Boolean);}
+  catch{return [];}
+}
+export const trackedPrivateFiles=(root=workspace,files=trackedFiles(root))=>files.filter(file=>groupOf(file)==='private');
 function strictFailure(report){
   const dirty=name=>Object.values(report.groups[name].totals).some(Boolean);
   return STRICT_GROUPS.filter(dirty);
@@ -180,8 +191,8 @@ export function unreviewedContacts(records,reviewed){
   const known=new Set(reviewed.digests);
   return contactRows(records).filter(row=>!known.has(row.digest)).map(({card,position})=>({card,position}));
 }
-// records defaults to the assembled catalogue of this workspace (loadCatalog); a test passes its own.
-export function privateContactsReport(root=workspace,{records=loadCatalog().ACTIVITIES,reviewed=readReviewedContacts(path.join(root,REVIEWED_CONTACTS))}={}){
+// records defaults to the assembled catalogue of the root (loadCatalog); a test passes its own.
+export function privateContactsReport(root=workspace,{records=loadCatalog({base:root}).ACTIVITIES,reviewed=readReviewedContacts(path.join(root,REVIEWED_CONTACTS))}={}){
   const mobileNumbers=mobileNumberFiles(root),unreviewed=unreviewedContacts(records,reviewed);
   return {contacts:contactRows(records).length,mobileNumbers,unreviewed,failing:mobileNumbers.length>0||unreviewed.length>0};
 }
@@ -194,19 +205,22 @@ export const BUILT_SITE_CHECKS=['cyrillicWords','workingTitle','motherWording'];
 export function builtSiteFailure(report){return BUILT_SITE_CHECKS.filter(name=>report.totals[name]>0);}
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const strict=process.argv.includes('--strict');
-  const directory=path.join(workspace,'.publish');
+  const rootArgument=process.argv.find(argument=>argument.startsWith('--root='));
+  const root=rootArgument?path.resolve(rootArgument.slice(7)):workspace;
+  const directory=path.join(root,'.publish');
   if(process.argv.includes('--source')||strict){
-    const report=auditWorkspace();
-    const contacts=privateContactsReport();
+    const report=auditWorkspace(root);
+    const contacts=privateContactsReport(root);
+    const tracked=trackedPrivateFiles(root);
     const failing=[...strictFailure(report),...(contacts.failing?['private contacts']:[])];
     const built=fs.existsSync(directory)?auditDirectory(directory):null;
     const builtFailing=strict&&built?builtSiteFailure(built):[];
     const builtMissing=strict&&!built;
-    console.log(JSON.stringify({scope:'workspace',strictGroups:[...STRICT_GROUPS,'private contacts'],failingGroups:failing,builtSite:built?{totals:built.totals,failing:builtFailing}:'not built',privateNotIgnored:report.privateNotIgnored,
+    console.log(JSON.stringify({scope:'workspace',strictGroups:[...STRICT_GROUPS,'private contacts'],failingGroups:failing,builtSite:built?{totals:built.totals,failing:builtFailing}:'not built',privateNotIgnored:report.privateNotIgnored,trackedPrivateFiles:tracked,
       groups:Object.fromEntries(Object.entries(report.groups).map(([name,group])=>[name,{totals:group.totals,files:name==='ui'||name==='docs'?group.files.length+' files':group.files}])),
       'private contacts':{contacts:contacts.contacts,filesWithMobileNumbers:contacts.mobileNumbers,unreviewedContacts:contacts.unreviewed,
         ...(contacts.unreviewed.length&&{advice:UNREVIEWED_ADVICE})}},null,2));
-    process.exit(strict&&(failing.length||report.privateNotIgnored.length||builtFailing.length||builtMissing)?1:0);
+    process.exit(strict&&(failing.length||report.privateNotIgnored.length||tracked.length||builtFailing.length||builtMissing)?1:0);
   }
   const report=auditDirectory(directory);
   // Generated place pages repeat the card texts; one line for the group keeps the report readable.

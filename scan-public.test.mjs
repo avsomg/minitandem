@@ -3,6 +3,8 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
+import {spawnSync} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
 import {scan} from './scripts/scan-public.mjs';
 
 // Values are assembled from parts so that this file does not trip the scan itself.
@@ -52,4 +54,18 @@ test('without git, files that .gitignore names are not scanned',t=>{
   const value='/'+'Users/someone/Documents/project';
   const report=scan(project(t,{'.gitignore':'.publish/\nlocal-settings.json\nprivate/state/\n','.publish/page.html':value,'local-settings.json':value,'private/state/a.json':value,'kept.txt':value}));
   assert.deepEqual(report.findings.map(f=>f.file),['kept.txt']);
+});
+
+// The command CI and QA run: node scripts/scan-public.mjs DIRECTORY. A finding gives its exit code 1; the report names file, line and rule, never the value.
+test('the command fails on a forbidden public file and passes on a clean tree',t=>{
+  const script=fileURLToPath(new URL('./scripts/scan-public.mjs',import.meta.url)),run=directory=>spawnSync(process.execPath,[script,directory],{encoding:'utf8'});
+  const clean=run(project(t,{'README.md':'Playgroups in canton Fribourg','data.js':'window.ACTIVITIES=[{"contacts":[{"email":"info'+'@organiser.ch"}]}];'}));
+  assert.equal(clean.status,0);assert.deepEqual(JSON.parse(clean.stdout).findings,[]);
+  for(const [rule,value] of Object.entries(planted)){
+    const failed=run(project(t,{'docs/notes.md':'one\n'+value+'\n'}));
+    assert.equal(failed.status,1,rule);assert.deepEqual(JSON.parse(failed.stdout).findings,[{file:'docs/notes.md',line:2,rule}]);
+    assert.equal(failed.stdout.includes(value),false,rule+': the value is not printed');
+  }
+  const contact=run(project(t,{'docs/notes.md':'Write to anna.muster'+'@organiser.ch'}));
+  assert.equal(contact.status,1);assert.deepEqual(JSON.parse(contact.stdout).findings.map(f=>f.rule),['email-outside-catalogue']);
 });

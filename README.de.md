@@ -63,8 +63,8 @@ npm run demo           # die Pipeline weist ein falsches Ergebnis zurück, offli
 npm run build          # die Seite nach .publish/
 npm run test:browser   # Alters- und Mobile-Checks in WebKit; braucht Playwright, siehe oben
 npm start              # der kleine Dienst auf http://127.0.0.1:8787 (Familienabgleich, Korrekturen)
-npm run audit:public   # keine kyrillischen Zeichen, kein früherer Arbeitstitel, keine persönliche Formulierung, keine privaten Kontakte; braucht eine gebaute Seite (npm run build)
-npm run scan:public    # Geheimnisse, persönliche Pfade, Kontaktdaten ausserhalb des Katalogs
+npm run audit:public   # keine kyrillischen Zeichen, kein früherer Arbeitstitel, keine persönliche Formulierung, keine privaten Kontakte; braucht eine gebaute Seite (npm run build); die CI führt es aus
+npm run scan:public    # Geheimnisse, persönliche Pfade, Kontaktdaten ausserhalb des Katalogs; die CI führt es aus
 ```
 
 **Die Demo.** `npm run demo` lässt drei erfundene Übungseinträge durch den echten Controller-Code laufen, mit einer temporären Queue: Ein Such-Worker zieht Claims mit wörtlichen Zitaten aus einer abgeholten Seite; der Verifizierer weist einen Claim zurück, dessen Zitat ihn nicht stützt; der Controller lehnt einen Entwurf ab, der auf diesem Claim aufbaut; ein korrigierter Entwurf wird genehmigt und angewendet; die redaktionellen Release-Gates sind bestanden. Das Web und die Modelle sind durch aufgezeichnete Antworten ersetzt: Die Seite ist eine gespeicherte Datei, und die Worker-Antworten sind von Hand geschriebene Fixtures, die dem Worker-Vertrag folgen. Kein Modell hat sie erzeugt. Die QA-Stufe des Release-Checks wird eingereiht, aber nicht ausgeführt. Nichts berührt das Netzwerk oder die echte Queue.

@@ -7,7 +7,7 @@ import {JobQueue,digest,ROLE_KINDS} from './jobs.mjs';
 import {pipelineReport,readPipelineInputs,validateCandidate,validateDecision,validateDispute,
   validateCorrection,recordRevision,venueGroups} from './external-pipeline.mjs';
 import {readExternalReviewInputs,validateReceipt} from './external-review.mjs';
-import {locateQuote,evidenceProblem,validateSnapshot,writeJsonAtomic} from './evidence.mjs';
+import {locateQuote,evidenceProblem,validateSnapshot,writeJsonAtomic,publicUrl} from './evidence.mjs';
 import {PATCH_FIELDS,PRACTICAL_FIELDS,CLAIM_FIELDS,CRITICAL_FIELDS,validateFieldValue,validDate,fullReviewFields,FULL_REVIEW_UNKNOWN_TEXT,FULL_REVIEW_UNKNOWN_PRACTICAL_TEXT} from './field-contract.mjs';
 import {PROJECT_ID} from './project-id.mjs';
 import {approvalSummary} from './catalogue-journal.mjs';
@@ -158,6 +158,23 @@ const orderEvents=list=>Array.isArray(list)&&list.every(e=>typeof e?.date==='str
 export const orderDraftEvents=(draft,approved=[])=>!approved.some(c=>c.field==='events')||!Array.isArray(draft?.patch?.events)?draft:
   {...draft,patch:{...draft.patch,events:orderEvents(draft.patch.events)},...(Array.isArray(draft.reviewCoverage?.fields)&&{reviewCoverage:{...draft.reviewCoverage,
     fields:draft.reviewCoverage.fields.map(row=>row?.field==='events'?{...row,value:orderEvents(row.value)}:row)}})};
+// A public citation is a link families can open: a finding's url and the source of a practical fact. Each must be a page the controller
+// captured for that very field, so a quote bound to source A cannot publish a link to an unrelated source B.
+// The cited address must be the source of one of the field's own bindings, or the address that source finally redirected to
+// (the snapshot's url and finalUrl, which evidence.mjs records side by side). Both sides are compared as publicUrl writes them:
+// https, no fragment, nothing else normalised, so another path, query or trailing slash is another page unless the server redirected there.
+// A field bound to several sources may cite any of them, never a source that is bound only to another field. A link that is only context
+// is cited by capturing it and binding a quote from it. The findings are research.findings.N, a practical fact is practical.KEY.
+const citedAddress=value=>{try{return publicUrl(value);}catch{return null;}};
+export function citationProblems(draft){
+  const snapshots=new Map((draft.snapshots||[]).map(evidence=>[evidence.id,evidence]));
+  const supported=field=>new Set((draft.bindings||[]).filter(b=>b.field===field).flatMap(b=>{
+    const evidence=snapshots.get(b.snapshotId);return evidence?[evidence.url,evidence.finalUrl]:[];
+  }));
+  const citations=[...draft.findings.map((finding,index)=>['research.findings.'+index,finding.url]),
+    ...Object.entries(draft.practicalPatch||{}).map(([key,fact])=>['practical.'+key,fact.source])];
+  return citations.filter(([field,url])=>{const address=citedAddress(url);return !address||!supported(field).has(address);}).map(([field])=>field);
+}
 export function validateBindings(queue,draft,approved=[]){
   if(!Array.isArray(draft.bindings)||!Array.isArray(draft.snapshots))throw Error('Draft needs captured evidence bindings');
   assertCaptured(queue,{snapshots:draft.snapshots});
@@ -213,6 +230,8 @@ export function validateBindings(queue,draft,approved=[]){
       if(numbers.some(n=>!quoted.includes(n)))throw Error('New price numbers require explicit source evidence, not a translation of another claim');
     }
   }
+  const unbound=citationProblems(draft);
+  if(unbound.length)throw Error(`Citation does not match its evidence binding: ${unbound.join(', ')}`);
   if(draft.reviewCoverage)fields.push('review.coverage');
   return fields;
 }

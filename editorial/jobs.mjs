@@ -11,7 +11,7 @@ const decode=row=>row?{...row,payload:JSON.parse(row.payload)}:null;
 export function failureCategory(message){
   if(/rate.?limit|quota|too many requests|usage limit|HTTP 429/i.test(message))return 'provider-limit';
   if(/authentication|unauthorized|invalid.*(?:key|token)|not logged in|HTTP 401|model.*(?:not found|unavailable)/i.test(message))return 'provider-configuration';
-  if(/Invalid field (?:claim|value)|Public text must be English|Unsupported patch field|Missing evidence binding|wrong worker project|wrong.*revision|does not match.*claim|Conflicting approved scalar claims|Worker input exceeds budget|checked requires a current full-card review/i.test(message))return 'contract';
+  if(/Invalid field (?:claim|value)|Public text must be English|Unsupported patch field|Missing evidence binding|Citation does not match its evidence binding|wrong worker project|wrong.*revision|does not match.*claim|Conflicting approved scalar claims|Worker input exceeds budget|checked requires a current full-card review/i.test(message))return 'contract';
   return null;
 }
 
