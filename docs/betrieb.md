@@ -16,6 +16,7 @@ Internet ──80/443──> Caddy (Container "caddy")  ──intern──> app 
 - `Dockerfile`: baut die Seite mit `node build.mjs --public` und startet `server.mjs` als unprivilegierter Benutzer. Der Healthcheck fragt `/healthz` ab.
 - `compose.yaml`: zwei Dienste, `app` und `caddy`, Projektname `minitandem`. Nur Caddy veröffentlicht Ports. Der Zustand liegt im benannten Volume `minitandem_state`.
 - `docker/Caddyfile`: `www.minitandem.ch` leitet dauerhaft auf `minitandem.ch` um; `minitandem.ch` wird mit `encode zstd gzip` ausgeliefert, die Editor-Pfade (`/admin`, `/api/v1/admin/*`) sind am Proxy gesperrt (404), alles andere geht an `app:8787`.
+- `ops/deploy.sh <Commit>`: das Update mit Prüfungen, vom Rechner des Eigentümers aus (siehe «Update»).
 - `docker/entrypoint.sh`: legt beim ersten Start **genau eine Demo-Familie** an (Schlüssel in `/state/demo-family-key.txt`) und startet den Dienst. Ein **Editor-Schlüssel** (`server.mjs new-admin`) wird auf dem Server **nie** erzeugt; ohne ihn antworten alle Editor-Routen mit 401.
 - Die redaktionelle Pipeline (`editorial/cycle.mjs`, die Worker) läuft **nicht** auf dem Server, sondern auf dem Rechner des Eigentümers. Der Server hat weder die privaten Daten noch Modell-Zugänge.
 
@@ -61,6 +62,34 @@ Nichts davon ist geheim.
 
 ## Update
 
+Ein Update ist ein Aufruf auf dem Rechner des Eigentümers, mit dem **vollständigen** Commit (40 Zeichen). Es gibt keinen Standardwert; der redaktionelle Zyklus startet das Skript nie.
+
+```
+git push                                     # GitHub-CI muss für diesen Commit durchlaufen
+ops/deploy.sh "$(git rev-parse HEAD)"        # oder ein anderer Commit, der auf GitHub liegt
+```
+
+Gebraucht werden auf dem Mac `gh` (angemeldet), `ssh` mit dem Schlüssel `~/.ssh/minitandem_ed25519` und `curl`. Das Skript tut der Reihe nach Folgendes und hält an der ersten Stelle an, die nicht stimmt:
+
+1. **CI.** `gh run list --repo avsomg/minitandem --commit <Commit>`: Es muss mindestens einen Lauf geben, und jeder Lauf muss erfolgreich sein. Sonst Abbruch, ohne den Server zu berühren.
+2. **Ist-Zustand.** Auf dem Server liest es den Tag aus `.env`, den Checkout (Branch oder Commit) und die Zahl der Karten aus dem öffentlichen `/healthz`. Ein Checkout mit Änderungen oder ein nicht antwortendes `/healthz` führen zum Abbruch.
+3. **Bauen.** `git fetch`, `git checkout --detach <Commit>`, dann `docker compose build app` unter dem neuen Tag. Der laufende Container wird dabei nicht angefasst. Ist der Commit schon live, tut es nichts.
+4. **Vorschau.** Das neue Image läuft einmal als Container `minitandem-preview` auf `127.0.0.1:18788` des Servers, nur dort erreichbar, mit denselben Grenzen wie der Dienst (`read_only`, keine Capabilities, 512 MB). Sein `/state` ist ein flüchtiges tmpfs: Das Volume `minitandem_state` ist **nicht** eingehängt, die Vorschau liest und schreibt also keine Familiendaten; die Demo-Familie, die der Entrypoint dort anlegt, verschwindet mit dem Container.
+5. **Schrumpf-Schutz.** Hat die Vorschau mehr als 15 % weniger Karten als die laufende Seite (`records` im `/healthz`), bricht das Skript ab. 321 Karten live: 273 sind erlaubt, 272 nicht. Fehlt der Vorschau die `revision` (ein Commit von vor `build-info.json`), bricht es ebenfalls ab.
+6. **Umschalten.** Die Vorschau wird entfernt, der Tag in `.env` gesetzt und `docker compose up -d --no-build` gestartet, also mit genau dem Image, das in der Vorschau lief. Das Skript wartet, bis der Container `healthy` meldet (bis zu 90 Sekunden), und prüft dann, dass das öffentliche `https://minitandem.ch/healthz` dieselbe `revision` und denselben `commit` zeigt wie die Vorschau. Caddy braucht dafür bis zu 30 Sekunden (sein eigener Health-Check).
+7. **Zurück bei jedem Fehler.** Scheitert etwas nach dem Bauen, entfernt das Skript die Vorschau und stellt den alten Checkout wieder her. Scheitert etwas nach dem Umschalten, setzt es den alten Tag zurück und startet das alte Image wieder (fehlt es, wird es am alten Commit neu gebaut). Das Skript endet in beiden Fällen mit einem Fehlercode.
+
+Am Ende steht der **vorherige Tag** und der Befehl für den Rollback (siehe unten) auf dem Bildschirm, zum Beispiel:
+
+```
+Previous tag: 4befd91 (checkout main)
+Rollback:  ssh -i ~/.ssh/minitandem_ed25519 -o IdentitiesOnly=yes ubuntu@179.237.77.144 "cd /opt/minitandem && git checkout --quiet 'main' && sed ... && { docker compose up -d --no-build || ...; }"
+```
+
+Alles Veränderliche steht am Kopf des Skripts und lässt sich über Umgebungsvariablen ersetzen (`DEPLOY_HOST`, `DEPLOY_KEY`, `DEPLOY_DIR`, `DEPLOY_URL`, `DEPLOY_PORT`, `DEPLOY_MAX_DROP`). Solange auf dem Server noch ein Image von vor `build-info.json` läuft, hat dessen `/healthz` keine `revision`; das Skript schreibt dann `revision none` und macht weiter, die Prüfung am Ende vergleicht nur mit der Vorschau.
+
+**Von Hand** (Rückfall, falls das Skript nicht läuft oder der Zugang zu GitHub fehlt). Die Prüfungen oben entfallen dann, die Vorschau und der Schrumpf-Schutz auch:
+
 ```
 cd /opt/minitandem
 git fetch --tags && git checkout <Tag oder Commit>
@@ -69,9 +98,11 @@ docker compose up -d --build
 curl -fsS https://minitandem.ch/healthz
 ```
 
-Der alte Image-Tag bleibt erhalten; das ist die Grundlage für den Rollback. Das Volume `state` wird bei einem Update nicht angetastet.
+Der alte Image-Tag bleibt erhalten; das ist die Grundlage für den Rollback. Das Volume `state` wird bei einem Update nicht angetastet. `MINITANDEM_TAG` ist zugleich der `commit` im `/healthz`, deshalb immer die kurze Commit-ID eintragen.
 
 ## Rollback
+
+`ops/deploy.sh` macht diese Schritte bei einem Fehler selbst und druckt sie nach einem erfolgreichen Update mit dem richtigen Tag. Von Hand:
 
 ```
 cd /opt/minitandem
@@ -221,6 +252,7 @@ Geprüft auf dem Entwicklungsrechner, ohne Docker:
 - Die Dateien `compose.yaml` und `compose.local.yaml` wurden mit einem YAML-Parser gelesen; Struktur und Regeln (nur Caddy mit Ports, benannte Volumes, `read_only`, Pflichtvariable `ACME_EMAIL`) prüft `docker-files.test.mjs`.
 - `docker/entrypoint.sh` läuft im Test mit einem leeren Zustandsordner: eine Demo-Familie, kein Editor-Schlüssel, `/healthz` antwortet, ein zweiter Start ändert nichts.
 - `ops/healthcheck.sh` läuft im Test gegen einen Wegwerf-Server mit einem Ersatz für `sendmail`: eine Mail beim Ausfall, eine bei der Rückkehr, sonst keine.
+- `ops/deploy.sh` läuft im Test (`deploy.test.mjs`) mit Ersatzprogrammen für `ssh`, `docker`, `gh` und `curl`; der «Server» ist ein lokaler Git-Klon. Geprüft sind: Abbruch ohne genau einen vollständigen Commit, ohne grüne CI (kein, laufender oder fehlgeschlagener Lauf), bei 20 % weniger Karten (und die Grenze 272/273 von 321), bei geändertem Checkout; die Vorschau ohne Volume auf `127.0.0.1`; der Tag und der Rollback-Befehl am Ende; die Rückkehr zum alten Tag und Checkout, wenn der neue Container nicht `healthy` wird, das öffentliche `/healthz` die Vorschau nicht zeigt oder der Build scheitert.
 - Die Regeln aus `.dockerignore` werden im Test nachgebildet; kein privater Pfad der Audit-Liste gelangt in den Build-Kontext.
 
 Auf dem Server, am 14. Oktober 2026:
@@ -230,4 +262,4 @@ Auf dem Server, am 14. Oktober 2026:
 - Sichern und Wiederherstellen wurden geübt (siehe dort).
 - Überwachung per E-Mail eingerichtet: Eine Testmail sowie je eine Mail für Ausfall und Rückkehr wurden über `mail.infomaniak.com:587` verschickt, vom Relay angenommen und kamen an; der Timer läuft alle fünf Minuten.
 
-**Nicht geprüft:** ein Neustart des ganzen Servers (die Container haben `restart: unless-stopped`, Docker startet beim Booten) und das Erneuern eines Zertifikats. Die jetzigen Zertifikate gelten bis zum 12. Januar 2027; Caddy erneuert sie vorher selbst, voraussichtlich ab Mitte Dezember 2026.
+**Nicht geprüft:** `ops/deploy.sh` gegen den echten Server und echtes Docker (der erste Lauf geschieht mit dem Eigentümer), die tmpfs-Optionen der Vorschau (`uid=1000,gid=1000`) auf dem Server, ein Neustart des ganzen Servers (die Container haben `restart: unless-stopped`, Docker startet beim Booten) und das Erneuern eines Zertifikats. Die jetzigen Zertifikate gelten bis zum 12. Januar 2027; Caddy erneuert sie vorher selbst, voraussichtlich ab Mitte Dezember 2026.
