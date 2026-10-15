@@ -63,8 +63,8 @@ npm run demo           # the pipeline rejecting a wrong result, offline, in abou
 npm run build          # the site into .publish/
 npm run test:browser   # age and mobile checks in WebKit; needs Playwright, see above
 npm start              # the small service on http://127.0.0.1:8787 (family sync, corrections)
-npm run audit:public   # no Cyrillic, no earlier working title, no personal wording, no private contacts; needs a built site (npm run build)
-npm run scan:public    # secrets, personal paths, contact data outside the catalogue
+npm run audit:public   # no Cyrillic, no earlier working title, no personal wording, no private contacts; needs a built site (npm run build); CI runs it
+npm run scan:public    # secrets, personal paths, contact data outside the catalogue; CI runs it
 ```
 
 **The demo.** `npm run demo` runs three invented training cards through the real controller code with a temporary queue: a search worker extracts claims with exact quotes from a captured page; the verifier rejects one claim whose quote does not support it; the controller refuses a draft that builds on that claim; a corrected draft is approved and applied; the editorial release gates pass. The web and the models are replaced by recorded answers: the page is a saved file, and the worker answers are fixtures written by hand to follow the worker contract. No model produced them. The QA stage of the release check is queued but not run. Nothing touches the network or the real queue.

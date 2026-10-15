@@ -18,7 +18,10 @@ Internet ──80/443──> Caddy (Container "caddy")  ──intern──> app 
 - `docker/Caddyfile`: `www.minitandem.ch` leitet dauerhaft auf `minitandem.ch` um; `minitandem.ch` wird mit `encode zstd gzip` ausgeliefert, die Editor-Pfade (`/admin`, `/api/v1/admin/*`) sind am Proxy gesperrt (404), alles andere geht an `app:8787`.
 - `ops/deploy.sh <Commit>`: das Update mit Prüfungen, vom Rechner des Eigentümers aus (siehe «Update»).
 - `docker/entrypoint.sh`: legt beim ersten Start **genau eine Demo-Familie** an (Schlüssel in `/state/demo-family-key.txt`) und startet den Dienst. Ein **Editor-Schlüssel** (`server.mjs new-admin`) wird auf dem Server **nie** erzeugt; ohne ihn antworten alle Editor-Routen mit 401.
-- Die redaktionelle Pipeline (`editorial/cycle.mjs`, die Worker) läuft **nicht** auf dem Server, sondern auf dem Rechner des Eigentümers. Der Server hat weder die privaten Daten noch Modell-Zugänge.
+- Die redaktionelle Pipeline (`editorial/cycle.mjs`, die Worker) läuft **nicht** auf dem Server, sondern auf dem Rechner des Eigentümers; der Server hat keine Modell-Zugänge. Zu unterscheiden ist, was wo liegt:
+  - **App-Image** (Container `app`): die öffentliche Seite und der Dienst, **keine** privaten redaktionellen Daten. Das Image wird mit `--public` aus einem sauberen Checkout gebaut, und `.dockerignore` hält alle privaten Pfade aus dem Build-Kontext.
+  - **Volume `minitandem_state`** (Familien-Zustand): gehashte Familienschlüssel, Profile, eingereichte Korrekturen und die Demo-Familie. Das sind Familiendaten, keine redaktionellen Daten; sie gehören dem Dienst und werden von `ops/backup.sh` gesichert (Abschnitt «Sichern und Wiederherstellen des State-Volumes»).
+  - **Host-Verzeichnis `~/editorial-backups`** (ausserhalb von Docker, Benutzer `ubuntu`, Modus 700): die tägliche Kopie des **privaten redaktionellen Zustands** vom Mac des Eigentümers (Warteschlange, Belege, Quelltexte), ohne Familiendaten. Kein Container bindet es ein (Abschnitt «Redaktioneller Zyklus: Überwachung und Kopie ausser Haus»).
 
 ## Vorbereitung (einmalig)
 
@@ -43,7 +46,7 @@ curl -fsS https://minitandem.ch/healthz     # {"status":"ok","records":...,"revi
 
 Beim ersten Start holt Caddy die Zertifikate; das dauert meist unter einer Minute (`docker compose logs caddy`). Den Schlüssel der Demo-Familie zeigt `docker compose exec app cat /state/demo-family-key.txt`. Er schützt nur Demo-Daten.
 
-Die Seite wird beim Bauen des Images erzeugt, **ohne** die Publikations-Gates (sie brauchen private Belege, die nicht im Repository liegen; die Build-Ausgabe sagt `publicationGates: skipped`). Diese Gates laufen vor dem Commit auf dem Rechner des Eigentümers. Vor dem Deployment also nur Stände aus dem Repository nehmen, die dort geprüft wurden.
+Die Seite wird beim Bauen des Images erzeugt, **ohne** die Publikations-Gates (sie brauchen private Belege, die nicht im Repository liegen; die Build-Ausgabe sagt `publicationGates: skipped`). Diese Gates laufen vor dem Commit auf dem Rechner des Eigentümers. Vor dem Deployment also nur Stände aus dem Repository nehmen, die dort geprüft wurden. Die öffentlichen Prüfungen `npm run audit:public` und `npm run scan:public` brauchen keine privaten Belege und laufen in der CI; `ops/deploy.sh` verlangt für den Commit eine grüne CI.
 
 ## Welche Version läuft?
 

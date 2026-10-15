@@ -21,8 +21,12 @@ routine scheduled work.
 Search produces candidates and field claims. Verify produces receipts, disputes,
 proposed corrections and claim/patch verdicts. Arbitrate produces sourced rulings.
 Editor produces drafts. The controller alone applies an independently approved
-draft to approved-updates.json. QA runs code and mobile tests. Release uses the
-tested manifest and the configured Minitandem Vercel identity.
+draft to approved-updates.json. QA runs code and mobile tests, then the strict
+public audit and the public scan. A tested manifest publishes nothing. The site
+at minitandem.ch goes live only through ops/deploy.sh, run by the owner with a
+full commit that passed CI (docs/betrieb.md). The queue's release job
+(release.mjs publish, a Vercel project) is the earlier path and not how the
+site is updated; no worker or cycle runs either.
 
 Keep exact source URLs, dates, units, quotes and offer identity. Distinguish venue
 context from a class or event. Missing evidence stays unknown. Website language
