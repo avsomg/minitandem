@@ -74,13 +74,14 @@ test('the time a schedule gives for one weekday is read only when the text says 
 test('under a day filter a row marks weekly hours and shows the slot of the matching weekday, else the whole schedule',()=>{
   const {window:W,t,I}=loadStack();
   const cards=[card('Cafe',{format:'self',category:'dining',days:[1,2,3,4,5,6,7],schedule:'Mon–Sat 07:00–21:00; Sun 07:00–19:00'}),
-    card('Group',{days:[7],schedule:'2nd and 4th Sunday 10:00–12:00'})];
+    card('Group',{days:[7],schedule:'Sun 10:00–12:00, except in school holidays'}),card('Second and fourth',{days:[7],schedule:'2nd and 4th Sunday 10:00–12:00'})];
   const C=K.create({activities:cards,regions:{sense:'Sense'},towns:{},planning:P,clock:{today:()=>'2026-10-18',nowHm:()=>'10:00'},t});
   const F=W.MinitandemFormat.create({t,locale:I.locale}),state={view:'catalog',f:{...K.defaultFilters(),when:'today'},near:null,weekOpen:new Set()};
   const V=W.MinitandemViews.create({t,C,P,X:W.MinitandemExchange,F,store:{personal:{favorites:[],age:null}},state:()=>state});
   const html=V.rows(C.filter(state.f,{view:'catalog'}));
   assert.ok(html.includes(`<b>${V.esc(t('week.hoursMark'))}</b> · <span>Sun 07:00–19:00</span>`),'the Sunday slot, not Monday to Saturday');
-  assert.ok(html.includes(`<b>${V.esc(t('week.regularMark'))}</b> · <span>2nd and 4th Sunday 10:00–12:00</span>`),'a rule the slot cannot express: the whole schedule');
+  assert.ok(html.includes(`<b>${V.esc(t('week.regularMark'))}</b> · <span>Sun 10:00–12:00, except in school holidays</span>`),'a rule the slot cannot express: the whole schedule');
+  assert.ok(!html.includes('2nd and 4th Sunday'),'a card that meets only in certain weeks is not offered for a particular Sunday');
   state.f.when='';
   assert.ok(!V.rows(cards).includes(V.esc(t('week.hoursMark'))),'without a day filter the row is as before');
 });

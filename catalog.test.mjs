@@ -856,8 +856,9 @@ test('every filter option selects only cards that have the property, and some ca
   const weekday=date=>new Date(date+'T12:00:00Z').getUTCDay()||7;
   // 14 October 2026 is a Wednesday and the test clock stands at 10:00, so the weekend is 17 and 18 October.
   const dated=(a,from,to)=>a.events.some(e=>e.date>=from&&e.date<=to&&(e.date!=='2026-10-14'||!e.end||e.end>='10:00'));
-  // Today, this weekend and the next 7 days also count a card without dated sessions on its weekdays while its schedule is valid.
-  const repeats=(a,dates)=>!a.events.length&&dates.some(d=>a.days.includes(weekday(d))&&(!a.scheduleValidThrough||a.scheduleValidThrough>=d));
+  // Today, this weekend and the next 7 days also count a card without dated sessions on its weekdays while its schedule is valid and does
+  // not limit that weekday ("1st and 3rd Wed", every other week, dates not confirmed: K.restrictedOn, tested on its own in near-week.test.mjs).
+  const repeats=(a,dates)=>!a.events.length&&dates.some(d=>a.days.includes(weekday(d))&&(!a.scheduleValidThrough||a.scheduleValidThrough>=d)&&!K.restrictedOn(a.schedule,weekday(d)));
   const days=(from,n)=>Array.from({length:n},(_,i)=>new Date(Date.parse(from+'T12:00:00Z')+i*864e5).toISOString().slice(0,10));
   const cases=[
     ['category',f=>f.categories.add('water'),a=>a.category==='water'],

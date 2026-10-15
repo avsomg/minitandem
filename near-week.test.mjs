@@ -163,6 +163,92 @@ test('this week: dated sessions with their time; regular groups and places on th
   assert.deepEqual(ids(C.weekCards(week)).sort(),['Dated','Early','Ending place','Later group','Overdue place','Unsure group','Wednesday group','Wednesday lesson','Wednesday place']);
 });
 
+test('a weekday in the day facet is no weekly opening when the schedule limits it: first and third week, every other week, listed or unconfirmed dates',()=>{
+  const group=(id,schedule,extra={})=>card(id,{format:'group',days:[3],schedule,...extra});
+  const weekly=[group('Weekly','Wed 09:00–11:00'),group('Weekly and first','Wed 09:00–11:00 · 1st Wed 14:00–16:00'),group('Swiss time','Wed 09.30–11.00'),group('Last entry','Wed 09:00–13:00, last entry 12:30'),
+    card('Open place',{format:'self',days:[1,2,3,4,5,6,7],schedule:'Open playground; opening hours are not published'})];
+  const limited=[group('First and third','1st and 3rd Wed 15:00–18:00'),group('First only','first Wed 17:30–18:30'),group('Every other','Every other Wednesday 09:00–10:00'),
+    group('Once a month','Once a month on Wednesdays, 09:00–11:00'),group('Unconfirmed','Wed 09:00–11:00; autumn dates not confirmed'),group('Published dates','Wed 09:00–11:00 · on published dates'),
+    group('Listed dates','Sat 10.10. and 24.10., 09:30–11:30',{days:[6]})];
+  // The real Plaffeien wording: Saturday every week, Tuesday only the first of the month.
+  const mixed=card('Mixed',{format:'self',days:[2,6],schedule:'Sat 09:30–11:00 · first Tue 17:30–18:30; except holidays and special closures'});
+  // Dates that are confirmed are what counts, whatever the wording says.
+  const dated=group('With session','1st and 3rd Wed 15:00–18:00',{events:[{date:'2026-10-14',start:'15:00',end:'18:00'}]});
+  const C=catalogue([...weekly,...limited,mixed,dated]);
+  const when=when=>ids(C.filter({...K.defaultFilters(),when})).sort();
+  // Wednesday 14 October: only the weekly ones and the session, not the cards that meet in certain weeks only (and not by guessing which).
+  assert.deepEqual(when('today'),['Last entry','Open place','Swiss time','Weekly','Weekly and first','With session']);
+  assert.deepEqual(plain(C.whenInfo(dated,{when:'today'})),{date:'2026-10-14',kind:'session'});
+  assert.equal(C.whenInfo(limited[0],{when:'today'}),null);
+  // The week and the weekend: Saturday keeps Mixed (weekly), loses the listed dates; the Tuesday of Mixed is not claimed.
+  assert.deepEqual(when('weekend'),['Mixed','Open place']);
+  const week=C.week(C.activities,K.defaultFilters());
+  assert.deepEqual(ids(week.find(d=>d.date==='2026-10-17').places).sort(),['Mixed','Open place']);
+  assert.deepEqual(ids(week.find(d=>d.date==='2026-10-17').regular),[],'listed dates are not turned into a Saturday');
+  assert.deepEqual(ids(week.find(d=>d.date==='2026-10-20').places),['Open place'],'the third Tuesday');
+  assert.deepEqual(ids(week.find(d=>d.date==='2026-10-14').regular).sort(),['Last entry','Swiss time','Weekly','Weekly and first'].sort());
+  // They are still found by ordinary weekday search, and by text.
+  const wed=ids(C.filter({...K.defaultFilters(),days:new Set([3])}));
+  for(const a of [...limited.filter(x=>x.days.includes(3)),dated])assert.ok(wed.includes(a.id),a.id+' by weekday');
+  assert.ok(ids(C.filter({...K.defaultFilters(),days:new Set([2])})).includes('Mixed'),'Mixed by its Tuesday');
+  assert.ok(ids(C.filter({...K.defaultFilters(),days:new Set([6])})).includes('Listed dates'));
+  // A translated copy keeps the English card behind it; the wording is read from there.
+  const german=Object.defineProperty({...limited[0],schedule:'1. und 3. Mi 15:00–18:00'},'english',{value:limited[0]});
+  assert.equal(catalogue([german]).repeatsOn(german,'2026-10-14'),false);
+  const translated=Object.defineProperty({...weekly[0],schedule:'1. und 3. Mi 09:00–11:00'},'english',{value:weekly[0]});
+  assert.equal(catalogue([translated]).repeatsOn(translated,'2026-10-14'),true,'the English card decides, not the translation');
+});
+
+test('restrictedOn reads one weekday of a schedule: restricted only when that weekday is named in such wording or the dates are unconfirmed',()=>{
+  const r=K.restrictedOn;
+  // Restricted.
+  assert.equal(r('Sat 09:30–11:00 · first Tue 17:30–18:30; except holidays',2),true);
+  assert.equal(r('Sat 09:30–11:00 · first Tue 17:30–18:30; except holidays',6),false,'Saturday of the same text is weekly');
+  assert.equal(r('Tue 16:30–17:30 · 1st and 3rd Thu 10:00–10:30 · 1st and 3rd Sat 09:30–10:30',2),false);
+  assert.equal(r('Tue 16:30–17:30 · 1st and 3rd Thu 10:00–10:30 · 1st and 3rd Sat 09:30–10:30',4),true);
+  assert.equal(r('Tue 16:30–17:30 · 1st and 3rd Thu 10:00–10:30 · 1st and 3rd Sat 09:30–10:30',6),true);
+  assert.equal(r('1st and 3rd Fridays · 09:30–11:30 and 13:30–15:30',5),true,'the days and the times in separate parts');
+  assert.equal(r('2nd and 4th Sat 09–11:30',6),true);
+  assert.equal(r('Last Saturday of the month 10:00',6),true);
+  assert.equal(r('Every other Friday 09:00–10:00',5),true);
+  assert.equal(r('Fridays, fortnightly, 09:00–10:00',5),true);
+  assert.equal(r('Thursday 16:00–17:00, once a month',4),true);
+  assert.equal(r('Sat 10.10. and 24.10., 09:30–11:30',6),true);
+  assert.equal(r('Thu 09:30–11:00; check dates and school holidays against the programme',4),true);
+  assert.equal(r('Autumn dates are not confirmed. The last published session is 22.08.2026',6),true);
+  assert.equal(r('Wed 09:00–11:00 · on the listed dates from 7 October to 16 December 2026',3),true);
+  // Not restricted: a weekly slot, a plain mention beside a restricted one, no mention at all, ranges of dates, times written with a dot.
+  for(const [text,day] of [['Wed 09:00–11:00',3],['Mon–Fri 09–22, Sat–Sun 09–20',6],['Wed 09:00–11:00 · 1st Wed 14:00–16:00',3],['Daily 10–18 until 31.10; last entry one hour before closing',2],
+    ['Open playground; opening hours are not published',4],['',1],[null,1],['Sat 03.10.–28.11.2026 09:30–11:30',6],['Mon 26.10–07.12.2026: 17:30',1],['Sat 09.10–11.00',6],
+    ['Mon 09:00–12:00 and 14:00–17:00. Closed 16–21.11.2026, 08.12 and 24.12.2026–05.01.2027',1],['Friday 15:00–17:30; except school holidays and public holidays',5],
+    ['Wed–Sun 13:00–17:00 according to the published 2026 calendar',3]])assert.equal(r(text,day),false,String(text)+' '+day);
+});
+
+test('the real Ludothek Plaffeien is not offered for the third Tuesday, nor the first, but stays in the Saturday and weekday results',()=>{
+  const at=(today,nowHm='17:35')=>{const stack=loadStack({today,nowHm});return {C:stack.C,K:stack.K,card:stack.byId.get('ludo-plaffeien')};};
+  const third=at('2026-10-20');
+  assert.match(third.card.schedule,/Sat 09:30–11:00 · first Tue 17:30–18:30/);
+  assert.deepEqual(plain(third.card.days),[2,6]);assert.deepEqual(plain(third.card.events),[]);
+  // Tuesday 20 October is the third Tuesday: not "Today", and not a repeating place that day.
+  assert.equal(third.K.weekdayOf('2026-10-20'),2);
+  assert.equal(third.C.whenInfo(third.card,{when:'today'}),null);
+  assert.equal(third.C.repeatsOn(third.card,'2026-10-20'),false);
+  assert.ok(!ids(third.C.filter({...third.K.defaultFilters(),when:'today'})).includes('ludo-plaffeien'));
+  // The Saturday of that week is a weekly slot: This week and the weekend still offer it, as a place to visit.
+  for(const when of ['week','weekend'])assert.deepEqual(plain(third.C.whenInfo(third.card,{when})),{date:'2026-10-24',kind:'place'},when);
+  const week=third.C.week(third.C.activities,third.K.defaultFilters());
+  assert.deepEqual(plain(week.filter(d=>[...d.regular,...d.places].includes(third.card)).map(d=>d.date)),['2026-10-24']);
+  // Ordinary weekday search finds it under Tuesday and Saturday.
+  for(const day of [2,6])assert.ok(ids(third.C.filter({...third.K.defaultFilters(),days:new Set([day])})).includes('ludo-plaffeien'),'weekday '+day);
+  // Tuesday 6 October is the first Tuesday of the month, which is what the text says. The text is not turned into dates, so it is not claimed then either.
+  const first=at('2026-10-06');
+  assert.equal(first.K.weekdayOf('2026-10-06'),2);
+  assert.equal(first.C.whenInfo(first.card,{when:'today'}),null);
+  // On a Saturday the weekly slot is offered.
+  const saturday=at('2026-10-24','10:00');
+  assert.deepEqual(plain(saturday.C.whenInfo(saturday.card,{when:'today'})),{date:'2026-10-24',kind:'place'});
+});
+
 test('this week follows the weekday and "when" filters by leaving other days out, and the other filters through the list',()=>{
   const regular=card('Regular',{days:[1,2,3,4,5,6,7]});
   const C=catalogue([regular]);
@@ -190,12 +276,14 @@ test('this week follows the weekday and "when" filters by leaving other days out
   const near=R.week(list(),state.f,{age:3,near:centre});
   for(const d of near)for(const part of [d.regular,d.places])for(let i=1;i<part.length;i++)assert.ok(nearKey(R,part[i-1],centre)<=nearKey(R,part[i],centre),d.date);
   // Without filters, a Wednesday splits the many places from the groups and courses, and lists exactly the cards the list offers
-  // for that weekday, "check details" included; each row carries the status mark of the list.
+  // for that weekday, "check details" included, except cards whose schedule limits that weekday (the 1st and 3rd Wednesday is not every
+  // Wednesday); each row carries the status mark of the list.
   const all=loadStack();
   const listed=all.list(),wednesday=all.C.week(listed,all.state.f).find(d=>d.weekday===3);
   assert.ok(wednesday.places.length>wednesday.regular.length&&wednesday.regular.length>=10);
-  const expected=listed.filter(a=>!a.events.length&&a.days.includes(3)&&(!a.scheduleValidThrough||a.scheduleValidThrough>=wednesday.date));
+  const expected=listed.filter(a=>!a.events.length&&a.days.includes(3)&&(!a.scheduleValidThrough||a.scheduleValidThrough>=wednesday.date)&&!all.K.restrictedOn(a.schedule,3));
   assert.deepEqual(ids([...wednesday.regular,...wednesday.places]).sort(),ids(expected).sort());
+  assert.ok(listed.some(a=>a.id==='ludo-trottinette-chatel')&&!ids(wednesday.regular).includes('ludo-trottinette-chatel'),'1st and 3rd Wednesday: in the list, not under every Wednesday');
   assert.ok(wednesday.regular.some(a=>all.C.statusOf(a,null)==='check'),'groups that need checking are shown');
   for(const a of wednesday.regular)assert.ok(all.V.row(a).includes(all.V.esc(all.t('status.'+all.C.statusOf(a,null)+'.short'))),a.id);
 });

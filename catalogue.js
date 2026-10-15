@@ -55,13 +55,9 @@
     ['fri', 'friday', 'fridays'], ['sat', 'saturday', 'saturdays'], ['sun', 'sunday', 'sundays']];
   const dayOfWord = word => DAY_WORDS.findIndex(words => words.includes(String(word).toLowerCase())) + 1;
   const CONNECTORS = ['–', '-', ',', '/', '&', 'and', 'to'];
-  // The days named just before a time: "Sat–Sun", "Tue, Thu, Fri", "Monday to Saturday", "Daily".
-  function daysBefore(head) {
-    const tokens = head.match(/[A-Za-z]+|[–\-,/&]/g) || [];
-    let start = tokens.length;
-    while (start > 0 && (dayOfWord(tokens[start - 1]) || CONNECTORS.includes(tokens[start - 1].toLowerCase()))) start--;
-    const spec = tokens.slice(start), days = new Set();
-    if (!spec.some(dayOfWord)) return /\b(?:daily|every day)\s*$/i.test(head) ? new Set(DAY_KEYS) : null;
+  // The days a run of day words stands for: "Sat–Sun" is 6 and 7, "Tue, Thu" is 2 and 4.
+  function expandDays(spec) {
+    const days = new Set();
     for (let i = 0; i < spec.length; i++) {
       const day = dayOfWord(spec[i]); if (!day) continue;
       const next = (spec[i + 1] || '').toLowerCase(), end = ['–', '-', 'to'].includes(next) && dayOfWord(spec[i + 2] || '');
@@ -69,13 +65,24 @@
     }
     return days;
   }
+  // The days named just before a time: "Sat–Sun", "Tue, Thu, Fri", "Monday to Saturday", "Daily".
+  function daysBefore(head) {
+    const tokens = head.match(/[A-Za-z]+|[–\-,/&]/g) || [];
+    let start = tokens.length;
+    while (start > 0 && (dayOfWord(tokens[start - 1]) || CONNECTORS.includes(tokens[start - 1].toLowerCase()))) start--;
+    const spec = tokens.slice(start);
+    if (!spec.some(dayOfWord)) return /\b(?:daily|every day)\s*$/i.test(head) ? new Set(DAY_KEYS) : null;
+    return expandDays(spec);
+  }
   const TIME = String.raw`\d{1,2}(?::\d{2})?\s*[–-]\s*\d{1,2}(?::\d{2})?`;
   const TIMES = new RegExp(String.raw`(?<![\d.:])${TIME}(?:\s*(?:,|and|&|or|/)\s*${TIME})*(?![\d:]|\.\d)`, 'g');
   // A day and month in the text ("until 31.10", "from 01.11.2026") as a date of the given year.
   const dayMonth = (match, year) => `${match[3] || year}-${match[2].padStart(2, '0')}-${match[1].padStart(2, '0')}`;
+  // A schedule in its parts: "Sat 09:30–11:00 · first Tue 17:30–18:30; except holidays" is three.
+  const clausesOf = schedule => String(schedule || '').split(/\s*(?:;|·|\.\s|\n)\s*/);
   function scheduleSlot(schedule, weekday, date = '') {
     const hits = [];
-    for (const clause of String(schedule || '').split(/\s*(?:;|·|\.\s|\n)\s*/)) {
+    for (const clause of clausesOf(schedule)) {
       let last = 0;
       for (const match of clause.matchAll(TIMES)) {
         const days = daysBefore(clause.slice(last, match.index));
@@ -90,6 +97,42 @@
       }
     }
     return hits.length === 1 ? hits[0] : null;
+  }
+  // Every weekday one clause names: "Mon, Wed 09:00–18:00", "Sat–Sun", "1st and 3rd Fridays", "Daily".
+  function clauseDays(clause) {
+    const tokens = clause.match(/[A-Za-z]+|[–\-,/&]/g) || [], days = new Set();
+    for (let i = 0; i < tokens.length; i++) {
+      if (!dayOfWord(tokens[i])) continue;
+      let end = i;
+      while (end + 1 < tokens.length && (dayOfWord(tokens[end + 1]) || CONNECTORS.includes(tokens[end + 1].toLowerCase()))) end++;
+      expandDays(tokens.slice(i, end + 1)).forEach(day => days.add(day));
+      i = end;
+    }
+    if (/\b(?:daily|every day)\b/i.test(clause)) DAY_KEYS.forEach(day => days.add(day));
+    return days;
+  }
+  // The days of the week are a search facet, not a recurrence rule (editorial/field-contract.mjs), so a card counts as meeting every week on a
+  // weekday only when its schedule does not say otherwise. Otherwise: "first Tue", "1st and 3rd Thu", "every other Friday", "once a month", a
+  // listed date ("Sat 10.10.") or dates that are not confirmed. Nothing is turned into dates; such a card is simply not claimed for a given day.
+  const ORDINAL = String.raw`(?:1st|2nd|3rd|4th|5th|first|second|third|fourth|fifth|last)`, WEEKDAY_WORD = DAY_WORDS.flat().join('|');
+  const ORDINAL_DAY = new RegExp(String.raw`\b${ORDINAL}(?:\s*(?:,|and|&|or|/|–|-|to)\s*${ORDINAL})*\s+(${WEEKDAY_WORD})\b`, 'gi');
+  // A weekday followed by a day and month ("Sat 10.10."), not a range ("Sat 03.10.–28.11.") and not a time written with a dot ("Sat 09.30").
+  const DATED_DAY = new RegExp(String.raw`\b(${WEEKDAY_WORD})\b\.?,?\s+(\d{1,2})\.(\d{1,2})(?:\.(?:\d{4})?)?`, 'gi');
+  const datedDays = clause => [...clause.matchAll(DATED_DAY)].filter(m => +m[2] >= 1 && +m[2] <= 31 && +m[3] >= 1 && +m[3] <= 12 && !/^\s*[–-]\s*\d/.test(clause.slice(m.index + m[0].length))).map(m => dayOfWord(m[1]));
+  const OTHER_RHYTHM = /\b(?:every (?:other|second|2nd|two weeks|2 weeks)|alternate|alternating|fortnightly|bi-?weekly|monthly|(?:once|twice) (?:a|per) month)\b/i;
+  const DATES_UNCONFIRMED = /\b(?:(?:on )?(?:the )?(?:published|listed|announced) dates|dates?\b[^.;·]{0,30}?\b(?:not (?:yet )?(?:confirmed|published|set|known)|to be (?:confirmed|announced)|have not been published)|check (?:the )?dates)\b/i;
+  // true: the schedule gives this weekday only in such wording (or says its dates are unconfirmed), so it is no weekly opening.
+  // false: a weekly slot, or the weekday is not mentioned at all (open places keep all seven days). A plain mention beats a restricted one.
+  function restrictedOn(schedule, weekday) {
+    if (DATES_UNCONFIRMED.test(String(schedule || ''))) return true;
+    let named = false, plain = false;
+    for (const clause of clausesOf(schedule)) {
+      if (!clauseDays(clause).has(weekday)) continue;
+      const restricted = new Set([...[...clause.matchAll(ORDINAL_DAY)].map(m => dayOfWord(m[1])), ...datedDays(clause)]);
+      if (OTHER_RHYTHM.test(clause)) clauseDays(clause).forEach(day => restricted.add(day));
+      named = true; if (!restricted.has(weekday)) plain = true;
+    }
+    return named && !plain;
   }
   // What a row shows: one decimal under 1 km, whole kilometres above.
   const roundKm = km => km < 1 ? Math.max(0.1, Math.round(km * 10) / 10) : Math.round(km);
@@ -112,9 +155,12 @@
     // changes by date), else the centre of its town, approximate. null: no point at all, the distance is unknown.
     const exactPoint = a => a.geo && a.addressPrecision !== 'area' && !a.events.some(e => e.address && e.address !== a.address) ? a.geo : null;
     // A date counts for a card when a dated session falls on it (today: one not over yet), or when the card has no dated sessions, names
-    // that weekday and its schedule has not run out by then. The week view and the day filters use the same two tests.
+    // that weekday, its schedule has not run out by then and does not limit that weekday (restrictedOn: "first Tue", every other week,
+    // listed or unconfirmed dates). Such a card stays findable through the weekday filter but is not claimed for a particular day.
+    // The week view and the day filters use the same two tests.
     const sessionsOn = (a, date) => a.events.filter(e => e.date === date && inFuture(e));
-    const repeatsOn = (a, date) => !isArchive(a) && !a.events.length && a.days.includes(weekdayOf(date)) && (!a.scheduleValidThrough || a.scheduleValidThrough >= date);
+    const repeatsOn = (a, date) => !isArchive(a) && !a.events.length && a.days.includes(weekdayOf(date)) && (!a.scheduleValidThrough || a.scheduleValidThrough >= date)
+      && !restrictedOn((a.english || a).schedule, weekdayOf(date));
     function whenDates(mode) {
       if (!DAY_WHEN.includes(mode)) return null;
       const [from, to] = P.range(mode, today()), dates = [];
@@ -226,7 +272,7 @@
     }
     // This week: today and the next six days, for cards that already passed the filters. Each day lists the dated sessions on it
     // (today only those not yet over) and, apart, what repeats on that weekday: cards without dated sessions whose weekdays include
-    // the day and whose schedule has not run out by then (scheduleValidThrough). These are the cards the list offers, with the same
+    // the day, whose schedule has not run out by then (scheduleValidThrough) and does not limit that weekday (repeatsOn). These are cards of the list, with the same
     // status on each row, so "check details" and "for later" stay visible as such. They are split into regular groups, courses and
     // individual offers (regular) and places to visit on your own during their hours (places, format 'self'). Weekly times are never
     // turned into dates, so holidays and breaks are unknown. A day outside a chosen weekday or "when" filter is left out.
@@ -289,6 +335,6 @@
     return {PERSONAL: PERSONAL_KEYS, norm, isArchive, byId, localities, localityByKey, today, inFuture, upcoming, past, venueFor, ageFit, ageRank, bounded, needsReview, statusOf, searchText, setLocalText, matchesSearch, matches, filter,
       sortItems, activeCount, anyFilter, ageSummary, restoreFilters, serializeFilters, placeOptions, townCentre, centreTowns, distanceOf, week, weekCards, whenDates, whenInfo, sessionsOn, repeatsOn, regions, coverage, venues, activities};
   }
-  window.MinitandemCatalogue = {create, defaultFilters, swissNow, norm, canonicalId, isArchive, placeNames, placeKey, bounded, addDays, weekdayOf, distanceKm, roundKm, scheduleSlot, RADIUS_KEYS, DAY_WHEN, ALIASES, MAX_AGE,
+  window.MinitandemCatalogue = {create, defaultFilters, swissNow, norm, canonicalId, isArchive, placeNames, placeKey, bounded, addDays, weekdayOf, distanceKm, roundKm, scheduleSlot, restrictedOn, RADIUS_KEYS, DAY_WHEN, ALIASES, MAX_AGE,
     CATEGORY_KEYS, FORMAT_KEYS, LANGUAGE_KEYS, PRICE_KEYS, STATUS_FILTER_KEYS, PERSONAL_KEYS, WHEN_KEYS, PRESET_KEYS, SCENARIO_KEYS, SORT_KEYS, DAY_KEYS, VIEWS};
 })();
