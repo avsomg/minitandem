@@ -136,10 +136,12 @@ function notifyMac(title,text){
 export const needsOwner=record=>Boolean(record.blocked||record.failedSteps?.length||record.changes?.attention.length||
   record.changes?.circuitOpened.length||record.changes?.loginUnavailable.length||record.batch?.stopReason);
 
-export function runCycle({base=here,home=os.homedir(),now=new Date(),run=runNode,notify=notifyMac,dryRun=false,lock=acquireLock}={}){
+// `runId` is the id ops/cycle-run.mjs gave this invocation (MINITANDEM_CYCLE_RUN_ID); it goes into the record so the heartbeat can tell this run's receipt
+// from an earlier or an overlapping one.
+export function runCycle({base=here,home=os.homedir(),now=new Date(),run=runNode,notify=notifyMac,dryRun=false,lock=acquireLock,runId=process.env.MINITANDEM_CYCLE_RUN_ID}={}){
   const root=path.dirname(base),stateDirectory=path.join(base,'workflow-state','cycle'),stateFile=path.join(stateDirectory,'state.json');
   const queueFile=path.join(base,'workflow-state','jobs.sqlite');
-  const policy=readPolicy(base),record={project:PROJECT_ID,startedAt:now.toISOString()};
+  const policy=readPolicy(base),record={project:PROJECT_ID,startedAt:now.toISOString(),...(/^[A-Za-z0-9._-]{1,64}$/.test(runId||'')?{runId}:{})};
   const finish=()=>{
     if(dryRun)return record;
     fs.mkdirSync(path.join(stateDirectory,'log'),{recursive:true,mode:0o700});

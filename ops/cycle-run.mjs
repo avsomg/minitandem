@@ -4,6 +4,10 @@
 //
 // The heartbeat holds counts, step names and card ids, no card text and no quotes. A heartbeat that cannot be sent is logged and changes nothing:
 // the exit code is always the cycle's own. `--status` and `--dry-run` do not run a cycle and send nothing.
+//
+// Every invocation gets a run id, passed to the cycle in MINITANDEM_CYCLE_RUN_ID; the cycle writes it into its receipt (latest.json). A receipt
+// counts only when it carries this id. A run that exits with 0 and has no such receipt is reported as ok:false, reason "no-receipt".
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -19,10 +23,14 @@ const latestFile=path.join(editorial,'workflow-state','cycle','latest.json');
 // Text that goes into the heartbeat: plain characters only, so the server can read it with grep and sed and print it in a mail.
 const clean=(value,max=120)=>String(value??'').replace(/[^A-Za-z0-9 ,.:;()_/+-]/g,'?').replace(/\s+/g,' ').trim().slice(0,max);
 
-// `record` is editorial/workflow-state/cycle/latest.json as the cycle wrote it; it counts only when this run wrote it
-// (its startedAt is not older than the moment this script started the cycle).
-export function buildHeartbeat({exit,record=null,startedMs,now=new Date()}){
-  const mine=record&&Date.parse(record.startedAt)>=startedMs-1000?record:null;
+// `record` is editorial/workflow-state/cycle/latest.json as the cycle wrote it; it counts only when it carries `runId`, the id of this invocation.
+// What the heartbeat says (ok, reason):
+//   ok:true,  reason:null          the run finished and nothing needs the owner (a pause has paused:true, another cycle running has skipped:"...": both alive and well)
+//   ok:false, reason:"exit"        the cycle exited with a non-zero code
+//   ok:false, reason:"no-receipt"  the cycle exited with 0 but this invocation has no receipt: missing, unreadable, from an earlier run or from an overlapping one
+//   ok:false, reason:"needs-owner" the receipt says something needs the owner (the condition of the cycle's Mac banner: needsOwner in editorial/cycle.mjs)
+export function buildHeartbeat({exit,record=null,startedMs,now=new Date(),runId=null}){
+  const mine=runId&&record&&record.runId===runId?record:null;
   const skipped=mine?.skipped?clean(mine.skipped,60):null;
   const failedSteps=(mine?.failedSteps||[]).slice(0,12).map(step=>clean(step,40));
   const attention=(mine?.changes?.attention||[]).map(job=>clean(job.card,60)).filter(Boolean);
@@ -33,14 +41,16 @@ export function buildHeartbeat({exit,record=null,startedMs,now=new Date()}){
   if(mine?.changes?.circuitOpened?.length)reasons.push('circuit breaker opened');
   if(mine?.changes?.loginUnavailable?.length)reasons.push('Claude login unavailable');
   if(mine?.batch?.stopReason)reasons.push('batch stopped: '+clean(mine.batch.stopReason,40));
+  // A batch lost to a missing Claude login exits with 0, and still must reach the owner.
+  const reason=exit!==0?'exit':!mine?'no-receipt':reasons.length?'needs-owner':null;
   return {
     at:now.toISOString(),
     exit,
-    // ok:false is what the cycle itself calls "needs the owner" (the condition of its Mac banner: cycle.mjs needsOwner), as well as a non-zero exit.
-    // A batch lost to a missing Claude login exits with 0, and still must reach the owner.
-    ok:exit===0&&reasons.length===0,
+    ok:reason===null,
+    reason,
     paused:Boolean(skipped&&/^paused/.test(skipped)),
     skipped,
+    runId:runId?clean(runId,64):null,
     startedAt:new Date(startedMs).toISOString(),
     seconds:Math.max(0,Math.round((now.getTime()-startedMs)/1000)),
     daily:Boolean(mine?.daily),
@@ -58,7 +68,8 @@ const stamp=()=>new Date().toISOString();
 async function main(){
   const args=process.argv.slice(2);
   const startedMs=Date.now();
-  const child=spawn(process.execPath,[cycleScript,...args],{stdio:'inherit'});
+  const runId=crypto.randomUUID();
+  const child=spawn(process.execPath,[cycleScript,...args],{stdio:'inherit',env:{...process.env,MINITANDEM_CYCLE_RUN_ID:runId}});
   for(const signal of ['SIGTERM','SIGINT','SIGHUP'])process.on(signal,()=>child.kill(signal));
   const exit=await new Promise(resolve=>{
     child.on('error',error=>{console.error(`${stamp()} cycle-run: could not start the cycle: ${error.message}`);resolve(127);});
@@ -66,9 +77,10 @@ async function main(){
   });
   if(args.includes('--status')||args.includes('--dry-run'))return exit;
   try{
-    const heartbeat=buildHeartbeat({exit,record:readLatest(),startedMs});
+    const heartbeat=buildHeartbeat({exit,record:readLatest(),startedMs,runId});
+    if(heartbeat.reason==='no-receipt')console.error(`${stamp()} cycle-run: the cycle exited with 0 but left no receipt of run ${runId} (editorial/workflow-state/cycle/latest.json is missing, unreadable or from another run)`);
     const result=await runDropWithRetry('heartbeat',{input:JSON.stringify(heartbeat)+'\n',timeoutMs:60000});
-    if(result.ok)console.error(`${stamp()} cycle-run: heartbeat sent (exit ${exit}, attempt ${result.attempts})`);
+    if(result.ok)console.error(`${stamp()} cycle-run: heartbeat sent (exit ${exit}, ${heartbeat.ok?'ok':'reason '+heartbeat.reason}, attempt ${result.attempts})`);
     else console.error(`${stamp()} cycle-run: heartbeat NOT sent after ${result.attempts} attempt(s): ssh status ${result.status}, ${result.stderr}`);
   }catch(error){
     console.error(`${stamp()} cycle-run: heartbeat NOT sent: ${error.message}`);

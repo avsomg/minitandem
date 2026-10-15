@@ -135,6 +135,21 @@ test('the shared planning state is read after the lock is taken, not before',t=>
   fs.writeFileSync(path.join(f.base,'cycle.pause'),'');
   assert.match(runCycle({base:f.base,home:f.home,now:at(11),lock:()=>assert.fail('paused: no lock'),notify:()=>{}}).skipped,/paused/);
 });
+test('the record carries the run id that ops/cycle-run.mjs gave this invocation, and only a plain id',t=>{
+  const f=fixture(t);f.dailyDone();
+  const run=()=>({code:0,seconds:0,stdout:'',stderr:''});
+  const record=runCycle({base:f.base,home:f.home,now:at(11),run,notify:()=>{},runId:'7f3a0c1e-0000-4000-8000-000000000001'});
+  assert.equal(record.runId,'7f3a0c1e-0000-4000-8000-000000000001');assert.equal(f.latest().runId,record.runId);
+  assert.equal(JSON.parse(fs.readFileSync(path.join(f.base,'workflow-state','cycle','log','2026-10-13.jsonl'),'utf8').trim().split('\n').at(-1)).runId,record.runId);
+  // every kind of receipt has it: a pause, a skip, a block
+  fs.writeFileSync(path.join(f.base,'cycle.pause'),'');
+  assert.equal(runCycle({base:f.base,home:f.home,now:at(11),run,notify:()=>{},runId:'run-2'}).runId,'run-2');assert.equal(f.latest().runId,'run-2');
+  fs.rmSync(path.join(f.base,'cycle.pause'));
+  const release=acquireLock(path.join(f.base,'workflow-state','cycle'));
+  assert.equal(runCycle({base:f.base,home:f.home,now:at(11),run,notify:()=>{},runId:'run-3'}).skipped.length>0,true);assert.equal(f.latest().runId,'run-3');release();
+  // without one, or with something that is not a plain id, there is none in the record
+  for(const runId of [undefined,null,'','has space','x'.repeat(65),'a\nb'])assert.equal('runId' in runCycle({base:f.base,home:f.home,now:at(11),run,notify:()=>{},runId}),false,JSON.stringify(runId));
+});
 test('a failed sync skips the batch, is reported, and still leaves a record',t=>{
   const f=fixture(t),calls=[],notes=[];f.dailyDone();
   const record=runCycle({base:f.base,home:f.home,now:at(11),notify:(...a)=>notes.push(a),
