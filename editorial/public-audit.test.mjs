@@ -3,7 +3,9 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {auditText,auditDirectory,auditWorkspace,groupOf,PRIVATE,privateContactsReport,readReviewedContacts,REVIEWED_CONTACTS,UNREVIEWED_ADVICE} from './public-audit.mjs';
+import {spawnSync} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
+import {auditText,auditDirectory,auditWorkspace,groupOf,PRIVATE,privateContactsReport,readReviewedContacts,REVIEWED_CONTACTS,trackedPrivateFiles,UNREVIEWED_ADVICE} from './public-audit.mjs';
 import {CONTACT_RULE,contactDigest} from './contact-rule.mjs';
 
 // Cyrillic is written as escapes so that this file passes its own audit.
@@ -143,3 +145,85 @@ test('private contacts: every contact of the assembled catalogue must be on the 
   assert.throws(()=>readReviewedContacts(path.join(root,REVIEWED_CONTACTS)),/must hold/);
 });
 
+
+// The check CI and QA run is the command itself: node editorial/public-audit.mjs --strict, here pointed at a copy of the tracked catalogue files
+// (--root), the way a clean clone holds them. Contacts are invented; the real reviewed list is only read, never written.
+const repository=path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+const CATALOGUE_LAYERS=['data.js','data-reviewed.js','data-practical.js','regions.js','data-geo.js','planning.js','exchange.js',
+  '.gitignore','editorial/approved-updates.json',REVIEWED_CONTACTS];
+function cleanClone(t){
+  const root=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-audit-clone-'));
+  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  for(const file of CATALOGUE_LAYERS){fs.mkdirSync(path.dirname(path.join(root,file)),{recursive:true});fs.copyFileSync(path.join(repository,file),path.join(root,file));}
+  fs.mkdirSync(path.join(root,'.publish'));fs.writeFileSync(path.join(root,'.publish','index.html'),'<p>Playgroups</p>');
+  return root;
+}
+const strictAudit=root=>{
+  const result=spawnSync(process.execPath,['editorial/public-audit.mjs','--strict','--root='+root],{cwd:repository,encoding:'utf8'});
+  return {status:result.status,text:result.stdout,report:result.stdout?JSON.parse(result.stdout):null};
+};
+// Adds a contact to the first card of the copied data.js (one JSON object per line).
+function addContact(root,contact){
+  const file=path.join(root,'data.js'),lines=fs.readFileSync(file,'utf8').split('\n');
+  const index=lines.findIndex(line=>/^\s+\{"id":/.test(line)),line=lines[index],comma=line.trimEnd().endsWith(',');
+  const card=JSON.parse(line.trim().replace(/,$/,''));card.contacts=[...(card.contacts||[]),contact];
+  lines[index]=line.match(/^\s*/)[0]+JSON.stringify(card)+(comma?',':'');
+  fs.writeFileSync(file,lines.join('\n'));return {card:card.id,position:`contacts[${card.contacts.length-1}]`};
+}
+test('the strict audit needs no private file: it passes on the tracked catalogue layers and the built site of a clean clone, and fails without the build',t=>{
+  const root=cleanClone(t),run=strictAudit(root);
+  assert.equal(run.status,0,run.text);
+  assert.deepEqual(run.report.failingGroups,[]);assert.deepEqual(run.report['private contacts'].unreviewedContacts,[]);
+  assert.ok(run.report['private contacts'].contacts>0,'the contacts of the assembled catalogue are checked, not skipped');
+  fs.rmSync(path.join(root,'.publish'),{recursive:true});
+  const unbuilt=strictAudit(root);
+  assert.equal(unbuilt.status,1);assert.equal(unbuilt.report.builtSite,'not built');
+});
+test('the strict audit fails on an unreviewed synthetic contact, by card and position only, and passes once a person has reviewed an organisation contact',t=>{
+  const root=cleanClone(t),person={name:'Jane Example',phone:'',email:'jane.example@example.org'};
+  const where=addContact(root,person);
+  const failing=strictAudit(root);
+  assert.equal(failing.status,1);assert.deepEqual(failing.report.failingGroups,['private contacts']);
+  assert.deepEqual(failing.report['private contacts'].unreviewedContacts,[where]);
+  assert.match(failing.report['private contacts'].advice,/check that it is an organisation contact first/);
+  assert.equal(failing.text.includes('Jane')||failing.text.includes('jane.example'),false,'the report holds no contact value');
+  // The audit never approves a digest itself: the reviewed list is unchanged by the failing run, and only a person's entry makes it pass.
+  const listed=path.join(root,REVIEWED_CONTACTS),before=fs.readFileSync(listed,'utf8');
+  assert.equal(strictAudit(root).status,1);assert.equal(fs.readFileSync(listed,'utf8'),before);
+  const list=JSON.parse(before);list.digests=[...list.digests,contactDigest(person)].sort();fs.writeFileSync(listed,JSON.stringify(list));
+  assert.equal(strictAudit(root).status,0);
+  // A reviewed organisation contact on another card passes in the same way.
+  const office={name:'Example Playgroup Office',phone:'026 000 00 00',email:'info@example.org'};
+  const clone=cleanClone(t);addContact(clone,office);
+  assert.equal(strictAudit(clone).status,1);
+  const organisation=JSON.parse(fs.readFileSync(path.join(clone,REVIEWED_CONTACTS),'utf8'));organisation.digests.push(contactDigest(office));
+  fs.writeFileSync(path.join(clone,REVIEWED_CONTACTS),JSON.stringify(organisation));
+  assert.equal(strictAudit(clone).status,0);
+  // A written-out Swiss mobile number fails even for a contact somebody listed.
+  const mobileContact={name:'Office',phone:mobile(),email:''};addContact(clone,mobileContact);
+  const listedMobile=JSON.parse(fs.readFileSync(path.join(clone,REVIEWED_CONTACTS),'utf8'));listedMobile.digests.push(contactDigest(mobileContact));
+  fs.writeFileSync(path.join(clone,REVIEWED_CONTACTS),JSON.stringify(listedMobile));
+  const mobileRun=strictAudit(clone);
+  assert.equal(mobileRun.status,1);assert.equal(mobileRun.text.includes('000 00'),false);
+});
+test('a private path that git tracks fails the strict audit although .gitignore lists it',t=>{
+  const gitReady=spawnSync('git',['--version'],{stdio:'ignore'}).status===0;
+  if(!gitReady){t.skip('git is not available');return;}
+  const root=cleanClone(t),git=(...args)=>spawnSync('git',['-c','commit.gpgsign=false',...args],{cwd:root,encoding:'utf8'});
+  assert.equal(git('init','-q').status,0);
+  const receipts='editorial/external-review-receipts.json';
+  fs.writeFileSync(path.join(root,receipts),'{"schema":1,"receipts":[]}');
+  assert.equal(git('add','-A').status,0);
+  assert.equal(strictAudit(root).status,0,'untracked and ignored, as on the owner\'s machine: fine');
+  assert.equal(git('add','-f',receipts).status,0);
+  const failing=strictAudit(root);
+  assert.equal(failing.status,1);assert.deepEqual(failing.report.trackedPrivateFiles,[receipts]);
+  assert.deepEqual(failing.report.privateNotIgnored,[],'.gitignore does list the file; being tracked is the problem');
+  assert.equal(git('rm','--cached','-q',receipts).status,0);
+  assert.equal(strictAudit(root).status,0);
+});
+test('trackedPrivateFiles names the tracked files that sit on a private path, and only those',()=>{
+  const files=['data.js','editorial/workflow.mjs','editorial/agent-artifacts/a.json','editorial/external-review-receipts.json','editorial/external-review.mjs','archive-ru/x.md','editorial/audit-sample.mjs','editorial/audit/log.json'];
+  assert.deepEqual(trackedPrivateFiles('.',files),['editorial/agent-artifacts/a.json','editorial/external-review-receipts.json','archive-ru/x.md','editorial/audit/log.json']);
+  assert.deepEqual(trackedPrivateFiles(os.tmpdir(),[]),[]);
+});

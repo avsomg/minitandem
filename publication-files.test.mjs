@@ -4,6 +4,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import test from 'node:test';
 import {PRIVATE} from './editorial/public-audit.mjs';
+import {PUBLIC_GATES} from './editorial/agent-run.mjs';
 
 const root=path.dirname(fileURLToPath(import.meta.url));
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');
@@ -87,6 +88,21 @@ test('the CI workflow installs the pipeline dependencies with npm ci and runs np
   assert.match(workflow,/permissions:\s*\n\s+contents: read/);
   assert.doesNotMatch(workflow,/secrets\./);
   assert.doesNotMatch(workflow,/\bdeploy\b|ssh|docker login|vercel/i,'the workflow only tests');
+});
+
+test('CI and the local QA run the strict public audit and the public scan after the build, as the same commands',()=>{
+  const pkg=JSON.parse(read('package.json')),workflow=read('.github/workflows/test.yml');
+  assert.equal(pkg.scripts['audit:public'],'node editorial/public-audit.mjs --strict');
+  assert.equal(pkg.scripts['scan:public'],'node scripts/scan-public.mjs');
+  // CI: npm test builds the site first (pretest), the audit needs that site, and the generated-files check comes last.
+  assert.equal(pkg.scripts.pretest,'npm run build');
+  const order=['run: npm test','run: npm run audit:public','run: npm run scan:public','run: git diff --exit-code'].map(step=>workflow.indexOf(step));
+  assert.ok(order.every(position=>position>0)&&order.every((position,index)=>!index||position>order[index-1]),'npm test, audit:public, scan:public, git diff, in that order');
+  // QA: the same two commands, after its own build and before the tests of the built files.
+  assert.deepEqual(PUBLIC_GATES.map(([,args])=>['node',...args].join(' ')),[pkg.scripts['audit:public'],pkg.scripts['scan:public']]);
+  const source=read('editorial/agent-run.mjs'),qa=source.slice(source.indexOf('export function qaRun'));
+  const steps=["['build',['build.mjs']]",'...PUBLIC_GATES',"['unit',"].map(step=>qa.indexOf(step));
+  assert.ok(steps.every(position=>position>0)&&steps[0]<steps[1]&&steps[1]<steps[2],'QA: build, public gates, unit tests');
 });
 
 test('.gitignore names every private path of the audit, and the account identity of the release',()=>{

@@ -366,11 +366,14 @@ export async function semanticClaims(bundle,card,{judgeImpl=judgeBatch}={}){
     return {status:rows.some(r=>r.status==='service-unavailable')?'unavailable':'completed',rows,requests,estimatedCostUsd,automaticPublication:false};
   }catch{return {status:'unavailable',automaticPublication:false};}
 }
+// The public gates CI runs on a clean clone (npm run audit:public and scan:public in .github/workflows/test.yml), run here on the site QA has just built.
+// A contact that no person has reviewed, a Swiss mobile number, a private path that git tracks, a secret or a personal path fails QA, so no release job follows.
+export const PUBLIC_GATES=[['public-audit',['editorial/public-audit.mjs','--strict']],['public-scan',['scripts/scan-public.mjs']]];
 export function qaRun(queue,job){
   const checks=[],inputRevision=sourceRevision(root,{generated:false});let testedManifest=null,snapshot=null,compiledRevision=null;
   for(const [label,args] of [
     ['compile',['editorial/compile-review.mjs']],['catalogue',['maintain.mjs']],
-    ['build',['build.mjs']],['profile',['editorial/profile.mjs']],
+    ['build',['build.mjs']],['profile',['editorial/profile.mjs']],...PUBLIC_GATES,
     ['unit',['--test',...fs.readdirSync(root).filter(f=>f.endsWith('.test.mjs')),
       ...fs.readdirSync(here).filter(f=>f.endsWith('.test.mjs')).map(f=>'editorial/'+f)]],
     ['mobile-ages',['verify-age.mjs']],['mobile-flow',['verify-mobile.mjs']]]){

@@ -30,6 +30,15 @@ jobs:
       # npm test builds the site first (npm run build --public), then runs every test that can run on a clean clone.
       # Tests that need the owner's private editorial state are skipped with a message; docs/publication-scope.md lists them.
       - run: npm test
+      # The public gates, on the site that npm test has just built (audit:public needs it). Both read only tracked files and the built site,
+      # so a clean clone can run them. audit:public --strict fails on Cyrillic, the earlier working title or the reference child's age in what
+      # families read, on a private path that git tracks, on a Swiss mobile number in the catalogue or the site, and on any contact of the
+      # catalogue that is not in editorial/public-contacts-reviewed.json (only a person adds a digest there). scan:public fails on secrets,
+      # personal paths, Cyrillic text and contact data outside the catalogue files.
+      - name: Public audit (strict)
+        run: npm run audit:public
+      - name: Public scan
+        run: npm run scan:public
       # The build regenerates data-reviewed.js, data-geo.js and research.md from their sources. If the committed copies differ, they are stale.
       - name: Generated files are up to date
         run: git diff --exit-code
