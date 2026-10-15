@@ -1,0 +1,10 @@
+# Installed on the server as /etc/systemd/system/minitandem-cycle-watch.timer
+[Unit]
+Description=Minitandem editorial cycle and off-site copy watcher every 30 minutes
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=30min
+
+[Install]
+WantedBy=timers.target
