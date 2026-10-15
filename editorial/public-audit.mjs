@@ -59,7 +59,7 @@ export function auditDirectory(directory){
 // Private state: search and verification records, queue, artifacts, caches. Gitignored and not audited.
 export const PRIVATE=['archive-ru/','translation/','node_modules/','editorial/node_modules/','server-state/',
   'editorial/workflow-state/','editorial/agent-artifacts/','editorial/external-candidates/','editorial/external-disputes/','editorial/external-decisions/',
-  'editorial/corrections/','editorial/correction-versions/','editorial/versions/','editorial/typesafe-runtime/','editorial/calibration-runtime/',
+  'editorial/corrections/','editorial/correction-versions/','editorial/versions/','editorial/page-records/','editorial/typesafe-runtime/','editorial/calibration-runtime/',
   'editorial/catalogue-runtime/','editorial/catalog-versions/','editorial/audit/',
   'editorial/external-review-receipts.json','editorial/family-venues-visitor-check-2026-09-27.json','editorial/monitor-state.json',
   'editorial/discovery-state.json','editorial/discovery-report.json','editorial/heartbeat-state.json',

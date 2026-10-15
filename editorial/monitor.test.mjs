@@ -780,3 +780,81 @@ test('main: a tripped outage fuse returns exit code 2 and lists the sources; the
     assert.deepEqual((await read()).queue.map(q=>q.kind),['source-unavailable','source-unavailable','source-unavailable']);
   }finally{server.close();await fs.rm(dir,{recursive:true,force:true});}
 });
+
+// Stage 2: every successful fetch leaves a page record (provenance, the full body, the alarm lines, the raw bytes of an HTML page).
+const recorder=()=>{const rows=[];return {rows,record:async(id,info)=>{rows.push({id,info});}};};
+const titledPage=(title,price='CHF 20')=>`<html><head><title>${title}</title></head><body><header><p>Montag Ruhetag</p></header><nav>Menu</nav><main><h1>ElKi</h1><p>${price} pro Treffen</p><p>Mittwoch 10:00</p></main><footer><p>Kontakt Verein</p></footer></body></html>`;
+test('each 200 hands the record callback the provenance of the fetch and the texts of the same bytes',async()=>{
+  const state={schema:1,sources:{},queue:[]},{rows,record}=recorder();
+  const body=titledPage('Krabbelgruppe: vorübergehend geschlossen bis 30.11.2099');
+  const fetchImpl=async()=>new Response(body,{status:200,headers:{'content-type':'text/html; charset=utf-8'}});
+  const report=await runMonitor({sources:[krabbel],state,now:at(13),fetchImpl,record});
+  assert.equal(report.results[0].result,'baseline');assert.equal(rows.length,1);
+  const {id,info}=rows[0],entry=state.sources.krabbel;
+  assert.equal(id,'krabbel');assert.equal(info.hash,entry.hash);assert.equal(info.version,entry.version);
+  assert.equal(info.fetchedAt,at(13));assert.equal(info.parser,'v2');assert.equal(info.status,200);assert.equal(info.contentType,'text/html; charset=utf-8');
+  assert.equal(info.rawHash,sha256(Buffer.from(body)));assert.equal(info.rawBytes,Buffer.byteLength(body));assert.deepEqual(info.raw,Buffer.from(body));
+  assert.equal(info.full.parser,'cheerio-visible-body-v1');assert.match(info.full.text,/Kontakt Verein/);assert.doesNotMatch(info.full.text,/Menu/);
+  assert.deepEqual(info.alarm,['Krabbelgruppe: vorübergehend geschlossen bis 30.11.2099']);
+  // The same version fetched again records again; a new price is a new version and a new record.
+  await runMonitor({sources:[krabbel],state,force:true,now:at(14),fetchImpl,record});
+  assert.equal(rows[1].info.version,rows[0].info.version);assert.equal(rows[1].info.fetchedAt,at(14));
+  await runMonitor({sources:[krabbel],state,force:true,now:at(15),fetchImpl:async()=>new Response(titledPage('Krabbelgruppe','CHF 35'),{headers:{'content-type':'text/html'}}),record});
+  assert.notEqual(rows[2].info.version,rows[0].info.version);assert.equal(state.queue.filter(q=>q.kind==='content-changed').length,1);
+});
+test('a PDF and a calendar record their text as the full view and no raw bytes',async()=>{
+  const state={schema:1,sources:{},queue:[]},{rows,record}=recorder();
+  const ics={id:'cal',url:'https://example.org/cal.ics',type:'ics',recordIds:[],intervalDays:1,minChars:10};
+  const calendar='BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\nSUMMARY:Fixture meeting with a long\r\n  folded title\r\nDTSTART:20261104T140000Z\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n';
+  await runMonitor({sources:[ics],state,now:at(13),fetchImpl:async()=>new Response(calendar,{headers:{'content-type':'text/calendar'}}),record});
+  assert.equal(rows[0].info.raw,null);assert.deepEqual(rows[0].info.full,{parser:'calendar-raw-v1',text:calendar.trim()});
+  assert.deepEqual(rows[0].info.alarm,[]);assert.equal(rows[0].info.rawHash,sha256(Buffer.from(calendar)));
+});
+test('a version without a page record is fetched in full once; with a record the validators go out as before',async()=>{
+  const state={schema:1,sources:{},queue:[]},seen=[];
+  let has=false;
+  const fetchImpl=async(url,options)=>{seen.push(options.headers['if-none-match']??null);return new Response(titledPage('Krabbelgruppe'),{headers:{'content-type':'text/html',etag:'v1'}});};
+  const run=day=>runMonitor({sources:[krabbel],state,force:true,now:at(day),fetchImpl,hasRecord:async()=>has});
+  await run(13);await run(14);
+  assert.deepEqual(seen,[null,null]);                 // no record yet: no validator even though the page sent an etag
+  has=true;await run(15);
+  assert.deepEqual(seen,[null,null,'v1']);            // a record exists: the conditional request is back
+});
+test('a 304, a failed fetch and a parser failure leave no record, and a record that cannot be written does not fail the pass',async()=>{
+  const state={schema:1,sources:{},queue:[]},{rows,record}=recorder();
+  await runMonitor({sources:[krabbel],state,now:at(13),fetchImpl:async()=>new Response(titledPage('Krabbelgruppe'),{headers:{'content-type':'text/html',etag:'v1'}}),record});
+  assert.equal(rows.length,1);
+  await runMonitor({sources:[krabbel],state,force:true,now:at(14),fetchImpl:async()=>new Response(null,{status:304}),record});
+  await runMonitor({sources:[krabbel],state,force:true,now:at(15),fetchImpl:async()=>new Response('gone',{status:500}),record});
+  await runMonitor({sources:[krabbel],state,force:true,now:at(16),fetchImpl:async()=>new Response('<html><main></main></html>',{headers:{'content-type':'text/html'}}),record});
+  assert.equal(rows.length,1);
+  const hash=state.sources.krabbel.hash;
+  const broken=await runMonitor({sources:[krabbel],state,force:true,now:at(17),fetchImpl:async()=>new Response(titledPage('Krabbelgruppe','CHF 40'),{headers:{'content-type':'text/html'}}),
+    record:async()=>{throw Error('disk full');}});
+  assert.equal(broken.results[0].result,'changed');assert.equal(broken.results[0].recordError,'disk full');
+  assert.notEqual(state.sources.krabbel.hash,hash);assert.equal(state.sources.krabbel.errorCount,0);
+});
+test('main: the first full pass writes page records beside the versions, a dry run writes none, and the versions folder is untouched',async()=>{
+  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'monitor-records-'));
+  const server=http.createServer((req,res)=>{res.writeHead(200,{'content-type':'text/html; charset=utf-8',etag:'"e1"'});res.end(titledPage('Krabbelgruppe'));});
+  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+  try{
+    const url=`http://127.0.0.1:${server.address().port}/krabbel`;
+    await fs.writeFile(path.join(dir,'source-watch.json'),JSON.stringify({sources:[{...krabbel,url}]}));
+    await main(['--dry-run','--host-delay-ms=0'],dir);
+    assert.deepEqual(await fs.readdir(dir),['source-watch.json']);
+    await main(['--host-delay-ms=0'],dir);
+    const state=JSON.parse(await fs.readFile(path.join(dir,'monitor-state.json'),'utf8')),version=state.sources.krabbel.version;
+    assert.deepEqual(await fs.readdir(path.join(dir,'versions','krabbel')),[version+'.txt']);
+    assert.deepEqual((await fs.readdir(path.join(dir,'page-records','krabbel'))).sort(),[version+'.full.txt.gz',version+'.json',version+'.raw.gz']);
+    const {readRecord}=await import('./page-record.mjs');
+    const record=await readRecord(dir,'krabbel',version,{raw:true});
+    assert.deepEqual(record.problems,[]);assert.equal(record.meta.hash,state.sources.krabbel.hash);assert.equal(record.meta.finalUrl,url);
+    assert.match(record.full,/Kontakt Verein/);assert.equal(record.raw.toString(),titledPage('Krabbelgruppe'));
+    // A second pass, forced: the record exists now, the page is the same version, and the first fetch time stays.
+    await main(['--force','--host-delay-ms=0'],dir);
+    const again=await readRecord(dir,'krabbel',version);
+    assert.equal(again.meta.firstFetchedAt,record.meta.firstFetchedAt);assert.ok(again.meta.fetchedAt>=record.meta.fetchedAt);
+    assert.deepEqual(await fs.readdir(path.join(dir,'versions','krabbel')),[version+'.txt']);
+  }finally{server.close();await fs.rm(dir,{recursive:true,force:true});}
+});

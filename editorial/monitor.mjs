@@ -5,172 +5,16 @@ import crypto from 'node:crypto';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 import {fileURLToPath} from 'node:url';
-import {load} from 'cheerio';
-import {alarmLines,newAlarms,significance,ALARM_PARSER} from './alarm.mjs';
+import {newAlarms,significance,ALARM_PARSER} from './alarm.mjs';
+import {writeRecord,hasRecord as hasPageRecord} from './page-record.mjs';
+import {compact,htmlTextV1,htmlTextV2,fullPageText,sourceAnchors,hostOf,hostRules,validateHostIgnore,dropIgnored,normalize,decodeBytes,pageAlarms,fullView} from './page-text.mjs';
+// The text functions moved to page-text.mjs (the controller's capture uses them too); the names stay importable from here.
+export {htmlTextV1,htmlTextV2,fullPageText,sourceAnchors,hostRules,validateHostIgnore,dropIgnored,normalize,decodeBytes};
 
 const here=path.dirname(fileURLToPath(import.meta.url));
 const DAY=86400000;
 const runFile=promisify(execFile);
 const sha=text=>crypto.createHash('sha256').update(text).digest('hex');
-const compact=text=>text.replace(/\u00a0/g,' ').replace(/[\t ]+/g,' ').replace(/\s*\n\s*/g,'\n').replace(/\n{2,}/g,'\n').trim();
-const entities={amp:'&',lt:'<',gt:'>',quot:'"',apos:"'",nbsp:' ',ndash:'–',mdash:'—',hellip:'…',eacute:'é',auml:'ä',ouml:'ö',uuml:'ü'};
-function decode(text){return text.replace(/&(#x[\da-f]+|#\d+|[a-z]+);/gi,(_,key)=>key[0]==='#'?String.fromCodePoint(key[1].toLowerCase()==='x'?parseInt(key.slice(2),16):parseInt(key.slice(1),10)):entities[key.toLowerCase()]??`&${key};`);}
-// The first extractor (regex, main or body, header and footer dropped). Kept for v1 baselines and the --rebaseline-parser comparison.
-export function htmlTextV1(html){
-  let value=html.replace(/<(script|style|noscript|svg|nav|header|footer)\b[^>]*>[\s\S]*?<\/\1\s*>/gi,' ');
-  const main=value.match(/<main\b[^>]*>([\s\S]*?)<\/main\s*>/i);
-  if(main)value=main[1];
-  else value=value.match(/<body\b[^>]*>([\s\S]*?)<\/body\s*>/i)?.[1]??value;
-  value=value.replace(/<\/(?:p|div|section|article|h[1-6]|li|tr|br)\s*>/gi,'\n').replace(/<br\b[^>]*>/gi,'\n').replace(/<[^>]+>/g,' ');
-  return compact(decode(value));
-}
-const BLOCK_TAGS='p,div,section,article,aside,header,footer,main,nav,h1,h2,h3,h4,h5,h6,li,ul,ol,dl,dt,dd,tr,table,thead,tbody,tfoot,form,fieldset,blockquote,pre,address,figure,figcaption,details,summary,caption';
-function markBlocks($){
-  $('br,hr').replaceWith('\n');
-  $(BLOCK_TAGS).each((_,node)=>{$(node).prepend('\n').append('\n');});
-  $('td,th,a,button,label,option').each((_,node)=>{$(node).append(' ');});
-}
-// Opening hours and closing days that sites put in the page header or footer (Club Cafe: "Montag Ruhetag").
-const HOURS_LINE=/\b\d{1,2}[.:h]\d{2}\b|(?<![\p{L}])(?:montags?|dienstags?|mittwochs?|donnerstags?|freitags?|samstags?|sonntags?|lundis?|mardis?|mercredis?|jeudis?|vendredis?|samedis?|dimanches?|mondays?|tuesdays?|wednesdays?|thursdays?|fridays?|saturdays?|sundays?|ruhetage?|geschlossen|geöffnet|fermée?s?|ouverte?s?|closed|open)(?![\p{L}])|(?<![\p{L}])(?:mo|di|mi|do|fr|sa|so|lu|ma|me|je|ve|mon|tue|wed|thu|fri|sat|sun)(?=\s*[.:–-]|\s+\d)/iu;
-const PAGE_CHROME='body>header,body>footer,[role=banner],[role=contentinfo]';
-/**
- * Parser v2 (cheerio): page-level header and footer are dropped after their opening-hours lines are kept; all <main> elements are
- * used unless they hold less than a quarter of the remaining body text (then the whole body); entities are decoded by cheerio.
- */
-export function htmlTextV2(html,{remove=[]}={}){
-  const $=load(String(html));
-  $('script,style,noscript,svg,template,iframe,nav').remove();
-  if(remove.length)$(remove.join(',')).remove();
-  markBlocks($);
-  const candidates=$(`${PAGE_CHROME},header,footer`).toArray().filter(el=>$(el).is(PAGE_CHROME)||!$(el).closest('main,article').length);
-  const set=new Set(candidates),chrome=candidates.filter(el=>!$(el).parents().toArray().some(parent=>set.has(parent)));
-  const harvested=[];
-  for(const el of chrome)for(const line of compact($(el).text()).split('\n'))if(line.length<=120&&HOURS_LINE.test(line)&&!harvested.includes(line))harvested.push(line);
-  for(const el of chrome)$(el).remove();
-  const bodyText=compact($('body').text());
-  const mains=$('main').toArray().filter(el=>!$(el).parents('main').length);
-  const mainText=compact(mains.map(el=>$(el).text()).join('\n'));
-  const text=mains.length&&mainText.length>=bodyText.length*0.25?mainText:bodyText;
-  const kept=new Set(text.split('\n'));
-  return compact([text,...harvested.filter(line=>!kept.has(line))].join('\n'));
-}
-/** The whole visible page for alarm lines: title, meta description and the body with header, navigation and footer. */
-export function fullPageText(html,{remove=[]}={}){
-  const $=load(String(html));
-  const title=$('head>title').first().text()||$('title').first().text();
-  const description=$('meta').filter((_,el)=>String($(el).attr('name')??'').toLowerCase()==='description').first().attr('content')??'';
-  $('script,style,noscript,svg,template,iframe').remove();
-  if(remove.length)$(remove.join(',')).remove();
-  markBlocks($);
-  return compact([title,description,$('body').text()].join('\n'));
-}
-/**
- * Anchors for long documents, in the source's own language: required markers, the card name before " · " (and its parts around
- * "/" or "–"), the town, and organiser labels of the card's sources ("Tierhappy · organiser"). The English description is left out.
- */
-export function sourceAnchors(source,records=[]){
-  const byId=new Map(records.map(record=>[record.id,record])),out=[];
-  const add=value=>{value=String(value??'').trim();if(value.length>=3&&!out.includes(value))out.push(value);};
-  for(const term of source.required??[])add(term);
-  for(const id of source.recordIds??[]){
-    const record=byId.get(id);if(!record)continue;
-    const name=String(record.name??'').split(' · ')[0];
-    add(name);
-    const parts=name.split(/\s*[/–]\s*/);if(parts.length>1)for(const part of parts)if(part.length>=4)add(part);
-    add(record.town);
-    for(const item of record.sources??[])if(String(item.label??'').includes(' · '))add(item.label.split(' · ')[0]);
-  }
-  return out;
-}
-function calendarText(value,source={},now=new Date().toISOString()){
-  const unfolded=value.replace(/\r?\n[ \t]/g,'').split(/\r?\n/);
-  const significant=/^(BEGIN:VEVENT|END:VEVENT|UID|SUMMARY|DESCRIPTION|LOCATION|DTSTART|DTEND|STATUS|RRULE|EXDATE)(;[^:]*)?:/i;
-  if(source.eventIds?.length){
-    if(!unfolded.includes('BEGIN:VCALENDAR')||!unfolded.includes('BEGIN:VEVENT')||source.calendarName&&!unfolded.includes('X-WR-CALNAME:'+source.calendarName))throw Error('invalid calendar feed');
-    const blocks=[...value.replace(/\r?\n[ \t]/g,'').matchAll(/BEGIN:VEVENT\r?\n([\s\S]*?)END:VEVENT/g)].map(match=>match[1].split(/\r?\n/));
-    const instant=line=>{
-      const stamp=line?.split(':').slice(1).join(':');
-      const match=stamp?.match(/^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})Z$/);
-      if(!match)throw Error('unsupported calendar datetime');
-      return Date.parse(`${match[1]}-${match[2]}-${match[3]}T${match[4]}:${match[5]}:${match[6]}Z`);
-    };
-    return source.eventIds.map(id=>{
-      const matches=blocks.filter(lines=>lines.some(line=>line.startsWith('URL:https://tockify.com/educationfamiliale/detail/'+id+'/')));
-      const future=matches.map(lines=>({lines,start:instant(lines.find(line=>line.startsWith('DTSTART'))),end:instant(lines.find(line=>line.startsWith('DTEND')))})).filter(event=>event.end>Date.parse(now)).sort((a,b)=>a.start-b.start);
-      if(!future.length)return `EVENT_ID:${id}\nNO_FUTURE_EVENT`;
-      return [`EVENT_ID:${id}`,...future[0].lines.filter(line=>/^(SUMMARY|DESCRIPTION|LOCATION|DTSTART|DTEND|STATUS|URL)(;[^:]*)?:/i.test(line))].join('\n');
-    }).join('\n');
-  }
-  return unfolded.filter(line=>significant.test(line)).map(line=>line.trim()).join('\n');
-}
-const hostOf=url=>{try{return new URL(url).hostname.toLowerCase().replace(/^www\./,'');}catch{return String(url);}};
-function compileRule(key,rule){
-  try{
-    if(!rule||typeof rule!=='object'||Array.isArray(rule))throw Error('a rule must be an object');
-    const list=(value,name)=>{
-      if(value==null)return [];
-      if(!Array.isArray(value)||value.some(item=>typeof item!=='string'||!item.trim()))throw Error(`${name} must be a list of non-empty strings`);
-      return value;
-    };
-    if(rule.ranges!=null&&!Array.isArray(rule.ranges))throw Error('ranges must be a list');
-    const ranges=(rule.ranges??[]).map(range=>{
-      if(typeof range?.from!=='string'||typeof range?.to!=='string'||!range.from||!range.to)throw Error('a range needs a "from" and a "to" pattern');
-      return {from:new RegExp(range.from),to:new RegExp(range.to)};
-    });
-    const selectors=list(rule.selectors,'selectors');
-    if(selectors.length)load('<p></p>')(selectors.join(','));
-    return {selectors,ranges,lines:list(rule.lines,'lines').map(value=>new RegExp(value))};
-  }catch(error){throw Error(`hostIgnore ${key}: ${error.message??error}`);}
-}
-/**
- * Host rules from `hostIgnore` in source-watch.json: `{host:{selectors:[css],ranges:[{from,to}],lines:[regex]}}`, the host without
- * "www.". Selectors remove page blocks before parser v2 and before the alarm lines; ranges (first line matching `from` to the next
- * line matching `to`, both included; nothing when `to` is missing) and line patterns drop lines from the text of both parsers.
- */
-export function hostRules(hostIgnore,url){
-  const host=hostOf(url);
-  const entry=Object.entries(hostIgnore??{}).find(([key])=>key.toLowerCase().replace(/^www\./,'')===host);
-  return entry?compileRule(...entry):null;
-}
-export function validateHostIgnore(hostIgnore){
-  if(hostIgnore==null)return;
-  if(typeof hostIgnore!=='object'||Array.isArray(hostIgnore))throw Error('hostIgnore must be an object keyed by host');
-  for(const [key,rule] of Object.entries(hostIgnore))compileRule(key,rule);
-}
-export function dropIgnored(text,rules){
-  if(!rules||!rules.ranges.length&&!rules.lines.length)return text;
-  const lines=String(text).split('\n'),keep=[];
-  for(let i=0;i<lines.length;i++){
-    const range=rules.ranges.find(rule=>rule.from.test(lines[i]));
-    if(range){const end=lines.findIndex((line,j)=>j>i&&range.to.test(line));if(end>i){i=end;continue;}}
-    if(!rules.lines.some(pattern=>pattern.test(lines[i])))keep.push(lines[i]);
-  }
-  return keep.join('\n');
-}
-export function normalize(value,source,now,parser='v2',rules=null){
-  let text=source.type==='html'?(parser==='v1'?htmlTextV1(value):htmlTextV2(value,{remove:rules?.selectors??[]})):source.type==='ics'?calendarText(value,source,now):compact(value);
-  if(source.start){const index=text.indexOf(source.start);if(index<0)throw Error(`missing start marker: ${source.start}`);text=text.slice(index);}
-  if(source.end){const index=text.indexOf(source.end);if(index>=0)text=text.slice(0,index);}
-  text=compact(text);
-  if(source.ignoreLines?.length){const patterns=source.ignoreLines.map(value=>new RegExp(value));text=text.split('\n').filter(line=>!patterns.some(pattern=>pattern.test(line))).join('\n');}
-  text=dropIgnored(text,rules);
-  if(text.length<(source.minChars??40))throw Error(`extracted text too short (${text.length} chars)`);
-  for(const term of source.required??[])if(!text.includes(term))throw Error(`required marker missing: ${term}`);
-  return text;
-}
-const CP1252_C1=[...'\u20ac\u0081\u201a\u0192\u201e\u2026\u2020\u2021\u02c6\u2030\u0160\u2039\u0152\u008d\u017d\u008f\u0090\u2018\u2019\u201c\u201d\u2022\u2013\u2014\u02dc\u2122\u0161\u203a\u0153\u009d\u017e\u0178'];
-export function decodeBytes(bytes,contentType=''){
-  const buffer=Buffer.from(bytes);
-  const label=value=>{try{return new TextDecoder(String(value).trim().toLowerCase()).encoding;}catch{return null;}};
-  const declared=label(/charset\s*=\s*["']?([\w.:-]+)/i.exec(contentType)?.[1]??'')
-    ??label(/<meta[^>]+charset\s*=\s*["']?([\w.:-]+)/i.exec(buffer.subarray(0,4096).toString('latin1'))?.[1]??'');
-  for(const encoding of [declared??'utf-8','utf-8']){
-    try{return new TextDecoder(encoding,{fatal:true}).decode(buffer);}catch{}
-    if(declared)break;
-  }
-  // Some Node builds decode windows-1252 as latin-1; map the C1 range explicitly.
-  return new TextDecoder('windows-1252').decode(buffer).replace(/[\u0080-\u009f]/g,char=>CP1252_C1[char.charCodeAt(0)-0x80]);
-}
 export function acceptLanguage(url){
   const segment=/^\/(de|fr)(?:-ch)?(?=\/|$)/i.exec((()=>{try{return new URL(url).pathname;}catch{return '';}})())?.[1]?.toLowerCase();
   if(segment==='de')return 'de-CH,de;q=0.9,fr;q=0.5';
@@ -294,7 +138,7 @@ export function rebaseline(state,ids,note,now=new Date().toISOString()){
  * `hostIgnore` (see hostRules) applies to the compared text and the alarm lines; when the stored text, with the same rules applied,
  * equals the new text, the hash moves without a task (noted in baselineHistory). A v1 baseline stays on v1 outside the parser pass.
  */
-export async function runMonitor({sources,state,fetchImpl=fetch,now=new Date().toISOString(),force=false,ids=null,snapshot=async()=>{},snapshotFailed=async()=>{},max=Infinity,hostDelayMs=0,sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms)),
+export async function runMonitor({sources,state,fetchImpl=fetch,now=new Date().toISOString(),force=false,ids=null,snapshot=async()=>{},snapshotFailed=async()=>{},record=async()=>{},hasRecord=async()=>true,max=Infinity,hostDelayMs=0,sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms)),
   records=[],readVersion=async()=>null,rebaselineParser=null,spreadDays=0,alarmFuse=Infinity,outageFuse=Infinity,outageMin=1,hostIgnore={}}){
   state??={schema:1,sources:{},queue:[]};
   state.sources??={};state.queue??=[];
@@ -322,8 +166,10 @@ export async function runMonitor({sources,state,fetchImpl=fetch,now=new Date().t
     try{
       const headers={'user-agent':'MinitandemCatalogMonitor/1.0 (editorial source check; no indexing)','accept':'text/html, text/calendar, application/pdf;q=0.9, */*;q=0.5','accept-language':acceptLanguage(source.url)};
       // Rolling next-event snapshots change as time passes, even if the feed bytes do not. A parser rebaseline needs the full body.
-      if(!rebuild&&entry.hash&&entry.etag&&!source.eventIds?.length)headers['if-none-match']=entry.etag;
-      if(!rebuild&&entry.hash&&entry.lastModified&&!source.eventIds?.length)headers['if-modified-since']=entry.lastModified;
+      // A version that has no page record yet is fetched in full once (no validators), so that the record of this fetch can be written.
+      const conditional=!rebuild&&entry.hash&&!source.eventIds?.length&&await hasRecord(source.id,entry.version??entry.hash.slice(0,12));
+      if(conditional&&entry.etag)headers['if-none-match']=entry.etag;
+      if(conditional&&entry.lastModified)headers['if-modified-since']=entry.lastModified;
       const host=(()=>{try{return new URL(source.url).hostname;}catch{return source.url;}})();
       if(hostDelayMs>0&&lastRequest.has(host)){const wait=hostDelayMs-(Date.now()-lastRequest.get(host));if(wait>0)await sleep(wait);}
       lastRequest.set(host,Date.now());
@@ -355,8 +201,15 @@ export async function runMonitor({sources,state,fetchImpl=fetch,now=new Date().t
       }
       entry.finalUrlNorm=normUrl(finalUrl);
       entry.redirect=normUrl(finalUrl)===normUrl(source.url)?null:{from:source.url,to:finalUrl,class:redirectClass(source.url,finalUrl),at:now};
-      const alarmText=source.type==='html'?dropIgnored(fullPageText(raw,{remove}),rules):source.type==='pdf'?dropIgnored(raw,rules):null;
-      const current=alarmText==null?null:alarmLines(alarmText,{now,ignore:[...(source.ignoreLines??[]),...(source.alarmIgnore??[])],anchors:sourceAnchors(source,records)});
+      const current=pageAlarms(raw,source,{now,rules,records});
+      // The record of this fetch (provenance, full view, alarm lines, raw bytes of an HTML page). A failure to write it never fails the pass.
+      const keep=async(hash,parserUsed)=>{
+        try{
+          await record(source.id,{version:hash.slice(0,12),hash,fetchedAt:now,finalUrl,contentType:type,status:response.status,parser:parserUsed,
+            rawHash:sha(bytes),rawBytes:bytes.length,raw:source.type==='html'?bytes:null,full:fullView(raw,source.type),alarm:(current??[]).map(line=>line.text)});
+          return null;
+        }catch(error){return String(error.message??error);}
+      };
       if(rebuild){
         let textV1=null,v1Error=null;
         try{textV1=normalize(raw,source,now,'v1',rules);}catch(error){v1Error=String(error.message??error);}
@@ -382,6 +235,7 @@ export async function runMonitor({sources,state,fetchImpl=fetch,now=new Date().t
         }
         await snapshot(source.id,hashV2,textV2);
         entry.hash=hashV2;entry.version=hashV2.slice(0,12);entry.parser='v2';
+        const rebuildRecordError=await keep(hashV2,'v2');if(rebuildRecordError)row.recordError=rebuildRecordError;
         if(current){const base=newAlarms(null,current,prior.alarmHistory,now);entry.alarm={keys:base.keys,at:now,parser:ALARM_PARSER};entry.alarmHistory=base.history;row.alarmKeys=base.keys.length;}
         if(entry.redirect&&HIGH_REDIRECT.includes(entry.redirect.class)&&!state.queue.some(q=>q.sourceId===source.id&&q.kind==='redirect-changed'&&q.status==='open'))
           issue(state.queue,source,'redirect-changed',now,{from:source.url,to:finalUrl,class:entry.redirect.class,httpStatus:response.status});
@@ -416,8 +270,9 @@ export async function runMonitor({sources,state,fetchImpl=fetch,now=new Date().t
       }
       entry.etag=response.headers.get('etag')??null;
       entry.lastModified=response.headers.get('last-modified')??null;
+      const recordError=await keep(hash,parser);
       succeed();
-      results.push({id:source.id,result:!previousHash?'baseline':hash===previousHash||ignoredOnly?'unchanged':'changed',chars:text.length,...(alarmNote?{alarm:alarmNote}:{})});
+      results.push({id:source.id,result:!previousHash?'baseline':hash===previousHash||ignoredOnly?'unchanged':'changed',chars:text.length,...(alarmNote?{alarm:alarmNote}:{}),...(recordError?{recordError}:{})});
     }catch(error){
       entry.errorCount=(entry.errorCount??0)+1;entry.error=String(error.message??error);
       const code=entry.httpStatus;
@@ -515,7 +370,8 @@ export async function main(args,baseDir=here,{records}={}){
   const readVersion=async(id,version)=>{try{return (await fs.readFile(path.join(baseDir,'versions',id,version+'.txt'),'utf8')).replace(/\n$/,'');}catch{return null;}};
   const now=new Date().toISOString();
   const report=await runMonitor({sources:config.sources,state,now,force:args.includes('--force')||!!rebaselineIds.length,ids:selected,max,hostDelayMs,records,readVersion,rebaselineParser,spreadDays,alarmFuse,outageFuse,outageMin,hostIgnore:config.hostIgnore??{},
-    snapshot:(id,hash,text)=>write(id,hash.slice(0,12),text),snapshotFailed:(id,label,text)=>write(id,label,text)});
+    snapshot:(id,hash,text)=>write(id,hash.slice(0,12),text),snapshotFailed:(id,label,text)=>write(id,label,text),
+    record:async(id,info)=>{if(!dryRun)await writeRecord(baseDir,id,info);},hasRecord:(id,version)=>hasPageRecord(baseDir,id,version)});
   if(!dryRun)await writeJsonAtomic(statePath,report.state);
   const out={results:report.results,openTasks:report.openTasks,state:statePath};
   if(report.siteWide.length)out.siteWide=report.siteWide;

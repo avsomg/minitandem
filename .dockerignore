@@ -41,6 +41,7 @@ editorial/discovery-state.json
 editorial/discovery-report.json
 editorial/heartbeat-state.json
 editorial/versions
+editorial/page-records
 editorial/typesafe-runtime
 editorial/calibration-runtime
 editorial/catalogue-runtime
