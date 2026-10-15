@@ -6,11 +6,12 @@ import {relevantPracticalFields,practicalFieldApplies,validDate} from './field-c
 import {publicApprovedUpdates} from './catalogue-journal.mjs';
 
 export const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-export function loadCatalog({updatesFile=path.join(root,'editorial','approved-updates.json')}={}){
+// base: the checkout to read the catalogue layers from (default: this one), so that a tool can be run against another checkout.
+export function loadCatalog({base=root,updatesFile=path.join(base,'editorial','approved-updates.json')}={}){
   const context={window:{},structuredClone,URL};
-  for(const file of ['data.js','data-reviewed.js'])vm.runInNewContext(fs.readFileSync(path.join(root,file),'utf8'),context);
+  for(const file of ['data.js','data-reviewed.js'])vm.runInNewContext(fs.readFileSync(path.join(base,file),'utf8'),context);
   if(updatesFile&&fs.existsSync(updatesFile))context.window.APPROVED_UPDATES=publicApprovedUpdates(JSON.parse(fs.readFileSync(updatesFile,'utf8')));
-  for(const file of ['data-practical.js','regions.js','data-geo.js','planning.js','exchange.js'])vm.runInNewContext(fs.readFileSync(path.join(root,file),'utf8'),context);
+  for(const file of ['data-practical.js','regions.js','data-geo.js','planning.js','exchange.js'])vm.runInNewContext(fs.readFileSync(path.join(base,file),'utf8'),context);
   return context.window;
 }
 const KIND_WEIGHT={'possible-closure':400,'redirect-changed':150,'content-changed':80,'parser-failed':80,'possible-reopen':80,'source-unavailable':60};

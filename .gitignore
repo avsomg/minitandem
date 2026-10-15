@@ -20,6 +20,7 @@ editorial/typesafe-runtime/
 editorial/calibration-runtime/
 editorial/catalogue-runtime/
 editorial/catalog-versions/
+editorial/audit/
 
 # 2. Generated snapshots of that state (rebuilt by their commands; they change with every pipeline run)
 editorial/external-review-report.json
