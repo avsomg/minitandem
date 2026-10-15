@@ -109,21 +109,43 @@ test('distance limit: a checked address point, else the town centre; unknown dis
   assert.deepEqual(plain(K.RADIUS_KEYS),[0,5,10,20,30]);
 });
 
-test('every category has its own icon and tint, the icon reaches 3:1 on its tile, and the word stays in the row',()=>{
-  const css=fs.readFileSync(path.join(root,'styles.css'),'utf8');
+test('every category has its Phosphor icon in three weights, its own ink, and the ink reaches 4.5:1 on the row and on hover',()=>{
+  const css=fs.readFileSync(path.join(root,'styles.css'),'utf8'),icons=S.window.MinitandemCategoryIcons;
   const lum=hex=>{const c=hex.match(/\w\w/g).map(x=>parseInt(x,16)/255).map(v=>v<=0.03928?v/12.92:((v+0.055)/1.055)**2.4);return 0.2126*c[0]+0.7152*c[1]+0.0722*c[2];};
   const ratio=(a,b)=>{const [x,y]=[lum(a),lum(b)].sort((p,q)=>q-p);return (x+0.05)/(y+0.05);};
-  const tints=new Set();
+  const inks=new Set();
+  assert.deepEqual(Object.keys(icons.ICONS).sort(),[...K.CATEGORY_KEYS].sort(),'one icon set per category, no more');
   for(const category of K.CATEGORY_KEYS){
-    assert.ok(S.window.MinitandemViews.CATEGORY_ICON[category]?.includes('<'),category+' has an icon');
+    for(const weight of ['fill','duotone','regular'])assert.match(icons.ICONS[category][weight],/^<path d="M[\d.,\sA-Za-z-]+"(?: opacity="0\.2")?\/>/,`${category} ${weight}`);
+    assert.match(icons.ICONS[category].duotone,/opacity="0\.2"/,category+': the duotone layer');
     const rule=css.match(new RegExp(`\\.c-${category} \\{ --ink: (#[0-9a-f]{6}); --tint: (#[0-9a-f]{6}); \\}`));
     assert.ok(rule,category+' has an ink and a tint');
-    assert.ok(ratio(rule[1],rule[2])>=3,`${category}: ${ratio(rule[1],rule[2]).toFixed(2)}:1`);
-    tints.add(rule[2]);
+    for(const ground of ['#f6f6f6','#ececec'])assert.ok(ratio(rule[1],ground)>=4.5,`${category} on ${ground}: ${ratio(rule[1],ground).toFixed(2)}:1`);
+    assert.ok(ratio(rule[1],rule[2])>=3,category+' on its tile');
+    inks.add(rule[1]);
   }
-  assert.equal(tints.size,K.CATEGORY_KEYS.length,'each category its own hue');
-  const {V,byId,t}=loadStack(),a=byId.get('aef-attalens'),row=V.row(a);
-  assert.match(row,new RegExp(`<span class="tile c-${a.category}" aria-hidden="true"><svg`));
-  assert.ok(row.includes(`<span class="r-catname">${V.esc(t('category.'+a.category))}</span>`));
-  assert.ok(!row.includes('class="chev"'),'the whole row is the link; no chevron');
+  assert.equal(inks.size,K.CATEGORY_KEYS.length,'each category its own hue');
+  assert.ok(fs.readFileSync(path.join(root,'assets/PHOSPHOR-LICENSE'),'utf8').replace(/\r\n/g,'\n').startsWith('MIT License\n\nCopyright (c) 2023 Phosphor Icons'));
+});
+
+test('one switch selects the icon variant: E by default (fill, no tile, coloured word); A to E each render and have their CSS',()=>{
+  const {V,byId,t,window:W}=loadStack(),icons=W.MinitandemCategoryIcons,a=byId.get('aef-attalens');
+  assert.equal(icons.VARIANT,'E');
+  assert.deepEqual(plain(icons.VARIANTS),{A:{weight:'duotone',tile:true,word:false},B:{weight:'fill',tile:false,word:false},C:{weight:'regular',tile:true,word:false},
+    D:{weight:'duotone',tile:true,word:true},E:{weight:'fill',tile:false,word:true}});
+  const row=V.row(a);
+  assert.match(row,new RegExp(`<a class="row c-${a.category}" [^>]*><span class="cat-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">`));
+  assert.ok(row.includes(icons.ICONS[a.category].fill),'E draws the fill weight');
+  assert.ok(row.includes(`<span class="r-catname">${V.esc(t('category.'+a.category))}</span>`),'the word stays');
+  for(const [variant,weight,size] of [['A','duotone',24],['B','fill',26],['C','regular',24],['D','duotone',24]]){
+    icons.VARIANT=variant;
+    const html=V.row(a);
+    assert.ok(html.includes(icons.ICONS[a.category][weight])&&html.includes(`width="${size}"`),variant);
+  }
+  icons.VARIANT='E';
+  const css=fs.readFileSync(path.join(root,'styles.css'),'utf8');
+  assert.match(css,/\[data-icons="A"\] \.cat-icon, \[data-icons="C"\] \.cat-icon, \[data-icons="D"\] \.cat-icon \{[^}]*background: var\(--tint\)/,'A, C and D: the tile');
+  assert.match(css,/\[data-icons="D"\] \.r-catname, \[data-icons="E"\] \.r-catname \{ color: var\(--ink\)/,'D and E: the coloured word');
+  assert.match(css,/\.cat-icon \{ grid-area: tile; align-self: center;/,'centred vertically on the row');
+  assert.match(fs.readFileSync(path.join(root,'app.js'),'utf8'),/document\.body\.dataset\.icons = W\.MinitandemCategoryIcons\?\.VARIANT/);
 });

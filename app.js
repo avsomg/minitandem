@@ -683,6 +683,8 @@
   document.addEventListener('visibilitychange', () => { if (!document.hidden) sync.now(); });
 
   cardLanguage(I.lang());
+  // The variant of the category icons (category-icons.js, VARIANT) for styles.css.
+  document.body.dataset.icons = W.MinitandemCategoryIcons?.VARIANT || 'E';
   applyStatic(); buildPanel(); wirePanel();
   if (store.storageAvailable && store.personal.favorites.some(id => !store.personal.tracked[id])) store.persist();
   render();

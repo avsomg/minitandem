@@ -125,6 +125,6 @@ Favoriten, Notizen, Status, Besuchspläne, das Alter des Kindes, der gespeichert
 
 Der Code steht unter der MIT-Lizenz (`LICENSE`). Sie gilt nicht für die Katalogdaten: Angaben, Texte und Kontakte zu Angeboten und Anbietern, wo immer sie in diesem Repository stehen (vor allem `data.js`, `data-practical.js`, `data-reviewed.js`, `data-geo.js`, `data-de.js`, `data-fr.js`, `research.md`, die JSON-Dateien unter `editorial/`, die sie enthalten, und Bildschirmfotos der App). Für sie wird keine Lizenz erteilt; sie stammen von den öffentlichen Seiten der Anbieter.
 
-Fremde Dateien in `assets/` behalten ihre eigenen Lizenzen (Leaflet, Leaflet.markercluster, Lucide; die Lizenztexte liegen daneben). Die Fotografie `assets/papiliorama-outside.jpg` ist im Eintrag, der sie zeigt, mit Quelle angegeben (gemeinfrei, Wikimedia Commons).
+Fremde Dateien in `assets/` behalten ihre eigenen Lizenzen (Leaflet, Leaflet.markercluster, Lucide; die Lizenztexte liegen daneben). Die Kategorie-Icons der Liste sind Phosphor Icons 2.1.1 (MIT, `assets/PHOSPHOR-LICENSE`); ihre Pfaddaten stehen in `category-icons.js`, zusammen mit dem Schalter zwischen den fünf Icon-Varianten aus `design/icon-options-phosphor.html`. Die Fotografie `assets/papiliorama-outside.jpg` ist im Eintrag, der sie zeigt, mit Quelle angegeben (gemeinfrei, Wikimedia Commons).
 
 Kontakt für Korrekturen und Löschbegehren: hello@minitandem.ch

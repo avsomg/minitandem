@@ -30,6 +30,7 @@
 !store.js
 !sync.js
 !exports.js
+!category-icons.js
 !views.js
 !toast.js
 !map.js
@@ -44,4 +45,5 @@
 !assets/MarkerCluster.css
 !assets/MIT-LICENCE.txt
 !assets/LICENSE
+!assets/PHOSPHOR-LICENSE
 !assets/papiliorama-outside.jpg

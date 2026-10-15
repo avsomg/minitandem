@@ -102,7 +102,7 @@ h1 { margin: 0; font-size: 28px; font-weight: 400; letter-spacing: -0.032em; lin
 .list { list-style: none; margin: 0; padding: 0; background: var(--surface); border-radius: 18px; overflow: hidden; }
 .list > li + li { border-top: 1px solid var(--bg); }
 .listhead { display: none; }
-.row { display: grid; grid-template-columns: 40px minmax(0, 1fr); grid-template-areas: "tile cat" "tile name" "tile facts" "tile l3"; column-gap: 12px; row-gap: 3px; align-items: start; padding: 14px; min-height: 64px; color: inherit; text-decoration: none; }
+.row { display: grid; grid-template-columns: var(--icon-col) minmax(0, 1fr); grid-template-areas: "tile cat" "tile name" "tile facts" "tile l3"; column-gap: 12px; row-gap: 3px; align-items: start; padding: 14px; min-height: 64px; color: inherit; text-decoration: none; }
 .r-main { display: contents; }
 .r-cat { grid-area: cat; display: flex; align-items: baseline; column-gap: 10px; min-width: 0; font-size: 13px; line-height: 1.3; color: var(--d); }
 /* The category gives way (it is cut short) so that a session's time and the distance stay on the same line. */
@@ -130,11 +130,18 @@ h1 { margin: 0; font-size: 28px; font-weight: 400; letter-spacing: -0.032em; lin
   .week .r-l3 .r-status { order: 1; }
 }
 .chev { color: var(--d); }
-/* Category tile: a line icon in the category's ink on its pale tint, at the start of each row (the whole row is the link, so there is no
-   chevron). The category is also written next to it. Ink on tint (icon contrast, WCAG 1.4.11 needs 3:1): play 6.38, dining 6.81,
-   movement 6.38, water 7.15, horses 6.52, music 7.08, creative 6.71, nature 6.73, books 6.41, events 6.80. Each hue is apart from the
-   status marks: amber "check details" and violet "for later" are small round dots next to a word. */
-.tile { grid-area: tile; align-self: start; display: grid; place-items: center; width: 40px; height: 40px; margin-top: 2px; border-radius: 12px; background: var(--tint); color: var(--ink); }
+/* Category icons (category-icons.js): five variants, chosen by VARIANT there and set on <body data-icons="A|B|C|D|E">.
+     A duotone on a tint tile · B fill, no tile · C outline on a tint tile · D as A with the word in the ink · E as B with the word in the ink.
+   The icon is centred vertically on the row, whatever the number of lines beside it. It is aria-hidden: the category word stays next to it,
+   so colour is never the only cue. Contrast of the ink (icon and coloured word) on the row #f6f6f6 / on hover #ececec, and on the tile tint
+   (A, C, D): play 6.34 / 5.80 / 6.38, dining 7.51 / 6.87 / 6.81, movement 6.76 / 6.19 / 6.38, water 8.07 / 7.38 / 7.15,
+   horses 6.55 / 5.99 / 6.52, music 7.62 / 6.97 / 7.08, creative 7.30 / 6.67 / 6.71, nature 7.02 / 6.42 / 6.73, books 7.31 / 6.69 / 6.41,
+   events 7.69 / 7.03 / 6.80: all at least 4.5:1 (text) and 3:1 (graphics). The status dots stay small round marks next to a word. */
+body { --icon-col: 30px; }
+[data-icons="A"], [data-icons="C"], [data-icons="D"] { --icon-col: 40px; }
+.cat-icon { grid-area: tile; align-self: center; display: grid; place-items: center; color: var(--ink); }
+[data-icons="A"] .cat-icon, [data-icons="C"] .cat-icon, [data-icons="D"] .cat-icon { width: 40px; height: 40px; border-radius: 12px; background: var(--tint); }
+[data-icons="D"] .r-catname, [data-icons="E"] .r-catname { color: var(--ink); font-weight: 500; }
 .c-play { --ink: #854d0e; --tint: #fef9c3; }
 .c-dining { --ink: #7c3f1d; --tint: #f5e9df; }
 .c-movement { --ink: #9a3412; --tint: #ffedd5; }
@@ -308,11 +315,10 @@ dialog .toast { position: absolute; top: 76px; bottom: auto; }
 }
 /* The list becomes a table (one line per activity, columns to compare) only when the list column is wide enough. */
 @media (min-width: 1200px) {
-  .listhead, .row { display: grid; grid-template-columns: 40px minmax(0, 1.6fr) 112px 136px minmax(0, 1.1fr) 104px; grid-template-areas: none; column-gap: 14px; align-items: center; }
+  .listhead, .row { display: grid; grid-template-columns: var(--icon-col) minmax(0, 1.6fr) 112px 136px minmax(0, 1.1fr) 104px; grid-template-areas: none; column-gap: 14px; align-items: center; }
   .listhead { padding: 0 16px 8px; font-size: 12.5px; color: var(--d); font-weight: 500; }
   .row { padding: 12px 16px; row-gap: 0; }
-  .row > *, .r-name, .r-facts, .r-l3, .chev, .tile { grid-area: auto; }
-  .tile { align-self: center; margin-top: 0; }
+  .row > *, .r-name, .r-facts, .r-l3, .chev, .cat-icon { grid-area: auto; }
   .r-main { display: block; min-width: 0; }
   .r-town-d { display: block; margin-top: 1px; font-size: 13.5px; color: var(--d); }
   .r-town-m { display: none !important; }

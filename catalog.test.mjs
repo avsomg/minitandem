@@ -265,10 +265,10 @@ test('catalogue opens in a bounded batch while retaining the full result count',
   const items=list();
   assert.equal(state.limit,24);
   const html=V.rows(items.slice(0,state.limit));
-  assert.equal((html.match(/<li><a class="row"/g)||[]).length,24);
+  assert.equal((html.match(/<li><a class="row[ "]/g)||[]).length,24);
   assert.deepEqual(Array.from(html.matchAll(/data-id="([^"]+)"/g),m=>m[1]),ids(items.slice(0,24)));
   assert.equal(t('list.more',{shown:24,total:items.length}),'Show more · 24 of 295');
-  assert.equal((V.rows(items.slice(0,48)).match(/<li><a class="row"/g)||[]).length,48);
+  assert.equal((V.rows(items.slice(0,48)).match(/<li><a class="row[ "]/g)||[]).length,48);
 });
 
 test('dining filter survives restored filters and includes new mountain buvettes',()=>{

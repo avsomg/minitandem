@@ -9,7 +9,7 @@ import {SCRIPTS} from './ui-files.mjs';
 export const root=path.dirname(fileURLToPath(import.meta.url));
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');
 // Modules that need no DOM and are not data layers, in load order.
-const LOGIC=['planning.js','exchange.js','storage-migration.js','catalogue.js','catalogue-i18n.js','format.js','store.js','sync.js','exports.js','views.js','toast.js'];
+const LOGIC=['planning.js','exchange.js','storage-migration.js','catalogue.js','catalogue-i18n.js','format.js','store.js','sync.js','exports.js','category-icons.js','views.js','toast.js'];
 
 export function fakeStorage(initial={}){
   const map=new Map(Object.entries(initial).map(([k,v])=>[k,typeof v==='string'?v:JSON.stringify(v)]));

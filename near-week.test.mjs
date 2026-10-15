@@ -218,7 +218,7 @@ test('the week view: a row to jump to a day, dated sessions open and time first,
   assert.ok(html.includes('id="wd-2026-10-15" tabindex="-1">Tomorrow · Thursday 15 October'));
   // A dated session: open, its time first on the row, its title on the date line.
   assert.ok(html.includes('>1 dated session<'));
-  assert.match(html,/<a class="row has-time"[^>]*><span class="tile c-play" aria-hidden="true"><svg[\s\S]*?<\/svg><\/span><span class="r-main"><span class="r-cat"><b class="r-time">09:30–11:00<\/b>/);
+  assert.match(html,/<a class="row c-play has-time"[^>]*><span class="cat-icon" aria-hidden="true"><svg[\s\S]*?<\/svg><\/span><span class="r-main"><span class="r-cat"><b class="r-time">09:30–11:00<\/b>/);
   assert.ok(html.includes('<span>Autumn morning</span>'));
   // Wednesday: the regular group and the places are folded into a count each, and their rows are not built yet.
   const wednesday=html.slice(html.indexOf('id="wd-2026-10-14"'),html.indexOf('id="wd-2026-10-15"'));
@@ -231,7 +231,7 @@ test('the week view: a row to jump to a day, dated sessions open and time first,
   const regular=V.weekGroup(days[0],'regular'),open=V.weekGroup(days[0],'places');
   assert.ok(regular.includes(`<b>${V.esc(t('week.regularMark'))}</b> · <span>Wednesday 09:00–11:00; except school holidays</span>`));
   assert.ok(open.includes(V.esc(t('week.regularNote')))&&open.includes(`<b>${V.esc(t('week.hoursMark'))}</b> · <span>Wed–Sun 10:00–17:00</span>`));
-  assert.equal((open.match(/<a class="row" href="#view=week&amp;activity=/g)||[]).length,2,'every entry opens its card like a list row');
+  assert.equal((open.match(/<a class="row c-\w+" href="#view=week&amp;activity=/g)||[]).length,2,'every entry opens its card like a list row');
   // What the visitor unfolded stays unfolded when the view is rebuilt.
   state.weekOpen.add('2026-10-14|places');
   html=V.week(days);

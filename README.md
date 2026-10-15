@@ -125,6 +125,6 @@ Favourites, notes, statuses, visit plans, the child's age, the saved starting po
 
 The code is under the MIT licence (`LICENSE`). It does not cover the catalogue data: facts, texts and contacts about activities and organisers, wherever they appear in this repository (mainly `data.js`, `data-practical.js`, `data-reviewed.js`, `data-geo.js`, `data-de.js`, `data-fr.js`, `research.md`, the JSON records under `editorial/` that hold them, and screenshots of the app). No licence is granted for them; they were compiled from the organisers' public pages.
 
-Third-party files in `assets/` keep their own licences (Leaflet, Leaflet.markercluster, Lucide; the licence texts are next to them). The photograph `assets/papiliorama-outside.jpg` is credited on the card that shows it (public domain, Wikimedia Commons).
+Third-party files in `assets/` keep their own licences (Leaflet, Leaflet.markercluster, Lucide; the licence texts are next to them). The category icons of the list are Phosphor Icons 2.1.1 (MIT, `assets/PHOSPHOR-LICENSE`); their path data is copied into `category-icons.js`, which also holds the switch between the five icon variants compared in `design/icon-options-phosphor.html`. The photograph `assets/papiliorama-outside.jpg` is credited on the card that shows it (public domain, Wikimedia Commons).
 
 Contact for corrections and removal requests: hello@minitandem.ch
