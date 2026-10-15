@@ -3,6 +3,8 @@ import test from 'node:test';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
+import {EventEmitter} from 'node:events';
+import {Readable} from 'node:stream';
 import {snapshot,validateSnapshot,locateQuote,evidenceProblem,publicUrl,captureUrl,htmlText,saveSnapshot,hash,MAX_PDF_BYTES,monitorSnapshot} from './evidence.mjs';
 
 const now='2026-10-01T10:00:00Z';
@@ -74,4 +76,56 @@ test('monitor snapshots are labelled by the parser that produced the stored text
   const entry={hash:h,lastSuccess:'2026-10-01T10:00:00.000Z'};
   assert.equal((await monitorSnapshot(source,entry,dir)).parser,'monitor-text-v1');
   assert.equal((await monitorSnapshot(source,{...entry,parser:'v2'},dir)).parser,'monitor-text-v2');
+});
+
+// F11: the name is resolved once per hop, checked, and the connection is pinned to what was checked. No DNS, no network.
+const wire=(log,answers)=>(target,options,callback)=>{
+  log.push({host:target.hostname,path:target.pathname,options});
+  const req=new EventEmitter();
+  req.end=()=>setImmediate(()=>{const answer=answers.shift();if(answer instanceof Error)req.emit('error',answer);else callback(answer);});
+  return req;
+};
+const wireReply=(status,headers,body)=>Object.assign(Readable.from(body==null?[]:[Buffer.from(body)]),{statusCode:status,statusMessage:'x',headers});
+const connectTo=(call,name,options={all:true})=>new Promise(resolve=>call.options.lookup(name,options,(error,address)=>resolve(error?error:address)));
+test('a name that answers public for the check and private for the connection cannot move the connection',async()=>{
+  const log=[],asked=[];
+  // The fake resolver: public the first time a name is asked, private every time after. A second resolution would be caught here.
+  const lookupImpl=async name=>{asked.push(name);return [{address:asked.length===1?'93.184.216.34':'10.0.0.5',family:4}];};
+  const requestImpl=wire(log,[wireReply(200,{'content-type':'text/html'},'<body><p>Children participate with a parent, every Wednesday morning.</p></body>')]);
+  const evidence=await captureUrl('https://example.org/offer',{now,lookupImpl,requestImpl});
+  assert.deepEqual(asked,['example.org']);
+  assert.equal(log.length,1);assert.equal(log[0].host,'example.org');assert.equal(log[0].options.agent,false);
+  assert.deepEqual(await connectTo(log[0],'example.org'),[{address:'93.184.216.34',family:4}]);
+  assert.match((await connectTo(log[0],'internal.example.org')).message,/another host/);
+  assert.equal(evidence.captureMethod,'node-pinned-https');assert.match(evidence.text,/Children participate/);
+});
+test('every redirect hop is resolved, checked and pinned on its own',async()=>{
+  const log=[],answers={'a.example.org':['93.184.216.1','10.0.0.1'],'b.example.org':['93.184.216.2','10.0.0.2'],'c.example.org':['93.184.216.3','10.0.0.3']},asked=[];
+  const lookupImpl=async name=>{asked.push(name);return [{address:answers[name].shift(),family:4}];};
+  const requestImpl=wire(log,[wireReply(302,{location:'https://b.example.org/next'}),wireReply(301,{location:'https://c.example.org/last'}),
+    wireReply(200,{'content-type':'text/plain'},'Plain text at the end of two redirects, long enough to keep.')]);
+  const evidence=await captureUrl('https://a.example.org/start',{now,lookupImpl,requestImpl});
+  assert.deepEqual(asked,['a.example.org','b.example.org','c.example.org']);
+  assert.deepEqual(log.map(call=>call.host+call.path),['a.example.org/start','b.example.org/next','c.example.org/last']);
+  assert.deepEqual(await Promise.all(log.map((call,index)=>connectTo(call,call.host))),
+    [[{address:'93.184.216.1',family:4}],[{address:'93.184.216.2',family:4}],[{address:'93.184.216.3',family:4}]]);
+  assert.equal(evidence.finalUrl,'https://c.example.org/last');
+});
+test('a private answer at a later hop is refused before a connection is made',async()=>{
+  const log=[],asked=[];
+  const lookupImpl=async name=>{asked.push(name);return [{address:name==='a.example.org'?'93.184.216.1':'192.168.1.20',family:4}];};
+  const requestImpl=wire(log,[wireReply(302,{location:'https://b.example.org/'})]);
+  await assert.rejects(captureUrl('https://a.example.org/',{now,lookupImpl,requestImpl}),/non-public/);
+  assert.equal(log.length,1);
+});
+test('one private address among public ones refuses the whole answer',async()=>{
+  const log=[];
+  await assert.rejects(captureUrl('https://example.org/',{now,requestImpl:wire(log,[]),lookupImpl:async()=>[{address:'93.184.216.34',family:4},{address:'169.254.169.254',family:4}]}),/non-public/);
+  assert.equal(log.length,0);
+});
+test('when the pinned native connection fails, the curl fallback gets the same checked addresses',async()=>{
+  const log=[],checked=[{address:'93.184.216.34',family:4}];let given;
+  const evidence=await captureUrl('https://example.org/',{now,lookupImpl:async()=>checked,requestImpl:wire(log,[Error('socket hang up')]),
+    fallbackImpl:async(url,addresses)=>{given=addresses;return {method:'curl-pinned-ipv4',response:new Response('Fallback page text that is long enough to keep.',{headers:{'content-type':'text/plain'}})};}});
+  assert.deepEqual(given,checked);assert.equal(evidence.captureMethod,'curl-pinned-ipv4');
 });
