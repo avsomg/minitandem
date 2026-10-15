@@ -31,7 +31,7 @@ export function requireClaudeCli({execImpl=execFileSync,env=claudeEnvironment()}
   if(older>=0&&version[older]<MIN_CLI[older])throw Error(`Claude CLI ${version.join('.')} is older than the verified minimum ${MIN_CLI.join('.')}`);
   return {cliVersion:version.join('.')};
 }
-const isolationArgs=['--setting-sources','','--strict-mcp-config','--mcp-config','{"mcpServers":{}}',
+export const isolationArgs=['--setting-sources','','--strict-mcp-config','--mcp-config','{"mcpServers":{}}',
   '--disable-slash-commands','--no-chrome','--no-session-persistence'];
 const redact=text=>String(text).replace(/(?:sk-[A-Za-z0-9_-]+|Bearer\s+[^\s]+|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+)/gi,'[redacted]');
 export function failureDetail(event,stderr='',code=null){
