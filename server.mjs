@@ -7,6 +7,7 @@ import {loadCatalog, qualityReport} from './editorial/quality.mjs';
 import {JobQueue} from './editorial/jobs.mjs';
 import {operationsReport} from './editorial/operations-report.mjs';
 import {SITE_ORIGIN} from './site.mjs';
+import {BUILD_INFO} from './ui-files.mjs';
 
 const root=path.dirname(fileURLToPath(import.meta.url));
 const stateDir=process.env.MINITANDEM_STATE_DIR||path.join(root,'server-state');
@@ -14,6 +15,11 @@ const dataFile=path.join(stateDir,'families.json');
 const correctionDir=process.env.MINITANDEM_CORRECTION_DIR||path.join(root,'editorial/corrections');
 const MAX_PENDING_CORRECTIONS=Number(process.env.MINITANDEM_MAX_PENDING_CORRECTIONS||500);
 const queueFile=process.env.MINITANDEM_QUEUE_FILE||path.join(root,'editorial/workflow-state/jobs.sqlite');
+// Which build is live: build.mjs writes this next to the pages. Read once, because the files of a running container do not change.
+// Without it (the site was not built yet) /healthz still answers; revision and date are then null.
+const buildInfo=(()=>{try{return JSON.parse(fs.readFileSync(path.join(root,'.publish',BUILD_INFO),'utf8'));}catch{return {};}})();
+// The commit the deploy script put on the image (compose.yaml passes MINITANDEM_TAG); absent when the service runs outside a deployment.
+const commit=process.env.MINITANDEM_COMMIT||null;
 const catalog=loadCatalog();
 const allowed=new Map(catalog.ACTIVITIES.map(a=>[a.id,a]));
 const statuses=new Set(['','discuss','contact','waiting','booked','visited','skip']);
@@ -104,9 +110,10 @@ export function createServer(){
     if(origin&&!origins.has(origin))return json(res,403,{error:'Origin not allowed'});
     const pathname=new URL(req.url,'http://localhost').pathname;
     // For container health checks and uptime monitors: answers from memory, reads no state and needs no key.
+    // It also says which build is live (revision of the catalogue files, date of the latest review, deployed commit); nothing in it is secret.
     if(pathname==='/healthz'&&['GET','HEAD'].includes(req.method)){
       res.writeHead(200,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});
-      return res.end(req.method==='HEAD'?undefined:JSON.stringify({status:'ok',records:allowed.size}));
+      return res.end(req.method==='HEAD'?undefined:JSON.stringify({status:'ok',records:allowed.size,revision:buildInfo.revision??null,catalogueUpdated:buildInfo.catalogueUpdated??null,...(commit&&{commit})}));
     }
     if(!pathname.startsWith('/api/'))return ['GET','HEAD'].includes(req.method)?staticFile(req,res,pathname):json(res,405,{error:'Method not allowed'});
     try{

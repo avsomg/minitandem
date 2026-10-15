@@ -12,3 +12,6 @@ export const ASSETS=['lucide.min.js','LUCIDE-LICENSE','PHOSPHOR-LICENSE','favico
 export const LAZY_ASSETS=['leaflet.js','leaflet.css','leaflet.markercluster.js','MarkerCluster.css'];
 // Written by build.mjs and published next to the page: the catalogue with sources, linked from the footer and from every plain page.
 export const GENERATED=['research.md'];
+// Written by build.mjs into the output: {revision,catalogueUpdated,records} of the catalogue as built. It holds no time of day, so a build is reproducible.
+// server.mjs reads it for /healthz; .vercelignore lets it through. Not in GENERATED, because that list is copied from the source folder.
+export const BUILD_INFO='build-info.json';
