@@ -6,6 +6,7 @@
 !vercel.json
 !robots.txt
 !research.md
+!build-info.json
 !sitemap.xml
 !places
 !places/**

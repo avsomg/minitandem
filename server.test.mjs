@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import http from 'node:http';
 import os from 'node:os';
@@ -120,6 +121,33 @@ test('/healthz answers without a key, reads and writes no state, and only to GET
     await new Promise(resolve=>server.close(resolve));
     fs.rmSync(temp,{recursive:true,force:true});
   }
+});
+
+test('/healthz names the build that is live: revision of the built files, date of the latest review, and the commit only when one is set',async()=>{
+  const built=fileURLToPath(new URL('.publish/',import.meta.url));
+  const info=JSON.parse(fs.readFileSync(built+'build-info.json','utf8'));
+  // build-info.json holds no time of day (a build must be reproducible); the revision is the content hash of the catalogue files that were built.
+  assert.deepEqual(Object.keys(info),['revision','catalogueUpdated','records']);
+  const files=['data.js','data-reviewed.js','data-practical.js','data-geo.js','regions.js','data-de.js','data-fr.js'];
+  const revision=crypto.createHash('sha256').update(files.map(file=>fs.readFileSync(built+file)).join('\n')).digest('hex').slice(0,16);
+  assert.equal(info.revision,revision);
+  assert.equal(info.catalogueUpdated,/^Catalogue updated (\d{4}-\d{2}-\d{2})\./m.exec(fs.readFileSync(built+'research.md','utf8'))[1]);
+  const health=async(tag,commit)=>{
+    if(commit===undefined)delete process.env.MINITANDEM_COMMIT;else process.env.MINITANDEM_COMMIT=commit;
+    const {createServer}=await import('./server.mjs?build='+tag+Date.now());
+    const server=createServer();
+    await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+    try{return await (await fetch('http://127.0.0.1:'+server.address().port+'/healthz')).json();}
+    finally{await new Promise(resolve=>server.close(resolve));}
+  };
+  const before=process.env.MINITANDEM_COMMIT;
+  try{
+    const plain=await health('plain');
+    assert.deepEqual(plain,{status:'ok',records:info.records,revision:info.revision,catalogueUpdated:info.catalogueUpdated});
+    assert.equal('commit' in plain,false,'no commit without MINITANDEM_COMMIT');
+    assert.equal('commit' in await health('empty',''),false,'an empty variable (compose without a tag) counts as unset');
+    assert.deepEqual(await health('tagged','1a2b3c4'),{status:'ok',records:info.records,revision:info.revision,catalogueUpdated:info.catalogueUpdated,commit:'1a2b3c4'});
+  }finally{if(before===undefined)delete process.env.MINITANDEM_COMMIT;else process.env.MINITANDEM_COMMIT=before;}
 });
 
 test('a damaged state file gives a 500 for that request and the service keeps running',async()=>{

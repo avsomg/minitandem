@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 import {SITE_ORIGIN} from './site.mjs';
-import {SCRIPTS,LAZY_SCRIPTS,STATIC,ASSETS,LAZY_ASSETS,GENERATED} from './ui-files.mjs';
+import {SCRIPTS,LAZY_SCRIPTS,STATIC,ASSETS,LAZY_ASSETS,GENERATED,BUILD_INFO} from './ui-files.mjs';
 import {root} from './test-support.mjs';
 
 const read=file=>fs.readFileSync(path.join(root,file),'utf8');
@@ -43,7 +43,7 @@ test('index.html loads exactly the scripts in ui-files.mjs, in that order, witho
 });
 test('the Vercel allow-list names every published file and nothing private',()=>{
   const allowed=read('.vercelignore').split('\n').filter(line=>line.startsWith('!')).map(line=>line.slice(1));
-  for(const file of [...STATIC,...GENERATED,...SCRIPTS,...LAZY_SCRIPTS].filter(f=>f!=='.vercelignore'))assert.ok(allowed.includes(file),file+' is published but not allowed through');
+  for(const file of [...STATIC,...GENERATED,BUILD_INFO,...SCRIPTS,...LAZY_SCRIPTS].filter(f=>f!=='.vercelignore'))assert.ok(allowed.includes(file),file+' is published but not allowed through');
   for(const file of ASSETS.filter(f=>!/^(?:lucide\.min\.js|LUCIDE-LICENSE)$/.test(f)))assert.ok(allowed.includes('assets/'+file),file);
   assert.ok(!allowed.some(item=>/editorial|archive-ru|server|\.test\.|verify/.test(item)));
   assert.ok(!allowed.includes('assets/lucide.min.js'),'the admin panel icons stay off the public site');

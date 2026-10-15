@@ -75,6 +75,8 @@ test('compose.yaml: Caddy is the only service with public ports, the state is a 
   assert.doesNotMatch(app,/^\s+ports:/m);
   assert.match(app,/expose:\s*\n\s+- "8787"/);
   assert.match(app,/state:\/state/);
+  // The deployed commit reaches /healthz through the image tag (docs/betrieb.md, Update); an unset tag gives an empty value, not a warning.
+  assert.match(app,/MINITANDEM_COMMIT: \$\{MINITANDEM_TAG:-\}/);
   assert.match(app,/read_only: true/);
   assert.match(app,/cap_drop:\s*\n\s+- ALL/);
   for(const port of ['"80:80"','"443:443"','"443:443/udp"'])assert.ok(caddy.includes(port),port);
@@ -110,13 +112,17 @@ test('the entrypoint creates one demo family, never an editor key, serves /healt
   const state=tmp(t,'minitandem-entrypoint-'),port=await freePort();
   const env={...process.env,MINITANDEM_STATE_DIR:path.join(state,'state'),MINITANDEM_CORRECTION_DIR:path.join(state,'state','corrections'),
     MINITANDEM_HOST:'127.0.0.1',MINITANDEM_PORT:String(port)};
+  delete env.MINITANDEM_COMMIT;
   const start=()=>{const child=spawn('sh',[path.join(root,'docker','entrypoint.sh')],{env,stdio:['ignore','pipe','pipe']});let output='';
     child.stdout.on('data',chunk=>{output+=chunk;});child.stderr.on('data',chunk=>{output+=chunk;});return {child,output:()=>output};};
   const stop=async run=>{run.child.kill('SIGTERM');await new Promise(resolve=>run.child.on('close',resolve));};
   let run=start();
   try{
     const health=await waitFor(`http://127.0.0.1:${port}/healthz`);
-    assert.equal((await health.json()).status,'ok');
+    const answer=await health.json();
+    assert.equal(answer.status,'ok');
+    // The image's own build says which catalogue it holds; there is no commit unless the deployment passes one.
+    assert.match(answer.revision,/^[a-f0-9]{16}$/);assert.match(answer.catalogueUpdated,/^\d{4}-\d{2}-\d{2}$/);assert.equal('commit' in answer,false);
     const keyFile=path.join(env.MINITANDEM_STATE_DIR,'demo-family-key.txt');
     const key=fs.readFileSync(keyFile,'utf8').trim();
     assert.match(key,/^[A-Za-z0-9_-]{40,}$/);
@@ -157,7 +163,7 @@ test('the site builds from the files the Docker build context lets in',t=>{
   if(fs.existsSync(path.join(root,'editorial/node_modules')))fs.symlinkSync(path.join(root,'editorial/node_modules'),path.join(context,'editorial/node_modules'));
   const build=spawnSync(process.execPath,['build.mjs','--public'],{cwd:context,encoding:'utf8'});
   assert.equal(build.status,0,build.stderr.slice(-800));
-  for(const file of ['index.html','projekt/index.html','projekt/en/index.html','places/index.html','sitemap.xml'])
+  for(const file of ['index.html','projekt/index.html','projekt/en/index.html','places/index.html','sitemap.xml','build-info.json'])
     assert.ok(fs.existsSync(path.join(context,'.publish',file)),file);
 });
 

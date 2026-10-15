@@ -37,12 +37,27 @@ sed -i "s/^MINITANDEM_TAG=.*/MINITANDEM_TAG=$(git rev-parse --short HEAD)/" .env
 docker compose config -q        # prüft die Datei und die Variablen
 docker compose up -d --build
 docker compose ps               # beide Dienste "running", app "healthy"
-curl -fsS https://minitandem.ch/healthz     # {"status":"ok","records":...}
+curl -fsS https://minitandem.ch/healthz     # {"status":"ok","records":...,"revision":...,"commit":...}
 ```
 
 Beim ersten Start holt Caddy die Zertifikate; das dauert meist unter einer Minute (`docker compose logs caddy`). Den Schlüssel der Demo-Familie zeigt `docker compose exec app cat /state/demo-family-key.txt`. Er schützt nur Demo-Daten.
 
 Die Seite wird beim Bauen des Images erzeugt, **ohne** die Publikations-Gates (sie brauchen private Belege, die nicht im Repository liegen; die Build-Ausgabe sagt `publicationGates: skipped`). Diese Gates laufen vor dem Commit auf dem Rechner des Eigentümers. Vor dem Deployment also nur Stände aus dem Repository nehmen, die dort geprüft wurden.
+
+## Welche Version läuft?
+
+`/healthz` nennt die laufende Version, ohne Schlüssel:
+
+```
+curl -fsS https://minitandem.ch/healthz
+{"status":"ok","records":321,"revision":"e2705429a88dd340","catalogueUpdated":"2026-10-15","commit":"1a2b3c4"}
+```
+
+- `records`: Zahl der Karten im Katalog.
+- `revision`: Prüfsumme (SHA-256, 16 Zeichen) der Katalogdateien, aus denen die Seite gebaut wurde. `build.mjs` schreibt sie mit `catalogueUpdated` (Datum der jüngsten Prüfung im Katalog) und `records` nach `.publish/build-info.json`; die Datei enthält keine Uhrzeit, derselbe Stand ergibt dieselbe Datei. Der Dienst liest sie beim Start. Die Revision ändert sich nur, wenn sich der Katalog ändert, nicht bei Änderungen am Code.
+- `commit`: der Wert von `MINITANDEM_TAG` aus `.env` (kurze Commit-ID, siehe «Update»). `compose.yaml` gibt ihn als `MINITANDEM_COMMIT` an den Dienst weiter. Ist der Tag leer oder läuft der Dienst ausserhalb von Compose, fehlt das Feld; mit dem Standardwert `current` aus `.env.example` steht dort `current`.
+
+Nichts davon ist geheim.
 
 ## Update
 
