@@ -143,7 +143,7 @@
     function ageFit(a, age) {
       if (!Number.isFinite(age)) return null;
       if ((a.min !== null && age < a.min) || (a.max !== null && age > a.max)) return false;
-      if (a.ageUpperUncertainFrom !== undefined && age >= a.ageUpperUncertainFrom) return null;
+      if (P.ageUncertain(a, age)) return null;
       if (a.ageException) return true;
       if (a.min === null) return null;
       return true;

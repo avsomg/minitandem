@@ -97,11 +97,14 @@
     if(children.some(child=>!child))return null;
     return {total:children.reduce((sum,child)=>sum+child.price,adults*tariff.adult),adultTotal:adults*tariff.adult,childTotals:children.map(child=>child.price),text:tariff.note,source:tariff.source};
   }
+  // From this age on, suitability is uncertain (not excluded). Only a real number is a bound: a missing field and null (how an editor clears it)
+  // mean there is none, and 0 is a bound like any other. One rule for the match (catalogue.js ageFit) and for the reasons below.
+  const ageUncertain=(a,age)=>Number.isFinite(a.ageUpperUncertainFrom)&&age>=a.ageUpperUncertainFrom;
   // Reasons are codes; the interface words them.
   function matchReasons(a,age,parentRequired,walkinRequired,date) {
     const reasons=[];
     if(age!==null){
-      if(a.min!==null&&age>=a.min&&(a.max===null||age<=a.max)&&!(a.ageUpperUncertainFrom!==undefined&&age>=a.ageUpperUncertainFrom))reasons.push('ageInRange');
+      if(a.min!==null&&age>=a.min&&(a.max===null||age<=a.max)&&!ageUncertain(a,age))reasons.push('ageInRange');
       else reasons.push('ageToConfirm');
     }
     if(parentRequired&&a.parent==='yes')reasons.push('adultJoins');
@@ -163,5 +166,5 @@
     const current=snapshot(a,previous.date);
     return trackedFieldKeys.filter(key=>previous.fields[key]!==current.fields[key]).map(key=>({key,before:previous.fields[key],after:current.fields[key]}));
   }
-  window.MinitandemPlanning={STALE_CHECK_DAYS,checkAge,checkStale,scenario,range,matches,needKeys,matchesNeeds,matchesWhen,facilityKeys,attendanceKeys,usefulnessKeys,informationKeys,warnings,visit,visitFieldKeys,shareIds,shareURL,familyPrice,matchReasons,admission,admissionKeys,bookingStateKeys,outcomeKeys,validDate,validTime,validateVisits,mergeVisits,snapshot,validateTracked,changes,trackedFieldKeys,maxVisits,fail};
+  window.MinitandemPlanning={STALE_CHECK_DAYS,checkAge,checkStale,scenario,range,matches,needKeys,matchesNeeds,matchesWhen,facilityKeys,attendanceKeys,usefulnessKeys,informationKeys,warnings,ageUncertain,visit,visitFieldKeys,shareIds,shareURL,familyPrice,matchReasons,admission,admissionKeys,bookingStateKeys,outcomeKeys,validDate,validTime,validateVisits,mergeVisits,snapshot,validateTracked,changes,trackedFieldKeys,maxVisits,fail};
 })();

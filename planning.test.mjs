@@ -168,6 +168,35 @@ test('planning returns codes or card text only, never interface wording',()=>{
   assert.ok(!P.matchReasons(workshops,null,false,false,'2026-10-07').includes('publishedDate'));
 });
 
+test('the uncertain upper age counts only as a number: missing and null mean no bound, 0 and a positive value are bounds',()=>{
+  const {K,P,C,regions,byId}=shared;
+  // A card with confirmed ages 2 to 4, listed alone in its own catalogue so that the interface's own filter runs on it.
+  const withBound=bound=>{const card={...byId.get('mpe'),min:2,max:4};delete card.ageException;delete card.ageUpperUncertainFrom;if(bound!=='absent')card.ageUpperUncertainFrom=bound;return card;};
+  const shows=(card,age,includeUnknownAge)=>K.create({activities:[card],regions,planning:P,clock}).filter({...K.defaultFilters(),includeUnknownAge},{age}).length===1;
+  const reasons=(card,age)=>Array.from(P.matchReasons(card,age,false,false,null));
+  // Absent (the field never set) and null (how a full-review patch clears it) are the same thing: the confirmed range decides.
+  for(const bound of ['absent',undefined,null]){
+    const card=withBound(bound),label=String(bound);
+    assert.equal(C.ageFit(card,3),true,label);
+    assert.equal(shows(card,3,false),true,label+': still listed when unknown ages are left out');
+    assert.deepEqual(reasons(card,3),['ageInRange'],label+': the explanation keeps the confirmed-age reason');
+    assert.equal(C.ageFit(card,5),false,label+': above the published limit');
+  }
+  // 0 is a bound like any other: from age 0 on, suitability is uncertain, so the confirmed range no longer settles it.
+  const zero=withBound(0);
+  assert.equal(C.ageFit(zero,3),null);
+  assert.equal(shows(zero,3,false),false);assert.equal(shows(zero,3,true),true);
+  assert.deepEqual(reasons(zero,3),['ageToConfirm']);
+  // A positive bound applies from that age: below it the range fits, at it the age is to be confirmed, and the published limit still excludes.
+  const four=withBound(3.5);
+  assert.equal(C.ageFit(four,3),true);assert.deepEqual(reasons(four,3),['ageInRange']);
+  assert.equal(C.ageFit(four,3.5),null);assert.deepEqual(reasons(four,3.5),['ageToConfirm']);
+  assert.equal(shows(four,3.5,false),false);assert.equal(shows(four,3.5,true),true);
+  assert.equal(C.ageFit(four,5),false);
+  // The same card as an editor leaves it: the key present with null, then with a number, changes nothing for the other ages.
+  assert.equal(C.ageFit(withBound(null),2),C.ageFit(withBound('absent'),2));
+});
+
 test('family calculations respect child bands and never expose course unit prices as tickets',()=>{
   const {P,byId}=shared,beo=byId.get('beo-funpark');
   assert.equal(P.familyPrice(beo,2.5,1).total,19);
