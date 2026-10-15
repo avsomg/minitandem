@@ -145,3 +145,45 @@ test('systemic failures stop new model claims; one blocked venue does not stop t
   assert.throws(()=>queue.resetCircuit(''),/investigation/);
   queue.resetCircuit('Fixed notes normalization and added regression tests.');assert.ok(queue.claim('search','worker'));
 });
+test('a provider outage returns the attempt and retries soon; any other failure still counts',t=>{
+  const {queue,time}=fixture(t);queue.enqueue(spec('facts','a','v1',2));queue.enqueue(spec('facts','b','v1',1));
+  const limited=queue.claim('search','w');assert.equal(limited.attempt,1);
+  const released=queue.releaseUncounted(limited.id,limited.token,'search',"You've hit your limit · usage limit resets 7pm");
+  assert.equal(released.attempt,0);assert.equal(released.state,'retry');assert.equal(released.token,null);assert.match(released.error,/limit/);
+  assert.equal(queue.db.prepare("SELECT count(*) AS n FROM events WHERE job_id=? AND kind='released-uncounted'").get(limited.id).n,1);
+  // The other card goes first; the released one waits out its short delay and is claimed again with a fresh first attempt.
+  const other=queue.claim('search','w');assert.equal(other.card_id,'b');
+  queue.fail(other.id,other.token,'search','Invalid field value type: notes');
+  assert.equal(queue.get(other.id).attempt,1);assert.equal(queue.get(other.id).state,'retry');
+  assert.equal(queue.claim('search','w'),null);
+  time('2026-10-02T08:11:00.000Z');const again=queue.claim('search','w');
+  assert.equal(again.id,limited.id);assert.equal(again.attempt,1);
+  // The outage also keeps a job on its third claim out of attention.
+  queue.db.prepare('UPDATE jobs SET attempt=3 WHERE id=?').run(again.id);
+  assert.equal(queue.releaseUncounted(again.id,again.token,'search','HTTP 401 unauthorized').state,'retry');
+  assert.equal(queue.get(again.id).attempt,2);
+});
+test('only a provider failure is released, only with a live lease, and a job that keeps meeting one starts to count',t=>{
+  const {queue,time}=fixture(t);queue.enqueue(spec('facts','a'));
+  const job=queue.claim('search','w');
+  assert.throws(()=>queue.releaseUncounted(job.id,job.token,'search','Invalid field value type: notes'),/Only a provider failure/);
+  assert.throws(()=>queue.releaseUncounted(job.id,'wrong','search','HTTP 429 quota'),/lease/);
+  assert.throws(()=>queue.releaseUncounted(job.id,job.token,'verify','HTTP 429 quota'),/lease/);
+  assert.equal(queue.get(job.id).attempt,1);assert.equal(queue.get(job.id).state,'leased');
+  let current=job;
+  for(let i=0;i<10;i++){
+    queue.releaseUncounted(current.id,current.token,'search','HTTP 429 quota');
+    assert.equal(queue.get(job.id).attempt,0);time(`2026-10-02T${String(9+i).padStart(2,'0')}:00:00.000Z`);current=queue.claim('search','w');
+  }
+  queue.releaseUncounted(current.id,current.token,'search','HTTP 429 quota');
+  assert.equal(queue.get(job.id).attempt,1);assert.match(queue.get(job.id).error,/429/);
+  assert.equal(queue.db.prepare("SELECT count(*) AS n FROM events WHERE job_id=? AND kind='released-uncounted'").get(job.id).n,10);
+});
+test('released provider failures are still classified, so the circuit breaker keeps working',t=>{
+  const {queue}=fixture(t);
+  for(const id of ['a','b','c']){
+    queue.enqueue(spec('facts',id));const job=queue.claim('search','worker');queue.releaseUncounted(job.id,job.token,'search','HTTP 429 quota');
+    assert.equal(queue.get(job.id).attempt,0);
+  }
+  assert.equal(queue.circuit().open,true);assert.equal(queue.circuit().category,'provider-limit');
+});

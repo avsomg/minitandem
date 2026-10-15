@@ -7,7 +7,7 @@ import {EventEmitter} from 'node:events';
 import {snapshot} from './evidence.mjs';
 import {JobQueue,digest} from './jobs.mjs';
 import {retireStaleReadyJobs} from './workflow.mjs';
-import {captureClaims,prepareEvidence,captureDraft,promptFor,runRoles,runCodex,workerEvidenceFiles,normalizePilotSources,upgradeInputBudgetJob,upgradeInvestigatedJob,requestQa} from './agent-run.mjs';
+import {captureClaims,prepareEvidence,captureDraft,promptFor,failJob,runRoles,runCodex,workerEvidenceFiles,normalizePilotSources,upgradeInputBudgetJob,upgradeInvestigatedJob,requestQa} from './agent-run.mjs';
 
 const now=new Date().toISOString(),url='https://example.org/course';
 const first=snapshot({url,fetchedAt:now,text:'Official source: admission is free. Course is on Monday.'});
@@ -35,6 +35,25 @@ test('obsolete ready and retry inputs are retired before model calls, without cl
   assert.equal(retireStaleReadyJobs(q,[{...card,min:6}]).length,2);
   assert.deepEqual(q.list().map(j=>j.state).sort(),['await-source','leased','superseded','superseded']);
   assert.ok(q.list().every(j=>j.attempt===2));
+});
+test('a provider outage leaves the attempt unchanged, a contract failure or a refused answer still counts',t=>{
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-fail-job-')),q=new JobQueue(path.join(directory,'jobs.sqlite'));
+  t.after(()=>{q.close();fs.rmSync(directory,{recursive:true,force:true});});
+  const run=(kind,role,message,options)=>{
+    q.enqueue({kind,cardId:message.slice(0,8)+kind,inputRevision:'r',payload:{}});
+    const job=q.claim(role,'runtime-'+role);failJob(q,job,role,Error(message),options);return q.get(job.id);
+  };
+  const limit=run('facts','search',"Claude worker did not complete successfully: usage limit; You've hit your limit");
+  assert.equal(limit.attempt,0);assert.equal(limit.state,'retry');
+  const login=run('verify-facts','verify','Claude worker did not complete successfully: authentication; API Error: 401');
+  assert.equal(login.attempt,0);assert.equal(login.state,'retry');
+  const contract=run('integrate','editor','Invalid field value type: notes');
+  assert.equal(contract.attempt,1);assert.equal(contract.state,'retry');
+  // The model did answer and the controller refused it: a provider-looking message in that answer is not an outage.
+  assert.equal(run('review-patch','verify','Missing evidence binding for HTTP 429 quota',{answered:true}).attempt,1);
+  assert.equal(run('facts','search','HTTP 429 quota in the quoted text',{answered:true}).attempt,1);
+  // QA output can mention a rate limit without any provider being down.
+  assert.equal(run('qa','qa','Command failed: node --test\nHTTP 429 too many requests').attempt,1);
 });
 test('an open systemic circuit leaves deterministic QA available even in a verify-first chain',()=>{
   assert.deepEqual(runRoles({role:'verify',chain:true,circuitOpen:true}),['qa']);

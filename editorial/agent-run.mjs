@@ -274,10 +274,22 @@ export function modelPreflight(policy,options={}){
 export async function gatedRoles(roles,priorities,gate){
   if(!gate.preflight)return roles;
   if(gate.ready===null&&roles.some(role=>role!=='qa'&&priorities.has(role))){
-    try{await gate.preflight();gate.ready=true;}
-    catch(error){gate.ready=false;gate.reason=String(error.message).slice(0,500);}
+    // One slow or failed login check must not lose the whole batch: ask once more after a pause (injectable, so tests do not wait).
+    gate.tries=0;
+    while(gate.ready!==true&&gate.tries<2){
+      if(gate.tries)await (gate.sleep||(ms=>new Promise(resolve=>setTimeout(resolve,ms))))(gate.retryMs??60000);
+      gate.tries++;
+      try{await gate.preflight();gate.ready=true;}
+      catch(error){gate.ready=false;gate.reason=String(error.message).slice(0,500);}
+    }
   }
   return gate.ready===true?roles:roles.filter(role=>role==='qa');
+}
+// A provider outage (usage limit, login) is not the job's fault, so the job keeps its attempt; every other failure counts, including a
+// refused model answer and any QA failure (test output can mention "429" without any provider being down).
+export function failJob(queue,job,role,error,{answered=false}={}){
+  const outage=role!=='qa'&&!answered&&/^provider-/.test(failureCategory(error.message)||'');
+  return outage?queue.releaseUncounted(job.id,job.token,role,error.message):queue.fail(job.id,job.token,role,error.message);
 }
 export async function prepareEvidence(job,{captureImpl=captureUrl,saveImpl=saveSnapshot,queue=null,sources=null}={}){
   // A verifier also receives the sources fetched for leads of an earlier round; otherwise it cannot see what following its lead produced.
@@ -399,7 +411,7 @@ export function recordRejectedOutput(queue,job,role,workerOutput,error,outputRoo
   });queue.flush(outputRoot);
   return hash;
 }
-export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=runModel,cardId=null,pilot=false,fullReview=false,sources=[],preflight}={}){
+export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=runModel,cardId=null,pilot=false,fullReview=false,sources=[],preflight,preflightRetryMs=60000,sleep}={}){
   assertRuntimeCurrent(loadedRuntimeRevision);
   sources=normalizePilotSources(sources,{pilot});
   const policy=JSON.parse(fs.readFileSync(path.join(here,'agent-policy.json'),'utf8'));
@@ -409,7 +421,7 @@ export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=r
     role&&!['search','verify','arbitrate','editor','qa'].includes(role))throw Error('Invalid worker policy, role or limit');
   const provider=assertWorkerPolicy(policy);
   if(preflight===undefined)preflight=worker===runModel&&provider==='claude'?modelPreflight:null;
-  const gate={preflight:preflight&&(()=>preflight(policy)),ready:null,reason:null};
+  const gate={preflight:preflight&&(()=>preflight(policy)),ready:null,reason:null,retryMs:preflightRetryMs,sleep};
   const owned=!queue;queue??=new JobQueue(path.join(here,'workflow-state','jobs.sqlite'));
   const results=[];
   const startedAt=Date.now();let stopReason=null;
@@ -439,7 +451,7 @@ export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=r
       }
       const blocked=gate.ready===false;
       const roles=await gatedRoles(runRoles({role,chain,circuitOpen,priorities,first:i===0}),priorities,gate);let job,assignedRole;
-      if(gate.ready===false&&!blocked)queue.event(null,'worker-preflight-failed',{provider,reason:gate.reason});
+      if(gate.ready===false&&!blocked)queue.event(null,'worker-preflight-failed',{provider,reason:gate.reason,tries:gate.tries});
       for(const possible of roles){
         job=queue.claim(possible,`runtime-${possible}`,{leaseMs:policy.leaseMinutes*60000,backpressure:policy.backpressure,cardId});
         if(job){assignedRole=possible;break;}
@@ -467,7 +479,7 @@ export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=r
       }catch(error){
         if(!workerOutput&&error.usage)queue.event(job.id,'usage',{...error.usage,failed:true});
         if(workerOutput)recordRejectedOutput(queue,job,assignedRole,workerOutput,error);
-        if(queue.get(job.id)?.state==='leased')queue.fail(job.id,job.token,assignedRole,error.message);
+        if(queue.get(job.id)?.state==='leased')failJob(queue,job,assignedRole,error,{answered:Boolean(workerOutput)});
         results.push({jobId:job.id,cardId:job.card_id,kind:job.kind,error:error.message});
         // A subscription outage or limit would otherwise spend an attempt on every remaining job of the run.
         if(provider==='claude'&&/^provider-/.test(failureCategory(error.message)||'')){stopReason='worker-provider-failure';break;}

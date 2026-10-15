@@ -79,20 +79,35 @@ test('a failed readiness check leaves model jobs unclaimed with their attempts i
   t.after(()=>{q.close();fs.rmSync(directory,{recursive:true,force:true});});
   const verify=q.enqueue({kind:'verify-facts',cardId:'card-a',inputRevision:'r',priority:10});
   const qa=q.enqueue({kind:'qa',cardId:'catalogue',inputRevision:'r',priority:1});
-  let calls=0;
-  const gate={preflight:async()=>{calls++;throw Error('Claude login check failed: authentication; exit 1');},ready:null,reason:null};
+  let calls=0;const pauses=[];
+  const gate={preflight:async()=>{calls++;throw Error('Claude login check failed: authentication; exit 1');},ready:null,reason:null,retryMs:7,sleep:async ms=>{pauses.push(ms);}};
   const priorities=new Map([['verify',10],['qa',1]]);
   for(let i=0;i<2;i++){
     const roles=await gatedRoles(['verify','qa'],priorities,gate);
     assert.deepEqual(roles,['qa']);
     for(const role of roles)q.claim(role,`runtime-${role}`);
   }
-  assert.equal(calls,1);assert.match(gate.reason,/authentication/);
+  // Asked twice with one pause in between, and not again on the next loop.
+  assert.equal(calls,2);assert.deepEqual(pauses,[7]);assert.equal(gate.tries,2);assert.match(gate.reason,/authentication/);
   assert.equal(q.get(verify.id).state,'ready');assert.equal(q.get(verify.id).attempt,0);assert.equal(q.get(qa.id).state,'leased');
   const idle={preflight:async()=>{calls++;},ready:null,reason:null};
-  assert.deepEqual(await gatedRoles(['verify','qa'],new Map([['qa',1]]),idle),['qa']);assert.equal(calls,1);
-  assert.deepEqual(await gatedRoles(['verify','qa'],priorities,idle),['verify','qa']);assert.equal(calls,2);
+  assert.deepEqual(await gatedRoles(['verify','qa'],new Map([['qa',1]]),idle),['qa']);assert.equal(calls,2);
+  assert.deepEqual(await gatedRoles(['verify','qa'],priorities,idle),['verify','qa']);assert.equal(calls,3);
   assert.deepEqual(await gatedRoles(['verify','qa'],priorities,{preflight:null,ready:null}),['verify','qa']);
+});
+test('a login check that fails once and then succeeds does not lose the batch',async t=>{
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-gate-retry-')),q=new JobQueue(path.join(directory,'jobs.sqlite'));
+  t.after(()=>{q.close();fs.rmSync(directory,{recursive:true,force:true});});
+  const verify=q.enqueue({kind:'verify-facts',cardId:'card-a',inputRevision:'r',priority:10});
+  let calls=0;const pauses=[];
+  const gate={preflight:async()=>{if(++calls===1)throw Error('Claude subscription login could not be verified; no API fallback');},ready:null,reason:null,
+    retryMs:60000,sleep:async ms=>{pauses.push(ms);}};
+  const roles=await gatedRoles(['verify','qa'],new Map([['verify',10]]),gate);
+  assert.deepEqual(roles,['verify','qa']);assert.equal(gate.ready,true);assert.equal(calls,2);assert.deepEqual(pauses,[60000]);
+  const job=q.claim('verify','runtime-verify');assert.equal(job.id,verify.id);assert.equal(job.attempt,1);
+  // A check that passes at once never pauses.
+  const quick={preflight:async()=>{calls++;},ready:null,reason:null,sleep:async ms=>{pauses.push(ms);}};
+  assert.deepEqual(await gatedRoles(['verify'],new Map([['verify',1]]),quick),['verify']);assert.deepEqual(pauses,[60000]);assert.equal(quick.tries,1);
 });
 test('an incomplete Claude route is refused before any job can be claimed',()=>{
   const roles={verify:{model:'retained-codex-model',claudeModel:'sonnet',effort:'low',criticalEffort:'medium'},qa:{model:null,effort:null}};
