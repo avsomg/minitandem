@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import vm from 'node:vm';
 import {JobQueue,digest,failureCategory} from './jobs.mjs';
-import {commitResult,validateClaims,validateDraft,taskSpecs,registerCaptured,validateBindings,mergeResearch,today,unprocessedSpecs,assertFullReviewPermission,retireStaleReadyJobs,orderDraftEvents} from './workflow.mjs';
+import {commitResult,validateClaims,validateDraft,applyDraftRecord,citationProblems,taskSpecs,registerCaptured,validateBindings,mergeResearch,today,unprocessedSpecs,assertFullReviewPermission,retireStaleReadyJobs,orderDraftEvents} from './workflow.mjs';
 import {snapshot} from './evidence.mjs';
 import {modelRoute,promptFor} from './agent-run.mjs';
 import {fullReviewFields} from './field-contract.mjs';
@@ -122,11 +122,11 @@ test('a patched number needs a binding quote that writes it, even without an app
   const f=fixture(t),page=snapshot({url:'https://example.org/atelier',fetchedAt:'2026-10-02T08:00:00.000Z',text:'Kinder ab drei Jahren. Gruppen von maximal 8 Kindern. Anmeldung bis Freitag.'});
   registerCaptured(f.queue,page);
   const bind=(field,quote)=>({field,source:page.url,quote,kind:'official',scope:'exact-card',snapshotId:page.id});
-  const make=(patch,practicalPatch,...bindings)=>({...draft,snapshots:[page],patch,practicalPatch,bindings:[...bindings,bind('research.findings.0','Anmeldung bis Freitag')]});
+  const make=(patch,practicalPatch,...bindings)=>({...draft,snapshots:[page],findings:[{...draft.findings[0],url:page.url}],patch,practicalPatch,bindings:[...bindings,bind('research.findings.0','Anmeldung bis Freitag')]});
   assert.deepEqual(validateBindings(f.queue,make({min:3},{},bind('min','Kinder ab drei Jahren'))),['min','research.findings.0']);
-  assert.deepEqual(validateBindings(f.queue,make({},{groupSize:{value:8}},bind('practical.groupSize','Gruppen von maximal 8 Kindern'))),['practical.groupSize','research.findings.0']);
+  assert.deepEqual(validateBindings(f.queue,make({},{groupSize:{value:8,source:page.url}},bind('practical.groupSize','Gruppen von maximal 8 Kindern'))),['practical.groupSize','research.findings.0']);
   assert.throws(()=>validateBindings(f.queue,make({min:4},{},bind('min','Kinder ab drei Jahren'))),/Patch number not written in its evidence quote: min/);
-  assert.throws(()=>validateBindings(f.queue,make({},{groupSize:{value:10}},bind('practical.groupSize','Gruppen von maximal 8 Kindern'))),/not written in its evidence quote: practical.groupSize/);
+  assert.throws(()=>validateBindings(f.queue,make({},{groupSize:{value:10,source:page.url}},bind('practical.groupSize','Gruppen von maximal 8 Kindern'))),/not written in its evidence quote: practical.groupSize/);
   // One quote among the field's bindings is enough; clearing a bound to null is not a figure.
   validateBindings(f.queue,make({min:3},{},bind('min','Anmeldung bis Freitag'),bind('min','Kinder ab drei Jahren')));
   assert.deepEqual(validateBindings(f.queue,make({max:null},{},{...bind('max','Kinder ab drei Jahren'),transformation:'clear-unconfirmed',reason:'No stated upper age.'})),['max','research.findings.0']);
@@ -385,6 +385,68 @@ test('a finding binding is numbered within the draft, not after the findings the
   assert.match(prompt,/A finding, note or intro states only what the quotes of its bindings support: bind every fact it states \(several bindings may share one field name\) or leave that fact out/);
   const twice={...draft,bindings:[...draft.bindings,{...draft.bindings[2],quote:'Admission is free.'}]};
   assert.deepEqual(validateBindings(f.queue,twice),['min','age','research.findings.0']);
+});
+// A public citation (a finding's url, the source of a practical fact) must be a page the controller captured for that very field.
+test('a quote bound to source A cannot publish a link to an unrelated source B',t=>{
+  const f=fixture(t),quote='No registration is required for this playgroup.',other='https://unrelated.example.org/notice';
+  const source=snapshot({url:'https://example.org/playgroup',fetchedAt:'2026-10-02T08:00:00.000Z',text:quote});
+  registerCaptured(f.queue,source);
+  const bind=field=>({field,source:source.url,quote,kind:'official',scope:'exact-card',snapshotId:source.id});
+  const make=(url,factSource)=>({...draft,snapshots:[source],patch:{},findings:[{field:'Booking',kind:'official',text:'No registration is required.',url}],
+    practicalPatch:{booking:{value:false,text:'No registration is required.',source:factSource,checked:'2026-10-01'}},bindings:['practical.booking','research.findings.0'].map(bind)});
+  const good=make(source.url,source.url);
+  validateDraft(good,card);assert.deepEqual(validateBindings(f.queue,good),['practical.booking','research.findings.0']);
+  assert.deepEqual(applyDraftRecord(card,good,'2026-10-02').sources.map(s=>s.url),['https://example.org/course',source.url]);
+  for(const [bad,fields] of [[make(other,source.url),'research.findings.0'],[make(source.url,other),'practical.booking'],[make(other,other),'research.findings.0, practical.booking']]){
+    validateDraft(bad,card); // well formed and https: only its links are not the captured source
+    assert.deepEqual(citationProblems(bad),fields.split(', '));
+    assert.throws(()=>validateBindings(f.queue,bad),error=>error.message==='Citation does not match its evidence binding: '+fields&&failureCategory(error.message)==='contract');
+  }
+  // The controller refuses the editor's answer and writes nothing: no review job, no artifact, no journal entry.
+  f.queue.enqueue({kind:'integrate',cardId:'a',inputRevision:'mismatch',payload:{card,cardRevision:digest(card)}});
+  const editor=f.queue.claim('editor','editor');
+  assert.throws(()=>commitResult(f.queue,{jobId:editor.id,token:editor.token,role:'editor',result:{draft:make(other,other)}},f),/Citation does not match its evidence binding/);
+  assert.equal(f.queue.summary().artifacts,0);assert.equal(f.queue.list().filter(job=>job.kind==='review-patch').length,0);
+  assert.equal(fs.existsSync(path.join(f.outputRoot,'editorial/approved-updates.json')),false);
+  // The editor is told the rule before it writes.
+  assert.match(promptFor({id:'j',kind:'integrate',input_revision:'r',payload:{card}}),/A finding's url and a practicalPatch fact's source must each be a source you bound for that same field/);
+});
+test('a citation may be the requested address of its source or the address it redirected to, and no other address',t=>{
+  const f=fixture(t),moved=snapshot({url:'https://example.org/old-page',finalUrl:'https://www.example.org/new/page/',fetchedAt:'2026-10-02T08:00:00.000Z',text:'Children aged 2 to 5 are welcome.'});
+  registerCaptured(f.queue,moved);
+  const make=url=>({...draft,snapshots:[moved],patch:{min:2},findings:[{...draft.findings[0],url}],
+    bindings:['min','research.findings.0'].map(field=>({field,source:moved.url,quote:'Children aged 2 to 5',kind:'official',scope:'exact-card',snapshotId:moved.id}))});
+  // Both addresses the controller recorded for the capture are the source; a fragment is not part of an address.
+  for(const url of [moved.url,moved.finalUrl,moved.url+'#times',moved.finalUrl+'#top']){
+    validateDraft(make(url),card);assert.deepEqual(validateBindings(f.queue,make(url)),['min','research.findings.0'],url);
+  }
+  // Nothing else is normalised: another path, a query, a trailing slash the server did not redirect to, or another host is another page.
+  for(const url of ['https://example.org/old-page/','https://example.org/old-page?lang=fr','https://www.example.org/new/page','https://example.org/new/page/','https://www.example.org/'])
+    assert.throws(()=>validateBindings(f.queue,make(url)),/Citation does not match its evidence binding: research\.findings\.0/,url);
+  // A practical fact is held to the same rule through its own field.
+  const fact=url=>({...make(moved.url),practicalPatch:{booking:{value:false,text:'No registration is required.',source:url,checked:'2026-10-01'}},
+    bindings:[...make(moved.url).bindings,{...make(moved.url).bindings[1],field:'practical.booking'}]});
+  assert.deepEqual(validateBindings(f.queue,fact(moved.finalUrl)),['min','practical.booking','research.findings.0']);
+  assert.throws(()=>validateBindings(f.queue,fact('https://example.org/elsewhere')),/binding: practical\.booking$/);
+});
+test('each citation is held to the sources bound to its own field, and a field bound to two sources may cite either',t=>{
+  const f=fixture(t),at='2026-10-02T08:00:00.000Z';
+  const a=snapshot({url:'https://example.org/course',fetchedAt:at,text:'Children aged 2 to 5 are welcome.'});
+  const b=snapshot({url:'https://tourism.example.net/offers/course',fetchedAt:at,text:'Admission is free for all visitors.'});
+  registerCaptured(f.queue,a);registerCaptured(f.queue,b);
+  const bind=(field,evidence,quote)=>({field,source:evidence.url,quote,kind:'official',scope:'exact-card',snapshotId:evidence.id});
+  const make=(first,second,...extra)=>({...draft,snapshots:[a,b],patch:{min:2},
+    findings:[{...draft.findings[0],url:first},{field:'Price',kind:'official',text:'Admission is free.',url:second}],
+    bindings:[bind('min',a,'Children aged 2 to 5'),bind('research.findings.0',a,'Children aged 2 to 5'),bind('research.findings.1',b,'Admission is free'),...extra]});
+  // Two independently bound sources: each finding cites its own.
+  assert.deepEqual(validateBindings(f.queue,make(a.url,b.url)),['min','research.findings.0','research.findings.1']);
+  // A source bound only to the other finding does not support this one.
+  assert.throws(()=>validateBindings(f.queue,make(b.url,a.url)),/binding: research\.findings\.0, research\.findings\.1$/);
+  assert.throws(()=>validateBindings(f.queue,make(a.url,a.url)),/binding: research\.findings\.1$/);
+  // A field bound to both sources may cite either of them.
+  const both=bind('research.findings.0',b,'Admission is free');
+  for(const [first,second] of [[a.url,b.url],[b.url,b.url]])assert.deepEqual(citationProblems(make(first,second,both)),[]);
+  assert.deepEqual(citationProblems(make(b.url,a.url,both)),['research.findings.1']);
 });
 test('an unchanged value restated in the patch still has to match the approved claim, so the editor is told to patch changes only',t=>{
   const f=fixture(t);registerCaptured(f.queue,page);
