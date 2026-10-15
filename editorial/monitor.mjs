@@ -262,6 +262,14 @@ function recovered(queue,sourceId,now){
     task.status='resolved';task.resolvedAt=now;task.resolution='Source fetched and parsed successfully; this does not verify catalogue facts.';
   }
 }
+// A withheld alarm must come back at a later run, so the source keeps what it had before this run for everything that could hide the
+// notice: the alarm keys it is compared with, the validators of the page that carried it (else the next request answers 304 and the notice
+// is lost for good, a title-only change leaves no content task to rescue it) and, after a good fetch, the attempt time (it is due again;
+// a failed fetch keeps its backoff). The hash stays: a content change of the same run was issued, and a repeat would only merge into it.
+function holdBack(entry,prior){
+  for(const key of ['alarm','alarmHistory','etag','lastModified',...entry.error==null?['lastAttempt']:[]])
+    if(key in prior)entry[key]=prior[key];else delete entry[key];
+}
 export function rebaseline(state,ids,note,now=new Date().toISOString()){
   if(!note?.trim())throw Error('a rebaseline requires --note');
   for(const id of ids){
@@ -275,12 +283,14 @@ export function rebaseline(state,ids,note,now=new Date().toISOString()){
  * One monitor pass. Alarm lines (alarm.mjs) are compared on the full page of every HTML and PDF source that was fetched and decoded
  * (not on 304, challenge pages or HTTP errors; still on a parser failure). A first comparison stores the keys and issues nothing.
  * New lines become possible-closure / possible-reopen tasks after the pass: lines new on three or more sources of one host are
- * marked siteWide, and more than `alarmFuse` alarm tasks issue none (the keys stay as they were, so the next run sees them again).
+ * marked siteWide, and more than `alarmFuse` alarm tasks issue none: those sources are put back for alarm keys, validators and attempt
+ * time (see holdBack), so they are due again, their page is read again and not answered with 304, and the alarm is found again.
  * `rebaselineParser:{note}` moves v1 HTML baselines to parser v2: content-changed only where v1 itself sees a change, the alarm
  * keys become a baseline, high redirect classes are issued once. `spreadDays` moves the last attempt back by spreadOffset() days.
  * A run-wide outage fuse covers source-unavailable the way `alarmFuse` covers alarms: when more than `outageFuse` percent of the sources
  * fetched in one run (at least `outageMin` of them) are unavailable, the check broke, not the market (a network down on this Mac). No
- * source-unavailable task is issued, and the failed sources are put back as they were before the run, so they are due again next time.
+ * source-unavailable task is issued, and the failed sources are put back as they were before the run (validators included: a failed
+ * fetch never stored new ones), so they are due again next time.
  * `hostIgnore` (see hostRules) applies to the compared text and the alarm lines; when the stored text, with the same rules applied,
  * equals the new text, the hash moves without a task (noted in baselineHistory). A v1 baseline stays on v1 outside the parser pass.
  */
@@ -385,7 +395,7 @@ export async function runMonitor({sources,state,fetchImpl=fetch,now=new Date().t
         else{
           const strip=({index,...line})=>line,reopenOnly=line=>line.cats.every(cat=>cat==='reopen');
           for(const [kind,lines] of [['possible-closure',compared.added.filter(line=>!reopenOnly(line))],['possible-reopen',compared.added.filter(reopenOnly)]])
-            if(lines.length)pending.push({source,kind,lines:lines.map(strip),finalUrl,entry,priorAlarm:prior.alarm,priorHistory:prior.alarmHistory});
+            if(lines.length)pending.push({source,kind,lines:lines.map(strip),finalUrl,entry,prior});
           if(compared.added.length||compared.muted.length)alarmNote={added:compared.added.length,muted:compared.muted.map(line=>line.key)};
         }
       }
@@ -440,7 +450,10 @@ export async function runMonitor({sources,state,fetchImpl=fetch,now=new Date().t
   const fuse={tripped:pending.length>alarmFuse,limit:alarmFuse,count:pending.length};
   if(fuse.tripped){
     fuse.alarms=pending.map(item=>({sourceId:item.source.id,kind:item.kind,lines:item.lines.map(line=>line.text)}));
-    for(const item of pending){item.entry.alarm=item.priorAlarm;item.entry.alarmHistory=item.priorHistory;}
+    for(const item of pending){
+      holdBack(item.entry,item.prior);
+      const row=results.find(result=>result.id===item.source.id);if(row)row.withheld='alarm-fuse';
+    }
   }else for(const item of pending)issue(state.queue,item.source,item.kind,now,{url:item.source.url,finalUrl:item.finalUrl,parser:ALARM_PARSER,lines:item.lines,...(item.siteWide?{siteWide:item.siteWide}:{})});
   const share=fetched?Math.round(unavailable.length/fetched*1000)/10:0;
   const outage={tripped:fetched>=outageMin&&unavailable.length*100>fetched*outageFuse,limit:outageFuse,min:outageMin,fetched,failed:unavailable.length,share};
@@ -514,7 +527,7 @@ export async function main(args,baseDir=here,{records}={}){
 async function cli(){
   const out=await main(process.argv.slice(2));
   console.log(JSON.stringify(out,null,2));
-  if(out.fuse?.tripped){console.error(`alarm fuse: ${out.fuse.count} alarm tasks exceed --alarm-fuse=${out.fuse.limit}; none were issued (listed under "fuse").`);process.exitCode=2;}
+  if(out.fuse?.tripped){console.error(`alarm fuse: ${out.fuse.count} alarm tasks exceed --alarm-fuse=${out.fuse.limit}; none were issued (listed under "fuse"); those sources stay due and are read again at the next run, so raise the limit or fix the cause and run again.`);process.exitCode=2;}
   if(out.outageFuse?.tripped){console.error(`outage fuse: ${out.outageFuse.failed} of ${out.outageFuse.fetched} fetched sources were unavailable (${out.outageFuse.share} %, limit --outage-fuse=${out.outageFuse.limit} %); no source-unavailable task was issued and those sources stay due (listed under "outageFuse").`);process.exitCode=2;}
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))cli().catch(error=>{console.error(error);process.exitCode=1;});
