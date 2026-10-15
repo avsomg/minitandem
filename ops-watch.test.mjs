@@ -11,6 +11,7 @@ import zlib from 'node:zlib';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {buildHeartbeat} from './ops/cycle-run.mjs';
+import {processStart} from './editorial/process-lock.mjs';
 
 const root=path.dirname(fileURLToPath(import.meta.url));
 const TMP=fs.realpathSync(os.tmpdir());
@@ -177,7 +178,7 @@ function cycleSandbox(t){
   write(path.join(folder,'editorial','cycle.mjs'),`import fs from 'node:fs';import path from 'node:path';import {fileURLToPath} from 'node:url';
 const here=path.dirname(fileURLToPath(import.meta.url)),mode=process.env.FAKE_CYCLE||'ok';
 const latest=path.join(here,'workflow-state','cycle','latest.json');
-const save=record=>{fs.mkdirSync(path.dirname(latest),{recursive:true});fs.writeFileSync(latest,JSON.stringify(record));};
+const save=record=>{fs.mkdirSync(path.dirname(latest),{recursive:true});fs.writeFileSync(latest,JSON.stringify({runId:process.env.MINITANDEM_CYCLE_RUN_ID,...record}));};
 const started=new Date().toISOString();
 console.log('cycle arguments: '+process.argv.slice(2).join(' '));
 if(mode==='ok'){save({startedAt:started,daily:true,failedSteps:[],batch:{stopReason:null,jobs:[{card:'card-a',kind:'verify',state:'done'},{card:'card-b',kind:'search',state:'done'}]},approvedUpdates:[{card:'card-a'}],changes:{attention:[],circuitOpened:[],loginUnavailable:[]}});process.exit(0);}
@@ -187,7 +188,12 @@ if(mode==='login'){save({startedAt:started,failedSteps:[],batch:{stopReason:'wor
 if(mode==='blocked'){save({startedAt:started,blocked:'Codex schedules are active: automation'});process.exit(1);}
 if(mode==='paused'){save({startedAt:started,skipped:'paused by editorial/cycle.pause'});process.exit(0);}
 if(mode==='crash'){process.exit(3);}
-if(mode==='stale'){save({startedAt:'2020-01-01T00:00:00.000Z',failedSteps:['old']});process.exit(0);}
+if(mode==='stale'){save({runId:'earlier-run',startedAt:'2020-01-01T00:00:00.000Z',failedSteps:['old']});process.exit(0);}
+if(mode==='silent'){process.exit(0);}
+if(mode==='other-run'){save({runId:'an-overlapping-run',startedAt:started,failedSteps:[],batch:{jobs:[]}});process.exit(0);}
+if(mode==='garbage'){fs.mkdirSync(path.dirname(latest),{recursive:true});fs.writeFileSync(latest,'{"runId":');process.exit(0);}
+if(mode==='busy'){save({startedAt:started,skipped:'another cycle is still running'});process.exit(0);}
+if(mode==='echo-env'){console.log('run id: '+process.env.MINITANDEM_CYCLE_RUN_ID);save({startedAt:started,failedSteps:[]});process.exit(0);}
 `);
   const env={PATH:process.env.PATH,HOME:folder,MINITANDEM_DROP_SSH:fakeSsh(folder),MINITANDEM_DROP_KEY:path.join(folder,'key'),
     MINITANDEM_DROP_RETRY_DELAYS_MS:'0,0',FAKE_SSH_LOG:path.join(folder,'ssh.log'),FAKE_SSH_STDIN:path.join(folder,'ssh.stdin'),FAKE_SSH_MODE:'capture'};
@@ -208,6 +214,7 @@ test('cycle-run passes the cycle through (arguments, output, exit code) and send
   assert.deepEqual({exit:beat.exit,ok:beat.ok,paused:beat.paused,failedSteps:beat.failedSteps,jobsRun:beat.jobsRun,approvedUpdates:beat.approvedUpdates,daily:beat.daily,record:beat.record},
     {exit:0,ok:true,paused:false,failedSteps:[],jobsRun:2,approvedUpdates:1,daily:true,record:true});
   assert.deepEqual(beat.needsOwner,{count:0,text:''});
+  assert.equal(beat.reason,null);assert.match(beat.runId,/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/);
   assert.match(beat.at,/^\d{4}-\d{2}-\d{2}T/);
   assert.ok(fs.readFileSync(box.env.FAKE_SSH_STDIN,'utf8').trim().split('\n').length===1,'one line of JSON');
 });
@@ -239,18 +246,46 @@ test('cycle-run reports ok:false when the cycle exits with 0 but says it needs t
   assert.equal(beat.needsOwner.count,2);assert.match(beat.needsOwner.text,/Claude login unavailable; batch stopped: worker-login-unavailable/);
 });
 
-test('cycle-run reports a pause as alive (paused:true, ok:true) and ignores a record this run did not write',t=>{
+test('cycle-run reports a pause as alive (paused:true, ok:true, reason null) and a skip because another cycle runs as a skip, not as work',t=>{
   const box=cycleSandbox(t);
   assert.equal(box.run({FAKE_CYCLE:'paused'}).status,0);
   const beat=box.heartbeat();
-  assert.equal(beat.paused,true);assert.equal(beat.ok,true);assert.equal(beat.exit,0);assert.match(beat.skipped,/^paused/);
-  // a cycle that dies without writing anything: the record of an earlier run must not be passed off as this one
-  assert.equal(box.run({FAKE_CYCLE:'stale'}).status,0);
-  const stale=box.heartbeat();
-  assert.equal(stale.record,false);assert.deepEqual(stale.failedSteps,[]);
+  assert.equal(beat.paused,true);assert.equal(beat.ok,true);assert.equal(beat.reason,null);assert.equal(beat.exit,0);assert.match(beat.skipped,/^paused/);assert.equal(beat.record,true);
+  assert.equal(box.run({FAKE_CYCLE:'busy'}).status,0);
+  const busy=box.heartbeat();
+  assert.equal(busy.paused,false);assert.equal(busy.ok,true);assert.equal(busy.reason,null);assert.equal(busy.skipped,'another cycle is still running');assert.equal(busy.record,true);
+});
+
+test('cycle-run never reports success for a run without its own receipt: missing, earlier, unreadable or written by an overlapping run',t=>{
+  const box=cycleSandbox(t);
+  for(const mode of ['silent','stale','other-run','garbage']){
+    const result=box.run({FAKE_CYCLE:mode});
+    assert.equal(result.status,0,mode+': the exit code is still the cycle\'s');
+    const beat=box.heartbeat();
+    assert.equal(beat.ok,false,mode);assert.equal(beat.reason,'no-receipt',mode);assert.equal(beat.exit,0,mode);assert.equal(beat.record,false,mode);
+    assert.equal(beat.paused,false,mode);assert.equal(beat.skipped,null,mode);assert.deepEqual(beat.failedSteps,[],'the receipt of another run is not read: '+mode);
+    assert.match(beat.runId,/^[0-9a-f-]{36}$/,mode);
+    assert.match(result.stderr,/left no receipt of run [0-9a-f-]{36}/,mode);
+  }
+  // a cycle that dies without a receipt: the exit code is the reason
   assert.equal(box.run({FAKE_CYCLE:'crash'}).status,3,'the exit code of the cycle is the exit code of cycle-run');
   const crashed=box.heartbeat();
-  assert.equal(crashed.ok,false);assert.equal(crashed.exit,3);assert.equal(crashed.record,false);
+  assert.equal(crashed.ok,false);assert.equal(crashed.exit,3);assert.equal(crashed.reason,'exit');assert.equal(crashed.record,false);
+});
+
+test('cycle-run gives every invocation its own run id, hands it to the cycle and sends it in the heartbeat',t=>{
+  const box=cycleSandbox(t);
+  const first=box.run({FAKE_CYCLE:'echo-env'}),beatOne=box.heartbeat();
+  assert.equal(first.stdout.match(/run id: (\S+)/)[1],beatOne.runId,'the cycle got the id the heartbeat carries');
+  assert.equal(beatOne.ok,true);assert.equal(beatOne.record,true);
+  box.run({FAKE_CYCLE:'echo-env'});
+  assert.notEqual(box.heartbeat().runId,beatOne.runId);
+  // the receipt of the first invocation, still on disk, does not stand in for the second one
+  const latest=path.join(box.folder,'editorial','workflow-state','cycle','latest.json');
+  const earlier=fs.readFileSync(latest,'utf8');
+  box.run({FAKE_CYCLE:'silent'});
+  assert.equal(fs.readFileSync(latest,'utf8'),earlier);
+  assert.equal(box.heartbeat().reason,'no-receipt');
 });
 
 test('cycle-run survives ssh failures: retries a dead connection, does not retry a refusal, never changes the exit code',t=>{
@@ -278,8 +313,36 @@ test('cycle-run sends nothing for --status and --dry-run, which do not run a cyc
   assert.deepEqual(box.calls(),[]);
 });
 
+test('buildHeartbeat: ok only with the receipt of this very run; a missing, earlier or foreign receipt, and a missing run id, are never success',()=>{
+  const startedMs=Date.parse('2026-10-15T10:00:00Z'),now=new Date('2026-10-15T10:01:00Z');
+  const make=over=>buildHeartbeat({exit:0,startedMs,now,runId:'run-a',record:{runId:'run-a',startedAt:'2026-10-15T10:00:01Z',failedSteps:[],batch:{jobs:[{card:'c1'}]}},...over});
+  const good=make();
+  assert.deepEqual({ok:good.ok,reason:good.reason,record:good.record,runId:good.runId,jobsRun:good.jobsRun,seconds:good.seconds},{ok:true,reason:null,record:true,runId:'run-a',jobsRun:1,seconds:60});
+  for(const [name,beat] of Object.entries({
+    missing:make({record:null}),
+    'earlier run':make({record:{runId:'run-0',startedAt:'2026-10-15T10:00:30Z',failedSteps:[]}}),
+    'no run id in the receipt':make({record:{startedAt:'2026-10-15T10:00:30Z',failedSteps:[]}}),
+    'no run id given':make({runId:null}),
+    'no run id at all':make({runId:undefined,record:{startedAt:'2026-10-15T10:00:30Z'}}),
+    'empty run id on both sides':make({runId:'',record:{runId:'',startedAt:'2026-10-15T10:00:30Z'}})
+  })){
+    assert.equal(beat.ok,false,name);assert.equal(beat.reason,'no-receipt',name);assert.equal(beat.record,false,name);assert.equal(beat.jobsRun,0,name);
+  }
+  // other states keep their meaning
+  assert.deepEqual([make({exit:2}).ok,make({exit:2}).reason],[false,'exit']);
+  assert.deepEqual([make({exit:2,record:null}).ok,make({exit:2,record:null}).reason],[false,'exit']);
+  const owner=make({record:{runId:'run-a',startedAt:'2026-10-15T10:00:01Z',failedSteps:['sync']}});
+  assert.deepEqual([owner.ok,owner.reason,owner.needsOwner.count],[false,'needs-owner',1]);
+  const paused=make({record:{runId:'run-a',startedAt:'2026-10-15T10:00:01Z',skipped:'paused by editorial/cycle.pause'}});
+  assert.deepEqual([paused.ok,paused.reason,paused.paused,paused.skipped],[true,null,true,'paused by editorial/cycle.pause']);
+  const busy=make({record:{runId:'run-a',startedAt:'2026-10-15T10:00:01Z',skipped:'another cycle is still running'}});
+  assert.deepEqual([busy.ok,busy.reason,busy.paused,busy.skipped],[true,null,false,'another cycle is still running']);
+  // the heartbeat stays small: counts, ids and short codes
+  assert.ok(JSON.stringify(good).length<500,JSON.stringify(good));
+});
+
 test('buildHeartbeat keeps the text plain and short',()=>{
-  const beat=buildHeartbeat({exit:1,startedMs:Date.now()-5000,record:{startedAt:new Date().toISOString(),blocked:'quote "x" \\ <b>\n é'+'y'.repeat(500),failedSteps:['a"b']}});
+  const beat=buildHeartbeat({exit:1,runId:'run-1',startedMs:Date.now()-5000,record:{runId:'run-1',startedAt:new Date().toISOString(),blocked:'quote "x" \\ <b>\n é'+'y'.repeat(500),failedSteps:['a"b']}});
   const raw=JSON.stringify(beat);
   assert.ok(raw.length<1500);
   assert.doesNotMatch(beat.needsOwner.text,/["\\<>\né]/);
@@ -291,10 +354,12 @@ test('buildHeartbeat keeps the text plain and short',()=>{
 function offsiteSandbox(t){
   const folder=tmp(t,'minitandem-offsite-'),staging=tmp(t,'minitandem-offsite-staging-');
   for(const file of ['editorial-offsite.mjs','drop-client.mjs'])fs.copyFileSync(path.join(root,'ops',file),write(path.join(folder,'ops',file),''));
+  fs.copyFileSync(path.join(root,'editorial','process-lock.mjs'),write(path.join(folder,'editorial','process-lock.mjs'),''));
   // editorial/backup.mjs as the pipeline has it, reduced to the commands the script uses
   write(path.join(folder,'editorial','backup.mjs'),`import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';
 const [command,target]=process.argv.slice(2),directory=target?.startsWith('--to=')?target.slice(5):target;
 if(process.env.FAKE_FAIL===command){console.error('Wait for active workers before taking a consistent backup');process.exit(1);}
+if(command==='create'&&process.env.FAKE_LOCK_PROBE)fs.copyFileSync(path.join(process.env.MINITANDEM_OFFSITE_STAGING,'.offsite.lock'),process.env.FAKE_LOCK_PROBE);
 if(command==='create'){fs.mkdirSync(path.join(directory,'project','editorial'),{recursive:true});
   fs.writeFileSync(path.join(directory,'manifest.json'),JSON.stringify({schema:1,id:crypto.randomUUID()}));fs.writeFileSync(path.join(directory,'jobs.sqlite'),'queue');
   fs.writeFileSync(path.join(directory,'project','editorial','approved-updates.json'),'{"updates":[]}');console.log('{"destination":"'+directory+'"}');}
@@ -378,6 +443,29 @@ test('editorial-offsite sweeps leftovers of a killed run, refuses a second run a
   assert.equal(inside.status,1);assert.match(inside.stderr,/outside the repository/);
 });
 
+test('editorial-offsite holds the same kind of lock as the cycle: a file with its pid while it runs, never taken from a live process, taken over from a dead one, an older version\'s directory respected',t=>{
+  const box=offsiteSandbox(t),lock=path.join(box.staging,'.offsite.lock'),probe=path.join(box.folder,'lock-during-run.json');
+  assert.equal(box.run({FAKE_LOCK_PROBE:probe}).status,0);
+  const held=JSON.parse(fs.readFileSync(probe,'utf8'));
+  assert.equal(held.schema,1);assert.ok(held.pid>0&&held.pid!==process.pid);assert.match(held.token,/^[0-9a-f-]{36}$/);assert.ok(Date.parse(held.startedAt)>Date.now()-60000);
+  assert.deepEqual(box.left(),[],'released at the end, no marker or temporary file left');
+  const sent=box.calls().length;
+  // a live owner, however long ago it says it started: this run is refused and the lock stays as it was
+  const start=processStart(process.pid);   // this test process is the live owner; null only where ps does not exist, then the record is young
+  const alive={schema:1,pid:process.pid,token:'0123456789abcdef',startedAt:start?'2020-01-01T00:00:00.000Z':new Date().toISOString(),processStart:start};
+  fs.writeFileSync(lock,JSON.stringify(alive)+'\n');
+  const busy=box.run();
+  assert.equal(busy.status,1);assert.match(busy.stderr,new RegExp(`another run is active \\(pid ${process.pid}\\)`));
+  assert.equal(JSON.parse(fs.readFileSync(lock,'utf8')).token,alive.token);assert.equal(box.calls().length,sent,'nothing was sent');
+  // an owner that is gone
+  const gone=spawnSync(process.execPath,['-e','0']).pid;
+  fs.writeFileSync(lock,JSON.stringify({...alive,pid:gone})+'\n');
+  assert.equal(box.run().status,0);assert.deepEqual(box.left(),[]);
+  // a directory of the older version: a dead owner is cleared, a live one is respected
+  fs.mkdirSync(path.join(box.staging,'.lock'));fs.writeFileSync(path.join(box.staging,'.lock','pid'),String(gone));
+  assert.equal(box.run().status,0);assert.deepEqual(box.left(),[],'the old directory is gone');
+});
+
 // ---- the whole way: cycle-run and editorial-offsite talk to the real drop.sh, cycle-watch reads what it left -----------------------------
 
 function fakeSendmail(folder){
@@ -401,10 +489,13 @@ function watchSandbox(t,shell='sh'){
   return {folder,watch,state,mail,put,age,run};
 }
 const NOW=1_800_000_000,H=3600;
-const beat=(over={})=>JSON.stringify(buildHeartbeat({exit:0,startedMs:Date.now()-1000,record:{startedAt:new Date().toISOString(),failedSteps:[],batch:{jobs:[]}},...over}))+'\n';
-const failedBeat=()=>JSON.stringify(buildHeartbeat({exit:1,startedMs:Date.now()-1000,record:{startedAt:new Date().toISOString(),failedSteps:['sync','batch'],
+const RUN='run-0001';
+const beat=(over={})=>JSON.stringify(buildHeartbeat({exit:0,runId:RUN,startedMs:Date.now()-1000,record:{runId:RUN,startedAt:new Date().toISOString(),failedSteps:[],batch:{jobs:[]}},...over}))+'\n';
+const failedBeat=()=>JSON.stringify(buildHeartbeat({exit:1,runId:RUN,startedMs:Date.now()-1000,record:{runId:RUN,startedAt:new Date().toISOString(),failedSteps:['sync','batch'],
   changes:{attention:[{card:'card-x'}],circuitOpened:[],loginUnavailable:[]}}}))+'\n';
-const pausedBeat=()=>JSON.stringify(buildHeartbeat({exit:0,startedMs:Date.now()-1000,record:{startedAt:new Date().toISOString(),skipped:'paused by editorial/cycle.pause'}}))+'\n';
+const pausedBeat=()=>JSON.stringify(buildHeartbeat({exit:0,runId:RUN,startedMs:Date.now()-1000,record:{runId:RUN,startedAt:new Date().toISOString(),skipped:'paused by editorial/cycle.pause'}}))+'\n';
+const busyBeat=()=>JSON.stringify(buildHeartbeat({exit:0,runId:RUN,startedMs:Date.now()-1000,record:{runId:RUN,startedAt:new Date().toISOString(),skipped:'another cycle is still running'}}))+'\n';
+const noReceiptBeat=()=>JSON.stringify(buildHeartbeat({exit:0,runId:RUN,startedMs:Date.now()-1000,record:null}))+'\n';
 const subjects=box=>box.mail.mails().map(mail=>mail.match(/^Subject: (.*)$/m)[1]);
 
 for(const shell of SHELLS)test(`cycle-watch (${shell}) sends exactly one mail when the cycle goes silent and one when it is back, and stays quiet otherwise`,t=>{
@@ -433,7 +524,8 @@ for(const shell of SHELLS)test(`cycle-watch (${shell}) sends one mail when the l
   assert.equal(box.run(NOW).status,1);
   assert.deepEqual(subjects(box),['Minitandem editorial: cycle failed']);
   const [mail]=box.mail.mails();
-  assert.match(mail,/Exit code: 1/);assert.match(mail,/Failed steps: sync,batch/);assert.match(mail,/Needs the owner: failed steps: sync, batch; attention: card-x/);
+  assert.match(mail,/Exit code: 1/);assert.match(mail,/Reason: exit: the cycle exited with a non-zero code/);
+  assert.match(mail,/Failed steps: sync,batch/);assert.match(mail,/Needs the owner: failed steps: sync, batch; attention: card-x/);
   assert.equal(box.run(NOW+1800).status,1);assert.equal(subjects(box).length,1,'still failing: no second mail');
   box.put('heartbeat.json',pausedBeat(),H,NOW+3600);
   assert.equal(box.run(NOW+3600).status,1);assert.equal(subjects(box).length,1,'a pause neither mails nor clears the open failure');
@@ -441,17 +533,57 @@ for(const shell of SHELLS)test(`cycle-watch (${shell}) sends one mail when the l
   assert.equal(box.run(NOW+7200).status,0);
   assert.deepEqual(subjects(box),['Minitandem editorial: cycle failed','Minitandem editorial: cycle works again']);
   // a cycle that exits with 0 but says it needs the owner (a lost batch) is reported with its reason, and the exit code is named as it was
-  box.put('heartbeat.json',JSON.stringify(buildHeartbeat({exit:0,startedMs:Date.now()-1000,record:{startedAt:new Date().toISOString(),failedSteps:[],
+  box.put('heartbeat.json',JSON.stringify(buildHeartbeat({exit:0,runId:RUN,startedMs:Date.now()-1000,record:{runId:RUN,startedAt:new Date().toISOString(),failedSteps:[],
     batch:{stopReason:'worker-login-unavailable',jobs:[]},changes:{attention:[],circuitOpened:[],loginUnavailable:['x']}}}))+'\n',H,NOW+7250);
   assert.equal(box.run(NOW+7250).status,1);
   assert.equal(subjects(box).at(-1),'Minitandem editorial: cycle failed');
   assert.match(box.mail.mails().at(-1),/Exit code: 0/);assert.match(box.mail.mails().at(-1),/Needs the owner: Claude login unavailable; batch stopped: worker-login-unavailable/);
+  assert.match(box.mail.mails().at(-1),/Reason: needs-owner: the cycle finished and says itself/);
+  // a run skipped because another cycle is running is neither success nor failure: an open failure stays open
+  box.put('heartbeat.json',failedBeat(),H,NOW+7260);
+  assert.equal(box.run(NOW+7260).status,1);assert.equal(subjects(box).at(-1),'Minitandem editorial: cycle failed');
+  const opened=subjects(box).length;
+  box.put('heartbeat.json',busyBeat(),H,NOW+7270);
+  assert.equal(box.run(NOW+7270).status,1);assert.equal(subjects(box).length,opened,'a skipped run does not clear the failure');
   // a pause that begins from a healthy state sends nothing at all
   box.put('heartbeat.json',beat(),H,NOW+7300);
   assert.equal(box.run(NOW+7300).status,0);assert.equal(subjects(box).at(-1),'Minitandem editorial: cycle works again');
   const count=subjects(box).length;
   box.put('heartbeat.json',pausedBeat(),H,NOW+7400);
   assert.equal(box.run(NOW+7400).status,0);assert.equal(subjects(box).length,count);
+  box.put('heartbeat.json',busyBeat(),H,NOW+7500);
+  assert.equal(box.run(NOW+7500).status,0);assert.equal(subjects(box).length,count,'nor does a skipped run from a healthy state');
+});
+
+for(const shell of SHELLS)test(`cycle-watch (${shell}) names the reason when a cycle exits with 0 but left no receipt of its own run, and treats it like any other failure`,t=>{
+  const box=watchSandbox(t,shell);
+  box.put('backup.json','{"at":"x","name":"editorial-2026-10-15.tar.gz","bytes":10}\n',H,NOW);
+  box.put('heartbeat.json',beat(),H,NOW);
+  assert.equal(box.run(NOW).status,0);assert.deepEqual(subjects(box),[]);
+  box.put('heartbeat.json',noReceiptBeat(),H,NOW);
+  assert.equal(box.run(NOW).status,1);
+  assert.deepEqual(subjects(box),['Minitandem editorial: cycle failed']);
+  const [mail]=box.mail.mails();
+  assert.match(mail,/^Exit code: 0$/m);
+  assert.match(mail,/^Reason: no-receipt: the cycle exited with 0 but left no receipt of this run \(editorial\/workflow-state\/cycle\/latest\.json /m);
+  assert.match(mail,/^Failed steps: none named$/m);assert.match(mail,/^Needs the owner: nothing named$/m);
+  assert.equal(box.run(NOW+1800).status,1);assert.equal(subjects(box).length,1,'still failing: no second mail');
+  // a pause is not a missing receipt; it does not clear the failure either
+  box.put('heartbeat.json',pausedBeat(),H,NOW+3600);
+  assert.equal(box.run(NOW+3600).status,1);assert.equal(subjects(box).length,1);
+  box.put('heartbeat.json',beat(),H,NOW+7200);
+  assert.equal(box.run(NOW+7200).status,0);
+  assert.deepEqual(subjects(box),['Minitandem editorial: cycle failed','Minitandem editorial: cycle works again']);
+  // a heartbeat of the older format (no reason field) is still reported, and says so
+  box.put('heartbeat.json','{"at":"x","exit":1,"ok":false,"paused":false,"failedSteps":[],"needsOwner":{"count":0,"text":""},"record":false}\n',H,NOW+7300);
+  assert.equal(box.run(NOW+7300).status,1);
+  assert.match(box.mail.mails().at(-1),/^Reason: not stated \(heartbeat from an older version\)$/m);
+  // whatever the field holds, only letters and hyphens reach the mail
+  box.put('heartbeat.json',beat(),H,NOW+7350);assert.equal(box.run(NOW+7350).status,0);
+  box.put('heartbeat.json','{"at":"x","exit":1,"ok":false,"reason":"x\u001b[31my; rm -rf","failedSteps":[],"needsOwner":{"count":0,"text":""}}\n',H,NOW+7400);
+  assert.equal(box.run(NOW+7400).status,1);
+  const last=box.mail.mails().at(-1);
+  assert.doesNotMatch(last,/\u001b/);assert.match(last,/^Reason: xmyrm-rf$/m);
 });
 
 for(const shell of SHELLS)test(`cycle-watch (${shell}) sends one mail when the off-site copy is missing for more than 36 hours and one when it is back`,t=>{
@@ -535,6 +667,17 @@ test('heartbeat and archive travel the real way: cycle-run and editorial-offsite
   assert.match(sent[0],/Subject: Minitandem editorial: cycle failed/);
   assert.match(sent[0],/Failed steps: sync,report/);assert.match(sent[0],/Exit code: 1/);
   assert.doesNotMatch(sent[0],/PRIVATE QUOTE/);
+  assert.match(sent[0],/Reason: exit: the cycle exited with a non-zero code/);
+  // a cycle that exits with 0 but leaves no receipt of its own run: the stored heartbeat says so, and so does the next mail
+  const watchAgain=()=>spawnSync('sh',[WATCH],{encoding:'utf8',env:{PATH:process.env.PATH,HEALTH_MAIL_TO:'owner@example.org',HEALTH_SENDMAIL:mail.program,WATCH_DIR:shared.WATCH_DIR,WATCH_STATE_DIR:path.join(server,'state')}});
+  assert.equal(cycle.run({...shared,FAKE_CYCLE:'ok'}).status,0);
+  const recovered=watchAgain();
+  assert.equal(recovered.status,0,recovered.stderr);assert.match(mail.mails().at(-1),/Subject: Minitandem editorial: cycle works again/);
+  assert.equal(cycle.run({...shared,FAKE_CYCLE:'silent'}).status,0);
+  const third=watchAgain();
+  assert.equal(third.status,1,third.stderr);
+  assert.match(mail.mails().at(-1),/Subject: Minitandem editorial: cycle failed/);
+  assert.match(mail.mails().at(-1),/Exit code: 0/);assert.match(mail.mails().at(-1),/Reason: no-receipt: /);
 });
 
 // ---- install templates ---------------------------------------------------------------------------------------------------------------------

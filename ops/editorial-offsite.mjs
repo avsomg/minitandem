@@ -20,6 +20,7 @@ import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {runDropWithRetry} from './drop-client.mjs';
+import {takeProcessLock} from '../editorial/process-lock.mjs';
 
 const here=path.dirname(fileURLToPath(import.meta.url));
 const repo=path.join(here,'..');
@@ -38,19 +39,12 @@ function node(step,script,args,timeoutMs){
   return run.stdout;
 }
 
-const alive=pid=>{try{process.kill(pid,0);return true;}catch(error){return error.code==='EPERM';}};
+// One run at a time (editorial/process-lock.mjs, the same lock as the cycle's): a file with the owner's pid and token, never taken from a live process,
+// released only while it is still ours. A directory `.lock` left by an older version is respected while its owner lives and removed otherwise.
 function takeLock(staging){
-  const lock=path.join(staging,'.lock');
-  for(let attempt=0;attempt<2;attempt++){
-    try{fs.mkdirSync(lock);fs.writeFileSync(path.join(lock,'pid'),String(process.pid));return ()=>fs.rmSync(lock,{recursive:true,force:true});}
-    catch(error){
-      if(error.code!=='EEXIST')throw error;
-      let pid=0;try{pid=Number(fs.readFileSync(path.join(lock,'pid'),'utf8'));}catch{}
-      if(pid&&alive(pid))throw new StepError('lock',`another run is active (pid ${pid})`);
-      fs.rmSync(lock,{recursive:true,force:true});
-    }
-  }
-  throw new StepError('lock','could not take the lock');
+  const taken=takeProcessLock(path.join(staging,'.offsite.lock'),{legacyDirectory:path.join(staging,'.lock')});
+  if(!taken.ok)throw new StepError('lock',taken.holder?.pid?`another run is active (pid ${taken.holder.pid})`:'another run is active');
+  return ()=>{if(!taken.release())console.error(`${stamp()} editorial-offsite: the lock was not ours any more at the end of this run; it was left as it is`);};
 }
 
 // Only what this script itself makes: leftovers of a run that was killed

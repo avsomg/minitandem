@@ -10,10 +10,14 @@
 #
 # The three checks, each with its own remembered state in $WATCH_STATE_DIR:
 #   silent  no heartbeat for more than WATCH_SILENT_HOURS (cycle silent / cycle is running again)
-#   failed  the last heartbeat says ok:false and not paused: a non-zero exit, or the cycle itself says it needs the owner (cycle failed / cycle works again)
+#   failed  the last heartbeat says ok:false and not paused (cycle failed / cycle works again). Its "reason" is named in the mail:
+#             exit        the cycle exited with a non-zero code
+#             no-receipt  the cycle exited with 0 but left no receipt of that very run (a run id from ops/cycle-run.mjs), so nothing is known about its work
+#             needs-owner the cycle finished and itself says it needs the owner
 #   backup  no archive for more than WATCH_BACKUP_HOURS (off-site copy missing / off-site copy is back)
 # A file that does not exist yet counts from the watcher's first run, so installing the watcher before the Mac sends anything stays quiet
-# until the period has passed. A pause (paused:true) counts as alive and leaves the failed state as it was.
+# until the period has passed. A pause (paused:true) and a skipped run (skipped:"another cycle is still running") count as alive and leave the
+# failed state as it was: neither is work that succeeded, neither is a failure.
 # A mail that cannot be sent is not remembered as sent: the next run tries again.
 #
 # Environment:
@@ -93,6 +97,7 @@ if [ -f "$HEARTBEAT" ]; then
   hb=$(head -c 16384 "$HEARTBEAT")
   failed=""
   if printf '%s' "$hb" | grep -q '"paused":true'; then failed=""            # paused: alive, no judgement
+  elif printf '%s' "$hb" | grep -q '"skipped":"'; then failed=""             # skipped (another cycle is running): alive, no judgement
   elif printf '%s' "$hb" | grep -q '"ok":false'; then failed=problem
   elif printf '%s' "$hb" | grep -q '"ok":true'; then failed=ok
   fi
@@ -100,11 +105,20 @@ if [ -f "$HEARTBEAT" ]; then
     steps=$(printf '%s' "$hb" | sed -n 's/.*"failedSteps":\[\([^]]*\)\].*/\1/p' | tr -d '"' | printable)
     owner=$(printf '%s' "$hb" | sed -n 's/.*"needsOwner":{[^}]*"text":"\([^"]*\)".*/\1/p' | printable)
     code=$(number exit "$hb")
+    reason=$(field reason "$hb" | tr -cd 'a-z-')
+    case "$reason" in
+      exit) why="exit: the cycle exited with a non-zero code" ;;
+      no-receipt) why="no-receipt: the cycle exited with 0 but left no receipt of this run (editorial/workflow-state/cycle/latest.json was missing, unreadable or written by another run), so it is not known what it did" ;;
+      needs-owner) why="needs-owner: the cycle finished and says itself that something needs the owner (see below)" ;;
+      "") why="not stated (heartbeat from an older version)" ;;
+      *) why="$reason" ;;
+    esac
     change failed "$failed" \
       "cycle failed" \
       "The editorial cycle on the Mac failed or needs the owner.
 Heartbeat received: $(fmt "$last_hb")
 Exit code: ${code:-unknown}
+Reason: $why
 Failed steps: ${steps:-none named}
 Needs the owner: ${owner:-nothing named}
 On the Mac: node editorial/cycle.mjs --status shows the last record; the log is ~/Library/Logs/minitandem-editorial-cycle.log." \
