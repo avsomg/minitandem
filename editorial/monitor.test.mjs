@@ -527,6 +527,15 @@ test('a withheld alarm is also found again when the page changed in content: one
   assert.deepEqual(state.queue.filter(q=>q.kind==='content-changed').map(q=>q.occurrences),[1,1],'the held back run does not repeat the content task');
   assert.deepEqual(state.queue.filter(q=>q.kind==='possible-closure').map(q=>[q.sourceId,q.occurrences]),[['a',1],['b',1]]);
 });
+test('in a run, an ongoing closure since a past date opens a task and an expired temporary closure does not',async()=>{
+  const state={schema:1,sources:{},queue:[]};
+  await runMonitor({sources:[krabbel],state,now:at(14),fetchImpl:async()=>reply(notice())});
+  await runMonitor({sources:[krabbel],state,force:true,now:at(15),fetchImpl:async()=>reply(notice('Geschlossen bis 01.10.2026'))});
+  const alarms=()=>state.queue.filter(q=>q.kind.startsWith('possible-')).map(q=>[q.kind,q.details.lines.map(line=>line.text)]);
+  assert.deepEqual(alarms(),[]);
+  await runMonitor({sources:[krabbel],state,force:true,now:at(16),fetchImpl:async()=>reply(notice('Geschlossen bis 01.10.2026','Dauerhaft geschlossen seit 01.10.2026'))});
+  assert.deepEqual(alarms(),[['possible-closure',['Dauerhaft geschlossen seit 01.10.2026']]]);
+});
 test('a withheld alarm of a source whose fetch failed keeps its backoff, and the alarm is found again when it is read',async()=>{
   const sources=[{...krabbel,id:'a',url:'https://a.example.org/course',intervalDays:7,required:['Marker']}];
   const state={schema:1,sources:{},queue:[]};

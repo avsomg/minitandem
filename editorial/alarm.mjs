@@ -116,6 +116,18 @@ const MONTH_NAMES=Object.keys(MONTHS).sort((a,b)=>b.length-a.length).join('|');
 const NUMERIC_DATE=/(?<!\d)(\d{1,2})\.\s?(\d{1,2})\.(?:\s?(\d{4}|\d{2})(?!\d))?|(?<!\d)(\d{1,2})\/(\d{1,2})\/(\d{4}|\d{2})(?!\d)/gu;
 const NAMED_DATE=new RegExp(`(?<!\\d)(\\d{1,2})(?:er)?\\.?\\s(${MONTH_NAMES})\\.?(?:\\s(\\d{4}))?(?![\\p{L}\\p{N}])`,'giu');
 const YEAR=/(?<!\d)(20\d\d)(?:\s?[/–-]\s?(20\d\d|\d{2}))?(?!\d)/gu;
+// A notice with dates that are all behind us is over, unless it says the state still holds (F03). Still in force: a permanent or open-ended
+// closure ("permanently", "until further notice", "no longer offered") or a start without an end ("since / seit / depuis / from 01.10.").
+// An explicit end ("until / bis / jusqu'au 01.10.", "from ... to ...") that has passed makes it obsolete, and so does a bare date or a list
+// of dates (a holiday closure). The monitor only queues a notice for review, it never closes a card, so the doubtful case is kept.
+const LASTING=bounded(['permanently','permanent closure','closed for good','until further notice','indefinitely','no longer (?:available|offered|takes? place)',
+  'dauerhaft','definitiv','endgültig','unbefristet','bis auf weiteres','auf unbestimmte zeit','betriebsaufgabe','aufgelöst','(?:findet|finden) nicht mehr statt','(?:wird|werden) nicht mehr angeboten','nicht (?:mehr )?weitergeführt',
+  'définitivement','définitives?',"jusqu'à nouvel (?:avis|ordre)",'durée indéterminée',"cessation d'activités?",'cesse(?:nt)? (?:ses|leurs) activités','dissolution',"n'est plus (?:proposée?|organisée?)",'ne sont plus (?:proposée?s|organisée?s)'].join('|'));
+const DATE_AHEAD=`(?:(?:dem|le|la|the|den|der|l')\\s*)?(?:\\d{1,2}(?:er)?\\.?\\s?(?:\\d{1,2}[./]|(?:${MONTH_NAMES})(?![\\p{L}]))|(?:${MONTH_NAMES})(?![\\p{L}])|20\\d\\d(?!\\d))`;
+const SINCE=new RegExp(`(?<![\\p{L}\\p{N}])(?:seit|depuis|since|ab|dès|from|as of|per|à partir (?:du|de))\\s+${DATE_AHEAD}`,'iu');
+const UNTIL=new RegExp(`(?<![\\p{L}\\p{N}])(?:bis(?: zum| und mit| am| ende)?|jusqu'(?:au|à|en|a)|until|till|through|thru|au|à|to)\\s+${DATE_AHEAD}|(?<=[\\d.])\\s*[–-]\\s*${DATE_AHEAD}`,'iu');
+const ongoing=key=>LASTING.test(key)||SINCE.test(key)&&!UNTIL.test(key);
+
 const WEEKDAY=bounded(['(?:mon|diens|donners|frei|sams|sonn)tags?','mittwochs?','ruhetage?','feiertage?n?','(?:lun|mar|mercre|jeu|vendre|same)dis?','dimanches?','(?:mon|tues|wednes|thurs|fri|satur|sun)days?',
   'jours? fériés?','wochenenden?','week-ends?',"(?:mo|di|mi|do|fr|sa|so|lu|ma|me|je|ve|mon|tue|wed|thu|fri|sat|sun)\\.?(?=\\s*(?:[-–:,/&]|$|bis |à |au |to |und |et ))"].join('|'));
 
@@ -172,6 +184,8 @@ function matchTerms(key){
 /**
  * Every line of `text` that carries an alarm term, with the rule that drops it (`dropped`, null when it stays).
  * Rule order: ui, doppelganger, cell, weekday, live, weak, past, policy, (office lowers strength to info), far, ignored.
+ * `past` drops a line whose dates are all behind us, except a closure that is still in force (see `ongoing`): permanent, open-ended or
+ * "since ..." without an end. An expired temporary closure ("until 01.10.") and lists of past dates are dropped.
  */
 export function classifyLines(text,{now=new Date(),ignore=[],longDocument,anchors=[]}={}){
   const at=now instanceof Date?now:new Date(now);
@@ -202,7 +216,7 @@ export function classifyLines(text,{now=new Date(),ignore=[],longDocument,anchor
     else if(!strong&&!dated&&weekdayNear)dropped='weekday';
     else if(!strong&&RULE.live.test(key))dropped='live';
     else if(!strong&&!dated&&!QUALIFIER.test(key))dropped='weak';
-    else if(dated&&days.every(day=>day<today)&&years.every(year=>year<thisYear))dropped='past';
+    else if(dated&&days.every(day=>day<today)&&years.every(year=>year<thisYear)&&!ongoing(key))dropped='past';
     else if(RULE.policy.test(key))dropped='policy';
     if(!dropped&&RULE.office.test(key)){strength='info';office=true;}
     if(!dropped&&long&&!anchorAt.some(anchor=>Math.abs(anchor-index)<=ANCHOR_RADIUS))dropped='far';

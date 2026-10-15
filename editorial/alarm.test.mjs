@@ -134,6 +134,47 @@ test('past dates and past seasons do not alarm',()=>{
   assert.equal(one('Geschlossen bis 10.01.').length,1,'a date without a year early next year is ahead');
 });
 
+// F03: an old date alone does not end a closure. NOW is 14 October 2026.
+const verdicts=lines=>lines.map(line=>[line,classifyLines(line,{now:NOW})[0]?.dropped]);
+const only=(lines,dropped)=>assert.deepEqual(verdicts(lines).filter(([,reason])=>reason!==dropped),[],`all ${dropped}`);
+
+test('a closure that began on a past date and still holds alarms in English, German and French',()=>{
+  only([
+    'Permanently closed since 01.10.2026','Closed since 01.10.2026','Closed from 01.10.2026',
+    'Seit dem 01.10.2026 dauerhaft geschlossen','Geschlossen seit 1. Oktober','Geschlossen ab 01.10.2026','Die Spielgruppe schliesst per 30.09.2026','Betriebsaufgabe am 30.09.2026',
+    'Fermé définitivement depuis le 01.10.2026','Fermée depuis le 1er octobre','Fermée dès le 01.10.2026',"Cessation d'activités au 30.09.2026",'Closed since 2025'
+  ],null);
+  const [line]=one('Permanently closed since 01.10.2026');
+  assert.deepEqual([line.cats,line.strength],[['closure'],'strong']);
+});
+test('"until further notice" and its German and French forms stay alarms when the dates are past',()=>{
+  only([
+    'Closed since 01.10.2026 until further notice','Geschlossen seit 01.10.2026 bis auf Weiteres',"Fermé depuis le 01.10.2026 jusqu'à nouvel avis",
+    'Spielgruppe bis auf Weiteres sistiert (seit 01.10.2026)','Closed until further notice (last day 30.09.2026)'
+  ],null);
+});
+test('a temporary closure whose end has passed is dropped as past, in English, German and French',()=>{
+  only([
+    'Closed until 01.10.2026','Geschlossen bis 01.10.2026',"Fermé jusqu'au 01.10.2026",'Temporarily closed from 15.09.2026 until 01.10.2026',
+    'Vorübergehend geschlossen vom 15.09. bis 01.10.2026','Fermeture temporaire du 15.09 au 01.10.2026',"Fermé depuis le 15.09.2026 jusqu'au 01.10.2026",
+    'Closed from 01.10.2026 to 05.10.2026','Geschlossen ab 01.10.2026 bis 05.10.2026'
+  ],'past');
+  assert.deepEqual(one('Closed until 01.10.2026'),[]);
+});
+test('a temporary closure that ends in the future, or today, alarms',()=>{
+  only(['Closed until 01.11.2026','Geschlossen bis 01.11.2026',"Fermé jusqu'au 01.11.2026",'Closed since 01.10.2026 until 01.11.2026','Closed until 14.10.2026'],null);
+  assert.equal(alarmLines('Closed until 14.10.2026',{now:'2026-10-15T08:00:00Z'}).length,0,'the day after it is over');
+});
+test('holiday closure lists and single past dates are still dropped as before',()=>{
+  only([
+    'Sommerpause: 05.10., 06.10. und 07.10.2026','Fermeture annuelle du 05.10. au 09.10.2026','Holiday closure: 05.10.2026 and 06.10.2026','Betriebsferien 5.10.-9.10.2026',
+    'Sonntag, 4. Oktober: geschlossen','Saison 2025 beendet'
+  ],'past');
+});
+test('a mixed notice with a future date alarms whatever the other dates say',()=>{
+  only(['Closed since 01.10.2026, reopening 01.12.2026','Fermé du 01.10.2026 au 01.12.2026','Geschlossen bis 01.10.2026 und vom 20.12.2026 bis 02.01.2027'],null);
+});
+
 test('conditions and rules do not alarm',()=>{
   for(const line of [
     'Lors des jours de pluie, la balade est annulée',
