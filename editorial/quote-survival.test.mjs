@@ -6,7 +6,10 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
-import {parseArgs,approvedQuotes,candidateSources,judgeQuote,storedCopy,survivalReport,formatReport,main} from './quote-survival.mjs';
+import {parseArgs,approvedQuotes,candidateSources,judgeQuote,storedCopy,survivalReport,formatReport,main,calendarExtract} from './quote-survival.mjs';
+import {snapshot} from './evidence.mjs';
+import {calendarEvidence} from './calendar-evidence.mjs';
+import {writeRecord} from './page-record.mjs';
 
 const script=path.join(path.dirname(fileURLToPath(import.meta.url)),'quote-survival.mjs');
 const sha=value=>crypto.createHash('sha256').update(value).digest('hex');
@@ -76,8 +79,8 @@ test('approved quotes: verdict approvals and journal bindings, each claim once, 
   assert.deepEqual(b.origins.sort(),['journal','verify']);assert.deepEqual(b.cardIds.sort(),['fx-a','fx-b']);
   assert.ok(!units.some(unit=>unit.field==='min'||unit.field==='age'));
 }));
-test('survival: found, page changed, extraction difference and no stored version are told apart',()=>withFixture(root=>{
-  const report=survivalReport(root);
+test('survival: found, page changed, extraction difference and no stored version are told apart',()=>withFixture(async root=>{
+  const report=await survivalReport(root);
   assert.equal(report.claims,6);
   // Found: both quotes of page a (whitespace differs) and the journal finding of b.
   const by=Object.fromEntries(report.rows.map(row=>[`${row.field}@${row.source.split('/').pop()}`,row]));
@@ -90,15 +93,15 @@ test('survival: found, page changed, extraction difference and no stored version
   assert.equal(by['address@elsewhere'].reason,'no-stored-version');assert.equal(by['address@elsewhere'].detail,'not-watched');
   assert.equal(report.found,3);assert.equal(report.missed,3);
 }));
-test('a source without a readable latest copy is a stored-version miss with its reason',()=>withFixture((root,{editorial,sources,state})=>{
+test('a source without a readable latest copy is a stored-version miss with its reason',()=>withFixture(async(root,{editorial,sources,state})=>{
   const unit={field:'schedule',source:'https://fixture.example.org/a',quote:'Jeden Mittwoch',cardIds:['fx-a'],origins:['verify'],snapshots:[]};
-  const missing=storedCopy(editorial,sources[0],{...state['watch-a'],hash:sha('other')});
+  const missing=await storedCopy(editorial,sources[0],{...state['watch-a'],hash:sha('other')});
   assert.equal(missing.problem,'file-missing');
   assert.equal(judgeQuote(unit,[missing]).detail,'file-missing');
   fs.writeFileSync(path.join(editorial,'versions','watch-a',state['watch-a'].hash.slice(0,12)+'.txt'),'tampered\n');
-  assert.equal(storedCopy(editorial,sources[0],state['watch-a']).problem,'hash-mismatch');
-  assert.equal(storedCopy(editorial,sources[0],{}).problem,'no-baseline');
-  assert.equal(judgeQuote(unit,[storedCopy(editorial,sources[0],{})]).detail,'no-baseline');
+  assert.equal((await storedCopy(editorial,sources[0],state['watch-a'])).problem,'hash-mismatch');
+  assert.equal((await storedCopy(editorial,sources[0],{})).problem,'no-baseline');
+  assert.equal(judgeQuote(unit,[await storedCopy(editorial,sources[0],{})]).detail,'no-baseline');
 }));
 test('raw hashes tell a changed page from a different reading when both are known',()=>{
   const unit={field:'schedule',source:'https://fixture.example.org/a',quote:'Quote that is not there',cardIds:[],origins:['verify'],snapshots:[{id:'s',parser:'cheerio-visible-body-v1',rawHash:'aa'}]};
@@ -116,13 +119,13 @@ test('candidates: the address with or without www and slash, the monitor final a
   assert.deepEqual(candidateSources(sources,state,unit(['zz'])).map(source=>source.id),['one','two','moved']);
   assert.deepEqual(candidateSources(sources,state,{source:'https://nowhere.example.org/',cardIds:[]}),[]);
 });
-test('the report names counts, sources and parsers and never a quote',()=>withFixture(root=>{
-  const report=survivalReport(root),text=formatReport(report,{misses:true});
+test('the report names counts, sources and parsers and never a quote',()=>withFixture(async root=>{
+  const report=await survivalReport(root),text=formatReport(report,{misses:true});
   assert.match(text,/Approved claims: 6 \(6 distinct quotes\)/);assert.match(text,/Found in the latest stored copy: 3 of 6 \(50 %\)/);
   assert.match(text,/page-changed: 1/);assert.match(text,/extraction-difference: 1/);assert.match(text,/no-stored-version: 1/);
   assert.match(text,/cheerio-visible-body-v1: 3 of 5 found/);
   assert.doesNotMatch(text,/Mittwoch|Dienstag|Donnerstag|Probeweg|CHF/);
-  const lines=[];main([`--root=${root}`,'--json','--misses'],line=>lines.push(line));
+  const lines=[];await main([`--root=${root}`,'--json','--misses'],line=>lines.push(line));
   const json=JSON.parse(lines[0]);assert.equal(json.rows.length,3);assert.ok(json.rows.every(row=>!('quote' in row)));
 }));
 test('the command reads another checkout and writes nothing',()=>withFixture(root=>{
@@ -132,8 +135,87 @@ test('the command reads another checkout and writes nothing',()=>withFixture(roo
   assert.equal(fs.readdirSync(path.join(root,'editorial')).join(),before);
   assert.equal(spawnSync(process.execPath,[script,'--bogus'],{encoding:'utf8'}).status,2);
 }));
-test('a root without private state reports nothing found and nothing to find',()=>{
+test('a root without private state reports nothing found and nothing to find',async()=>{
   const root=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-survival-empty-'));
-  try{const report=survivalReport(root);assert.equal(report.claims,0);assert.match(formatReport(report),/Approved claims: 0/);}
+  try{const report=await survivalReport(root);assert.equal(report.claims,0);assert.match(formatReport(report),/Approved claims: 0/);}
   finally{fs.rmSync(root,{recursive:true,force:true});}
+});
+
+// Stage 2: the page records add the full body and the alarm lines, and a calendar extract is derived from the stored raw calendar.
+const FEED='https://feed.example.org/ics',EVENT='https://fixture.example.org/feed-event/7';
+const RAW_ICS=`BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nUID:7\nURL:${EVENT}\nSUMMARY:Puppentheater in Teststadt\nDTSTART:20261104T140000Z\nDTEND:20261104T150000Z\nEND:VEVENT\nBEGIN:VEVENT\nUID:8\nURL:https://fixture.example.org/feed-event/8\nSUMMARY:Anderes Treffen in Nirgendwo\nDTSTART:20261105T140000Z\nEND:VEVENT\nEND:VCALENDAR\n`;
+const FX_CARD={id:'fx-feed',name:'Fixture feed card',category:'play',town:'Teststadt',status:'active',sources:[{url:EVENT,label:'Event'}]};
+function recordFixture(root,{storeRaw=true}={}){
+  const editorial=path.join(root,'editorial');
+  fs.mkdirSync(path.join(editorial,'agent-artifacts'),{recursive:true});fs.mkdirSync(path.join(editorial,'typesafe-runtime','snapshots'),{recursive:true});
+  fs.writeFileSync(path.join(root,'data.js'),`(() => {\n  window.ACTIVITIES = [\n${JSON.stringify(FX_CARD)}\n  ];\n})();\n`);
+  for(const file of ['data-reviewed.js','data-practical.js','regions.js','data-geo.js','planning.js','exchange.js'])fs.writeFileSync(path.join(root,file),'');
+  // A page the controller captured on 2 October: body text, and the calendar the extract was derived from.
+  const page='https://fixture.example.org/page';
+  const body=snapshot({url:page,fetchedAt:'2026-10-02T10:00:00.000Z',parser:'cheerio-visible-body-v1',rawHash:'aa',text:'Spielgruppe Teststadt\nJeden Mittwoch 15:00 bis 16:00 Uhr.\nKontakt: Fixture Verein, Probeweg 5'});
+  const rawSnapshot=snapshot({url:FEED,fetchedAt:'2026-10-02T10:00:00.000Z',parser:'calendar-raw-v1',contentType:'text/calendar',text:RAW_ICS});
+  const extract=calendarEvidence(rawSnapshot,FX_CARD).evidence;
+  const claims=[claim('schedule',page,'Jeden Mittwoch 15:00 bis 16:00 Uhr.',{snapshotId:body.id}),claim('address',page,'Kontakt: Fixture Verein, Probeweg 5',{snapshotId:body.id}),
+    claim('status',page,'Wegen Umbau bis 30.11.2099 geschlossen',{snapshotId:body.id}),claim('events',FEED,'"title": "Puppentheater in Teststadt"',{snapshotId:extract.id})];
+  fs.writeFileSync(path.join(editorial,'agent-artifacts','search.json'),JSON.stringify({role:'search',result:{bundle:{cardId:'fx-feed',claims,snapshots:[body,extract]}}}));
+  fs.writeFileSync(path.join(editorial,'agent-artifacts','verify.json'),JSON.stringify({role:'verify',result:{verdicts:claims.map(item=>({key:item.key,verdict:'approve'}))}}));
+  if(storeRaw)fs.writeFileSync(path.join(editorial,'typesafe-runtime','snapshots',rawSnapshot.id+'.json'),JSON.stringify(rawSnapshot));
+  fs.writeFileSync(path.join(editorial,'source-watch.json'),JSON.stringify({schema:1,sources:[{id:'page',url:page,type:'html',recordIds:['fx-feed']},{id:'feed',url:FEED,type:'ics',recordIds:['fx-feed']}]}));
+  const pageText='Spielgruppe Teststadt\nJeden Mittwoch 15:00 bis 16:00 Uhr.',feedText='SUMMARY:Puppentheater in Teststadt\nDTSTART:20261104T140000Z';
+  const state={page:{hash:writeVersion(editorial,'page',pageText),lastSuccess:'2026-10-14T05:00:00.000Z'},feed:{hash:writeVersion(editorial,'feed',feedText),lastSuccess:'2026-10-14T05:00:00.000Z'}};
+  fs.writeFileSync(path.join(editorial,'monitor-state.json'),JSON.stringify({schema:1,sources:state,queue:[]}));
+  return {editorial,state,pageText,feedText,body,extract};
+}
+const record=(editorial,id,hash,over)=>writeRecord(editorial,id,{version:hash.slice(0,12),hash,fetchedAt:'2026-10-14T05:00:00.000Z',finalUrl:'https://fixture.example.org/x',contentType:'text/html',status:200,parser:'v2',
+  rawHash:'bb',rawBytes:2,raw:null,full:null,alarm:[],...over});
+
+const withRecordFixture=async(options,body)=>{
+  const root=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-survival-records-'));
+  try{return await body(root,recordFixture(root,options));}finally{fs.rmSync(root,{recursive:true,force:true});}
+};
+test('without page records only the change text is searched, and the calendar extract cannot be derived',()=>withRecordFixture({},async root=>{
+  const report=await survivalReport(root);
+  assert.equal(report.claims,4);assert.equal(report.found,1);assert.deepEqual(report.foundIn,{monitor:1});
+  assert.deepEqual(report.byReason,{'extraction-difference':3});
+  // Ceiling: all four claims are on watched pages and were taken from texts a new record keeps.
+  assert.deepEqual(report.ceiling,{watched:4,notWatched:0,reproducible:4,notReproducible:0});
+}));
+test('with page records the footer line is found in the full body, the notice in the alarm lines and the extract by deriving it',()=>withRecordFixture({},async(root,{editorial,state,pageText})=>{
+  await record(editorial,'page',state.page.hash,{full:{parser:'cheerio-visible-body-v1',text:pageText+'\nKontakt: Fixture Verein, Probeweg 5'},alarm:['Wegen Umbau bis 30.11.2099 geschlossen']});
+  await record(editorial,'feed',state.feed.hash,{contentType:'text/calendar',full:{parser:'calendar-raw-v1',text:RAW_ICS.trim()}});
+  const report=await survivalReport(root);
+  assert.equal(report.found,4);assert.equal(report.missed,0);assert.deepEqual(report.foundIn,{monitor:2,full:2,derived:1});
+  const by=Object.fromEntries(report.rows.map(row=>[row.field,row.views]));
+  assert.deepEqual(by.schedule,['monitor','full']);assert.deepEqual(by.address,['full']);assert.deepEqual(by.status,['monitor']);assert.deepEqual(by.events,['derived']);
+  assert.match(formatReport(report),/Found in the latest stored copy: 4 of 4 \(100 %\)/);
+}));
+test('a record that does not belong to the stored version, or whose full body is damaged, is not used',()=>withRecordFixture({},async(root,{editorial,state,pageText})=>{
+  await record(editorial,'page',state.page.hash,{full:{parser:'cheerio-visible-body-v1',text:pageText+'\nKontakt: Fixture Verein, Probeweg 5'}});
+  const file=path.join(editorial,'page-records','page',state.page.hash.slice(0,12)+'.full.txt.gz');
+  fs.writeFileSync(file,fs.readFileSync(file).subarray(0,10));
+  const damaged=await survivalReport(root);
+  assert.equal(damaged.rows.find(row=>row.field==='address').found,false);
+  const other=JSON.parse(fs.readFileSync(path.join(editorial,'page-records','page',state.page.hash.slice(0,12)+'.json'),'utf8'));
+  fs.writeFileSync(path.join(editorial,'page-records','page',state.page.hash.slice(0,12)+'.json'),JSON.stringify({...other,hash:'f'.repeat(64)}));
+  assert.equal((await survivalReport(root)).rows.find(row=>row.field==='address').found,false);
+}));
+test('raw hashes of the record and of the claim snapshot decide between a changed page and a different reading',()=>withRecordFixture({},async(root,{editorial,state})=>{
+  await record(editorial,'page',state.page.hash,{rawHash:'aa',full:{parser:'cheerio-visible-body-v1',text:'Spielgruppe Teststadt\nSomething else entirely'}});
+  assert.equal((await survivalReport(root)).rows.find(row=>row.field==='address').reason,'extraction-difference');
+  await record(editorial,'page',state.page.hash,{rawHash:'cc',full:{parser:'cheerio-visible-body-v1',text:'Spielgruppe Teststadt\nSomething else entirely'}});
+  assert.equal((await survivalReport(root)).rows.find(row=>row.field==='address').reason,'page-changed');
+}));
+test('the simulation derives the extract again from the raw calendar of the same fetch, when it is stored',()=>withRecordFixture({},async root=>{
+  const report=await survivalReport(root,{simulate:true});
+  assert.deepEqual(report.simulation,{claims:1,rawAvailable:1,reproduced:1});
+  assert.match(formatReport(report),/Simulation .*: 1 of 1 reproduced, raw calendar stored for 1/);
+  assert.equal((await survivalReport(root)).simulation,undefined);
+}));
+test('the simulation reports a calendar whose raw snapshot is gone as not available',()=>withRecordFixture({storeRaw:false},async root=>{
+  assert.deepEqual((await survivalReport(root,{simulate:true})).simulation,{claims:1,rawAvailable:0,reproduced:0});
+}));
+test('a calendar extract is derived by the same code that made it, and not for a card the feed does not mention',()=>{
+  const text=calendarExtract(RAW_ICS,{url:FEED},FX_CARD,{fetchedAt:'2026-10-14T05:00:00.000Z'});
+  assert.match(text,/"title": "Puppentheater in Teststadt"/);
+  assert.throws(()=>calendarExtract(RAW_ICS,{url:FEED},{...FX_CARD,sources:[{url:'https://fixture.example.org/nowhere'}]},{fetchedAt:'2026-10-14T05:00:00.000Z'}));
 });
