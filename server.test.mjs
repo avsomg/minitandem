@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import http from 'node:http';
 import os from 'node:os';
 import path from 'node:path';
+import {Readable} from 'node:stream';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import test from 'node:test';
@@ -168,5 +169,76 @@ test('a damaged state file gives a 500 for that request and the service keeps ru
     console.error=logged;
     await new Promise(resolve=>server.close(resolve));
     fs.rmSync(temp,{recursive:true,force:true});
+  }
+});
+
+// A request line goes out as written (the fetch API would refuse these targets); Node's parser lets them through to the listener.
+const rawGet=(port,target)=>new Promise((resolve,reject)=>{
+  const request=http.request({host:'127.0.0.1',port,path:target,method:'GET'},response=>{
+    let text='';response.setEncoding('utf8');response.on('data',chunk=>text+=chunk);response.on('end',()=>resolve({status:response.statusCode,text}));
+  });
+  request.on('error',reject);request.end();
+});
+const quietServer=async(tag)=>{
+  const temp=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-'+tag+'-'));
+  process.env.MINITANDEM_STATE_DIR=path.join(temp,'state');process.env.MINITANDEM_CORRECTION_DIR=path.join(temp,'corrections');
+  const {createServer}=await import('./server.mjs?'+tag+'='+Date.now());
+  const server=createServer();
+  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+  return {server,temp,port:server.address().port,base:'http://127.0.0.1:'+server.address().port,
+    close:async()=>{await new Promise(resolve=>{server.close(resolve);server.closeAllConnections();});fs.rmSync(temp,{recursive:true,force:true});}};
+};
+
+test('a malformed request target gets 400 and the same process keeps serving /healthz and a page',async()=>{
+  const service=await quietServer('target');
+  const failures=[];
+  const onRejection=error=>failures.push(error);process.on('unhandledRejection',onRejection);
+  try{
+    // Each one makes new URL() throw ERR_INVALID_URL.
+    for(const target of ['//[','//%','http://[','//a:99999999','//[::1']){
+      const answer=await rawGet(service.port,target);
+      assert.equal(answer.status,400,target);
+      assert.deepEqual(JSON.parse(answer.text),{error:'Malformed request target'},target);
+    }
+    // After all of them the process is the same one and answers: the health check, a page and the API.
+    const health=await fetch(service.base+'/healthz');
+    assert.equal(health.status,200);assert.equal((await health.json()).status,'ok');
+    assert.equal((await fetch(service.base+'/index.html')).status,200);
+    assert.equal((await fetch(service.base+'/api/v1/family')).status,401);
+    await new Promise(resolve=>setImmediate(resolve));
+    assert.deepEqual(failures,[],'no unhandled rejection');
+  }finally{process.off('unhandledRejection',onRejection);await service.close();}
+});
+
+test('a static file that cannot be read gets a plain 500 or 404, and a stream that fails midway only cuts that connection',async()=>{
+  const service=await quietServer('static');
+  const open=fs.promises.open,logged=console.error,logs=[];
+  console.error=(...args)=>logs.push(args);
+  const failures=[];
+  const onRejection=error=>failures.push(error);process.on('unhandledRejection',onRejection);
+  const onException=error=>failures.push(error);process.on('uncaughtException',onException);
+  try{
+    // The file exists when it is checked but cannot be opened (a permission change, a file replaced during a deploy).
+    fs.promises.open=async()=>{throw Object.assign(Error("EACCES: permission denied, open '/srv/minitandem/.publish/index.html'"),{code:'EACCES'});};
+    const denied=await fetch(service.base+'/index.html');
+    const deniedText=await denied.text();
+    assert.equal(denied.status,500);assert.deepEqual(JSON.parse(deniedText),{error:'Server error'});
+    assert.doesNotMatch(deniedText,/EACCES|\/srv\/|\bat\s/,'no path and no stack for the caller');
+    assert.ok(logs.length>0,'the cause is logged on the server');
+    fs.promises.open=async()=>{throw Object.assign(Error('ENOENT: no such file'),{code:'ENOENT'});};
+    const gone=await fetch(service.base+'/index.html');
+    assert.equal(gone.status,404);assert.deepEqual(await gone.json(),{error:'Not found'});
+    // The status line is out, then the file fails: nothing can be corrected any more, the connection ends, the process goes on.
+    fs.promises.open=async()=>({createReadStream:()=>new Readable({read(){this.push('partial');setImmediate(()=>this.destroy(Object.assign(Error('EIO: read failed'),{code:'EIO'})));}})});
+    const cut=await fetch(service.base+'/index.html');
+    assert.equal(cut.status,200);
+    await assert.rejects(cut.text());
+    fs.promises.open=open;
+    assert.equal((await fetch(service.base+'/healthz')).status,200);
+    assert.equal((await fetch(service.base+'/index.html')).status,200);
+    assert.deepEqual(failures,[],'no unhandled rejection or exception');
+  }finally{
+    fs.promises.open=open;console.error=logged;process.off('unhandledRejection',onRejection);process.off('uncaughtException',onException);
+    await service.close();
   }
 });

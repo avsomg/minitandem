@@ -2,6 +2,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import {pipeline} from 'node:stream/promises';
 import {fileURLToPath} from 'node:url';
 import {loadCatalog, qualityReport} from './editorial/quality.mjs';
 import {JobQueue} from './editorial/jobs.mjs';
@@ -74,7 +75,7 @@ function corrections(){
   if(!fs.existsSync(correctionDir))return [];
   return fs.readdirSync(correctionDir).filter(name=>/^[a-f0-9]{20}\.json$/.test(name)).map(name=>JSON.parse(fs.readFileSync(path.join(correctionDir,name),'utf8'))).sort((a,b)=>b.importedAt.localeCompare(a.importedAt));
 }
-function staticFile(req,res,pathname){
+async function staticFile(req,res,pathname){
   if(pathname.split('/').some(segment=>segment.startsWith('.')||segment==='..'))return json(res,404,{error:'Not found'});
   const editorial=pathname==='/admin'||pathname==='/admin.js'||pathname==='/admin.css';
   let file=editorial?path.join(root,'editorial',pathname==='/admin'?'admin.html':pathname.slice(1)):path.join(root,'.publish',pathname==='/'?'index.html':pathname.slice(1));
@@ -87,16 +88,31 @@ function staticFile(req,res,pathname){
     file=path.join(file,'index.html');
   }
   if(!fs.existsSync(file)||!fs.statSync(file).isFile())return json(res,404,{error:'Not found'});
-  res.writeHead(200,{'Content-Type':mime[path.extname(file)]||'application/octet-stream','Cache-Control':pathname==='/admin'||pathname==='/admin.js'?'no-store':'public, max-age=0, must-revalidate','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://wmts.geo.admin.ch; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'"});
-  if(req.method==='HEAD')return res.end();
-  fs.createReadStream(file).pipe(res);
+  const headers={'Content-Type':mime[path.extname(file)]||'application/octet-stream','Cache-Control':pathname==='/admin'||pathname==='/admin.js'?'no-store':'public, max-age=0, must-revalidate','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://wmts.geo.admin.ch; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'"};
+  if(req.method==='HEAD'){res.writeHead(200,headers);return res.end();}
+  // The file is opened before the status line goes out: one that vanished or cannot be read is answered as such, not as a broken 200.
+  // An error after the first byte can only cut the connection (see fail).
+  let handle;
+  try{handle=await fs.promises.open(file);}catch(error){if(['ENOENT','ENOTDIR','EISDIR'].includes(error.code))return json(res,404,{error:'Not found'});throw error;}
+  res.writeHead(200,headers);
+  await pipeline(handle.createReadStream(),res);
 }
 // A request the caller can fix: malformed JSON, an error from the planning and exchange modules (they carry a code such as
 // 'plan.invalidVisit' or 'report.source'), or one of this file's own English messages. Operating-system errors also carry
 // a string code (ENOENT, EACCES), so the code must have the dotted module form to count; those stay a 500.
 const isClientError=error=>error instanceof SyntaxError||(typeof error?.code==='string'&&/^[a-z]+\.[A-Za-z]+$/.test(error.code))||/^(Invalid|JSON required|Request too large)/.test(error?.message||'');
+// What an error ends in. Before the reply has started it is a status and a short message, never a stack (that goes to the log);
+// once bytes are out nothing can be corrected, so the connection is cut. A visitor who closed the page is not worth a log line.
+function fail(res,error){
+  if(res.headersSent){if(error?.code!=='ERR_STREAM_PREMATURE_CLOSE')console.error(error);return res.destroy();}
+  if(isClientError(error))return json(res,400,{error:error.message});
+  console.error(error);return json(res,500,{error:'Server error'});
+}
+// One error boundary around the whole request: parsing the target, the static files and the API all run inside it, so nothing a
+// request does can end as an unhandled rejection that stops the process. The last resort cuts the connection and keeps the process.
+const guard=handler=>(req,res)=>handler(req,res).catch(error=>{try{fail(res,error);}catch(again){console.error(again);res.destroy();}});
 export function createServer(){
-  return http.createServer(async(req,res)=>{
+  return http.createServer(guard(async(req,res)=>{
     res.setHeader('X-Content-Type-Options','nosniff');
     res.setHeader('Referrer-Policy','no-referrer');
     const origin=req.headers.origin;
@@ -108,7 +124,9 @@ export function createServer(){
     }
     if(req.method==='OPTIONS')return json(res,origin&&origins.has(origin)?204:403,{});
     if(origin&&!origins.has(origin))return json(res,403,{error:'Origin not allowed'});
-    const pathname=new URL(req.url,'http://localhost').pathname;
+    // A target that is not a URL ('//[') is the caller's mistake: 400, and the process goes on.
+    let pathname;
+    try{pathname=new URL(req.url,'http://localhost').pathname;}catch{return json(res,400,{error:'Malformed request target'});}
     // For container health checks and uptime monitors: answers from memory, reads no state and needs no key.
     // It also says which build is live (revision of the catalogue files, date of the latest review, deployed commit); nothing in it is secret.
     if(pathname==='/healthz'&&['GET','HEAD'].includes(req.method)){
@@ -172,10 +190,9 @@ export function createServer(){
       }
       return json(res,404,{error:'Not found'});
     }catch(error){
-      if(isClientError(error))return json(res,400,{error:error.message});
-      console.error(error);return json(res,500,{error:'Server error'});
+      return fail(res,error);
     }
-  });
+  }));
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
