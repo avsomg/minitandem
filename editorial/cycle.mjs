@@ -167,6 +167,8 @@ export function runCycle({base=here,home=os.homedir(),now=new Date(),run=runNode
     record.changes=digest(queueFile,marks.lastEventId);
     record.approvedUpdates=approvedUpdates(base).slice(before).map(updateBrief);
     record.finishedAt=new Date().toISOString();
+    // The number the owner reads is the day's total after this run; the cap was planned from the count before it.
+    record.claimedBeforeRun=record.claimedToday;record.claimedToday=queueMarks(queueFile,new Date(record.finishedAt)).claimedToday;
     writeJson(stateFile,{...state,runs:(state.runs||0)+1,lastRunAt:record.startedAt,lastEventId:record.changes?.lastEventId??marks.lastEventId,
       roleTurn:(state.roleTurn||0)+(planned.daily?0:1),lastDailyOn:planned.daily?planned.today:state.lastDailyOn});
     return finish();

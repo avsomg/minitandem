@@ -107,3 +107,19 @@ test('a dry run shows the plan and changes nothing',t=>{
   assert.equal(record.daily,true);assert.equal(record.steps[0],'node editorial/monitor.mjs');
   assert.equal(fs.existsSync(path.join(f.base,'workflow-state','cycle')),false);
 });
+test('claimed today is the day\'s total after the batch, not the count the cap was planned from',t=>{
+  const f=fixture(t);f.dailyDone();
+  for(const card of ['a','b','c'])f.queue.enqueue({kind:'verify',cardId:`card-${card}`,inputRevision:'r'});
+  f.queue.claim('verify','runtime-verify');
+  // A claim from another day must not count.
+  f.queue.db.prepare("INSERT INTO events(job_id,kind,details,created_at) VALUES (NULL,'claimed','{}','2020-01-01T00:00:00.000Z')").run();
+  const run=(_root,step)=>{
+    if(step.label==='batch')for(let i=0;i<2;i++)f.queue.claim('verify','runtime-verify');
+    return {code:0,seconds:0,stdout:'',stderr:''};
+  };
+  const record=runCycle({base:f.base,home:f.home,now:at(11),run,notify:()=>{}});
+  assert.equal(record.claimedBeforeRun,1);assert.equal(record.changes.claimed,2);assert.equal(record.claimedToday,3);
+  assert.equal(f.latest().claimedToday,3);
+  // The next run plans its cap from those three claims.
+  assert.equal(runCycle({base:f.base,home:f.home,now:at(15),dryRun:true}).claimedToday,3);
+});
