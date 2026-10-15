@@ -17,6 +17,10 @@ function load({age=null,filters=null,...rest}={}){
 }
 const ids=items=>Array.from(items,a=>a.id);
 const readJson=file=>JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
+// Card counts are not written into this file: editorial/profile.json holds them, counted by editorial/profile.mjs straight from the
+// data files, a second reading next to the catalogue module these tests load. A card added or archived changes both together.
+const COUNTS=readJson('editorial/profile.json');
+const isPublished=a=>!['closed','excluded'].includes(a.status);
 // Private-only tests check the catalogue against research records that are not in the public repository (see docs/publication-scope.md).
 // On a clean clone they are skipped with this message; in the owner's workspace they run.
 const PRIVATE_SKIP=fs.existsSync(path.join(root,'editorial/family-venues-visitor-check-2026-09-27.json'))?false:
@@ -49,8 +53,7 @@ test('default catalogue includes new family venues without forcing age or langua
   assert.equal(state.f.includeUnknownAge,true);
   assert.equal(C.activeCount(state.f,store.personal.age),0);
   assert.equal(C.anyFilter(state.f,store.personal.age),false);
-  // 295 published cards since the approved closure of memo-musik-entdecken-2026-09-29 on 3 October 2026.
-  assert.equal(list().length,295);
+  assert.equal(list().length,COUNTS.catalog,'the unfiltered list is every published card');
   assert.ok(ids(list()).includes('bistro11-duedingen'));
   assert.ok(ids(list()).includes('beo-funpark'));
 });
@@ -60,7 +63,7 @@ test('new profiles have no assumed child age, while saved profiles retain theirs
   const neutral=load({filters:{ageMatch:true,ageOverride:3}});
   assert.equal(neutral.store.personal.age,null);
   assert.equal(neutral.C.activeCount(neutral.state.f,neutral.store.personal.age),0);
-  assert.equal(neutral.list().length,295);
+  assert.equal(neutral.list().length,COUNTS.catalog);
   assert.equal(neutral.C.ageFit(neutral.byId.get('pony-entdecken'),neutral.store.personal.age),null);
   assert.equal(load({age:6}).store.personal.age,6);
   assert.equal(load({age:AGE}).store.personal.age,AGE);
@@ -266,13 +269,14 @@ test('catalogue opens in a bounded batch while retaining the full result count',
   const html=V.rows(items.slice(0,state.limit));
   assert.equal((html.match(/<li><a class="row[ "]/g)||[]).length,24);
   assert.deepEqual(Array.from(html.matchAll(/data-id="([^"]+)"/g),m=>m[1]),ids(items.slice(0,24)));
-  assert.equal(t('list.more',{shown:24,total:items.length}),'Show more · 24 of 295');
+  assert.equal(t('list.more',{shown:24,total:items.length}),`Show more · 24 of ${COUNTS.catalog}`);
   assert.equal((V.rows(items.slice(0,48)).match(/<li><a class="row[ "]/g)||[]).length,48);
 });
 
 test('dining filter survives restored filters and includes new mountain buvettes',()=>{
-  const {list}=load({filters:{categories:['dining','invalid']}});
-  assert.equal(list().length,26);
+  const {list,records}=load({filters:{categories:['dining','invalid']}});
+  assert.equal(list().length,records.filter(a=>a.category==='dining'&&isPublished(a)).length);
+  assert.ok(list().length>0);
   assert.ok(ids(list()).includes('alice-marly'));
   assert.ok(ids(list()).includes('gros-chaumiaux-cerniat'));
   assert.ok(ids(list()).includes('buvette-sapins-epagny'));
@@ -280,7 +284,8 @@ test('dining filter survives restored filters and includes new mountain buvettes
 });
 
 test('unknown ages, languages and admission fees remain unknown for original dining venues',()=>{
-  const {C,list,state,store}=load({filters:{categories:['dining']}});
+  const {C,list,state,store,records}=load({filters:{categories:['dining']}});
+  const dining=records.filter(a=>a.category==='dining'&&isPublished(a)).length;
   const withAge=['gros-chaumiaux-cerniat','buvette-sapins-epagny','ueberstorf-schluessel-play','sarrazin-lossy-play','plasselb-tennisbuvette-play'];
   for(const a of list().filter(a=>!withAge.includes(a.id))){
     assert.equal(a.min,null,a.id);
@@ -290,7 +295,7 @@ test('unknown ages, languages and admission fees remain unknown for original din
     assert.equal(a.amount,null,a.id);
   }
   store.personal.age=AGE;
-  assert.equal(list().length,26,'unknown ages remain discoverable without becoming confirmed');
+  assert.equal(list().length,dining,'unknown ages remain discoverable without becoming confirmed');
   state.f.includeUnknownAge=false;
   assert.deepEqual(ids(list()).sort(),['buvette-sapins-epagny','gros-chaumiaux-cerniat']);
   store.personal.age=null;state.f.price='free';
@@ -306,7 +311,7 @@ test('district and parent filters compose with dining, obsolete routes are ignor
   assert.deepEqual(ids(list()).sort(),['beachhouse-muntelier','clubcafe-kerzers','jardin-muntelier','kafi8-kerzers','laferme-murten']);
   // The old route filter is gone: a saved session that still has it is not a filter.
   const obsolete=load({filters:{routes:['schwarzsee']}});
-  assert.equal(obsolete.list().length,295);
+  assert.equal(obsolete.list().length,COUNTS.catalog);
   assert.equal(obsolete.C.activeCount(obsolete.state.f,null),0);
 });
 
@@ -449,8 +454,8 @@ test('watched family sources refer to existing cards and have a monthly interval
 test('deep review covers active cards and preserves receipts for ended events',()=>{
   const {records,byId,C}=load();
   const main=records.filter(a=>!C.isArchive(a));
-  assert.equal(main.length,295);
-  assert.equal(records.filter(a=>a.research).length,299);
+  assert.equal(main.length,COUNTS.catalog);
+  assert.equal(main.filter(a=>a.research).length,main.length,'every published card carries a deep-review record');
   for(const a of main){
     assert.match(a.research.date,/^\d{4}-\d{2}-\d{2}$/,a.id);
     assert.equal(new Date(a.research.date+'T12:00:00Z').toISOString().slice(0,10),a.research.date,a.id);
@@ -473,7 +478,8 @@ test('deep review covers active cards and preserves receipts for ended events',(
 
 test('all four expanded districts have sourced cards and participate in normal filters',()=>{
   const {records,list,state,byId}=load();
-  const counts={gruyere:38,glane:24,broye:26,veveyse:22};
+  const counts=Object.fromEntries(['gruyere','glane','broye','veveyse'].map(region=>[region,COUNTS.byRegion[region]]));
+  for(const [region,count] of Object.entries(counts))assert.ok(count>0,region+': the profile counts cards in every expanded district');
   assert.equal(new Set(EXPANSION_IDS).size,37);
   for(const id of EXPANSION_IDS)assert.ok(records.some(a=>a.id===id&&Object.hasOwn(counts,a.region)),id);
   for(const [region,count] of Object.entries(counts)){
@@ -988,7 +994,8 @@ test('each place option counts the published cards in it, and choosing it lists 
 test('archive, saved, shared and venue views select their own cards',()=>{
   const {records,C,list,state,store}=load();
   const archived=records.filter(a=>C.isArchive(a));
-  assert.equal(archived.length,records.length-295);
+  assert.equal(archived.length,COUNTS.archive);
+  assert.equal(archived.length+COUNTS.catalog,records.length);
   assert.ok(list().every(a=>!C.isArchive(a)),'closed and excluded cards stay out of the list');
   assert.deepEqual(ids(list({view:'archive'})).sort(),ids(archived).sort());
   // Saved: only the visitor's saved cards, archived ones included, filtered by the private status.

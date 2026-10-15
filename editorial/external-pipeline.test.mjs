@@ -11,6 +11,9 @@ import path from 'node:path';
 const SKIP_RECEIPTS=fs.existsSync(path.join(root,'editorial','external-review-receipts.json'))?false:
   'private-only: editorial/external-review-receipts.json is not present (clean clone)';
 
+// The number of published cards, from editorial/profile.json (counted by profile.mjs from the data files), not a literal.
+const publishedCards=()=>JSON.parse(fs.readFileSync(path.join(root,'editorial','profile.json'),'utf8')).catalog;
+
 const records=[
   {id:'a',name:'Event A',town:'Fribourg',address:'Main 1, Fribourg',status:'active',
     region:'sarine',category:'play',events:[],sources:[{url:'https://example.org/a'}]},
@@ -172,9 +175,8 @@ test('the venue registry reconciles with the current published catalogue',()=>{
   const today=new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Zurich'});
   const current=pipelineReport(loadCatalog().ACTIVITIES,[],inputs.receiptBaseline,
     inputs.registry,new Map(),new Map(),new Map(),today,new Map(),inputs.approvedUpdates);
-  // 295 since the approved closure of memo-musik-entdecken-2026-09-29 on 3 October 2026.
-  assert.equal(current.records,295);
-  assert.equal(Object.values(current.summary).reduce((sum,value)=>sum+value,0),295);
+  assert.equal(current.records,publishedCards());
+  assert.equal(Object.values(current.summary).reduce((sum,value)=>sum+value,0),current.records,'every published card is in exactly one stage');
 });
 
 test('the real receipts reconcile with the current published catalogue',{skip:SKIP_RECEIPTS},()=>{
@@ -182,7 +184,7 @@ test('the real receipts reconcile with the current published catalogue',{skip:SK
   const today=new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Zurich'});
   const current=pipelineReport(loadCatalog().ACTIVITIES,receipts,inputs.receiptBaseline,
     inputs.registry,inputs.candidates,inputs.disputes,inputs.decisions,today,inputs.corrections,inputs.approvedUpdates);
-  assert.equal(current.records,295);
+  assert.equal(current.records,publishedCards());
   // Every receipt of a published card is current, held for editorial work, or explicitly
   // stale and back in verification. Closed cards keep their receipt as history only.
   const stageOf=new Map(current.rows.map(row=>[row.id,row.stage]));

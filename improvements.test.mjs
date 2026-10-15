@@ -11,6 +11,10 @@ import {loadStack} from './test-support.mjs';
 const catalog=loadCatalog(),P=catalog.MinitandemPlanning,X=catalog.MinitandemExchange;
 const allowed=new Map(catalog.ACTIVITIES.map(a=>[a.id,a]));
 const read=name=>fs.readFileSync(path.join(root,name),'utf8');
+// Card counts are not written into this file: editorial/profile.json holds them, counted by editorial/profile.mjs straight from the
+// data files, a second reading next to the catalogue module these tests load. A card added or archived changes both together.
+const COUNTS=JSON.parse(read('editorial/profile.json'));
+const isPublished=a=>!['closed','excluded'].includes(a.status);
 // Calendar lines are folded at 73 bytes; unfold them before reading a line.
 const unfold=text=>text.replace(/\r\n /g,'');
 // The two stored-file identifiers are the only places where the old product name remains.
@@ -19,9 +23,8 @@ const oldName=new RegExp('vme'+'ste','i');
 const withoutStoredIds=text=>text.replaceAll('vmeste-plan','').replaceAll('vmeste-correction','');
 
 test('all seven Fribourg districts are represented while ended events leave the catalogue',()=>{
-  const active=catalog.ACTIVITIES.filter(a=>!['closed','excluded'].includes(a.status));
-  // 295 published cards since the approved closure of memo-musik-entdecken-2026-09-29 on 3 October 2026.
-  assert.equal(active.length,295);assert.equal(catalog.ACTIVITIES.length,321);
+  const active=catalog.ACTIVITIES.filter(isPublished);
+  assert.equal(active.length,COUNTS.catalog);assert.equal(catalog.ACTIVITIES.length,COUNTS.total);
   assert.deepEqual([...new Set(active.map(a=>a.region))].sort(),['broye','glane','gruyere','sarine','see','sense','veveyse']);
 });
 test('the front page is English and names one origin, the same one the generated pages and sitemap use',()=>{
@@ -172,8 +175,11 @@ test('two Schwarzsee beaches remain separate map searches, not one route destina
 test('static directory and sitemap include all public records and no archives',()=>{
   const dir=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-public-'));
   try{
-    assert.equal(generatePublicPages(catalog.ACTIVITIES,catalog.CATALOG_REGIONS,dir,'2026-09-27'),295);
-    const sitemap=fs.readFileSync(path.join(dir,'sitemap.xml'),'utf8');assert.equal((sitemap.match(/<loc>/g)||[]).length,299);
+    assert.equal(generatePublicPages(catalog.ACTIVITIES,catalog.CATALOG_REGIONS,dir,'2026-09-27'),COUNTS.catalog);
+    // One page per published card, plus the home page, the directory and the two project pages.
+    const sitemap=fs.readFileSync(path.join(dir,'sitemap.xml'),'utf8'),fixedPages=['/','/places/','/projekt/','/projekt/en/'];
+    assert.equal((sitemap.match(/<loc>/g)||[]).length,COUNTS.catalog+fixedPages.length);
+    for(const page of fixedPages)assert.ok(sitemap.includes(`<loc>${SITE_ORIGIN}${page}</loc>`),page);
     assert.ok(sitemap.includes(`<loc>${SITE_ORIGIN}/projekt/</loc>`)&&sitemap.includes(`<loc>${SITE_ORIGIN}/projekt/en/</loc>`));
     assert.ok(sitemap.includes(`<loc>${SITE_ORIGIN}/</loc>`)&&sitemap.includes(`<loc>${SITE_ORIGIN}/places/mpe/</loc>`));
     assert.ok([...sitemap.matchAll(/<loc>([^<]*)<\/loc>/g)].every(match=>match[1].startsWith(SITE_ORIGIN+'/')));
@@ -186,10 +192,10 @@ test('static directory and sitemap include all public records and no archives',(
 test('editorial queue measures missing facts without inventing owners or new verification dates',()=>{
   const sources=JSON.parse(read('editorial/source-watch.json')).sources;
   const report=qualityReport(catalog.ACTIVITIES,sources,'2026-09-27');
-  assert.equal(report.records,295);assert.equal(report.queue.length,295);assert.equal(report.unassigned,295);
+  assert.equal(report.records,COUNTS.catalog);assert.equal(report.queue.length,report.records);assert.equal(report.unassigned,report.queue.length);
   for(const field of Object.values(report.coverage)){
     assert.equal(field.known+field.unknown,field.applicable);
-    assert.equal(field.applicable+field.notApplicable,295);
+    assert.equal(field.applicable+field.notApplicable,COUNTS.catalog);
   }
   assert.ok(report.coverage.trial.applicable<report.records);
   assert.ok(report.queue.every(row=>row.owner===null&&row.checked===allowed.get(row.id).checked));
