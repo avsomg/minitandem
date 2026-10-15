@@ -469,6 +469,118 @@ test('main: a tripped alarm fuse returns exit code 2 and lists the withheld alar
     assert.deepEqual(JSON.parse(await fs.readFile(path.join(dir,'monitor-state.json'),'utf8')).queue.map(q=>q.kind),['possible-closure','possible-closure']);
   }finally{server.close();await fs.rm(dir,{recursive:true,force:true});}
 });
+// F02: a withheld alarm must survive the validators. A site that answers like a real one: 304 only for the validator of the page it serves.
+const titled=title=>`<html><head><title>${title}</title></head><body><main><h1>ElKi</h1><p>CHF 20 pro Treffen</p><p>Mittwoch 10:00</p></main></body></html>`;
+function honestSite(title='Krabbelgruppe',etag='v1'){
+  const site={title,etag,sent:[],set(nextTitle,nextEtag){site.title=nextTitle;site.etag=nextEtag;},
+    fetch:async(url,options)=>{
+      const sent=options.headers['if-none-match']??null;site.sent.push(sent);
+      return sent===site.etag?new Response(null,{status:304}):new Response(titled(site.title),{status:200,headers:{'content-type':'text/html',etag:site.etag}});
+    }};
+  return site;
+}
+const restart=state=>JSON.parse(JSON.stringify(state));
+test('a withheld alarm survives restarts and a later 304: the next requests carry the old validator, release creates one task, no repeat after',async()=>{
+  const sources=['a','b'].map(id=>({...krabbel,id,url:`https://${id}.example.org/course`,recordIds:[id],intervalDays:1}));
+  const site=honestSite();
+  let state={schema:1,sources:{},queue:[]};
+  await runMonitor({sources,state,now:at(13),alarmFuse:1,fetchImpl:site.fetch});
+  const before=restart(state.sources);
+  // The title alone changes to a closure notice; the main text, and with it the hash, stays: no content task can rescue the notice.
+  site.set('Dauerhaft geschlossen','v2');
+  const tripped=await runMonitor({sources,state,now:at(14),alarmFuse:1,fetchImpl:site.fetch});
+  assert.equal(tripped.fuse.tripped,true);assert.equal(tripped.fuse.count,2);assert.deepEqual(tripped.results.map(row=>[row.id,row.result,row.withheld]),[['a','unchanged','alarm-fuse'],['b','unchanged','alarm-fuse']]);
+  for(const id of ['a','b'])for(const key of ['alarm','alarmHistory','etag','lastModified','lastAttempt','hash'])assert.deepEqual(state.sources[id][key],before[id][key],`${id}.${key}`);
+  assert.equal(state.sources.a.attempts,before.a.attempts+1);assert.deepEqual(state.queue,[]);
+  state=restart(state);
+  // Day 15, still too many alarms: both sources are due again, asked with the validator of the page they knew, and the page is read again.
+  site.sent.length=0;
+  const again=await runMonitor({sources,state,now:at(15),alarmFuse:1,fetchImpl:site.fetch});
+  assert.deepEqual(site.sent,['v1','v1']);assert.equal(again.fuse.tripped,true);assert.deepEqual(state.queue,[]);
+  state=restart(state);
+  // Day 16: the owner raises the limit. Exactly one task per source, each with the notice.
+  site.sent.length=0;
+  const released=await runMonitor({sources,state,now:at(16),alarmFuse:5,fetchImpl:site.fetch});
+  assert.deepEqual(site.sent,['v1','v1']);assert.equal(released.fuse.tripped,false);
+  assert.deepEqual(state.queue.map(q=>[q.sourceId,q.kind,q.occurrences,q.details.lines.map(line=>line.text)]),[['a','possible-closure',1,['Dauerhaft geschlossen']],['b','possible-closure',1,['Dauerhaft geschlossen']]]);
+  assert.equal(state.sources.a.etag,'v2');
+  state=restart(state);
+  // Day 17: the page is known now, the server answers 304, and nothing is issued twice.
+  site.sent.length=0;
+  const after=await runMonitor({sources,state,now:at(17),alarmFuse:5,fetchImpl:site.fetch});
+  assert.deepEqual(site.sent,['v2','v2']);assert.deepEqual(after.results.map(row=>row.result),['unchanged-304','unchanged-304']);
+  assert.equal(state.queue.length,2);assert.deepEqual(state.queue.map(q=>q.occurrences),[1,1]);
+});
+test('a withheld alarm is also found again when the page changed in content: one content task, one alarm task',async()=>{
+  const sources=['a','b'].map(id=>({...krabbel,id,url:`https://${id}.example.org/course`,recordIds:[id],intervalDays:1}));
+  const body=(price,extra='')=>titled('Krabbelgruppe').replace('CHF 20',price).replace('</main>',`${extra}</main>`);
+  let price='CHF 20',extra='',etag='v1';
+  const fetchImpl=async(url,options)=>options.headers['if-none-match']===etag?new Response(null,{status:304}):new Response(body(price,extra),{status:200,headers:{'content-type':'text/html',etag}});
+  let state={schema:1,sources:{},queue:[]};
+  await runMonitor({sources,state,now:at(13),alarmFuse:1,fetchImpl});
+  price='CHF 25';extra='<p>Die Gruppe ist bis auf Weiteres sistiert.</p>';etag='v2';
+  await runMonitor({sources,state,now:at(14),alarmFuse:1,fetchImpl});
+  assert.deepEqual(state.queue.map(q=>[q.sourceId,q.kind]),[['a','content-changed'],['b','content-changed']]);
+  state=restart(state);
+  await runMonitor({sources,state,now:at(15),alarmFuse:5,fetchImpl});
+  await runMonitor({sources,state,now:at(16),alarmFuse:5,fetchImpl});
+  assert.deepEqual(state.queue.filter(q=>q.kind==='content-changed').map(q=>q.occurrences),[1,1],'the held back run does not repeat the content task');
+  assert.deepEqual(state.queue.filter(q=>q.kind==='possible-closure').map(q=>[q.sourceId,q.occurrences]),[['a',1],['b',1]]);
+});
+test('in a run, an ongoing closure since a past date opens a task and an expired temporary closure does not',async()=>{
+  const state={schema:1,sources:{},queue:[]};
+  await runMonitor({sources:[krabbel],state,now:at(14),fetchImpl:async()=>reply(notice())});
+  await runMonitor({sources:[krabbel],state,force:true,now:at(15),fetchImpl:async()=>reply(notice('Geschlossen bis 01.10.2026'))});
+  const alarms=()=>state.queue.filter(q=>q.kind.startsWith('possible-')).map(q=>[q.kind,q.details.lines.map(line=>line.text)]);
+  assert.deepEqual(alarms(),[]);
+  await runMonitor({sources:[krabbel],state,force:true,now:at(16),fetchImpl:async()=>reply(notice('Geschlossen bis 01.10.2026','Dauerhaft geschlossen seit 01.10.2026'))});
+  assert.deepEqual(alarms(),[['possible-closure',['Dauerhaft geschlossen seit 01.10.2026']]]);
+});
+test('a withheld alarm of a source whose fetch failed keeps its backoff, and the alarm is found again when it is read',async()=>{
+  const sources=[{...krabbel,id:'a',url:'https://a.example.org/course',intervalDays:7,required:['Marker']}];
+  const state={schema:1,sources:{},queue:[]};
+  const withMarker=notice().replace('ElKi','Marker');
+  await runMonitor({sources,state,now:at(13),fetchImpl:async()=>reply(withMarker)});
+  // The page lost its marker (parser-failed) and carries a notice: the alarm is withheld by the fuse at 0.
+  const report=await runMonitor({sources,state,force:true,now:at(14),alarmFuse:0,fetchImpl:async()=>reply(notice('Die Gruppe ist bis auf Weiteres sistiert.'))});
+  assert.equal(report.fuse.tripped,true);assert.equal(report.results[0].result,'error');assert.equal(report.results[0].withheld,'alarm-fuse');
+  const entry=state.sources.a;
+  assert.equal(entry.lastAttempt,at(14),'a failed fetch is not made due again at once');assert.equal(entry.errorCount,1);assert.equal(entry.nextRetry,new Date(Date.parse(at(14))+86400000).toISOString());
+  assert.equal(due(entry,sources[0],at(14)),false);assert.equal(due(entry,sources[0],at(15)),true);
+  assert.deepEqual(entry.alarm.keys,[]);
+  await runMonitor({sources,state,now:at(15),fetchImpl:async()=>reply(withMarker.replace('</footer>','<p>Die Gruppe ist bis auf Weiteres sistiert.</p></footer>'))});
+  assert.deepEqual(state.queue.filter(q=>q.kind==='possible-closure').map(q=>q.occurrences),[1]);
+});
+test('main: a withheld alarm survives a restart through monitor-state.json and is released by a plain later run',async()=>{
+  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'monitor-held-'));
+  let title='Krabbelgruppe',etag='"v1"';const sent=[];
+  const server=http.createServer((req,res)=>{
+    sent.push(req.headers['if-none-match']??null);
+    if(req.headers['if-none-match']===etag){res.writeHead(304);res.end();return;}
+    res.writeHead(200,{'content-type':'text/html; charset=utf-8',etag});res.end(titled(title));
+  });
+  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+  try{
+    const base=`http://127.0.0.1:${server.address().port}`,statePath=path.join(dir,'monitor-state.json'),read=async()=>JSON.parse(await fs.readFile(statePath,'utf8'));
+    // intervalDays 0: every source is due at every run, so no --force is needed and the held back sources are picked up by a plain run.
+    await fs.writeFile(path.join(dir,'source-watch.json'),JSON.stringify({sources:['a','b'].map(id=>({...krabbel,id,url:`${base}/${id}`,intervalDays:0}))}));
+    await main(['--host-delay-ms=0'],dir);
+    title='Dauerhaft geschlossen';etag='"v2"';sent.length=0;
+    const out=await main(['--alarm-fuse=1','--host-delay-ms=0'],dir);
+    assert.equal(out.exitCode,2);assert.equal(out.fuse.alarms.length,2);
+    assert.deepEqual(sent,[ '"v1"','"v1"']);
+    assert.deepEqual((await read()).queue,[]);assert.equal((await read()).sources.a.etag,'"v1"');
+    sent.length=0;
+    const still=await main(['--alarm-fuse=1','--host-delay-ms=0'],dir);
+    assert.equal(still.exitCode,2);assert.deepEqual(sent,['"v1"','"v1"']);
+    sent.length=0;
+    const ok=await main(['--host-delay-ms=0'],dir);
+    assert.equal(ok.exitCode,undefined);assert.equal(ok.openTasks,2);assert.deepEqual(sent,['"v1"','"v1"']);
+    const next=await main(['--host-delay-ms=0'],dir);
+    assert.equal(next.openTasks,2);assert.deepEqual(next.results.map(row=>row.result),['unchanged-304','unchanged-304']);
+    assert.deepEqual((await read()).queue.map(q=>[q.sourceId,q.kind,q.occurrences]),[['a','possible-closure',1],['b','possible-closure',1]]);
+  }finally{server.close();await fs.rm(dir,{recursive:true,force:true});}
+});
 test('a challenge page or an HTTP error never moves the stored final URL, so the recovery raises no redirect',async()=>{
   const state={schema:1,sources:{},queue:[]};
   await runMonitor({sources:[source],state,now:at(10),fetchImpl:async()=>replyAt(page(),'https://example.org/course')});
@@ -623,6 +735,26 @@ test('a source that answers 304 or is not due is not counted as fetched, and a f
   assert.equal(state.sources.s0.errorCount,1);assert.equal(state.queue.length,0);
   const tripped=await runMonitor({sources,state,ids:new Set(['s0','s1']),force:true,now:at(16),outageFuse:20,fetchImpl});
   assert.equal(tripped.outageFuse.tripped,true);assert.equal(state.sources.s0.errorCount,1);assert.equal(state.queue.length,0);
+});
+test('the outage fuse puts an established source back whole, validators included, so the next request asks about the page it knew',async()=>{
+  const sources=grid(10).map(item=>({...item,intervalDays:7})),state={schema:1,sources:{},queue:[]};
+  const stamp='Tue, 13 Oct 2026 05:00:00 GMT',sent=new Map();
+  const site=down=>async(url,options)=>{
+    const id=new URL(url).hostname.match(/^site(\d+)/)[1],header=options.headers['if-none-match']??null;sent.set(id,header);
+    if(down.includes(Number(id)))return new Response('Maintenance',{status:503,headers:{'content-type':'text/html',etag:'"maintenance"','last-modified':'Thu, 15 Oct 2026 05:00:00 GMT'}});
+    return header===`"page-${id}"`?new Response(null,{status:304}):new Response(notice(),{status:200,headers:{'content-type':'text/html',etag:`"page-${id}"`,'last-modified':stamp}});
+  };
+  await runMonitor({sources,state,now:at(14),outageFuse:20,fetchImpl:site([])});
+  const before=structuredClone(state.sources);
+  for(const id of ['s0','s1','s2'])assert.deepEqual([before[id].etag,before[id].lastModified,before[id].alarm.keys],[`"page-${id.slice(1)}"`,stamp,[]]);
+  const report=await runMonitor({sources,state,now:at(22),outageFuse:20,fetchImpl:site([0,1,2])});
+  assert.equal(report.outageFuse.tripped,true);assert.deepEqual(report.outageFuse.sources.map(row=>row.httpStatus),[503,503,503]);
+  for(const id of ['s0','s1','s2'])assert.deepEqual(state.sources[id],before[id],`${id} is exactly as before the run, the maintenance page's own validators were never kept`);
+  assert.equal(state.queue.length,0);
+  sent.clear();
+  const next=await runMonitor({sources,state,now:at(22),outageFuse:20,fetchImpl:site([])});
+  assert.deepEqual(['0','1','2'].map(id=>sent.get(id)),['"page-0"','"page-1"','"page-2"']);
+  assert.deepEqual(next.results.filter(row=>['s0','s1','s2'].includes(row.id)).map(row=>row.result),['unchanged-304','unchanged-304','unchanged-304']);
 });
 test('main: a tripped outage fuse returns exit code 2 and lists the sources; the options are validated and can switch it off',async()=>{
   const dir=await fs.mkdtemp(path.join(os.tmpdir(),'monitor-outage-'));
