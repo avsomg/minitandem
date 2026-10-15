@@ -56,15 +56,15 @@ Gemeinsames Prinzip aller vier Wege: **Modelle lesen und schlagen vor, Code ents
 
 ## 4. Ein Zyklus
 
-**Dateien:** `editorial/cycle.mjs` (`runCycle`, `plan`, `acquireLock`, `queueMarks`, `digest`, `needsOwner`, `codexSchedules`), `editorial/cycle-policy.json`.
+**Dateien:** `editorial/cycle.mjs` (`runCycle`, `plan`, `acquireLock`, `queueMarks`, `digest`, `needsOwner`, `codexSchedules`), `editorial/process-lock.mjs` (die Sperre), `editorial/cycle-policy.json`.
 
 **Was passiert.** `runCycle` ist die Routine für einen Timer, ohne Modell in der Schleife.
 1. Existiert `editorial/cycle.pause`, endet der Zyklus sofort mit einem Vermerk.
 2. Sind die in der Policy genannten Codex-Automationen noch aktiv, wird nichts gestartet: Zwei Zeitpläne sollen nie gleichzeitig an der Queue arbeiten.
 3. `plan` entscheidet nach Tag und Stunde. Einmal pro Tag (nach der Stunde aus der Policy) läuft die tägliche Wartung: `monitor`, `review`, `discover-events`, `canton-audit`, `work-packets`. Danach folgen immer `workflow sync`, ein Batch (`agent-run --chain`, begrenzt durch `limitPerRun` und die Tagesgrenze `maxJobsPerDay`), an Wartungstagen eine Sicherung der Queue, die beiden externen Reports und `workflow report`. Die führende Rolle wechselt bei normalen Läufen reihum.
-4. `acquireLock` legt ein Verzeichnis `lock` mit der Prozess-ID an. Ein Lock gilt höchstens drei Stunden und nur, solange der Prozess lebt; ein verwaister Lock wird entfernt.
+4. `acquireLock` legt die Datei `cycle.lock` an (`editorial/process-lock.mjs`): Prozess-ID, Token und Startzeit stehen von Anfang an darin, weil die Datei fertig geschrieben und in einem Schritt an ihren Platz gelegt wird. Sie ist nur veraltet, wenn der Prozess nicht mehr lebt oder seine ID einem anderen Prozess gehört; ein lebender Besitzer wird nie wegen der Zeit verdrängt. Freigegeben wird nur, wenn das Token noch das eigene ist. Erst danach liest der Zyklus den gemeinsamen Zustand (`state.json`, Marken der Warteschlange) und plant. Ein Verzeichnis `lock` der alten Version wird respektiert, solange sein Besitzer lebt und es jünger als drei Stunden ist, sonst entfernt (Einzelheiten in `docs/betrieb.md`).
 5. Jeder Schritt ist ein eigener Node-Prozess mit Zeitlimit. Schlägt `sync` fehl, werden alle Schritte übersprungen, die davon abhängen.
-6. Am Ende fasst `digest` die Ereignisse der Queue zusammen, die während dieses Zyklus entstanden sind: übernommen, abgeschlossen, Wiederholungen, Aufmerksamkeit, Breaker, Login. Gezählt wird ab der Ereignisnummer, die der Zyklus beim Start liest; Änderungen zwischen zwei Zyklen, etwa durch Läufe von Hand, erscheinen in dieser Zusammenfassung nicht. Dann schreibt der Zyklus `latest.json`, ein Tagesprotokoll und den neuen Zustand.
+6. Am Ende fasst `digest` die Ereignisse der Queue zusammen, die während dieses Zyklus entstanden sind: übernommen, abgeschlossen, Wiederholungen, Aufmerksamkeit, Breaker, Login. Gezählt wird ab der Ereignisnummer, die der Zyklus beim Start liest; Änderungen zwischen zwei Zyklen, etwa durch Läufe von Hand, erscheinen in dieser Zusammenfassung nicht. Dann schreibt der Zyklus `latest.json`, ein Tagesprotokoll und den neuen Zustand. Gestartet über `ops/cycle-run.mjs`, trägt jede Quittung die Lauf-ID dieses Aufrufs (`runId`, aus `MINITANDEM_CYCLE_RUN_ID`); der Heartbeat meldet nur dann Erfolg, wenn die Quittung dieses Aufrufs vorliegt (`docs/betrieb.md`).
 
 **Warum so.** Der Zyklus ersetzt einen früheren Chat-Zeitplan durch Code, den man lesen und testen kann; jeder Schritt hat eine Obergrenze, damit ein hängender Schritt den Zyklus nicht blockiert. Die Tagesgrenze begrenzt, wie viele Modelljobs ein Tag verbrauchen kann.
 
