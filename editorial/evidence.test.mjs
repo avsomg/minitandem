@@ -5,6 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {EventEmitter} from 'node:events';
 import {Readable} from 'node:stream';
+import zlib from 'node:zlib';
 import {snapshot,validateSnapshot,locateQuote,evidenceProblem,publicUrl,captureUrl,htmlText,saveSnapshot,hash,MAX_PDF_BYTES,monitorSnapshot,monitorRecord,capturedViews,capturedSet} from './evidence.mjs';
 import {runMonitor,normalize} from './monitor.mjs';
 import {writeRecord} from './page-record.mjs';
@@ -205,4 +206,14 @@ test('a source without a page record reads as before, and with one it also gives
     assert.equal(fresh.full.text,'Open every Saturday from nine to noon for families. Footer address.');assert.equal(fresh.view.text,text+'\nClosed on 24 December');
     assert.equal(fresh.full.fetchedAt,'2026-10-02T10:00:00.000Z');assert.equal(fresh.full.rawHash,hash('x'));
   }finally{await fs.rm(dir,{recursive:true,force:true});}
+});
+
+test('a compressed answer on the pinned connection is decoded and the byte limit counts the decoded bytes',async()=>{
+  const lookupImpl=async()=>[{address:'93.184.216.34',family:4}];
+  const page=zlib.gzipSync('<body><p>Children participate with a parent, every Wednesday morning.</p></body>');
+  const ok=await captureUrl('https://example.org/',{now,lookupImpl,requestImpl:wire([],[wireReply(200,{'content-type':'text/html','content-encoding':'gzip','content-length':String(page.length)},page)])});
+  assert.match(ok.text,/every Wednesday morning/);
+  // 5 MB of zeros compress to a few kilobytes: the limit of 10 KB must still stop the read.
+  const bomb=zlib.gzipSync(Buffer.alloc(5_000_000,32));
+  await assert.rejects(captureUrl('https://example.org/',{now,lookupImpl,maxBytes:10_000,requestImpl:wire([],[wireReply(200,{'content-type':'text/plain','content-encoding':'gzip'},bomb)])}),/byte limit/);
 });
