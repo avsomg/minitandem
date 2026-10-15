@@ -174,6 +174,9 @@ test('editor draft requires an independent full-field approval before a catalogu
   const journal=JSON.parse(fs.readFileSync(path.join(f.outputRoot,'editorial/approved-updates.json'),'utf8'));
   assert.equal(journal.updates.length,1);assert.equal(journal.updates[0].draft.cardId,'a');
   assert.match(journal.updates[0].approvalArtifact,/^[a-f0-9]{64}$/);
+  // The entry carries the approval summary that lets a clean clone check it without the private artifact.
+  assert.deepEqual(journal.updates[0].approval,{role:'verify',verdict:'approve',draftHash:digest(draft),
+    checkedFields:['min','age','research.findings','research.remaining'],approvedBindings:['min','age','research.findings.0']});
   // The next sync sees the card as the approval left it; the QA it requested must survive that.
   const pending=f.queue.list().find(j=>j.kind==='qa'),approvedCard={...card,name:card.name+' (as approved)'};
   assert.notEqual(digest(approvedCard),pending.payload.cardRevision);

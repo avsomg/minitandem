@@ -10,6 +10,7 @@ import {readExternalReviewInputs,validateReceipt} from './external-review.mjs';
 import {locateQuote,evidenceProblem,validateSnapshot,writeJsonAtomic} from './evidence.mjs';
 import {PATCH_FIELDS,PRACTICAL_FIELDS,CLAIM_FIELDS,CRITICAL_FIELDS,validateFieldValue,validDate,fullReviewFields,FULL_REVIEW_UNKNOWN_TEXT,FULL_REVIEW_UNKNOWN_PRACTICAL_TEXT} from './field-contract.mjs';
 import {PROJECT_ID} from './project-id.mjs';
+import {approvalSummary} from './catalogue-journal.mjs';
 
 export const here=path.join(root,'editorial');
 export {root};
@@ -446,7 +447,7 @@ export function commitResult(queue,{jobId,token,role,result},{getInputs=currentI
           if(!old||old.draft.cardId!==card.id||digest(old)!==reviewed.revision)throw Error('Stale update changed or belongs to another card');
           old.supersededBy=job.id;
         }
-        journal.updates.push({jobId:job.id,editorJobId:job.payload.editorJobId,approvalArtifact,approvedOn:today(),cardRevision:digest(card),
+        journal.updates.push({jobId:job.id,editorJobId:job.payload.editorJobId,approvalArtifact,approval:approvalSummary(role,result),approvedOn:today(),cardRevision:digest(card),
           baseRecord:card,appliedRecordRevision:revision,research:updated.research,draft});
         writes.push({file:'editorial/approved-updates.json',data:journal});
         writes.push({file:`editorial/correction-versions/${revision}.json`,data:updated});

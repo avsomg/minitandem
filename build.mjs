@@ -14,13 +14,15 @@ import {pipelineReport,readPipelineInputs,assertEditorialReady} from './editoria
 const root = path.dirname(fileURLToPath(import.meta.url));
 const output = path.join(root, '.publish');
 // The generators are quiet when they succeed; when one fails, its own error output is shown, not only "Command failed".
-const generate=(...parts)=>{
-  try{execFileSync(process.execPath,[path.join(root,...parts)],{stdio:'pipe'});}
+const generate=(parts,args=[])=>{
+  try{return execFileSync(process.execPath,[path.join(root,...parts),...args],{stdio:'pipe',encoding:'utf8'});}
   catch(error){process.stderr.write(error.stderr||'');throw error;}
 };
-generate('editorial','compile-review.mjs');
-generate('maintain.mjs');
-generate('editorial','compile-geo.mjs');
+// Without --public the approved-update journal is also checked against the private approval artifacts; a missing one fails.
+const publicOnly=process.argv.includes('--public');
+const {privateCrossCheck:approvalCrossCheck}=JSON.parse(generate(['editorial','compile-review.mjs'],publicOnly?['--public']:[]));
+generate(['maintain.mjs']);
+generate(['editorial','compile-geo.mjs']);
 const context = { window: {}, structuredClone };
 for(const file of ['data.js','data-reviewed.js','data-practical.js','regions.js','data-geo.js']) vm.runInNewContext(fs.readFileSync(path.join(root,file),'utf8'), context);
 const records = context.window.ACTIVITIES;
@@ -28,7 +30,6 @@ if(context.window.STALE_UPDATES?.length)throw Error('Approved updates need reapp
 const today=new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Zurich'});
 // The publication gates read private evidence (external review receipts, the visitor check) that is not in the public repository.
 // Without it the gates cannot be evaluated. That is allowed only when asked for with --public, and the summary below says so.
-const publicOnly=process.argv.includes('--public');
 const evidenceFiles=['external-review-receipts.json','family-venues-visitor-check-2026-09-27.json'];
 const privateEvidence=evidenceFiles.every(file=>fs.existsSync(path.join(root,'editorial',file)));
 if(!privateEvidence&&!publicOnly)throw Error('Private editorial evidence is missing ('+evidenceFiles.join(', ')+'), so the publication gates cannot run. Use --public (npm run build) to build the site from the tracked files without them.');
@@ -95,4 +96,4 @@ fs.mkdirSync(path.join(output,'assets'),{recursive:true});
 for (const file of ASSETS) fs.copyFileSync(path.join(root,'assets',file),path.join(output,'assets',file));
 const publicPages=generatePublicPages(records,context.window.CATALOG_REGIONS,output,new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Zurich'}));
 generateCaseStudy(root,output);
-console.log(JSON.stringify({output,revision,records:records.length,publicationGates,translations,publicPages,files:fs.readdirSync(output)},null,2));
+console.log(JSON.stringify({output,revision,records:records.length,publicationGates,approvalCrossCheck,translations,publicPages,files:fs.readdirSync(output)},null,2));

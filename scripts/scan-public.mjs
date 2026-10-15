@@ -22,8 +22,9 @@ const PHONE=/(?:\+41|\b0)[ ]?[0-9]{2}[ ]?[0-9]{3}[ ]?[0-9]{2}[ ]?[0-9]{2}\b/g;
 // Placeholders and documentation addresses are not contact data; neither is the project's own public address.
 const HARMLESS_PHONE=/(?:000 00 00|123 45 67|00 00 00)$/;
 const HARMLESS_EMAIL=/@(?:[a-z0-9-]+\.)*(?:example\.(?:org|com|ch)|localhost)\b|^(?:a"b|owner|user|you|name)@|^hello@minitandem\.ch$/i;
-// data-de.js and data-fr.js are the same cards in German and French, organiser contacts included.
-export const CATALOGUE_FILES=new Set(['data.js','research.md','data-reviewed.js','data-de.js','data-fr.js','design/minitandem-mockup.html']);
+// data-de.js and data-fr.js are the same cards in German and French, organiser contacts included. editorial/approved-updates.json is
+// the catalogue layer that data-reviewed.js is compiled from: its entries carry the approved card records, organiser contacts included.
+export const CATALOGUE_FILES=new Set(['data.js','research.md','data-reviewed.js','data-de.js','data-fr.js','design/minitandem-mockup.html','editorial/approved-updates.json']);
 const SKIP_BINARY=/\.(?:png|jpe?g|gif|webp|ico|woff2?|pdf|sqlite)$/i;
 // Third-party bundles contain long digit runs and the like; they are checked for secrets and paths only.
 const VENDOR=/^assets\/(?:leaflet|lucide)[\w.-]*\.js$/;
