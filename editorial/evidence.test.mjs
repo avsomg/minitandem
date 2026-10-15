@@ -5,7 +5,9 @@ import os from 'node:os';
 import path from 'node:path';
 import {EventEmitter} from 'node:events';
 import {Readable} from 'node:stream';
-import {snapshot,validateSnapshot,locateQuote,evidenceProblem,publicUrl,captureUrl,htmlText,saveSnapshot,hash,MAX_PDF_BYTES,monitorSnapshot} from './evidence.mjs';
+import {snapshot,validateSnapshot,locateQuote,evidenceProblem,publicUrl,captureUrl,htmlText,saveSnapshot,hash,MAX_PDF_BYTES,monitorSnapshot,monitorRecord,capturedViews,capturedSet} from './evidence.mjs';
+import {runMonitor,normalize} from './monitor.mjs';
+import {writeRecord} from './page-record.mjs';
 
 const now='2026-10-01T10:00:00Z';
 const sample=()=>snapshot({url:'https://example.org/course',fetchedAt:now,text:'Kinder ab 3 Jahren. Teilnahme mit einer Bezugsperson. Anmeldung erforderlich.'});
@@ -128,4 +130,79 @@ test('when the pinned native connection fails, the curl fallback gets the same c
   const evidence=await captureUrl('https://example.org/',{now,lookupImpl:async()=>checked,requestImpl:wire(log,[Error('socket hang up')]),
     fallbackImpl:async(url,addresses)=>{given=addresses;return {method:'curl-pinned-ipv4',response:new Response('Fallback page text that is long enough to keep.',{headers:{'content-type':'text/plain'}})};}});
   assert.deepEqual(given,checked);assert.equal(evidence.captureMethod,'curl-pinned-ipv4');
+});
+
+// Stage 2: the capture of a watched page also holds the monitor's view of the same bytes; the monitor's record holds the capture's text.
+const WATCHED='https://example.org/spielgruppe',watchSource={id:'fx',url:WATCHED,type:'html',minChars:10};
+const WATCHED_PAGE=`<html><head><title>Spielgruppe Teststadt: vorübergehend geschlossen bis 30.11.2099</title></head><body><header><p>Montag Ruhetag</p></header><nav>Startseite</nav>
+<main><h1>Spielgruppe Teststadt</h1><p>Jeden Mittwoch 15:00 bis 16:00 Uhr fuer Kinder von 2 bis 4 Jahren.</p></main><footer><p>Kontakt: Fixture Verein, Probeweg 5</p></footer></body></html>`;
+const watchOptions={now,lookupImpl:async()=>[{address:'93.184.216.34'}],fetchImpl:async()=>new Response(WATCHED_PAGE,{headers:{'content-type':'text/html; charset=utf-8'}})};
+test('a capture of a watched page holds the monitor view of the same bytes as a snapshot of its own, kept beside it',async()=>{
+  const evidence=await captureUrl(WATCHED,{...watchOptions,watch:{source:watchSource,hostIgnore:{},records:[]}});
+  const [view,...more]=capturedViews(evidence);
+  assert.equal(more.length,0);assert.equal(view.parser,'monitor-view-v2');validateSnapshot(view);
+  for(const key of ['url','finalUrl','fetchedAt','rawHash','contentType'])assert.equal(view[key],evidence[key],key);
+  assert.notEqual(view.id,evidence.id);assert.deepEqual(capturedSet(evidence).map(item=>item.id),[evidence.id,view.id]);
+  // The footer is in the capture only, the title notice in the view only, the main text in both.
+  assert.ok(locateQuote(evidence,'Kontakt: Fixture Verein, Probeweg 5'));assert.equal(locateQuote(view,'Kontakt: Fixture Verein, Probeweg 5'),null);
+  assert.ok(locateQuote(view,'vorübergehend geschlossen bis 30.11.2099'));assert.equal(locateQuote(evidence,'vorübergehend geschlossen bis 30.11.2099'),null);
+  assert.ok(locateQuote(evidence,'Jeden Mittwoch 15:00 bis 16:00 Uhr'));assert.ok(locateQuote(view,'Jeden Mittwoch 15:00 bis 16:00 Uhr'));
+  // The capture itself is what it was: same parser, no extra field, nothing of the view in its JSON.
+  assert.equal(evidence.parser,'cheerio-visible-body-v1');
+  assert.deepEqual(JSON.parse(JSON.stringify(evidence)),JSON.parse(JSON.stringify({...evidence})));assert.equal(Object.keys(evidence).includes('views'),false);
+  assert.equal(capturedViews(JSON.parse(JSON.stringify(evidence))).length,0);
+});
+test('no watch entry, a page the monitor would refuse, another content type or an identical text give no view',async()=>{
+  const view=watch=>captureUrl(WATCHED,{...watchOptions,watch}).then(capturedViews);
+  assert.equal((await view(null)).length,0);assert.equal((await view(undefined)).length,0);
+  assert.equal((await view({source:{...watchSource,required:['Nicht vorhanden']}})).length,0);
+  assert.equal((await view({source:{...watchSource,type:'pdf'}})).length,0);
+  assert.equal((await view({source:{...watchSource,minChars:100000}})).length,0);
+  // A plain text page: the monitor's text and the body are the same words, so a second snapshot would add nothing.
+  const plain=await captureUrl(WATCHED,{...watchOptions,fetchImpl:async()=>new Response('Spielgruppe jeden Mittwoch von 15:00 bis 16:00 Uhr.',{headers:{'content-type':'text/plain'}}),watch:{source:watchSource}});
+  assert.equal(capturedViews(plain).length,0);assert.equal(plain.parser,'plain-text-v1');
+});
+test('host rules of the watch entry apply to the view, not to the capture',async()=>{
+  const watch={source:watchSource,hostIgnore:{'example.org':{selectors:['footer','header']}}};
+  const evidence=await captureUrl(WATCHED,{...watchOptions,watch});
+  assert.ok(locateQuote(evidence,'Probeweg 5'));
+  assert.equal(locateQuote(capturedViews(evidence)[0],'Probeweg 5'),null);
+});
+test('the same bytes give the same texts from the monitor record and from a controller capture',async()=>{
+  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'minitandem-views-')),state={schema:1,sources:{},queue:[]},fetchedAt='2026-10-14T05:00:00.000Z';
+  try{
+    const fetchImpl=async()=>new Response(WATCHED_PAGE,{headers:{'content-type':'text/html; charset=utf-8'}});
+    await runMonitor({sources:[watchSource],state,now:fetchedAt,fetchImpl,record:(id,info)=>writeRecord(dir,id,info),
+      snapshot:async(id,digest,text)=>{await fs.mkdir(path.join(dir,'versions',id),{recursive:true});await fs.writeFile(path.join(dir,'versions',id,digest.slice(0,12)+'.txt'),text+'\n');}});
+    const stored=await monitorRecord(watchSource,{...state.sources.fx,parser:'v2'},dir);
+    const captured=await captureUrl(WATCHED,{...watchOptions,now:fetchedAt,watch:{source:watchSource,hostIgnore:{},records:[]}});
+    const [view]=capturedViews(captured);
+    assert.equal(stored.full.text,captured.text);assert.equal(stored.full.parser,captured.parser);assert.equal(stored.full.rawHash,captured.rawHash);
+    assert.equal(stored.view.text,view.text);assert.equal(stored.view.parser,view.parser);
+    assert.equal(stored.watch.text,normalize(WATCHED_PAGE,watchSource,fetchedAt,'v2'));assert.equal(stored.watch.parser,'monitor-text-v2');
+    // With the same fetch instant the stored copies and the capture even share identities; none of them is registered anywhere by this.
+    assert.equal(stored.full.id,captured.id);assert.equal(stored.view.id,view.id);
+    // A quote from either view is found in the other's record.
+    for(const quote of ['Kontakt: Fixture Verein','vorübergehend geschlossen bis 30.11.2099','Jeden Mittwoch 15:00 bis 16:00 Uhr']){
+      assert.ok(locateQuote(stored.full,quote)||locateQuote(stored.view,quote),quote);
+      assert.ok(locateQuote(captured,quote)||locateQuote(view,quote),quote);
+    }
+  }finally{await fs.rm(dir,{recursive:true,force:true});}
+});
+test('a source without a page record reads as before, and with one it also gives the full view and the monitor view',async()=>{
+  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'minitandem-views-old-'));
+  try{
+    const text='Open every Saturday from nine to noon for families.',h=hash(text);
+    await fs.mkdir(path.join(dir,'versions','fx'),{recursive:true});await fs.writeFile(path.join(dir,'versions','fx',h.slice(0,12)+'.txt'),text+'\n');
+    const entry={hash:h,lastSuccess:'2026-10-01T10:00:00.000Z',parser:'v2'};
+    const old=await monitorRecord(watchSource,entry,dir);
+    assert.equal(old.watch.text,text);assert.equal(old.view,null);assert.equal(old.full,null);assert.equal(old.meta,null);
+    assert.equal(await monitorRecord(watchSource,{},dir),null);
+    // With a record the same entry reads the full view, the view and the provenance of that fetch.
+    await writeRecord(dir,'fx',{version:h.slice(0,12),hash:h,fetchedAt:'2026-10-02T10:00:00.000Z',finalUrl:WATCHED,contentType:'text/html',status:200,parser:'v2',rawHash:hash('x'),rawBytes:1,raw:null,
+      full:{parser:'cheerio-visible-body-v1',text:'Open every Saturday from nine to noon for families. Footer address.'},alarm:['Closed on 24 December']});
+    const fresh=await monitorRecord(watchSource,entry,dir);
+    assert.equal(fresh.full.text,'Open every Saturday from nine to noon for families. Footer address.');assert.equal(fresh.view.text,text+'\nClosed on 24 December');
+    assert.equal(fresh.full.fetchedAt,'2026-10-02T10:00:00.000Z');assert.equal(fresh.full.rawHash,hash('x'));
+  }finally{await fs.rm(dir,{recursive:true,force:true});}
 });

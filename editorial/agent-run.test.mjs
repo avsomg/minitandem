@@ -4,10 +4,11 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {EventEmitter} from 'node:events';
-import {snapshot} from './evidence.mjs';
+import {snapshot,captureUrl,capturedViews,monitorRecord,hash} from './evidence.mjs';
+import {writeRecord} from './page-record.mjs';
 import {JobQueue,digest} from './jobs.mjs';
-import {retireStaleReadyJobs} from './workflow.mjs';
-import {captureClaims,prepareEvidence,captureDraft,promptFor,failJob,runRoles,runCodex,workerEvidenceFiles,normalizePilotSources,upgradeInputBudgetJob,upgradeInvestigatedJob,requestQa,timedWorker} from './agent-run.mjs';
+import {retireStaleReadyJobs,assertCaptured,registerCaptured} from './workflow.mjs';
+import {captureClaims,prepareEvidence,captureDraft,watchFor,promptFor,failJob,runRoles,runCodex,workerEvidenceFiles,normalizePilotSources,upgradeInputBudgetJob,upgradeInvestigatedJob,requestQa,timedWorker} from './agent-run.mjs';
 
 const now=new Date().toISOString(),url='https://example.org/course';
 const first=snapshot({url,fetchedAt:now,text:'Official source: admission is free. Course is on Monday.'});
@@ -257,4 +258,74 @@ test('the usage of a worker answer or failure carries the wall time of the model
   const failure=Object.assign(Error('Worker time limit'),{usage:{model:'m',toolCalls:1}});
   await assert.rejects(timedWorker(async()=>{await pause(30);throw failure;}),error=>error===failure&&typeof failure.usage.modelSeconds==='number');
   await assert.rejects(timedWorker(async()=>{throw Error('no usage on this one');}),/no usage/);
+});
+
+// Stage 2: a capture of a watched page is saved and registered together with the monitor's view of the same bytes.
+const WATCHED='https://example.org/spielgruppe',watchSource={id:'fx',url:WATCHED,type:'html',recordIds:['course'],minChars:10};
+const WATCHED_PAGE=`<html><head><title>Spielgruppe Teststadt: vorübergehend geschlossen bis 30.11.2099</title></head><body><nav>Startseite</nav>
+<main><h1>Spielgruppe Teststadt</h1><p>Jeden Mittwoch 15:00 bis 16:00 Uhr fuer Kinder von 2 bis 4 Jahren.</p></main><footer><p>Kontakt: Fixture Verein, Probeweg 5</p></footer></body></html>`;
+const realCapture=(u,options={})=>captureUrl(u,{...options,now,lookupImpl:async()=>[{address:'93.184.216.34'}],fetchImpl:async()=>new Response(WATCHED_PAGE,{headers:{'content-type':'text/html'}})});
+const memoryQueue=t=>{
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-views-queue-')),queue=new JobQueue(path.join(directory,'jobs.sqlite'));
+  t.after(()=>{queue.close();fs.rmSync(directory,{recursive:true,force:true});});return queue;
+};
+test('watchFor finds the monitor entry of a page by its address, with or without www and slash',()=>{
+  const sources=[watchSource],hostIgnore={'example.org':{selectors:['footer']}};
+  assert.equal(watchFor('https://www.example.org/spielgruppe/',{sources,hostIgnore}).source,watchSource);
+  assert.deepEqual(watchFor(WATCHED,{sources,hostIgnore,records:[card]}).hostIgnore,hostIgnore);
+  assert.equal(watchFor('https://example.org/other',{sources}),null);
+});
+test('prepare saves and registers the monitor view beside the capture and gives the worker only the capture',async t=>{
+  const queue=memoryQueue(t),saved=[];
+  const prepared=await prepareEvidence({kind:'facts',payload:{card:{...card,sources:[{url:WATCHED}]}}},{sources:[watchSource],queue,saveImpl:async(_,e)=>saved.push(e),captureImpl:realCapture});
+  const [capture]=prepared.payload.preparedEvidence,[view]=capturedViews(capture);
+  assert.equal(prepared.payload.preparedEvidence.length,1);assert.equal(capture.parser,'cheerio-visible-body-v1');
+  assert.deepEqual(saved.map(e=>e.parser),['cheerio-visible-body-v1','monitor-view-v2']);
+  assert.equal(queue.db.prepare('SELECT count(*) AS n FROM captured_evidence').get().n,2);
+  assertCaptured(queue,{snapshots:[capture,view]});
+  assert.equal(JSON.stringify(prepared.payload.preparedEvidence).includes('monitor-view-v2'),false);
+});
+test('a claim quoting the notice in the title is bound to the registered monitor view, a claim from the body stays on the capture',async t=>{
+  const queue=memoryQueue(t),prepared=await prepareEvidence({kind:'facts',payload:{card:{...card,sources:[{url:WATCHED}]}}},{sources:[watchSource],queue,saveImpl:async()=>{},captureImpl:realCapture});
+  const [capture]=prepared.payload.preparedEvidence,[view]=capturedViews(capture);
+  const on=(field,value,quote)=>({...claim(field,value,quote),source:WATCHED});
+  const bundle={project:'vmeste',cardId:card.id,claims:[on('status','closed','vorübergehend geschlossen bis 30.11.2099'),on('priceKind','unknown','Jeden Mittwoch 15:00 bis 16:00 Uhr')]};
+  await captureClaims(bundle,card,{prepared:prepared.payload.preparedEvidence,queue,saveImpl:async()=>{}});
+  assert.equal(bundle.claims[0].status,'supported');assert.equal(bundle.claims[0].snapshotId,view.id);
+  assert.equal(bundle.claims[1].snapshotId,capture.id);
+  assert.deepEqual(bundle.snapshots.map(e=>e.parser).sort(),['cheerio-visible-body-v1','monitor-view-v2']);
+  assertCaptured(queue,bundle);
+});
+test('a quote that is in neither view is still refused, and a fresh capture brings its views along',async t=>{
+  const queue=memoryQueue(t),captured=[];
+  const bundle={project:'vmeste',cardId:card.id,claims:[{...claim('priceKind','free','CHF 99 pro Kind'),source:WATCHED},{...claim('status','closed','vorübergehend geschlossen bis 30.11.2099'),source:WATCHED}]};
+  await captureClaims(bundle,card,{queue,saveImpl:async(_,e)=>captured.push(e.parser),captureImpl:async(u,options)=>{
+    assert.equal(options.watch,null);return realCapture(u,{watch:{source:watchSource,hostIgnore:{},records:[card]}});}});
+  assert.equal(bundle.claims[0].status,'unknown');assert.match(bundle.claims[0].note,/could not establish the supplied quote/);
+  assert.equal(bundle.claims[1].status,'supported');assert.deepEqual(captured,['cheerio-visible-body-v1','monitor-view-v2']);
+});
+test('a draft binding quoting the title notice is bound to the registered view too',async t=>{
+  const queue=memoryQueue(t),capture=await realCapture(WATCHED,{watch:{source:watchSource,hostIgnore:{},records:[card]}}),[view]=capturedViews(capture);
+  const draft={bindings:[{field:'status',source:WATCHED,quote:'vorübergehend geschlossen bis 30.11.2099'},{field:'priceKind',source:WATCHED,quote:'Jeden Mittwoch 15:00 bis 16:00 Uhr'}]};
+  await captureDraft(draft,[capture],queue,{saveImpl:async()=>{}});
+  assert.equal(draft.bindings[0].snapshotId,view.id);assert.equal(draft.bindings[1].snapshotId,capture.id);
+  assertCaptured(queue,draft);
+  // A fresh capture of the same page, no prepared evidence: the binding finds its quote in the view of the new capture.
+  const second={bindings:[{field:'status',source:WATCHED,quote:'vorübergehend geschlossen bis 30.11.2099'}]};
+  await captureDraft(second,[],queue,{saveImpl:async()=>{},captureImpl:async u=>realCapture(u,{watch:{source:watchSource,hostIgnore:{},records:[card]}})});
+  assert.equal(second.snapshots[0].parser,'monitor-view-v2');assertCaptured(queue,second);
+});
+test('a stored monitor copy is never a controller capture, even when the controller holds the very same page',async t=>{
+  const queue=memoryQueue(t),directory=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-copy-'));
+  t.after(()=>fs.rmSync(directory,{recursive:true,force:true}));
+  const capture=await realCapture(WATCHED,{watch:{source:watchSource,hostIgnore:{},records:[card]}});
+  registerCaptured(queue,capture);
+  // The monitor stored the same page earlier in the day: its copies carry another fetch time, so none of them is the registered capture.
+  const text=capture.text,storedText='Stored change text of the watched fixture page.',entry={hash:hash(storedText),lastSuccess:'2026-10-14T04:00:00.000Z',parser:'v2'};
+  fs.mkdirSync(path.join(directory,'versions','fx'),{recursive:true});fs.writeFileSync(path.join(directory,'versions','fx',entry.hash.slice(0,12)+'.txt'),storedText+'\n');
+  await writeRecord(directory,'fx',{version:entry.hash.slice(0,12),hash:entry.hash,fetchedAt:entry.lastSuccess,finalUrl:WATCHED,contentType:'text/html',status:200,parser:'v2',rawHash:capture.rawHash,rawBytes:1,raw:null,
+    full:{parser:'cheerio-visible-body-v1',text},alarm:[]});
+  const stored=await monitorRecord(watchSource,entry,directory);
+  for(const copy of [stored.watch,stored.full])assert.throws(()=>assertCaptured(queue,{snapshots:[copy]}),/lacks controller capture provenance/);
+  assertCaptured(queue,{snapshots:[capture]});
 });

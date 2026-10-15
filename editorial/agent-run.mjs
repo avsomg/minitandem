@@ -6,7 +6,8 @@ import {randomUUID} from 'node:crypto';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {JobQueue,digest,ROLE_KINDS,failureCategory} from './jobs.mjs';
 import {here,root,today,syncQueue,commitResult,currentInputs,validateClaims,CLAIM_FIELDS,registerCaptured} from './workflow.mjs';
-import {captureUrl,saveSnapshot,writeJsonAtomic,locateQuote,hash,validateSnapshot,publicUrl} from './evidence.mjs';
+import {captureUrl,saveSnapshot,writeJsonAtomic,locateQuote,hash,validateSnapshot,publicUrl,capturedSet} from './evidence.mjs';
+import {normUrl} from './monitor.mjs';
 import {sourceRevision} from './release.mjs';
 import {readPolicy,createClient,judgeBatch} from './typesafe.mjs';
 import {fieldDictionary,fullReviewFields,CRITICAL_FIELDS} from './field-contract.mjs';
@@ -203,6 +204,16 @@ export async function runCodex(job,policy,{runImpl=spawn,timeoutMs=720000,prompt
   }catch(error){error.usage=usage;throw error;}
   finally{fs.rmSync(directory,{recursive:true,force:true});}
 }
+// The source monitor's entry for a page, so that a capture also registers the monitor's view of the very same bytes (evidence.mjs, VIEWS).
+// `sources` and `hostIgnore` are those of source-watch.json (read from the file when not given); null for a page the monitor does not watch.
+export function watchFor(url,{sources=null,hostIgnore=null,records=[]}={}){
+  if(!sources){
+    let config;try{config=JSON.parse(fs.readFileSync(path.join(here,'source-watch.json'),'utf8'));}catch{return null;}
+    sources=config.sources;hostIgnore??=config.hostIgnore;
+  }
+  const wanted=normUrl(url),source=sources.find(item=>normUrl(item.url)===wanted);
+  return source?{source,hostIgnore:hostIgnore??{},records}:null;
+}
 export async function captureClaims(bundle,card,{captureImpl=captureUrl,prepared=[],saveImpl=saveSnapshot,queue=null}={}){
   if(!bundle||!Array.isArray(bundle.claims))throw Error('Missing claims');
   const snapshots=new Map(),bySource=new Map();
@@ -239,9 +250,11 @@ export async function captureClaims(bundle,card,{captureImpl=captureUrl,prepared
     if(!bySource.has(claim.source)){
       try{
         const evidence=prepared.filter(e=>e.url===claim.source);
-        if(!evidence.length)evidence.push(await captureImpl(claim.source));
-        for(const item of evidence){await saveImpl(path.join(here,'typesafe-runtime'),item);if(queue)registerCaptured(queue,item);}
-        bySource.set(claim.source,evidence);
+        if(!evidence.length)evidence.push(await captureImpl(claim.source,{watch:watchFor(claim.source,{records:[card]})}));
+        // A capture and the other views of it (the monitor's) are all saved and registered; a quote may be found in any of them, the capture first.
+        const set=evidence.flatMap(capturedSet);
+        for(const item of set){await saveImpl(path.join(here,'typesafe-runtime'),item);if(queue)registerCaptured(queue,item);}
+        bySource.set(claim.source,set);
       }catch{bySource.set(claim.source,[]);}
     }
     const evidence=bySource.get(claim.source).find(e=>locateQuote(e,claim.quote));
@@ -304,7 +317,7 @@ export function failJob(queue,job,role,error,{answered=false}={}){
   const outage=role!=='qa'&&!answered&&/^provider-/.test(failureCategory(error.message)||'');
   return outage?queue.releaseUncounted(job.id,job.token,role,error.message):queue.fail(job.id,job.token,role,error.message);
 }
-export async function prepareEvidence(job,{captureImpl=captureUrl,saveImpl=saveSnapshot,queue=null,sources=null}={}){
+export async function prepareEvidence(job,{captureImpl=captureUrl,saveImpl=saveSnapshot,queue=null,sources=null,hostIgnore=null}={}){
   // A verifier also receives the sources fetched for leads of an earlier round; otherwise it cannot see what following its lead produced.
   const urls=[...(job.payload.sourceIssues||[]).map(i=>i.details?.url),...(job.payload.researchLeads||[]).map(l=>l.source),...(job.kind==='verify-facts'?job.payload.followedLeads||[]:[]).map(l=>l.source),
     ...(job.payload.draft?.bindings||[]).map(b=>b.source),
@@ -312,18 +325,21 @@ export async function prepareEvidence(job,{captureImpl=captureUrl,saveImpl=saveS
     ...(job.payload.rejectedDraft?.findings||[]).map(f=>f.url),
     ...(job.payload.bundle?.claims||[]).map(c=>c.source),...(job.payload.card?.sources||[]).map(s=>s.url)];
   const evidence=[],failures=[];
-  sources??=JSON.parse(fs.readFileSync(path.join(here,'source-watch.json'),'utf8')).sources;
+  if(!sources){const config=JSON.parse(fs.readFileSync(path.join(here,'source-watch.json'),'utf8'));sources=config.sources;hostIgnore??=config.hostIgnore;}
+  const records=[job.payload.card].filter(Boolean),watch=url=>watchFor(url,{sources,hostIgnore:hostIgnore??{},records});
+  // Everything a capture holds is saved and registered (the capture and the monitor's view of it); only the capture goes to the worker.
+  const keep=async item=>{for(const part of capturedSet(item)){await saveImpl(path.join(here,'typesafe-runtime'),part);if(queue)registerCaptured(queue,part);}};
   const feeds=sources.filter(source=>source.type==='ics'&&source.recordIds.includes(job.payload.card?.id));
   for(const source of feeds){
     try{
-      const raw=await captureImpl(source.url,{type:'ics'});await saveImpl(path.join(here,'typesafe-runtime'),raw);if(queue)registerCaptured(queue,raw);
+      const raw=await captureImpl(source.url,{type:'ics',watch:watch(source.url)});await keep(raw);
       const selected=calendarEvidence(raw,job.payload.card).evidence;
       await saveImpl(path.join(here,'typesafe-runtime'),selected);if(queue)registerCaptured(queue,selected);evidence.push(selected);
     }catch(error){failures.push({url:source.url,status:'calendar-capture-unavailable',reason:String(error.message).slice(0,200)});}
   }
   for(const url of [...new Set(urls)].filter(Boolean).slice(0,5)){
     if(feeds.some(source=>source.url===url))continue;
-    try{const snapshot=await captureImpl(url);await saveImpl(path.join(here,'typesafe-runtime'),snapshot);if(queue)registerCaptured(queue,snapshot);evidence.push(snapshot);}
+    try{const snapshot=await captureImpl(url,{watch:watch(url)});await keep(snapshot);evidence.push(snapshot);}
     catch{failures.push({url,status:'capture-unavailable'});}
   }
   if(queue)for(const previous of job.payload.bundle?.snapshots||[]){
@@ -335,10 +351,11 @@ export async function captureDraft(draft,prepared,queue,{captureImpl=captureUrl,
   if(!Array.isArray(draft.bindings))throw Error('Editor did not provide evidence bindings');
   const snapshots=new Map(),fetched=new Map();
   for(const binding of draft.bindings){
-    let evidence=prepared.find(e=>e.url===binding.source&&locateQuote(e,binding.quote));
+    let evidence=prepared.flatMap(capturedSet).find(e=>e.url===binding.source&&locateQuote(e,binding.quote));
     if(!evidence){
-      if(!fetched.has(binding.source))fetched.set(binding.source,await captureImpl(binding.source));
-      evidence=fetched.get(binding.source);
+      if(!fetched.has(binding.source))fetched.set(binding.source,await captureImpl(binding.source,{watch:watchFor(binding.source)}));
+      const set=capturedSet(fetched.get(binding.source));
+      evidence=set.find(e=>locateQuote(e,binding.quote))??set[0];
     }
     await saveImpl(path.join(here,'typesafe-runtime'),evidence);registerCaptured(queue,evidence);snapshots.set(evidence.id,evidence);
     binding.snapshotId=evidence.id;
