@@ -1,5 +1,283 @@
 {
   "schema": 1,
   "project": "vmeste",
-  "updates": []
+  "updates": [
+    {
+      "jobId": "5d81def4-b10f-4018-b66f-8be6ad7c1612",
+      "editorJobId": "aea2526c-e7a0-40dc-96dc-4231b0650515",
+      "approvalArtifact": "8d57d6bb871bb3085602c4f855549691c15887915c5e3005d1608f975fe4b32d",
+      "approval": {
+        "role": "verify",
+        "verdict": "approve",
+        "draftHash": "704708ccb8c7e0564a3a0b09d53582072d988825d8cf8974cbca75f44ddc0ea6",
+        "checkedFields": [
+          "schedule",
+          "events",
+          "research.findings",
+          "research.remaining",
+          "days",
+          "scheduleValidThrough",
+          "status",
+          "price"
+        ],
+        "approvedBindings": [
+          "schedule",
+          "events",
+          "research.findings.0"
+        ]
+      },
+      "approvedOn": "2026-10-15",
+      "cardRevision": "13c2da80b81e8a4c52fa6e479d17f5b3774e78e3a306d2bbb7e3c54f4a35ffa4",
+      "baseRecord": {
+        "route": "outside",
+        "format": "group",
+        "status": "active",
+        "min": 0,
+        "max": 7,
+        "age": "0–7 years",
+        "parent": "yes",
+        "languages": [],
+        "schedule": "29.09, 29.10, 26.11, 22.12.2026 · 09:30–11:00",
+        "days": [
+          2,
+          4
+        ],
+        "events": [
+          {
+            "date": "2026-09-29",
+            "start": "09:30",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-10-29",
+            "start": "09:30",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-11-26",
+            "start": "09:30",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-12-22",
+            "start": "09:30",
+            "end": "11:00"
+          }
+        ],
+        "address": "Route de la Chapelle 33, 1470 Estavayer-le-Lac",
+        "price": "Free participation; no mandatory fee is stated",
+        "priceKind": "unknown",
+        "amount": null,
+        "contacts": [
+          {
+            "name": "Bibliothèque publique d’Estavayer",
+            "phone": "026 663 95 08",
+            "email": ""
+          }
+        ],
+        "sources": [
+          {
+            "url": "https://estabiblio.ch/cafeparent",
+            "label": "Library: dates, age, format and participation"
+          },
+          {
+            "url": "https://estabiblio.ch/",
+            "label": "Library: address and telephone"
+          },
+          {
+            "url": "https://tockify.com/educationfamiliale/detail/778/1790667000000",
+            "label": "AEF: time, address and series"
+          }
+        ],
+        "notes": [
+          "While the adults talk with the facilitators about education and child-rearing, the children play nearby.",
+          "Participation is free; the source does not say whether registration is required or whether there is a voluntary contribution.",
+          "This is a meeting in the library, not the normal book-lending service. Dates differ by day of the week; only the published meetings are entered in the calendar."
+        ],
+        "checked": "2026-09-28",
+        "reviewAfter": "2026-10-09",
+        "id": "aef-estavayer-cafe",
+        "region": "broye",
+        "name": "Café (grands-)parents-enfants · Estavayer",
+        "category": "play",
+        "town": "Estavayer-le-Lac",
+        "parentDetails": "The child comes with a parent or another adult.",
+        "scheduleValidThrough": "2026-12-22",
+        "intro": "A meeting for a child and an adult in a library: play alongside a conversation for parents.",
+        "practical": {
+          "scenario": "event",
+          "indoor": {
+            "value": true,
+            "text": "The meeting takes place indoors, in a public library.",
+            "source": "https://estabiblio.ch/cafeparent",
+            "checked": "2026-09-28"
+          }
+        },
+        "research": {
+          "date": "2026-09-28",
+          "outcome": "enriched",
+          "findings": [
+            {
+              "field": "Dates and age",
+              "kind": "official",
+              "text": "The library publishes meetings on 29 September, 29 October, 26 November and 22 December 2026 at 09:30 for children aged 0–7 with a parent; participation is free.",
+              "url": "https://estabiblio.ch/cafeparent"
+            },
+            {
+              "field": "Address and contact",
+              "kind": "official",
+              "text": "The library is at Route de la Chapelle 33, Estavayer-le-Lac; telephone 026 663 95 08.",
+              "url": "https://estabiblio.ch/"
+            }
+          ],
+          "remaining": [
+            "Check the language of the meeting, whether registration is required and whether free participation means a voluntary contribution is possible."
+          ]
+        },
+        "geo": {
+          "label": "Route de la Chapelle 33 1470 Estavayer-le-Lac",
+          "lat": 46.848121643066406,
+          "lon": 6.853948593139648,
+          "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+la+Chapelle+33+1470+Estavayer-le-Lac&type=locations&origins=address&limit=5&sr=4326",
+          "checked": "2026-09-28",
+          "precision": "address"
+        }
+      },
+      "appliedRecordRevision": "08cbab4993cc9267c29d8fea7883a19b956376740ce089792ed574c8f0f8ee36",
+      "research": {
+        "date": "2026-10-15",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Address and contact",
+            "kind": "official",
+            "text": "The library is at Route de la Chapelle 33, Estavayer-le-Lac; telephone 026 663 95 08.",
+            "url": "https://estabiblio.ch/"
+          },
+          {
+            "field": "Dates",
+            "kind": "official",
+            "text": "The library's café page lists meetings at the library on Thursday 29 October, Thursday 26 November and Tuesday 22 December 2026, each at 09:30. No end time is given.",
+            "url": "https://estabiblio.ch/cafeparent"
+          }
+        ],
+        "remaining": [
+          "Check the language of the meeting, whether registration is required and whether free participation means a voluntary contribution is possible.",
+          "What time does each meeting end?"
+        ]
+      },
+      "draft": {
+        "cardId": "aef-estavayer-cafe",
+        "patch": {
+          "schedule": "Listed sessions at 9:30 on Thursday 29 October, Thursday 26 November and Tuesday 22 December 2026. No recurring pattern is published.",
+          "events": [
+            {
+              "date": "2026-10-29",
+              "start": "09:30",
+              "end": "",
+              "title": "",
+              "address": ""
+            },
+            {
+              "date": "2026-11-26",
+              "start": "09:30",
+              "end": "",
+              "title": "",
+              "address": ""
+            },
+            {
+              "date": "2026-12-22",
+              "start": "09:30",
+              "end": "",
+              "title": "",
+              "address": ""
+            }
+          ]
+        },
+        "practicalPatch": {},
+        "findings": [
+          {
+            "field": "Dates",
+            "kind": "official",
+            "text": "The library's café page lists meetings at the library on Thursday 29 October, Thursday 26 November and Tuesday 22 December 2026, each at 09:30. No end time is given.",
+            "url": "https://estabiblio.ch/cafeparent"
+          }
+        ],
+        "remaining": [
+          "Check the language of the meeting, whether registration is required and whether free participation means a voluntary contribution is possible.",
+          "What time does each meeting end?"
+        ],
+        "supersededFindings": [
+          "fc7f917d5cb0ec584f485bd586e762f71e1748c5059b5cc7de0edc2412ecd98d"
+        ],
+        "reviewLimitations": [
+          "The AEF Tockify listing (https://tockify.com/educationfamiliale/detail/778/1790667000000), a relevant source named on the card, could not be captured (capture-unavailable), so the full review is incomplete.",
+          "The café page and the library homepage were inspected. The café page publishes no address, contact, language, registration, indoor or price-kind details."
+        ],
+        "bindings": [
+          {
+            "field": "schedule",
+            "source": "https://estabiblio.ch/cafeparent",
+            "quote": "Vos prochains rendez-vous à la bibliothèque : Jeudi 29 octobre 2026 à 9h30 Jeudi 26 novembre 2026 à 9h30 Mardi 22 décembre 2026 à 9h30",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "schedule-a58a646e94e1",
+            "snapshotId": "3bff0ef880be2f45d2b619effb2e30168154e0f8dd30bf0f89d7d532f5c60865"
+          },
+          {
+            "field": "events",
+            "source": "https://estabiblio.ch/cafeparent",
+            "quote": "Jeudi 29 octobre 2026 à 9h30",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-7b618ba6d551",
+            "snapshotId": "3bff0ef880be2f45d2b619effb2e30168154e0f8dd30bf0f89d7d532f5c60865"
+          },
+          {
+            "field": "events",
+            "source": "https://estabiblio.ch/cafeparent",
+            "quote": "Jeudi 26 novembre 2026 à 9h30",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-39c283505780",
+            "snapshotId": "3bff0ef880be2f45d2b619effb2e30168154e0f8dd30bf0f89d7d532f5c60865"
+          },
+          {
+            "field": "events",
+            "source": "https://estabiblio.ch/cafeparent",
+            "quote": "Mardi 22 décembre 2026 à 9h30",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-1d29d8718313",
+            "snapshotId": "3bff0ef880be2f45d2b619effb2e30168154e0f8dd30bf0f89d7d532f5c60865"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://estabiblio.ch/cafeparent",
+            "quote": "Vos prochains rendez-vous à la bibliothèque :\nJeudi 29 octobre 2026 à 9h30\nJeudi 26 novembre 2026 à 9h30\nMardi 22 décembre 2026 à 9h30",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "3bff0ef880be2f45d2b619effb2e30168154e0f8dd30bf0f89d7d532f5c60865"
+          }
+        ],
+        "snapshots": [
+          {
+            "schema": 1,
+            "project": "vmeste",
+            "id": "3bff0ef880be2f45d2b619effb2e30168154e0f8dd30bf0f89d7d532f5c60865",
+            "url": "https://estabiblio.ch/cafeparent",
+            "finalUrl": "https://estabiblio.ch/cafeparent",
+            "fetchedAt": "2026-10-15T11:33:28.208Z",
+            "contentType": "text/html; charset=UTF-8",
+            "parser": "cheerio-visible-body-v1",
+            "textHash": "7d687712befda4dd39dc853f1f0a48abe7f328124b350e2d4c014c324b1990b9",
+            "rawHash": "7931509d3459fad8745a1ddf4a1e74cc119146d1487f4d109276211ae4266a9b",
+            "text": "La bibliothèque et l’association pour l’éducation familiale vous invitent,\nle temps d’un café, à échanger autour du thème de l’éducation.\nLe café { grands-} parents-enfants est un espace de rencontre dans lequel les parents peuvent, en\nprésence de professionnel·le·s, discuter en toute simplicité de leurs expériences et de leurs\npréoccupations. Pendant ce temps, les enfants jouent, font des expériences, se sociabilisent et\ns’amusent.\nVos prochains rendez-vous à la bibliothèque :\nJeudi 29 octobre 2026 à 9h30\nJeudi 26 novembre 2026 à 9h30\nMardi 22 décembre 2026 à 9h30\nÂge : enfants de 0 à 7 ans accompagnés d’un parent\nParticipation : libre\nProjet soutenu par le service de l'action sociale\n(SASoc), le café parents-enfants s'adresse aux familles\n(mamans, papas, grands-parents) et aux\nprofessionnel·le·s qui s'interrogent sur l’éducation et\nle rôle éducatif des adultes. Il est également possible\nde venir sans enfants.\n© 2016 -\nBibliothèque publique, Estavayer-le-Lac\n×\nRèglement de la bibliothèque\nLa bibliothèque publique, Estavayer-le-Lac, se veut un espace accessible, ouvert à toutes et tous. Les livres, revues, journaux et poste informatique peuvent être consultés librement.\nHeures d’ouverture :\nMardi : 15h00 - 19h00\nMercredi : 15h00 - 19h00\nJeudi : 15h00 - 19h00\nVendredi : 15h00 - 19h00\nSamedi : 09h00 - 13h00\nPendant les vacances scolaires, la bibliothèque reste ouverte le mercredi de 15h00 à 19h00\nAbonnements :\nPossibilité d’emprunter jusqu’à 6 livres :\nAdulte : 40 CHF\nEnfant : 15 CHF\nApprenti & étudiant : 20 CHF\nNé pour lire : gratuit pour les petits de 0 à 1 an avec un accès libre à notre sélection parentalité pour les parents.\nPossibilité d’emprunter jusqu’à 20 livres :\nFamille : 50 CHF\nSoutien : 100 CHF\nVotre carte de lecteur vous permet de bénéficier des services de la bibliothèque pendant une année.\nPour les élèves de l'école du Cycle d'orientation de la Broye à Estavayer-le-Lac, la carte de lecteur est établie gratuitement.\nL’accès à la bibliothèque est libre pour les enseignants qui viennent avec leur classe. Les élèves des classes primaires peuvent emprunter gratuitement des livres lors de la visite de leur classe sous la responsabilité de leur enseignant.\nCondition de prêt :\nLa durée des prêts est de 4 semaines. Trois jours avant leur date d’expiration, la bibliothèque vous envoie un avis d’échéance par courriel. Celui-ci sert uniquement à vous informer que vous devez bientôt restituer vos documents.\nProlongation :\nPour autant que vos emprunts ne soient pas réservés, vous pouvez prolonger la durée de votre prêt de 4 semaines. Au maximum 2 prolongations par document restent possibles.\nRéservation :\nVous pouvez réserver jusqu'à trois documents déjà empruntés et commander jusqu'à deux documents présents dans nos rayons. Une fois votre réservation ou commande prête, vous recevez un courriel pour vous avertir que votre ouvrage se trouve à la bibliothèque où il reste à votre disposition pendant une semaine. Après quoi, il sera remis en circulation.\nRappels :\nSi vous n’avez pas ramené vos documents dans le délai d’une semaine après la date d’échéance, une demande de restitution débute avec l’envoi automatique d’un rappel. Les frais sont de 4 CHF par semaine de retard. Sauf demande expresse, les trois premiers rappels sont envoyés uniquement par e-mail. Aucun nouvel emprunt ne sera possible avant le retour de vos prêts.\nPremier rappel : 4 CHF.\nDeuxième rappel : 8 CHF.\nTroisième rappel : 12 CHF.\nQuatrième et dernier rappel : envoi recommandé. 20 CHF + frais de rappel.\nAu terme des 4 rappels, les documents sont considérés comme perdus et facturés à leur valeur d’achat (prix du neuf) augmenté des frais d’équipement. Les ouvrages ne seront plus acceptés en retour.\nDégat et perte :\nVous demeurez responsable de vos emprunts jusqu’au moment où vous les restituez et restez garants des livres que vous prêteriez à une tierce personne. Les emprunts détériorés ou perdus sont facturés au prix d’achat de ceux-ci, augmenté des frais d’équipement.\nPoste informatique :\nNotre poste informatique reste en libre accès pour la recherche, la consultation ou le travail. La suite logicielle Microsoft Office est à disposition pour élaborer vos exposés, mémoires ou courriers.\nImpressions :\nLes impressions et copies noir et blanc coûtent 0,10 CHF pièce, celles en couleur 1 CHF pièce.\nTélécharger au format PDF\nFermer",
+            "captureMethod": "node-fetch"
+          }
+        ]
+      }
+    }
+  ]
 }

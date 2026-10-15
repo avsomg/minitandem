@@ -1,6 +1,6 @@
 # Minitandem: catalogue with sources
 
-Catalogue updated 2026-10-03. The date of the in-depth check is shown on each card. Free places and future work are not guaranteed. All prices are in CHF; payment units are stated separately. Personal notes are not part of this file.
+Catalogue updated 2026-10-15. The date of the in-depth check is shown on each card. Free places and future work are not guaranteed. All prices are in CHF; payment units are stated separately. Personal notes are not part of this file.
 
 ## Sellenhof · open children's Wednesday
 
@@ -4789,24 +4789,24 @@ To confirm before visiting:
 - Age: 0–7 years
 - Adult: The child comes with a parent or another adult.
 - Language: To be confirmed
-- Schedule: 29.09, 29.10, 26.11, 22.12.2026 · 09:30–11:00
+- Schedule: Listed sessions at 9:30 on Thursday 29 October, Thursday 26 November and Tuesday 22 December 2026. No recurring pattern is published.
 - Price: Free participation; no mandatory fee is stated
 - Contact: Bibliothèque publique d’Estavayer; 026 663 95 08
-- Date: 2026-09-29 09:30–11:00
-- Date: 2026-10-29 09:30–11:00
-- Date: 2026-11-26 09:30–11:00
-- Date: 2026-12-22 09:30–11:00
+- Date: 2026-10-29 09:30
+- Date: 2026-11-26 09:30
+- Date: 2026-12-22 09:30
 - While the adults talk with the facilitators about education and child-rearing, the children play nearby.
 - Participation is free; the source does not say whether registration is required or whether there is a voluntary contribution.
 - This is a meeting in the library, not the normal book-lending service. Dates differ by day of the week; only the published meetings are entered in the calendar.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-10-15
 
-- **Dates and age** (Organiser source): The library publishes meetings on 29 September, 29 October, 26 November and 22 December 2026 at 09:30 for children aged 0–7 with a parent; participation is free. [Source](https://estabiblio.ch/cafeparent)
 - **Address and contact** (Organiser source): The library is at Route de la Chapelle 33, Estavayer-le-Lac; telephone 026 663 95 08. [Source](https://estabiblio.ch/)
+- **Dates** (Organiser source): The library's café page lists meetings at the library on Thursday 29 October, Thursday 26 November and Tuesday 22 December 2026, each at 09:30. No end time is given. [Source](https://estabiblio.ch/cafeparent)
 
 To confirm before visiting:
 - Check the language of the meeting, whether registration is required and whether free participation means a voluntary contribution is possible.
+- What time does each meeting end?
 
 - [Library: dates, age, format and participation](https://estabiblio.ch/cafeparent)
 - [Library: address and telephone](https://estabiblio.ch/)
