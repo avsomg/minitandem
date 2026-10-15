@@ -45,6 +45,7 @@ editorial/typesafe-runtime
 editorial/calibration-runtime
 editorial/catalogue-runtime
 editorial/catalog-versions
+editorial/audit
 editorial/node_modules
 editorial/release-identity.json
 editorial/external-review-report.json
