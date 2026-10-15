@@ -16,6 +16,7 @@ import {imageFile} from './image-evidence.mjs';
 import {runtimeContractRevision,assertRuntimeCurrent} from './runtime-contract.mjs';
 import {runClaudeWorker,assertClaudeReady} from './claude-worker.mjs';
 import {PROJECT_ID} from './project-id.mjs';
+import {numberProblem} from './quote-numbers.mjs';
 
 const loadedRuntimeRevision=runtimeContractRevision();
 const evidencePrefixes={preparedEvidence:'evidence',bundle:'bundle-evidence',draft:'draft-evidence',rejectedDraft:'previous-evidence'};
@@ -44,7 +45,7 @@ const CONTRACTS={
   adjudicate:`Return {decision:{schema:1,id,candidateRevision,disputeOpenedOn,decidedOn,rulings:[{key,verdict:'resolved'|'unresolved',reason,urls}],reviewAfter}}.
     Answer every question in the current dispute, independently open primary sources. A resolved ruling needs supporting URLs. An unresolved ruling needs a future reviewAfter. Missing evidence is not a reason to infer a value or contact the organizer.`,
   facts:`Return {bundle:{project:'${PROJECT_ID}',cardId,snapshots:[],claims:[{key,field,value,status:'supported'|'unknown'|'conflicting',scope:'exact-card'|'venue-only'|'uncertain',kind:'official'|'visitor'|'historical'|'inference',source,quote,snapshotId:null,note}]}}.
-    Research primary facts for this exact offer: age, adult participation, address, schedule, dates, price with unit, language and booking. Keep fields separate. Open actual pages/PDFs, not just search snippets. Copy a short EXACT quote including original case for every supported claim, and a nonempty note. The controller independently captures those URLs and assigns snapshotId; do not manufacture snapshot text. Do not infer session language from page language or age from photographs. Use supported only when explicit current official evidence exists for critical fields. Values use the card's field types: parent is yes/no/unknown, contacts is an array, min/max are numbers or null. contacts holds organisation contacts only (organisation name, landline, role address such as info@): never record a mobile number, a private person's name or an e-mail address that carries a person's name; leave such a contact out, the source link leads families to it. In findings and every other public text, refer to a private person by role (the group leader, the instructor), never by name. Empty claims are allowed when every source is unavailable, but explain limits in unknown claims. Allowed field names are exactly: ${[...CLAIM_FIELDS].join(', ')}. For example, use languages (not language) and practical.booking (not booking). If a source issue quotes a notice (closure, works, cancellation, move), verify the quoted notice on the live official page first; a notice about another offer on the same page does not apply; an outage is not closure; never set a status without an exact binding.`,
+    Research primary facts for this exact offer: age, adult participation, address, schedule, dates, price with unit, language and booking. Keep fields separate. Open actual pages/PDFs, not just search snippets. Copy a short EXACT quote including original case for every supported claim, and a nonempty note. The controller independently captures those URLs and assigns snapshotId; do not manufacture snapshot text. Do not infer session language from page language or age from photographs. Use supported only when explicit current official evidence exists for critical fields. Values use the card's field types: parent is yes/no/unknown, contacts is an array, min/max are numbers or null. A number in a supported claim (min, max, ageUpperUncertainFrom, amount, practical.groupSize, practical.duration) must be written in its own quote, in digits or words; the controller also accepts months for an age in years, hours or the span between two times for a duration in minutes, and free or from birth for 0. A figure you work out yourself (a sum, a school grade turned into an age, babies read as 0) stays unknown. contacts holds organisation contacts only (organisation name, landline, role address such as info@): never record a mobile number, a private person's name or an e-mail address that carries a person's name; leave such a contact out, the source link leads families to it. In findings and every other public text, refer to a private person by role (the group leader, the instructor), never by name. Empty claims are allowed when every source is unavailable, but explain limits in unknown claims. Allowed field names are exactly: ${[...CLAIM_FIELDS].join(', ')}. For example, use languages (not language) and practical.booking (not booking). If a source issue quotes a notice (closure, works, cancellation, move), verify the quoted notice on the live official page first; a notice about another offer on the same page does not apply; an outage is not closure; never set a status without an exact binding.`,
   'verify-facts':`Return {verdicts:[{key,verdict:'approve'|'reject'|'await-source',reason}]} covering EVERY claim exactly once.
     If a relevant linked PDF exceeds the web tool's size limit and its full text is not already in an evidenceFile, return researchLeads:[{source:exact PDF URL,note:fields to inspect and the web-size limitation}]. The controller can extract PDFs up to 20 MB locally. Read supplied PDF files before calling the source inaccessible; never substitute search snippets or transfer another programme's conditions.
     followedLeads, if present, are sources the controller already fetched for an earlier lead. Each is in preparedEvidence with its evidenceFile (the text the controller extracted, even where your web tool shows only metadata), or in evidenceFailures when it could not be captured. Read those files and treat them as inspected sources. Do not return a followedLeads source in researchLeads again, with one exception: its evidenceFile shows explicit evidence for a field the researcher still missed, and the note quotes it. A source in evidenceFailures, or one whose file adds nothing, is a reviewLimitations entry, never a repeated lead.
@@ -212,6 +213,12 @@ export async function captureClaims(bundle,card,{captureImpl=captureUrl,prepared
       claim.controllerRejection='Critical claim lacks exact-offer official scope; other valid claims may continue to independent verification.';
       claim.note=(claim.note||'')+' '+claim.controllerRejection;
     }
+    // A figure the quote does not write (a sum, a school grade turned into an age, "babies" as 0) is the model's own work out, not the page's.
+    const slip=claim.status==='supported'&&numberProblem(claim.field,claim.value,claim.quote);
+    if(slip){
+      claim.rejectedValue=claim.value;claim.value=null;claim.status='unknown';
+      claim.controllerRejection=slip+'; the proposed value is not approved.';claim.note=(claim.note||'')+' '+claim.controllerRejection;
+    }
     if(claim.field==='notes'&&claim.status==='supported'&&typeof claim.value==='string'){
       claim.value=[claim.value];claim.normalization='single-note-to-array';
     }
@@ -280,10 +287,22 @@ export function modelPreflight(policy,options={}){
 export async function gatedRoles(roles,priorities,gate){
   if(!gate.preflight)return roles;
   if(gate.ready===null&&roles.some(role=>role!=='qa'&&priorities.has(role))){
-    try{await gate.preflight();gate.ready=true;}
-    catch(error){gate.ready=false;gate.reason=String(error.message).slice(0,500);}
+    // One slow or failed login check must not lose the whole batch: ask once more after a pause (injectable, so tests do not wait).
+    gate.tries=0;
+    while(gate.ready!==true&&gate.tries<2){
+      if(gate.tries)await (gate.sleep||(ms=>new Promise(resolve=>setTimeout(resolve,ms))))(gate.retryMs??60000);
+      gate.tries++;
+      try{await gate.preflight();gate.ready=true;}
+      catch(error){gate.ready=false;gate.reason=String(error.message).slice(0,500);}
+    }
   }
   return gate.ready===true?roles:roles.filter(role=>role==='qa');
+}
+// A provider outage (usage limit, login) is not the job's fault, so the job keeps its attempt; every other failure counts, including a
+// refused model answer and any QA failure (test output can mention "429" without any provider being down).
+export function failJob(queue,job,role,error,{answered=false}={}){
+  const outage=role!=='qa'&&!answered&&/^provider-/.test(failureCategory(error.message)||'');
+  return outage?queue.releaseUncounted(job.id,job.token,role,error.message):queue.fail(job.id,job.token,role,error.message);
 }
 export async function prepareEvidence(job,{captureImpl=captureUrl,saveImpl=saveSnapshot,queue=null,sources=null}={}){
   // A verifier also receives the sources fetched for leads of an earlier round; otherwise it cannot see what following its lead produced.
@@ -405,7 +424,7 @@ export function recordRejectedOutput(queue,job,role,workerOutput,error,outputRoo
   });queue.flush(outputRoot);
   return hash;
 }
-export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=runModel,cardId=null,pilot=false,fullReview=false,sources=[],preflight}={}){
+export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=runModel,cardId=null,pilot=false,fullReview=false,sources=[],preflight,preflightRetryMs=60000,sleep}={}){
   assertRuntimeCurrent(loadedRuntimeRevision);
   sources=normalizePilotSources(sources,{pilot});
   const policy=JSON.parse(fs.readFileSync(path.join(here,'agent-policy.json'),'utf8'));
@@ -415,7 +434,7 @@ export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=r
     role&&!['search','verify','arbitrate','editor','qa'].includes(role))throw Error('Invalid worker policy, role or limit');
   const provider=assertWorkerPolicy(policy);
   if(preflight===undefined)preflight=worker===runModel&&provider==='claude'?modelPreflight:null;
-  const gate={preflight:preflight&&(()=>preflight(policy)),ready:null,reason:null};
+  const gate={preflight:preflight&&(()=>preflight(policy)),ready:null,reason:null,retryMs:preflightRetryMs,sleep};
   const owned=!queue;queue??=new JobQueue(path.join(here,'workflow-state','jobs.sqlite'));
   const results=[];
   const startedAt=Date.now();let stopReason=null;
@@ -445,7 +464,7 @@ export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=r
       }
       const blocked=gate.ready===false;
       const roles=await gatedRoles(runRoles({role,chain,circuitOpen,priorities,first:i===0}),priorities,gate);let job,assignedRole;
-      if(gate.ready===false&&!blocked)queue.event(null,'worker-preflight-failed',{provider,reason:gate.reason});
+      if(gate.ready===false&&!blocked)queue.event(null,'worker-preflight-failed',{provider,reason:gate.reason,tries:gate.tries});
       for(const possible of roles){
         job=queue.claim(possible,`runtime-${possible}`,{leaseMs:policy.leaseMinutes*60000,backpressure:policy.backpressure,cardId});
         if(job){assignedRole=possible;break;}
@@ -473,7 +492,7 @@ export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=r
       }catch(error){
         if(!workerOutput&&error.usage)queue.event(job.id,'usage',{...error.usage,failed:true});
         if(workerOutput)recordRejectedOutput(queue,job,assignedRole,workerOutput,error);
-        if(queue.get(job.id)?.state==='leased')queue.fail(job.id,job.token,assignedRole,error.message);
+        if(queue.get(job.id)?.state==='leased')failJob(queue,job,assignedRole,error,{answered:Boolean(workerOutput)});
         results.push({jobId:job.id,cardId:job.card_id,kind:job.kind,error:error.message});
         // A subscription outage or limit would otherwise spend an attempt on every remaining job of the run.
         if(provider==='claude'&&/^provider-/.test(failureCategory(error.message)||'')){stopReason='worker-provider-failure';break;}

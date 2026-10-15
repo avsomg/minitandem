@@ -15,6 +15,7 @@ export function failureCategory(message){
   return null;
 }
 
+const RELEASE_LIMIT=10;
 export class JobQueue{
   constructor(file,{now=()=>new Date().toISOString(),readOnly=false}={}){
     if(!readOnly)fs.mkdirSync(path.dirname(file),{recursive:true,mode:0o700});
@@ -189,6 +190,21 @@ export class JobQueue{
   }
   fail(id,token,role,error){return this.transaction(()=>{
     const job=this.requireLease(id,token,role);this.retryInside(job,error);this.noteFailure(job,String(error));return this.get(id);
+  });}
+  // A provider outage (usage limit, login) is not the job's fault: the lease goes back, the attempt it cost is returned and the job is
+  // retried soon. Only provider-* messages qualify, and a job that meets one RELEASE_LIMIT times is probably the cause, so then it counts.
+  releaseUncounted(id,token,role,error,{delayMs=600000}={}){return this.transaction(()=>{
+    const job=this.requireLease(id,token,role),message=String(error),category=failureCategory(message);
+    if(!/^provider-/.test(category||''))throw Error('Only a provider failure can be released without an attempt');
+    const released=this.db.prepare("SELECT count(*) AS n FROM events WHERE job_id=? AND kind='released-uncounted'").get(id).n;
+    if(released>=RELEASE_LIMIT)this.retryInside(job,message);
+    else{
+      const now=this.now(),after=new Date(Date.parse(now)+delayMs).toISOString(),attempt=Math.max(0,job.attempt-1);
+      this.db.prepare("UPDATE jobs SET state='retry',attempt=?,error=?,retry_after=?,token=NULL,lease_until=NULL,updated_at=? WHERE id=?")
+        .run(attempt,message.slice(0,1000),after,now,id);
+      this.event(id,'released-uncounted',{category,error:message.slice(0,1000),retryAfter:after,attempt});
+    }
+    this.noteFailure(job,message);return this.get(id);
   });}
   flush(root){
     return this.transaction(()=>{
