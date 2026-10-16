@@ -80,7 +80,7 @@ Die Datei `.deployments/<Operations-ID>` hält vorherigen Checkout und Image-Tag
 
 Normale Fehler und die behandelten Signale HUP/INT/TERM versuchen den alten Zustand wiederherzustellen. Rollback und Aufräumen prüfen die eigene Sperr-ID; ein inzwischen anderer Besitzer bleibt unberührt. Vor einem Rollback nach dem Umschalten muss zudem der Live-Tag noch der dieser Operation sein. Bei einem gescheiterten Rollback bleibt die Sperre mit `recovery-needed` stehen. Stromverlust, SIGKILL und eine unterbrochene Verbindung garantieren keinen automatischen Rollback: Die Serverdatei zeigt, wo die Operation stand. Die öffentliche Seite und `/healthz` prüfen, bevor etwas von Hand geändert wird.
 
-Am Ende nennt das Skript den vorherigen Tag und die Recovery-Datei. Umgebungsvariablen: `DEPLOY_HOST`, `DEPLOY_KEY`, `DEPLOY_DIR`, `DEPLOY_URL`, `DEPLOY_PORT`, `DEPLOY_MAX_DROP`, `DEPLOY_TRIES`, `DEPLOY_POLL`. Keine dieser Änderungen ist hier auf dem echten Server angewendet worden.
+Am Ende nennt das Skript den vorherigen Tag und die Recovery-Datei. Umgebungsvariablen: `DEPLOY_HOST`, `DEPLOY_KEY`, `DEPLOY_DIR`, `DEPLOY_URL`, `DEPLOY_PORT`, `DEPLOY_MAX_DROP`, `DEPLOY_TRIES`, `DEPLOY_POLL`. Auf dem echten Server läuft das Skript in dieser Form seit dem 16. Oktober 2026 (siehe «Stand der Prüfung»).
 
 ### Unterbrochenes Deployment wiederherstellen
 
@@ -503,4 +503,10 @@ Auf dem Server, am 14. Oktober 2026:
 - Sichern und Wiederherstellen wurden geübt (siehe dort).
 - Überwachung per E-Mail eingerichtet: Eine Testmail sowie je eine Mail für Ausfall und Rückkehr wurden über `mail.infomaniak.com:587` verschickt, vom Relay angenommen und kamen an; der Timer läuft alle fünf Minuten.
 
-**Nicht geprüft:** `ops/deploy.sh` gegen den echten Server und echtes Docker (der erste Lauf geschieht mit dem Eigentümer), die tmpfs-Optionen der Vorschau (`uid=1000,gid=1000`) auf dem Server, ein Neustart des ganzen Servers (die Container haben `restart: unless-stopped`, Docker startet beim Booten) und das Erneuern eines Zertifikats. Die jetzigen Zertifikate gelten bis zum 12. Januar 2027; Caddy erneuert sie vorher selbst, voraussichtlich ab Mitte Dezember 2026.
+Auf dem Server, am 15. und 16. Oktober 2026:
+
+- `ops/deploy.sh` in der ersten Fassung hat am 15. Oktober `3c5ebf2` und `a3f8819` ausgeliefert: Vorschau auf `127.0.0.1` mit eigenem tmpfs (`uid=1000,gid=1000` wurde angenommen), Vergleich der Kartenzahl mit live, Umschalten, Prüfung von `/healthz` von aussen.
+- Die jetzige Fassung mit Sperre und Operationsdatei lief am 16. Oktober zweimal. Der erste Lauf (`a145e42`) hielt vor dem Umschalten an: Die Vorschau konnte `server.mjs` nicht lesen (EACCES; der entfernte Teil setzte `umask 077` vor dem Checkout). Das Skript stellte Checkout und Tag selbst wieder her, die Seite lief ohne Unterbrechung weiter; `.deployments/209aee1d…` steht auf `rolled-back`. Nach der Korrektur (`101784e`) lief der zweite Lauf durch (`.deployments/7abfc623…`, `done`); `/healthz` nennt seitdem 295 veröffentlichte und 26 archivierte Karten.
+- Der Drop-Schlüssel mit erzwungenem Befehl ist eingerichtet: Heartbeats des Zyklus und die tägliche Kopie kommen an, jeder andere Befehl wird abgelehnt. Eine Kopie vom 15. Oktober wurde in einen leeren Ordner wiederhergestellt und hat ihre Freigaben selbst bestätigt.
+
+**Nicht geprüft:** ein Rollback *nach* dem Umschalten auf dem echten Server (geübt ist bisher nur der Abbruch davor), ein Neustart des ganzen Servers (die Container haben `restart: unless-stopped`, Docker startet beim Booten) und das Erneuern eines Zertifikats. Die jetzigen Zertifikate gelten bis zum 12. Januar 2027; Caddy erneuert sie vorher selbst, voraussichtlich ab Mitte Dezember 2026.
