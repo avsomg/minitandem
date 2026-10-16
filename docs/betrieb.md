@@ -17,7 +17,7 @@ Internet ──80/443──> Caddy (Container "caddy")  ──intern──> app 
 - `compose.yaml`: zwei Dienste, `app` und `caddy`, Projektname `minitandem`. Nur Caddy veröffentlicht Ports. Der Zustand liegt im benannten Volume `minitandem_state`.
 - `docker/Caddyfile`: `www.minitandem.ch` leitet dauerhaft auf `minitandem.ch` um; `minitandem.ch` wird mit `encode zstd gzip` ausgeliefert, die Editor-Pfade (`/admin`, `/api/v1/admin/*`) sind am Proxy gesperrt (404), alles andere geht an `app:8787`.
 - `ops/deploy.sh <Commit>`: das Update mit Prüfungen, vom Rechner des Eigentümers aus (siehe «Update»).
-- `docker/entrypoint.sh`: legt beim ersten Start **genau eine Demo-Familie** an (Schlüssel in `/state/demo-family-key.txt`) und startet den Dienst. Ein **Editor-Schlüssel** (`server.mjs new-admin`) wird auf dem Server **nie** erzeugt; ohne ihn antworten alle Editor-Routen mit 401.
+- `docker/entrypoint.sh`: legt nur bei ausdrücklich eingeschaltetem Familienabgleich eine Demo-Familie an (Standard: aus) und startet den Dienst. Ein **Editor-Schlüssel** (`server.mjs new-admin`) wird auf dem Server **nie** erzeugt; ohne ihn antworten alle Editor-Routen mit 401.
 - Die redaktionelle Pipeline (`editorial/cycle.mjs`, die Worker) läuft **nicht** auf dem Server, sondern auf dem Rechner des Eigentümers; der Server hat keine Modell-Zugänge. Zu unterscheiden ist, was wo liegt:
   - **App-Image** (Container `app`): die öffentliche Seite und der Dienst, **keine** privaten redaktionellen Daten. Das Image wird mit `--public` aus einem sauberen Checkout gebaut, und `.dockerignore` hält alle privaten Pfade aus dem Build-Kontext.
   - **Volume `minitandem_state`** (Familien-Zustand): gehashte Familienschlüssel, Profile, eingereichte Korrekturen und die Demo-Familie. Das sind Familiendaten, keine redaktionellen Daten; sie gehören dem Dienst und werden von `ops/backup.sh` gesichert (Abschnitt «Sichern und Wiederherstellen des State-Volumes»).
@@ -44,7 +44,7 @@ docker compose ps               # beide Dienste "running", app "healthy"
 curl -fsS https://minitandem.ch/healthz     # {"status":"ok","records":...,"revision":...,"commit":...}
 ```
 
-Beim ersten Start holt Caddy die Zertifikate; das dauert meist unter einer Minute (`docker compose logs caddy`). Den Schlüssel der Demo-Familie zeigt `docker compose exec app cat /state/demo-family-key.txt`. Er schützt nur Demo-Daten.
+Beim ersten Start holt Caddy die Zertifikate; das dauert meist unter einer Minute (`docker compose logs caddy`). Mit dem Standard wird keine Demo-Familie angelegt. Die Familien-API antwortet mit 503.
 
 Die Seite wird beim Bauen des Images erzeugt, **ohne** die Publikations-Gates (sie brauchen private Belege, die nicht im Repository liegen; die Build-Ausgabe sagt `publicationGates: skipped`). Diese Gates laufen vor dem Commit auf dem Rechner des Eigentümers. Vor dem Deployment also nur Stände aus dem Repository nehmen, die dort geprüft wurden. Die öffentlichen Prüfungen `npm run audit:public` und `npm run scan:public` brauchen keine privaten Belege und laufen in der CI; `ops/deploy.sh` verlangt für den Commit eine grüne CI.
 
@@ -174,13 +174,29 @@ Der Benutzer `node` im Image hat die ID 1000; deshalb das `chown`.
 
 | Was | Wo |
 | --- | --- |
-| Zugriffe (JSON, eine Zeile pro Anfrage), Zertifikate | `docker compose logs -f --tail=200 caddy` |
+| Zugriffe (JSON, maskierte IPs) | `docker compose exec caddy tail -n 200 /var/log/caddy/access.json` |
+| Zertifikate und Caddy-Betriebsmeldungen | `docker compose logs -f --tail=200 caddy` |
 | Dienst: Startmeldung und Serverfehler (500) | `docker compose logs -f --tail=200 app` |
 | Dateien auf dem Host | `/var/lib/docker/containers/<container-id>/<container-id>-json.log`; Rotation durch `compose.yaml`: 10 MB, 5 Dateien je Dienst |
 | Docker selbst | `journalctl -u docker` |
 | Zustand der Container | `docker compose ps`; `docker inspect --format '{{.State.Health.Status}}' minitandem-app-1` |
 
-Der Dienst schreibt keinen eigenen Zugriffsprotokollstrom, nur Startmeldung und Fehler. Wer Zugriffe sehen will, liest das Caddy-Log.
+Der App-Dienst schreibt keine Zugriffe. Bei Fehlern protokolliert `serviceError` nur eine feste Meldung und einen freigegebenen Fehlercode, keine Fehlermeldung, keinen Stack und keine Anfrage. Damit gelangen keine IP-Adressen in sein Fehlerprotokoll.
+
+### Neue Zugriffsprotokolle (noch nicht auf dem Server angewendet)
+
+Caddy maskiert `request.remote_ip` und `request.client_ip` vor dem Schreiben (IPv4 /24, IPv6 /48). Authorization und Cookie werden gelöscht, zusätzlich sämtliche Anfrage- und Antwortheader sowie URI und Host. So können auch Forwarding-Header oder URL-Parameter keine vollständigen IPs oder Zugangsdaten ins Zugriffsprotokoll tragen. Zeit, Methode, Status, Dauer, übertragene Grössen und Verbindungsdaten bleiben zur Fehleranalyse erhalten.
+
+`roll_disabled` verhindert alte Rotationsdateien. Der einzige Zugriffsstrom liegt in `/var/log/caddy/access.json` auf einem 32-MB-tmpfs des Containers, ausserhalb aller Sicherungen. Bei Platzmangel kann das Protokoll Lücken haben; die Grösse ist keine Aufbewahrungsfrist. `docker/access-log-entrypoint.sh` begrenzt den schreibenden Prozess mit Alpines `timeout` auf 518400 Sekunden (sechs Tage) plus höchstens 60 Sekunden bis SIGKILL. Danach beendet sich der Container, Docker startet ihn durch `restart: unless-stopped` neu und legt das tmpfs neu an. Der Entrypoint leert die Datei zusätzlich vor jedem Start. Selbst der erste Eintrag einer Laufzeit verschwindet nach höchstens 518460 Sekunden, also vor sieben Tagen, ohne einen einzigen weiteren Zugriff. Stoppen oder Neuerstellen verwirft das tmpfs ebenfalls. Es braucht keinen Host-Timer. Den Container nicht pausieren oder mit seinem Speicherzustand archivieren; keine Log-Kopie aufbewahren.
+
+### Umstellung durch die Hauptsitzung (noch nicht angewendet)
+
+1. Den geprüften Commit auf dem Server bereitstellen. In `.env` `MINITANDEM_FAMILY_SYNC=0` setzen oder die Variable weglassen. Das neue App-Image bauen; die öffentliche Ausgabe muss `familySync:false` enthalten.
+2. Vor dem Umschalten lokal auf dem Server mit dem vorhandenen Caddy-Image prüfen (ohne Image-Download): `docker compose run --rm --no-deps --entrypoint caddy caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile`. Auch `timeout --help` im Image auf `-s` und `-k` prüfen. Diese echten Container-Prüfungen wurden im Arbeitsklon mangels Docker-Daemon nicht ausgeführt.
+3. `docker compose stop caddy app`. Solange die alten Container noch existieren, ihre `LogPath` mit `docker inspect` ermitteln. Keine Kopien der alten Protokolle anlegen. Mit Root-Rechten die zu diesen beiden Containern gehörenden `*-json.log` und deren Rotationsdateien entfernen (oder bei gestopptem Container leeren); anschliessend `docker compose rm -f caddy app`. Die bisherigen Docker-Logs enthalten vollständige IPs und dürfen die Umstellung nicht überleben. Eventuelle manuelle Exporte oder Sicherungen dieser Logs ebenfalls löschen. Zertifikats- und State-Volumes behalten.
+4. Beide Container mit `docker compose up -d --no-build --force-recreate` neu erstellen. `docker compose ps`, `/healthz`, die sechs rechtlichen Seiten und `/api/v1/family` (503) prüfen. `/state` darf keine neu erzeugte Familie oder neuen Demo-Schlüssel enthalten; alte Zustandsdateien bleiben gesperrt.
+5. Prüfanfragen mit IPv4/IPv6 und künstlichen Authorization-/Cookie-Werten senden. In `/var/log/caddy/access.json` nur maskierte IPs, keine Header oder URI erwarten. `docker compose logs caddy` darf keinen Zugriffsstrom enthalten. Das Mount als tmpfs prüfen. Mit einem Wegwerf-Container und verkürztem Timeout das Ende und den frischen, leeren tmpfs beim Neustart prüfen, ohne den Produktionscontainer dafür zu verändern.
+6. Erst nach diesen Prüfungen die Umstellung mit Datum dokumentieren. Die Veröffentlichung der neuen Datenschutzerklärung und diese Betriebsänderung gehören zu derselben Freigabe. Ein Rollback auf den alten Compose-Stand würde die bisherige Protokollierung und Demo-Familie wieder einschalten; deshalb bei einem Rollback diese Datenschutzkonfiguration beibehalten oder die Seite anhalten.
 
 ## Überwachung per E-Mail über ein authentifiziertes Relay (Port 587)
 

@@ -25,7 +25,7 @@ Google Maps öffnet sich erst nach einem Klick ausserhalb dieser Website. Der Li
 
 ## Zugriffsprotokoll
 
-Zur Fehleranalyse wird pro Zugriff ein Protokolleintrag mit Zeitpunkt, angefragtem Pfad, Methode, Antwortstatus und technischen Angaben zur Verbindung und zum Browser erstellt. IP-Adressen werden vor dem Schreiben gekürzt (IPv4 auf /24, IPv6 auf /48). Die Header Authorization und Cookie werden entfernt. Die Einträge werden spätestens nach sieben Tagen gelöscht, auch bei wenigen Zugriffen. Die Fehlerprotokolle des App-Dienstes enthalten keine IP-Adressen.
+Zur Fehleranalyse wird pro Zugriff ein Protokolleintrag mit Zeitpunkt, Methode, Antwortstatus und technischen Angaben zur Verbindung und zum Browser erstellt. IP-Adressen werden vor dem Schreiben gekürzt (IPv4 auf /24, IPv6 auf /48). Die Header Authorization und Cookie werden entfernt. Die Einträge werden spätestens nach sieben Tagen gelöscht, auch bei wenigen Zugriffen. Die Fehlerprotokolle des App-Dienstes enthalten keine IP-Adressen.
 
 ## Speicherung im Browser und externe Inhalte
 

@@ -25,7 +25,7 @@ Google Maps opens outside this site after a click. The link includes the destina
 
 ## Access log
 
-For fault analysis, each request produces an entry with the time, requested path, method, response status and technical details about the connection and browser. IP addresses are masked before writing (IPv4 to /24, IPv6 to /48). The Authorization and Cookie headers are removed. Entries are deleted within seven days, even with little traffic. The application service’s error logs contain no IP addresses.
+For fault analysis, each request produces an entry with the time, method, response status and technical details about the connection and browser. IP addresses are masked before writing (IPv4 to /24, IPv6 to /48). The Authorization and Cookie headers are removed. Entries are deleted within seven days, even with little traffic. The application service’s error logs contain no IP addresses.
 
 ## Browser storage and external content
 

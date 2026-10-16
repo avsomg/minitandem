@@ -25,7 +25,7 @@ Google Maps s’ouvre hors du site après un clic. Le lien contient la destinati
 
 ## Journal des accès
 
-Pour rechercher les causes des erreurs, chaque accès produit une entrée avec l’heure, le chemin demandé, la méthode, le statut de réponse et des informations techniques sur la connexion et le navigateur. Les adresses IP sont masquées avant l’écriture (IPv4 à /24, IPv6 à /48). Les en-têtes Authorization et Cookie sont retirés. Les entrées sont supprimées au plus tard après sept jours, même lorsque les accès sont rares. Les journaux d’erreurs du service applicatif ne contiennent aucune adresse IP.
+Pour rechercher les causes des erreurs, chaque accès produit une entrée avec l’heure, la méthode, le statut de réponse et des informations techniques sur la connexion et le navigateur. Les adresses IP sont masquées avant l’écriture (IPv4 à /24, IPv6 à /48). Les en-têtes Authorization et Cookie sont retirés. Les entrées sont supprimées au plus tard après sept jours, même lorsque les accès sont rares. Les journaux d’erreurs du service applicatif ne contiennent aucune adresse IP.
 
 ## Stockage dans le navigateur et contenus externes
 
