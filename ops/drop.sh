@@ -41,7 +41,7 @@ cleanup() {
   drop_status=$?
   trap - EXIT HUP INT TERM
   [ -z "$limit_child" ] || { kill "$limit_child" 2>/dev/null || true; wait "$limit_child" 2>/dev/null || true; }
-  [ -z "$limit_guard" ] || { kill "$limit_guard" 2>/dev/null || true; wait "$limit_guard" 2>/dev/null || true; }
+  [ -z "$limit_guard" ] || { kill -KILL "$limit_guard" 2>/dev/null || true; wait "$limit_guard" 2>/dev/null || true; }
   [ -z "$tmp" ] || rm -f "$tmp"
   [ -z "$receipt" ] || rm -f "$receipt"
   if [ -n "$lock_token" ] && [ "$(cat "$UPLOAD_LOCK/owner" 2>/dev/null)" = "$lock_token" ]; then
@@ -70,20 +70,19 @@ limited() {
   "$@" <&8 8<&- &
   limit_child=$!
   exec 8<&-
+  # The guard is stopped with KILL once the reader is done: a trapped TERM could stay pending in dash while it waits (a race seen on Linux),
+  # and the guard would then sit out its whole deadline. Killed, it can never act on a reader that has gone; its sleep has no open
+  # descriptors besides /dev/null and simply runs out.
   (
-    sleeper=
-    trap '[ -z "$sleeper" ] || kill "$sleeper" 2>/dev/null || true; exit 0' HUP INT TERM
-    sleep "$seconds" & sleeper=$!
-    wait "$sleeper"
+    sleep "$seconds"
     kill -TERM "$limit_child" 2>/dev/null || exit 0
-    sleep 1 & sleeper=$!
-    wait "$sleeper"
+    sleep 1
     kill -KILL "$limit_child" 2>/dev/null || true
   ) </dev/null >/dev/null 2>&1 &
   limit_guard=$!
   if wait "$limit_child"; then limited_status=0; else limited_status=$?; fi
   limit_child=
-  kill "$limit_guard" 2>/dev/null || true
+  kill -KILL "$limit_guard" 2>/dev/null || true
   wait "$limit_guard" 2>/dev/null || true
   limit_guard=
   return "$limited_status"
