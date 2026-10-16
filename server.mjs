@@ -23,6 +23,7 @@ const buildInfo=(()=>{try{return JSON.parse(fs.readFileSync(path.join(root,'.pub
 const commit=process.env.MINITANDEM_COMMIT||null;
 const catalog=loadCatalog();
 const allowed=new Map(catalog.ACTIVITIES.map(a=>[a.id,a]));
+const published=catalog.ACTIVITIES.filter(record=>!['closed','excluded'].includes(record.status)).length;
 const statuses=new Set(['','discuss','contact','waiting','booked','visited','skip']);
 const hash=value=>crypto.createHash('sha256').update(value).digest('hex');
 const randomToken=()=>crypto.randomBytes(32).toString('base64url');
@@ -131,7 +132,7 @@ export function createServer(){
     // It also says which build is live (revision of the catalogue files, date of the latest review, deployed commit); nothing in it is secret.
     if(pathname==='/healthz'&&['GET','HEAD'].includes(req.method)){
       res.writeHead(200,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});
-      return res.end(req.method==='HEAD'?undefined:JSON.stringify({status:'ok',records:allowed.size,revision:buildInfo.revision??null,catalogueUpdated:buildInfo.catalogueUpdated??null,...(commit&&{commit})}));
+      return res.end(req.method==='HEAD'?undefined:JSON.stringify({status:'ok',records:allowed.size,published,archived:allowed.size-published,revision:buildInfo.revision??null,catalogueUpdated:buildInfo.catalogueUpdated??null,...(commit&&{commit})}));
     }
     if(!pathname.startsWith('/api/'))return ['GET','HEAD'].includes(req.method)?staticFile(req,res,pathname):json(res,405,{error:'Method not allowed'});
     try{

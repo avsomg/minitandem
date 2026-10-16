@@ -84,7 +84,7 @@ function scenario(t,{preview=310,previewExtra,publicNew,files={}}={}){
   fs.writeFileSync(path.join(fake,`public-${oldTag}.json`),json(321));
   // The new image: what its own preview says is also what the public site shows once it is switched (unless a test says otherwise).
   const newTag=git(work,'rev-parse','--short',nextSha);
-  const previewAnswer=json(preview,previewExtra??{revision:'0123456789abcdef',catalogueUpdated:'2026-10-15',commit:newTag});
+  const previewAnswer=json(preview,{published:preview,archived:0,...(previewExtra??{revision:'0123456789abcdef',catalogueUpdated:'2026-10-15',commit:newTag})});
   fs.writeFileSync(path.join(fake,'preview.json'),previewAnswer);
   fs.writeFileSync(path.join(fake,`public-${newTag}.json`),publicNew??previewAnswer);
   for(const [name,body] of Object.entries(files))fs.writeFileSync(path.join(fake,name.replace('<new>',newTag).replace('<old>',oldTag)),body);
@@ -128,7 +128,7 @@ test('ops/deploy.sh refuses a preview with more than 15 % fewer records than the
   const s=scenario(t,{preview:257});                // 20 % fewer than the 321 that are live
   const result=s.run(s.nextSha);
   assert.notEqual(result.status,0);
-  assert.match(result.stderr,/257 records is more than 15 % below the 321/);
+  assert.match(result.stderr,/257 published cards is more than 15 % below the 321/);
   assert.match(result.stdout,new RegExp('Live now: tag '+s.oldTag));
   const log=s.log();
   assert.ok(log.includes('docker compose build app'),'the image was built and previewed first');
@@ -249,4 +249,23 @@ test('a late failure cannot clean up or roll back an operation whose ownership c
 test('a successful workflow for a different head never satisfies the named exact-commit check',{skip:HAS_TOOLS?false:'bash or git is not installed'},t=>{
   const s=scenario(t);fs.writeFileSync(path.join(s.fake,'gh.json'),JSON.stringify([{headSha:s.oldSha,status:'completed',conclusion:'success'}]));
   assert.notEqual(s.run(s.nextSha).status,0);assert.equal(s.log().some(row=>row.startsWith('ssh')),false);
+});
+test('published-count shrink catches mass archival even when the total record count is unchanged',{skip:HAS_TOOLS?false:'bash or git is not installed'},t=>{
+  const s=scenario(t,{preview:321});
+  fs.writeFileSync(path.join(s.fake,`public-${s.oldTag}.json`),json(321,{published:295,archived:26}));
+  const preview=json(321,{published:240,archived:81,revision:'0123456789abcdef',commit:s.newTag});
+  fs.writeFileSync(path.join(s.fake,'preview.json'),preview);
+  const result=s.run(s.nextSha);assert.notEqual(result.status,0);assert.match(result.stderr,/240 published cards/);
+  assert.match(result.stdout,/published 295 -> 240; archived 26 -> 81/);untouched(s);
+});
+test('the published-count boundary is exact and legacy live images print their fallback warning',{skip:HAS_TOOLS?false:'bash or git is not installed'},t=>{
+  for(const [published,accepted] of [[250,false],[251,true]]){
+    const s=scenario(t,{preview:321});
+    fs.writeFileSync(path.join(s.fake,`public-${s.oldTag}.json`),json(321,{published:295,archived:26}));
+    const preview=json(321,{published,archived:321-published,revision:'0123456789abcdef',commit:s.newTag});
+    fs.writeFileSync(path.join(s.fake,'preview.json'),preview);fs.writeFileSync(path.join(s.fake,`public-${s.newTag}.json`),preview);
+    assert.equal(s.run(s.nextSha).status===0,accepted);
+  }
+  const legacy=scenario(t),result=legacy.run(legacy.nextSha);assert.equal(result.status,0,result.stderr);
+  assert.match(result.stdout,/live image has no published count; using records/);
 });

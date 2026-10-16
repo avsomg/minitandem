@@ -89,6 +89,13 @@ record inspected
 LIVE=$(curl -fsS --max-time 10 "$URL/healthz") || die 'live /healthz does not answer'
 LIVE_RECORDS=$(printf '%s' "$LIVE" | field records)
 [[ $LIVE_RECORDS =~ ^[0-9]+$ ]] || die 'live /healthz has no record count'
+LIVE_PUBLISHED=$(printf '%s' "$LIVE" | field published)
+LIVE_ARCHIVED=$(printf '%s' "$LIVE" | field archived)
+if [ -z "$LIVE_PUBLISHED" ]; then
+  LIVE_PUBLISHED=$LIVE_RECORDS
+  say 'Warning: live image has no published count; using records for this transition.'
+fi
+[[ $LIVE_PUBLISHED =~ ^[0-9]+$ ]] || die 'invalid live published count'
 say "Live now: tag $PREV_TAG on $PREV_REF, $LIVE_RECORDS records"
 git fetch --tags --quiet
 git cat-file -e "$SHA^{commit}"
@@ -106,9 +113,14 @@ for i in $(seq "$TRIES"); do PREVIEW_JSON=$(curl -fsS --max-time 3 "http://127.0
 PREVIEW_RECORDS=$(printf '%s' "$PREVIEW_JSON" | field records)
 PREVIEW_REVISION=$(printf '%s' "$PREVIEW_JSON" | field revision)
 PREVIEW_COMMIT=$(printf '%s' "$PREVIEW_JSON" | field commit)
+PREVIEW_PUBLISHED=$(printf '%s' "$PREVIEW_JSON" | field published)
+PREVIEW_ARCHIVED=$(printf '%s' "$PREVIEW_JSON" | field archived)
 [[ $PREVIEW_RECORDS =~ ^[0-9]+$ && -n $PREVIEW_REVISION ]] || die 'preview has no record count or no revision'
+[[ $PREVIEW_PUBLISHED =~ ^[0-9]+$ && $PREVIEW_ARCHIVED =~ ^[0-9]+$ ]] || die 'preview has no valid published/archived counts'
+[ $((PREVIEW_PUBLISHED + PREVIEW_ARCHIVED)) -eq "$PREVIEW_RECORDS" ] || die 'preview status counts do not sum to records'
 say "Preview: $PREVIEW_RECORDS records (live: $LIVE_RECORDS), revision $PREVIEW_REVISION, commit $PREVIEW_COMMIT"
-[ $((PREVIEW_RECORDS * 100)) -ge $((LIVE_RECORDS * (100 - MAX_DROP))) ] || die "$PREVIEW_RECORDS records is more than $MAX_DROP % below the $LIVE_RECORDS records that are live"
+say "Status changes: published $LIVE_PUBLISHED -> $PREVIEW_PUBLISHED; archived ${LIVE_ARCHIVED:-unknown} -> $PREVIEW_ARCHIVED"
+[ $((PREVIEW_PUBLISHED * 100)) -ge $((LIVE_PUBLISHED * (100 - MAX_DROP))) ] || die "$PREVIEW_PUBLISHED published cards is more than $MAX_DROP % below the $LIVE_PUBLISHED that are live"
 record switched
 owns || die 'operation ownership lost before switch'
 set_tag "$NEW_TAG"

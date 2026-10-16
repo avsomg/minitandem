@@ -86,7 +86,8 @@ for(const [file,needle] of [['index.html','rel="canonical" href="'+site+'/"'],['
   if(!fs.readFileSync(path.join(root,file),'utf8').includes(needle))throw Error(file+' does not name the site origin '+site);
 for (const file of [...STATIC,...GENERATED,...new Set(SCRIPTS),...LAZY_SCRIPTS,'.vercelignore']) fs.copyFileSync(path.join(root,file),path.join(output,file));
 // Which catalogue this build holds, for /healthz and for the deploy script. Deterministic: the revision is a content hash, the date is the latest review.
-fs.writeFileSync(path.join(output,BUILD_INFO),JSON.stringify({revision,catalogueUpdated:latestReview,records:records.length},null,2)+'\n');
+const published=records.filter(record=>!['closed','excluded'].includes(record.status)).length;
+fs.writeFileSync(path.join(output,BUILD_INFO),JSON.stringify({revision,catalogueUpdated:latestReview,records:records.length,published,archived:records.length-published},null,2)+'\n');
 // German and French card texts: a card whose English changed after it was translated is shown in English. Reported, never a failure.
 const i18n={window:{},structuredClone,TextEncoder};
 for(const file of ['catalogue-i18n.js','views.js',...LAZY_SCRIPTS])vm.runInNewContext(fs.readFileSync(path.join(root,file),'utf8'),i18n,{filename:file});

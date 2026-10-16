@@ -128,7 +128,8 @@ test('/healthz names the build that is live: revision of the built files, date o
   const built=fileURLToPath(new URL('.publish/',import.meta.url));
   const info=JSON.parse(fs.readFileSync(built+'build-info.json','utf8'));
   // build-info.json holds no time of day (a build must be reproducible); the revision is the content hash of the catalogue files that were built.
-  assert.deepEqual(Object.keys(info),['revision','catalogueUpdated','records']);
+  assert.deepEqual(Object.keys(info),['revision','catalogueUpdated','records','published','archived']);
+  assert.ok(info.published>0&&info.archived>0);assert.equal(info.published+info.archived,info.records);
   const files=['data.js','data-reviewed.js','data-practical.js','data-geo.js','regions.js','data-de.js','data-fr.js'];
   const revision=crypto.createHash('sha256').update(files.map(file=>fs.readFileSync(built+file)).join('\n')).digest('hex').slice(0,16);
   assert.equal(info.revision,revision);
@@ -144,10 +145,10 @@ test('/healthz names the build that is live: revision of the built files, date o
   const before=process.env.MINITANDEM_COMMIT;
   try{
     const plain=await health('plain');
-    assert.deepEqual(plain,{status:'ok',records:info.records,revision:info.revision,catalogueUpdated:info.catalogueUpdated});
+    assert.deepEqual(plain,{status:'ok',records:info.records,published:info.published,archived:info.archived,revision:info.revision,catalogueUpdated:info.catalogueUpdated});
     assert.equal('commit' in plain,false,'no commit without MINITANDEM_COMMIT');
     assert.equal('commit' in await health('empty',''),false,'an empty variable (compose without a tag) counts as unset');
-    assert.deepEqual(await health('tagged','1a2b3c4'),{status:'ok',records:info.records,revision:info.revision,catalogueUpdated:info.catalogueUpdated,commit:'1a2b3c4'});
+    assert.deepEqual(await health('tagged','1a2b3c4'),{status:'ok',records:info.records,published:info.published,archived:info.archived,revision:info.revision,catalogueUpdated:info.catalogueUpdated,commit:'1a2b3c4'});
   }finally{if(before===undefined)delete process.env.MINITANDEM_COMMIT;else process.env.MINITANDEM_COMMIT=before;}
 });
 
