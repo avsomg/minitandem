@@ -34,7 +34,7 @@ const labels=steps=>steps.map(step=>step.label);
 test('daily maintenance runs once per local day and other runs rotate the leading role',()=>{
   const first=plan({},policy,at(7),0);
   assert.equal(first.daily,true);assert.equal(first.role,null);
-  assert.deepEqual(labels(first.steps),['monitor','review','discover-events','canton-audit','work-packets','sync','batch','backup','external-pipeline','external-review','report']);
+  assert.deepEqual(labels(first.steps),['monitor','review','discover-events','canton-audit','work-packets','sync','batch','backup','external-pipeline','external-review','report','release-summary']);
   assert.deepEqual(first.steps.find(step=>step.label==='batch').args,['editorial/agent-run.mjs','--chain','--limit=4']);
   assert.equal(plan({},policy,at(3),0).daily,false);
   const later=plan({lastDailyOn:'2026-10-13',roleTurn:1},policy,at(11),0);

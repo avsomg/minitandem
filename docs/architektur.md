@@ -79,3 +79,9 @@ Ein partieller Quellauftrag wird durch Karte, Quellversion und Signal bestimmt, 
 Bei await-source nennt `resumeWhen` die benötigte Quelländerung, eine Wiederherstellung, einen ausdrücklich gesetzten Termin oder eine manuelle Untersuchung. Sync beginnt bei einem neuen Grund eine frische Faktenprüfung mit `resumedFrom`; alte Aussagen werden nicht einfach wiederholt und alte Versuche bleiben erhalten. Die neue Tabelle ist additiv. Alte blockierte Aufgaben erhalten beim ersten Sync eine Bedingung aus dem Quellenregister; nicht belegbare frühere Genehmigungen werden nicht nachträglich umetikettiert.
 
 Der Zyklusbericht zeigt genehmigte Änderungen des Tages, offene Ketten mit Alter und die älteste dringende Aufgabe. Die Zahl der Claims bleibt die Budgetgrenze. Eine JSON-Pausendatei darf `until` nennen; der Bericht zeigt die Frist, setzt eine Pause aber nie selbständig zurück.
+
+## Freigabeübersicht für den Eigentümer
+
+Der tägliche Durchlauf erzeugt nach Stapel und Berichten mit `release-summary.mjs` eine private Datei `editorial/workflow-state/release-summary.md`. Pro genehmigter Karte stehen dort Vorher/Nachher, öffentliche Quelle und Genehmigungsdatum, offene Fragen, QA und veraltete deutsche/französische Übersetzungen. Private Quelltexte, Zitate aus Worker-Artefakten und Familiendaten werden nicht gelesen oder übernommen. Die QA gilt nur für genau die geprüften öffentlichen Dateien und den aktuellen Quellstand, einschliesslich Public-Audit und Scan. Eine fehlende oder alte Prüfung wird so benannt.
+
+Die Übersicht umfasst alle aktuellen Journaleinträge. Sie kennt den zuletzt live geschalteten Journalstand nicht und behauptet deshalb keine Differenz zur Live-Seite. Sie ist eine Lesehilfe für die ausdrückliche Freigabe durch den Eigentümer und veröffentlicht nichts.

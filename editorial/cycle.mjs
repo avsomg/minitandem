@@ -44,6 +44,7 @@ export function plan(state,policy,now,claimedToday){
   if(daily)steps.push({label:'backup',needsSync:true,args:['editorial/workflow.mjs','backup'],timeoutMs:minutes(10)});
   for(const name of ['external-pipeline','external-review'])steps.push({label:name,needsSync:true,args:[`editorial/${name}.mjs`],timeoutMs:minutes(10)});
   steps.push({label:'report',needsSync:true,args:['editorial/workflow.mjs','report'],timeoutMs:minutes(10)});
+  if(daily)steps.push({label:'release-summary',needsSync:true,args:['editorial/release-summary.mjs'],timeoutMs:minutes(2)});
   return {today,daily,role,limit,capReached:limit===0,steps};
 }
 
