@@ -190,8 +190,11 @@ for(const shell of SHELLS){
     const child=spawn(shell,[DROP],{env:{...box.env,SSH_ORIGINAL_COMMAND:`backup ${D0} ${sha(data)}`},stdio:['pipe','pipe','pipe']});
     child.stderr.resume();child.stdout.resume();
     const done=new Promise((resolve,reject)=>{child.on('error',reject);child.on('close',code=>resolve(code));});
-    for(let i=0;i<100&&!box.list(box.backups).some(name=>name.startsWith('.incoming-'));i++)await new Promise(resolve=>setTimeout(resolve,10));
-    child.kill('SIGTERM');assert.equal(await done,1);
+    for(const end=Date.now()+10000;Date.now()<end&&!box.list(box.backups).some(name=>name.startsWith('.incoming-'));)await new Promise(resolve=>setTimeout(resolve,10));
+    // A cut connection is a signal and the end of the input together. dash can hold a TERM until the reader returns, so a signal with
+    // the input still open could wait for the read deadline; with the input closed the reader returns at once and the trap cleans up.
+    child.kill('SIGTERM');child.stdin.end();
+    assert.equal(await done,1);
     assert.deepEqual(box.list(box.backups),[]);assert.deepEqual(box.list(box.watch),[]);
   });
 }

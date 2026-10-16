@@ -39,7 +39,8 @@ refuse() { echo "minitandem-drop: $*" >&2; exit 1; }
 
 cleanup() {
   drop_status=$?
-  trap - EXIT HUP INT TERM
+  # Cleanup runs to its end: a second signal while it removes temporary files is ignored.
+  trap - EXIT; trap '' HUP INT TERM
   [ -z "$limit_child" ] || { kill "$limit_child" 2>/dev/null || true; wait "$limit_child" 2>/dev/null || true; }
   [ -z "$limit_guard" ] || { kill -KILL "$limit_guard" 2>/dev/null || true; wait "$limit_guard" 2>/dev/null || true; }
   [ -z "$tmp" ] || rm -f "$tmp"
