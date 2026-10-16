@@ -1,6 +1,7 @@
 #!/bin/sh
 # Starts the service. On the first start it creates exactly one demo family key. It never creates an editor key
 # (server.mjs new-admin): without one, every editor route of the service answers 401.
+# Public files stay in the images; startup never copies or mutates a shared site volume.
 set -eu
 cd "$(dirname "$0")/.."
 : "${MINITANDEM_STATE_DIR:?MINITANDEM_STATE_DIR is not set}"

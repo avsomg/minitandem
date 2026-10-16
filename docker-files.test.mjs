@@ -60,6 +60,7 @@ test('the Dockerfile builds from tracked files with the public flag, runs unpriv
   const file=read('Dockerfile');
   assert.match(file,/npm ci --omit=dev/);
   assert.match(file,/RUN node build\.mjs --public/);
+  assert.match(file,/ARG RELEASE_COMMIT=local/);assert.match(file,/info.commit=process.argv\[1\]/);
   assert.match(file,/^USER node$/m);
   assert.match(file,/HEALTHCHECK[\s\S]*\/healthz/);
   assert.match(file,/ENTRYPOINT \["docker\/entrypoint\.sh"\]/);
@@ -82,6 +83,10 @@ test('compose.yaml: Caddy is the only service with public ports, the state is a 
   for(const port of ['"80:80"','"443:443"','"443:443/udp"'])assert.ok(caddy.includes(port),port);
   assert.match(caddy,/ACME_EMAIL: \$\{ACME_EMAIL:\?/);
   assert.match(caddy,/condition: service_healthy/);
+  assert.match(caddy,/target: edge/);
+  assert.match(caddy,/image: minitandem-caddy:\$\{MINITANDEM_TAG:-current\}/);
+  assert.doesNotMatch(caddy,/Caddyfile:|site:\/srv/);
+  assert.match(app,/target: app/);assert.match(app,/MINITANDEM_API_ONLY: "1"/);
   assert.match(compose,/^volumes:\s*\n(?:\s+#.*\n)*\s+state:\s*\n(?:\s+#.*\n)*\s+caddy-data:/m);
   assert.doesNotMatch(compose,/new-admin|MINITANDEM_ADMIN/);
   const local=read('compose.local.yaml');
@@ -89,15 +94,37 @@ test('compose.yaml: Caddy is the only service with public ports, the state is a 
   assert.match(local,/profiles: \["edge"\]/);
 });
 
-test('Caddyfile: both names, www redirects to the apex, editor paths refused, everything else to the service',()=>{
-  const file=read('docker/Caddyfile');
-  assert.equal(file.split('{').length,file.split('}').length,'braces are balanced');
+test('Caddy owns the immutable site and proxies only API and health paths, with the same preview configuration',()=>{
+  const file=read('docker/Caddyfile'),site=read('docker/site.caddy'),preview=read('docker/preview.Caddyfile');
+  for(const config of [file,site,preview])assert.equal(config.split('{').length,config.split('}').length,'braces are balanced');
   assert.match(file,/^www\.minitandem\.ch \{\s*\n\s+redir https:\/\/minitandem\.ch\{uri\} permanent/m);
-  assert.match(file,/^minitandem\.ch \{/m);
-  assert.match(file,/@editor path \/admin \/admin\.js \/admin\.css \/api\/v1\/admin\/\*\s*\n\s+respond @editor 404/);
-  assert.match(file,/reverse_proxy app:8787/);
-  assert.match(file,/health_uri \/healthz/);
   assert.match(file,/email \{\$ACME_EMAIL\}/);
+  for(const config of [file,preview])assert.match(config,/import \/etc\/caddy\/site\.caddy[\s\S]*import catalogue/);
+  assert.match(preview,/auto_https off/);assert.match(preview,/:8080 \{/);
+  assert.match(site,/@editor path \/admin\* \/api\/v1\/admin \/api\/v1\/admin\/\*/);
+  assert.match(site,/@backend path \/api\/\* \/healthz\s+handle @backend \{\s+reverse_proxy/);
+  assert.equal((site.match(/reverse_proxy/g)||[]).length,1);
+  assert.match(site,/health_uri \/healthz/);assert.match(site,/root \* \/srv\/site/);
+  assert.match(site,/file_server \{/);assert.doesNotMatch(site,/browse|try_files.*index.html/);
+  assert.match(site,/redir @directory \{path\}\/ 301/);assert.match(site,/@hidden path_regexp/);
+  assert.match(read('Dockerfile'),/FROM caddy:2-alpine AS edge\nCOPY --from=build \/app\/\.publish \/srv\/site/);
+});
+
+test('the edge retains every Node MIME type, CSP, cache and CORS header in the public serving contract',()=>{
+  const server=read('server.mjs'),site=read('docker/site.caddy');
+  const csp=/\x27Content-Security-Policy\x27:\x22([^\x22]+)\x22/.exec(server)[1];
+  assert.ok(site.includes('Content-Security-Policy "'+csp+'"'));
+  const mime=Object.fromEntries([.../const mime=\{([^}]+)\}/.exec(server)[1].matchAll(/'([^']+)':'([^']+)'/g)].map(match=>[match[1],match[2]]));
+  for(const [extension,type] of Object.entries(mime)){
+    const matcher=new RegExp('@(\\w+) path ([^\\n]*\\*'+extension.replace('.','\\.')+'(?= |$)[^\\n]*)','m').exec(site);
+    assert.ok(matcher,extension);assert.ok(site.includes('header @'+matcher[1]+' Content-Type '+(type.includes(' ')?'"'+type+'"':type)),extension+': '+type);
+  }
+  for(const [name,value] of [['X-Content-Type-Options','nosniff'],['Referrer-Policy','no-referrer'],['Cache-Control','public, max-age=0, must-revalidate'],
+    ['Cache-Control','no-store'],['Access-Control-Allow-Headers','Authorization, Content-Type'],['Access-Control-Allow-Methods','GET, PUT, POST, OPTIONS']]){
+    assert.ok(server.includes(value),name);assert.ok(site.includes(name+' '+(value.includes(' ')?'"'+value+'"':value)),name);
+  }
+  assert.match(site,/Vary Origin/);
+  assert.match(site,/https:\/\/minitandem.ch http:\/\/localhost:8787 http:\/\/127.0.0.1:8787/);
 });
 
 function freePort(){
@@ -192,4 +219,43 @@ test('ops/healthcheck.sh mails once when the service goes down and once when it 
   assert.equal((await check()).status,0);assert.equal(mails(),2,'back up: one mail');
   const text=fs.readFileSync(mailbox,'utf8');
   assert.match(text,/Subject: Minitandem is DOWN/);assert.match(text,/Subject: Minitandem is back up/);assert.match(text,/To: owner@example\.org/);
+});
+
+const CADDY=process.env.MINITANDEM_CADDY_BIN||'caddy';
+const HAS_CADDY=spawnSync(CADDY,['version'],{stdio:'ignore'}).status===0;
+// Uses the real Caddy parser and HTTP server when installed. No replacement HTTP server stands in for Caddy.
+test('real Caddy matches Node on every built file and keeps serving after the API stops',{skip:HAS_CADDY?false:'Caddy is not installed; run with MINITANDEM_CADDY_BIN on the owner-approved host'},async t=>{
+  const folder=tmp(t,'minitandem-caddy-'),port=await freePort();
+  process.env.MINITANDEM_STATE_DIR=path.join(folder,'state');process.env.MINITANDEM_CORRECTION_DIR=path.join(folder,'corrections');
+  const {createServer}=await import('./server.mjs?edge-reference='+Date.now());
+  const reference=createServer();await new Promise(resolve=>reference.listen(0,'127.0.0.1',resolve));
+  t.after(()=>reference.close());
+  const upstream='127.0.0.1:'+reference.address().port;
+  const config=path.join(folder,'Caddyfile');
+  fs.writeFileSync(config,'{\n admin off\n auto_https off\n}\n'+read('docker/site.caddy').replace('root * /srv/site','root * "'+path.join(root,'.publish')+'"')+'\n:'+port+' {\n import catalogue\n}\n');
+  const child=spawn(CADDY,['run','--config',config,'--adapter','caddyfile'],{env:{...process.env,API_UPSTREAM:upstream},stdio:['ignore','pipe','pipe']});
+  let log='';child.stdout.on('data',chunk=>log+=chunk);child.stderr.on('data',chunk=>log+=chunk);
+  t.after(async()=>{if(child.exitCode===null){child.kill();await new Promise(resolve=>child.on('close',resolve));}});
+  const base='http://127.0.0.1:'+port,local='http://'+upstream;
+  try{await waitFor(base+'/build-info.json');}catch(error){throw Error(error.message+'\n'+log);}
+  const walk=directory=>fs.readdirSync(directory,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?walk(path.join(directory,entry.name)):[path.relative(path.join(root,'.publish'),path.join(directory,entry.name))]);
+  const files=walk(path.join(root,'.publish'));
+  const routes=[...files.map(file=>'/'+file),'/','/projekt','/projekt/','/projekt/en/','/places','/places/','/assets','/assets/','/missing','/.git/config','/assets/.hidden','/healthz/extra'];
+  const compare=async(route,options={})=>{
+    const init={redirect:'manual',...options,headers:{'Accept-Encoding':'identity',...options.headers}};
+    const [node,edge]=await Promise.all([fetch(local+route,init),fetch(base+route,init)]);
+    assert.equal(edge.status,node.status,route+' status');
+    for(const header of ['content-type','cache-control','content-security-policy','x-content-type-options','referrer-policy','location',
+      'access-control-allow-origin','access-control-allow-headers','access-control-allow-methods'])assert.equal(edge.headers.get(header),node.headers.get(header),route+' '+header);
+    assert.deepEqual(Buffer.from(await edge.arrayBuffer()),Buffer.from(await node.arrayBuffer()),route+' body');
+  };
+  for(const route of routes)await compare(route);
+  for(const method of ['HEAD','POST','OPTIONS'])for(const headers of [{},{Origin:'https://minitandem.ch'},{Origin:'https://bad.example'}])await compare('/',{method,headers});
+  for(const route of ['/admin','/admin.js','/admin.css','/admin/unknown','/api/v1/admin','/api/v1/admin/queue'])assert.equal((await fetch(base+route)).status,404,route);
+  assert.equal((await fetch(base+'/api/v1/family')).status,401);
+  assert.equal((await fetch(base+'/healthz')).status,200);
+  await new Promise(resolve=>reference.close(resolve));
+  assert.equal((await fetch(base+'/')).status,200,'catalogue survives API outage');
+  assert.equal((await fetch(base+'/sw.js')).status,200,'root service worker keeps its scope');
+  assert.ok([502,503].includes((await fetch(base+'/api/v1/family')).status));
 });

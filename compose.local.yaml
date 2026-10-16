@@ -3,6 +3,8 @@
 # then open http://127.0.0.1:8787/ and http://127.0.0.1:8787/healthz
 services:
   app:
+    environment:
+      MINITANDEM_API_ONLY: "0"
     ports:
       - "127.0.0.1:8787:8787"
   caddy:

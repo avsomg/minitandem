@@ -4,6 +4,10 @@ Dieses Dokument beschreibt den Betrieb von Minitandem auf einem kleinen Server. 
 
 Zielsystem (nur zur Referenz): Ubuntu 24.04 LTS, 1 vCPU, 2 GB RAM, eingehend offen sind 22, 80 und 443 auf IPv4. Ausgehend ist Port 25 gesperrt.
 
+## Caddy-Umstellung: vorbereitet, noch nicht angewendet
+
+Dieser Checkout bereitet die getrennte Auslieferung vor: Die Docker-Stufen `app` und `edge` übernehmen denselben öffentlichen Build. `minitandem-caddy:<Tag>` enthält `.publish` und die Konfiguration; `minitandem-app:<Tag>` betreibt mit `MINITANDEM_API_ONLY=1` nur API und Healthcheck. Es gibt kein gemeinsames, beim Start überschriebenes Site-Volume. Die folgenden Angaben zum bisherigen Serverstand bleiben historisch; die Umstellung erfolgt erst mit dem Eigentümer. Die Server-Schritte und der Rollback-Drill stehen weiter unten.
+
 ## Überblick
 
 ```

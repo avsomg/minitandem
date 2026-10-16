@@ -21,6 +21,8 @@ const queueFile=process.env.MINITANDEM_QUEUE_FILE||path.join(root,'editorial/wor
 const buildInfo=(()=>{try{return JSON.parse(fs.readFileSync(path.join(root,'.publish',BUILD_INFO),'utf8'));}catch{return {};}})();
 // The commit the deploy script put on the image (compose.yaml passes MINITANDEM_TAG); absent when the service runs outside a deployment.
 const commit=process.env.MINITANDEM_COMMIT||null;
+// Compose leaves public files to Caddy; local tools can still preview the built site.
+const apiOnly=process.env.MINITANDEM_API_ONLY==='1';
 const catalog=loadCatalog();
 const allowed=new Map(catalog.ACTIVITIES.map(a=>[a.id,a]));
 const published=catalog.ACTIVITIES.filter(record=>!['closed','excluded'].includes(record.status)).length;
@@ -134,6 +136,7 @@ export function createServer(){
       res.writeHead(200,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});
       return res.end(req.method==='HEAD'?undefined:JSON.stringify({status:'ok',records:allowed.size,published,archived:allowed.size-published,revision:buildInfo.revision??null,catalogueUpdated:buildInfo.catalogueUpdated??null,...(commit&&{commit})}));
     }
+    if(apiOnly&&pathname!=='/healthz'&&!pathname.startsWith('/api/'))return json(res,404,{error:'Not found'});
     if(!pathname.startsWith('/api/'))return ['GET','HEAD'].includes(req.method)?staticFile(req,res,pathname):json(res,405,{error:'Method not allowed'});
     try{
       // Inside the try: a damaged state file must end in a 500 for this request, not in an unhandled rejection that stops the process.

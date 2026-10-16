@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-# The public site plus the small service (server.mjs) in one image. Caddy in front of it is a separate container (compose.yaml).
+# Two release images share the build stage: the API and Caddy with its own immutable public files.
 # Build from a clean clone of the repository, never from a working folder that holds private editorial state:
 # .dockerignore lists only what the build needs and names every private path again at the end.
 ARG NODE_VERSION=24.12.0
@@ -15,9 +15,14 @@ COPY . .
 COPY --from=dependencies /app/editorial/node_modules editorial/node_modules
 # --public builds from the tracked files alone. The publication gates need private evidence that is not in the repository,
 # so they do not run here; the build prints that. They run on the owner's machine before a change is committed.
-RUN node build.mjs --public
+ARG RELEASE_COMMIT=local
+RUN node build.mjs --public && node -e 'const fs=require("node:fs"),p=".publish/build-info.json",info=JSON.parse(fs.readFileSync(p));info.commit=process.argv[1];fs.writeFileSync(p,JSON.stringify(info,null,2)+"\n")' "$RELEASE_COMMIT"
 
-FROM node:${NODE_VERSION}-alpine
+FROM caddy:2-alpine AS edge
+COPY --from=build /app/.publish /srv/site
+COPY docker/Caddyfile docker/site.caddy docker/preview.Caddyfile /etc/caddy/
+
+FROM node:${NODE_VERSION}-alpine AS app
 ENV NODE_ENV=production \
     MINITANDEM_HOST=0.0.0.0 \
     MINITANDEM_PORT=8787 \

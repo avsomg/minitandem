@@ -1,37 +1,14 @@
 {
-	# Contact address for certificate notices from Let's Encrypt. Set ACME_EMAIL in .env (compose.yaml refuses to start without it).
+	# Compose requires the owner's certificate contact in .env.
 	email {$ACME_EMAIL}
 }
+
+import /etc/caddy/site.caddy
 
 www.minitandem.ch {
 	redir https://minitandem.ch{uri} permanent
 }
 
 minitandem.ch {
-	encode zstd gzip
-
-	# The editor panel and the editor API belong to the owner's Mac. No editor key exists on this server, so the service
-	# would answer 401 anyway; the edge refuses these paths as well.
-	@editor path /admin /admin.js /admin.css /api/v1/admin/*
-	respond @editor 404
-
-	header {
-		# One day for the first weeks. Raise it once the certificate renewal has been seen to work.
-		Strict-Transport-Security "max-age=86400"
-		X-Content-Type-Options nosniff
-		X-Frame-Options DENY
-		Referrer-Policy no-referrer
-		Permissions-Policy "camera=(), microphone=(), geolocation=(self)"
-		-Server
-	}
-
-	log {
-		output stdout
-		format json
-	}
-
-	reverse_proxy app:8787 {
-		health_uri /healthz
-		health_interval 30s
-	}
+	import catalogue
 }

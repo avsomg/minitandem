@@ -1,0 +1,127 @@
+# Shared by the public edge and the isolated deploy preview, both inside the release image.
+(catalogue) {
+	encode zstd gzip
+	log {
+		output stdout
+		format json
+	}
+	route {
+		header {
+			Strict-Transport-Security "max-age=86400"
+			X-Content-Type-Options nosniff
+			X-Frame-Options DENY
+			Referrer-Policy no-referrer
+			Permissions-Policy "camera=(), microphone=(), geolocation=(self)"
+			-Server
+		}
+
+		# The editor belongs to the owner's Mac, including unknown editor subpaths.
+		@editor path /admin* /api/v1/admin /api/v1/admin/*
+		respond @editor 404
+
+		@backend path /api/* /healthz
+		handle @backend {
+			reverse_proxy {$API_UPSTREAM:app:8787} {
+				health_uri /healthz
+				health_interval 30s
+			}
+		}
+
+		handle {
+			root * /srv/site
+			route {
+				@allowedOrigin header Origin https://minitandem.ch http://localhost:8787 http://127.0.0.1:8787
+				header @allowedOrigin {
+					Access-Control-Allow-Origin {http.request.header.Origin}
+					Vary Origin
+					Access-Control-Allow-Headers "Authorization, Content-Type"
+					Access-Control-Allow-Methods "GET, PUT, POST, OPTIONS"
+				}
+				@options method OPTIONS
+				handle @options {
+					header Content-Type "application/json; charset=utf-8"
+					header Cache-Control no-store
+					respond @allowedOrigin 204
+					respond "{}" 403
+				}
+				@foreignOrigin {
+					header Origin *
+					not header Origin https://minitandem.ch http://localhost:8787 http://127.0.0.1:8787
+				}
+				handle @foreignOrigin {
+					header Content-Type "application/json; charset=utf-8"
+					header Cache-Control no-store
+					respond `{"error":"Origin not allowed"}` 403
+				}
+				@method not method GET HEAD
+				handle @method {
+					header Content-Type "application/json; charset=utf-8"
+					header Cache-Control no-store
+					respond `{"error":"Method not allowed"}` 405
+				}
+				@hidden path_regexp hidden (^|/)\.[^/]*
+				handle @hidden {
+					header Content-Type "application/json; charset=utf-8"
+					header Cache-Control no-store
+					respond `{"error":"Not found"}` 404
+				}
+				# Keep Node's 301 directory redirect, including folders without an index.
+				@directory {
+					file {path}/
+					not path */
+				}
+				redir @directory {path}/ 301
+				@index {
+					path */
+					file {path}index.html
+				}
+				rewrite @index {path}index.html
+				@exists {
+					file {path}
+					not path */
+				}
+				handle @exists {
+					route {
+						header Content-Type application/octet-stream
+						header Cache-Control "public, max-age=0, must-revalidate"
+						header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://wmts.geo.admin.ch; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'"
+						@html path *.html
+						header @html Content-Type "text/html; charset=utf-8"
+						@js path *.js
+						header @js Content-Type "text/javascript; charset=utf-8"
+						@css path *.css
+						header @css Content-Type "text/css; charset=utf-8"
+						@svg path *.svg
+						header @svg Content-Type image/svg+xml
+						@png path *.png
+						header @png Content-Type image/png
+						@json path *.json
+						header @json Content-Type application/json
+						@manifest path *.webmanifest
+						header @manifest Content-Type application/manifest+json
+						@txt path *.txt
+						header @txt Content-Type "text/plain; charset=utf-8"
+						@xml path *.xml
+						header @xml Content-Type application/xml
+						@md path *.md
+						header @md Content-Type "text/markdown; charset=utf-8"
+						@jpg path *.jpg *.jpeg
+						header @jpg Content-Type image/jpeg
+						@webp path *.webp
+						header @webp Content-Type image/webp
+						@ico path *.ico
+						header @ico Content-Type image/x-icon
+						file_server {
+							disable_canonical_uris
+							pass_thru
+						}
+					}
+				}
+				# No SPA fallback, directory listing or private files.
+				header Content-Type "application/json; charset=utf-8"
+				header Cache-Control no-store
+				respond `{"error":"Not found"}` 404
+			}
+		}
+	}
+}

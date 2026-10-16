@@ -4,11 +4,16 @@ name: minitandem
 
 services:
   app:
-    build: .
+    build:
+      context: .
+      target: app
+      args:
+        RELEASE_COMMIT: ${MINITANDEM_TAG:-current}
     image: minitandem-app:${MINITANDEM_TAG:-current}
     restart: unless-stopped
     environment:
       # The service reads these; the image sets the same defaults.
+      MINITANDEM_API_ONLY: "1"
       MINITANDEM_STATE_DIR: /state
       MINITANDEM_CORRECTION_DIR: /state/corrections
       # /healthz reports it as "commit". The tag is the short commit id of the deployed version (.env.example), empty if unset.
@@ -33,7 +38,12 @@ services:
         max-file: "5"
 
   caddy:
-    image: caddy:2-alpine
+    build:
+      context: .
+      target: edge
+      args:
+        RELEASE_COMMIT: ${MINITANDEM_TAG:-current}
+    image: minitandem-caddy:${MINITANDEM_TAG:-current}
     restart: unless-stopped
     depends_on:
       app:
@@ -45,7 +55,6 @@ services:
     environment:
       ACME_EMAIL: ${ACME_EMAIL:?Set ACME_EMAIL in .env (copy .env.example)}
     volumes:
-      - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy-data:/data
       - caddy-config:/config
     mem_limit: 256m
