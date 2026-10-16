@@ -400,8 +400,12 @@
   els.detail.addEventListener('cancel', e => { e.preventDefault(); closeDetail(); });
   els.detail.addEventListener('close', () => {
     state.openId = null; render();
-    const restored = state.returnId && $(`[data-id="${CSS.escape(state.returnId)}"]`);
-    (restored || (state.opener?.isConnected ? state.opener : els.results)).focus({preventScroll: true});
+    // After whatever closed the dialog has finished: Chromium fires 'close' inside dialog.close(), so the hashchange handler that
+    // called it renders the list again afterwards and would drop the focus from the row it replaces.
+    queueMicrotask(() => {
+      const restored = state.returnId && $(`#list [data-id="${CSS.escape(state.returnId)}"]`);
+      (restored || (state.opener?.isConnected ? state.opener : els.results)).focus({preventScroll: true});
+    });
   });
 
   /* ---------- dialogs ---------- */

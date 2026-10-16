@@ -163,7 +163,7 @@
     const switchRow = (id, label, hint) => `<div class="switchrow"><div><span class="sw-t" id="${id}L">${esc(label)}</span>${hint ? `<span class="hint">${esc(hint)}</span>` : ''}</div><button type="button" class="switch" id="${id}" role="switch" aria-checked="false" aria-labelledby="${id}L"></button></div>`;
     function panel() {
       const count = key => C.activities.filter(a => !['closed', 'excluded'].includes(a.status) && a[key.field] === key.value).length;
-      const ageButtons = [0, 1, 2, 3, 4, 5, 6].map(n => `<button type="button" class="chip age" data-age="${n}" aria-pressed="false" aria-label="${esc(F.ageLabel(n))}">${n}</button>`).join('');
+      const ageButtons = [0, 1, 2, 3, 4, 5, 6].map(n => `<button type="button" class="chip age" data-age="${n}" aria-pressed="false" aria-label="${esc(n === 0 ? `0 (${F.ageLabel(0)})` : F.ageLabel(n))}">${n}</button>`).join('');
       return nearGroup() + `<fieldset class="group" id="g-age"><legend class="glabel">${esc(t('filter.age'))}</legend>` +
         `<div class="agebox"><input class="field" id="age" type="number" inputmode="numeric" min="0" max="6" step="1" placeholder="${esc(t('common.any'))}" aria-label="${esc(t('filter.ageInput'))}" aria-describedby="ageHint"><span class="unit">${esc(t('filter.ageUnit'))}</span></div>` +
         `<div class="chips ages" role="group" aria-label="${esc(t('filter.agePick'))}">${ageButtons}</div><p class="hint" id="ageHint" data-text="${esc(t('filter.ageHint'))}">${esc(t('filter.ageHint'))}</p>` +
