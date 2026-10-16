@@ -150,6 +150,12 @@ test('the record carries the run id that ops/cycle-run.mjs gave this invocation,
   // without one, or with something that is not a plain id, there is none in the record
   for(const runId of [undefined,null,'','has space','x'.repeat(65),'a\nb'])assert.equal('runId' in runCycle({base:f.base,home:f.home,now:at(11),run,notify:()=>{},runId}),false,JSON.stringify(runId));
 });
+test('the run id never comes from the environment of a step: QA runs the tests inside a cycle that has one',t=>{
+  const f=fixture(t);f.dailyDone();const before=process.env.MINITANDEM_CYCLE_RUN_ID;
+  process.env.MINITANDEM_CYCLE_RUN_ID='inherited-by-a-step';t.after(()=>{if(before===undefined)delete process.env.MINITANDEM_CYCLE_RUN_ID;else process.env.MINITANDEM_CYCLE_RUN_ID=before;});
+  const record=runCycle({base:f.base,home:f.home,now:at(11),run:()=>({code:0,seconds:0,stdout:'',stderr:''}),notify:()=>{}});
+  assert.equal('runId' in record,false);
+});
 test('a failed sync skips the batch, is reported, and still leaves a record',t=>{
   const f=fixture(t),calls=[],notes=[];f.dailyDone();
   const record=runCycle({base:f.base,home:f.home,now:at(11),notify:(...a)=>notes.push(a),

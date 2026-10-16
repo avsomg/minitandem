@@ -138,7 +138,7 @@ export const needsOwner=record=>Boolean(record.blocked||record.failedSteps?.leng
 
 // `runId` is the id ops/cycle-run.mjs gave this invocation (MINITANDEM_CYCLE_RUN_ID); it goes into the record so the heartbeat can tell this run's receipt
 // from an earlier or an overlapping one.
-export function runCycle({base=here,home=os.homedir(),now=new Date(),run=runNode,notify=notifyMac,dryRun=false,lock=acquireLock,runId=process.env.MINITANDEM_CYCLE_RUN_ID}={}){
+export function runCycle({base=here,home=os.homedir(),now=new Date(),run=runNode,notify=notifyMac,dryRun=false,lock=acquireLock,runId}={}){
   const root=path.dirname(base),stateDirectory=path.join(base,'workflow-state','cycle'),stateFile=path.join(stateDirectory,'state.json');
   const queueFile=path.join(base,'workflow-state','jobs.sqlite');
   const policy=readPolicy(base),record={project:PROJECT_ID,startedAt:now.toISOString(),...(/^[A-Za-z0-9._-]{1,64}$/.test(runId||'')?{runId}:{})};
@@ -191,7 +191,9 @@ export function runCycle({base=here,home=os.homedir(),now=new Date(),run=runNode
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   if(process.argv.includes('--status'))console.log(JSON.stringify(readJson(path.join(here,'workflow-state','cycle','latest.json'),null),null,2));
   else{
-    const record=runCycle({dryRun:process.argv.includes('--dry-run'),...(process.argv.includes('--no-notify')?{notify:()=>{}}:{})});
+    // The run id is this process's own: taken out of the environment so the steps (and the tests QA runs) never inherit it.
+    const runId=process.env.MINITANDEM_CYCLE_RUN_ID;delete process.env.MINITANDEM_CYCLE_RUN_ID;
+    const record=runCycle({runId,dryRun:process.argv.includes('--dry-run'),...(process.argv.includes('--no-notify')?{notify:()=>{}}:{})});
     console.log(JSON.stringify(record,null,2));
     process.exit(record.blocked||record.failedSteps?.length?1:0);
   }
