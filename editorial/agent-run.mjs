@@ -17,6 +17,7 @@ import {imageFile} from './image-evidence.mjs';
 import {runtimeContractRevision,assertRuntimeCurrent} from './runtime-contract.mjs';
 import {runClaudeWorker,assertClaudeReady} from './claude-worker.mjs';
 import {PROJECT_ID} from './project-id.mjs';
+import {assertWorkerInput,workerInputSize,canClaimWorker,blockWorkerInput} from './worker-input.mjs';
 import {numberProblem} from './quote-numbers.mjs';
 import {performance} from 'node:perf_hooks';
 
@@ -66,7 +67,7 @@ export async function runCodex(job,policy,{runImpl=spawn,timeoutMs=720000,prompt
       fs.writeFileSync(path.join(directory,file),JSON.stringify(evidence),{mode:0o600,flag:'wx'});
     }
     const prompt=promptImpl(job);
-    if(prompt.length>60000)throw Error('Worker input exceeds budget; split the task without truncating evidence');
+    assertWorkerInput(job,policy,prompt);
     await new Promise((resolve,reject)=>{
       const env=Object.fromEntries(['PATH','HOME','TMPDIR','USER','LOGNAME','SHELL','CODEX_HOME','LANG','LC_ALL','TZ'].filter(k=>process.env[k]).map(k=>[k,process.env[k]]));
       const child=runImpl('codex',args,{stdio:['pipe','pipe','pipe'],env});
@@ -412,7 +413,7 @@ export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=r
       for(const selection of [...(i===0?[{urgentOnly:true}]:[]),...(chain?[{kinds:DOWNSTREAM}]:[]),{}]){
         const order=selection.urgentOnly?[...roles].sort((a,b)=>(urgent.get(b)??-Infinity)-(urgent.get(a)??-Infinity)):roles;
         for(const possible of order){
-          job=queue.claim(possible,`runtime-${possible}`,{leaseMs:policy.leaseMinutes*60000,backpressure:policy.backpressure,cardId,maxOpenChains,...selection});
+          job=queue.claim(possible,`runtime-${possible}`,{leaseMs:policy.leaseMinutes*60000,backpressure:policy.backpressure,cardId,maxOpenChains,canClaim:candidate=>canClaimWorker(queue,candidate,policy),...selection});
           if(job){assignedRole=possible;break;}
         }
         if(job)break;
@@ -424,6 +425,11 @@ export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=r
           if(assignedRole==='qa')return qaRun(queue,job,active);
           const evidenceOptions={queue,signal:active.signal,assertActive:active.check};
           const prepared=await prepareImpl(job,evidenceOptions);active.check();
+          const inputSize=workerInputSize(prepared,policy);
+          if(!inputSize.fits){
+            queue.requireLease(job.id,job.token,assignedRole);blockWorkerInput(queue,prepared,inputSize);
+            return {jobId:job.id,state:'await-source',reason:'input-budget'};
+          }
           const output=await timedWorker(worker,prepared,policy,{timeoutMs:Math.min(720000,active.remaining()),signal:active.signal});active.check();workerOutput=output;
           assertRuntimeCurrent(loadedRuntimeRevision);
           if(job.kind==='facts'||job.kind==='adjudicate-facts'&&output.result.bundle){
@@ -444,7 +450,10 @@ export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=r
           if(!workerOutput&&error.usage)queue.event(job.id,'usage',{...error.usage,failed:true});
           if(workerOutput&&error.code!=='LEASE_LOST')recordRejectedOutput(queue,job,assignedRole,workerOutput,error);
         }catch(cleanup){cleanupErrors.push(cleanup.message);}
-        try{failJob(queue,job,assignedRole,error,{answered:Boolean(workerOutput)});}catch(cleanup){cleanupErrors.push(cleanup.message);}
+        try{
+          if(error.code==='INPUT_BUDGET'&&!workerOutput){queue.requireLease(job.id,job.token,assignedRole);blockWorkerInput(queue,job,error.inputSize);}
+          else failJob(queue,job,assignedRole,error,{answered:Boolean(workerOutput)});
+        }catch(cleanup){cleanupErrors.push(cleanup.message);}
         results.push({jobId:job.id,cardId:job.card_id,kind:job.kind,error:error.message,...(error.code&&{code:error.code}),...(cleanupErrors.length&&{cleanupErrors})});
         if(['LEASE_LOST','JOB_TIMEOUT'].includes(error.code)){stopReason=error.code==='LEASE_LOST'?'lease-lost':'run-time-budget';break;}
         // A subscription outage or limit would otherwise spend an attempt on every remaining job of the run.

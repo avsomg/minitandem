@@ -57,7 +57,8 @@ export const CONTRACTS={
 const DRAFTING=['editorial','integrate','review-patch'];
 const withoutSubmittedKey=({submittedKey,...claim})=>claim;
 export function promptFor(job){
-  const payload={...job.payload},evidence=evidenceLayout(job);
+  const {inputBudget,...original}=job.payload;
+  const payload={...original},evidence=evidenceLayout(job);
   if(evidence.metadata.length)payload.evidence=evidence.metadata;
   const drafting=DRAFTING.includes(job.kind),fullReviewMaterial=!drafting||payload.primaryReviewStatus==='complete';
   if(drafting&&Array.isArray(payload.approved))payload.approved=payload.approved.map(withoutSubmittedKey);

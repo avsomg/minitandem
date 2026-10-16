@@ -59,3 +59,56 @@ test('compact rework context preserves every distinct claim, snapshot and change
   assert.equal(changed.bundle.claims.length,15);assert.equal(changed.evidence.length,3);
   assert.equal(workerEvidenceFiles(job).length,3);
 });
+
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {JobQueue} from './jobs.mjs';
+import {runJobs,runCodex,runClaude} from './agent-run.mjs';
+import {inputLimit,workerInputSize,assertWorkerInput,canClaimWorker} from './worker-input.mjs';
+const policy=JSON.parse(fs.readFileSync(new URL('./agent-policy.json',import.meta.url)));
+function queueFixture(t){
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-budget-')),queue=new JobQueue(path.join(directory,'jobs.sqlite'));
+  t.after(()=>{queue.close();fs.rmSync(directory,{recursive:true,force:true});});
+  return {queue,directory};
+}
+
+test('the whole rework fits the justified editor limit, with provider overhead reserved',()=>{
+  const job=budgetFixture(),size=workerInputSize(job,policy);
+  assert.ok(size.characters>60000);assert.equal(size.limit,90000);assert.equal(size.fits,true);
+  assert.equal(inputLimit({...job,kind:'verify-facts'},policy),60000);
+  assert.throws(()=>inputLimit(job,{roles:{editor:{maxInputChars:90000}}}),/Invalid worker input budget/);
+  assert.throws(()=>inputLimit(job,{roles:{editor:{maxInputChars:120001,inputBudgetReason:'Reason'}}}),/Invalid worker input budget/);
+  assert.doesNotThrow(()=>assertWorkerInput(job,policy,'x'.repeat(90000)));
+  assert.throws(()=>assertWorkerInput(job,policy,'x'.repeat(90001)),error=>error.code==='INPUT_BUDGET');
+});
+
+test('oversized work blocks before a lease, retains evidence and does not starve fitting work',t=>{
+  const {queue}=queueFixture(t),job=budgetFixture();job.payload.fixtureContext+='x'.repeat(100000);
+  const oversized=queue.enqueue({kind:job.kind,cardId:job.card_id,inputRevision:'large',priority:100,payload:job.payload});
+  const small=queue.enqueue({kind:'integrate',cardId:'small',inputRevision:'small',payload:{card:{id:'small'}}});
+  const chosen=queue.claim('editor','editor',{canClaim:job=>canClaimWorker(queue,job,policy)});
+  assert.equal(chosen.id,small.id);const blocked=queue.get(oversized.id);
+  assert.equal(blocked.attempt,0);assert.equal(blocked.state,'await-source');assert.equal(blocked.token,null);
+  assert.match(blocked.error,/evidence was not truncated/);assert.deepEqual(blocked.payload.bundle,job.payload.bundle);
+  assert.deepEqual(blocked.payload.rejectedDraft,job.payload.rejectedDraft);assert.equal(queue.circuit(),null);
+  assert.equal(queue.db.prepare("SELECT count(*) AS n FROM events WHERE job_id=? AND kind='claimed'").get(oversized.id).n,0);
+});
+
+test('source preparation that grows the input blocks once without calling a worker or committing',async t=>{
+  const {queue,directory}=queueFixture(t),job=budgetFixture();let workers=0,commits=0;
+  const added=queue.enqueue({kind:job.kind,cardId:job.card_id,inputRevision:'prepare',payload:job.payload});
+  const result=await runJobs({queue,role:'editor',limit:1,syncImpl:()=>{},reportFile:path.join(directory,'report.json'),
+    prepareImpl:async job=>({...job,payload:{...job.payload,freshContext:'x'.repeat(100000)}}),
+    worker:async()=>{workers++;},commitImpl:()=>{commits++;}});
+  assert.equal(workers,0);assert.equal(commits,0);assert.equal(queue.get(added.id).attempt,1);
+  assert.equal(queue.get(added.id).state,'await-source');assert.equal(result.results[0].result.reason,'input-budget');
+});
+
+test('both worker adapters enforce the role limit before spawning a process',async()=>{
+  const job=budgetFixture();job.payload.fixtureContext+='x'.repeat(100000);let spawned=0;
+  const options={runImpl:()=>{spawned++;throw Error('Must not spawn');}};
+  await assert.rejects(runCodex(job,policy,options),error=>error.code==='INPUT_BUDGET');
+  await assert.rejects(runClaude(job,policy,{...options,authImpl:()=>{}}),error=>error.code==='INPUT_BUDGET');
+  assert.equal(spawned,0);
+});

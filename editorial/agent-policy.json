@@ -15,7 +15,7 @@
     "search": {"model": "gpt-6-luna", "claudeModel": "claude-haiku-5-5", "effort": "medium", "writes": ["candidate", "claims"], "criticalEffort": "medium"},
     "verify": {"model": "gpt-6.1-sol", "claudeModel": "claude-sonnet-5-5", "effort": "low", "writes": ["receipt", "dispute", "correction", "claim-verdict", "patch-verdict"], "criticalEffort": "medium"},
     "arbitrate": {"model": "gpt-6.1-sol", "claudeModel": "claude-opus-5-5", "effort": "medium", "writes": ["decision"], "criticalEffort": "high"},
-    "editor": {"model": "gpt-6.1-sol", "claudeModel": "claude-sonnet-5-5", "effort": "medium", "writes": ["patch-draft"], "criticalEffort": "medium"},
+    "editor": {"maxInputChars": 90000, "inputBudgetReason": "Keep the complete card and rework evidence together for cross-field consistency; the size-matched 98,621-character fixture still needs about 78,000 prompt characters after deduplication.", "model": "gpt-6.1-sol", "claudeModel": "claude-sonnet-5-5", "effort": "medium", "writes": ["patch-draft"], "criticalEffort": "medium"},
     "qa": {"model": null, "effort": null, "writes": ["test-results"]},
     "release": {"model": null, "effort": null, "writes": ["release-manifest"]}
   }

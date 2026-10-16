@@ -93,3 +93,18 @@ separate even if their IDs match. Approved claims appear once, with the remainin
 bundle claims alongside them. A rejected draft carries its changed patch fields
 and all bindings; unchanged fields are read from the current card. The original
 draft hash still identifies the complete controller artifact.
+
+The editor role has a 90,000-character input limit in `agent-policy.json`, with
+the reason recorded there. Other roles keep 60,000. The synthetic rework fixture
+still needs about 78,000 characters after deduplication. Keeping its whole card
+in one editor job lets the existing independent patch review check consistency
+across age, calendar, price and practical fields. The controller reserves 4,096
+characters for provider instructions and image paths; both adapters also check
+the final prompt against the role limit.
+
+The runner checks size before granting a model lease. Oversized work becomes
+`await-source` with an `inputBudget` reason and complete evidence, without spending
+an attempt or recording a worker failure. It awaits an investigated input-contract
+or budget change, and source changes alone do not restart it. If source preparation
+grows the prompt beyond the limit, it blocks before the model call; that existing
+lease remains one recorded attempt. Neither path repeats three failed calls.

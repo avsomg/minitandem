@@ -159,7 +159,7 @@ export class JobQueue{
     for(const source of job.payload.sourceTasks||[])this.db.prepare('INSERT OR REPLACE INTO source_dispositions VALUES (?,?,?,?,?,?,?,?)')
       .run(source.key,job.card_id,source.sourceId,source.version,source.signal,state,job.id,this.now());
   }
-  claim(role,owner,{leaseMs=900000,backpressure=24,cardId=null,maxOpenChains=8,kinds=null,urgentOnly=false}={}){
+  claim(role,owner,{leaseMs=900000,backpressure=24,cardId=null,maxOpenChains=8,kinds=null,urgentOnly=false,canClaim=()=>true}={}){
     if(!ROLE_KINDS[role]||!owner||leaseMs<1000||leaseMs>3600000)throw Error('Invalid claim');
     if(!Number.isInteger(maxOpenChains)||maxOpenChains<1)throw Error('Invalid open-chain cap');
     return this.transaction(()=>{
@@ -179,7 +179,7 @@ export class JobQueue{
         AND NOT EXISTS(SELECT 1 FROM jobs held WHERE held.state='leased' AND held.kind='release')
         ORDER BY priority DESC,created_at,id`).all(...allowed,now,role==='search'&&backlog>=backpressure?1:0,role==='search'&&backlog>=2*backpressure?1:0,cardId,cardId).map(decode);
       const chains=this.openChains(),job=candidates.find(job=>(!urgentOnly||urgentJob(job,now))&&
-        (job.kind!=='facts'||job.payload.chainId||chains.length<maxOpenChains&&!chains.some(chain=>chain.card===job.card_id)));
+        (job.kind!=='facts'||job.payload.chainId||chains.length<maxOpenChains&&!chains.some(chain=>chain.card===job.card_id))&&canClaim(job));
       if(!job)return null;
       if(job.kind==='facts'&&!job.payload.chainId){job.payload.chainId=job.id;this.db.prepare('UPDATE jobs SET payload=? WHERE id=?').run(JSON.stringify(job.payload),job.id);}
       const token=randomUUID(),until=new Date(Date.parse(now)+leaseMs).toISOString();
