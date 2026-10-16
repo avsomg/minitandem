@@ -1,6 +1,24 @@
 {
 	# Contact address for certificate notices from Let's Encrypt. Set ACME_EMAIL in .env (compose.yaml refuses to start without it).
 	email {$ACME_EMAIL}
+	# Caddy's own messages (errors, reverse proxy, certificates) go to the container log, which Docker keeps by size, not by time.
+	# An error record carries the request that caused it; its visitor fields are deleted here, not masked, so this log holds no
+	# visitor address at all. Access records have their own masked, short-lived log in the site block and are left out here.
+	log default {
+		output stderr
+		exclude http.log.access
+		format filter {
+			wrap json
+			fields {
+				request>remote_ip delete
+				request>client_ip delete
+				request>remote_port delete
+				request>headers delete
+				request>uri delete
+				request>host delete
+			}
+		}
+	}
 }
 
 www.minitandem.ch {

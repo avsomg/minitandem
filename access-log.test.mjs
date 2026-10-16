@@ -11,6 +11,12 @@ test('Caddy masks both IP fields and deletes credentials and untrusted request t
   assert.match(config,/output file \/var\/log\/caddy\/access.json\s*\{\s*roll_disabled/);
   assert.doesNotMatch(config,/output stdout|log_credentials/);
 });
+test('Caddy\'s own error and proxy records keep no visitor address or request text, and access records stay out of them',()=>{
+  const config=read('docker/Caddyfile'),global=config.slice(0,config.indexOf('\nwww.minitandem.ch'));
+  const block=global.match(/log default \{([\s\S]*?)\n\t\}/);assert.ok(block,'the default logger is configured');
+  assert.match(block[1],/exclude http\.log\.access/);
+  for(const field of ['request>remote_ip','request>client_ip','request>remote_port','request>headers','request>uri','request>host'])assert.ok(block[1].includes(field+' delete'),field);
+});
 test('access log lifetime is bounded below seven days by process time and volatile storage, not file size or traffic',()=>{
   const script=read('docker/access-log-entrypoint.sh'),compose=read('compose.yaml');
   const timeout=script.match(/exec timeout -s TERM -k (\d+) (\d+) "\$@"/);
