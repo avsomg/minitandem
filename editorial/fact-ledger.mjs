@@ -7,13 +7,14 @@ import {DatabaseSync} from 'node:sqlite';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {isDeepStrictEqual} from 'node:util';
 import {loadCatalog,root as workspace} from './quality.mjs';
-import {CLAIM_FIELDS,CRITICAL_FIELDS,FULL_REVIEW_UNKNOWN_TEXT,validateFieldValue,validDate} from './field-contract.mjs';
+import {CLAIM_FIELDS,CRITICAL_FIELDS,FULL_REVIEW_UNKNOWN_TEXT,UNCONFIRMED_PROSE,validateFieldValue,validDate} from './field-contract.mjs';
 import {catalogueFacts} from './catalogue-store.mjs';
 import {digest} from './jobs.mjs';
 import {approvalSummary} from './catalogue-journal.mjs';
 import {validateSnapshot,locateQuote,hash,normalizeQuote} from './evidence.mjs';
 import {readRecord} from './page-record.mjs';
 import {PROJECT_ID} from './project-id.mjs';
+import {applyDraftRecord} from './workflow.mjs';
 
 export const LEDGER_DIRECTORY='editorial/fact-ledger';
 const read=file=>JSON.parse(fs.readFileSync(file,'utf8'));
@@ -31,7 +32,12 @@ export function catalogueValues(card){
 }
 export function unknownValue(field,value){
   return value==null||value===''||Array.isArray(value)&&!value.length||value==='unknown'||field==='status'&&value==='check'||
-    (FULL_REVIEW_UNKNOWN_TEXT[field]||[]).some(text=>text.toLowerCase()===String(value).trim().toLowerCase());
+    (FULL_REVIEW_UNKNOWN_TEXT[field]||[]).some(text=>text.toLowerCase()===String(value).trim().toLowerCase())||
+    !!FULL_REVIEW_UNKNOWN_TEXT[field]&&typeof value==='string'&&!/\d/.test(value)&&UNCONFIRMED_PROSE.test(value);
+}
+function realTarget(file){
+  if(fs.existsSync(file))return fs.realpathSync(file);
+  return path.join(realTarget(path.dirname(file)),path.basename(file));
 }
 export function parseArgs(argv){
   const options={root:workspace,out:null,dryRun:false};
@@ -42,7 +48,7 @@ export function parseArgs(argv){
     else throw Error('Unknown or incomplete option: '+arg);
   }
   options.out??=path.join(options.root,LEDGER_DIRECTORY);
-  const relative=path.relative(options.root,options.out);
+  const relative=path.relative(realTarget(options.root),realTarget(options.out));
   if(!relative.startsWith('..'+path.sep)&&!path.isAbsolute(relative)&&
     relative!==LEDGER_DIRECTORY&&!relative.startsWith(LEDGER_DIRECTORY+path.sep))
     throw Error('--out inside the checkout must be under '+LEDGER_DIRECTORY);
@@ -81,6 +87,10 @@ function approvalFor(root,update,db){
     throw Error('Missing or mismatched approval job: '+update.jobId);
   const payload=JSON.parse(job.payload);
   if(!equal(payload.draft,draft))throw Error('Approval job differs from journal draft: '+update.jobId);
+  const stored=db.prepare('SELECT data FROM artifacts WHERE hash=? AND job_id=?').get(update.approvalArtifact,job.id);
+  if(!stored||!equal(JSON.parse(stored.data),saved.artifact))throw Error('Approval artifact differs from queue: '+update.jobId);
+  const applied=applyDraftRecord(update.baseRecord,draft,update.approvedOn);
+  if(digest(applied)!==update.appliedRecordRevision||!equal(applied.research,update.research))throw Error('Applied journal record differs from approved draft: '+update.jobId);
   return {update,job,payload,approvalArtifact:saved.path};
 }
 function latestFields(approvals){
@@ -98,6 +108,8 @@ function supportedClaims(candidate,field){
   const {payload,update,bindingField}=candidate;
   if(!update.approval.approvedBindings?.includes(bindingField))return [];
   if(bindingField.startsWith('review.')&&!update.approval.checkedCoverage?.includes(field))return [];
+  const coverage=bindingField.startsWith('review.')?update.draft.reviewCoverage?.fields.find(row=>row.field===field):null;
+  if(bindingField.startsWith('review.')&&coverage?.outcome!=='confirmed')return [];
   if(!bindingField.startsWith('review.')&&!update.approval.checkedFields?.includes(field))return [];
   return (payload.approved||[]).flatMap(claim=>{
     if(claim.field!==field||claim.status!=='supported'||!claim.key||!claim.note?.trim())return [];
@@ -106,6 +118,7 @@ function supportedClaims(candidate,field){
     if(!payload.bundle?.claims?.some(item=>equal(item,claim)))throw Error('Approved claim is absent from its bundle: '+claim.key);
     const binding=(update.draft.bindings||[]).find(b=>b.field===bindingField&&b.claimKey===claim.key&&b.source===claim.source&&
       b.quote===claim.quote&&b.snapshotId===claim.snapshotId&&!b.transformation);
+    if(binding&&(CRITICAL_FIELDS.has(field)&&(binding.kind!=='official'||binding.scope!=='exact-card')||coverage&&!coverage.snapshotIds?.includes(binding.snapshotId)))return [];
     return binding?[{claim,binding}]:[];
   });
 }
@@ -166,10 +179,37 @@ export function ledgerCounts(cards){
   for(const card of cards)for(const row of card.fields){total[row.origin]++;perField[row.field][row.origin]++;}
   return {total,perField,filled:total.verified+total.inherited,journalCovered:total.verified,cardsWithVerified:cards.filter(card=>card.fields.some(row=>row.origin==='verified')).map(card=>card.id)};
 }
+export function validateLedger(ledger,records,{journal=null}={}){
+  records=json(records);
+  if(ledger.schema!==1||ledger.project!==PROJECT_ID||ledger.kind!=='derived-private-fact-ledger'||!Array.isArray(ledger.cards))throw Error('Invalid fact ledger identity');
+  if(ledger.catalogueRevision!==digest(records)||journal&&ledger.journalRevision!==digest(journal))throw Error('Stale fact ledger; regenerate it for the current catalogue and journal');
+  const cards=new Map(ledger.cards.map(card=>[card.id,card]));
+  if(cards.size!==ledger.cards.length||cards.size!==records.length)throw Error('Ledger card identities differ from catalogue');
+  for(const card of records){
+    const rows=cards.get(card.id)?.fields;
+    if(!Array.isArray(rows)||rows.length!==CLAIM_FIELDS.size||new Set(rows.map(row=>row.field)).size!==CLAIM_FIELDS.size)throw Error('Ledger field coverage differs: '+card.id);
+    const byField=new Map(rows.map(row=>[row.field,row]));
+    for(const slot of catalogueValues(card)){
+      const row=byField.get(slot.field);
+      if(!row||row.present!==slot.present||!equal(row.value,slot.value))throw Error('Ledger round-trip mismatch: '+card.id+'/'+slot.field);
+      if(!['verified','inherited','unknown'].includes(row.origin)||unknownValue(slot.field,slot.value)!==(row.origin==='unknown'))throw Error('Invalid ledger origin: '+card.id+'/'+slot.field);
+      if(row.origin==='verified'){
+        if(row.drift||!row.approvalJobId||!/^editorial\/agent-artifacts\/[a-f0-9]{64}\.json$/.test(row.approvalArtifact)||!row.evidence?.length)throw Error('Verified field lacks approval provenance: '+card.id+'/'+slot.field);
+        for(const proof of row.evidence)if(!proof.claimId||!proof.jobId||!hex(proof.snapshotId)||!hex(proof.quoteDigest)||!validDate(proof.approvedOn)||
+          !/^editorial\/agent-artifacts\/[a-f0-9]{64}\.json$/.test(proof.verdictArtifact)||typeof proof.sourceUrl!=='string')throw Error('Verified field lacks claim provenance: '+card.id+'/'+slot.field);
+      }
+    }
+  }
+  if(!equal(ledger.counts,ledgerCounts(ledger.cards)))throw Error('Ledger counts differ from field origins');
+  return ledger;
+}
 export async function buildLedger({root=workspace,generatedAt=new Date().toISOString()}={}){
   const editorial=path.join(root,'editorial'),records=json(loadCatalog({base:root}).ACTIVITIES);
   const journal=read(path.join(editorial,'approved-updates.json'));
   if(journal.schema!==1||journal.project!==PROJECT_ID||!Array.isArray(journal.updates))throw Error('Wrong approval journal identity');
+  const ids=new Set(records.map(card=>card.id));
+  if(ids.size!==records.length||records.some(card=>!safeId(card.id)))throw Error('Invalid catalogue card identities');
+  if(new Set(journal.updates.map(update=>update.jobId)).size!==journal.updates.length||journal.updates.some(update=>!ids.has(update.draft?.cardId)))throw Error('Invalid journal card or job identities');
   const db=openQueue(root);
   try{
     const updates=journal.updates.filter(update=>!update.supersededBy);
@@ -186,6 +226,7 @@ export async function buildLedger({root=workspace,generatedAt=new Date().toISOSt
         }else if(candidate&&row.origin!=='unknown'){
           const claims=claimsForValue(slot.field,slot.value,supportedClaims(candidate,slot.field));
           if(claims.length){
+            validateFieldValue(slot.field,slot.value,{allowUnknown:false});
             if(!verdictCache.has(candidate.job.id))verdictCache.set(candidate.job.id,verdictFor(root,db,candidate));
             const verdict=verdictCache.get(candidate.job.id),evidence=[];
             for(const {claim} of claims){
@@ -204,8 +245,8 @@ export async function buildLedger({root=workspace,generatedAt=new Date().toISOSt
       }
       cards.push({id:card.id,fields});
     }
-    return {schema:1,project:PROJECT_ID,kind:'derived-private-fact-ledger',generatedAt,catalogueRevision:digest(records),journalRevision:digest(journal),
-      cards,counts:ledgerCounts(cards),drift};
+    return validateLedger({schema:1,project:PROJECT_ID,kind:'derived-private-fact-ledger',generatedAt,catalogueRevision:digest(records),journalRevision:digest(journal),
+      cards,counts:ledgerCounts(cards),drift},records,{journal});
   }finally{db?.close();}
 }
 export function summaryMarkdown(ledger){
@@ -221,7 +262,8 @@ export function summaryMarkdown(ledger){
   return lines.join('\n');
 }
 export function writeLedger(ledger,out){
-  fs.mkdirSync(out,{recursive:true,mode:0o700});fs.chmodSync(out,0o700);
+  fs.mkdirSync(out,{recursive:true,mode:0o700});
+  if(fs.lstatSync(out).isSymbolicLink()||fs.statSync(out).mode&0o077)throw Error('Ledger output directory must be private (mode 0700), not a symlink');
   for(const [name,text] of [['ledger.json',JSON.stringify(ledger,null,2)+'\n'],['summary.md',summaryMarkdown(ledger)]]){
     const temporary=path.join(out,name+'.tmp-'+process.pid);
     try{fs.writeFileSync(temporary,text,{mode:0o600,flag:'wx'});fs.renameSync(temporary,path.join(out,name));}

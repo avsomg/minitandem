@@ -2,6 +2,7 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import {DatabaseSync} from 'node:sqlite';
 import {root} from './quality.mjs';
 import {JobQueue,digest} from './jobs.mjs';
 import {snapshot} from './evidence.mjs';
@@ -13,7 +14,7 @@ export const writeJson=(file,value)=>{fs.mkdirSync(path.dirname(file),{recursive
 export const fixtureCard=(id='fixture')=>({id,name:'Fixture meeting',category:'play',town:'Teststadt',region:'sarine',route:'local',format:'group',status:'active',
   min:null,max:null,age:'Age to be confirmed',parent:'yes',languages:[],schedule:'Schedule to be confirmed',days:[],events:[],address:'Fixture road 1',
   price:'Free',priceKind:'free',amount:0,contacts:[],sources:[{url:'https://fixture.example.org/meeting',label:'Official'}],notes:[],
-  checked:'2026-09-30',practical:{booking:{value:false,text:'No registration required',source:'https://fixture.example.org/meeting',checked:'2026-09-30'}},
+  checked:'2026-09-30',reviewAfter:'2026-12-29',practical:{booking:{value:true,text:'Registration required',source:'https://fixture.example.org/meeting',checked:'2026-09-30'}},
   research:{findings:[],remaining:[]}});
 export function ledgerFixture(t){
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-ledger-fixture-')),editorial=path.join(directory,'editorial');
@@ -38,7 +39,7 @@ export function ledgerFixture(t){
   const verifier=queue.enqueue({kind:'verify-facts',cardId:base.id,inputRevision:'fixture-verifier',payload:{bundle}});
   queue.db.prepare("UPDATE jobs SET state='done' WHERE id=?").run(verifier.id);
   const verdictArtifact=putArtifact(verifier,{verdicts});
-  const draft={cardId:base.id,patch:{amount:0},practicalPatch:{booking:{...base.practical.booking,checked:'2026-10-15'}},
+  const draft={cardId:base.id,patch:{amount:0},practicalPatch:{booking:{...base.practical.booking,value:false,text:'No registration required',checked:'2026-10-15'}},
     findings:[{field:'Participation',kind:'official',url:evidence.url,text:'The meeting is free and needs no registration.'}],remaining:[],
     snapshots:[evidence],bindings:claims.map(c=>({field:c.field,claimKey:c.key,quote:c.quote,source:c.source,snapshotId:c.snapshotId,kind:c.kind,scope:c.scope}))};
   const payload={draft,bundle,approved:claims,verdicts,editorJobId:'fixture-editor'};
@@ -53,4 +54,27 @@ export function ledgerFixture(t){
   const save=()=>writeJson(path.join(editorial,'approved-updates.json'),journal);save();queue.close();
   writeJson(path.join(editorial,'source-watch.json'),{schema:1,sources:[]});
   return {root:directory,editorial,base,setCards,evidence,claims,bundle,verdicts,draft,payload,verifier,reviewer,verdictArtifact,approvalArtifact,journal,update,save};
+}
+// Re-seal invented proofs after a test changes the claims or the approved patch.
+export function resealFixture(f){
+  const db=new DatabaseSync(path.join(f.editorial,'workflow-state/jobs.sqlite'));
+  const put=(job,result)=>{
+    const data={project:PROJECT_ID,jobId:job.id,role:'verify',inputRevision:job.input_revision,result},id=digest(data);
+    db.prepare('DELETE FROM artifacts WHERE job_id=?').run(job.id);
+    db.prepare('INSERT INTO artifacts VALUES (?,?,?,?,?)').run(id,job.id,'verify',JSON.stringify(data),'2026-10-15T09:00:00.000Z');
+    writeJson(path.join(f.editorial,'agent-artifacts',id+'.json'),data);return id;
+  };
+  try{
+    db.prepare('UPDATE jobs SET payload=? WHERE id=?').run(JSON.stringify({bundle:f.bundle}),f.verifier.id);
+    db.prepare('UPDATE jobs SET payload=? WHERE id=?').run(JSON.stringify(f.payload),f.reviewer.id);
+    for(const evidence of f.bundle.snapshots)db.prepare('INSERT OR REPLACE INTO captured_evidence VALUES (?,?,?)').run(evidence.id,JSON.stringify(evidence),evidence.fetchedAt);
+    f.verdictArtifact=put(f.verifier,{verdicts:f.verdicts});
+    const result={verdict:'approve',draftHash:digest(f.draft),checkedFields:['research.findings','research.remaining',...Object.keys(f.draft.patch),
+      ...Object.keys(f.draft.practicalPatch||{}).map(key=>'practical.'+key)],approvedBindings:[...new Set(f.draft.bindings.map(b=>b.field))],
+      ...(f.draft.reviewCoverage&&{checkedCoverage:f.draft.reviewCoverage.fields.map(row=>row.field)}),reason:'The fixture patch was independently approved.'};
+    f.approvalArtifact=put(f.reviewer,result);
+    const applied=applyDraftRecord(f.base,f.draft,'2026-10-15');
+    Object.assign(f.update,{approvalArtifact:f.approvalArtifact,approval:approvalSummary('verify',result),cardRevision:digest(f.base),
+      appliedRecordRevision:digest(applied),research:applied.research});f.save();
+  }finally{db.close();}
 }
