@@ -1,23 +1,7 @@
 #!/usr/bin/env bash
-# Deploys one commit to the Minitandem server, from the Mac: ops/deploy.sh <full 40-character commit sha>   (docs/betrieb.md, "Update").
-# There is no default commit and nothing calls this script but the owner; the editorial cycle must never run it.
-# What it does, in this order, and where it stops:
-#   1. refuses unless GitHub CI succeeded for exactly that commit;
-#   2. over ssh: remembers the live tag (.env), the checkout and the live record count (/healthz);
-#   3. fetches and checks out the commit, builds the image under its own tag (the live container is untouched);
-#   4. starts the new image once as a preview on 127.0.0.1 of the server, with a throw-away state, never the live volume;
-#   5. refuses when the preview has more than 15 % fewer records than the live site;
-#   6. only then sets the tag in .env and recreates the app from the image it previewed, waits until it is healthy,
-#      and checks that the public /healthz shows the previewed revision and commit;
-#   7. any failure after step 3 removes the preview and puts the previous checkout and tag back.
-# It prints the previous tag and the rollback command at the end.
-#
-# Environment, for tests and for a second server (default in brackets):
-#   DEPLOY_HOST [ubuntu@179.237.77.144]   DEPLOY_KEY [~/.ssh/minitandem_ed25519]   DEPLOY_DIR [/opt/minitandem]
-#   DEPLOY_URL [https://minitandem.ch]    DEPLOY_REPO [avsomg/minitandem]          DEPLOY_PORT [18788] (preview, server side)
-#   DEPLOY_MAX_DROP [15] percent          DEPLOY_TRIES [45] x DEPLOY_POLL [2] seconds: how long to wait for a health answer
+# The owner deploys one full commit. All server work, including rollback, holds one lock in one SSH session.
+# Normal exits and handled signals attempt rollback. Power loss/SIGKILL can leave a recovery record and a stale lock.
 set -euo pipefail
-
 HOST=${DEPLOY_HOST:-ubuntu@179.237.77.144}
 KEY=${DEPLOY_KEY:-$HOME/.ssh/minitandem_ed25519}
 DIR=${DEPLOY_DIR:-/opt/minitandem}
@@ -27,156 +11,118 @@ PORT=${DEPLOY_PORT:-18788}
 MAX_DROP=${DEPLOY_MAX_DROP:-15}
 TRIES=${DEPLOY_TRIES:-45}
 POLL=${DEPLOY_POLL:-2}
-PREVIEW=minitandem-preview
-# How far the run has got, so that the exit trap knows what to undo: none, checkout, switched, done.
-STAGE=none
-PREVIEW_UP=0
-
+[ "$#" -eq 1 ] || { echo 'usage: ops/deploy.sh <full commit sha>' >&2; exit 2; }
+SHA=$1
+[[ $SHA =~ ^[0-9a-f]{40}$ ]] || { echo 'not a full commit sha' >&2; exit 2; }
+[[ $PORT =~ ^[0-9]+$ && $MAX_DROP =~ ^[0-9]+$ && $TRIES =~ ^[0-9]+$ && $POLL =~ ^[0-9]+([.][0-9]+)?$ ]] || exit 2
+# Filter by the required workflow, then check its exact head and latest run. An unrelated green workflow is insufficient.
+runs=$(gh run list --repo "$REPO" --workflow test.yml --commit "$SHA" --limit 1 --json conclusion,status,headSha)
+printf '%s' "$runs" | node -e 'let s="";process.stdin.on("data",c=>s+=c);process.stdin.on("end",()=>{try{const r=JSON.parse(s);if(!r.length)throw Error("no CI run for test.yml");if(r[0].headSha!==process.argv[1]||r[0].status!=="completed"||r[0].conclusion!=="success")throw Error("test.yml is not green for the exact commit");}catch(e){console.error(e.message);process.exitCode=1;}})' "$SHA"
+OP=$(node -e 'process.stdout.write(require("node:crypto").randomUUID())')
+printf 'CI: test.yml succeeded for %s; operation %s\n' "$SHA" "$OP"
+# Shell-quote the arguments for the remote login shell; the program itself arrives on stdin.
+quote() { printf "'%s'" "${1//\'/\'\\\'\'}"; }
+command='bash -s --'
+for arg in "$DIR" "$SHA" "$URL" "$MAX_DROP" "$TRIES" "$POLL" "$PORT" "$OP"; do command="$command $(quote "$arg")"; done
+ssh -i "$KEY" -o IdentitiesOnly=yes "$HOST" "$command" <<'REMOTE'
+set -euo pipefail
+DIR=$1 SHA=$2 URL=$3 MAX_DROP=$4 TRIES=$5 POLL=$6 PORT=$7 OP=$8
+cd "$DIR"
+umask 077
+LOCK=.deploy-lock
+if ! mkdir "$LOCK" 2>/dev/null; then
+  echo 'deploy: another operation owns the lock, or an interrupted operation needs recovery' >&2
+  [ ! -f "$LOCK/owner" ] || cat "$LOCK/owner" >&2
+  exit 1
+fi
+printf '%s\n' "$OP" > "$LOCK/id"
+printf 'operation=%s\npid=%s\n' "$OP" "$$" > "$LOCK/owner"
+mkdir -p .deployments
+STATE=.deployments/$OP
+PREV_TAG= PREV_REF= NEW_TAG= STAGE=locked PREVIEW_UP=0
+PREVIEW=minitandem-preview-$OP
 say() { printf '%s\n' "$*"; }
-die() { printf 'deploy: %s\n' "$*" >&2; exit 1; }
-# A command in the checkout on the server.
-remote() { ssh -i "$KEY" -o IdentitiesOnly=yes "$HOST" "cd '$DIR' && { $1; }"; }
-# Repeats a shell test on the server until it passes (its output is the answer) or the tries are used up.
-remote_until() { remote "for i in \$(seq $TRIES); do $1 && exit 0; sleep $POLL; done; exit 1"; }
-# Number of matches of an extended regex in stdin; no match is 0, not an error.
-count() { { grep -Eo "$1" || true; } | wc -l | tr -d ' '; }
-# One field of the flat /healthz JSON (records, revision, commit); a missing field or null is empty.
+die() { say "deploy: $*" >&2; exit 1; }
 field() { sed -n "s/.*\"$1\":\"\{0,1\}\([^\",}]*\).*/\1/p" | sed 's/^null$//'; }
-# The shell text that writes a tag into .env on the server. It copies instead of using sed -i, which differs between systems.
-set_tag() { printf "sed 's/^MINITANDEM_TAG=.*/MINITANDEM_TAG=%s/' .env > .env.new && cat .env.new > .env && rm -f .env.new" "$1"; }
-# True when the app container reports healthy (its Dockerfile HEALTHCHECK asks /healthz).
-APP_HEALTHY='[ "$(docker inspect --format "{{.State.Health.Status}}" "$(docker compose ps -q app)")" = healthy ]'
-
-usage() { say "usage: ops/deploy.sh <commit>   (the full 40-character sha; there is no default, see docs/betrieb.md)" >&2; exit 2; }
-
-# 1. CI must be green for this exact commit: at least one run, and every run of it succeeded (a run still going has no conclusion yet).
-check_ci() {
-  local runs total green
-  runs=$(gh run list --repo "$REPO" --commit "$SHA" --json conclusion,status) || die "cannot ask GitHub about $SHA (is gh logged in?)"
-  total=$(printf '%s' "$runs" | count '"status": ?"[a-z_]*"')
-  green=$(printf '%s' "$runs" | count '"conclusion": ?"success"')
-  [ "$total" -ge 1 ] || die "GitHub has no CI run for $SHA: push it and wait for the tests"
-  [ "$green" -eq "$total" ] || die "CI is not green for $SHA ($green of $total runs succeeded)"
-  say "CI: $green of $total runs succeeded for $SHA"
+owns() { [ "$(cat "$LOCK/id" 2>/dev/null)" = "$OP" ]; }
+record() {
+  STAGE=$1
+  printf 'operation=%s\nstage=%s\nprevious_ref=%s\nprevious_tag=%s\ntarget_commit=%s\ntarget_tag=%s\nat=%s\n' \
+    "$OP" "$STAGE" "$PREV_REF" "$PREV_TAG" "$SHA" "$NEW_TAG" "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" > "$STATE.tmp"
+  mv "$STATE.tmp" "$STATE"
 }
-
-# 2. What is live now: the tag in .env, the checkout (branch or commit) to go back to, the record count and revision.
-read_live() {
-  PREV_TAG=$(remote "sed -n 's/^MINITANDEM_TAG=//p' .env")
-  [ -n "$PREV_TAG" ] || die "no MINITANDEM_TAG in .env on the server; without it there is no way back (docs/betrieb.md, first deployment)"
-  PREV_REF=$(remote "git symbolic-ref -q --short HEAD || git rev-parse HEAD")
-  [ -z "$(remote "git status --porcelain --untracked-files=no")" ] || die "the checkout $DIR on the server has uncommitted changes"
-  LIVE=$(curl -fsS --max-time 10 "$URL/healthz") || die "$URL/healthz does not answer; repair the live service first (manual steps: docs/betrieb.md)"
-  LIVE_RECORDS=$(printf '%s' "$LIVE" | field records)
-  [[ $LIVE_RECORDS =~ ^[0-9]+$ ]] || die "the live /healthz has no record count: $LIVE"
-  LIVE_REVISION=$(printf '%s' "$LIVE" | field revision)
-  say "Live now: tag $PREV_TAG on $PREV_REF, $LIVE_RECORDS records, revision ${LIVE_REVISION:-none (an image from before build-info.json)}"
-  remote "docker image inspect minitandem-app:$PREV_TAG >/dev/null 2>&1" || say "Warning: the image minitandem-app:$PREV_TAG is gone; a rollback has to rebuild it."
-}
-
-# 3a. The commit must reach the server. A commit that is already live needs nothing.
-fetch_commit() {
-  remote "git fetch --tags --quiet && git cat-file -e '$SHA^{commit}'" || die "the server cannot fetch $SHA (is it pushed to GitHub?)"
-  NEW_TAG=$(remote "git rev-parse --short '$SHA'")
-  if [ "$NEW_TAG" = "$PREV_TAG" ]; then say "Tag $NEW_TAG is already live; nothing to deploy."; exit 0; fi
-}
-
-# 3b. Switch the checkout (compose.yaml, Dockerfile and the sources of the build come from it) and build under the new tag.
-checkout_and_build() {
-  STAGE=checkout
-  remote "git checkout --quiet --detach '$SHA'"
-  say "Building minitandem-app:$NEW_TAG on the server (the live service keeps running) ..."
-  remote "MINITANDEM_TAG=$NEW_TAG docker compose build app"
-}
-
-# 4. The new image once, on 127.0.0.1 of the server only, with the live container's limits. Its /state is a tmpfs: the live volume
-# is not mounted, so the preview can neither read family data nor write to it (the entrypoint makes its own demo family, gone with it).
-start_preview() {
-  PREVIEW_UP=1
-  remote "docker rm -f $PREVIEW >/dev/null 2>&1; docker run -d --name $PREVIEW -p 127.0.0.1:$PORT:8787 --read-only --tmpfs /tmp \
-    --tmpfs /state:rw,uid=1000,gid=1000,mode=0700,size=16m --cap-drop ALL --security-opt no-new-privileges:true --memory 512m --pids-limit 200 \
-    -e MINITANDEM_COMMIT=$NEW_TAG minitandem-app:$NEW_TAG >/dev/null"
-  PREVIEW_JSON=$(remote_until "curl -fsS --max-time 3 http://127.0.0.1:$PORT/healthz 2>/dev/null") || die "the preview does not answer on port $PORT (on the server: docker logs $PREVIEW)"
-  PREVIEW_RECORDS=$(printf '%s' "$PREVIEW_JSON" | field records)
-  PREVIEW_REVISION=$(printf '%s' "$PREVIEW_JSON" | field revision)
-  PREVIEW_COMMIT=$(printf '%s' "$PREVIEW_JSON" | field commit)
-}
-
-# 5. The shrink guard: a catalogue that lost more than MAX_DROP percent of its records is a broken build, not an edit.
-guard_records() {
-  [[ $PREVIEW_RECORDS =~ ^[0-9]+$ && -n $PREVIEW_REVISION ]] || die "the preview's /healthz has no record count or no revision (a commit from before build-info.json?): $PREVIEW_JSON"
-  say "Preview: $PREVIEW_RECORDS records (live: $LIVE_RECORDS), revision $PREVIEW_REVISION, commit ${PREVIEW_COMMIT:-none}"
-  if [ $((PREVIEW_RECORDS * 100)) -lt $((LIVE_RECORDS * (100 - MAX_DROP))) ]; then
-    die "refusing: $PREVIEW_RECORDS records is more than $MAX_DROP % below the $LIVE_RECORDS records that are live"
-  fi
-}
-
-# 6a. The switch: the tag into .env, then the app is recreated from the image that was previewed (no new build).
-switch_live() {
-  STAGE=switched
-  remote "docker rm -f $PREVIEW >/dev/null 2>&1; $(set_tag "$NEW_TAG") && docker compose up -d --no-build"
-  PREVIEW_UP=0
-  remote_until "$APP_HEALTHY" || die "the new app container did not become healthy"
-}
-
-# 6b. What the public sees must be what was previewed. Caddy needs a moment (its own health check) to send traffic to the new container.
-verify_public() {
-  local i answer=
-  for i in $(seq "$TRIES"); do
-    answer=$(curl -fsS --max-time 10 "$URL/healthz" 2>/dev/null) || answer=
-    [ "$(printf '%s' "$answer" | field revision)" = "$PREVIEW_REVISION" ] && [ "$(printf '%s' "$answer" | field commit)" = "$PREVIEW_COMMIT" ] && return 0
-    sleep "$POLL"
-  done
-  die "$URL/healthz does not show the previewed build (wanted revision $PREVIEW_REVISION, commit ${PREVIEW_COMMIT:-none}; last answer: ${answer:-none})"
-}
-
-# The way back, as shell text for the server: the old checkout, the old tag in .env, the old image (rebuilt if it was pruned).
-rollback_command() {
-  printf "git checkout --quiet '%s' && %s && { docker compose up -d --no-build || docker compose up -d --build; }" "$PREV_REF" "$(set_tag "$PREV_TAG")"
-}
-
-finish() {
-  STAGE=done
-  say ""
-  say "Deployed $SHA as tag $NEW_TAG. $URL/healthz shows revision $PREVIEW_REVISION and commit $PREVIEW_COMMIT."
-  say "Previous tag: $PREV_TAG (checkout $PREV_REF)"
-  say "Rollback:  ssh -i $KEY -o IdentitiesOnly=yes $HOST \"cd $DIR && $(rollback_command)\""
-}
-
-# 7. Runs on every exit. Whatever failed, the preview goes away and the server is left on the previous version.
-on_exit() {
+set_tag() { sed "s/^MINITANDEM_TAG=.*/MINITANDEM_TAG=$1/" .env > .env.new; cat .env.new > .env; rm -f .env.new; }
+healthy() { [ "$(docker inspect --format '{{.State.Health.Status}}' "$(docker compose ps -q app)")" = healthy ]; }
+wait_healthy() { local i; for i in $(seq "$TRIES"); do healthy && return 0; sleep "$POLL"; done; return 1; }
+cleanup() {
   local status=$?
-  trap - EXIT
+  trap - EXIT HUP INT TERM
   set +e
-  if [ "$PREVIEW_UP" = 1 ]; then
-    [ "$status" -ne 0 ] && remote "docker logs --tail 15 $PREVIEW"
-    remote "docker rm -f $PREVIEW >/dev/null 2>&1"
-  fi
-  case $STAGE in
+  if ! owns; then say "deploy: ownership changed; no cleanup or rollback of another operation ($OP)" >&2; exit "$status"; fi
+  if [ "$PREVIEW_UP" = 1 ]; then docker rm -f "$PREVIEW" >/dev/null 2>&1; fi
+  case "$STAGE" in
     checkout)
-      remote "git checkout --quiet '$PREV_REF'" && say "Deploy failed before the switch: the checkout is back on $PREV_REF, the live service was not touched." ;;
+      if git checkout --quiet "$PREV_REF"; then record rolled-back; else record recovery-needed; fi ;;
     switched)
-      say "Deploy failed after the switch: putting tag $PREV_TAG back ..."
-      if remote "$(rollback_command)" && remote_until "$APP_HEALTHY"; then say "Rolled back to tag $PREV_TAG ($PREV_REF); it is healthy."
-      else say "ROLLBACK FAILED. By hand on the server: cd $DIR && $(rollback_command)"; fi ;;
+      if [ "$(sed -n 's/^MINITANDEM_TAG=//p' .env)" != "$NEW_TAG" ]; then
+        record recovery-needed; say 'deploy: live tag changed externally; rollback refused' >&2
+      elif git checkout --quiet "$PREV_REF" && set_tag "$PREV_TAG" && { docker compose up -d --no-build || docker compose up -d --build; } && wait_healthy; then
+        record rolled-back; say "Rolled back to tag $PREV_TAG ($PREV_REF); it is healthy."
+      else record recovery-needed; say "ROLLBACK FAILED; recovery record: $STATE" >&2; fi ;;
   esac
+  if [ "$status" -ne 0 ] && [[ $STAGE = locked || $STAGE = inspected ]]; then record failed; fi
+  # A failed recovery stays locked for an explicit investigation. A completed operation releases only its own token.
+  if [ "$STAGE" != recovery-needed ] && owns; then rm -f "$LOCK/id" "$LOCK/owner"; rmdir "$LOCK"; fi
   exit "$status"
 }
-
-main() {
-  [ "$#" -eq 1 ] || usage
-  SHA=$1
-  [[ $SHA =~ ^[0-9a-f]{40}$ ]] || die "'$SHA' is not a full commit sha; use git rev-parse <ref>"
-  trap on_exit EXIT
-  trap 'exit 130' INT TERM
-  check_ci
-  read_live
-  fetch_commit
-  checkout_and_build
-  start_preview
-  guard_records
-  switch_live
-  verify_public
-  finish
-}
-main "$@"
+trap cleanup EXIT
+trap 'exit 129' HUP
+trap 'exit 130' INT
+trap 'exit 143' TERM
+record locked
+PREV_TAG=$(sed -n 's/^MINITANDEM_TAG=//p' .env)
+[ -n "$PREV_TAG" ] || die 'no MINITANDEM_TAG in .env'
+[[ $PREV_TAG =~ ^[A-Za-z0-9._-]+$ ]] || die 'invalid live tag'
+PREV_REF=$(git symbolic-ref -q --short HEAD || git rev-parse HEAD)
+record inspected
+[ -z "$(git status --porcelain --untracked-files=no)" ] || die 'the server checkout has uncommitted changes'
+LIVE=$(curl -fsS --max-time 10 "$URL/healthz") || die 'live /healthz does not answer'
+LIVE_RECORDS=$(printf '%s' "$LIVE" | field records)
+[[ $LIVE_RECORDS =~ ^[0-9]+$ ]] || die 'live /healthz has no record count'
+say "Live now: tag $PREV_TAG on $PREV_REF, $LIVE_RECORDS records"
+git fetch --tags --quiet
+git cat-file -e "$SHA^{commit}"
+NEW_TAG=$(git rev-parse --short "$SHA")
+if [ "$NEW_TAG" = "$PREV_TAG" ]; then record done; say 'Tag is already live; nothing to deploy.'; exit 0; fi
+record checkout
+git checkout --quiet --detach "$SHA"
+MINITANDEM_TAG=$NEW_TAG docker compose build app
+PREVIEW_UP=1
+docker run -d --name "$PREVIEW" -p "127.0.0.1:$PORT:8787" --read-only --tmpfs /tmp \
+  --tmpfs /state:rw,uid=1000,gid=1000,mode=0700,size=16m --cap-drop ALL --security-opt no-new-privileges:true --memory 512m --pids-limit 200 \
+  -e MINITANDEM_COMMIT="$NEW_TAG" "minitandem-app:$NEW_TAG" >/dev/null
+PREVIEW_JSON=
+for i in $(seq "$TRIES"); do PREVIEW_JSON=$(curl -fsS --max-time 3 "http://127.0.0.1:$PORT/healthz") && break; sleep "$POLL"; done
+PREVIEW_RECORDS=$(printf '%s' "$PREVIEW_JSON" | field records)
+PREVIEW_REVISION=$(printf '%s' "$PREVIEW_JSON" | field revision)
+PREVIEW_COMMIT=$(printf '%s' "$PREVIEW_JSON" | field commit)
+[[ $PREVIEW_RECORDS =~ ^[0-9]+$ && -n $PREVIEW_REVISION ]] || die 'preview has no record count or no revision'
+say "Preview: $PREVIEW_RECORDS records (live: $LIVE_RECORDS), revision $PREVIEW_REVISION, commit $PREVIEW_COMMIT"
+[ $((PREVIEW_RECORDS * 100)) -ge $((LIVE_RECORDS * (100 - MAX_DROP))) ] || die "$PREVIEW_RECORDS records is more than $MAX_DROP % below the $LIVE_RECORDS records that are live"
+record switched
+owns || die 'operation ownership lost before switch'
+set_tag "$NEW_TAG"
+docker compose up -d --no-build
+wait_healthy || die 'the new app container did not become healthy'
+verified=0
+for i in $(seq "$TRIES"); do
+  answer=$(curl -fsS --max-time 10 "$URL/healthz" 2>/dev/null) || answer=
+  if [ "$(printf '%s' "$answer" | field revision)" = "$PREVIEW_REVISION" ] && [ "$(printf '%s' "$answer" | field commit)" = "$PREVIEW_COMMIT" ]; then verified=1; break; fi
+  sleep "$POLL"
+done
+[ "$verified" = 1 ] || die 'public /healthz does not show the previewed build'
+record done
+say "Deployed $SHA as tag $NEW_TAG. Previous tag: $PREV_TAG (checkout $PREV_REF)"
+say "Recovery record: $STATE"
+say "Rollback: inspect $STATE and follow docs/betrieb.md under the deployment lock."
+REMOTE

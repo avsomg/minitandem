@@ -72,51 +72,63 @@ git push                                     # GitHub-CI muss für diesen Commit
 ops/deploy.sh "$(git rev-parse HEAD)"        # oder ein anderer Commit, der auf GitHub liegt
 ```
 
-Gebraucht werden auf dem Mac `gh` (angemeldet), `ssh` mit dem Schlüssel `~/.ssh/minitandem_ed25519` und `curl`. Das Skript tut der Reihe nach Folgendes und hält an der ersten Stelle an, die nicht stimmt:
+Gebraucht werden auf dem Mac `gh` (angemeldet), Node und `ssh` mit dem Admin-Schlüssel. Auf dem Server laufen Bash, Git, Docker und curl. Das Skript prüft zuerst den neuesten Lauf von **`test.yml` für exakt den angeforderten Commit** (`headSha`, Status completed, Schluss success). Ein anderer grüner Workflow genügt nicht.
 
-1. **CI.** `gh run list --repo avsomg/minitandem --commit <Commit>`: Es muss mindestens einen Lauf geben, und jeder Lauf muss erfolgreich sein. Sonst Abbruch, ohne den Server zu berühren.
-2. **Ist-Zustand.** Auf dem Server liest es den Tag aus `.env`, den Checkout (Branch oder Commit) und die Zahl der Karten aus dem öffentlichen `/healthz`. Ein Checkout mit Änderungen oder ein nicht antwortendes `/healthz` führen zum Abbruch.
-3. **Bauen.** `git fetch`, `git checkout --detach <Commit>`, dann `docker compose build app` unter dem neuen Tag. Der laufende Container wird dabei nicht angefasst. Ist der Commit schon live, tut es nichts.
-4. **Vorschau.** Das neue Image läuft einmal als Container `minitandem-preview` auf `127.0.0.1:18788` des Servers, nur dort erreichbar, mit denselben Grenzen wie der Dienst (`read_only`, keine Capabilities, 512 MB). Sein `/state` ist ein flüchtiges tmpfs: Das Volume `minitandem_state` ist **nicht** eingehängt, die Vorschau liest und schreibt also keine Familiendaten; die Demo-Familie, die der Entrypoint dort anlegt, verschwindet mit dem Container.
-5. **Schrumpf-Schutz.** Hat die Vorschau mehr als 15 % weniger Karten als die laufende Seite (`records` im `/healthz`), bricht das Skript ab. 321 Karten live: 273 sind erlaubt, 272 nicht. Fehlt der Vorschau die `revision` (ein Commit von vor `build-info.json`), bricht es ebenfalls ab.
-6. **Umschalten.** Die Vorschau wird entfernt, der Tag in `.env` gesetzt und `docker compose up -d --no-build` gestartet, also mit genau dem Image, das in der Vorschau lief. Das Skript wartet, bis der Container `healthy` meldet (bis zu 90 Sekunden), und prüft dann, dass das öffentliche `https://minitandem.ch/healthz` dieselbe `revision` und denselben `commit` zeigt wie die Vorschau. Caddy braucht dafür bis zu 30 Sekunden (sein eigener Health-Check).
-7. **Zurück bei jedem Fehler.** Scheitert etwas nach dem Bauen, entfernt das Skript die Vorschau und stellt den alten Checkout wieder her. Scheitert etwas nach dem Umschalten, setzt es den alten Tag zurück und startet das alte Image wieder (fehlt es, wird es am alten Commit neu gebaut). Das Skript endet in beiden Fällen mit einem Fehlercode.
+Danach läuft die gesamte Operation in **einer SSH-Sitzung** auf dem Server. Ein atomar angelegtes Verzeichnis `/opt/minitandem/.deploy-lock` sperrt Aufbau, Vorschau, Umschalten, Prüfung und Fehlerbehandlung. Jeder Aufruf erhält eine zufällige Operations-ID. Die Sperre nennt ID und PID des Servers. Ein zweiter Aufruf scheitert sofort, auch bei einer unvollständigen oder verwaisten Sperre. Es gibt keine automatische Übernahme nach einer Zeitfrist.
 
-Am Ende steht der **vorherige Tag** und der Befehl für den Rollback (siehe unten) auf dem Bildschirm, zum Beispiel:
+Die Datei `.deployments/<Operations-ID>` hält vorherigen Checkout und Image-Tag, Ziel-Commit und Ziel-Tag, Phase und Zeitpunkt. Sie wird vor den jeweiligen Änderungen atomar ersetzt. Die Vorschau heisst `minitandem-preview-<Operations-ID>`, ist nur auf Loopback erreichbar und nutzt ein eigenes tmpfs statt des Familien-Volumes. Der Schrumpf-Schutz vergleicht zunächst die Zahl `records` mit live (maximal 15 % Rückgang); das öffentliche Ergebnis muss Revision und Commit der Vorschau tragen.
 
-```
-Previous tag: 4befd91 (checkout main)
-Rollback:  ssh -i ~/.ssh/minitandem_ed25519 -o IdentitiesOnly=yes ubuntu@179.237.77.144 "cd /opt/minitandem && git checkout --quiet 'main' && sed ... && { docker compose up -d --no-build || ...; }"
-```
+Normale Fehler und die behandelten Signale HUP/INT/TERM versuchen den alten Zustand wiederherzustellen. Rollback und Aufräumen prüfen die eigene Sperr-ID; ein inzwischen anderer Besitzer bleibt unberührt. Vor einem Rollback nach dem Umschalten muss zudem der Live-Tag noch der dieser Operation sein. Bei einem gescheiterten Rollback bleibt die Sperre mit `recovery-needed` stehen. Stromverlust, SIGKILL und eine unterbrochene Verbindung garantieren keinen automatischen Rollback: Die Serverdatei zeigt, wo die Operation stand. Die öffentliche Seite und `/healthz` prüfen, bevor etwas von Hand geändert wird.
 
-Alles Veränderliche steht am Kopf des Skripts und lässt sich über Umgebungsvariablen ersetzen (`DEPLOY_HOST`, `DEPLOY_KEY`, `DEPLOY_DIR`, `DEPLOY_URL`, `DEPLOY_PORT`, `DEPLOY_MAX_DROP`). Solange auf dem Server noch ein Image von vor `build-info.json` läuft, hat dessen `/healthz` keine `revision`; das Skript schreibt dann `revision none` und macht weiter, die Prüfung am Ende vergleicht nur mit der Vorschau.
+Am Ende nennt das Skript den vorherigen Tag und die Recovery-Datei. Umgebungsvariablen: `DEPLOY_HOST`, `DEPLOY_KEY`, `DEPLOY_DIR`, `DEPLOY_URL`, `DEPLOY_PORT`, `DEPLOY_MAX_DROP`, `DEPLOY_TRIES`, `DEPLOY_POLL`. Keine dieser Änderungen ist hier auf dem echten Server angewendet worden.
 
-**Von Hand** (Rückfall, falls das Skript nicht läuft oder der Zugang zu GitHub fehlt). Die Prüfungen oben entfallen dann, die Vorschau und der Schrumpf-Schutz auch:
+### Unterbrochenes Deployment wiederherstellen
 
-```
+Nur mit dem Eigentümer und dem Admin-Zugang. Zuerst auf dem Server `cat /opt/minitandem/.deploy-lock/owner` und die zugehörige `.deployments/<ID>` lesen. Solange die PID lebt, **nicht** übernehmen. Eine fehlende Owner-Datei nicht als tote Operation behandeln: Prozesse und laufende Docker-Builds zuerst untersuchen. Bei unbekanntem Live-Tag ebenfalls anhalten. Die folgende Folge gilt nur für eine vollständig geschriebene Sperre eines nachweislich beendeten Prozesses. Sie wird in einer Shell ausgeführt; kein `source` und kein `eval` auf dem Statusfile.
+
+```sh
+bash <<'RECOVER'
+set -euo pipefail
 cd /opt/minitandem
-git fetch --tags && git checkout <Tag oder Commit>
-sed -i "s/^MINITANDEM_TAG=.*/MINITANDEM_TAG=$(git rev-parse --short HEAD)/" .env
-docker compose up -d --build
+op=$(cat .deploy-lock/id)
+[[ $op =~ ^[a-f0-9-]{36}$ ]]
+mkdir .deploy-lock/recovery
+trap 'rmdir .deploy-lock/recovery 2>/dev/null || true' EXIT
+pid=$(sed -n 's/^pid=//p' .deploy-lock/owner)
+[[ $pid =~ ^[0-9]+$ ]] && [ "$pid" -gt 1 ]
+if kill -0 "$pid" 2>/dev/null; then echo 'Owner still alive; stop' >&2; exit 1; fi
+[ "$(cat .deploy-lock/id)" = "$op" ]
+record=.deployments/$op
+cat "$record"
+previous_ref=$(sed -n 's/^previous_ref=//p' "$record")
+previous_tag=$(sed -n 's/^previous_tag=//p' "$record")
+target_tag=$(sed -n 's/^target_tag=//p' "$record")
+[ -n "$previous_ref" ]
+[[ $previous_tag =~ ^[A-Za-z0-9._-]+$ ]]
+live_tag=$(sed -n 's/^MINITANDEM_TAG=//p' .env)
+[ "$live_tag" = "$previous_tag" ] || [ "$live_tag" = "$target_tag" ]
+git checkout --quiet "$previous_ref"
+sed "s/^MINITANDEM_TAG=.*/MINITANDEM_TAG=$previous_tag/" .env > .env.new
+cat .env.new > .env
+rm .env.new
+docker compose up -d --no-build
 curl -fsS https://minitandem.ch/healthz
+docker inspect --format '{{.State.Health.Status}}' "$(docker compose ps -q app)" | grep -qx healthy
+printf 'recovery=rolled-back at %s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" >> "$record"
+docker rm -f "minitandem-preview-$op" >/dev/null 2>&1 || true
+[ "$(cat .deploy-lock/id)" = "$op" ]
+rm .deploy-lock/id .deploy-lock/owner
+rmdir .deploy-lock/recovery
+rmdir .deploy-lock
+trap - EXIT
+RECOVER
 ```
 
-Der alte Image-Tag bleibt erhalten; das ist die Grundlage für den Rollback. Das Volume `state` wird bei einem Update nicht angetastet. `MINITANDEM_TAG` ist zugleich der `commit` im `/healthz`, deshalb immer die kurze Commit-ID eintragen.
+Fehlt das alte Image, die Folge anhalten; zuerst am protokollierten alten Commit mit dem Eigentümer neu bauen. Eine Recovery, die an einer Prüfung scheitert, lässt die äussere Sperre stehen. Eine nach SIGKILL selbst verwaiste `recovery`-Sperre ebenfalls erst nach Prozessprüfung entfernen. Diese Befehle sind dokumentiert, nicht ausgeführt.
 
 ## Rollback
 
-`ops/deploy.sh` macht diese Schritte bei einem Fehler selbst und druckt sie nach einem erfolgreichen Update mit dem richtigen Tag. Von Hand:
-
-```
-cd /opt/minitandem
-docker image ls minitandem-app          # welche Tags gibt es?
-git checkout <alter Commit>
-sed -i "s/^MINITANDEM_TAG=.*/MINITANDEM_TAG=<alter Tag>/" .env
-docker compose up -d --no-build         # nimmt das vorhandene Image
-curl -fsS https://minitandem.ch/healthz
-```
-
-Der Dienst hat keine Datenmigrationen (Format `schema: 1`), ein Rollback der Version lässt den Zustand daher unverändert nutzbar. Fehlt das alte Image, mit `docker compose up -d --build` am alten Commit neu bauen. Alte Images erst löschen (`docker image prune`), wenn die neue Version eine Weile problemlos läuft.
+Nach einem erfolgreichen Deployment ist ein geplanter Rollback ein **neuer** Aufruf von `ops/deploy.sh <vollständiger alter Commit>` mit der Freigabe des Eigentümers. Er nimmt dieselbe Sperre, prüft CI und Vorschau und hinterlässt eine eigene Operations-ID. Alte Images erst löschen, wenn die neue Version ausreichend beobachtet wurde. Das Familien-Volume wird beim Deployment nicht ersetzt.
 
 ## Sichern und Wiederherstellen des State-Volumes
 

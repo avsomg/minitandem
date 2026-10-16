@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {spawnSync} from 'node:child_process';
+import {spawnSync,spawn} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import test from 'node:test';
 
@@ -27,7 +27,12 @@ cat "$FAKE/gh.json"
 for last; do :; done
 case "$last" in
   http://127.0.0.1:*) [ -f "$FAKE/preview-up" ] || exit 7; cat "$FAKE/preview.json" ;;
-  */healthz) f="$FAKE/public-$(cat "$FAKE/running").json"; [ -f "$f" ] || exit 22; cat "$f" ;;
+  */healthz)
+    if [ -f "$FAKE/steal-owner" ] && [ -d "$DEPLOY_DIR/.deploy-lock" ]; then
+      current=$(sed -n 's/^MINITANDEM_TAG=//p' "$DEPLOY_DIR/.env")
+      if [ "$current" != "$(cat "$FAKE/old-tag")" ]; then echo replacement > "$DEPLOY_DIR/.deploy-lock/id"; exit 22; fi
+    fi
+    f="$FAKE/public-$(cat "$FAKE/running").json"; [ -f "$f" ] || exit 22; cat "$f" ;;
   *) exit 6 ;;
 esac
 `,
@@ -35,6 +40,7 @@ esac
 echo "docker $*" >> "$FAKE/log"
 case "$1 $2" in
   "compose build")
+    if [ -f "$FAKE/wait-build" ]; then touch "$FAKE/build-entered"; while [ ! -f "$FAKE/release-build" ]; do sleep 0.02; done; fi
     [ -f "$FAKE/build-fails" ] && { echo "build failed" >&2; exit 1; }
     echo "$MINITANDEM_TAG" >> "$FAKE/images" ;;
   "compose up")
@@ -71,8 +77,9 @@ function scenario(t,{preview=310,previewExtra,publicNew,files={}}={}){
   const oldTag=git(server,'rev-parse','--short',oldSha);
   fs.writeFileSync(path.join(server,'.env'),`ACME_EMAIL=owner@example.org\nMINITANDEM_TAG=${oldTag}\n`);
   for(const [name,body] of Object.entries(TOOLS))fs.writeFileSync(path.join(bin,name),body,{mode:0o755});
-  fs.writeFileSync(path.join(fake,'gh.json'),'[{"conclusion":"success","status":"completed"}]');
+  fs.writeFileSync(path.join(fake,'gh.json'),JSON.stringify([{conclusion:'success',status:'completed',headSha:nextSha}]));
   fs.writeFileSync(path.join(fake,'images'),oldTag+'\n');fs.writeFileSync(path.join(fake,'running'),oldTag);
+  fs.writeFileSync(path.join(fake,'old-tag'),oldTag);
   // The image that was live before build-info.json existed answers with the record count only.
   fs.writeFileSync(path.join(fake,`public-${oldTag}.json`),json(321));
   // The new image: what its own preview says is also what the public site shows once it is switched (unless a test says otherwise).
@@ -86,7 +93,7 @@ function scenario(t,{preview=310,previewExtra,publicNew,files={}}={}){
   const run=(...args)=>spawnSync(script,args,{env,encoding:'utf8'});
   const log=()=>fs.existsSync(path.join(fake,'log'))?fs.readFileSync(path.join(fake,'log'),'utf8').split('\n').filter(Boolean):[];
   const tagInEnv=()=>/^MINITANDEM_TAG=(.*)$/m.exec(fs.readFileSync(path.join(server,'.env'),'utf8'))[1];
-  return {run,log,oldSha,nextSha,oldTag,newTag,tagInEnv,server,fake,
+  return {run,log,env,oldSha,nextSha,oldTag,newTag,tagInEnv,server,fake,
     running:()=>fs.readFileSync(path.join(fake,'running'),'utf8').trim(),
     previewUp:()=>fs.existsSync(path.join(fake,'preview-up')),
     branch:()=>git(server,'rev-parse','--abbrev-ref','HEAD'),head:()=>git(server,'rev-parse','HEAD')};
@@ -112,7 +119,7 @@ test('ops/deploy.sh refuses unless GitHub CI succeeded for that exact commit',{s
     const s=scenario(t,{files:{'gh.json':answer}});
     const result=s.run(s.nextSha);
     assert.notEqual(result.status,0,answer);assert.match(result.stderr,message,answer);
-    assert.deepEqual(s.log(),[`gh run list --repo avsomg/minitandem --commit ${s.nextSha} --json conclusion,status`],'only GitHub was asked, never the server');
+    assert.deepEqual(s.log(),[`gh run list --repo avsomg/minitandem --workflow test.yml --commit ${s.nextSha} --limit 1 --json conclusion,status,headSha`],'only GitHub was asked, never the server');
     untouched(s);
   }
 });
@@ -141,8 +148,11 @@ test('ops/deploy.sh previews the new image without the live state, switches, che
   assert.match(result.stdout,new RegExp(`Previous tag: ${s.oldTag}`));
   const rollback=result.stdout.split('\n').find(line=>line.startsWith('Rollback:'));
   assert.ok(rollback,'the rollback command is printed');
-  assert.match(rollback,/ssh -i \S+ -o IdentitiesOnly=yes ubuntu@192\.0\.2\.10 "cd \S+ && git checkout --quiet 'main' && /);
-  assert.ok(rollback.includes(`MINITANDEM_TAG=${s.oldTag}/`));assert.match(rollback,/docker compose up -d --no-build/);
+  assert.match(rollback,/inspect .*deployments.*deployment lock/);
+  const records=fs.readdirSync(path.join(s.server,'.deployments'));assert.equal(records.length,1);
+  const record=fs.readFileSync(path.join(s.server,'.deployments',records[0]),'utf8');
+  assert.ok(record.includes('previous_tag='+s.oldTag));assert.ok(record.includes('target_commit='+s.nextSha));assert.match(record,/stage=done/);
+  assert.equal(fs.existsSync(path.join(s.server,'.deploy-lock')),false);
   const log=s.log();
   const at=prefix=>log.findIndex(line=>line.startsWith(prefix));
   assert.ok(at('gh run list')<at('ssh'),'CI is checked before the server is touched');
@@ -158,6 +168,7 @@ test('ops/deploy.sh previews the new image without the live state, switches, che
 
 test('ops/deploy.sh does nothing when the commit is already live',{skip:HAS_TOOLS?false:'bash or git is not installed'},t=>{
   const s=scenario(t);
+  fs.writeFileSync(path.join(s.fake,'gh.json'),JSON.stringify([{conclusion:'success',status:'completed',headSha:s.oldSha}]));
   const result=s.run(s.oldSha);
   assert.equal(result.status,0);assert.match(result.stdout,/already live/);
   assert.equal(s.log().some(line=>line.startsWith('docker compose')),false);untouched(s);
@@ -198,4 +209,44 @@ test('ops/deploy.sh refuses a checkout with uncommitted changes on the server',{
   const result=s.run(s.nextSha);
   assert.notEqual(result.status,0);assert.match(result.stderr,/uncommitted changes/);
   assert.equal(s.log().some(line=>line.startsWith('docker')),false);
+});
+const waitFor=async predicate=>{
+  for(let i=0;i<300;i++){if(predicate())return;await new Promise(resolve=>setTimeout(resolve,10));}
+  assert.fail('fixture process did not reach its expected state');
+};
+function background(s){
+  const child=spawn(script,[s.nextSha],{env:s.env,stdio:['ignore','pipe','pipe']});let output='';
+  child.stdout.on('data',chunk=>output+=chunk);child.stderr.on('data',chunk=>output+=chunk);
+  const done=new Promise((resolve,reject)=>{child.on('error',reject);child.on('close',(code,signal)=>resolve({code,signal,output}));});
+  return {child,done};
+}
+test('one SSH operation holds the server lock throughout build and refuses a concurrent deploy immediately',{skip:HAS_TOOLS?false:'bash or git is not installed'},async t=>{
+  const s=scenario(t,{files:{'wait-build':''}}),first=background(s);
+  t.after(()=>{if(fs.existsSync(s.fake))fs.writeFileSync(path.join(s.fake,'release-build'),'');first.child.kill();});
+  await waitFor(()=>fs.existsSync(path.join(s.fake,'build-entered')));
+  const second=s.run(s.nextSha);assert.notEqual(second.status,0);assert.match(second.stderr,/another operation owns the lock/);
+  assert.equal(s.log().filter(row=>row==='docker compose build app').length,1);
+  fs.writeFileSync(path.join(s.fake,'release-build'),'');assert.equal((await first.done).code,0);
+  assert.equal(fs.existsSync(path.join(s.server,'.deploy-lock')),false);
+});
+test('an interrupted server operation leaves its previous and target versions for explicit recovery',{skip:HAS_TOOLS?false:'bash or git is not installed'},async t=>{
+  const s=scenario(t,{files:{'wait-build':''}}),first=background(s);
+  await waitFor(()=>fs.existsSync(path.join(s.fake,'build-entered')));
+  const owner=fs.readFileSync(path.join(s.server,'.deploy-lock','owner'),'utf8'),pid=Number(/^pid=(\d+)$/m.exec(owner)[1]);
+  process.kill(pid,'SIGKILL');fs.writeFileSync(path.join(s.fake,'release-build'),'');
+  assert.notEqual((await first.done).code,0);
+  const id=fs.readFileSync(path.join(s.server,'.deploy-lock','id'),'utf8').trim(),record=fs.readFileSync(path.join(s.server,'.deployments',id),'utf8');
+  assert.match(record,/stage=checkout/);assert.ok(record.includes('previous_tag='+s.oldTag));assert.ok(record.includes('target_commit='+s.nextSha));
+  assert.notEqual(s.run(s.nextSha).status,0,'a stale lock is not silently stolen');
+});
+test('a late failure cannot clean up or roll back an operation whose ownership changed',{skip:HAS_TOOLS?false:'bash or git is not installed'},t=>{
+  const s=scenario(t,{files:{'steal-owner':''}}),result=s.run(s.nextSha);
+  assert.notEqual(result.status,0);assert.match(result.stderr,/ownership changed/);
+  assert.equal(s.running(),s.newTag);assert.equal(s.tagInEnv(),s.newTag);
+  assert.equal(fs.readFileSync(path.join(s.server,'.deploy-lock','id'),'utf8').trim(),'replacement');
+  assert.equal(s.log().filter(row=>row==='up '+s.oldTag).length,0);
+});
+test('a successful workflow for a different head never satisfies the named exact-commit check',{skip:HAS_TOOLS?false:'bash or git is not installed'},t=>{
+  const s=scenario(t);fs.writeFileSync(path.join(s.fake,'gh.json'),JSON.stringify([{headSha:s.oldSha,status:'completed',conclusion:'success'}]));
+  assert.notEqual(s.run(s.nextSha).status,0);assert.equal(s.log().some(row=>row.startsWith('ssh')),false);
 });
