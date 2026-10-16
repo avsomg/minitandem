@@ -6,6 +6,7 @@ import os from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {loadCatalog,qualityReport,root} from './editorial/quality.mjs';
 import {placePage,generatePublicPages,site} from './public-pages.mjs';
+import {LEGAL_URLS} from './legal-pages.mjs';
 import {SITE_ORIGIN} from './site.mjs';
 import {loadStack} from './test-support.mjs';
 const catalog=loadCatalog(),P=catalog.MinitandemPlanning,X=catalog.MinitandemExchange;
@@ -176,8 +177,8 @@ test('static directory and sitemap include all public records and no archives',(
   const dir=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-public-'));
   try{
     assert.equal(generatePublicPages(catalog.ACTIVITIES,catalog.CATALOG_REGIONS,dir,'2026-09-27'),COUNTS.catalog);
-    // One page per published card, plus the home page, the directory and the two project pages.
-    const sitemap=fs.readFileSync(path.join(dir,'sitemap.xml'),'utf8'),fixedPages=['/','/places/','/projekt/','/projekt/en/'];
+    // One page per published card, plus the home page, the directory, project pages and legal notices.
+    const sitemap=fs.readFileSync(path.join(dir,'sitemap.xml'),'utf8'),fixedPages=['/','/places/','/projekt/','/projekt/en/',...LEGAL_URLS];
     assert.equal((sitemap.match(/<loc>/g)||[]).length,COUNTS.catalog+fixedPages.length);
     for(const page of fixedPages)assert.ok(sitemap.includes(`<loc>${SITE_ORIGIN}${page}</loc>`),page);
     assert.ok(sitemap.includes(`<loc>${SITE_ORIGIN}/projekt/</loc>`)&&sitemap.includes(`<loc>${SITE_ORIGIN}/projekt/en/</loc>`));

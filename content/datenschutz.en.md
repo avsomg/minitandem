@@ -31,6 +31,10 @@ For fault analysis, each request produces an entry with the time, method, respon
 
 The site sets no cookies and uses no analytics. It loads no third-party scripts or fonts. Scripts, catalogue files, images and the service worker come from this site; the service worker stores files in the browser for offline use. External map tiles are loaded only while the map is open. The location service also depends on your browser or device’s settings and services.
 
+## Hosting
+
+The site and its access log are hosted at Infomaniak Public Cloud in Switzerland.
+
 ## Your rights
 
 For information about your personal data, or to request correction or deletion, write to hello@minitandem.ch. Browser data and downloaded backups are on your device; we cannot view or delete them on our server.

@@ -10,6 +10,9 @@ import {fileURLToPath} from 'node:url';
 import test from 'node:test';
 import {JobQueue} from './editorial/jobs.mjs';
 
+// This file exercises the enabled protocol. family-sync-off.test.mjs checks the safe default separately.
+process.env.MINITANDEM_FAMILY_SYNC='1';
+
 test('Mac service authenticates family sync, conflicts and editorial intake',async()=>{
   const temp=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-service-'));
   // The operations route reads the editorial queue; the test gives it an empty one of its own instead of the real, private queue.
@@ -22,7 +25,6 @@ test('Mac service authenticates family sync, conflicts and editorial intake',asy
     assert.equal(result.status,0,result.stderr);return result.stdout.trim();
   };
   const familyKey=issue('new-family'),editorKey=issue('new-admin');
-  process.env.MINITANDEM_FAMILY_SYNC='1';
   process.env.MINITANDEM_STATE_DIR=env.MINITANDEM_STATE_DIR;
   process.env.MINITANDEM_CORRECTION_DIR=env.MINITANDEM_CORRECTION_DIR;
   process.env.MINITANDEM_QUEUE_FILE=env.MINITANDEM_QUEUE_FILE;

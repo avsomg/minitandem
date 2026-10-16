@@ -31,6 +31,10 @@ Pour rechercher les causes des erreurs, chaque accès produit une entrée avec l
 
 Le site ne dépose aucun cookie et n’utilise aucun outil d’analyse. Il ne charge aucun script ni aucune police de caractères de tiers. Les scripts, fichiers du catalogue, images et le service worker proviennent du même site ; le service worker conserve des fichiers dans le navigateur pour l’utilisation hors ligne. Les tuiles ne sont chargées depuis un serveur externe que lorsque la carte est ouverte. Le service de localisation dépend aussi des réglages et services de votre navigateur ou appareil.
 
+## Hébergement
+
+Le site et son journal des accès sont hébergés chez Infomaniak Public Cloud en Suisse.
+
 ## Vos droits
 
 Pour demander des informations sur vos données personnelles, leur rectification ou leur suppression, écrivez à hello@minitandem.ch. Les données du navigateur et les sauvegardes téléchargées se trouvent sur votre appareil ; nous ne pouvons pas les consulter ni les supprimer sur notre serveur.

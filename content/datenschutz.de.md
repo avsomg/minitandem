@@ -31,6 +31,10 @@ Zur Fehleranalyse wird pro Zugriff ein Protokolleintrag mit Zeitpunkt, Methode, 
 
 Die Website setzt keine Cookies und verwendet keine Analysewerkzeuge. Sie lädt keine Skripte oder Schriftarten von Dritten. Die Skripte, Katalogdateien, Bilder und der Service Worker kommen von derselben Website; der Service Worker speichert Dateien für die Offline-Nutzung im Browser. Kartenkacheln werden nur bei geöffneter Karte extern geladen. Beim Ortungsdienst gelten zusätzlich die Einstellungen und Dienste Ihres Browsers beziehungsweise Geräts.
 
+## Hosting
+
+Die Website und ihr Zugriffsprotokoll werden bei Infomaniak Public Cloud in der Schweiz gehostet.
+
 ## Ihre Rechte
 
 Für Auskunft über Ihre Personendaten sowie für Berichtigung oder Löschung schreiben Sie an hello@minitandem.ch. Browserdaten und heruntergeladene Sicherungen liegen auf Ihrem Gerät; wir können sie nicht auf unserem Server einsehen oder löschen.
