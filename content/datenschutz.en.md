@@ -1,40 +1,45 @@
-# Privacy
+# Privacy notice
 
 As of 16 October 2026
 
-## Responsible person and contact
+## Responsible person
 
-Alex Shamrai, Hauptstrasse 15, 1716 Plaffeien, Schweiz.
-hello@minitandem.ch
+Alex Shamrai, Hauptstrasse 15, 1716 Plaffeien, Switzerland
+
+E-mail: hello@minitandem.ch
 
 ## Your records
 
-Favourites, notes, statuses, visit plans, the child’s age and the saved starting point stay in your browser. Filters, the town selected for distances and the language are stored there too. The backup file is downloaded to your device. These records are not sent to our server. You can change your records in the interface or delete the site’s stored data in your browser. Delete downloaded files on your device.
+Favourites, notes, statuses, visit plans, the child’s age and the saved starting point stay in your browser. Filters, the town selected for distances and the language are stored there too. A backup file that you export is downloaded to your device. These records are not sent to our server. You can change your records in the interface or delete the site’s stored data in your browser. Delete downloaded files on your device.
 
-Family sync is switched off. The server accepts no family data, including for existing families. No demo family is offered.
+Syncing between devices is switched off. The server accepts no family data.
 
-## Location and maps
+## Location and map
 
-The page calls your browser’s location service only when you request it. The position stays in the page’s memory and is neither stored persistently nor sent to our server. When you open the map, your browser requests tiles directly from the federal geoportal (wmts.geo.admin.ch). Swisstopo receives your IP address and the tile requests. The position itself is not sent as coordinates, but the displayed area determines which tiles are requested.
+The page asks for your location only when you request it, through your browser’s location service. The location stays in the page’s memory. It is neither stored permanently nor sent to our server.
 
-Google Maps opens outside this site after a click. The link includes the destination and, if you entered one, your starting point. Google’s privacy rules apply there. Links to organisers and sources also open only after a click.
+When you open the map, your browser loads the map tiles directly from the federal geoportal (wmts.geo.admin.ch). The Federal Office of Topography swisstopo then sees your IP address and which tiles are requested. Your location is not sent, but the tiles show which part of the map you are viewing.
+
+Google Maps opens only after you click the link, outside this site. The link contains the destination and, if you entered a starting point, that starting point. Google’s privacy policy applies there. Links to organisers and sources also open their websites only after a click.
 
 ## Report an error
 
-“Report an error” opens your e-mail application with a template addressed to hello@minitandem.ch. The message is sent only if you send it from that application. The website does not submit this report to a server API. The template includes the activity’s name, its ID and a link to the card. Your message is used to handle the report. Messages to hello@minitandem.ch are received and stored in a mailbox at Infomaniak in Switzerland.
+“Report an error” opens your e-mail application with a pre-filled message addressed to hello@minitandem.ch. The pre-filled message contains the activity’s name, its ID and a link to its entry. The message is sent only when you send it from that application; the website itself transmits nothing. We receive your e-mail address and your message and use them only to handle the report.
+
+E-mails to hello@minitandem.ch are stored in a mailbox at Infomaniak in Switzerland and forwarded to a mailbox at Google (Gmail). Google may also process them outside Switzerland, in particular in the USA.
 
 ## Access log
 
-For fault analysis, each request produces an entry with the time, method, response status and technical details about the connection and browser. IP addresses are masked before writing (IPv4 to /24, IPv6 to /48). The Authorization and Cookie headers are removed. Entries are deleted within seven days, even with little traffic. The application service’s error logs contain no IP addresses.
+For troubleshooting, the server writes an entry for each request: time, request method, response status, duration, response size and technical details of the connection (protocol, encryption). The IP address is stored only in shortened form (IPv4 to /24, IPv6 to /48). The address of the requested page and the details your browser sends are not stored. Entries are deleted after seven days at the latest. The server’s error messages contain no IP addresses.
 
-## Browser storage and external content
+## Cookies and external content
 
-The site sets no cookies and uses no analytics. It loads no third-party scripts or fonts. Scripts, catalogue files, images and the service worker come from this site; the service worker stores files in the browser for offline use. External map tiles are loaded only while the map is open. The location service also depends on your browser or device’s settings and services.
+The site sets no cookies and uses no analytics. It loads no third-party scripts or fonts. Scripts, catalogue files, images and the service worker come from this site. The service worker stores files in the browser so that the site also works offline. External map tiles are loaded only while the map is open. The settings of your browser and device also apply to the location service.
 
 ## Hosting
 
-The site and its access log run on a server of Infomaniak Public Cloud in Switzerland. The provider is Infomaniak Network SA, Rue Eugène-Marziano 25, 1227 Les Acacias.
+The site and its access log are hosted on a server of Infomaniak Public Cloud in Switzerland. The provider is Infomaniak Network SA, Rue Eugène-Marziano 25, 1227 Les Acacias (Geneva).
 
 ## Your rights
 
-For information about your personal data, or to request correction or deletion, write to hello@minitandem.ch. Browser data and downloaded backups are on your device; we cannot view or delete them on our server.
+You can ask for information about your personal data and request its correction or deletion. To do so, write to hello@minitandem.ch. Browser data and downloaded backups are only on your device; we have no access to them.

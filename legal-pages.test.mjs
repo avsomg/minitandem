@@ -21,11 +21,11 @@ test('six script-free notices have canonical and alternate links, contacts, and 
     assert.ok(html.includes(`hreflang="x-default" href="${SITE_ORIGIN}${legalURL(kind,'de')}"`));
     assert.match(html,/<link rel="stylesheet" href="\/styles.css">/);
     assert.doesNotMatch(html,/<script|<style|\sstyle=|\son[a-z]+=|[\u0400-\u04ff]/i);
-    assert.ok(html.includes('Alex Shamrai'));assert.ok(html.includes('Hauptstrasse 15, 1716 Plaffeien, Schweiz'));
+    assert.ok(html.includes('Alex Shamrai'));assert.ok(html.includes('Hauptstrasse 15, 1716 Plaffeien, '+{de:'Schweiz',fr:'Suisse',en:'Switzerland'}[lang]));
     assert.deepEqual([...new Set(html.match(/[\w.+-]+@[\w.-]+\.[a-z]{2,}/gi))],['hello@minitandem.ch']);
     const footer=html.match(/<footer\b[^>]*>(.*?)<\/footer>/s)[1];
     for(const key of ['impressum','datenschutz'])assert.ok(footer.includes(`href="${legalURL(key,lang)}">${LEGAL_LABELS[lang][key]}</a>`));
-    if(kind==='datenschutz')for(const fact of ['wmts.geo.admin.ch','Google Maps','IPv4','IPv6','/24','/48','Authorization','Cookie'])assert.ok(html.includes(fact));
+    if(kind==='datenschutz')for(const fact of ['wmts.geo.admin.ch','Google Maps','IPv4','IPv6','/24','/48','Infomaniak Network SA','Gmail'])assert.ok(html.includes(fact));
   }
 });
 

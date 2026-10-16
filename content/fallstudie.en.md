@@ -89,7 +89,7 @@ I cannot read code fluently yet. I can explain how it works: the four main paths
   are so far only in English.
 - Many fields are "unknown". That is on purpose, but less convenient for parents.
 - If the whole server goes down, it cannot send an e-mail any more. An outside check is still missing.
-- Syncing between devices is open to the public only for one demo family.
+- Syncing between devices exists in the code but is switched off. Records therefore stay in the browser where they were made.
 
 ## Contact
 

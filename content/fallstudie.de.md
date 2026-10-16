@@ -94,7 +94,7 @@ Code lese ich noch nicht flüssig. Die Abläufe kann ich erklären: Die vier wic
   Einzelseiten ohne JavaScript (unter /places/) gibt es bisher nur auf Englisch.
 - Viele Felder sind «unbekannt». Das ist Absicht, aber für Eltern weniger bequem.
 - Fällt der ganze Server aus, kann er keine E-Mail mehr schicken. Eine Prüfung von aussen fehlt noch.
-- Den Abgleich zwischen Geräten gibt es öffentlich nur für eine Demo-Familie.
+- Der Abgleich zwischen Geräten ist im Code vorhanden, aber ausgeschaltet. Aufzeichnungen bleiben darum in dem Browser, in dem sie entstanden sind.
 
 ## Kontakt
 

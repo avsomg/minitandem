@@ -2,39 +2,44 @@
 
 État au 16 octobre 2026
 
-## Responsable et contact
+## Responsable
 
-Alex Shamrai, Hauptstrasse 15, 1716 Plaffeien, Schweiz.
-hello@minitandem.ch
+Alex Shamrai, Hauptstrasse 15, 1716 Plaffeien, Suisse
+
+E-mail : hello@minitandem.ch
 
 ## Vos données
 
-Les favoris, notes, statuts, plans de visite, l’âge de l’enfant et le point de départ enregistré restent dans votre navigateur. Les filtres, la localité choisie pour les distances et la langue y sont aussi enregistrés. Le fichier de sauvegarde est téléchargé sur votre appareil. Ces données ne sont pas envoyées à notre serveur. Vous pouvez modifier vos données dans l’interface ou supprimer les données du site dans votre navigateur. Les fichiers téléchargés se suppriment sur votre appareil.
+Les favoris, notes, statuts, plans de visite, l’âge de l’enfant et le point de départ enregistré restent dans votre navigateur. Les filtres, la localité choisie pour les distances et la langue y sont aussi enregistrés. Un fichier de sauvegarde que vous exportez est téléchargé sur votre appareil. Ces données ne sont pas envoyées à notre serveur. Vous pouvez modifier vos données dans l’interface ou effacer les données du site dans votre navigateur. Vous pouvez effacer les fichiers téléchargés sur votre appareil.
 
-La synchronisation familiale est désactivée. Le serveur n’accepte aucune donnée familiale, même pour une famille existante. Aucune famille de démonstration n’est proposée.
+La synchronisation entre appareils est désactivée. Le serveur n’accepte aucune donnée familiale.
 
-## Position et cartes
+## Position et carte
 
-La page ne fait appel au service de localisation du navigateur qu’à votre demande. La position reste en mémoire dans la page et n’est ni enregistrée durablement ni envoyée à notre serveur. Lorsque vous ouvrez la carte, votre navigateur charge directement les tuiles du géoportail fédéral (wmts.geo.admin.ch). Swisstopo reçoit alors votre adresse IP et les demandes de tuiles. La position n’est pas transmise sous forme de coordonnées, mais la zone affichée détermine les tuiles demandées.
+La page ne demande votre position que si vous le souhaitez, par le service de localisation de votre navigateur. La position reste dans la mémoire de la page. Elle n’est ni enregistrée durablement ni envoyée à notre serveur.
 
-Google Maps s’ouvre hors du site après un clic. Le lien contient la destination et, si vous avez saisi un point de départ, ce point de départ. Les règles de confidentialité de Google s’y appliquent. Les liens vers les organisateurs et les sources ne s’ouvrent également qu’après un clic.
+Lorsque vous ouvrez la carte, votre navigateur charge les tuiles de la carte directement depuis le géoportail fédéral (wmts.geo.admin.ch). L’Office fédéral de topographie swisstopo voit alors votre adresse IP et les tuiles demandées. Votre position n’est pas transmise, mais les tuiles montrent quelle partie de la carte vous regardez.
+
+Google Maps ne s’ouvre qu’après un clic sur le lien, en dehors de ce site. Le lien contient la destination et, si vous avez saisi un point de départ, ce point de départ. La déclaration de confidentialité de Google s’y applique. De même, les liens vers les organisateurs et les sources n’ouvrent les sites correspondants qu’après un clic.
 
 ## Signaler une erreur
 
-« Signaler une erreur » ouvre votre logiciel de messagerie avec un modèle adressé à hello@minitandem.ch. Le message n’est envoyé que si vous l’expédiez depuis ce logiciel. Le site ne transmet pas ce signalement à une interface du serveur. Le modèle contient le nom de l’activité, son identifiant et un lien vers la fiche. Votre message sert à traiter le signalement. Les messages adressés à hello@minitandem.ch sont reçus et conservés dans une boîte aux lettres chez Infomaniak, en Suisse.
+« Signaler une erreur » ouvre votre logiciel de messagerie avec un message prérempli adressé à hello@minitandem.ch. Le message prérempli contient le nom de l’activité, son identifiant et un lien vers la fiche. Le message n’est envoyé que si vous l’expédiez depuis ce logiciel ; le site lui-même ne transmet rien. Nous recevons votre adresse e-mail et votre message et ne les utilisons que pour traiter le signalement.
+
+Les e-mails adressés à hello@minitandem.ch sont conservés dans une boîte aux lettres chez Infomaniak en Suisse et transférés vers une boîte chez Google (Gmail). Google peut les traiter aussi hors de Suisse, notamment aux États-Unis.
 
 ## Journal des accès
 
-Pour rechercher les causes des erreurs, chaque accès produit une entrée avec l’heure, la méthode, le statut de réponse et des informations techniques sur la connexion et le navigateur. Les adresses IP sont masquées avant l’écriture (IPv4 à /24, IPv6 à /48). Les en-têtes Authorization et Cookie sont retirés. Les entrées sont supprimées au plus tard après sept jours, même lorsque les accès sont rares. Les journaux d’erreurs du service applicatif ne contiennent aucune adresse IP.
+Pour rechercher les causes des erreurs, le serveur écrit une entrée pour chaque accès : date et heure, méthode de la requête, statut de la réponse, durée, taille de la réponse et informations techniques sur la connexion (protocole, chiffrement). L’adresse IP n’est enregistrée que sous forme tronquée (IPv4 à /24, IPv6 à /48). L’adresse de la page demandée et les informations envoyées par votre navigateur ne sont pas enregistrées. Les entrées sont supprimées après sept jours au plus tard. Les messages d’erreur du serveur ne contiennent aucune adresse IP.
 
-## Stockage dans le navigateur et contenus externes
+## Cookies et contenus externes
 
-Le site ne dépose aucun cookie et n’utilise aucun outil d’analyse. Il ne charge aucun script ni aucune police de caractères de tiers. Les scripts, fichiers du catalogue, images et le service worker proviennent du même site ; le service worker conserve des fichiers dans le navigateur pour l’utilisation hors ligne. Les tuiles ne sont chargées depuis un serveur externe que lorsque la carte est ouverte. Le service de localisation dépend aussi des réglages et services de votre navigateur ou appareil.
+Le site ne dépose aucun cookie et n’utilise aucun outil d’analyse. Il ne charge aucun script ni aucune police de caractères de tiers. Les scripts, les fichiers du catalogue, les images et le service worker proviennent de ce site. Le service worker conserve des fichiers dans le navigateur pour que le site fonctionne aussi hors ligne. Les tuiles externes ne sont chargées que lorsque la carte est ouverte. Pour le service de localisation, les réglages de votre navigateur et de votre appareil s’appliquent aussi.
 
 ## Hébergement
 
-Le site et son journal des accès fonctionnent sur un serveur d’Infomaniak Public Cloud en Suisse. Le fournisseur est Infomaniak Network SA, Rue Eugène-Marziano 25, 1227 Les Acacias.
+Le site et son journal des accès sont hébergés sur un serveur d’Infomaniak Public Cloud en Suisse. Le fournisseur est Infomaniak Network SA, rue Eugène-Marziano 25, 1227 Les Acacias (Genève).
 
 ## Vos droits
 
-Pour demander des informations sur vos données personnelles, leur rectification ou leur suppression, écrivez à hello@minitandem.ch. Les données du navigateur et les sauvegardes téléchargées se trouvent sur votre appareil ; nous ne pouvons pas les consulter ni les supprimer sur notre serveur.
+Vous pouvez demander des informations sur vos données personnelles ainsi que leur rectification ou leur effacement. Écrivez pour cela à hello@minitandem.ch. Les données du navigateur et les sauvegardes téléchargées se trouvent uniquement sur votre appareil ; nous n’y avons pas accès.
