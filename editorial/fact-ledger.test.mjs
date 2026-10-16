@@ -128,13 +128,18 @@ test('full-review bindings can verify a retained field only against its exact ap
 
 test('page-record version is linked by recorded bytes or text, never by quote survival alone',async t=>{
   const f=ledgerFixture(t),version=f.evidence.textHash.slice(0,12);
-  writeJson(path.join(f.editorial,'source-watch.json'),{sources:[{id:'fixture-source',url:f.evidence.url,recordIds:['fixture']}]});
+  writeJson(path.join(f.editorial,'source-watch.json'),{sources:[{id:'fixture-source',url:'https://www.fixture.example.org/meeting/',recordIds:['fixture']}]});
   await writeRecord(f.editorial,'fixture-source',{version,hash:f.evidence.textHash,fetchedAt:f.evidence.fetchedAt,finalUrl:f.evidence.finalUrl,
     contentType:'text/plain',status:200,parser:'v2',rawHash:null,rawBytes:0,raw:null,full:{parser:f.evidence.parser,text:f.evidence.text},alarm:[]});
   const ledger=await buildLedger({root:f.root});assert.equal(row(ledger,'amount').pageRecordVersion,version);
   assert.equal(row(ledger,'amount').pageRecord.match,'same-content');
   fs.writeFileSync(path.join(f.editorial,'page-records/fixture-source',version+'.full.txt.gz'),'damaged');
   await assert.rejects(buildLedger({root:f.root}),/Damaged matching page record/);
+  fs.rmSync(path.join(f.editorial,'page-records/fixture-source'),{recursive:true});
+  const text='A different page body with the old quotes still present. '+f.evidence.text,changed=hash(text);
+  await writeRecord(f.editorial,'fixture-source',{version:changed.slice(0,12),hash:changed,fetchedAt:f.evidence.fetchedAt,finalUrl:f.evidence.finalUrl,
+    contentType:'text/plain',status:200,parser:'v2',rawHash:null,rawBytes:0,raw:null,full:{parser:f.evidence.parser,text},alarm:[]});
+  assert.equal(row(await buildLedger({root:f.root}),'amount').pageRecordVersion,null);
 });
 
 test('unknown placeholders stay unknown and a checkout without journal evidence remains inherited',async t=>{

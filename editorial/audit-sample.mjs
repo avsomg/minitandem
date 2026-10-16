@@ -24,6 +24,7 @@ import {loadCatalog} from './quality.mjs';
 import {FIELD_CONTRACT} from './field-contract.mjs';
 import {validateSnapshot,normalizeQuote,monitorSnapshot,writeJsonAtomic,hash} from './evidence.mjs';
 import {claudeEnvironment,assertClaudeReady,failureDetail,claudeUsage,isolationArgs,wrapText} from './claude-worker.mjs';
+import {LEDGER_DIRECTORY,validateLedger} from './fact-ledger.mjs';
 
 export const workspace=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 export const PROMPT_VERSION='audit-1';
@@ -37,6 +38,27 @@ const PIPELINE_KINDS=['facts','verify-facts','review-patch','integrate','editori
 // Which entries of the field contract define each judged field. The model gets the contract's own wording.
 const CONTRACT_KEYS={schedule:['schedule','scheduleValidThrough','days','events'],age:['min','max','age','ageUpperUncertainFrom'],
   price:['price','priceKind','amount'],address:['address','addressPrecision'],booking:['practical.booking'],language:['languages'],contact:['contacts']};
+const FACT_ORIGINS=['verified','inherited','mixed','unknown','unavailable'];
+
+// A judged group may contain both inherited and verified fields. Keep it mixed;
+// the model's group verdict cannot locate a fault in one of its components.
+export function factOriginsFor(card,ledger){
+  const rows=new Map((ledger.cards?.get(card.id)?.fields||[]).map(row=>[row.field,row]));
+  return Object.fromEntries(FIELDS.map(field=>{
+    const fields=Object.fromEntries(CONTRACT_KEYS[field].map(key=>[key,rows.get(key)?.origin||'unavailable']));
+    const filled=new Set(Object.values(fields).filter(origin=>origin!=='unknown'));
+    return [field,{origin:filled.size>1?'mixed':[...filled][0]||'unknown',fields}];
+  }));
+}
+export function readFactLedger(root,records,journal){
+  const file=path.join(root,LEDGER_DIRECTORY,'ledger.json');
+  if(!fs.existsSync(file))return {status:'absent',note:'No fact ledger found; faults cannot be split into verified and inherited values.'};
+  try{
+    const ledger=validateLedger(JSON.parse(fs.readFileSync(file,'utf8')),records,{journal});
+    return {status:'current',note:'Current fact ledger; mixed groups contain both verified and inherited values and are counted separately.',
+      catalogueRevision:ledger.catalogueRevision,journalRevision:ledger.journalRevision,generatedAt:ledger.generatedAt,cards:new Map(ledger.cards.map(card=>[card.id,card]))};
+  }catch(error){return {status:/^Stale fact ledger/.test(error.message)?'stale':'invalid',note:error.message+'; fact origins are unavailable.'};}
+}
 
 const today=(now=new Date())=>now.toLocaleDateString('en-CA',{timeZone:'Europe/Zurich'});
 const safeName=name=>String(name).replace(/[^A-Za-z0-9._-]+/g,'-');
@@ -168,6 +190,7 @@ export async function loadContext(root,{originals='snapshots'}={}){
     const key=normalizeUrl(url);if(!urlIndex.has(key))urlIndex.set(key,[]);urlIndex.get(key).push(evidence.id);
   }
   const journal=readJson(path.join(editorial,'approved-updates.json'),{updates:[]});
+  const factLedger=readFactLedger(root,catalogue.ACTIVITIES,journal);
   const edited=new Set((journal.updates||[]).filter(update=>!update.supersededBy).map(update=>update.draft?.cardId).filter(Boolean));
   const watch=new Map();
   for(const source of readJson(path.join(editorial,'source-watch.json'),{sources:[]}).sources)
@@ -183,7 +206,7 @@ export async function loadContext(root,{originals='snapshots'}={}){
   const withCaptured=published.filter(card=>found.get(card.id).captured.length).map(card=>card.id);
   const withMonitor=published.filter(card=>found.get(card.id).monitor.length).map(card=>card.id);
   const usable=card=>found.get(card.id).captured.length>0||originals==='both'&&found.get(card.id).extra.length>0;
-  return {root,catalogue,published,byId:new Map(published.map(card=>[card.id,card])),queue,edited,
+  return {root,catalogue,published,byId:new Map(published.map(card=>[card.id,card])),queue,edited,factLedger,
     stratum:card=>edited.has(card.id)||queue.checked.has(card.id)?'pipeline':'base',
     originalsFor:card=>originals==='both'?[...found.get(card.id).captured,...found.get(card.id).extra]:found.get(card.id).captured,
     usable,coverage:{published:published.length,queueFound:queue.present,snapshotsRegistered:queue.evidence.size,snapshotsInvalid:queue.invalid,
@@ -392,16 +415,23 @@ export function summarize(results){
     ...count(checked,row=>row.fields[field].verdict),downgraded:checked.filter(row=>row.fields[field].downgraded).length}]));
   const group=pick=>Object.fromEntries(Object.entries(count(checked,pick)).map(([name,cards])=>
     [name,{cards,withWrongField:wrong.filter(row=>pick(row)===name).length}]));
+  const byFactOrigin=Object.fromEntries(FACT_ORIGINS.map(origin=>[origin,{fields:0,wrong:0,perField:Object.fromEntries(FIELDS.map(field=>[field,{fields:0,wrong:0}]))}]));
+  for(const row of checked)for(const field of FIELDS){
+    const origin=row.factOrigins?.[field]?.origin||'unavailable',bucket=byFactOrigin[origin];
+    bucket.fields++;bucket.perField[field].fields++;
+    if(row.fields[field].verdict==='wrong'){bucket.wrong++;bucket.perField[field].wrong++;}
+  }
   return {cardsChecked:checked.length,cardsWithWrongField:wrong.length,wrongFields:sum(checked,row=>FIELDS.filter(f=>row.fields[f].verdict==='wrong').length),
     downgradedToUnclear:sum(checked,row=>FIELDS.filter(f=>row.fields[f].downgraded).length),faultsPerField:Object.fromEntries(FIELDS.map(f=>[f,perField[f].wrong])),
-    perField,byStratum:group(row=>row.stratum),byOrigin:group(row=>row.origin),
+    perField,byStratum:group(row=>row.stratum),byOrigin:group(row=>row.origin),byFactOrigin,
     tokens:{input:sum(checked,row=>row.tokens.input),cached:sum(checked,row=>row.tokens.cached),output:sum(checked,row=>row.tokens.output)},
     callSeconds:Math.round(sum(checked,row=>row.seconds)*10)/10};
 }
 export function faultList(results){
   return results.filter(row=>row.fields&&FIELDS.some(field=>row.fields[field].verdict==='wrong')).sort((a,b)=>a.id.localeCompare(b.id)).map(row=>({
     id:row.id,name:row.name,stratum:row.stratum,origin:row.origin,
-    fields:FIELDS.filter(field=>row.fields[field].verdict==='wrong').map(field=>({field,cardValue:row.cardValue[field],sourceUrl:row.originals[Number(row.fields[field].matchedSource.slice(1))-1].url,
+    fields:FIELDS.filter(field=>row.fields[field].verdict==='wrong').map(field=>({field,factOrigin:row.factOrigins?.[field]?.origin||'unavailable',fieldOrigins:row.factOrigins?.[field]?.fields||{},
+      cardValue:row.cardValue[field],sourceUrl:row.originals[Number(row.fields[field].matchedSource.slice(1))-1].url,
       sourceLine:row.fields[field].line,shouldSay:row.fields[field].shouldSay,note:row.fields[field].note}))}));
 }
 const clip=(value,length=220)=>{const text=typeof value==='string'?value:JSON.stringify(value);return text.length>length?text.slice(0,length-1)+'…':text;};
@@ -422,11 +452,14 @@ export function markdown(report){
     `${report.run.wallSeconds} s on the clock this run (${report.run.asked} asked, ${report.run.reused} reused from earlier).`,'');
   for(const [name,row] of Object.entries(summary.byStratum))lines.push(`- stratum ${name}: ${row.withWrongField} of ${row.cards} cards with a wrong field`);
   for(const [name,row] of Object.entries(summary.byOrigin))lines.push(`- original ${name}: ${row.withWrongField} of ${row.cards} cards with a wrong field`);
+  lines.push('',`Fact provenance: ${report.factLedger?.note||'No fact ledger found; origins unavailable.'}`);
+  if(report.factLedger?.status==='current')lines.push('','| Fact origin | Audited field groups | Wrong groups |','| --- | ---: | ---: |',
+    ...Object.entries(summary.byFactOrigin).map(([origin,row])=>`| ${origin} | ${row.fields} | ${row.wrong} |`));
   lines.push('','## Faulty cards','');
   if(!report.faulty.length)lines.push('None.');
   for(const card of report.faulty){
     lines.push(`- **${card.id}** (${card.stratum}, ${card.origin})`);
-    for(const fault of card.fields)lines.push(`  - ${fault.field}: card says ${clip(fault.cardValue)}; source line "${clip(fault.sourceLine)}" (${fault.sourceUrl}); should say: ${clip(fault.shouldSay)}`);
+    for(const fault of card.fields)lines.push(`  - ${fault.field} [${fault.factOrigin}]: card says ${clip(fault.cardValue)}; source line "${clip(fault.sourceLine)}" (${fault.sourceUrl}); should say: ${clip(fault.shouldSay)}`);
   }
   if(report.failed.length)lines.push('','## Failed calls','',...report.failed.map(row=>`- ${row.id}: ${clip(row.error,160)}`));
   lines.push('','Nothing was changed: the faults are for the editors to pick up. The list of cards without a stored original is in the JSON report.','');
@@ -473,11 +506,11 @@ export async function main(argv=process.argv.slice(2),{log=console.log,now=new D
     strata:Object.fromEntries(['pipeline','base'].map(name=>[name,{pool:poolOf(name),drawn:sendable.filter(card=>stratumOf(card)===name).length}]))};
   const entries=sendable.map(card=>{
     const built=buildPrompt(card,context.originalsFor(card));
-    return {card,stratum:stratumOf(card),origin:built.originals.some(o=>o.origin==='captured')?'captured':'monitor',...built,digest:inputDigest(options,built.prompt)};
+    return {card,stratum:stratumOf(card),origin:built.originals.some(o=>o.origin==='captured')?'captured':'monitor',factOrigins:factOriginsFor(card,context.factLedger),...built,digest:inputDigest(options,built.prompt)};
   });
   const originalsSummary=entry=>entry.originals.map(o=>({origin:o.origin,url:o.url,parser:o.parser,fetchedAt:o.fetchedAt,chars:o.text.length,shownChars:o.shown.length,trimmed:o.trimmed}));
   const head={schema:1,kind:'catalogue-accuracy-audit',promptVersion:PROMPT_VERSION,date:day,model:options.model,effort:options.effort,seed:options.seed,
-    originals:options.originals,root:options.root,coverage,sample,noStoredOriginal};
+    originals:options.originals,root:options.root,coverage,sample,noStoredOriginal,factLedger:Object.fromEntries(Object.entries(context.factLedger).filter(([key])=>key!=='cards'))};
   const sizes=entries.map(entry=>entry.promptChars);
   fs.mkdirSync(options.out,{recursive:true});
   const stem=path.join(options.out,`${day}-${safeName(options.model)}`);
@@ -486,11 +519,12 @@ export async function main(argv=process.argv.slice(2),{log=console.log,now=new D
     `Stored originals: captured snapshots for ${coverage.withCapturedSnapshots} cards (${coverage.snapshotsRegistered} snapshots of ${coverage.snapshotPages} pages), monitor copies for ${coverage.withMonitorCopy} cards, either for ${coverage.withEither}. Used here: ${options.originals}.`,
     `Pool ${sample.pool} cards (pipeline ${sample.strata.pipeline.pool}, base ${sample.strata.base.pool}); sample ${sample.drawn} of ${sample.requested} asked, seed ${options.seed}: pipeline ${sample.strata.pipeline.drawn}, base ${sample.strata.base.drawn}.`,
     `No stored original: ${noStoredOriginal.length} published cards (not sent; ids in the report).`,
+    `Fact provenance: ${context.factLedger.note}`,
     ...(sample.skippedWithoutOriginal.length?[`Asked for but without an original: ${sample.skippedWithoutOriginal.join(', ')}.`]:[]),
     sizes.length?`Prompts: ${sizes.length}, characters min ${rangeOf(sizes).min}, median ${rangeOf(sizes).median}, max ${rangeOf(sizes).max} (about ${Math.round(rangeOf(sizes).median/4)} tokens at the median, 4 characters a token); ${entries.filter(e=>e.trimmed).length} cards have a text cut down to ${TEXT_BUDGET} characters.`:'Prompts: none.'];
   if(options.dryRun){
     const report={...head,dryRun:true,prompts:{count:sizes.length,chars:rangeOf(sizes),trimmed:entries.filter(e=>e.trimmed).length},
-      cards:entries.map(entry=>({id:entry.card.id,stratum:entry.stratum,origin:entry.origin,promptChars:entry.promptChars,trimmed:entry.trimmed,originals:originalsSummary(entry)}))};
+      cards:entries.map(entry=>({id:entry.card.id,stratum:entry.stratum,origin:entry.origin,factOrigins:entry.factOrigins,promptChars:entry.promptChars,trimmed:entry.trimmed,originals:originalsSummary(entry)}))};
     await writeJsonAtomic(`${stem}-dry-run.json`,report);
     fs.writeFileSync(`${stem}-dry-run.md`,`# Accuracy audit, dry run ${day} · ${options.model}\n\n${describe().map(line=>'- '+line).join('\n')}\n\nNo model was called and nothing else was written.\n`);
     for(const line of describe())log(line);
@@ -505,7 +539,11 @@ export async function main(argv=process.argv.slice(2),{log=console.log,now=new D
   const todo=[];
   for(const entry of entries){
     const saved=options.redo?null:readSaved(path.join(folder,`${entry.card.id}.json`),entry.digest);
-    if(saved){results.set(entry.card.id,{...saved,reused:true});reused++;}else todo.push(entry);
+    if(saved){
+      const refreshed={...saved,factOrigins:entry.factOrigins};
+      if(JSON.stringify(saved.factOrigins)!==JSON.stringify(entry.factOrigins))await writeJsonAtomic(path.join(folder,`${entry.card.id}.json`),refreshed);
+      results.set(entry.card.id,{...refreshed,reused:true});reused++;
+    }else todo.push(entry);
   }
   if(todo.length){try{readyImpl();}catch(error){log(`Claude is not ready: ${error.message}`);return {code:3};}}
   log(`${entries.length} cards sampled, ${reused} already read, ${todo.length} to ask with ${options.model} (${options.effort}), ${options.parallel} at a time.`);
@@ -522,7 +560,7 @@ export async function main(argv=process.argv.slice(2),{log=console.log,now=new D
       let fields;
       try{fields=judgeAnswer(answer.answer,entry.originals);}
       catch(error){failed.push({id:entry.card.id,error:`bad-output; ${error.message}`,seconds:answer.seconds});log(`${entry.card.id}: failed (${error.message})`);continue;}
-      const row={schema:1,id:entry.card.id,name:entry.card.name,stratum:entry.stratum,origin:entry.origin,model:options.model,effort:options.effort,promptVersion:PROMPT_VERSION,
+      const row={schema:1,id:entry.card.id,name:entry.card.name,stratum:entry.stratum,origin:entry.origin,factOrigins:entry.factOrigins,model:options.model,effort:options.effort,promptVersion:PROMPT_VERSION,
         inputDigest:entry.digest,askedAt:new Date().toISOString(),promptChars:entry.promptChars,trimmed:entry.trimmed,originals:originalsSummary(entry),
         cardValue:Object.fromEntries(FIELDS.map(field=>[field,cardView(entry.card)[field]])),fields,tokens:tokensOf(answer.usage),seconds:answer.seconds,
         actualModels:answer.usage?.actualModels||[]};

@@ -23,7 +23,7 @@ export function ledgerFixture(t){
   const setCards=cards=>fs.writeFileSync(cardFile,'window.ACTIVITIES = '+JSON.stringify(cards)+';');setCards([base]);
   for(const file of ['data-reviewed.js','data-practical.js','data-geo.js','planning.js','exchange.js'])fs.writeFileSync(path.join(directory,file),'');
   fs.copyFileSync(path.join(root,'regions.js'),path.join(directory,'regions.js'));
-  const evidence=snapshot({url:base.sources[0].url,fetchedAt:'2026-10-15T08:00:00.000Z',text:'This invented meeting is free. No registration required. Children from 2 years. Monday at 09:00.'});
+  const evidence=snapshot({url:base.sources[0].url,fetchedAt:'2026-10-15T08:00:00.000Z',text:'This invented meeting is free. No registration required. Children from 2 years. Monday at 09:00. The fixture organisation welcomes families at Fixture road 1.'});
   const claim=(field,value,quote)=>({key:field+'-'+digest([field,evidence.url,value,quote]).slice(0,12),field,value,quote,source:evidence.url,snapshotId:evidence.id,
     status:'supported',scope:'exact-card',kind:'official',note:'Explicit fixture condition.'});
   const claims=[claim('amount',0,'This invented meeting is free.'),claim('practical.booking',false,'No registration required.')];

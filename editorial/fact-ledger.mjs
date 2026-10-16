@@ -13,6 +13,7 @@ import {digest} from './jobs.mjs';
 import {approvalSummary} from './catalogue-journal.mjs';
 import {validateSnapshot,locateQuote,hash,normalizeQuote} from './evidence.mjs';
 import {readRecord} from './page-record.mjs';
+import {normUrl} from './monitor.mjs';
 import {PROJECT_ID} from './project-id.mjs';
 import {applyDraftRecord} from './workflow.mjs';
 
@@ -158,11 +159,11 @@ function capturedSnapshot(db,candidate,claim){
 async function pageVersion(editorial,evidence,watch){
   const matches=[];
   for(const source of watch){
-    if(!safeId(source.id)||![evidence.url,evidence.finalUrl].includes(source.url))continue;
+    if(!safeId(source.id)||![evidence.url,evidence.finalUrl].map(normUrl).includes(normUrl(source.url)))continue;
     const dir=path.join(editorial,'page-records',source.id);
     for(const name of fs.existsSync(dir)?fs.readdirSync(dir).filter(name=>/^[a-f0-9]{12}\.json$/.test(name)).sort():[]){
       const version=name.slice(0,12),record=await readRecord(editorial,source.id,version);
-      if(!record||record.meta.source!==source.id||!hex(record.meta.hash)||!record.meta.hash.startsWith(version)||record.meta.finalUrl!==evidence.finalUrl)continue;
+      if(!record||record.meta.source!==source.id||!hex(record.meta.hash)||!record.meta.hash.startsWith(version)||normUrl(record.meta.finalUrl)!==normUrl(evidence.finalUrl))continue;
       const sameBytes=evidence.rawHash&&record.meta.rawHash===evidence.rawHash;
       const sameText=evidence.textHash===record.meta.full?.hash||evidence.textHash===record.meta.hash;
       if(!sameBytes&&!sameText)continue;
