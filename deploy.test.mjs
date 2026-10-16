@@ -214,8 +214,9 @@ test('ops/deploy.sh refuses a checkout with uncommitted changes on the server',{
   assert.notEqual(result.status,0);assert.match(result.stderr,/uncommitted changes/);
   assert.equal(s.log().some(line=>line.startsWith('docker')),false);
 });
-const waitFor=async predicate=>{
-  for(let i=0;i<300;i++){if(predicate())return;await new Promise(resolve=>setTimeout(resolve,10));}
+// Generous on purpose: the whole suite runs files in parallel, also inside the editorial cycle's QA on a busy Mac. A success returns at once.
+const waitFor=async(predicate,ms=30000)=>{
+  for(const end=Date.now()+ms;Date.now()<end;){if(predicate())return;await new Promise(resolve=>setTimeout(resolve,10));}
   assert.fail('fixture process did not reach its expected state');
 };
 function background(s){
@@ -235,6 +236,7 @@ test('one SSH operation holds the server lock throughout build and refuses a con
 });
 test('an interrupted server operation leaves its previous and target versions for explicit recovery',{skip:HAS_TOOLS?false:'bash or git is not installed'},async t=>{
   const s=scenario(t,{files:{'wait-build':''}}),first=background(s);
+  t.after(()=>{if(fs.existsSync(s.fake))fs.writeFileSync(path.join(s.fake,'release-build'),'');first.child.kill();});
   await waitFor(()=>fs.existsSync(path.join(s.fake,'build-entered')));
   const owner=fs.readFileSync(path.join(s.server,'.deploy-lock','owner'),'utf8'),pid=Number(/^pid=(\d+)$/m.exec(owner)[1]);
   process.kill(pid,'SIGKILL');fs.writeFileSync(path.join(s.fake,'release-build'),'');

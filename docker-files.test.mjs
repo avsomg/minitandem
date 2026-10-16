@@ -103,7 +103,7 @@ test('Caddyfile: both names, www redirects to the apex, editor paths refused, ev
 function freePort(){
   return new Promise((resolve,reject)=>{const server=net.createServer();server.listen(0,'127.0.0.1',()=>{const {port}=server.address();server.close(()=>resolve(port));});server.on('error',reject);});
 }
-async function waitFor(url,tries=60){
+async function waitFor(url,tries=300){ // up to 30 s on a busy machine; returns as soon as the service answers
   for(let i=0;i<tries;i++){try{const response=await fetch(url);if(response.ok)return response;}catch{}await new Promise(resolve=>setTimeout(resolve,100));}
   throw Error('Service did not answer at '+url);
 }
