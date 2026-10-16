@@ -1,8 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {digest} from './jobs.mjs';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {EventEmitter} from 'node:events';
+import {JobQueue,digest} from './jobs.mjs';
+import {resumeAwaitingSources} from './workflow.mjs';
+import {inputLimit,workerInputSize,assertWorkerInput,canClaimWorker,reconcileWorkerInputs} from './worker-input.mjs';
 import {snapshot} from './evidence.mjs';
-import {promptFor,workerEvidenceFiles} from './agent-run.mjs';
+import {promptFor,workerEvidenceFiles,runJobs,runCodex,runClaude} from './agent-run.mjs';
 
 const size=value=>JSON.stringify(value).length;
 const pad=(value,target,key='note')=>{
@@ -60,12 +66,6 @@ test('compact rework context preserves every distinct claim, snapshot and change
   assert.equal(workerEvidenceFiles(job).length,3);
 });
 
-import fs from 'node:fs';
-import os from 'node:os';
-import path from 'node:path';
-import {JobQueue} from './jobs.mjs';
-import {runJobs,runCodex,runClaude} from './agent-run.mjs';
-import {inputLimit,workerInputSize,assertWorkerInput,canClaimWorker} from './worker-input.mjs';
 const policy=JSON.parse(fs.readFileSync(new URL('./agent-policy.json',import.meta.url)));
 function queueFixture(t){
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-budget-')),queue=new JobQueue(path.join(directory,'jobs.sqlite'));
@@ -76,7 +76,7 @@ function queueFixture(t){
 test('the whole rework fits the justified editor limit, with provider overhead reserved',()=>{
   const job=budgetFixture(),size=workerInputSize(job,policy);
   assert.ok(size.characters>60000);assert.equal(size.limit,90000);assert.equal(size.fits,true);
-  assert.equal(inputLimit({...job,kind:'verify-facts'},policy),60000);
+  assert.equal(inputLimit({...job,kind:'facts'},policy),60000);
   assert.throws(()=>inputLimit(job,{roles:{editor:{maxInputChars:90000}}}),/Invalid worker input budget/);
   assert.throws(()=>inputLimit(job,{roles:{editor:{maxInputChars:120001,inputBudgetReason:'Reason'}}}),/Invalid worker input budget/);
   assert.doesNotThrow(()=>assertWorkerInput(job,policy,'x'.repeat(90000)));
@@ -111,4 +111,73 @@ test('both worker adapters enforce the role limit before spawning a process',asy
   await assert.rejects(runCodex(job,policy,options),error=>error.code==='INPUT_BUDGET');
   await assert.rejects(runClaude(job,policy,{...options,authImpl:()=>{}}),error=>error.code==='INPUT_BUDGET');
   assert.equal(spawned,0);
+});
+
+
+test('sync replaces exhausted size failures once and preserves all three attempts and rework context',t=>{
+  const {queue}=queueFixture(t),job=budgetFixture();let at=Date.now();queue.now=()=>new Date(at).toISOString();
+  const old=queue.enqueue({kind:job.kind,cardId:job.card_id,inputRevision:'old-budget',payload:job.payload});
+  for(let i=0;i<3;i++){
+    const leased=queue.claim('editor','old-worker');queue.fail(leased.id,leased.token,'editor','Worker input exceeds budget; split the task without truncating evidence');
+    at+=86400000;
+  }
+  assert.equal(queue.get(old.id).state,'attention');
+  assert.deepEqual(reconcileWorkerInputs(queue,[job.payload.card],policy).length,1);
+  const previous=queue.get(old.id),next=queue.list().find(row=>row.payload.previousJobId===old.id);
+  assert.equal(previous.attempt,3);assert.equal(previous.state,'superseded');assert.match(previous.error,/input exceeds budget/);
+  assert.equal(next.attempt,0);assert.equal(next.state,'ready');assert.equal(next.payload.inputBudgetRecovery.previousAttempts,3);
+  for(const key of ['approved','bundle','rejectedDraft','reviewFeedback','reworkCount'])assert.deepEqual(next.payload[key],job.payload[key]);
+  assert.equal(workerInputSize(next,policy).fits,true);
+  assert.deepEqual(reconcileWorkerInputs(queue,[job.payload.card],policy),[]);
+  queue.reconcile([]);assert.equal(queue.get(next.id).state,'ready');
+  assert.equal(queue.claim('editor','new-worker',{canClaim:job=>canClaimWorker(queue,job,policy)}).id,next.id);
+  assert.equal(queue.get(old.id).attempt,3);
+  assert.equal(queue.db.prepare("SELECT count(*) AS n FROM events WHERE job_id=? AND kind='claimed'").get(old.id).n,3);
+});
+
+test('oversized blocked work ignores source resumes and waits for a fitting policy',t=>{
+  const {queue}=queueFixture(t),job=budgetFixture(),smallPolicy={...policy,roles:{...policy.roles,editor:{...policy.roles.editor,maxInputChars:60000}}};
+  const old=queue.enqueue({kind:job.kind,cardId:job.card_id,inputRevision:'blocked',payload:{...job.payload,sourceVersions:[['source','v1']]}});
+  assert.equal(queue.claim('editor','editor',{canClaim:job=>canClaimWorker(queue,job,smallPolicy)}),null);
+  const input={records:[job.payload.card]},monitor={sources:{source:{hash:'v2'}}};
+  assert.deepEqual(resumeAwaitingSources(queue,input,monitor),[]);
+  assert.deepEqual(reconcileWorkerInputs(queue,input.records,smallPolicy),[]);assert.equal(queue.get(old.id).attempt,0);
+  const resumed=reconcileWorkerInputs(queue,input.records,policy);assert.equal(resumed.length,1);
+  assert.equal(queue.get(old.id).state,'superseded');assert.equal(queue.get(old.id).attempt,0);
+});
+
+test('sync leaves stale cards and other attention failures alone',t=>{
+  const {queue}=queueFixture(t),job=budgetFixture();let at=Date.now();queue.now=()=>new Date(at).toISOString();
+  const old=queue.enqueue({kind:job.kind,cardId:job.card_id,inputRevision:'stale',payload:job.payload});
+  const leased=queue.claim('editor','editor');queue.fail(leased.id,leased.token,'editor','Worker input exceeds budget');at+=86400000;
+  assert.deepEqual(reconcileWorkerInputs(queue,[{...job.payload.card,name:'Changed'}],policy),[]);
+  assert.equal(queue.get(old.id).state,'retry');
+  const other=queue.enqueue({kind:'integrate',cardId:'other',inputRevision:'contract',payload:{card:{id:'other'},cardRevision:digest({id:'other'})}});
+  const claimed=queue.claim('editor','editor',{cardId:'other'});queue.fail(claimed.id,claimed.token,'editor','Invalid field value type: age');
+  assert.deepEqual(reconcileWorkerInputs(queue,[{id:'other'}],policy),[]);assert.equal(queue.get(other.id).state,'retry');
+});
+
+test('the full downstream review also fits, and both adapters accept the large intact input',async()=>{
+  const original=budgetFixture(),{rejectedDraft,reviewFeedback,...context}=original.payload;
+  const review={...original,kind:'review-patch',payload:{...context,draft:rejectedDraft}};
+  assert.ok(workerInputSize(review,policy).characters>60000);assert.equal(workerInputSize(review,policy).fits,true);
+  assert.equal(JSON.parse(promptFor(review).split('TASK DATA:\n')[1]).draftHash,digest(rejectedDraft));
+  for(const job of [original,review])for(const provider of ['codex','claude']){
+    let seen;
+    const result={verdict:'await-source'},envelope={project:'vmeste',jobId:job.id,inputRevision:job.input_revision};
+    const runImpl=(_command,args)=>{
+      const child=new EventEmitter();child.stdout=new EventEmitter();child.stderr=new EventEmitter();child.kill=()=>{};
+      child.stdin={end:prompt=>{
+        seen=prompt;
+        if(provider==='codex')fs.writeFileSync(args[args.indexOf('--output-last-message')+1],JSON.stringify({...envelope,resultJson:JSON.stringify(result)}));
+        queueMicrotask(()=>{
+          if(provider==='claude')child.stdout.emit('data',JSON.stringify({type:'result',subtype:'success',structured_output:{...envelope,result}})+'\n');
+          child.emit('close',0);
+        });
+      }};
+      return child;
+    };
+    const output=await (provider==='codex'?runCodex:runClaude)(job,policy,{runImpl,authImpl:()=>{}});
+    assert.equal(output.result.verdict,'await-source');assert.ok(seen.length>60000);assert.ok(seen.length<90000);
+  }
 });

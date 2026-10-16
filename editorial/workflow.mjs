@@ -11,7 +11,7 @@ import {locateQuote,evidenceProblem,validateSnapshot,writeJsonAtomic,publicUrl} 
 import {PATCH_FIELDS,PRACTICAL_FIELDS,CLAIM_FIELDS,CRITICAL_FIELDS,validateFieldValue,validDate,fullReviewFields,FULL_REVIEW_UNKNOWN_TEXT,FULL_REVIEW_UNKNOWN_PRACTICAL_TEXT} from './field-contract.mjs';
 import {PROJECT_ID} from './project-id.mjs';
 import {approvalSummary} from './catalogue-journal.mjs';
-import {canClaimWorker} from './worker-input.mjs';
+import {canClaimWorker,reconcileWorkerInputs} from './worker-input.mjs';
 import {NUMBER_FIELDS,numberProblem,writesNumber} from './quote-numbers.mjs';
 
 export const here=path.join(root,'editorial');
@@ -153,6 +153,7 @@ export function syncQueue(queue){
   const quality=qualityReport(input.records,sources,today(),monitor);
   queue.transaction(()=>resumeAwaitingSources(queue,input,monitor,today(),sources));
   queue.reconcile(unprocessedSpecs(queue,taskSpecs(input,{quality,monitor})));
+  reconcileWorkerInputs(queue,input.records,read(path.join(here,'agent-policy.json')));
   return {input,summary:queue.summary()};
 }
 export function validateClaims(bundle,card,{now=new Date().toISOString()}={}){

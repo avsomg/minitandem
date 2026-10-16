@@ -94,8 +94,9 @@ bundle claims alongside them. A rejected draft carries its changed patch fields
 and all bindings; unchanged fields are read from the current card. The original
 draft hash still identifies the complete controller artifact.
 
-The editor role has a 90,000-character input limit in `agent-policy.json`, with
-the reason recorded there. Other roles keep 60,000. The synthetic rework fixture
+The editor and verify roles have a 90,000-character input limit in `agent-policy.json`, with
+the reason recorded there. Other roles keep 60,000. The independent reviewer needs the same complete
+claims and draft evidence as the editor. The synthetic rework fixture
 still needs about 78,000 characters after deduplication. Keeping its whole card
 in one editor job lets the existing independent patch review check consistency
 across age, calendar, price and practical fields. The controller reserves 4,096
@@ -108,3 +109,16 @@ an attempt or recording a worker failure. It awaits an investigated input-contra
 or budget change, and source changes alone do not restart it. If source preparation
 grows the prompt beyond the limit, it blocks before the model call; that existing
 lease remains one recorded attempt. Neither path repeats three failed calls.
+
+After updating and restarting the controller between batches, run
+`node editorial/workflow.mjs sync`. Sync measures `retry` and `attention` rows
+whose error starts with `Worker input exceeds budget`, plus input-budget blocked
+rows. When the current card still matches `cardRevision` and the complete input
+fits, sync enqueues one replacement for the new input contract. The old row
+becomes `superseded` with its error, attempts and events intact; the replacement
+records `previousJobId` and `inputBudgetRecovery.previousAttempts`. It keeps the
+rejected draft, approved evidence and rework count, and follows the usual editor
+and independent patch-review path. Repeated syncs create no duplicate replacement.
+A changed card or an input that still does not fit is not replayed. The older
+`--upgrade-input-job` command still applies only to retryable jobs; use sync for
+an exhausted input-budget failure. No SQL edit or manual attempt reset is needed.

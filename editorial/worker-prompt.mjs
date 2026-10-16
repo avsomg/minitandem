@@ -50,10 +50,7 @@ export const CONTRACTS={
     draftHash must equal the supplied draftHash. Independently open the draft's official sources and compare every changed field, practical.FIELD, and practical.warnings if present. Include research.findings and research.remaining in checkedFields. Check every superseded finding and resolved question, age filters, day/calendar dates, price units, contradictory legacy notes, uncertainty and current season. Return approve only when ALL changed fields are supported and the full card remains coherent. List each actually resolved correction filename in checkedCorrectionFiles; an unrelated small edit does not close a correction. Copy every reviewed field into checkedFields. For a combined events list, check every listed session against the claim and quote of its binding; events is still one entry in checkedFields and approvedBindings. A high model confidence is not evidence. Do not edit or apply the draft yourself.`
 };
 
-// The prompt has a hard size limit (60,000 characters in the worker adapters). An editor or reviewer job for a card with some thirty claims sits
-// at that limit, so these two kinds are given only what can apply to them: no submittedKey (the search worker's own name for a claim, replaced by
-// key), and the full-review rules, word lists and field list only when a full review is permitted (primaryReviewStatus complete). The rules about
-// stale updates and OCR posters are included when the job has stale updates or an OCR snapshot. Nothing a job can act on is removed.
+// Drafting jobs carry only applicable rules. Full-review references require complete primary review.
 const DRAFTING=['editorial','integrate','review-patch'];
 const withoutSubmittedKey=({submittedKey,...claim})=>claim;
 export function promptFor(job){
@@ -88,7 +85,7 @@ export function promptFor(job){
       snapshots:evidence.refs(draft.snapshots)};
     payload.rejectedDraftContext='Changed fields and bindings only; omitted unchanged patch fields equal card. Original draft hash is retained.';
   }
-  if(payload.staleApprovedUpdates)payload.staleApprovedUpdates=payload.staleApprovedUpdates.map((update,index)=>({...update,
+  if(payload.staleApprovedUpdates)payload.staleApprovedUpdates=payload.staleApprovedUpdates.map(update=>({...update,
     draft:{...update.draft,snapshots:evidence.refs(update.draft.snapshots)}}));
   payload.existingFindings=(payload.card?.research?.findings||[]).map((finding,findingIndex)=>({hash:digest(finding),findingIndex}));
   const dictionary=fullReviewMaterial?fieldDictionary():Object.fromEntries(Object.entries(fieldDictionary()).map(([key,{fullReviewUnknownText,...rule}])=>[key,rule]));

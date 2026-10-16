@@ -5,12 +5,12 @@ import {spawn,execFileSync} from 'node:child_process';
 import {randomUUID} from 'node:crypto';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {JobQueue,digest,ROLE_KINDS,failureCategory,DOWNSTREAM,urgentJob} from './jobs.mjs';
-import {here,root,today,syncQueue,commitResult,currentInputs,validateClaims,CLAIM_FIELDS,registerCaptured} from './workflow.mjs';
+import {here,root,today,syncQueue,commitResult,currentInputs,validateClaims,registerCaptured} from './workflow.mjs';
 import {captureUrl,saveSnapshot,writeJsonAtomic,locateQuote,hash,validateSnapshot,publicUrl,capturedSet} from './evidence.mjs';
 import {normUrl} from './monitor.mjs';
 import {sourceRevision} from './release.mjs';
 import {readPolicy,createClient,judgeBatch} from './typesafe.mjs';
-import {fieldDictionary,fullReviewFields,CRITICAL_FIELDS} from './field-contract.mjs';
+import {fieldDictionary,CRITICAL_FIELDS} from './field-contract.mjs';
 import {calendarEvidence} from './calendar-evidence.mjs';
 import {workerOutputSchema,decodeWorkerOutput} from './worker-schema.mjs';
 import {imageFile} from './image-evidence.mjs';
@@ -21,9 +21,10 @@ import {assertWorkerInput,workerInputSize,canClaimWorker,blockWorkerInput} from 
 import {numberProblem} from './quote-numbers.mjs';
 import {performance} from 'node:perf_hooks';
 
-const loadedRuntimeRevision=runtimeContractRevision();
 import {promptFor,workerEvidenceFiles,CONTRACTS} from './worker-prompt.mjs';
 export {promptFor,workerEvidenceFiles} from './worker-prompt.mjs';
+
+const loadedRuntimeRevision=runtimeContractRevision();
 export function modelRoute(job,policy){
   const role=Object.keys(ROLE_KINDS).find(role=>ROLE_KINDS[role].includes(job.kind));
   const config=policy.roles[role];
