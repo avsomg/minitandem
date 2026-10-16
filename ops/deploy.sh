@@ -28,16 +28,17 @@ ssh -i "$KEY" -o IdentitiesOnly=yes "$HOST" "$command" <<'REMOTE'
 set -euo pipefail
 DIR=$1 SHA=$2 URL=$3 MAX_DROP=$4 TRIES=$5 POLL=$6 PORT=$7 OP=$8
 cd "$DIR"
-umask 077
+# Only the lock and the operation records are private (their folders are 700). The checkout keeps the normal umask: the image is built
+# from it, and a file the container user cannot read stops the app (16 October 2026: umask 077 here made the preview fail with EACCES).
 LOCK=.deploy-lock
-if ! mkdir "$LOCK" 2>/dev/null; then
+if ! mkdir -m 700 "$LOCK" 2>/dev/null; then
   echo 'deploy: another operation owns the lock, or an interrupted operation needs recovery' >&2
   [ ! -f "$LOCK/owner" ] || cat "$LOCK/owner" >&2
   exit 1
 fi
 printf '%s\n' "$OP" > "$LOCK/id"
 printf 'operation=%s\npid=%s\n' "$OP" "$$" > "$LOCK/owner"
-mkdir -p .deployments
+mkdir -p .deployments && chmod 700 .deployments
 STATE=.deployments/$OP
 PREV_TAG= PREV_REF= NEW_TAG= STAGE=locked PREVIEW_UP=0
 PREVIEW=minitandem-preview-$OP

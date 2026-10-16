@@ -153,6 +153,10 @@ test('ops/deploy.sh previews the new image without the live state, switches, che
   const record=fs.readFileSync(path.join(s.server,'.deployments',records[0]),'utf8');
   assert.ok(record.includes('previous_tag='+s.oldTag));assert.ok(record.includes('target_commit='+s.nextSha));assert.match(record,/stage=done/);
   assert.equal(fs.existsSync(path.join(s.server,'.deploy-lock')),false);
+  // The image is built from the checkout, so what the deploy checks out stays readable for others; only its own records are private.
+  for(const file of git(s.server,'diff','--name-only',s.oldSha,s.nextSha).split('\n').filter(Boolean))
+    assert.ok(fs.statSync(path.join(s.server,file)).mode&0o004,`${file} is readable by the container user`);
+  assert.equal(fs.statSync(path.join(s.server,'.deployments')).mode&0o777,0o700);
   const log=s.log();
   const at=prefix=>log.findIndex(line=>line.startsWith(prefix));
   assert.ok(at('gh run list')<at('ssh'),'CI is checked before the server is touched');
