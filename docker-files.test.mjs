@@ -110,7 +110,7 @@ async function waitFor(url,tries=300){ // up to 30 s on a busy machine; returns 
 
 test('the entrypoint creates one demo family, never an editor key, serves /healthz, and does nothing more on the second start',async t=>{
   const state=tmp(t,'minitandem-entrypoint-'),port=await freePort();
-  const env={...process.env,MINITANDEM_STATE_DIR:path.join(state,'state'),MINITANDEM_CORRECTION_DIR:path.join(state,'state','corrections'),
+  const env={...process.env,MINITANDEM_FAMILY_SYNC:'1',MINITANDEM_STATE_DIR:path.join(state,'state'),MINITANDEM_CORRECTION_DIR:path.join(state,'state','corrections'),
     MINITANDEM_HOST:'127.0.0.1',MINITANDEM_PORT:String(port)};
   delete env.MINITANDEM_COMMIT;
   const start=()=>{const child=spawn('sh',[path.join(root,'docker','entrypoint.sh')],{env,stdio:['ignore','pipe','pipe']});let output='';

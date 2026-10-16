@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import {familySyncEnabled} from './features.mjs';
 import path from 'node:path';
 import vm from 'node:vm';
 import crypto from 'node:crypto';
@@ -86,6 +87,7 @@ preparePublicOutput(output);
 for(const [file,needle] of [['index.html','rel="canonical" href="'+site+'/"'],['index.html','og:url" content="'+site+'/"'],['robots.txt','Sitemap: '+site+'/sitemap.xml']])
   if(!fs.readFileSync(path.join(root,file),'utf8').includes(needle))throw Error(file+' does not name the site origin '+site);
 for (const file of [...STATIC,...GENERATED,...new Set(SCRIPTS),...LAZY_SCRIPTS,'.vercelignore']) fs.copyFileSync(path.join(root,file),path.join(output,file));
+fs.writeFileSync(path.join(output,'features.js'), 'window.MINITANDEM_FEATURES = Object.freeze(' + JSON.stringify({familySync:familySyncEnabled()}) + ');\n');
 // Which catalogue this build holds, for /healthz and for the deploy script. Deterministic: the revision is a content hash, the date is the latest review.
 const published=records.filter(record=>!['closed','excluded'].includes(record.status)).length;
 fs.writeFileSync(path.join(output,BUILD_INFO),JSON.stringify({revision,catalogueUpdated:latestReview,records:records.length,published,archived:records.length-published},null,2)+'\n');

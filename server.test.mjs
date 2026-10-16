@@ -15,13 +15,14 @@ test('Mac service authenticates family sync, conflicts and editorial intake',asy
   // The operations route reads the editorial queue; the test gives it an empty one of its own instead of the real, private queue.
   const queueFile=path.join(temp,'queue','jobs.sqlite');
   new JobQueue(queueFile).close();
-  const env={...process.env,MINITANDEM_STATE_DIR:path.join(temp,'state'),MINITANDEM_CORRECTION_DIR:path.join(temp,'corrections'),MINITANDEM_QUEUE_FILE:queueFile};
+  const env={...process.env,MINITANDEM_FAMILY_SYNC:'1',MINITANDEM_STATE_DIR:path.join(temp,'state'),MINITANDEM_CORRECTION_DIR:path.join(temp,'corrections'),MINITANDEM_QUEUE_FILE:queueFile};
   const script=fileURLToPath(new URL('server.mjs',import.meta.url));
   const issue=command=>{
     const result=spawnSync(process.execPath,[script,command],{env,encoding:'utf8'});
     assert.equal(result.status,0,result.stderr);return result.stdout.trim();
   };
   const familyKey=issue('new-family'),editorKey=issue('new-admin');
+  process.env.MINITANDEM_FAMILY_SYNC='1';
   process.env.MINITANDEM_STATE_DIR=env.MINITANDEM_STATE_DIR;
   process.env.MINITANDEM_CORRECTION_DIR=env.MINITANDEM_CORRECTION_DIR;
   process.env.MINITANDEM_QUEUE_FILE=env.MINITANDEM_QUEUE_FILE;

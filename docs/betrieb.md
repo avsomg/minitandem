@@ -510,3 +510,11 @@ Auf dem Server, am 15. und 16. Oktober 2026:
 - Der Drop-Schlüssel mit erzwungenem Befehl ist eingerichtet: Heartbeats des Zyklus und die tägliche Kopie kommen an, jeder andere Befehl wird abgelehnt. Eine Kopie vom 15. Oktober wurde in einen leeren Ordner wiederhergestellt und hat ihre Freigaben selbst bestätigt.
 
 **Nicht geprüft:** ein Rollback *nach* dem Umschalten auf dem echten Server (geübt ist bisher nur der Abbruch davor), ein Neustart des ganzen Servers (die Container haben `restart: unless-stopped`, Docker startet beim Booten) und das Erneuern eines Zertifikats. Die jetzigen Zertifikate gelten bis zum 12. Januar 2027; Caddy erneuert sie vorher selbst, voraussichtlich ab Mitte Dezember 2026.
+
+## Familienabgleich ausschalten (noch nicht auf dem Server angewendet)
+
+Der Standard ist aus. Nur `MINITANDEM_FAMILY_SYNC=1` schaltet den Abgleich ein; jede andere oder fehlende Angabe lässt ihn aus. `features.mjs` wertet die Variable für Build, Server und Entrypoint aus. Compose reicht dieselbe Variable aus `.env` an den Image-Build und an den laufenden Dienst weiter. Nach einer Änderung das Image neu bauen und den Container neu erstellen; nur ein Neustart baut die Oberfläche nicht neu.
+
+Ausgeschaltet zeigt der Datendialog keinen Abgleich und gespeicherte Zugangsdaten lösen keine Anfrage aus. Die Familien-API und die Korrektureinreichung antworten mit 503 und `sync.disabled`, bevor ein Profil gelesen wird. `new-family` bricht ab. Der Entrypoint erzeugt weder eine Demo-Familie noch einen Schlüssel. Bestehende Dateien bleiben unberührt und gesperrt; diese Änderung löscht keine vorhandenen Zustandsarchive.
+
+Ein späteres Einschalten erfordert auch eine passende Datenschutzerklärung und eine bewusste Freigabe. Die vorhandenen technischen Tests schalten den Abgleich ausdrücklich ein, wenn sie Familienprotokolle prüfen. Ein Restore-Drill mit dem Standard erwartet jetzt 503 für die Familien-API; für den historischen Drill mit Demo-Schlüssel muss der Wegwerf-Container ausdrücklich `-e MINITANDEM_FAMILY_SYNC=1` erhalten.

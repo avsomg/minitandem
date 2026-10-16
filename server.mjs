@@ -1,4 +1,5 @@
 import http from 'node:http';
+import {familySyncEnabled} from './features.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -135,6 +136,8 @@ export function createServer(){
       return res.end(req.method==='HEAD'?undefined:JSON.stringify({status:'ok',records:allowed.size,published,archived:allowed.size-published,revision:buildInfo.revision??null,catalogueUpdated:buildInfo.catalogueUpdated??null,...(commit&&{commit})}));
     }
     if(!pathname.startsWith('/api/'))return ['GET','HEAD'].includes(req.method)?staticFile(req,res,pathname):json(res,405,{error:'Method not allowed'});
+    if(!familySyncEnabled() && (pathname==='/api/v1/family'||pathname.startsWith('/api/v1/family/')||pathname==='/api/v1/corrections'))
+      return json(res,503,{error:'Family sync is disabled',code:'sync.disabled'});
     try{
       // Inside the try: a damaged state file must end in a 500 for this request, not in an unhandled rejection that stops the process.
       const db=readDb();
@@ -199,6 +202,7 @@ export function createServer(){
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const command=process.argv[2]||'start';
   if(command==='new-family'||command==='new-admin'){
+    if(command==='new-family'&&!familySyncEnabled()){console.error('Family sync is disabled');process.exit(1);}
     const db=readDb(),token=randomToken();
     if(command==='new-admin')db.adminHash=hash(token);
     else db.families[hash(token)]={revision:0,profile:null,updatedAt:null};

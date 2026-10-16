@@ -14,12 +14,14 @@
   }
   function create({store, fetchFn = (...args) => fetch(...args), onStatus = () => {}, onConflict = () => {}, onApplied = () => {}, onCorrectionsSent = () => {},
     isOnline = () => navigator.onLine, setTimer = setTimeout, clearTimer = clearTimeout}) {
-    let config = store.loadSync(), busy = false, timer = null, conflict = null, generation = 0;
+    const enabled = window.MINITANDEM_FEATURES?.familySync === true;
+    let config = enabled ? store.loadSync() : null, busy = false, timer = null, conflict = null, generation = 0;
     let dirty = Boolean(config?.dirty);
     const save = () => store.saveSync(config);
     const status = code => onStatus(config ? code : '');
 
     async function request(path, method = 'GET', payload) {
+      if (!enabled) throw Object.assign(Error('Family sync is disabled.'), {code:'sync.disabled'});
       const response = await fetchFn(config.url + path, {method, cache: 'no-store', headers: {Authorization: 'Bearer ' + config.token, ...(payload ? {'Content-Type': 'application/json'} : {})}, body: payload ? JSON.stringify(payload) : undefined});
       const data = await response.json();
       if (!response.ok) throw Object.assign(Error(data.error || 'Service unavailable'), {status: response.status, remote: data});
@@ -70,6 +72,7 @@
     }
     function queue() { if (!config) return; generation++; dirty = true; config.dirty = true; save(); status('waiting'); clearTimer(timer); timer = setTimer(now, 900); }
     function connect(rawUrl, token) {
+      if (!enabled) throw Object.assign(Error('Family sync is disabled.'), {code:'sync.disabled'});
       const url = endpoint(rawUrl.trim(), typeof location !== 'undefined' ? location.hostname : '');
       token = token.trim();
       if (!/^[A-Za-z0-9_-]{40,}$/.test(token)) throw Object.assign(Error('Check the family key.'), {code: 'sync.badKeyFormat'});

@@ -4,7 +4,8 @@
 // timers are fake, so every wait is stepped by hand.
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {loadStack} from './test-support.mjs';
+import {loadStack as loadBaseStack} from './test-support.mjs';
+const loadStack = (...args) => { const stack = loadBaseStack(...args); stack.context.window.MINITANDEM_FEATURES = {familySync:true}; return stack; };
 
 const FAMILY='minitandem-family-v1',SYNC='minitandem-sync-v1',CORRECTIONS='minitandem-pending-corrections-v1';
 const ADDRESS='https://family.example.ch/',ORIGIN='https://family.example.ch';
