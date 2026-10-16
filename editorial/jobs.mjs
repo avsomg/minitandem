@@ -153,7 +153,7 @@ export class JobQueue{
   requireLease(id,token,role){
     const job=this.get(id);
     if(!job||job.state!=='leased'||job.token!==token||job.lease_until<=this.now()||
-      !ROLE_KINDS[role]?.includes(job.kind))throw Error('Invalid, expired or wrong-role lease');
+      !ROLE_KINDS[role]?.includes(job.kind))throw Object.assign(Error('Invalid, expired or wrong-role lease'),{code:'LEASE_LOST'});
     return job;
   }
   renew(id,token,role,leaseMs=900000){
@@ -190,6 +190,13 @@ export class JobQueue{
   }
   fail(id,token,role,error){return this.transaction(()=>{
     const job=this.requireLease(id,token,role);this.retryInside(job,error);this.noteFailure(job,String(error));return this.get(id);
+  });}
+  // Cleanup may retire our expired lease, but never a replacement owner's work.
+  failOwned(id,token,role,error,{uncounted=false}={}){return this.transaction(()=>{
+    const job=this.get(id);
+    if(job?.state!=='leased'||job.token!==token||!ROLE_KINDS[role]?.includes(job.kind))return {state:'lost-lease',jobId:id};
+    if(job.lease_until>this.now())return uncounted?this.releaseUncounted(id,token,role,error):this.fail(id,token,role,error);
+    this.retryInside(job,'Lease expired: '+error);this.event(id,'lease-lost',{role});return this.get(id);
   });}
   // A provider outage (usage limit, login) is not the job's fault: the lease goes back, the attempt it cost is returned and the job is
   // retried soon. Only provider-* messages qualify, and a job that meets one RELEASE_LIMIT times is probably the cause, so then it counts.

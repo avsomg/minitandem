@@ -4,17 +4,82 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {EventEmitter} from 'node:events';
+import {execFileSync} from 'node:child_process';
 import {snapshot,captureUrl,capturedViews,monitorRecord,hash} from './evidence.mjs';
 import {writeRecord} from './page-record.mjs';
 import {JobQueue,digest} from './jobs.mjs';
 import {retireStaleReadyJobs,assertCaptured,registerCaptured} from './workflow.mjs';
-import {captureClaims,prepareEvidence,captureDraft,watchFor,promptFor,failJob,runRoles,runCodex,workerEvidenceFiles,normalizePilotSources,upgradeInputBudgetJob,upgradeInvestigatedJob,requestQa,timedWorker} from './agent-run.mjs';
+import {captureClaims,prepareEvidence,captureDraft,watchFor,promptFor,failJob,runRoles,runCodex,workerEvidenceFiles,normalizePilotSources,upgradeInputBudgetJob,upgradeInvestigatedJob,requestQa,timedWorker,withJobLease,runJobs,qaRun} from './agent-run.mjs';
 
 const now=new Date().toISOString(),url='https://example.org/course';
 const first=snapshot({url,fetchedAt:now,text:'Official source: admission is free. Course is on Monday.'});
 const second=snapshot({url,fetchedAt:now,parser:'calendar-selected-zurich-v1',text:'Derived official calendar: 2026-10-03 starts at 09:30 in Zurich.'});
 const card={id:'course',name:'Meeting',format:'event',sources:[{url}],checked:'2026-09-01',min:5};
 const claim=(field,value,quote)=>({key:field,field,value,quote,source:url,status:'supported',scope:'exact-card',kind:'official',note:'Published exact condition.'});
+const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+function leaseFixture(t){
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-lease-'));let at=Date.parse('2026-10-15T10:00:00Z');
+  const queue=new JobQueue(path.join(directory,'jobs.sqlite'),{now:()=>new Date(at).toISOString()});
+  queue.enqueue({kind:'search',cardId:'course',inputRevision:'one'});
+  t.after(()=>{queue.close();fs.rmSync(directory,{recursive:true,force:true});});
+  return {queue,directory,advance:ms=>at+=ms};
+}
+test('active preparation and capture retain ownership beyond the initial persisted deadline',async t=>{
+  const {queue,advance}=leaseFixture(t),job=queue.claim('search','one',{leaseMs:1000});
+  await withJobLease(queue,job,'search',async active=>{
+    for(let i=0;i<5;i++){advance(400);await delay(20);active.check();}
+    queue.finish(job.id,job.token,'search',{});
+  },{leaseMs:1000,renewEveryMs:5,timeoutMs:1000});
+  assert.equal(queue.get(job.id).state,'done');
+});
+test('synchronous QA renews at checkpoints and its child cannot outlive the whole-job deadline',async t=>{
+  const {queue}=leaseFixture(t);queue.enqueue({kind:'qa',cardId:'catalogue',inputRevision:'qa'});
+  const job=queue.claim('qa','runner');let calls=0;
+  await assert.rejects(withJobLease(queue,job,'qa',active=>qaRun(queue,job,{...active,runImpl:(_node,_args,options)=>{
+    calls++;execFileSync(process.execPath,['-e','setTimeout(()=>{},10000)'],options);
+  }}),{timeoutMs:1000}),{code:'JOB_TIMEOUT'});
+  assert.equal(calls,1);assert.equal(failJob(queue,job,'qa',Error('Whole job time limit')).state,'retry');
+  assert.equal(queue.get(job.id).attempt,1);
+});
+test('a forward wall-clock jump loses the lease safely without another cleanup exception',async t=>{
+  const {queue,advance}=leaseFixture(t),job=queue.claim('search','one');
+  await assert.rejects(withJobLease(queue,job,'search',async active=>{advance(3600000);await delay(20);active.check();},
+    {renewEveryMs:5,timeoutMs:1000}),{code:'LEASE_LOST'});
+  assert.equal(failJob(queue,job,'search',Error('Lease lost')).state,'retry');
+  assert.equal(queue.get(job.id).attempt,1);
+});
+test('a late worker cannot fail or finish its replacement owner',async t=>{
+  const {queue}=leaseFixture(t),job=queue.claim('search','one');let replacement;
+  await assert.rejects(withJobLease(queue,job,'search',async active=>{
+    queue.reconcile([{kind:'search',cardId:'course',inputRevision:'two'}]);replacement=queue.claim('search','two');
+    await delay(15);active.check();queue.finish(job.id,job.token,'search',{});
+  },{renewEveryMs:5,timeoutMs:1000}),{code:'LEASE_LOST'});
+  assert.equal(failJob(queue,job,'search',Error('late result')).state,'lost-lease');
+  assert.equal(queue.get(replacement.id).state,'leased');assert.equal(queue.get(replacement.id).token,replacement.token);
+});
+test('the whole-job deadline stops preparation and writes a report before any late result can commit',async t=>{
+  const {queue,directory}=leaseFixture(t),reportFile=path.join(directory,'report.json');let commits=0,workers=0,aborted=false;
+  const result=await runJobs({queue,role:'search',limit:1,syncImpl:()=>{},reportFile,leaseOptions:{timeoutMs:20,renewEveryMs:5},
+    prepareImpl:async(job,{signal,assertActive})=>{signal.addEventListener('abort',()=>aborted=true);await delay(60);assertActive();return job;},
+    worker:async()=>{workers++;return {result:{},usage:{}};},commitImpl:()=>{commits++;}});
+  assert.equal(result.stopReason,'run-time-budget');assert.equal(aborted,true);
+  assert.equal(JSON.parse(fs.readFileSync(reportFile)).recentRun[0].code,'JOB_TIMEOUT');
+  await delay(70);assert.equal(workers,0);assert.equal(commits,0);assert.equal(queue.list()[0].state,'retry');
+});
+test('elapsed budgets use the injected monotonic clock, and reports survive cleanup and sync errors',async t=>{
+  const {queue,directory}=leaseFixture(t),reportFile=path.join(directory,'report.json');
+  const original=queue.failOwned;queue.failOwned=()=>{throw Error('cleanup unavailable');};
+  const result=await runJobs({queue,role:'search',limit:1,syncImpl:()=>{},prepareImpl:async job=>job,reportFile,
+    worker:async()=>{throw Error('contract refused');}});
+  assert.deepEqual(result.results[0].cleanupErrors,['cleanup unavailable']);
+  assert.equal(JSON.parse(fs.readFileSync(reportFile)).recentRun.length,1);queue.failOwned=original;
+  await assert.rejects(runJobs({queue,role:'search',limit:1,worker:async()=>{},syncImpl:()=>{throw Error('sync failed');},reportFile}),/sync failed/);
+  assert.equal(JSON.parse(fs.readFileSync(reportFile)).runError,'sync failed');
+  let elapsed=0;
+  const other=queue.enqueue({kind:'search',cardId:'other',inputRevision:'one'}),job=queue.claim('search','owner',{cardId:other.card_id});
+  await assert.rejects(withJobLease(queue,job,'search',async active=>{elapsed=100;active.check();},
+    {timeoutMs:50,monotonic:()=>elapsed}),{code:'JOB_TIMEOUT'});
+});
 test('operator can request version-bound QA for code changes without a card approval',t=>{
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-qa-request-')),q=new JobQueue(path.join(directory,'jobs.sqlite'));
   t.after(()=>{q.close();fs.rmSync(directory,{recursive:true,force:true});});

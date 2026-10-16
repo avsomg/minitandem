@@ -141,7 +141,8 @@ export function claudeUsage(event,route,toolCalls){
     costCaveat:'CLI estimate is not subscription billing or a quota percentage'};
 }
 export async function runClaudeWorker(job,policy,{route,promptImpl,evidenceFilesImpl,copyImagesImpl,
-  authImpl=requireClaudeSubscription,runImpl=spawn,timeoutMs=720000}={}){
+  authImpl=requireClaudeSubscription,runImpl=spawn,timeoutMs=720000,signal}={}){
+  signal?.throwIfAborted();
   if(!route?.model||!promptImpl||!evidenceFilesImpl||!copyImagesImpl)throw Error('Missing Claude worker contract');
   const env=claudeEnvironment();authImpl({env});
   const directory=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-claude-worker-')));fs.chmodSync(directory,0o700);
@@ -169,6 +170,7 @@ export async function runClaudeWorker(job,policy,{route,promptImpl,evidenceFiles
         setTimeout(()=>{if(!settled)child.kill('SIGKILL');},2000).unref();
       };
       const timeout=setTimeout(()=>stop('Worker time limit'),timeoutMs);
+      const aborted=()=>stop('Job cancelled');signal?.addEventListener('abort',aborted,{once:true});
       const parse=line=>{
         if(!line.trim())return;
         let event;try{event=JSON.parse(line);}catch{stop('Invalid Claude event JSON');return;}
@@ -185,9 +187,9 @@ export async function runClaudeWorker(job,policy,{route,promptImpl,evidenceFiles
         if(pending.length>2000000)stop('Oversized worker event');
       });
       child.stderr.on('data',chunk=>{stderr=(stderr+chunk.toString()).slice(-3000);});
-      child.on('error',error=>{clearTimeout(timeout);if(settled)return;settled=true;reject(error);});
+      child.on('error',error=>{clearTimeout(timeout);signal?.removeEventListener('abort',aborted);if(settled)return;settled=true;reject(error);});
       child.on('close',code=>{
-        clearTimeout(timeout);if(settled)return;parse(pending);settled=true;
+        clearTimeout(timeout);signal?.removeEventListener('abort',aborted);if(settled)return;parse(pending);settled=true;
         if(failure)reject(Error(failure));
         else if(code!==0||!resultEvent||resultEvent.is_error||resultEvent.subtype!=='success')
           reject(Error('Claude worker did not complete successfully: '+failureDetail(resultEvent,stderr,code)));

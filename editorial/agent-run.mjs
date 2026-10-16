@@ -18,6 +18,7 @@ import {runtimeContractRevision,assertRuntimeCurrent} from './runtime-contract.m
 import {runClaudeWorker,assertClaudeReady} from './claude-worker.mjs';
 import {PROJECT_ID} from './project-id.mjs';
 import {numberProblem} from './quote-numbers.mjs';
+import {performance} from 'node:perf_hooks';
 
 const loadedRuntimeRevision=runtimeContractRevision();
 const evidencePrefixes={preparedEvidence:'evidence',bundle:'bundle-evidence',draft:'draft-evidence',rejectedDraft:'previous-evidence'};
@@ -156,7 +157,8 @@ export function copyWorkerImages(job,directory,evidenceDirectory=path.join(here,
   }
   return [...images.values()];
 }
-export async function runCodex(job,policy,{runImpl=spawn,timeoutMs=720000,promptImpl=promptFor}={}){
+export async function runCodex(job,policy,{runImpl=spawn,timeoutMs=720000,promptImpl=promptFor,signal}={}){
+  signal?.throwIfAborted();
   const route=modelRoute(job,policy),directory=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-worker-'));
   const output=path.join(directory,'result.json');
   const schema=path.join(directory,'output-schema.json');
@@ -181,6 +183,7 @@ export async function runCodex(job,policy,{runImpl=spawn,timeoutMs=720000,prompt
         if(failure)return;failure=reason;child.kill('SIGTERM');setTimeout(()=>{if(!settled)child.kill('SIGKILL');},2000).unref();
       };
       const timeout=setTimeout(()=>stop('Worker time limit'),timeoutMs);
+      const aborted=()=>stop('Job cancelled');signal?.addEventListener('abort',aborted,{once:true});
       child.stdout.on('data',chunk=>{
         pending+=chunk.toString();const lines=pending.split('\n');pending=lines.pop();
         for(const line of lines){try{
@@ -191,9 +194,9 @@ export async function runCodex(job,policy,{runImpl=spawn,timeoutMs=720000,prompt
         if(pending.length>2000000)stop('Oversized worker event');
       });
       child.stderr.on('data',chunk=>{stderr=(stderr+chunk.toString()).slice(-3000);});
-      child.on('error',error=>{clearTimeout(timeout);reject(error);});
+      child.on('error',error=>{clearTimeout(timeout);signal?.removeEventListener('abort',aborted);reject(error);});
       child.on('close',code=>{
-        clearTimeout(timeout);if(settled)return;settled=true;
+        clearTimeout(timeout);signal?.removeEventListener('abort',aborted);if(settled)return;settled=true;
         if(failure)reject(Error(failure));else if(code===0)resolve();else reject(Error(`Worker exited ${code}: ${stderr.replace(/(?:sk-|ts_)[A-Za-z0-9_-]+/g,'[redacted]')}`));
       });
       child.stdin.end(prompt);
@@ -214,7 +217,8 @@ export function watchFor(url,{sources=null,hostIgnore=null,records=[]}={}){
   const wanted=normUrl(url),source=sources.find(item=>normUrl(item.url)===wanted);
   return source?{source,hostIgnore:hostIgnore??{},records}:null;
 }
-export async function captureClaims(bundle,card,{captureImpl=captureUrl,prepared=[],saveImpl=saveSnapshot,queue=null}={}){
+export async function captureClaims(bundle,card,{captureImpl=captureUrl,prepared=[],saveImpl=saveSnapshot,queue=null,signal,assertActive=()=>{}}={}){
+  assertActive();
   if(!bundle||!Array.isArray(bundle.claims))throw Error('Missing claims');
   const snapshots=new Map(),bySource=new Map();
   for(const claim of bundle.claims){
@@ -250,12 +254,12 @@ export async function captureClaims(bundle,card,{captureImpl=captureUrl,prepared
     if(!bySource.has(claim.source)){
       try{
         const evidence=prepared.filter(e=>e.url===claim.source);
-        if(!evidence.length)evidence.push(await captureImpl(claim.source,{watch:watchFor(claim.source,{records:[card]})}));
+        if(!evidence.length)evidence.push(await captureImpl(claim.source,{watch:watchFor(claim.source,{records:[card]}),signal}));
         // A capture and the other views of it (the monitor's) are all saved and registered; a quote may be found in any of them, the capture first.
         const set=evidence.flatMap(capturedSet);
-        for(const item of set){await saveImpl(path.join(here,'typesafe-runtime'),item);if(queue)registerCaptured(queue,item);}
+        for(const item of set){assertActive();await saveImpl(path.join(here,'typesafe-runtime'),item);assertActive();if(queue)registerCaptured(queue,item);}
         bySource.set(claim.source,set);
-      }catch{bySource.set(claim.source,[]);}
+      }catch{assertActive();bySource.set(claim.source,[]);}
     }
     const evidence=bySource.get(claim.source).find(e=>locateQuote(e,claim.quote));
     if(!evidence||!locateQuote(evidence,claim.quote)){
@@ -271,7 +275,7 @@ export function runClaude(job,policy,options={}){
 }
 // The wall time of the model process goes into its usage event, so a cycle can add up model seconds.
 export async function timedWorker(worker,...args){
-  const started=Date.now(),stamp=usage=>{if(usage&&typeof usage==='object')usage.modelSeconds=Math.round((Date.now()-started)/100)/10;};
+  const started=performance.now(),stamp=usage=>{if(usage&&typeof usage==='object')usage.modelSeconds=Math.round((performance.now()-started)/100)/10;};
   try{const output=await worker(...args);stamp(output.usage);return output;}
   catch(error){stamp(error.usage);throw error;}
 }
@@ -315,9 +319,28 @@ export async function gatedRoles(roles,priorities,gate){
 // refused model answer and any QA failure (test output can mention "429" without any provider being down).
 export function failJob(queue,job,role,error,{answered=false}={}){
   const outage=role!=='qa'&&!answered&&/^provider-/.test(failureCategory(error.message)||'');
-  return outage?queue.releaseUncounted(job.id,job.token,role,error.message):queue.fail(job.id,job.token,role,error.message);
+  return queue.failOwned(job.id,job.token,role,error.message,{uncounted:outage});
 }
-export async function prepareEvidence(job,{captureImpl=captureUrl,saveImpl=saveSnapshot,queue=null,sources=null,hostIgnore=null}={}){
+// The deadline covers capture and preparation too. Persistent lease time is only for ownership/restart recovery.
+export async function withJobLease(queue,job,role,work,{leaseMs=900000,timeoutMs=1800000,monotonic=()=>performance.now(),renewEveryMs=Math.min(30000,leaseMs/3)}={}){
+  const controller=new AbortController(),started=monotonic();let active=true;
+  const cancel=error=>{if(!controller.signal.aborted)controller.abort(error);};
+  const check=()=>{
+    controller.signal.throwIfAborted();
+    if(!active)throw Object.assign(Error('Job no longer active'),{code:'LEASE_LOST'});
+    if(monotonic()-started>=timeoutMs){cancel(Object.assign(Error('Whole job time limit'),{code:'JOB_TIMEOUT'}));controller.signal.throwIfAborted();}
+    try{queue.requireLease(job.id,job.token,role);}catch(error){cancel(error);throw error;}
+  };
+  const pulse=()=>{try{check();queue.renew(job.id,job.token,role,leaseMs);}catch(error){cancel(error);}};
+  let rejectAbort;
+  const aborted=new Promise((_,reject)=>{rejectAbort=()=>reject(controller.signal.reason);controller.signal.addEventListener('abort',rejectAbort,{once:true});});
+  const renew=setInterval(pulse,renewEveryMs),deadline=setTimeout(()=>cancel(Object.assign(Error('Whole job time limit'),{code:'JOB_TIMEOUT'})),timeoutMs);
+  try{check();return await Promise.race([aborted,Promise.resolve().then(()=>work({signal:controller.signal,check,renew:pulse,
+    remaining:()=>Math.max(1,timeoutMs-(monotonic()-started)),blockingBudget:()=>Math.max(1,Math.min(leaseMs/2,timeoutMs-(monotonic()-started)))}))]);}
+  finally{active=false;clearInterval(renew);clearTimeout(deadline);controller.signal.removeEventListener('abort',rejectAbort);}
+}
+export async function prepareEvidence(job,{captureImpl=captureUrl,saveImpl=saveSnapshot,queue=null,sources=null,hostIgnore=null,signal,assertActive=()=>{}}={}){
+  assertActive();
   // A verifier also receives the sources fetched for leads of an earlier round; otherwise it cannot see what following its lead produced.
   const urls=[...(job.payload.sourceIssues||[]).map(i=>i.details?.url),...(job.payload.researchLeads||[]).map(l=>l.source),...(job.kind==='verify-facts'?job.payload.followedLeads||[]:[]).map(l=>l.source),
     ...(job.payload.draft?.bindings||[]).map(b=>b.source),
@@ -332,32 +355,33 @@ export async function prepareEvidence(job,{captureImpl=captureUrl,saveImpl=saveS
   const feeds=sources.filter(source=>source.type==='ics'&&source.recordIds.includes(job.payload.card?.id));
   for(const source of feeds){
     try{
-      const raw=await captureImpl(source.url,{type:'ics',watch:watch(source.url)});await keep(raw);
+      const raw=await captureImpl(source.url,{type:'ics',watch:watch(source.url),signal});assertActive();await keep(raw);assertActive();
       const selected=calendarEvidence(raw,job.payload.card).evidence;
-      await saveImpl(path.join(here,'typesafe-runtime'),selected);if(queue)registerCaptured(queue,selected);evidence.push(selected);
-    }catch(error){failures.push({url:source.url,status:'calendar-capture-unavailable',reason:String(error.message).slice(0,200)});}
+      await saveImpl(path.join(here,'typesafe-runtime'),selected);assertActive();if(queue)registerCaptured(queue,selected);evidence.push(selected);
+    }catch(error){assertActive();failures.push({url:source.url,status:'calendar-capture-unavailable',reason:String(error.message).slice(0,200)});}
   }
   for(const url of [...new Set(urls)].filter(Boolean).slice(0,5)){
     if(feeds.some(source=>source.url===url))continue;
-    try{const snapshot=await captureImpl(url,{watch:watch(url)});await keep(snapshot);evidence.push(snapshot);}
-    catch{failures.push({url,status:'capture-unavailable'});}
+    try{assertActive();const snapshot=await captureImpl(url,{watch:watch(url),signal});assertActive();await keep(snapshot);assertActive();evidence.push(snapshot);}
+    catch{assertActive();failures.push({url,status:'capture-unavailable'});}
   }
   if(queue)for(const previous of job.payload.bundle?.snapshots||[]){
     if(evidence.some(current=>current.url===previous.url&&current.textHash===previous.textHash))registerCaptured(queue,previous);
   }
   return {...job,payload:{...job.payload,preparedEvidence:evidence,evidenceFailures:failures}};
 }
-export async function captureDraft(draft,prepared,queue,{captureImpl=captureUrl,saveImpl=saveSnapshot}={}){
+export async function captureDraft(draft,prepared,queue,{captureImpl=captureUrl,saveImpl=saveSnapshot,signal,assertActive=()=>{}}={}){
+  assertActive();
   if(!Array.isArray(draft.bindings))throw Error('Editor did not provide evidence bindings');
   const snapshots=new Map(),fetched=new Map();
   for(const binding of draft.bindings){
     let evidence=prepared.flatMap(capturedSet).find(e=>e.url===binding.source&&locateQuote(e,binding.quote));
     if(!evidence){
-      if(!fetched.has(binding.source))fetched.set(binding.source,await captureImpl(binding.source,{watch:watchFor(binding.source)}));
+      if(!fetched.has(binding.source))fetched.set(binding.source,await captureImpl(binding.source,{watch:watchFor(binding.source),signal}));
       const set=capturedSet(fetched.get(binding.source));
       evidence=set.find(e=>locateQuote(e,binding.quote))??set[0];
     }
-    await saveImpl(path.join(here,'typesafe-runtime'),evidence);registerCaptured(queue,evidence);snapshots.set(evidence.id,evidence);
+    assertActive();await saveImpl(path.join(here,'typesafe-runtime'),evidence);assertActive();registerCaptured(queue,evidence);snapshots.set(evidence.id,evidence);
     binding.snapshotId=evidence.id;
   }
   const reviewed=new Set((draft.reviewCoverage?.fields||[]).flatMap(row=>row.snapshotIds));
@@ -386,7 +410,7 @@ export async function semanticClaims(bundle,card,{judgeImpl=judgeBatch}={}){
 // The public gates CI runs on a clean clone (npm run audit:public and scan:public in .github/workflows/test.yml), run here on the site QA has just built.
 // A contact that no person has reviewed, a Swiss mobile number, a private path that git tracks, a secret or a personal path fails QA, so no release job follows.
 export const PUBLIC_GATES=[['public-audit',['editorial/public-audit.mjs','--strict']],['public-scan',['scripts/scan-public.mjs']]];
-export function qaRun(queue,job){
+export function qaRun(queue,job,{check=()=>{},renew=()=>{},blockingBudget=()=>180000,runImpl=execFileSync}={}){
   const checks=[],inputRevision=sourceRevision(root,{generated:false});let testedManifest=null,snapshot=null,compiledRevision=null;
   for(const [label,args] of [
     ['compile',['editorial/compile-review.mjs']],['catalogue',['maintain.mjs']],
@@ -394,6 +418,7 @@ export function qaRun(queue,job){
     ['unit',['--test',...fs.readdirSync(root).filter(f=>f.endsWith('.test.mjs')),
       ...fs.readdirSync(here).filter(f=>f.endsWith('.test.mjs')).map(f=>'editorial/'+f)]],
     ['mobile-ages',['verify-age.mjs']],['mobile-flow',['verify-mobile.mjs']]]){
+    check();renew();check();
     if(label==='unit'){
       if(inputRevision!==sourceRevision(root,{generated:false}))throw Error('Build inputs changed during compilation');
       compiledRevision=sourceRevision();testedManifest=publicManifest();
@@ -401,9 +426,12 @@ export function qaRun(queue,job){
       if(!fs.existsSync(snapshot))fs.cpSync(path.join(root,'.publish'),snapshot,{recursive:true,errorOnExist:true,force:false});
       if(publicManifest(snapshot).revision!==testedManifest.revision)throw Error('Release snapshot differs from built files');
     }
-    execFileSync(process.execPath,args,{cwd:root,timeout:180000,maxBuffer:12000000,stdio:'pipe',
-      env:{...process.env,APP_URL:pathToFileURL(path.join(snapshot||path.join(root,'.publish'),'index.html')).href}});checks.push(label);
+    try{runImpl(process.execPath,args,{cwd:root,timeout:Math.max(1,Math.floor(Math.min(180000,blockingBudget()))),maxBuffer:12000000,stdio:'pipe',
+      env:{...process.env,APP_URL:pathToFileURL(path.join(snapshot||path.join(root,'.publish'),'index.html')).href}});}
+    catch(error){check();throw error;}
+    check();checks.push(label);
   }
+  check();
   if(compiledRevision!==sourceRevision()||inputRevision!==sourceRevision(root,{generated:false})||testedManifest.revision!==publicManifest().revision)throw Error('Sources or built files changed while QA was running');
   const manifest=testedManifest;
   queue.transaction(()=>{
@@ -444,7 +472,8 @@ export function recordRejectedOutput(queue,job,role,workerOutput,error,outputRoo
   });queue.flush(outputRoot);
   return hash;
 }
-export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=runModel,cardId=null,pilot=false,fullReview=false,sources=[],preflight,preflightRetryMs=60000,sleep}={}){
+export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=runModel,cardId=null,pilot=false,fullReview=false,sources=[],preflight,preflightRetryMs=60000,sleep,
+  monotonic=()=>performance.now(),syncImpl=syncQueue,prepareImpl=prepareEvidence,commitImpl=commitResult,reportFile=path.join(here,'workflow-report.json'),leaseOptions={}}={}){
   assertRuntimeCurrent(loadedRuntimeRevision);
   sources=normalizePilotSources(sources,{pilot});
   const policy=JSON.parse(fs.readFileSync(path.join(here,'agent-policy.json'),'utf8'));
@@ -457,7 +486,7 @@ export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=r
   const gate={preflight:preflight&&(()=>preflight(policy)),ready:null,reason:null,retryMs:preflightRetryMs,sleep};
   const owned=!queue;queue??=new JobQueue(path.join(here,'workflow-state','jobs.sqlite'));
   const results=[];
-  const startedAt=Date.now();let stopReason=null;
+  const startedAt=monotonic();let stopReason=null,runError=null;
   try{
     if(pilot){
       const card=currentInputs().records.find(r=>r.id===cardId);if(!card)throw Error('Unknown pilot card');
@@ -473,10 +502,10 @@ export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=r
     }
     for(let i=0;i<limit;i++){
       if(runtimeContractRevision()!==loadedRuntimeRevision){stopReason='editorial-runtime-changed';break;}
-      if(Date.now()-startedAt>=policy.maxRunMinutes*60000){stopReason='run-time-budget';break;}
+      if(monotonic()-startedAt>=policy.maxRunMinutes*60000){stopReason='run-time-budget';break;}
       const circuitOpen=Boolean(queue.circuit()?.open);
       if(circuitOpen&&!chain&&role!=='qa'){stopReason='systemic-failure-circuit';break;}
-      syncQueue(queue);
+      syncImpl(queue);
       const priorities=new Map();
       for(const job of queue.list().filter(j=>(j.state==='ready'||j.state==='retry'&&j.retry_after<=queue.now())&&(!cardId||j.card_id===cardId))){
         const assigned=Object.keys(ROLE_KINDS).find(r=>ROLE_KINDS[r].includes(job.kind));
@@ -492,35 +521,43 @@ export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=r
       if(!job){stopReason=gate.ready===false?'worker-login-unavailable':circuitOpen?'systemic-failure-circuit':stopReason;break;}
       let workerOutput=null;
       try{
-        let result;
-        if(assignedRole==='qa')result=qaRun(queue,job);
-        else{
-          const prepared=await prepareEvidence(job,{queue});
-          const remainingMs=Math.max(1000,policy.maxRunMinutes*60000-(Date.now()-startedAt));
-          const output=await timedWorker(worker,prepared,policy,{timeoutMs:Math.min(720000,remainingMs)});workerOutput=output;
+        const result=await withJobLease(queue,job,assignedRole,async active=>{
+          if(assignedRole==='qa')return qaRun(queue,job,active);
+          const evidenceOptions={queue,signal:active.signal,assertActive:active.check};
+          const prepared=await prepareImpl(job,evidenceOptions);active.check();
+          const output=await timedWorker(worker,prepared,policy,{timeoutMs:Math.min(720000,active.remaining()),signal:active.signal});active.check();workerOutput=output;
           assertRuntimeCurrent(loadedRuntimeRevision);
           if(job.kind==='facts'||job.kind==='adjudicate-facts'&&output.result.bundle){
-            await captureClaims(output.result.bundle,job.payload.card,{prepared:prepared.payload.preparedEvidence,queue});
+            await captureClaims(output.result.bundle,job.payload.card,{prepared:prepared.payload.preparedEvidence,...evidenceOptions});active.check();
             if(policy.semanticPrecheck)output.result.bundle.semanticAdvisory=await semanticClaims(output.result.bundle,job.payload.card);
           }
-          if(['editorial','integrate'].includes(job.kind))await captureDraft(output.result.draft,prepared.payload.preparedEvidence,queue);
+          if(['editorial','integrate'].includes(job.kind))await captureDraft(output.result.draft,prepared.payload.preparedEvidence,queue,evidenceOptions);
+          active.check();
           assertRuntimeCurrent(loadedRuntimeRevision);
-          result=commitResult(queue,{jobId:job.id,token:job.token,role:assignedRole,result:output.result});
+          const result=commitImpl(queue,{jobId:job.id,token:job.token,role:assignedRole,result:output.result});
           queue.event(job.id,'usage',output.usage);
-        }
+          return result;
+        },{leaseMs:policy.leaseMinutes*60000,timeoutMs:Math.max(1,policy.maxRunMinutes*60000-(monotonic()-startedAt)),monotonic,...leaseOptions});
         results.push({jobId:job.id,cardId:job.card_id,kind:job.kind,result});
       }catch(error){
-        if(!workerOutput&&error.usage)queue.event(job.id,'usage',{...error.usage,failed:true});
-        if(workerOutput)recordRejectedOutput(queue,job,assignedRole,workerOutput,error);
-        if(queue.get(job.id)?.state==='leased')failJob(queue,job,assignedRole,error,{answered:Boolean(workerOutput)});
-        results.push({jobId:job.id,cardId:job.card_id,kind:job.kind,error:error.message});
+        const cleanupErrors=[];
+        try{
+          if(!workerOutput&&error.usage)queue.event(job.id,'usage',{...error.usage,failed:true});
+          if(workerOutput&&error.code!=='LEASE_LOST')recordRejectedOutput(queue,job,assignedRole,workerOutput,error);
+        }catch(cleanup){cleanupErrors.push(cleanup.message);}
+        try{failJob(queue,job,assignedRole,error,{answered:Boolean(workerOutput)});}catch(cleanup){cleanupErrors.push(cleanup.message);}
+        results.push({jobId:job.id,cardId:job.card_id,kind:job.kind,error:error.message,...(error.code&&{code:error.code}),...(cleanupErrors.length&&{cleanupErrors})});
+        if(['LEASE_LOST','JOB_TIMEOUT'].includes(error.code)){stopReason=error.code==='LEASE_LOST'?'lease-lost':'run-time-budget';break;}
         // A subscription outage or limit would otherwise spend an attempt on every remaining job of the run.
         if(provider==='claude'&&/^provider-/.test(failureCategory(error.message)||'')){stopReason='worker-provider-failure';break;}
       }
     }
-    await writeJsonAtomic(path.join(here,'workflow-report.json'),{...queue.summary(),recentRun:results});
     return {results,stopReason,summary:queue.summary()};
-  }finally{if(owned)queue.close();}
+  }catch(error){runError=error.message;throw error;}
+  finally{
+    try{await writeJsonAtomic(reportFile,{...queue.summary(),recentRun:results,stopReason,...(runError&&{runError})});}
+    finally{if(owned)queue.close();}
+  }
 }
 export function runRoles({role,chain,circuitOpen=false,priorities=new Map(),first=true}){
   const roles=chain?(circuitOpen?['qa']:['qa','verify','arbitrate','editor','search'].sort((a,b)=>(priorities.get(b)||0)-(priorities.get(a)||0))):[role];

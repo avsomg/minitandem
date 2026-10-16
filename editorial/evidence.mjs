@@ -119,7 +119,8 @@ function monitorViews(watch,{raw,text,contentType,url,finalUrl,now,rawHash}){
 
 // With the default fetchImpl the connection is pinned to the addresses checked here (see pinnedResponse): the name is not resolved a second time.
 // A fetchImpl that is passed in (tests, demo) is the caller's own transport and is used as given.
-export async function captureUrl(url,{now=new Date().toISOString(),fetchImpl=fetch,lookupImpl=lookup,requestImpl=https.request,type='html',required=[],timeoutMs=15000,maxBytes=2_000_000,ocrImpl=recognizeImage,pdfImpl=pdfText,fallbackImpl=curlResponse,watch=null}={}){
+export async function captureUrl(url,{now=new Date().toISOString(),fetchImpl=fetch,lookupImpl=lookup,requestImpl=https.request,type='html',required=[],timeoutMs=15000,maxBytes=2_000_000,ocrImpl=recognizeImage,pdfImpl=pdfText,fallbackImpl=curlResponse,watch=null,signal}={}){
+  signal?.throwIfAborted();
   url=publicUrl(url);let destination=url;
   for(let redirects=0;redirects<=4;redirects++){
     const addresses=await lookupImpl(new URL(destination).hostname,{all:true});
@@ -127,9 +128,10 @@ export async function captureUrl(url,{now=new Date().toISOString(),fetchImpl=fet
     let response,method=fetchImpl===fetch?'node-pinned-https':'node-fetch';
     const headers={'user-agent':'MinitandemEvidence/1.0 (editorial verification)','accept':'text/html, text/plain, text/calendar, application/pdf;q=0.9, image/png;q=0.8, image/jpeg;q=0.8'};
     try{
-      const signal=AbortSignal.timeout(timeoutMs);
-      response=fetchImpl===fetch?await pinnedResponse(destination,addresses,{headers,signal,request:requestImpl}):await fetchImpl(destination,{redirect:'manual',signal,headers});
+      const abort=signal?AbortSignal.any([signal,AbortSignal.timeout(timeoutMs)]):AbortSignal.timeout(timeoutMs);
+      response=fetchImpl===fetch?await pinnedResponse(destination,addresses,{headers,signal:abort,request:requestImpl}):await fetchImpl(destination,{redirect:'manual',signal:abort,headers});
     }catch(error){
+      signal?.throwIfAborted();
       if(fetchImpl!==fetch)throw error;
       ({response,method}=await fallbackImpl(destination,addresses,{timeoutMs,maxBytes:Math.max(maxBytes,MAX_PDF_BYTES)}));
     }
