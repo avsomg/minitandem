@@ -1,46 +1,22 @@
-// Mobile flow on an iPhone 15 (393 x 852) in WebKit: the release check "mobile-flow".
+// Mobile flow on an iPhone 15 (393 x 852) in the selected engine: the release check "mobile-flow".
 // It drives the real interface: the list and its bounded batches, the filter sheet, the way back to the filters, the card page,
 // saved records and their merge between tabs, downloads, the map, the three languages, and the layout from 320 px to desktop.
-import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import fs from 'node:fs';
-import http from 'node:http';
 import assert from 'node:assert/strict';
-
 import {loadPlaywright} from './playwright-loader.mjs';
-const {webkit}=loadPlaywright();
-const root=path.dirname(fileURLToPath(import.meta.url));
-const screenshots=path.join(root,'editorial/typesafe-runtime');
-fs.mkdirSync(screenshots,{recursive:true});
-let url=process.env.APP_URL||'http://127.0.0.1:8765/';
-let fixture;
-// WebKit file URLs do not deliver cross-tab storage events. Serve the selected snapshot.
-if(url.startsWith('file:')){
-  const directory=path.dirname(fileURLToPath(url));
-  const types={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.webmanifest':'application/manifest+json','.png':'image/png','.svg':'image/svg+xml','.md':'text/markdown','.jpg':'image/jpeg'};
-  fixture=http.createServer((request,response)=>{
-    let pathname;
-    try{pathname=decodeURIComponent(new URL(request.url,'http://localhost').pathname);}catch{response.writeHead(400).end();return;}
-    const file=path.resolve(directory,'.'+(pathname==='/'?'/index.html':pathname));
-    const segments=path.relative(directory,file).split(path.sep);
-    if(!['GET','HEAD'].includes(request.method)||segments.some(part=>part.startsWith('.'))||!file.startsWith(directory+path.sep)||
-      segments.some((_,index)=>fs.existsSync(path.join(directory,...segments.slice(0,index+1)))&&fs.lstatSync(path.join(directory,...segments.slice(0,index+1))).isSymbolicLink())||
-      !fs.existsSync(file)||!fs.statSync(file).isFile()){response.writeHead(404).end();return;}
-    response.writeHead(200,{'Content-Type':types[path.extname(file)]||'application/octet-stream','Cache-Control':'no-store'});
-    response.end(request.method==='HEAD'?undefined:fs.readFileSync(file));
-  });
-  await new Promise((resolve,reject)=>{fixture.once('error',reject);fixture.listen(0,'127.0.0.1',resolve);});
-  url='http://127.0.0.1:'+fixture.address().port+'/';
-}
+import {engineName,artifactDirectory,serveSite,prepareContext,contextOptions,targets} from './scripts/browser-support.mjs';
+const engine=engineName(),playwright=loadPlaywright();
+const screenshots=artifactDirectory('mobile');
+const fixture=await serveSite(),url=fixture.url;
 const FAMILY='minitandem-family-v1';
 let browser;
 try{
-  browser=await webkit.launch({headless:true});
-  const context=await browser.newContext({viewport:{width:393,height:852},screen:{width:393,height:852},deviceScaleFactor:3,isMobile:true,hasTouch:true,locale:'en-GB',timezoneId:'Europe/Zurich',acceptDownloads:true,reducedMotion:'reduce'});
+  browser=await playwright[engine].launch({headless:true});
+  const context=await browser.newContext(contextOptions(targets[0]));
+  const errors=await prepareContext(context,url);
   const page=await context.newPage();
   page.setDefaultTimeout(5000);
-  const errors=[];
-  page.on('pageerror',error=>errors.push(error.message));
   await page.goto(url);
   await page.waitForSelector('#list .row');
   const noOverflow=async()=>assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'horizontal overflow');
@@ -292,5 +268,5 @@ try{
   await page.setViewportSize({width:852,height:393});await noOverflow();
   await page.setViewportSize({width:1440,height:1000});await noOverflow();
   assert.deepEqual(errors,[]);
-  console.log(JSON.stringify({result:'PASS',engine:'WebKit',target:'iPhone 15, 393x852 @3x',url,checks:['bounded batch and show more','nothing fixed on a phone','44px tap targets','16px inputs','way back to the filters','district filter and reload','browser back and forward','notes, status and favourites','ICS timezone','cross-tab merge','saved view','visit planning','age boundaries and unknown ages','empty state and reset','map','three languages and defaults','backup download','storage failure warning','320px, landscape and desktop overflow','no JavaScript errors']},null,2));
-}finally{if(browser)await browser.close();if(fixture)await new Promise(resolve=>fixture.close(resolve));}
+  console.log(JSON.stringify({result:'PASS',engine,target:'iPhone 15, 393x852 @3x',url,checks:['bounded batch and show more','nothing fixed on a phone','44px tap targets','16px inputs','way back to the filters','district filter and reload','browser back and forward','notes, status and favourites','ICS timezone','cross-tab merge','saved view','visit planning','age boundaries and unknown ages','empty state and reset','map','three languages and defaults','backup download','storage failure warning','320px, landscape and desktop overflow','no JavaScript errors']},null,2));
+}finally{if(browser)await browser.close();await fixture.close();}
