@@ -9,6 +9,9 @@ import {venueGroups} from './external-pipeline.mjs';
 import {writeJsonAtomic} from './evidence.mjs';
 import {PROJECT_ID} from './project-id.mjs';
 
+// The practical rows of catalogue_facts, also used by the private fact ledger.
+export const catalogueFacts=record=>Object.entries(record.practical||{});
+
 // A lossless staging projection. The production compiler still reads the reviewed catalogue.
 export function buildCatalogueSnapshot(records,registry,destination){
   if(!Array.isArray(records)||records.some(r=>!r.id)||new Set(records.map(r=>r.id)).size!==records.length)throw Error('Invalid catalogue identities');
@@ -47,7 +50,7 @@ export function buildCatalogueSnapshot(records,registry,destination){
       (r.events||[]).forEach((e,n)=>occurrence.run(r.id,n,e.date,e.start||null,e.end||null,JSON.stringify(e)));
       tariff.run(r.id,r.priceKind,r.amount??null,r.price,'unparsed-published-text');
       (r.sources||[]).forEach((s,n)=>{const id=digest(s.url);source.run(id,s.url);reference.run(r.id,n,id,s.label||'');});
-      for(const [key,value] of Object.entries(r.practical||{}))fact.run(r.id,key,JSON.stringify(value),'inherited-catalogue-value');
+      for(const [key,value] of catalogueFacts(r))fact.run(r.id,key,JSON.stringify(value),'inherited-catalogue-value');
     });
     db.exec('COMMIT');verifyCatalogueDatabase(db,{expectedRevision:digest(records)});verified=true;
   }finally{db.close();if(!verified)fs.rmSync(temporary,{force:true});}
@@ -71,7 +74,7 @@ export function verifyCatalogueDatabase(db,{expectedRevision=null}={}){
     const tariff=db.prepare('SELECT kind,amount,description FROM tariffs WHERE offer_id=?').get(r.id);
     if(digest(tariff)!==digest({kind:r.priceKind,amount:r.amount??null,description:r.price}))throw Error('Catalogue tariff mismatch');
     const facts=Object.fromEntries(db.prepare('SELECT field,body FROM catalogue_facts WHERE offer_id=? ORDER BY field').all(r.id).map(f=>[f.field,JSON.parse(f.body)]));
-    const expectedFacts=Object.fromEntries(Object.entries(r.practical||{}).sort(([a],[b])=>a.localeCompare(b)));
+    const expectedFacts=Object.fromEntries(catalogueFacts(r).sort(([a],[b])=>a.localeCompare(b)));
     if(digest(facts)!==digest(expectedFacts))throw Error('Catalogue practical fact mismatch');
     const sources=db.prepare('SELECT s.url,r.label FROM offer_sources r JOIN sources s ON s.id=r.source_id WHERE r.offer_id=? ORDER BY ordinal').all(r.id);
     if(digest(sources)!==digest((r.sources||[]).map(s=>({url:s.url,label:s.label||''}))))throw Error('Catalogue source mismatch');
