@@ -5,7 +5,8 @@ import os from 'node:os';
 import path from 'node:path';
 import vm from 'node:vm';
 import {JobQueue,digest,failureCategory} from './jobs.mjs';
-import {commitResult,validateClaims,validateDraft,applyDraftRecord,citationProblems,taskSpecs,registerCaptured,validateBindings,mergeResearch,today,unprocessedSpecs,assertFullReviewPermission,retireStaleReadyJobs,orderDraftEvents} from './workflow.mjs';
+import {commitResult,validateClaims,validateDraft,applyDraftRecord,citationProblems,taskSpecs,registerCaptured,validateBindings,mergeResearch,today,unprocessedSpecs,assertFullReviewPermission,retireStaleReadyJobs,orderDraftEvents,resumeAwaitingSources} from './workflow.mjs';
+import {resolveFromDispositions} from './review.mjs';
 import {snapshot} from './evidence.mjs';
 import {modelRoute,promptFor} from './agent-run.mjs';
 import {fullReviewFields} from './field-contract.mjs';
@@ -166,7 +167,7 @@ test('stale cards request a full primary review, while source signals and family
   const partial=taskSpecs(data,{quality:{queue:[row]},date})[0];
   assert.equal(partial.payload.requestedReview,'partial');
   assert.equal(partial.payload.triggerRevision,digest(['facts','a',card.sources.map(s=>s.url),[],
-    [{id:'signal',kind:'content-changed'}],Math.floor(Date.parse(date+'T12:00:00Z')/(7*86400000))]));
+    [{id:'signal',kind:'content-changed'}]]));
   f.queue.enqueue(partial);const job=f.queue.claim('search','researcher');f.queue.finish(job.id,job.token,'search',{});
   const full=taskSpecs(data,{quality:{queue:[{...row,stale:true}]},date})[0];
   assert.equal(full.payload.requestedReview,'full');
@@ -180,6 +181,46 @@ test('stale workers cannot change shared files',t=>{
   const job=f.queue.claim('search','one');
   assert.throws(()=>commitResult(f.queue,{jobId:job.id,token:job.token,role:'search',result:{}},f),/stale/);
   assert.equal(f.queue.summary().artifacts,0);
+});
+test('a handled partial source signal stays handled across weeks and card edits, while a new version creates work',t=>{
+  const {queue}=fixture(t),row={id:'a',stale:false,sourceIssues:[{id:'notice',sourceId:'source',kind:'content-changed'}],watched:['source'],critical:[],priority:120};
+  const data={...input,pipeline:{rows:[]}},monitor={sources:{source:{hash:'v1'}}};
+  const specs=date=>taskSpecs(data,{quality:{queue:[row]},monitor,date});
+  const first=specs('2026-10-02')[0];queue.enqueue(first);const job=queue.claim('search','reader');queue.finish(job.id,job.token,'search',{});
+  queue.recordDisposition(job,'done');
+  assert.equal(unprocessedSpecs(queue,specs('2026-10-09')).length,0);
+  monitor.sources.source.hash='v2';assert.equal(unprocessedSpecs(queue,specs('2026-10-09')).length,1);
+  const stale=taskSpecs(data,{quality:{queue:[{...row,stale:true}]},monitor,date:'2026-10-09'});
+  assert.equal(unprocessedSpecs(queue,stale).length,1);
+});
+test('await-source persists a resume condition and resumes once for a new source version without retrying old claims',t=>{
+  const f=fixture(t),monitor={sources:{source:{hash:'v1'}},queue:[]};registerCaptured(f.queue,evidence);
+  const row={kind:'verify-facts',cardId:'a',inputRevision:'blocked',payload:{card,cardRevision:digest(card),bundle,sourceVersions:[['source','v1']]}};
+  f.queue.enqueue(row);const job=f.queue.claim('verify','reader');
+  commitResult(f.queue,{jobId:job.id,token:job.token,role:'verify',result:{verdicts:[{key:'age',verdict:'await-source',reason:'Relevant source is missing.'}]}},f);
+  const waiting=f.queue.get(job.id);assert.equal(waiting.state,'await-source');assert.equal(waiting.payload.resumeWhen.sources[0].version,'v1');
+  assert.deepEqual(resumeAwaitingSources(f.queue,input,monitor),[]);
+  monitor.sources.source.hash='v2';const ids=resumeAwaitingSources(f.queue,input,monitor);assert.equal(ids.length,1);
+  const fresh=f.queue.get(ids[0]);assert.equal(fresh.kind,'facts');assert.equal(fresh.attempt,0);assert.equal(fresh.payload.sourceVersions[0][1],'v2');
+  assert.equal(f.queue.get(job.id).attempt,1);assert.deepEqual(resumeAwaitingSources(f.queue,input,monitor),[]);
+  f.queue.reconcile([]);assert.equal(f.queue.get(fresh.id).state,'ready');
+});
+test('date and source-restored resume events are explicit and do not repeat',t=>{
+  const {queue}=fixture(t),monitor={sources:{source:{hash:'same',error:null,lastSuccess:'2026-10-04T10:00:00Z'}},queue:[]};
+  for(const [id,resumeWhen] of [['date',{sources:[],date:'2026-10-04'}],['restored',{sources:[{id:'source',version:'same',unavailable:true,lastSuccess:'2026-10-01T10:00:00Z'}]}]]){
+    const j=queue.enqueue({kind:'verify-facts',cardId:'a',inputRevision:id,payload:{card,resumeWhen}});
+    queue.db.prepare("UPDATE jobs SET state='await-source' WHERE id=?").run(j.id);
+  }
+  const first=resumeAwaitingSources(queue,input,monitor,'2026-10-03');assert.equal(first.length,1);
+  assert.equal(resumeAwaitingSources(queue,input,monitor,'2026-10-04').length,1);
+  assert.equal(resumeAwaitingSources(queue,input,monitor,'2026-10-05').length,0);
+});
+test('a shared monitor task resolves only after all affected cards have approved the current version and signal',()=>{
+  const task={id:'t',sourceId:'s',kind:'content-changed',recordIds:['a','b'],status:'open'},state={sources:{s:{hash:'v2'}},queue:[task]};
+  const row={source_id:'s',source_version:'v2',signal:'content-changed:t:'+digest({}),state:'done'};
+  assert.deepEqual(resolveFromDispositions(state,[{...row,card_id:'a'}]),[]);
+  assert.deepEqual(resolveFromDispositions(state,[{...row,card_id:'a'},{...row,card_id:'b',state:'await-source'}]),[]);
+  assert.deepEqual(resolveFromDispositions(state,[{...row,card_id:'a'},{...row,card_id:'b'}]),['t']);
 });
 test('the controller refuses an editor draft whose public text is not English, and nothing is written',t=>{
   const f=fixture(t);registerCaptured(f.queue,evidence);f.queue.enqueue({kind:'integrate',cardId:'a',inputRevision:'russian',payload:{card,cardRevision:digest(card)}});

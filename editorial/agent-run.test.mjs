@@ -48,6 +48,11 @@ test('a forward wall-clock jump loses the lease safely without another cleanup e
   assert.equal(failJob(queue,job,'search',Error('Lease lost')).state,'retry');
   assert.equal(queue.get(job.id).attempt,1);
 });
+test('ownership already lost before job entry rejects without an unhandled cancellation or starting work',async t=>{
+  const {queue,advance}=leaseFixture(t),job=queue.claim('search','one');advance(3600000);
+  await assert.rejects(withJobLease(queue,job,'search',()=>assert.fail('no work after lease loss')),{code:'LEASE_LOST'});
+  assert.equal(failJob(queue,job,'search',Error('lease lost before entry')).state,'retry');await delay(1);
+});
 test('a late worker cannot fail or finish its replacement owner',async t=>{
   const {queue}=leaseFixture(t),job=queue.claim('search','one');let replacement;
   await assert.rejects(withJobLease(queue,job,'search',async active=>{
@@ -125,6 +130,16 @@ test('an open systemic circuit leaves deterministic QA available even in a verif
   assert.deepEqual(runRoles({role:'verify',chain:true,circuitOpen:true}),['qa']);
   assert.deepEqual(runRoles({role:'qa',chain:false,circuitOpen:true}),['qa']);
   assert.equal(runRoles({role:'verify',chain:true,circuitOpen:false})[0],'verify');
+});
+test('one urgent slot precedes downstream work, and a search lead cannot take fresh work ahead of a started chain',async t=>{
+  const {queue,directory}=leaseFixture(t),order=[];
+  queue.enqueue({kind:'verify-facts',cardId:'started',inputRevision:'v',priority:10});
+  queue.enqueue({kind:'search',cardId:'fresh',inputRevision:'v',priority:900});
+  queue.enqueue({kind:'search',cardId:'closure',inputRevision:'v',priority:5,payload:{sourceIssues:[{kind:'possible-closure'}]}});
+  await runJobs({queue,role:'search',chain:true,limit:2,syncImpl:()=>{},prepareImpl:async job=>job,reportFile:path.join(directory,'report.json'),
+    worker:async job=>{order.push(job.card_id);return {result:{},usage:{}};},
+    commitImpl:(queue,{jobId,token,role})=>queue.finish(jobId,token,role,{})});
+  assert.deepEqual(order,['closure','started']);
 });
 test('capture resolves each quote in its own controller snapshot, including derived calendar evidence',async()=>{
   const bundle={project:'vmeste',cardId:card.id,claims:[claim('priceKind','free','admission is free'),claim('events',[{date:'2026-10-03',start:'09:30'}],'2026-10-03 starts at 09:30')]};

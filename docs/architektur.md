@@ -69,3 +69,13 @@ Gemeinsames Prinzip aller vier Wege: **Modelle lesen und schlagen vor, Code ents
 **Warum so.** Der Zyklus ersetzt einen früheren Chat-Zeitplan durch Code, den man lesen und testen kann; jeder Schritt hat eine Obergrenze, damit ein hängender Schritt den Zyklus nicht blockiert. Die Tagesgrenze begrenzt, wie viele Modelljobs ein Tag verbrauchen kann.
 
 **Wenn etwas schiefgeht.** Ein fehlgeschlagener Schritt steht im Protokoll (`failedSteps`) und der Prozess endet mit Exit-Code 1. `needsOwner` löst eine Benachrichtigung auf dem Mac aus, wenn der Zyklus blockiert war (etwa wegen aktiver Codex-Zeitpläne), ein Schritt scheiterte, ein Job Aufmerksamkeit braucht, der Breaker sich öffnete, der Login fehlte oder der Batch aus einem Grund stoppte. Läuft schon ein Zyklus, wird der neue ohne Fehler übersprungen. Auf dem Server (`docs/betrieb.md`) läuft dieser Zyklus nicht: Er gehört auf den Rechner des Eigentümers.
+
+## Planung nach abgeschlossenen Änderungen
+
+Im Kettenmodus ist der erste verfügbare Platz für die dringendste zulässige Aufgabe reserviert: Schliessung, Adresskorrektur oder Termin in den nächsten 14 Tagen. Danach kommen laufende Ketten (Prüfung, Integration, Patch-Prüfung und QA) vor neuer Recherche, unabhängig von der rotierenden Startrolle. `maxOpenChains` in `cycle-policy.json` begrenzt neue Faktenketten auf acht offene Karten. Der dringende Platz umgeht diese Grenze, die Lease und den Circuit Breaker nicht. Bereits begonnene Nacharbeit kann weiterlaufen.
+
+Ein partieller Quellauftrag wird durch Karte, Quellversion und Signal bestimmt, ohne Kalenderwoche. `source_dispositions` speichert das Ergebnis am Ende der Kette. Ein gemeinsamer Monitorauftrag wird erst aufgelöst, wenn jede betroffene Karte eine unabhängig genehmigte Änderung für diese Version hat. Attention und await-source bleiben sichtbar, erzeugen aber keine identische Neurecherche. Fällige vollständige Prüfungen behalten ihre periodische Wiederaufnahme.
+
+Bei await-source nennt `resumeWhen` die benötigte Quelländerung, eine Wiederherstellung, einen ausdrücklich gesetzten Termin oder eine manuelle Untersuchung. Sync beginnt bei einem neuen Grund eine frische Faktenprüfung mit `resumedFrom`; alte Aussagen werden nicht einfach wiederholt und alte Versuche bleiben erhalten. Die neue Tabelle ist additiv. Alte blockierte Aufgaben erhalten beim ersten Sync eine Bedingung aus dem Quellenregister; nicht belegbare frühere Genehmigungen werden nicht nachträglich umetikettiert.
+
+Der Zyklusbericht zeigt genehmigte Änderungen des Tages, offene Ketten mit Alter und die älteste dringende Aufgabe. Die Zahl der Claims bleibt die Budgetgrenze. Eine JSON-Pausendatei darf `until` nennen; der Bericht zeigt die Frist, setzt eine Pause aber nie selbständig zurück.

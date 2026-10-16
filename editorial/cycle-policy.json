@@ -3,6 +3,7 @@
   "project": "vmeste",
   "limitPerRun": 4,
   "maxJobsPerDay": 24,
+  "maxOpenChains": 8,
   "leadRoles": ["verify", "search", "arbitrate"],
   "dailyAfterHour": 7,
   "codexAutomationIds": ["automation", "automation-2", "automation-3", "automation-4"]

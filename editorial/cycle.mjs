@@ -8,6 +8,7 @@ import {fileURLToPath} from 'node:url';
 import {DatabaseSync} from 'node:sqlite';
 import {PROJECT_ID} from './project-id.mjs';
 import {takeProcessLock} from './process-lock.mjs';
+import {openChains,urgentJob} from './jobs.mjs';
 
 const here=path.dirname(fileURLToPath(import.meta.url));
 const zurich=(now,options)=>new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Zurich',...options}).format(now);
@@ -21,8 +22,9 @@ const writeJson=(file,value)=>{
 
 export function readPolicy(base=here){
   const policy=readJson(path.join(base,'cycle-policy.json'),null);
+  if(policy)policy.maxOpenChains??=8;
   if(policy?.schema!==1||policy.project!==PROJECT_ID||!Number.isInteger(policy.limitPerRun)||policy.limitPerRun<1||policy.limitPerRun>4||
-    !Number.isInteger(policy.maxJobsPerDay)||policy.maxJobsPerDay<1||!Array.isArray(policy.leadRoles)||!policy.leadRoles.length||
+    !Number.isInteger(policy.maxJobsPerDay)||policy.maxJobsPerDay<1||!Number.isInteger(policy.maxOpenChains)||policy.maxOpenChains<1||!Array.isArray(policy.leadRoles)||!policy.leadRoles.length||
     policy.leadRoles.some(role=>!['verify','search','arbitrate','editor'].includes(role))||
     !Number.isInteger(policy.dailyAfterHour)||!Array.isArray(policy.codexAutomationIds))throw Error('Invalid cycle policy');
   return policy;
@@ -97,7 +99,7 @@ export function usageSummary(used){
 }
 
 // What changed in the queue during this cycle (from the event id read at its start), in the terms the owner is told about.
-export function digest(file,sinceEventId){
+export function digest(file,sinceEventId,{now=new Date(),journalFile=path.resolve(path.dirname(file),'..','approved-updates.json')}={}){
   if(!fs.existsSync(file))return null;
   const db=openQueue(file);
   try{
@@ -108,7 +110,12 @@ export function digest(file,sinceEventId){
     const problem=event=>({jobId:event.jobId,card:event.card,kind:event.job,error:String(detail(event).error||'').slice(0,300)});
     const completed={};
     for(const event of events)if(event.kind==='completed')completed[event.job]=(completed[event.job]||0)+1;
+    const rows=db.prepare('SELECT * FROM jobs ORDER BY rowid').all().map(job=>({...job,payload:JSON.parse(job.payload)}));
+    const chains=openChains(rows,now.toISOString());
+    const oldest=rows.filter(job=>!['done','superseded'].includes(job.state)&&urgentJob(job,now.toISOString())).sort((a,b)=>a.created_at.localeCompare(b.created_at))[0];
     return {lastEventId:events.at(-1)?.id??sinceEventId,claimed:count('claimed'),completed,enqueued:count('enqueued'),superseded:count('superseded'),
+      completedChangesToday:readJson(journalFile,{updates:[]}).updates.filter(update=>!update.supersededBy&&update.approvedOn===localDate(now)).map(updateBrief),
+      openChains:chains,openChainCount:chains.length,oldestUrgent:oldest?{card:oldest.card_id,createdAt:oldest.created_at,state:oldest.state}:null,
       attention:events.filter(event=>event.kind==='attention').map(problem),
       retries:events.filter(event=>event.kind==='retry').map(problem),
       rejectedOutputs:count('rejected-output'),
@@ -153,7 +160,11 @@ export function runCycle({base=here,home=os.homedir(),now=new Date(),run=runNode
         record.batch?.stopReason&&`batch stopped: ${record.batch.stopReason}`].filter(Boolean).join('; '));
     return record;
   };
-  if(fs.existsSync(path.join(base,'cycle.pause'))){record.skipped='paused by editorial/cycle.pause';return dryRun?record:(writeJson(path.join(stateDirectory,'latest.json'),record),record);}
+  if(fs.existsSync(path.join(base,'cycle.pause'))){
+    let pause={};try{pause=readJson(path.join(base,'cycle.pause'),{});}catch{}
+    record.pause={until:pause?.until||null,expired:Boolean(pause?.until&&Date.parse(pause.until)<=now.getTime())};
+    record.skipped='paused by editorial/cycle.pause';return dryRun?record:(writeJson(path.join(stateDirectory,'latest.json'),record),record);
+  }
   const codex=codexSchedules(policy,home);record.codexSchedules=codex;
   if(codex.active.length){record.blocked=`Codex schedules are active: ${codex.active.join(', ')}`;return finish();}
   // The shared planning state (the daily marker, the queue marks) is read only once this run owns the cycle: read earlier, it could be what another
@@ -177,7 +188,7 @@ export function runCycle({base=here,home=os.homedir(),now=new Date(),run=runNode
         record.batch={stopReason:output?.stopReason??null,jobs:(output?.results||[]).map(job=>({card:job.cardId,kind:job.kind,...(job.error?{error:String(job.error).slice(0,300)}:{state:job.result?.state})}))};
       }
     }
-    record.changes=digest(queueFile,marks.lastEventId);
+    record.changes=digest(queueFile,marks.lastEventId,{now,journalFile:path.join(base,'approved-updates.json')});
     record.approvedUpdates=approvedUpdates(base).slice(before).map(updateBrief);
     record.finishedAt=new Date().toISOString();
     // The number the owner reads is the day's total after this run; the cap was planned from the count before it.

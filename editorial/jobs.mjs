@@ -16,6 +16,30 @@ export function failureCategory(message){
 }
 
 const RELEASE_LIMIT=10;
+export const DOWNSTREAM=['verify-facts','adjudicate-facts','integrate','review-patch','qa'];
+export const sourceSignal=issue=>issue.kind+':'+issue.id+':'+digest(issue.details||{});
+export function urgentJob(job,now=new Date().toISOString()){
+  if(job.payload.urgent)return true;
+  if(job.payload.sourceIssues?.some(issue=>issue.kind==='possible-closure'||issue.details?.fields?.includes('address')))return true;
+  if(job.payload.corrections?.some(row=>row.correction?.requiredFields?.includes('address'))||job.payload.reportedTopic==='address')return true;
+  const date=new Date(now).toLocaleDateString('en-CA',{timeZone:'Europe/Zurich'}),until=new Date(Date.parse(date+'T12:00:00Z')+14*86400000).toISOString().slice(0,10);
+  return Boolean(job.payload.card?.events?.some(event=>event.date>=date&&event.date<=until));
+}
+// Old rows have no chain id. Keep their latest started facts chain visible without resetting or relabelling their attempts.
+export function openChains(rows,now=new Date().toISOString()){
+  const cards=new Set(rows.filter(job=>job.kind==='facts').map(job=>job.card_id)),result=[];
+  for(const card of cards){
+    const jobs=rows.filter(job=>job.card_id===card),root=jobs.findLast(job=>job.kind==='facts'&&job.state!=='superseded'&&(job.payload.chainId||['done','leased'].includes(job.state)));
+    if(!root)continue;
+    const start=jobs.indexOf(root),chainId=root.payload.chainId||root.id;
+    const members=jobs.filter((job,index)=>job.id===chainId||(job.payload.chainId?job.payload.chainId===chainId:index>=start&&DOWNSTREAM.includes(job.kind)));
+    const last=members.at(-1);
+    if(!last||['attention','await-source','superseded'].includes(last.state)||last.kind==='qa'||last.kind==='review-patch'&&last.state==='done')continue;
+    const startedAt=members[0].created_at;
+    result.push({card,chainId,startedAt,ageHours:Math.max(0,Math.round((Date.parse(now)-Date.parse(startedAt))/360000)/10),kind:last.kind,state:last.state});
+  }
+  return result;
+}
 export class JobQueue{
   constructor(file,{now=()=>new Date().toISOString(),readOnly=false}={}){
     if(!readOnly)fs.mkdirSync(path.dirname(file),{recursive:true,mode:0o700});
@@ -40,6 +64,9 @@ export class JobQueue{
       CREATE TABLE IF NOT EXISTS releases(
         revision TEXT PRIMARY KEY,state TEXT NOT NULL,manifest TEXT NOT NULL,created_at TEXT NOT NULL);
       CREATE TABLE IF NOT EXISTS captured_evidence(id TEXT PRIMARY KEY,data TEXT NOT NULL,recorded_at TEXT NOT NULL);
+      CREATE TABLE IF NOT EXISTS source_dispositions(
+        key TEXT PRIMARY KEY,card_id TEXT NOT NULL,source_id TEXT NOT NULL,source_version TEXT NOT NULL,
+        signal TEXT NOT NULL,state TEXT NOT NULL,job_id TEXT NOT NULL,recorded_at TEXT NOT NULL);
     `);}
     const project=this.db.prepare('SELECT value FROM metadata WHERE key=?').get('project');
     if(project&&project.value!==PROJECT_ID){this.db.close();throw Error('Wrong queue project');}
@@ -109,7 +136,7 @@ export class JobQueue{
   reconcile(specs,{managedKinds=['search','facts','verify','adjudicate','editorial']}={}){
     return this.transaction(()=>{
       const active=new Set(specs.map(s=>JSON.stringify([s.kind,s.cardId,s.inputRevision])));
-      for(const job of this.list())if(!job.payload.pilot&&managedKinds.includes(job.kind)&&['ready','leased','retry'].includes(job.state)&&
+      for(const job of this.list())if(!job.payload.pilot&&!job.payload.resumeJob&&managedKinds.includes(job.kind)&&['ready','leased','retry'].includes(job.state)&&
         !active.has(JSON.stringify([job.kind,job.card_id,job.input_revision]))){
         this.db.prepare('UPDATE jobs SET state=?,token=NULL,lease_until=NULL,updated_at=? WHERE id=?')
           .run('superseded',this.now(),job.id);this.event(job.id,'superseded');
@@ -126,24 +153,35 @@ export class JobQueue{
       });
     });
   }
-  claim(role,owner,{leaseMs=900000,backpressure=24,cardId=null}={}){
+  openChains(){return openChains(this.db.prepare('SELECT * FROM jobs ORDER BY rowid').all().map(decode),this.now());}
+  dispositions(){return this.db.prepare('SELECT * FROM source_dispositions').all();}
+  recordDisposition(job,state){
+    for(const source of job.payload.sourceTasks||[])this.db.prepare('INSERT OR REPLACE INTO source_dispositions VALUES (?,?,?,?,?,?,?,?)')
+      .run(source.key,job.card_id,source.sourceId,source.version,source.signal,state,job.id,this.now());
+  }
+  claim(role,owner,{leaseMs=900000,backpressure=24,cardId=null,maxOpenChains=8,kinds=null,urgentOnly=false}={}){
     if(!ROLE_KINDS[role]||!owner||leaseMs<1000||leaseMs>3600000)throw Error('Invalid claim');
+    if(!Number.isInteger(maxOpenChains)||maxOpenChains<1)throw Error('Invalid open-chain cap');
     return this.transaction(()=>{
       const now=this.now();
       for(const job of this.db.prepare('SELECT * FROM jobs WHERE state=? AND lease_until<=?').all('leased',now))
         this.retryInside(job,'Lease expired',now);
       if(!['qa','release'].includes(role)&&this.circuit()?.open)return null;
-      const placeholders=ROLE_KINDS[role].map(()=>'?').join(',');
+      const allowed=ROLE_KINDS[role].filter(kind=>!kinds||kinds.includes(kind));if(!allowed.length)return null;
+      const placeholders=allowed.map(()=>'?').join(',');
       const backlog=this.db.prepare("SELECT count(*) AS n FROM jobs WHERE state IN ('ready','leased','retry') AND kind IN ('verify','verify-facts','review-patch','editorial','integrate','qa')").get().n;
-      const job=this.db.prepare(`SELECT * FROM jobs WHERE kind IN (${placeholders}) AND
+      const candidates=this.db.prepare(`SELECT * FROM jobs WHERE kind IN (${placeholders}) AND
         (state='ready' OR state='retry' AND retry_after<=?) AND
         (?=0 OR priority>=120 OR kind='facts' AND ?=0) AND (? IS NULL OR card_id=?) AND NOT EXISTS(
           SELECT 1 FROM jobs held WHERE held.card_id=jobs.card_id AND held.state='leased')
         AND (kind NOT IN ('qa','review-patch','release') OR NOT EXISTS(
           SELECT 1 FROM jobs held WHERE held.state='leased' AND held.kind IN ('qa','review-patch','release')))
         AND NOT EXISTS(SELECT 1 FROM jobs held WHERE held.state='leased' AND held.kind='release')
-        ORDER BY priority DESC,created_at,id LIMIT 1`).get(...ROLE_KINDS[role],now,role==='search'&&backlog>=backpressure?1:0,role==='search'&&backlog>=2*backpressure?1:0,cardId,cardId);
+        ORDER BY priority DESC,created_at,id`).all(...allowed,now,role==='search'&&backlog>=backpressure?1:0,role==='search'&&backlog>=2*backpressure?1:0,cardId,cardId).map(decode);
+      const chains=this.openChains(),job=candidates.find(job=>(!urgentOnly||urgentJob(job,now))&&
+        (job.kind!=='facts'||job.payload.chainId||chains.length<maxOpenChains&&!chains.some(chain=>chain.card===job.card_id)));
       if(!job)return null;
+      if(job.kind==='facts'&&!job.payload.chainId){job.payload.chainId=job.id;this.db.prepare('UPDATE jobs SET payload=? WHERE id=?').run(JSON.stringify(job.payload),job.id);}
       const token=randomUUID(),until=new Date(Date.parse(now)+leaseMs).toISOString();
       this.db.prepare('UPDATE jobs SET state=?,owner=?,token=?,lease_until=?,attempt=attempt+1,updated_at=? WHERE id=?')
         .run('leased',owner,token,until,now,job.id);this.event(job.id,'claimed',{role,owner,until});
@@ -177,6 +215,7 @@ export class JobQueue{
       this.db.prepare('UPDATE jobs SET state=?,token=NULL,lease_until=NULL,updated_at=?,error=NULL WHERE id=?')
         .run(state,this.now(),id);
       for(const next of followups)this.enqueue(next);
+      if(['await-source','attention'].includes(state)||job.kind==='review-patch'&&state==='done'&&data.verdict==='approve')this.recordDisposition(job,state);
       this.event(id,'completed',{role,hash,state});
       return {jobId:id,artifact:hash,state,followups:followups.length};
     });
@@ -187,6 +226,7 @@ export class JobQueue{
     this.db.prepare('UPDATE jobs SET state=?,error=?,retry_after=?,token=NULL,lease_until=NULL,updated_at=? WHERE id=?')
       .run(state,String(error).slice(0,1000),after,now,job.id);
     this.event(job.id,state,{error:String(error).slice(0,1000),retryAfter:after});
+    if(state==='attention')this.recordDisposition(decode({...job,payload:typeof job.payload==='string'?job.payload:JSON.stringify(job.payload)}),'attention');
   }
   fail(id,token,role,error){return this.transaction(()=>{
     const job=this.requireLease(id,token,role);this.retryInside(job,error);this.noteFailure(job,String(error));return this.get(id);

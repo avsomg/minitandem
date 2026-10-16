@@ -239,3 +239,14 @@ test('the usage line scales its units and drops the cost when no event carries a
   assert.equal(usageSummary([{input_tokens:900,cached_input_tokens:0,output_tokens:5,modelSeconds:3.6}]).line,
     '1 model call, 900 input tokens (of which 0 cache reads), 5 output tokens, 4 s model time');
 });
+test('the digest distinguishes completed changes from open chains and reports the oldest urgent work',t=>{
+  const f=fixture(t);f.dailyDone();
+  f.queue.enqueue({kind:'facts',cardId:'urgent',inputRevision:'one',payload:{urgent:true}});
+  const job=f.queue.claim('search','reader');f.queue.finish(job.id,job.token,'search',{}, {followups:[{kind:'verify-facts',cardId:'urgent',inputRevision:'next',payload:{chainId:job.id,urgent:true}}]});
+  fs.writeFileSync(path.join(f.base,'approved-updates.json'),JSON.stringify({updates:[{jobId:'approved',approvedOn:'2026-10-13',draft:{cardId:'done',patch:{min:2}}}]}));
+  const report=digest(path.join(f.base,'workflow-state','jobs.sqlite'),0,{now:at(11)});
+  assert.equal(report.completedChangesToday.length,1);assert.equal(report.openChainCount,1);assert.equal(report.openChains[0].card,'urgent');
+  assert.equal(report.oldestUrgent.card,'urgent');assert.ok(Number.isFinite(report.openChains[0].ageHours));
+  fs.writeFileSync(path.join(f.base,'cycle.pause'),JSON.stringify({until:'2026-10-12T10:00:00Z'}));
+  const paused=runCycle({base:f.base,home:f.home,now:at(11),notify:()=>{}});assert.equal(paused.pause.expired,true);
+});

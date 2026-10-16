@@ -21,6 +21,34 @@ test('queue is project-scoped, private and idempotent',t=>{
   queue.db.prepare('UPDATE metadata SET value=? WHERE key=?').run('other-client','project');
   assert.throws(()=>new JobQueue(file),/Wrong queue project/);
 });
+test('new facts stop at the open-chain cap, while downstream and rework can finish',t=>{
+  const {queue}=fixture(t);queue.enqueue(spec('facts','first'));
+  const first=queue.claim('search','one',{maxOpenChains:1});
+  queue.finish(first.id,first.token,'search',{}, {followups:[{...spec('verify-facts','first'),payload:{chainId:first.id}}]});
+  queue.enqueue(spec('facts','second','v1',1000));assert.equal(queue.openChains().length,1);
+  assert.equal(queue.claim('search','two',{maxOpenChains:1}),null);
+  const review=queue.claim('verify','verifier');queue.finish(review.id,review.token,'verify',{}, {state:'await-source'});
+  assert.equal(queue.openChains().length,0);assert.ok(queue.claim('search','two',{maxOpenChains:1}));
+});
+test('urgent selection accepts closure, address and near events, not merely a large priority',t=>{
+  const {queue}=fixture(t);queue.enqueue(spec('facts','ordinary','r',999));
+  const closure=queue.enqueue({...spec('facts','closure','r',5),payload:{sourceIssues:[{kind:'possible-closure'}]}});
+  const chosen=queue.claim('search','urgent',{urgentOnly:true});assert.equal(chosen.id,closure.id);
+  queue.finish(chosen.id,chosen.token,'search',{}, {state:'await-source'});
+  for(const [id,payload] of [['address',{corrections:[{correction:{requiredFields:['address']}}]}],['soon',{card:{events:[{date:'2026-10-15'}]}}]]){
+    queue.enqueue({...spec('facts',id),payload});const job=queue.claim('search','urgent',{urgentOnly:true});assert.equal(job.card_id,id);
+    queue.finish(job.id,job.token,'search',{}, {state:'await-source'});
+  }
+  assert.equal(queue.claim('search','urgent',{urgentOnly:true}),null);
+});
+test('a queued new reason does not keep a completed previous chain open forever',t=>{
+  const {queue}=fixture(t);queue.enqueue(spec('facts','card'));
+  const root=queue.claim('search','reader');queue.finish(root.id,root.token,'search',{});
+  queue.enqueue({...spec('review-patch','card','patch'),payload:{chainId:root.id}});
+  const review=queue.claim('verify','reviewer');queue.finish(review.id,review.token,'verify',{verdict:'approve'});
+  queue.enqueue(spec('facts','card','new-version'));
+  assert.equal(queue.openChains().length,0);assert.ok(queue.claim('search','reader',{maxOpenChains:1}));
+});
 test('investigated circuit reset starts a new failure window without erasing history',t=>{
   const {queue}=fixture(t);
   for(const id of ['a','b','c']){

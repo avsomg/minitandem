@@ -4,7 +4,7 @@ import path from 'node:path';
 import {spawn,execFileSync} from 'node:child_process';
 import {randomUUID} from 'node:crypto';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-import {JobQueue,digest,ROLE_KINDS,failureCategory} from './jobs.mjs';
+import {JobQueue,digest,ROLE_KINDS,failureCategory,DOWNSTREAM,urgentJob} from './jobs.mjs';
 import {here,root,today,syncQueue,commitResult,currentInputs,validateClaims,CLAIM_FIELDS,registerCaptured} from './workflow.mjs';
 import {captureUrl,saveSnapshot,writeJsonAtomic,locateQuote,hash,validateSnapshot,publicUrl,capturedSet} from './evidence.mjs';
 import {normUrl} from './monitor.mjs';
@@ -335,8 +335,8 @@ export async function withJobLease(queue,job,role,work,{leaseMs=900000,timeoutMs
   let rejectAbort;
   const aborted=new Promise((_,reject)=>{rejectAbort=()=>reject(controller.signal.reason);controller.signal.addEventListener('abort',rejectAbort,{once:true});});
   const renew=setInterval(pulse,renewEveryMs),deadline=setTimeout(()=>cancel(Object.assign(Error('Whole job time limit'),{code:'JOB_TIMEOUT'})),timeoutMs);
-  try{check();return await Promise.race([aborted,Promise.resolve().then(()=>work({signal:controller.signal,check,renew:pulse,
-    remaining:()=>Math.max(1,timeoutMs-(monotonic()-started)),blockingBudget:()=>Math.max(1,Math.min(leaseMs/2,timeoutMs-(monotonic()-started)))}))]);}
+  try{return await Promise.race([aborted,Promise.resolve().then(()=>{check();return work({signal:controller.signal,check,renew:pulse,
+    remaining:()=>Math.max(1,timeoutMs-(monotonic()-started)),blockingBudget:()=>Math.max(1,Math.min(leaseMs/2,timeoutMs-(monotonic()-started)))});})]);}
   finally{active=false;clearInterval(renew);clearTimeout(deadline);controller.signal.removeEventListener('abort',rejectAbort);}
 }
 export async function prepareEvidence(job,{captureImpl=captureUrl,saveImpl=saveSnapshot,queue=null,sources=null,hostIgnore=null,signal,assertActive=()=>{}}={}){
@@ -477,6 +477,7 @@ export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=r
   assertRuntimeCurrent(loadedRuntimeRevision);
   sources=normalizePilotSources(sources,{pilot});
   const policy=JSON.parse(fs.readFileSync(path.join(here,'agent-policy.json'),'utf8'));
+  const maxOpenChains=JSON.parse(fs.readFileSync(path.join(here,'cycle-policy.json'),'utf8')).maxOpenChains??8;
   if(policy.project!==PROJECT_ID||policy.schema!==1||!Number.isInteger(limit)||limit<1||limit>policy.maxJobsPerRun||
     !Number.isInteger(policy.maxToolCallsPerJob)||policy.maxToolCallsPerJob<1||policy.maxToolCallsPerJob>200||
     !Number.isFinite(policy.maxRunMinutes)||policy.maxRunMinutes<=0||policy.maxRunMinutes>60||
@@ -506,17 +507,23 @@ export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=r
       const circuitOpen=Boolean(queue.circuit()?.open);
       if(circuitOpen&&!chain&&role!=='qa'){stopReason='systemic-failure-circuit';break;}
       syncImpl(queue);
-      const priorities=new Map();
+      const priorities=new Map(),downstream=new Map(),urgent=new Map();
       for(const job of queue.list().filter(j=>(j.state==='ready'||j.state==='retry'&&j.retry_after<=queue.now())&&(!cardId||j.card_id===cardId))){
         const assigned=Object.keys(ROLE_KINDS).find(r=>ROLE_KINDS[r].includes(job.kind));
         priorities.set(assigned,Math.max(priorities.get(assigned)||0,job.priority));
+        if(DOWNSTREAM.includes(job.kind))downstream.set(assigned,Math.max(downstream.get(assigned)||0,job.priority));
+        if(urgentJob(job,queue.now()))urgent.set(assigned,Math.max(urgent.get(assigned)||0,job.priority));
       }
       const blocked=gate.ready===false;
-      const roles=await gatedRoles(runRoles({role,chain,circuitOpen,priorities,first:i===0}),priorities,gate);let job,assignedRole;
+      const roles=await gatedRoles(runRoles({role,chain,circuitOpen,priorities,downstream,first:i===0}),priorities,gate);let job,assignedRole;
       if(gate.ready===false&&!blocked)queue.event(null,'worker-preflight-failed',{provider,reason:gate.reason,tries:gate.tries});
-      for(const possible of roles){
-        job=queue.claim(possible,`runtime-${possible}`,{leaseMs:policy.leaseMinutes*60000,backpressure:policy.backpressure,cardId});
-        if(job){assignedRole=possible;break;}
+      for(const selection of [...(i===0?[{urgentOnly:true}]:[]),...(chain?[{kinds:DOWNSTREAM}]:[]),{}]){
+        const order=selection.urgentOnly?[...roles].sort((a,b)=>(urgent.get(b)??-Infinity)-(urgent.get(a)??-Infinity)):roles;
+        for(const possible of order){
+          job=queue.claim(possible,`runtime-${possible}`,{leaseMs:policy.leaseMinutes*60000,backpressure:policy.backpressure,cardId,maxOpenChains,...selection});
+          if(job){assignedRole=possible;break;}
+        }
+        if(job)break;
       }
       if(!job){stopReason=gate.ready===false?'worker-login-unavailable':circuitOpen?'systemic-failure-circuit':stopReason;break;}
       let workerOutput=null;
@@ -559,9 +566,10 @@ export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=r
     finally{if(owned)queue.close();}
   }
 }
-export function runRoles({role,chain,circuitOpen=false,priorities=new Map(),first=true}){
+export function runRoles({role,chain,circuitOpen=false,priorities=new Map(),downstream=new Map(),first=true}){
   const roles=chain?(circuitOpen?['qa']:['qa','verify','arbitrate','editor','search'].sort((a,b)=>(priorities.get(b)||0)-(priorities.get(a)||0))):[role];
-  if(chain&&first&&role&&roles.includes(role)){roles.splice(roles.indexOf(role),1);roles.unshift(role);}
+  if(chain&&downstream.size)roles.sort((a,b)=>Number(downstream.has(b))-Number(downstream.has(a))||(downstream.get(b)||0)-(downstream.get(a)||0));
+  else if(chain&&first&&role&&roles.includes(role)){roles.splice(roles.indexOf(role),1);roles.unshift(role);}
   return roles;
 }
 export function upgradeInvestigatedJob(queue,id,note,{getInputs=currentInputs,expectedFailure=null}={}){

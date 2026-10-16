@@ -3,7 +3,7 @@ import path from 'node:path';
 import {isDeepStrictEqual} from 'node:util';
 import {fileURLToPath} from 'node:url';
 import {loadCatalog,qualityReport,root} from './quality.mjs';
-import {JobQueue,digest,ROLE_KINDS} from './jobs.mjs';
+import {JobQueue,digest,ROLE_KINDS,sourceSignal} from './jobs.mjs';
 import {pipelineReport,readPipelineInputs,validateCandidate,validateDecision,validateDispute,
   validateCorrection,recordRevision,venueGroups} from './external-pipeline.mjs';
 import {readExternalReviewInputs,validateReceipt} from './external-review.mjs';
@@ -64,13 +64,18 @@ export function taskSpecs(input,{quality=null,monitor=null,date=today()}={}){
     const card=byId.get(row.id),cardRevision=digest(card);
     const sourceRevisions=(row.watched||[]).map(id=>[id,monitor?.sources?.[id]?.hash||null]);
     const sourceSignals=row.sourceIssues.map(({id,sourceId,kind,status,details})=>({id,sourceId,kind,status,details}));
-    const week=Math.floor(Date.parse(date+'T12:00:00Z')/(7*86400000));
     const requestedReview=row.stale?'full':'partial';
-    const trigger=['facts',row.id,card.sources.map(s=>s.url),sourceRevisions,sourceSignals,week];
-    if(requestedReview==='full')trigger.push('full-review-v1');
+    const sourceTasks=row.sourceIssues.map(issue=>{
+      const version=monitor?.sources?.[issue.sourceId]?.hash||issue.details?.to||'unavailable';
+      const signal=sourceSignal(issue);
+      return {key:digest([row.id,issue.sourceId,version,signal]),sourceId:issue.sourceId,version,signal,taskId:issue.id};
+    });
+    const trigger=['facts',row.id,card.sources.map(s=>s.url),sourceRevisions,sourceSignals];
+    if(requestedReview==='full')trigger.push('full-review-v1',card.reviewAfter,card.checked,Math.floor(Date.parse(date+'T12:00:00Z')/(7*86400000)));
     const triggerRevision=digest(trigger);
     jobs.push({kind:'facts',cardId:row.id,inputRevision:digest(['facts',cardRevision,triggerRevision]),
-      priority:row.priority,payload:{card,cardRevision,triggerRevision,requestedReview,critical:row.critical,sourceIssues:row.sourceIssues,date}});
+      priority:row.priority,payload:{card,cardRevision,triggerRevision,requestedReview,critical:row.critical,sourceIssues:row.sourceIssues,sourceTasks,sourceVersions:sourceRevisions,
+        urgent:row.sourceIssues.some(issue=>issue.kind==='possible-closure'||issue.details?.fields?.includes('address'))||Boolean(row.nextEvent&&row.nextEvent>=date&&row.nextEvent<=new Date(Date.parse(date+'T12:00:00Z')+14*86400000).toISOString().slice(0,10)),date}});
   }
   for(const [file,intake] of input.intakeReports||[]){
     if(intake.status!=='pending-review')continue;
@@ -83,7 +88,47 @@ export function taskSpecs(input,{quality=null,monitor=null,date=today()}={}){
 export function unprocessedSpecs(queue,specs){
   const processed=new Set(queue.list().filter(job=>job.kind==='facts'&&job.state==='done'&&job.payload.triggerRevision)
     .map(job=>job.payload.triggerRevision));
-  return specs.filter(spec=>!spec.payload.triggerRevision||!processed.has(spec.payload.triggerRevision));
+  const dispositions=new Set(queue.dispositions().map(row=>row.key));
+  const blocked=queue.list().filter(job=>job.state==='await-source'&&!job.payload.resumeWhen?.resumedBy);
+  const resumed=new Set(queue.list().filter(job=>job.payload.resumeJob&&['ready','leased','retry'].includes(job.state)).map(job=>job.card_id));
+  return specs.filter(spec=>{
+    if(spec.kind==='facts'&&resumed.has(spec.cardId))return false;
+    if(spec.kind==='facts'&&blocked.some(job=>job.card_id===spec.cardId))return false;
+    if(spec.payload.requestedReview==='partial'&&spec.payload.sourceTasks?.length&&spec.payload.sourceTasks.every(row=>dispositions.has(row.key)))return false;
+    return !spec.payload.triggerRevision||!processed.has(spec.payload.triggerRevision);
+  });
+}
+export function resumeCondition(payload,monitor=null,reviewDate=null){
+  const sources=(payload.sourceVersions||payload.sourceTasks?.map(row=>[row.sourceId,row.version])||[]).map(([id,version])=>({id,version,
+    unavailable:Boolean(payload.sourceIssues?.some(issue=>issue.sourceId===id&&issue.kind==='source-unavailable')),
+    lastSuccess:monitor?.sources?.[id]?.lastSuccess||null}));
+  return {sources,...(reviewDate&&reviewDate>today()?{date:reviewDate}:{}),...(!sources.length&&!reviewDate?{manual:'A new official source must be supplied after investigation.'}:{})};
+}
+export function resumeAwaitingSources(queue,input,monitor,date=today(),sources=[]){
+  const resumed=[];
+  for(const job of queue.list().filter(job=>job.state==='await-source'&&!job.payload.resumeWhen?.resumedBy)){
+    if(!job.payload.sourceVersions)job.payload.sourceVersions=sources.filter(source=>source.recordIds?.includes(job.card_id)).map(source=>[source.id,monitor?.sources?.[source.id]?.hash||null]);
+    const condition=job.payload.resumeWhen||resumeCondition(job.payload,monitor),changed=condition.sources.filter(source=>{
+      const current=monitor?.sources?.[source.id];
+      return current&&(current.hash!==source.version&&current.hash||source.unavailable&&!current.error&&current.lastSuccess&&current.lastSuccess!==source.lastSuccess);
+    });
+    const restored=(job.payload.sourceTasks||[]).some(source=>monitor?.queue?.some(task=>task.id===source.taskId&&task.status==='resolved'&&task.resolution?.decision==='source-restored'));
+    const signals=(job.payload.sourceTasks||[]).map(source=>monitor?.queue?.find(task=>task.id===source.taskId)).filter(task=>task&&(job.payload.sourceTasks||[]).some(source=>source.taskId===task.id&&source.signal!==sourceSignal(task)));
+    if(changed.length||restored||signals.length||condition.date&&date>=condition.date){
+      const card=input.records.find(card=>card.id===job.card_id);if(!card)continue;
+      const versions=(job.payload.sourceVersions||[]).map(([id])=>[id,monitor?.sources?.[id]?.hash||null]);
+      const reason={changed:changed.map(row=>[row.id,monitor.sources[row.id].hash,monitor.sources[row.id].lastSuccess]),restored,signals:signals.map(sourceSignal),date:condition.date||null};
+      const triggerRevision=digest(['resume',job.id,reason]);
+      const next=queue.enqueue({kind:'facts',cardId:card.id,inputRevision:digest([card,triggerRevision]),priority:job.priority,
+        payload:{card,cardRevision:digest(card),date,triggerRevision,requestedReview:job.payload.requestedReview||'partial',resumeJob:true,resumedFrom:job.id,
+          sourceVersions:versions,sourceTasks:(job.payload.sourceTasks||[]).map(row=>{const version=monitor?.sources?.[row.sourceId]?.hash||row.version;
+            const task=monitor?.queue?.find(task=>task.id===row.taskId),signal=task?sourceSignal(task):row.signal;return {...row,version,signal,key:digest([card.id,row.sourceId,version,signal])};}),
+          sourceIssues:job.payload.sourceIssues||[],urgent:job.payload.urgent}});
+      condition.resumedBy=next.id;queue.event(job.id,'source-work-resumed',{jobId:next.id,reason});resumed.push(next.id);
+    }
+    queue.db.prepare('UPDATE jobs SET payload=? WHERE id=?').run(JSON.stringify({...job.payload,resumeWhen:condition}),job.id);
+  }
+  return resumed;
 }
 export function retireStaleReadyJobs(queue,records){
   const revisions=new Map(records.map(card=>[card.id,digest(card)])),retired=[];
@@ -105,6 +150,7 @@ export function syncQueue(queue){
   const sources=read(path.join(here,'source-watch.json')).sources;
   const monitor=read(path.join(here,'monitor-state.json'));
   const quality=qualityReport(input.records,sources,today(),monitor);
+  queue.transaction(()=>resumeAwaitingSources(queue,input,monitor,today(),sources));
   queue.reconcile(unprocessedSpecs(queue,taskSpecs(input,{quality,monitor})));
   return {input,summary:queue.summary()};
 }
@@ -346,8 +392,11 @@ export function commitResult(queue,{jobId,token,role,result},{getInputs=currentI
     if(!card||digest(card)!==job.payload.cardRevision)throw Error('Card changed; result is stale');
     if(['search','verify','adjudicate'].includes(job.kind)&&job.payload.dependencyRevision!==dependencyRevision(input,card.id))throw Error('Job dependencies changed; result is stale');
     const writes=[],followups=[];
+    const chainId=job.payload.chainId||queue.openChains().find(chain=>chain.card===card.id)?.chainId||job.id;
     const next=(kind,payload,priority=job.priority)=>{
-      const nextPayload={...payload,requestedReview:job.payload.requestedReview||'partial',card,cardRevision:digest(card),date:today()};
+      const nextPayload={chainId,sourceTasks:job.payload.sourceTasks||[],sourceVersions:job.payload.sourceVersions||[],
+        sourceIssues:job.payload.sourceIssues||[],urgent:job.payload.urgent,triggerRevision:job.payload.triggerRevision,
+        ...payload,requestedReview:job.payload.requestedReview||'partial',card,cardRevision:digest(card),date:today()};
       followups.push({kind,cardId:card.id,inputRevision:digest([kind,nextPayload]),priority,payload:nextPayload});
     };
     let state='done';
@@ -501,6 +550,10 @@ export function commitResult(queue,{jobId,token,role,result},{getInputs=currentI
           rejectedDraft:job.payload.draft,reviewFeedback:result.reason,reworkCount:(job.payload.reworkCount||0)+1},job.priority+60);
       }else state=result.verdict==='reject'?'attention':'await-source';
     }else throw Error('Use the deterministic QA/release command for this job');
+    if(state==='await-source'){
+      const resumeWhen=resumeCondition(job.payload,null,result.decision?.reviewAfter);
+      queue.db.prepare('UPDATE jobs SET payload=? WHERE id=?').run(JSON.stringify({...job.payload,resumeWhen}),job.id);
+    }
     return queue.finish(job.id,token,role,result,{writes,followups,state});
   });
   queue.flush(outputRoot);
