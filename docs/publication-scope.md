@@ -26,7 +26,7 @@ A path is private when it is ignored. That is written down in three places that 
 | Pipeline configuration and generated statistics | `agent-policy.json`, `cycle-policy.json`, `source-watch.json`, field and baseline files, venue registry, geocoding candidates, coverage and profile statistics, early search logs of the See district | Policies and public inputs the code needs to build and test. The monitored sources are public web addresses. The statistics are counts, not state. | 24 | 651 KB |
 | Tests | `*.test.mjs` at the root and in `editorial/`, `test-support.mjs`, the browser checks `verify*.mjs` and `screenshots.mjs` | Proof that the code does what it says. Fixtures are invented or taken from the public catalogue. | 61 | 517 KB |
 | Demo | `demo/run.mjs` and `demo/fixtures/` | The pipeline rejecting a wrong result on three invented cards; no real data. | 8 | 25 KB |
-| Container, server, CI and scripts | `Dockerfile`, `compose*.yaml`, `docker/`, `ops/`, `.github/workflows/test.yml`, `package.json`, `scripts/`, `.dockerignore`, `.gitignore`, `.nvmrc`, `.env.example` | Prepared deployment and CI; they hold no secret (the server `.env` is ignored). | 14 | 19 KB |
+| Container, server, CI and scripts | `Dockerfile`, `compose*.yaml`, `docker/`, `ops/`, `.github/workflows/test.yml`, `.github/workflows/browser.yml`, `package.json`, `scripts/`, `.dockerignore`, `.gitignore`, `.nvmrc`, `.env.example` | Prepared deployment and CI; they hold no secret (the server `.env` is ignored). | 14 | 19 KB |
 | Documents | `README.md`, `README.de.md`, `docs/`, `editorial/OPERATIONS.md`, `AGENTS.md`, `METHOD.md` | Explanation for readers and for the coding agents that work on the project. | 8 | 92 KB |
 | **Total** | | | **224** | **6,355 KB** |
 

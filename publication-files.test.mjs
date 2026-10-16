@@ -98,10 +98,11 @@ test('the CI workflow installs the pipeline dependencies with npm ci and runs np
   assert.doesNotMatch(workflow,/\bdeploy\b|ssh|docker login|vercel/i,'the workflow only tests');
 });
 
-test('the independent browser CI job installs both engines and keeps diagnostics after failures',()=>{
-  const workflow=read('.github/workflows/test.yml');
-  const [unit,browser]=workflow.split(/\n  browser:\n/);
-  assert.ok(browser,'a separate browser job exists');
+test('the browser checks are a workflow of their own, install both engines and keep diagnostics after failures',()=>{
+  // Their own workflow: ops/deploy.sh requires test.yml, and a browser finding is fixed in the product, not by a red deploy gate.
+  const unit=read('.github/workflows/test.yml'),browser=read('.github/workflows/browser.yml');
+  assert.doesNotMatch(unit,/\n  browser:\n/,'the unit workflow holds no browser job');
+  assert.match(browser,/\n  browser:\n/,'the browser workflow has its job');
   assert.doesNotMatch(unit,/playwright install|npm ci --ignore-scripts|BROWSER_ENGINE/);
   assert.doesNotMatch(browser,/^\s+needs:|continue-on-error:/m);
   assert.match(browser,/run: npm ci --ignore-scripts/);
