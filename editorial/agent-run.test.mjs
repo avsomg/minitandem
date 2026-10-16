@@ -272,7 +272,7 @@ test('every original snapshot remains readable in a worker file, independently o
   const policy={roles:{verify:{model:'test-model',effort:'low',criticalEffort:'medium'}},maxToolCallsPerJob:50};
   const data=JSON.parse(promptFor(job).split('TASK DATA:\n')[1]);
   const references=[...data.preparedEvidence,...data.bundle.snapshots,...data.draft.snapshots,...data.rejectedDraft.snapshots,...data.staleApprovedUpdates[0].draft.snapshots];
-  assert.deepEqual(references.map(e=>e.evidenceFile),workerEvidenceFiles(job).map(e=>e.file));
+  assert.deepEqual([...new Set(references.map(e=>e.evidenceFile))],workerEvidenceFiles(job).map(e=>e.file));
   let directory;
   const output=await runCodex(job,policy,{runImpl:(_command,args)=>{
     directory=args[args.indexOf('--cd')+1];

@@ -38,3 +38,24 @@ test('the rework fixture reproduces the reported input sizes without private dat
     duplicateApprovedBytes:size(p.approved),duplicateSnapshotText:p.bundle.snapshots.reduce((sum,e)=>sum+e.text.length,0),
     unchangedDraftFields:Object.keys(p.rejectedDraft.patch).filter(key=>JSON.stringify(p.card[key])===JSON.stringify(p.rejectedDraft.patch[key]))}));
 });
+
+test('compact rework context preserves every distinct claim, snapshot and changed field',()=>{
+  const job=budgetFixture(),original=structuredClone(job.payload),data=JSON.parse(promptFor(job).split('TASK DATA:\n')[1]);
+  assert.equal(data.approved.length+data.bundle.claims.length,26);
+  assert.deepEqual([...data.approved,...data.bundle.claims],original.bundle.claims);
+  assert.deepEqual({...data.card,...data.rejectedDraft.patch},{...original.card,...original.rejectedDraft.patch});
+  assert.deepEqual(data.rejectedDraft.bindings,original.rejectedDraft.bindings);
+  assert.deepEqual(data.rejectedDraft.reviewLimitationsText,original.rejectedDraft.reviewLimitationsText);
+  assert.equal(data.rejectedDraftHash,digest(original.rejectedDraft));
+  const files=workerEvidenceFiles(job);assert.equal(files.length,2);assert.equal(data.evidence.length,2);
+  assert.deepEqual(files.map(row=>row.evidence),original.bundle.snapshots);
+  assert.deepEqual(data.bundle.snapshots,data.rejectedDraft.snapshots);
+  for(const key of Object.keys(original.card))assert.ok(!Object.hasOwn(data.rejectedDraft.patch,key));
+  assert.deepEqual(job.payload,original);
+  // Conflicting content with a reused key or snapshot id must never disappear as a duplicate.
+  job.payload.bundle.claims.push({...original.approved[0],quote:'A different exact quote.'});
+  job.payload.rejectedDraft.snapshots.push({...original.bundle.snapshots[0],text:'A distinct capture with a reused id.'});
+  const changed=JSON.parse(promptFor(job).split('TASK DATA:\n')[1]);
+  assert.equal(changed.bundle.claims.length,15);assert.equal(changed.evidence.length,3);
+  assert.equal(workerEvidenceFiles(job).length,3);
+});

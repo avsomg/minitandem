@@ -83,3 +83,13 @@ The cycle receipt now includes today's approved changes, open chains and their a
 `node editorial/release-summary.mjs` writes `editorial/workflow-state/release-summary.md` (private, mode 600). The daily cycle generates it after the batch and reports. It lists each current approved journal entry: changed values, public source links and approval date, remaining unknowns, QA status and German/French text that needs updating. It reads public catalogue/translation layers and the queue's QA receipt, never family state or private source text. A stale or missing receipt is labelled explicitly; required QA and both public gates must match the current source and built files before the summary calls QA current.
 
 The live deployment baseline is not stored by this tool, so its scope is all current journal entries, not an asserted diff from the live site. The owner still authorises the actual release. The summary never publishes, changes a card or approves a translation. Open it again after QA or translation changes; generating a summary does not make an old QA receipt current.
+
+## Worker input size
+
+Worker prompts share one evidence metadata row and one file for each identical
+snapshot across prepared evidence, bundles and drafts. References name that file;
+its captured text remains complete. Snapshots with different content remain
+separate even if their IDs match. Approved claims appear once, with the remaining
+bundle claims alongside them. A rejected draft carries its changed patch fields
+and all bindings; unchanged fields are read from the current card. The original
+draft hash still identifies the complete controller artifact.
