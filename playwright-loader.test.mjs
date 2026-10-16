@@ -30,7 +30,7 @@ test('Playwright is looked up in the environment variable, then in .playwright-p
   assert.equal(loadPlaywright({env:{},base}).webkit,'base');
 });
 
-test('without Playwright the error says it is not a declared dependency and where it looked',t=>{
+test('without Playwright the error names npm ci, local overrides and the searched locations',t=>{
   const base=folder(t);
-  assert.throws(()=>loadPlaywright({env:{},base}),error=>/not a declared dependency/.test(error.message)&&error.message.includes(base)&&/MINITANDEM_PLAYWRIGHT_DIR/.test(error.message));
+  assert.throws(()=>loadPlaywright({env:{},base}),error=>/Run npm ci/.test(error.message)&&error.message.includes(base)&&/MINITANDEM_PLAYWRIGHT_DIR/.test(error.message));
 });

@@ -1,8 +1,5 @@
-// The browser checks (verify*.mjs, screenshots.mjs) drive WebKit through Playwright. Playwright is not a declared dependency
-// of this repository (nothing is installed by default), so it is looked up in this order:
-//   1. the directory named by MINITANDEM_PLAYWRIGHT_DIR (a folder that has playwright in its node_modules)
-//   2. the first line of the file .playwright-path in the repository root (a local file, ignored by git)
-//   3. the repository itself, after `npm install --no-save playwright` or with NODE_PATH set
+// Local overrides keep their precedence; CI uses the exact dependency installed by npm ci.
+// MINITANDEM_PLAYWRIGHT_DIR and .playwright-path name a folder with playwright in node_modules.
 import {createRequire} from 'node:module';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -27,7 +24,7 @@ export function loadPlaywright({env=process.env,base=root,requireFrom=directory=
     try{return requireFrom(directory)('playwright');}
     catch(error){errors.push(`${directory}: ${error.code||error.message}`);}
   }
-  throw Error('Playwright was not found. It is not a declared dependency of this repository. Install it yourself '+
-    '(for example: npm install --no-save playwright && npx playwright install webkit), or point MINITANDEM_PLAYWRIGHT_DIR '+
+  throw Error('Playwright was not found. Run npm ci to install the declared dependency '+
+    '(browser binaries are installed separately on CI), or point MINITANDEM_PLAYWRIGHT_DIR '+
     'or the file .playwright-path at a folder that has it. Tried: '+errors.join('; '));
 }

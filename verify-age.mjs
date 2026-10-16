@@ -1,24 +1,22 @@
-// The child's age on an iPhone 15 and on a desktop screen in WebKit: the release check "mobile-ages".
+// The child's age on an iPhone 15 and on a desktop screen in the selected engine: the release check "mobile-ages".
 // One age, remembered in the family profile: a fresh profile has none, ages 0-6 filter, the unknown-age switch works,
 // a wrong entry is refused, the age survives a reload and clearing it removes the filter.
-import {fileURLToPath,pathToFileURL} from 'node:url';
 import path from 'node:path';
-import fs from 'node:fs';
 import assert from 'node:assert/strict';
 
 import {loadPlaywright} from './playwright-loader.mjs';
-const {webkit}=loadPlaywright();
-const root=path.dirname(fileURLToPath(import.meta.url));
-const url=process.env.APP_URL||pathToFileURL(path.join(root,'index.html')).href;
-const screenshots=path.join(root,'editorial/typesafe-runtime');
-fs.mkdirSync(screenshots,{recursive:true});
+import {engineName,artifactDirectory,serveSite,prepareContext,contextOptions,targets} from './scripts/browser-support.mjs';
+const engine=engineName(),playwright=loadPlaywright();
+const screenshots=artifactDirectory('age');
+const fixture=await serveSite(),url=fixture.url;
 const familyKey='minitandem-family-v1',filterKey=familyKey+'-filters';
-const browser=await webkit.launch();
+let browser;
 try{
-  for(const [name,viewport,mobile] of [['iphone15',{width:393,height:852},true],['desktop',{width:1440,height:1000},false]]){
-    const context=await browser.newContext({viewport,isMobile:mobile,hasTouch:mobile,timezoneId:'Europe/Zurich',locale:'en-GB',reducedMotion:'reduce'});
-    const page=await context.newPage(),errors=[];
-    page.on('pageerror',error=>errors.push(error.message));
+  browser=await playwright[engine].launch({headless:true});
+  for(const target of targets){
+    const {name,viewport,isMobile:mobile}=target;
+    const context=await browser.newContext(contextOptions(target));
+    const errors=await prepareContext(context,url),page=await context.newPage();
     await page.goto(url);await page.waitForSelector('#list .row');
     const noOverflow=async()=>assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,name+': horizontal overflow');
     // On a phone the age lives in the filter sheet, on a wide screen in the left column.
@@ -105,5 +103,5 @@ try{
     assert.deepEqual(errors,[]);
     await context.close();
   }
-  console.log(JSON.stringify({result:'PASS',engine:'WebKit',checks:['fresh profile has no assumed age','ages 0-6 through chips','tapping a chosen age clears it','Under 1 and published limits','unknown-age switch','wrong entry refused','age remembered across reload','clearing removes the filter','no overflow or JS errors'],screenshots},null,2));
-}finally{await browser.close();}
+  console.log(JSON.stringify({result:'PASS',engine,checks:['fresh profile has no assumed age','ages 0-6 through chips','tapping a chosen age clears it','Under 1 and published limits','unknown-age switch','wrong entry refused','age remembered across reload','clearing removes the filter','no overflow or JS errors'],screenshots},null,2));
+}finally{if(browser)await browser.close();await fixture.close();}

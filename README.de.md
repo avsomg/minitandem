@@ -52,7 +52,7 @@ Ein Worker ist ein einzelner `claude -p`-Lauf mit nur den Werkzeugen Read, WebSe
 
 - **Node.js 24.12.0 oder neuer.** Getestet mit 24.12.0; die Version ist in [`.nvmrc`](.nvmrc) festgehalten und wird von der CI verwendet. Die Queue nutzt das eingebaute Modul `node:sqlite`, das eine Warnung über seinen experimentellen Status ausgibt.
 - **npm**, um die Abhängigkeiten der Pipeline zu installieren (`editorial/package.json`, festgelegt in `editorial/package-lock.json`: fünf direkte Abhängigkeiten, insgesamt 31 Pakete). Die Seite, die Tests und der Build brauchen nichts weiter.
-- **Playwright ist keine deklarierte Abhängigkeit.** Die Browser-Checks (`npm run test:browser`) steuern WebKit über Playwright, und nichts installiert es automatisch. Selbst installieren (`npm install --no-save playwright && npx playwright install webkit`) oder `MINITANDEM_PLAYWRIGHT_DIR` bzw. eine lokale Datei `.playwright-path` auf einen Ordner zeigen lassen, der es enthält ([`playwright-loader.mjs`](playwright-loader.mjs)). Ohne Playwright laufen Unit-Tests, Build und Demo trotzdem.
+- **Playwright und axe-core sind devDependencies mit exakten Versionen**, festgelegt in `package-lock.json`. `npm ci` im Stammverzeichnis installiert die Pakete für die Browser-Checks. Die Browser selbst installiert die CI separat. Lokale Playwright-Installationen funktionieren weiterhin über `MINITANDEM_PLAYWRIGHT_DIR` oder `.playwright-path` ([`playwright-loader.mjs`](playwright-loader.mjs)); Unit-Tests, Build und Demo brauchen keinen Browser.
 
 ## Ausführen
 
@@ -61,7 +61,7 @@ npm run setup          # npm ci in editorial/ (einmalig nötig)
 npm test               # baut die Seite und führt danach alle Tests aus, die auf einem sauberen Klon laufen
 npm run demo           # die Pipeline weist ein falsches Ergebnis zurück, offline, in etwa einer Sekunde
 npm run build          # die Seite nach .publish/
-npm run test:browser   # Alters- und Mobile-Checks in WebKit; braucht Playwright, siehe oben
+npm run test:browser   # Alter, Mobile-Ablauf und axe; BROWSER_ENGINE=chromium oder standardmässig webkit
 npm start              # der kleine Dienst auf http://127.0.0.1:8787 (Familienabgleich, Korrekturen)
 npm run audit:public   # keine kyrillischen Zeichen, kein früherer Arbeitstitel, keine persönliche Formulierung, keine privaten Kontakte; braucht eine gebaute Seite (npm run build); die CI führt es aus
 npm run scan:public    # Geheimnisse, persönliche Pfade, Kontaktdaten ausserhalb des Katalogs; die CI führt es aus
