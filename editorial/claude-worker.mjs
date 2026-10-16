@@ -4,6 +4,7 @@ import path from 'node:path';
 import {spawn,spawnSync,execFileSync} from 'node:child_process';
 import {workerOutputSchema,decodeWorkerOutput} from './worker-schema.mjs';
 import {validateSnapshot} from './evidence.mjs';
+import {assertWorkerInput} from './worker-input.mjs';
 
 export function claudeEnvironment(source=process.env){
   const env=Object.fromEntries(['PATH','HOME','TMPDIR','USER','LOGNAME','SHELL','LANG','LC_ALL','TZ'].filter(k=>source[k]).map(k=>[k,source[k]]));
@@ -160,7 +161,7 @@ export async function runClaudeWorker(job,policy,{route,promptImpl,evidenceFiles
     }
     const images=copyImagesImpl(job,directory);
     const prompt=promptImpl(job)+(objectResult?OBJECT_RESULT:'')+(split?SPLIT_LAYOUT:'')+(images.length?'\nRead these original poster images with Read, not OCR alone:\n'+images.join('\n'):'');
-    if(prompt.length>60000)throw Error('Worker input exceeds budget; split the task without truncating evidence');
+    assertWorkerInput(job,policy,prompt);
     let resultEvent=null;
     await new Promise((resolve,reject)=>{
       const child=runImpl('claude',claudeArgs(directory,route,schema,settingsFile),{cwd:directory,stdio:['pipe','pipe','pipe'],env});

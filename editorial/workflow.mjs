@@ -11,6 +11,7 @@ import {locateQuote,evidenceProblem,validateSnapshot,writeJsonAtomic,publicUrl} 
 import {PATCH_FIELDS,PRACTICAL_FIELDS,CLAIM_FIELDS,CRITICAL_FIELDS,validateFieldValue,validDate,fullReviewFields,FULL_REVIEW_UNKNOWN_TEXT,FULL_REVIEW_UNKNOWN_PRACTICAL_TEXT} from './field-contract.mjs';
 import {PROJECT_ID} from './project-id.mjs';
 import {approvalSummary} from './catalogue-journal.mjs';
+import {canClaimWorker,reconcileWorkerInputs} from './worker-input.mjs';
 import {NUMBER_FIELDS,numberProblem,writesNumber} from './quote-numbers.mjs';
 
 export const here=path.join(root,'editorial');
@@ -106,7 +107,7 @@ export function resumeCondition(payload,monitor=null,reviewDate=null){
 }
 export function resumeAwaitingSources(queue,input,monitor,date=today(),sources=[]){
   const resumed=[];
-  for(const job of queue.list().filter(job=>job.state==='await-source'&&!job.payload.resumeWhen?.resumedBy)){
+  for(const job of queue.list().filter(job=>job.state==='await-source'&&!job.payload.inputBudget&&!job.payload.resumeWhen?.resumedBy)){
     if(!job.payload.sourceVersions)job.payload.sourceVersions=sources.filter(source=>source.recordIds?.includes(job.card_id)).map(source=>[source.id,monitor?.sources?.[source.id]?.hash||null]);
     const condition=job.payload.resumeWhen||resumeCondition(job.payload,monitor),changed=condition.sources.filter(source=>{
       const current=monitor?.sources?.[source.id];
@@ -152,6 +153,7 @@ export function syncQueue(queue){
   const quality=qualityReport(input.records,sources,today(),monitor);
   queue.transaction(()=>resumeAwaitingSources(queue,input,monitor,today(),sources));
   queue.reconcile(unprocessedSpecs(queue,taskSpecs(input,{quality,monitor})));
+  reconcileWorkerInputs(queue,input.records,read(path.join(here,'agent-policy.json')));
   return {input,summary:queue.summary()};
 }
 export function validateClaims(bundle,card,{now=new Date().toISOString()}={}){
@@ -568,7 +570,7 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
     else if(command==='status')console.log(JSON.stringify(queue.summary(),null,2));
     else if(command==='claim'){
       syncQueue(queue);const role=process.argv[3],owner=process.argv[4];
-      console.log(JSON.stringify(queue.claim(role,owner),null,2));
+      console.log(JSON.stringify(queue.claim(role,owner,{canClaim:job=>canClaimWorker(queue,job,read(path.join(here,'agent-policy.json')))}),null,2));
     }else if(command==='commit'){
       const file=process.argv[3];if(!file||fs.statSync(file).size>2000000)throw Error('Missing or oversized result');
       const envelope=read(file);console.log(JSON.stringify(commitResult(queue,envelope),null,2));syncQueue(queue);
