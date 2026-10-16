@@ -98,6 +98,23 @@ test('the CI workflow installs the pipeline dependencies with npm ci and runs np
   assert.doesNotMatch(workflow,/\bdeploy\b|ssh|docker login|vercel/i,'the workflow only tests');
 });
 
+test('the independent browser CI job installs both engines and keeps diagnostics after failures',()=>{
+  const workflow=read('.github/workflows/test.yml');
+  const [unit,browser]=workflow.split(/\n  browser:\n/);
+  assert.ok(browser,'a separate browser job exists');
+  assert.doesNotMatch(unit,/playwright install|npm ci --ignore-scripts|BROWSER_ENGINE/);
+  assert.doesNotMatch(browser,/^\s+needs:|continue-on-error:/m);
+  assert.match(browser,/run: npm ci --ignore-scripts/);
+  assert.match(browser,/npx --no-install playwright install --with-deps chromium webkit/);
+  assert.match(browser,/run: npm run build/);
+  assert.equal((browser.match(/run: npm run test:browser/g)||[]).length,2);
+  for(const engine of ['chromium','webkit'])assert.ok(browser.includes('BROWSER_ENGINE: '+engine));
+  assert.match(browser,/!cancelled\(\) && steps\.build\.outcome == 'success'/);
+  assert.match(browser,/actions\/upload-artifact@v4/);
+  assert.match(browser,/path: editorial\/typesafe-runtime\/browser-checks\//);
+  assert.match(read('scripts/browser-checks.mjs'),/verify-accessibility\.mjs/);
+});
+
 test('CI and the local QA run the strict public audit and the public scan after the build, as the same commands',()=>{
   const pkg=JSON.parse(read('package.json')),workflow=read('.github/workflows/test.yml');
   assert.equal(pkg.scripts['audit:public'],'node editorial/public-audit.mjs --strict');

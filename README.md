@@ -61,7 +61,7 @@ npm run setup          # npm ci in editorial/ (needed once)
 npm test               # builds the site, then runs every test that can run on a clean clone
 npm run demo           # the pipeline rejecting a wrong result, offline, in about a second
 npm run build          # the site into .publish/
-npm run test:browser   # age and mobile checks in WebKit; needs Playwright, see above
+npm run test:browser   # age, phone flow and axe; BROWSER_ENGINE=chromium or the default webkit
 npm start              # the small service on http://127.0.0.1:8787 (family sync, corrections)
 npm run audit:public   # no Cyrillic, no earlier working title, no personal wording, no private contacts; needs a built site (npm run build); CI runs it
 npm run scan:public    # secrets, personal paths, contact data outside the catalogue; CI runs it
