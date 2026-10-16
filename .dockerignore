@@ -48,6 +48,7 @@ editorial/catalogue-runtime
 editorial/fact-ledger
 editorial/catalog-versions
 editorial/audit
+editorial/experiments/out
 editorial/node_modules
 editorial/release-identity.json
 editorial/external-review-report.json

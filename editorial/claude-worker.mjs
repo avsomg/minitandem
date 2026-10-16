@@ -141,6 +141,53 @@ export function claudeUsage(event,route,toolCalls){
     sessionId:event.session_id||null,apiCostEstimateUsd:event.total_cost_usd??null,
     costCaveat:'CLI estimate is not subscription billing or a quota percentage'};
 }
+// Saved-text experiments need the same environment and isolation, with no tools.
+// cwd is supplied by the caller so experiment files stay in its output folder.
+export async function runClaudeNoTools({prompt,schema,model,effort='low',cwd,timeoutMs=60000},
+  {runImpl=spawn,authImpl=requireClaudeSubscription,cliImpl=requireClaudeCli}={}){
+  if(typeof prompt!=='string'||prompt.length>60000)throw Error('Worker input exceeds budget; evidence was not truncated');
+  if(!schema||!model||!cwd)throw Error('Missing no-tools worker contract');
+  const env=claudeEnvironment();cliImpl({env});authImpl({env});
+  const settings={...claudeSettings(cwd),permissions:{defaultMode:'dontAsk',allow:[],deny:['Read','WebSearch','WebFetch','Bash','Edit','Write','Agent','Task','Skill','mcp__*']}};
+  const args=['-p','--model',model,'--effort',effort,'--output-format','stream-json','--verbose',
+    '--json-schema',JSON.stringify(schema),'--tools','','--permission-mode','dontAsk','--settings',JSON.stringify(settings),...isolationArgs];
+  const started=Date.now();let result=null,toolCalls=0;
+  await new Promise((resolve,reject)=>{
+    const child=runImpl('claude',args,{cwd,env,stdio:['pipe','pipe','pipe']});
+    let pending='',stderr='',bytes=0,failure=null,settled=false;
+    const stop=reason=>{
+      if(failure||settled)return;failure=reason;child.kill('SIGTERM');
+      setTimeout(()=>{if(!settled)child.kill('SIGKILL');},2000).unref();
+    };
+    const timer=setTimeout(()=>stop('Worker time limit'),timeoutMs);
+    const parse=line=>{
+      if(!line.trim())return;
+      let event;try{event=JSON.parse(line);}catch{stop('Invalid Claude event JSON');return;}
+      if(event.type==='assistant')for(const block of event.message?.content||[])if(block.type==='tool_use')toolCalls++;
+      if(toolCalls)stop('No-tools worker attempted a tool call');
+      if(event.type==='result'){if(result)stop('Duplicate Claude result');else result=event;}
+    };
+    child.stdout.setEncoding?.('utf8');
+    child.stdout.on('data',chunk=>{
+      bytes+=Buffer.byteLength(chunk);if(bytes>12000000){stop('Claude worker event budget exceeded');return;}
+      pending+=chunk.toString();const lines=pending.split('\n');pending=lines.pop();for(const line of lines)parse(line);
+      if(pending.length>2000000)stop('Oversized worker event');
+    });
+    child.stderr.on('data',chunk=>{stderr=(stderr+chunk.toString()).slice(-3000);});
+    child.on('error',error=>{clearTimeout(timer);if(settled)return;settled=true;reject(error);});
+    child.on('close',code=>{
+      clearTimeout(timer);if(settled)return;parse(pending);settled=true;
+      if(failure)reject(Error(failure));
+      else if(code!==0||!result||result.is_error||result.subtype!=='success'||!result.structured_output||result.permission_denials?.length)
+        reject(Error('Claude worker did not complete successfully: '+failureDetail(result,stderr,code)));
+      else resolve();
+    });
+    child.stdin.on?.('error',()=>{});child.stdin.end(prompt);
+  });
+  // Missing usage is unknown, never a zero-token success.
+  const u=result.usage,measured=u&&['input_tokens','output_tokens'].every(k=>Number.isFinite(u[k])&&u[k]>=0);
+  return {answer:result.structured_output,usage:measured?claudeUsage(result,{model,effort},toolCalls):null,seconds:(Date.now()-started)/1000};
+}
 export async function runClaudeWorker(job,policy,{route,promptImpl,evidenceFilesImpl,copyImagesImpl,
   authImpl=requireClaudeSubscription,runImpl=spawn,timeoutMs=720000,signal}={}){
   signal?.throwIfAborted();

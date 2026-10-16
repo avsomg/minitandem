@@ -60,7 +60,7 @@ export function auditDirectory(directory){
 export const PRIVATE=['archive-ru/','translation/','node_modules/','editorial/node_modules/','server-state/',
   'editorial/workflow-state/','editorial/agent-artifacts/','editorial/external-candidates/','editorial/external-disputes/','editorial/external-decisions/',
   'editorial/corrections/','editorial/correction-versions/','editorial/versions/','editorial/page-records/','editorial/typesafe-runtime/','editorial/calibration-runtime/',
-  'editorial/catalogue-runtime/','editorial/fact-ledger/','editorial/catalog-versions/','editorial/audit/',
+  'editorial/catalogue-runtime/','editorial/fact-ledger/','editorial/catalog-versions/','editorial/audit/','editorial/experiments/out/',
   'editorial/external-review-receipts.json','editorial/family-venues-visitor-check-2026-09-27.json','editorial/monitor-state.json',
   'editorial/discovery-state.json','editorial/discovery-report.json','editorial/heartbeat-state.json',
   // Generated snapshots of private state, dated working papers of the first rollout, and the release account identity.

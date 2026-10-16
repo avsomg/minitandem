@@ -122,3 +122,40 @@ and independent patch-review path. Repeated syncs create no duplicate replacemen
 A changed card or an input that still does not fit is not replayed. The older
 `--upgrade-input-job` command still applies only to retryable jobs; use sync for
 an exhausted input-budget failure. No SQL edit or manual attempt reset is needed.
+
+## Booking shadow experiment
+
+Stage 5 has a separate script, `editorial/experiments/booking-route.mjs`. It reads only the card list and saved sources passed to it. It proposes `practical.booking`, fixed EN/DE/FR phrases and the existing planning admission/warning keys. It never applies a patch. Notes, intro, parent details and findings with opposite or ambiguous registration wording block approval. A venue-only quote, missing quote or unsupported claim stays unknown even if the checker approves it.
+
+Prepare four private JSON files. Paths in the source manifest are relative to that manifest. The main session prepares the labels from saved text and keeps the six holdouts out of prompt tuning. The owner spot-checks ten labels before a paid run.
+
+| Input | Shape |
+| --- | --- |
+| `cards.json` | `{ "cards": [card, ...], "includeIds": [calibrationCardId, ...], "holdoutIds": [heldOutCardId, ...] }`; a plain card array is also accepted |
+| `sources.json` | Array of `{ "id": "S1", "cardId": "offer-id", "path": "capture.json", "origin": "controller-capture", "kind": "official", "scope": "exact-card", "url": "https://example.org/offer" }` |
+| `labels.json` | Array of `{ "cardId": "offer-id", "value": true, "sourceId": "S1", "quote": "A complete verbatim line from the source", "proseConflict": false }`; unknown is `value: null`, `quote: ""`, `sourceId: ""` |
+| `baseline.json` | Optional array of `{ "cardId": "offer-id", "verdict": "approve", "value": true, "tokens": 638000, "seconds": 180 }`; verdicts are `approve`, `reject`, `await-source`; tokens/seconds are optional |
+
+Use controller snapshot JSON where available; its identity, URL and text hash are validated. Otherwise use `origin: "monitor-copy"` with a plain UTF-8 text file. Kind is `official` or `visitor`; only official sources can support this critical field. Scope is `exact-card`, `venue-only` or `uncertain`. Monitor copies keep their origin and never become controller bindings. A known label must have a located quote of at least 12 characters in an exact-card source. Baseline card IDs and `includeIds` are pinned first, then a seeded draw from published cards with booking words fills the sample to 40. Conflicting holdout/pinned IDs are refused.
+
+From the repository root, with `BOOKING_INPUT` set to the folder containing those private inputs:
+
+```sh
+node editorial/experiments/booking-route.mjs --cards="$BOOKING_INPUT/cards.json" --sources="$BOOKING_INPUT/sources.json" --labels="$BOOKING_INPUT/labels.json" --baseline="$BOOKING_INPUT/baseline.json" --seed=booking-stage-5 --dry-run
+```
+
+Dry run prints the selected IDs, origins, both prompt sizes and a token estimate, including four mutation checks. It creates no files and makes no model or login-probe call. Every check receives the complete saved text. Prompts exceeding 60,000 characters are refused without truncation; a composed package can exceed that limit even when the dry-run estimate fits.
+
+Only after the owner's spending approval, weekly-limit check and cycle pause, the main session runs:
+
+```sh
+node editorial/experiments/booking-route.mjs --cards="$BOOKING_INPUT/cards.json" --sources="$BOOKING_INPUT/sources.json" --labels="$BOOKING_INPUT/labels.json" --baseline="$BOOKING_INPUT/baseline.json" --seed=booking-stage-5 --out="$BOOKING_OUTPUT" --run-models
+```
+
+`BOOKING_OUTPUT` must name a new folder with a canonical path and no symlink ancestors. Inside this repository, output is restricted to `editorial/experiments/out/`, which is private and gitignored. Without `--out`, the script creates a dated folder there. It stores per-card packages, checker answers, mutations and `metrics.json`/`metrics.md`, with owner-only file permissions. Existing folders are refused; there is no resume or overwrite. CLI exit status is 1 if any threshold fails or remains unmeasured.
+
+The live route is one Haiku extraction and one independent Sonnet check per card, without tools, using the shared Claude environment, subscription check, schema and isolation flags. `--extract-model` and `--check-model` accept explicit model IDs. Four additional Sonnet checks receive a flipped value, another group's quote, a missing quote and a contradicting note. Their raw verdict must be `reject` for all four; the deterministic gate cannot substitute for the checker's rejection. The script needs two eligible offers with different extracted quotes to construct these mutations; otherwise that metric fails.
+
+The report requires 40 cards, complete labels and successful call pairs; false approvals must be 0, missed changes at most 3%, unknown retention at least 95%, and every labelled prose conflict must be flagged. Model time is the sum of both calls per card and must be at most 60 seconds. Owner decisions during the run must be 0; elapsed time must be at most 24 hours. Tokens include cached input, cache creation, output and mutation calls; the limit is 40% of the old chain. Where supplied, same-card baseline token totals replace the architect's approximate reference of 626,000 input plus 12,000 output tokens per chain. The report counts how many cards use that estimate. `--chain-tokens-per-card=N` changes the explicit reference; it does not make it a measured baseline. Missing usage, absent unknown/change/conflict cases or missing mutation checks prevent a pass. Baseline verdict/value agreement, false approvals and missed changes are reported separately.
+
+`--size=N` supports fixture and diagnostic runs; a sample smaller than 40 cannot pass the experiment. Recorded-answer tests run with `node --test editorial/booking-route.test.mjs editorial/booking-worker.test.mjs` and use invented sources only. Passing those tests does not establish the real experiment's accuracy or authorize stage 6. The main session records the actual results and the owner's subsequent route decision.

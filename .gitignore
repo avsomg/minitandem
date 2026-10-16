@@ -23,6 +23,7 @@ editorial/catalogue-runtime/
 editorial/fact-ledger/
 editorial/catalog-versions/
 editorial/audit/
+editorial/experiments/out/
 
 # 2. Generated snapshots of that state (rebuilt by their commands; they change with every pipeline run)
 editorial/external-review-report.json
