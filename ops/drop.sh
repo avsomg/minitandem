@@ -32,7 +32,7 @@ MAX_HEARTBEAT=${DROP_MAX_HEARTBEAT_BYTES:-16384}
 TOTAL_BACKUP=${DROP_TOTAL_BACKUP_BYTES:-2147483648}
 READ_SECONDS=${DROP_READ_SECONDS:-300}
 GZIP_SECONDS=${DROP_GZIP_SECONDS:-30}
-tmp= receipt= limit_child= limit_guard= lock_token=
+tmp= receipt= lock_token=
 UPLOAD_LOCK=$WATCH_DIR/.upload-lock
 
 refuse() { echo "minitandem-drop: $*" >&2; exit 1; }
@@ -41,8 +41,6 @@ cleanup() {
   drop_status=$?
   # Cleanup runs to its end: a second signal while it removes temporary files is ignored.
   trap - EXIT; trap '' HUP INT TERM
-  [ -z "$limit_child" ] || { kill "$limit_child" 2>/dev/null || true; wait "$limit_child" 2>/dev/null || true; }
-  [ -z "$limit_guard" ] || { kill -KILL "$limit_guard" 2>/dev/null || true; wait "$limit_guard" 2>/dev/null || true; }
   [ -z "$tmp" ] || rm -f "$tmp"
   [ -z "$receipt" ] || rm -f "$receipt"
   if [ -n "$lock_token" ] && [ "$(cat "$UPLOAD_LOCK/owner" 2>/dev/null)" = "$lock_token" ]; then
@@ -64,29 +62,12 @@ take_upload_lock() {
   printf '%s\n' "$lock_token" > "$UPLOAD_LOCK/owner"
 }
 
-# POSIX watchdog: the receiver needs no timeout utility on macOS. Commands here are the single-process head and gzip readers.
+# The deadline is an alarm on the reader itself: perl (part of the base system on Ubuntu and macOS) sets it and execs head or gzip in
+# the foreground, which the kernel stops with SIGALRM when time is up. No background guard, so no race with the shell's own signal
+# handling (a POSIX guard in dash sometimes sat out its whole deadline). The reader's standard input and output are its own.
 limited() {
   seconds=$1; shift
-  exec 8<&0
-  "$@" <&8 8<&- &
-  limit_child=$!
-  exec 8<&-
-  # The guard is stopped with KILL once the reader is done: a trapped TERM could stay pending in dash while it waits (a race seen on Linux),
-  # and the guard would then sit out its whole deadline. Killed, it can never act on a reader that has gone; its sleep has no open
-  # descriptors besides /dev/null and simply runs out.
-  (
-    sleep "$seconds"
-    kill -TERM "$limit_child" 2>/dev/null || exit 0
-    sleep 1
-    kill -KILL "$limit_child" 2>/dev/null || true
-  ) </dev/null >/dev/null 2>&1 &
-  limit_guard=$!
-  if wait "$limit_child"; then limited_status=0; else limited_status=$?; fi
-  limit_child=
-  kill -KILL "$limit_guard" 2>/dev/null || true
-  wait "$limit_guard" 2>/dev/null || true
-  limit_guard=
-  return "$limited_status"
+  perl -e 'alarm shift; exec @ARGV or exit 127' "$seconds" "$@"
 }
 
 # sha256 of a file, as lowercase hex, with whichever tool the system has
