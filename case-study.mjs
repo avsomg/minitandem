@@ -5,6 +5,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {SITE_ORIGIN} from './site.mjs';
+import {legalLinks} from './legal-pages.mjs';
 
 const REPOSITORY = 'https://github.com/avsomg/minitandem';
 const PAGES = {
@@ -78,7 +79,7 @@ function page(lang, markdown) {
     + `<link rel="icon" href="${own.prefix}assets/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="${own.prefix}assets/apple-touch-icon.png"><link rel="stylesheet" href="${own.prefix}styles.css"></head>`
     + `<body class="public-page case-page"><a class="skip" href="#content">${esc(own.skip)}</a><div class="topwrap"><header class="wrap top"><a class="mark" href="/" aria-label="Minitandem">Mini<span>tandem</span></a>`
     + `<a class="ghost" href="${PAGES[other].url}" hreflang="${other}" lang="${other}">${SWITCH[other]}</a></header></div>`
-    + `<main id="content" class="public-content case">${caseStudyBody(markdown)}</main></body></html>\n`;
+    + `<main id="content" class="public-content case">${caseStudyBody(markdown)}</main><footer class="public-footer"><p>${legalLinks(lang)}</p></footer></body></html>\n`;
 }
 
 export const CASE_STUDY_URLS = Object.values(PAGES).map(p => p.url);

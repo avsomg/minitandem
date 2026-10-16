@@ -1,4 +1,5 @@
 import http from 'node:http';
+import {familySyncEnabled} from './features.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -104,14 +105,19 @@ async function staticFile(req,res,pathname){
 const isClientError=error=>error instanceof SyntaxError||(typeof error?.code==='string'&&/^[a-z]+\.[A-Za-z]+$/.test(error.code))||/^(Invalid|JSON required|Request too large)/.test(error?.message||'');
 // What an error ends in. Before the reply has started it is a status and a short message, never a stack (that goes to the log);
 // once bytes are out nothing can be corrected, so the connection is cut. A visitor who closed the page is not worth a log line.
+// Log a fixed event and an allowlisted OS code only. Error messages, stacks and request objects can carry IPs or submitted data.
+export function serviceError(error){
+  const codes=new Set(['EACCES','ENOENT','ENOTDIR','EISDIR','ENOSPC','EIO','ERR_STREAM_PREMATURE_CLOSE']);
+  console.error('Service error', codes.has(error?.code)?error.code:'INTERNAL');
+}
 function fail(res,error){
-  if(res.headersSent){if(error?.code!=='ERR_STREAM_PREMATURE_CLOSE')console.error(error);return res.destroy();}
+  if(res.headersSent){if(error?.code!=='ERR_STREAM_PREMATURE_CLOSE')serviceError(error);return res.destroy();}
   if(isClientError(error))return json(res,400,{error:error.message});
-  console.error(error);return json(res,500,{error:'Server error'});
+  serviceError(error);return json(res,500,{error:'Server error'});
 }
 // One error boundary around the whole request: parsing the target, the static files and the API all run inside it, so nothing a
 // request does can end as an unhandled rejection that stops the process. The last resort cuts the connection and keeps the process.
-const guard=handler=>(req,res)=>handler(req,res).catch(error=>{try{fail(res,error);}catch(again){console.error(again);res.destroy();}});
+const guard=handler=>(req,res)=>handler(req,res).catch(error=>{try{fail(res,error);}catch(again){serviceError(again);res.destroy();}});
 export function createServer(){
   return http.createServer(guard(async(req,res)=>{
     res.setHeader('X-Content-Type-Options','nosniff');
@@ -135,6 +141,8 @@ export function createServer(){
       return res.end(req.method==='HEAD'?undefined:JSON.stringify({status:'ok',records:allowed.size,published,archived:allowed.size-published,revision:buildInfo.revision??null,catalogueUpdated:buildInfo.catalogueUpdated??null,...(commit&&{commit})}));
     }
     if(!pathname.startsWith('/api/'))return ['GET','HEAD'].includes(req.method)?staticFile(req,res,pathname):json(res,405,{error:'Method not allowed'});
+    if(!familySyncEnabled() && (pathname==='/api/v1/family'||pathname.startsWith('/api/v1/family/')||pathname==='/api/v1/corrections'))
+      return json(res,503,{error:'Family sync is disabled',code:'sync.disabled'});
     try{
       // Inside the try: a damaged state file must end in a 500 for this request, not in an unhandled rejection that stops the process.
       const db=readDb();
@@ -199,6 +207,7 @@ export function createServer(){
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const command=process.argv[2]||'start';
   if(command==='new-family'||command==='new-admin'){
+    if(command==='new-family'&&!familySyncEnabled()){console.error('Family sync is disabled');process.exit(1);}
     const db=readDb(),token=randomToken();
     if(command==='new-admin')db.adminHash=hash(token);
     else db.families[hash(token)]={revision:0,profile:null,updatedAt:null};

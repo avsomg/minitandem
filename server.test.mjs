@@ -10,12 +10,15 @@ import {fileURLToPath} from 'node:url';
 import test from 'node:test';
 import {JobQueue} from './editorial/jobs.mjs';
 
+// This file exercises the enabled protocol. family-sync-off.test.mjs checks the safe default separately.
+process.env.MINITANDEM_FAMILY_SYNC='1';
+
 test('Mac service authenticates family sync, conflicts and editorial intake',async()=>{
   const temp=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-service-'));
   // The operations route reads the editorial queue; the test gives it an empty one of its own instead of the real, private queue.
   const queueFile=path.join(temp,'queue','jobs.sqlite');
   new JobQueue(queueFile).close();
-  const env={...process.env,MINITANDEM_STATE_DIR:path.join(temp,'state'),MINITANDEM_CORRECTION_DIR:path.join(temp,'corrections'),MINITANDEM_QUEUE_FILE:queueFile};
+  const env={...process.env,MINITANDEM_FAMILY_SYNC:'1',MINITANDEM_STATE_DIR:path.join(temp,'state'),MINITANDEM_CORRECTION_DIR:path.join(temp,'corrections'),MINITANDEM_QUEUE_FILE:queueFile};
   const script=fileURLToPath(new URL('server.mjs',import.meta.url));
   const issue=command=>{
     const result=spawnSync(process.execPath,[script,command],{env,encoding:'utf8'});

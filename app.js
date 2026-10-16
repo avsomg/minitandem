@@ -94,6 +94,7 @@
     for (const node of $$('[data-i18n]')) node.textContent = t(node.dataset.i18n);
     for (const [attr, target] of [['i18nLabel', 'aria-label'], ['i18nPlaceholder', 'placeholder'], ['i18nTitle', 'title']])
       for (const node of $$(`[data-${attr.replace(/[A-Z]/g, c => '-' + c.toLowerCase())}]`)) node.setAttribute(target, t(node.dataset[attr]));
+    for (const node of $$('[data-legal]')) node.href = '/' + node.dataset.legal + '/' + (I.lang() === 'de' ? '' : I.lang() + '/');
     document.title = t('meta.title');
     $('meta[name="description"]')?.setAttribute('content', t('meta.description'));
     for (const b of $$('#langSeg button')) b.setAttribute('aria-pressed', String(b.dataset.lang === I.lang()));

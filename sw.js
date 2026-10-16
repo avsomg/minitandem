@@ -1,7 +1,7 @@
-const CACHE = 'minitandem-shell-2026-10-15-1';
+const CACHE = 'minitandem-shell-2026-10-16-legal-1';
 const SHELL = [
   '/', '/index.html', '/styles.css', '/manifest.webmanifest',
-  '/strings-en.js', '/strings-de.js', '/strings-fr.js', '/i18n.js',
+  '/features.js', '/strings-en.js', '/strings-de.js', '/strings-fr.js', '/i18n.js',
   '/data.js', '/data-reviewed.js', '/data-practical.js', '/regions.js', '/data-geo.js', '/data-towns.js',
   '/planning.js', '/exchange.js', '/storage-migration.js', '/catalogue.js', '/catalogue-i18n.js', '/format.js', '/store.js', '/sync.js', '/exports.js', '/category-icons.js', '/views.js', '/toast.js', '/map.js', '/app.js',
   '/assets/favicon.svg', '/assets/icon-512.png', '/assets/apple-touch-icon.png',

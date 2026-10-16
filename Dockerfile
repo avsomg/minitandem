@@ -10,6 +10,8 @@ COPY editorial/package.json editorial/package-lock.json ./
 RUN npm ci --omit=dev --ignore-scripts
 
 FROM node:${NODE_VERSION}-alpine AS build
+ARG MINITANDEM_FAMILY_SYNC=0
+ENV MINITANDEM_FAMILY_SYNC=${MINITANDEM_FAMILY_SYNC}
 WORKDIR /app
 COPY . .
 COPY --from=dependencies /app/editorial/node_modules editorial/node_modules

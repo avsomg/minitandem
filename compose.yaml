@@ -4,11 +4,15 @@ name: minitandem
 
 services:
   app:
-    build: .
+    build:
+      context: .
+      args:
+        MINITANDEM_FAMILY_SYNC: ${MINITANDEM_FAMILY_SYNC:-0}
     image: minitandem-app:${MINITANDEM_TAG:-current}
     restart: unless-stopped
     environment:
       # The service reads these; the image sets the same defaults.
+      MINITANDEM_FAMILY_SYNC: ${MINITANDEM_FAMILY_SYNC:-0}
       MINITANDEM_STATE_DIR: /state
       MINITANDEM_CORRECTION_DIR: /state/corrections
       # /healthz reports it as "commit". The tag is the short commit id of the deployed version (.env.example), empty if unset.
@@ -34,6 +38,10 @@ services:
 
   caddy:
     image: caddy:2-alpine
+    entrypoint: ["/bin/sh", "/etc/caddy/access-log-entrypoint.sh"]
+    command: ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
+    tmpfs:
+      - /var/log/caddy:size=32m,mode=0700
     restart: unless-stopped
     depends_on:
       app:
@@ -46,6 +54,7 @@ services:
       ACME_EMAIL: ${ACME_EMAIL:?Set ACME_EMAIL in .env (copy .env.example)}
     volumes:
       - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./docker/access-log-entrypoint.sh:/etc/caddy/access-log-entrypoint.sh:ro
       - caddy-data:/data
       - caddy-config:/config
     mem_limit: 256m

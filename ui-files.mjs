@@ -1,6 +1,6 @@
 // The files that make up the interface, in one place. build.mjs copies them, editorial/release.mjs fingerprints them,
 // and tests compare them with index.html, sw.js and .vercelignore so that none of those can drift.
-export const SCRIPTS=['strings-en.js','strings-de.js','strings-fr.js','i18n.js','data.js','data-reviewed.js','data-practical.js','regions.js','data-geo.js','data-towns.js',
+export const SCRIPTS=['features.js','strings-en.js','strings-de.js','strings-fr.js','i18n.js','data.js','data-reviewed.js','data-practical.js','regions.js','data-geo.js','data-towns.js',
   'planning.js','exchange.js','storage-migration.js','catalogue.js','catalogue-i18n.js','format.js','store.js','sync.js','exports.js','category-icons.js','views.js','toast.js','map.js','app.js'];
 // The German and French card texts (scripts/compile-catalogue-i18n.mjs): app.js loads only the one of the chosen language.
 export const LAZY_SCRIPTS=['data-de.js','data-fr.js'];

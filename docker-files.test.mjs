@@ -110,7 +110,7 @@ async function waitFor(url,tries=300){ // up to 30 s on a busy machine; returns 
 
 test('the entrypoint creates one demo family, never an editor key, serves /healthz, and does nothing more on the second start',async t=>{
   const state=tmp(t,'minitandem-entrypoint-'),port=await freePort();
-  const env={...process.env,MINITANDEM_STATE_DIR:path.join(state,'state'),MINITANDEM_CORRECTION_DIR:path.join(state,'state','corrections'),
+  const env={...process.env,MINITANDEM_FAMILY_SYNC:'1',MINITANDEM_STATE_DIR:path.join(state,'state'),MINITANDEM_CORRECTION_DIR:path.join(state,'state','corrections'),
     MINITANDEM_HOST:'127.0.0.1',MINITANDEM_PORT:String(port)};
   delete env.MINITANDEM_COMMIT;
   const start=()=>{const child=spawn('sh',[path.join(root,'docker','entrypoint.sh')],{env,stdio:['ignore','pipe','pipe']});let output='';
@@ -161,10 +161,14 @@ test('the site builds from the files the Docker build context lets in',t=>{
   }
   // The image installs the pipeline's dependencies in its own stage; here the checkout's copy stands in for them.
   if(fs.existsSync(path.join(root,'editorial/node_modules')))fs.symlinkSync(path.join(root,'editorial/node_modules'),path.join(context,'editorial/node_modules'));
-  const build=spawnSync(process.execPath,['build.mjs','--public'],{cwd:context,encoding:'utf8'});
+  const build=spawnSync(process.execPath,['build.mjs','--public'],{cwd:context,encoding:'utf8',env:{...process.env,MINITANDEM_FAMILY_SYNC:'0'}});
   assert.equal(build.status,0,build.stderr.slice(-800));
-  for(const file of ['index.html','projekt/index.html','projekt/en/index.html','places/index.html','sitemap.xml','build-info.json'])
+  for(const file of ['index.html','projekt/index.html','projekt/en/index.html','places/index.html','impressum/index.html','impressum/fr/index.html','impressum/en/index.html','datenschutz/index.html','datenschutz/fr/index.html','datenschutz/en/index.html','sitemap.xml','build-info.json'])
     assert.ok(fs.existsSync(path.join(context,'.publish',file)),file);
+  assert.match(fs.readFileSync(path.join(context,'.publish/features.js'),'utf8'),/familySync":false/);
+  const enabled=spawnSync(process.execPath,['build.mjs','--public'],{cwd:context,encoding:'utf8',env:{...process.env,MINITANDEM_FAMILY_SYNC:'1'}});
+  assert.equal(enabled.status,0,enabled.stderr.slice(-800));
+  assert.match(fs.readFileSync(path.join(context,'.publish/features.js'),'utf8'),/familySync":true/);
 });
 
 const HAS_CURL=spawnSync('curl',['--version'],{stdio:'ignore'}).status===0;

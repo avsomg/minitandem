@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import {familySyncEnabled} from './features.mjs';
 import path from 'node:path';
 import vm from 'node:vm';
 import crypto from 'node:crypto';
@@ -6,6 +7,7 @@ import {execFileSync} from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import {generatePublicPages,site} from './public-pages.mjs';
 import {generateCaseStudy} from './case-study.mjs';
+import {generateLegalPages} from './legal-pages.mjs';
 import {SCRIPTS,LAZY_SCRIPTS,STATIC,ASSETS,GENERATED,BUILD_INFO} from './ui-files.mjs';
 import {preparePublicOutput} from './public-output.mjs';
 import {externalReviewReport,assertPublicationReviewed,readExternalReviewInputs} from './editorial/external-review.mjs';
@@ -85,6 +87,7 @@ preparePublicOutput(output);
 for(const [file,needle] of [['index.html','rel="canonical" href="'+site+'/"'],['index.html','og:url" content="'+site+'/"'],['robots.txt','Sitemap: '+site+'/sitemap.xml']])
   if(!fs.readFileSync(path.join(root,file),'utf8').includes(needle))throw Error(file+' does not name the site origin '+site);
 for (const file of [...STATIC,...GENERATED,...new Set(SCRIPTS),...LAZY_SCRIPTS,'.vercelignore']) fs.copyFileSync(path.join(root,file),path.join(output,file));
+fs.writeFileSync(path.join(output,'features.js'), 'window.MINITANDEM_FEATURES = Object.freeze(' + JSON.stringify({familySync:familySyncEnabled()}) + ');\n');
 // Which catalogue this build holds, for /healthz and for the deploy script. Deterministic: the revision is a content hash, the date is the latest review.
 const published=records.filter(record=>!['closed','excluded'].includes(record.status)).length;
 fs.writeFileSync(path.join(output,BUILD_INFO),JSON.stringify({revision,catalogueUpdated:latestReview,records:records.length,published,archived:records.length-published},null,2)+'\n');
@@ -99,4 +102,5 @@ fs.mkdirSync(path.join(output,'assets'),{recursive:true});
 for (const file of ASSETS) fs.copyFileSync(path.join(root,'assets',file),path.join(output,'assets',file));
 const publicPages=generatePublicPages(records,context.window.CATALOG_REGIONS,output,new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Zurich'}));
 generateCaseStudy(root,output);
+generateLegalPages(root,output);
 console.log(JSON.stringify({output,revision,records:records.length,publicationGates,approvalCrossCheck,translations,publicPages,files:fs.readdirSync(output)},null,2));
