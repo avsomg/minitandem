@@ -6,24 +6,25 @@ Zielsystem (nur zur Referenz): Ubuntu 24.04 LTS, 1 vCPU, 2 GB RAM, eingehend off
 
 ## Caddy-Umstellung: vorbereitet, noch nicht angewendet
 
-Dieser Checkout bereitet die getrennte Auslieferung vor: Die Docker-Stufen `app` und `edge` übernehmen denselben öffentlichen Build. `minitandem-caddy:<Tag>` enthält `.publish` und die Konfiguration; `minitandem-app:<Tag>` betreibt mit `MINITANDEM_API_ONLY=1` nur API und Healthcheck. Es gibt kein gemeinsames, beim Start überschriebenes Site-Volume. Die folgenden Angaben zum bisherigen Serverstand bleiben historisch; die Umstellung erfolgt erst mit dem Eigentümer. Die Server-Schritte und der Rollback-Drill stehen weiter unten.
+Dieser Checkout bereitet die getrennte Auslieferung vor: Die Docker-Stufen `app` und `edge` übernehmen denselben öffentlichen Build. `minitandem-caddy:<Tag>` enthält `.publish` und die Konfiguration; `minitandem-app:<Tag>` betreibt mit `MINITANDEM_API_ONLY=1` nur API und Healthcheck. Es gibt kein gemeinsames, beim Start überschriebenes Site-Volume. Die folgenden Angaben zum bisherigen Serverstand bleiben historisch; die Umstellung erfolgt erst mit dem Eigentümer. Die Server-Schritte und der Rollback-Drill stehen unter «Erste Caddy-Umstellung».
 
-## Überblick
+## Überblick nach der Umstellung (noch nicht angewendet)
 
 ```
-Internet ──80/443──> Caddy (Container "caddy")  ──intern──> app (Container "app", Port 8787, nicht veröffentlicht)
-                       │ automatisches HTTPS                  │ site + Dienst (server.mjs)
-                       │ www -> minitandem.ch                 └─ Volume "state": /state
+Internet ──80/443──> Caddy (Container "caddy")
+                       │ /srv/site: öffentlicher Build im Image
+                       │ /api/* und /healthz ──> app:8787 (Node)
+                       │                         └─ Volume "state": /state
                        └─ Volumes "caddy-data", "caddy-config"
 ```
 
-- `Dockerfile`: baut die Seite mit `node build.mjs --public` und startet `server.mjs` als unprivilegierter Benutzer. Der Healthcheck fragt `/healthz` ab.
+- `Dockerfile`: baut die Seite einmal in der Stufe `build`; `app` und `edge` kopieren diesen Stand. Das API läuft als unprivilegierter Benutzer; sein Healthcheck fragt `/healthz` ab. `RELEASE_COMMIT` wird zusätzlich in `build-info.json` eingetragen. Ein Code-Update bleibt dadurch auch bei gleicher Katalogrevision erkennbar.
 - `compose.yaml`: zwei Dienste, `app` und `caddy`, Projektname `minitandem`. Nur Caddy veröffentlicht Ports. Der Zustand liegt im benannten Volume `minitandem_state`.
-- `docker/Caddyfile`: `www.minitandem.ch` leitet dauerhaft auf `minitandem.ch` um; `minitandem.ch` wird mit `encode zstd gzip` ausgeliefert, die Editor-Pfade (`/admin`, `/api/v1/admin/*`) sind am Proxy gesperrt (404), alles andere geht an `app:8787`.
+- `docker/Caddyfile`: `www.minitandem.ch` leitet dauerhaft auf `minitandem.ch` um. `docker/site.caddy` enthält die gemeinsamen Routen für Produktion und HTTP-Vorschau. Nur `/api/*` und `/healthz` gehen an `app:8787`. `/admin*`, `/api/v1/admin` und dessen Unterpfade bleiben am Rand gesperrt (404). Alle öffentlichen Dateien kommen aus `/srv/site` im Caddy-Image, mit `encode zstd gzip`.
 - `ops/deploy.sh <Commit>`: das Update mit Prüfungen, vom Rechner des Eigentümers aus (siehe «Update»).
 - `docker/entrypoint.sh`: legt beim ersten Start **genau eine Demo-Familie** an (Schlüssel in `/state/demo-family-key.txt`) und startet den Dienst. Ein **Editor-Schlüssel** (`server.mjs new-admin`) wird auf dem Server **nie** erzeugt; ohne ihn antworten alle Editor-Routen mit 401.
 - Die redaktionelle Pipeline (`editorial/cycle.mjs`, die Worker) läuft **nicht** auf dem Server, sondern auf dem Rechner des Eigentümers; der Server hat keine Modell-Zugänge. Zu unterscheiden ist, was wo liegt:
-  - **App-Image** (Container `app`): die öffentliche Seite und der Dienst, **keine** privaten redaktionellen Daten. Das Image wird mit `--public` aus einem sauberen Checkout gebaut, und `.dockerignore` hält alle privaten Pfade aus dem Build-Kontext.
+  - **Release-Images** (`minitandem-app:<Tag>` und `minitandem-caddy:<Tag>`): API und öffentlicher Build, **keine** privaten redaktionellen Daten. Die Images werden mit `--public` aus einem sauberen Checkout gebaut, und `.dockerignore` hält alle privaten Pfade aus dem Build-Kontext.
   - **Volume `minitandem_state`** (Familien-Zustand): gehashte Familienschlüssel, Profile, eingereichte Korrekturen und die Demo-Familie. Das sind Familiendaten, keine redaktionellen Daten; sie gehören dem Dienst und werden von `ops/backup.sh` gesichert (Abschnitt «Sichern und Wiederherstellen des State-Volumes»).
   - **Host-Verzeichnis `~/editorial-backups`** (ausserhalb von Docker, Benutzer `ubuntu`, Modus 700): die tägliche Kopie des **privaten redaktionellen Zustands** vom Mac des Eigentümers (Warteschlange, Belege, Quelltexte), ohne Familiendaten. Kein Container bindet es ein (Abschnitt «Redaktioneller Zyklus: Überwachung und Kopie ausser Haus»).
 
@@ -116,10 +117,18 @@ sed "s/^MINITANDEM_TAG=.*/MINITANDEM_TAG=$previous_tag/" .env > .env.new
 cat .env.new > .env
 rm .env.new
 docker compose up -d --no-build
-curl -fsS https://minitandem.ch/healthz
+health=$(curl -fsS https://minitandem.ch/healthz)
+files=$(curl -fsS https://minitandem.ch/build-info.json)
+field() { sed -n "s/.*\"$1\":[[:space:]]*\"\{0,1\}\([^\",}]*\).*/\1/p"; }
+revision=$(printf '%s' "$health" | field revision)
+[ -n "$revision" ] && [ "$revision" = "$(printf '%s' "$files" | field revision)" ]
+[ "$(printf '%s' "$health" | field commit)" = "$previous_tag" ]
+file_commit=$(printf '%s' "$files" | field commit)
+[ -z "$file_commit" ] || [ "$file_commit" = "$previous_tag" ]
 docker inspect --format '{{.State.Health.Status}}' "$(docker compose ps -q app)" | grep -qx healthy
 printf 'recovery=rolled-back at %s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" >> "$record"
-docker rm -f "minitandem-preview-$op" >/dev/null 2>&1 || true
+docker rm -f "minitandem-preview-$op" "minitandem-preview-api-$op" >/dev/null 2>&1 || true
+docker network rm "minitandem-preview-$op" >/dev/null 2>&1 || true
 [ "$(cat .deploy-lock/id)" = "$op" ]
 rm .deploy-lock/id .deploy-lock/owner
 rmdir .deploy-lock/recovery
@@ -133,6 +142,71 @@ Fehlt das alte Image, die Folge anhalten; zuerst am protokollierten alten Commit
 ## Rollback
 
 Nach einem erfolgreichen Deployment ist ein geplanter Rollback ein **neuer** Aufruf von `ops/deploy.sh <vollständiger alter Commit>` mit der Freigabe des Eigentümers. Er nimmt dieselbe Sperre, prüft CI und Vorschau und hinterlässt eine eigene Operations-ID. Alte Images erst löschen, wenn die neue Version ausreichend beobachtet wurde. Das Familien-Volume wird beim Deployment nicht ersetzt.
+
+## Erste Caddy-Umstellung mit dem Eigentümer (noch nicht angewendet)
+
+Diese Schritte wurden nicht auf dem Server ausgeführt. Vor dem ersten Umschalten muss die Hauptsitzung die Änderungen prüfen und die vollständigen Tests, `audit:public` und `scan:public` im integrierten Checkout wiederholen. Auf diesem Entwicklungsrechner fehlen Docker Engine und Caddy; der echte HTTP-Vertragstest wurde deshalb übersprungen. Die übrigen Tests ersetzen keinen Lauf mit Caddy.
+
+**Vorprüfung auf dem Server, ohne Umschalten.** Mit Docker Engine und ohne laufendes Deployment ausführen. `release` ist die vollständige freigegebene Commit-ID aus der Hauptsitzung. Die Vorprüfung nutzt einen separaten sauberen Klon; der laufende Server-Checkout bleibt unverändert. Der normale Update-Aufruf baut diese Images später nochmals über den Cache. Die folgenden Container haben keinen Zugriff auf das Familien-Volume und können keine externen Verbindungen aufbauen. Der Caddy-Binärdatei aus dem Edge-Image wird derselbe Build aus dem API-Image gegenübergestellt:
+
+```bash
+set -euo pipefail
+[[ $release =~ ^[0-9a-f]{40}$ ]]
+[ ! -e /opt/minitandem/.deploy-lock ]
+git -C /opt/minitandem fetch --tags --quiet
+scratch=$(mktemp -d)
+binary=minitandem-edge-binary-$$
+contract=minitandem-edge-contract-$$
+trap 'docker rm -f "$contract" "$binary" >/dev/null 2>&1 || true; rm -rf "$scratch"' EXIT
+git clone --quiet --no-hardlinks /opt/minitandem "$scratch/checkout"
+cd "$scratch/checkout"
+git checkout --quiet --detach "$release"
+tag=$(git rev-parse --short HEAD)
+ACME_EMAIL=owner@example.org MINITANDEM_TAG=$tag docker compose config -q
+ACME_EMAIL=owner@example.org MINITANDEM_TAG=$tag docker compose build app caddy
+docker create --name "$binary" "minitandem-caddy:$tag" >/dev/null
+docker cp "$binary:/usr/bin/caddy" "$scratch/caddy"
+docker create --name "$contract" --network none --cap-drop ALL \
+  --security-opt no-new-privileges:true --memory 512m --pids-limit 200 \
+  -e MINITANDEM_CADDY_BIN=/tmp/caddy --entrypoint node "minitandem-app:$tag" \
+  --test --test-name-pattern='real Caddy' /app/docker-files.test.mjs >/dev/null
+docker cp docker-files.test.mjs "$contract:/app/docker-files.test.mjs"
+docker cp "$scratch/caddy" "$contract:/tmp/caddy"
+docker start -a "$contract"
+[ "$(docker inspect --format '{{.State.ExitCode}}' "$contract")" = 0 ]
+```
+
+Der Test muss tatsächlich laufen und darf nicht als «Caddy is not installed» übersprungen werden. Er vergleicht Status, Antwortinhalt, CSP, Cache-Control, MIME-Typen und CORS mit Node für jede gebaute Datei sowie Verzeichnis- und Fehlerpfade. Dazu gehören `/projekt/`, `places/`, `sitemap.xml`, `robots.txt`, `manifest.webmanifest` und `/sw.js`. Er stoppt anschliessend das API: Katalog und Service Worker müssen weiter mit 200 antworten, API-Aufrufe mit 502 oder 503. Die Bindung des Workers bleibt `/sw.js` mit dem bisherigen Root-Scope; ein zusätzlicher `Service-Worker-Allowed`-Header war bisher nicht gesetzt.
+
+Caddy setzt für öffentliche Dateien dieselbe CSP und `public, max-age=0, must-revalidate`; JSON-Fehler erhalten `no-store`. Verzeichnisse werden mit 301 auf den Slash-Pfad umgeleitet. Es gibt weder Verzeichnislisten noch einen SPA-Fallback. Dot-Pfade bleiben gesperrt. `X-Content-Type-Options` und `Referrer-Policy` bleiben erhalten; die bisherigen Edge-Header HSTS, `X-Frame-Options` und `Permissions-Policy` ebenfalls. Das API prüft seine Origins weiterhin selbst. Zusätzliche Origins aus einer künftigen Compose-Konfiguration müssen auch im statischen Caddy-Vertrag ergänzt und getestet werden.
+
+**Umschalten und Rollback-Drill.** Auf dem Rechner des Eigentümers, nach dessen Freigabe und grüner CI für beide Commits:
+
+```bash
+set -euo pipefail
+release=$(git rev-parse HEAD)
+previous=$(ssh -i "$HOME/.ssh/minitandem_ed25519" -o IdentitiesOnly=yes \
+  ubuntu@179.237.77.144 'git -C /opt/minitandem rev-parse HEAD')
+[[ $release =~ ^[0-9a-f]{40}$ && $previous =~ ^[0-9a-f]{40}$ ]]
+# release und previous ausserhalb des Checkouts für den Drill notieren.
+ops/deploy.sh "$release"
+curl -fsS https://minitandem.ch/healthz
+curl -fsS https://minitandem.ch/build-info.json
+curl -fsSI https://minitandem.ch/projekt/
+curl -fsSI https://minitandem.ch/places/
+curl -fsSI https://minitandem.ch/sw.js
+# Nur nach erneuter Freigabe des Eigentümers: zurück und wieder vor.
+ops/deploy.sh "$previous"
+curl -fsS https://minitandem.ch/healthz
+curl -fsS https://minitandem.ch/build-info.json
+ops/deploy.sh "$release"
+```
+
+Die Hauptsitzung führt Vorprüfung und Wechsel unter Ausschluss anderer Deployments aus; eine bestehende `.deploy-lock` wird nie entfernt, um fortzufahren. Für den eigentlichen Wechsel übernimmt `ops/deploy.sh` die Sperre. Die Vorprüfung erstellt keine Compose-Dienste und verändert weder `.env` noch den laufenden Checkout. `previous` bezeichnet deshalb weiterhin den vorherigen Server-Commit.
+
+Nach jedem Wechsel müssen API-Revision und Dateirevision zusammenpassen. Bei getrennten Releases müssen zusätzlich beide Commit-Angaben dem Ziel-Tag entsprechen; alte Releases vor der Trennung enthalten den Commit nur in `/healthz`. Die vorherigen Images und die Recovery-Datei bis zum erfolgreichen Drill behalten. Der automatische Fehler-Rollback wechselt zuerst zum alten Checkout und setzt den alten Tag, startet dessen Compose-Konfiguration und prüft API und Dateien. Damit funktioniert auch der erste Rückweg zur bisherigen Proxy-Konfiguration. Ein späterer geplanter Rollback nutzt dasselbe Skript; für einen Ziel-Commit vor der Trennung baut es nur das alte App-Image und prüft die darin enthaltenen Dateien.
+
+**Offen:** echter Image-Build, dieser Vertragstest, Umschalten und Rollback-Drill auf dem Server. Erst nach ihrer Durchführung Datum, vollständige Commits und Ergebnis hier eintragen. Es wurde nichts veröffentlicht.
 
 ## Sichern und Wiederherstellen des State-Volumes
 
