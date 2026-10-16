@@ -52,7 +52,7 @@ A worker is one `claude -p` run with only the Read, WebSearch and WebFetch tools
 
 - **Node.js 24.12.0 or newer.** Tested with 24.12.0; the version is pinned in [`.nvmrc`](.nvmrc) and used by CI. The queue uses the built-in `node:sqlite` module, which prints an experimental warning.
 - **npm**, to install the dependencies of the pipeline (`editorial/package.json`, locked in `editorial/package-lock.json`: five direct dependencies, 31 packages in total). The site, the tests and the build need nothing else.
-- **Playwright is not a declared dependency.** The browser checks (`npm run test:browser`) drive WebKit through it, and nothing installs it for you. Install it yourself (`npm install --no-save playwright && npx playwright install webkit`) or point `MINITANDEM_PLAYWRIGHT_DIR` or a local `.playwright-path` file at a folder that has it ([`playwright-loader.mjs`](playwright-loader.mjs)). Without it the unit tests, build and demo still work.
+- **Playwright and axe-core are exact devDependencies**, locked in `package-lock.json`. Run `npm ci` at the repository root for browser checks. Browser binaries are installed separately on CI. Local Playwright installations still work through `MINITANDEM_PLAYWRIGHT_DIR` or `.playwright-path` ([`playwright-loader.mjs`](playwright-loader.mjs)); unit tests, build and demo need no browser.
 
 ## Run it
 

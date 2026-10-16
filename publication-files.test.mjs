@@ -46,8 +46,8 @@ test('both READMEs carry the honesty section, the licence, the badge and the com
   assert.match(de,/Er schreibt den Code nicht selbst/);
   for(const command of ['npm test','npm run demo','npm run build','npm run test:browser','npm run setup'])for(const text of [en,de])assert.ok(text.includes(command),command);
   for(const text of [en,de])assert.match(text,/Playwright/);
-  assert.match(en,/Playwright is not a declared dependency/);
-  assert.match(de,/Playwright ist keine deklarierte Abhängigkeit/);
+  assert.match(en,/Playwright and axe-core are exact devDependencies/);
+  assert.match(de,/Playwright und axe-core sind devDependencies mit exakten Versionen/);
   assert.match(en,/Node\.js 24\.12\.0/);
   // The README lists the private-only tests; every one of them is skipped by an explicit "private-only:" message in its test file.
   const sources=['catalog.test.mjs','editorial/corrections.test.mjs','editorial/external-pipeline.test.mjs','editorial/external-review.test.mjs','catalogue-i18n.test.mjs'].map(read).join('\n');
@@ -63,15 +63,23 @@ test('both READMEs carry the honesty section, the licence, the badge and the com
   assert.equal((sources.match(/const (?:PRIVATE_SKIP|SKIP_[A-Z]+)=[^;]*?\?false:\s*'private-only:/g)||[]).length,defined,'every skip reason starts with private-only:');
 });
 
-test('package.json: a root test, build, demo and a separate browser script; no dependencies, Playwright not declared',()=>{
+test('package.json: a root test, build, demo and a separate browser script; browser tools are locked devDependencies',()=>{
   const pkg=JSON.parse(read('package.json'));
   for(const script of ['test','build','demo','test:browser'])assert.ok(pkg.scripts[script],script);
   assert.match(pkg.scripts.test,/--test \*\.test\.mjs editorial\/\*\.test\.mjs/);
   assert.doesNotMatch(pkg.scripts.test,/verify|playwright/i,'the default test never needs a browser');
   assert.match(pkg.scripts['test:browser'],/scripts\/browser-checks\.mjs/);
   assert.match(read('scripts/browser-checks.mjs'),/verify-age\.mjs[\s\S]*verify-mobile\.mjs/);
-  assert.equal(pkg.dependencies,undefined);assert.equal(pkg.devDependencies,undefined);
-  assert.equal(JSON.stringify(pkg).includes('playwright'),false);
+  assert.equal(pkg.dependencies,undefined);
+  assert.deepEqual(Object.keys(pkg.devDependencies).sort(),['axe-core','playwright']);
+  const lock=JSON.parse(read('package-lock.json'));
+  for(const [name,version] of Object.entries(pkg.devDependencies)){
+    assert.match(version,/^\d+\.\d+\.\d+$/);
+    assert.equal(lock.packages[''].devDependencies[name],version);
+    assert.equal(lock.packages['node_modules/'+name].version,version);
+    assert.match(lock.packages['node_modules/'+name].resolved,/^https:\/\/registry\.npmjs\.org\//);
+    assert.ok(lock.packages['node_modules/'+name].integrity);
+  }
   assert.equal(pkg.private,true);
   assert.equal(read('.nvmrc').trim(),pkg.engines.node.replace('>=',''));
   const editorial=JSON.parse(read('editorial/package.json'));
