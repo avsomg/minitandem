@@ -21,7 +21,7 @@ Google Maps s’ouvre hors du site après un clic. Le lien contient la destinati
 
 ## Signaler une erreur
 
-« Signaler une erreur » ouvre votre logiciel de messagerie avec un modèle adressé à hello@minitandem.ch. Le message n’est envoyé que si vous l’expédiez depuis ce logiciel. Le site ne transmet pas ce signalement à une interface du serveur. Le modèle contient le nom de l’activité, son identifiant et un lien vers la fiche. Votre message sert à traiter le signalement.
+« Signaler une erreur » ouvre votre logiciel de messagerie avec un modèle adressé à hello@minitandem.ch. Le message n’est envoyé que si vous l’expédiez depuis ce logiciel. Le site ne transmet pas ce signalement à une interface du serveur. Le modèle contient le nom de l’activité, son identifiant et un lien vers la fiche. Votre message sert à traiter le signalement. Les messages adressés à hello@minitandem.ch sont reçus et conservés dans une boîte aux lettres chez Infomaniak, en Suisse.
 
 ## Journal des accès
 
@@ -33,7 +33,7 @@ Le site ne dépose aucun cookie et n’utilise aucun outil d’analyse. Il ne ch
 
 ## Hébergement
 
-Le site et son journal des accès sont hébergés chez Infomaniak Public Cloud en Suisse.
+Le site et son journal des accès fonctionnent sur un serveur d’Infomaniak Public Cloud en Suisse. Le fournisseur est Infomaniak Network SA, Rue Eugène-Marziano 25, 1227 Les Acacias.
 
 ## Vos droits
 

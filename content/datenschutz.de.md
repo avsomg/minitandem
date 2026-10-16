@@ -21,7 +21,7 @@ Google Maps öffnet sich erst nach einem Klick ausserhalb dieser Website. Der Li
 
 ## Fehler melden
 
-«Fehler melden» öffnet Ihr E-Mail-Programm mit einer Vorlage an hello@minitandem.ch. Erst wenn Sie die Nachricht dort absenden, wird sie als E-Mail verschickt. Die Website übermittelt diese Meldung nicht an eine Programmierschnittstelle des Servers. Die Vorlage enthält den Namen des Angebots, seine Kennung und einen Link zur Karte. Ihre Nachricht wird zur Bearbeitung der Meldung verwendet.
+«Fehler melden» öffnet Ihr E-Mail-Programm mit einer Vorlage an hello@minitandem.ch. Erst wenn Sie die Nachricht dort absenden, wird sie als E-Mail verschickt. Die Website übermittelt diese Meldung nicht an eine Programmierschnittstelle des Servers. Die Vorlage enthält den Namen des Angebots, seine Kennung und einen Link zur Karte. Ihre Nachricht wird zur Bearbeitung der Meldung verwendet. Nachrichten an hello@minitandem.ch werden im Postfach bei Infomaniak in der Schweiz empfangen und gespeichert.
 
 ## Zugriffsprotokoll
 
@@ -33,7 +33,7 @@ Die Website setzt keine Cookies und verwendet keine Analysewerkzeuge. Sie lädt 
 
 ## Hosting
 
-Die Website und ihr Zugriffsprotokoll werden bei Infomaniak Public Cloud in der Schweiz gehostet.
+Die Website und ihr Zugriffsprotokoll laufen auf einem Server der Infomaniak Public Cloud in der Schweiz. Anbieterin ist die Infomaniak Network SA, Rue Eugène-Marziano 25, 1227 Les Acacias.
 
 ## Ihre Rechte
 

@@ -21,7 +21,7 @@ Google Maps opens outside this site after a click. The link includes the destina
 
 ## Report an error
 
-“Report an error” opens your e-mail application with a template addressed to hello@minitandem.ch. The message is sent only if you send it from that application. The website does not submit this report to a server API. The template includes the activity’s name, its ID and a link to the card. Your message is used to handle the report.
+“Report an error” opens your e-mail application with a template addressed to hello@minitandem.ch. The message is sent only if you send it from that application. The website does not submit this report to a server API. The template includes the activity’s name, its ID and a link to the card. Your message is used to handle the report. Messages to hello@minitandem.ch are received and stored in a mailbox at Infomaniak in Switzerland.
 
 ## Access log
 
@@ -33,7 +33,7 @@ The site sets no cookies and uses no analytics. It loads no third-party scripts 
 
 ## Hosting
 
-The site and its access log are hosted at Infomaniak Public Cloud in Switzerland.
+The site and its access log run on a server of Infomaniak Public Cloud in Switzerland. The provider is Infomaniak Network SA, Rue Eugène-Marziano 25, 1227 Les Acacias.
 
 ## Your rights
 
