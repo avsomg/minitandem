@@ -25,8 +25,11 @@ cat "$FAKE/gh.json"
 `,
   curl:`#!/bin/sh
 for last; do :; done
+echo "curl $last" >> "$FAKE/log"
 case "$last" in
-  http://127.0.0.1:*) [ -f "$FAKE/preview-up" ] || exit 7; cat "$FAKE/preview.json" ;;
+  http://127.0.0.1:*/build-info.json) [ -f "$FAKE/preview-up" ] || exit 7; cat "$FAKE/preview-files.json" ;;
+  http://127.0.0.1:*/healthz) [ -f "$FAKE/preview-up" ] && [ -f "$FAKE/preview-api-up" ] || exit 7; cat "$FAKE/preview.json" ;;
+  */build-info.json) f="$FAKE/public-files-$(cat "$FAKE/static-running").json"; [ -f "$f" ] || exit 22; cat "$f" ;;
   */healthz)
     if [ -f "$FAKE/steal-owner" ] && [ -d "$DEPLOY_DIR/.deploy-lock" ]; then
       current=$(sed -n 's/^MINITANDEM_TAG=//p' "$DEPLOY_DIR/.env")
@@ -46,11 +49,19 @@ case "$1 $2" in
   "compose up")
     tag=$(sed -n 's/^MINITANDEM_TAG=//p' .env)
     case "$*" in *--no-build*) grep -qx "$tag" "$FAKE/images" || { echo "image missing" >&2; exit 1; } ;; esac
-    echo "$tag" > "$FAKE/running"; echo "up $tag" >> "$FAKE/log" ;;
+    echo "$tag" > "$FAKE/running"
+    if [ ! -f "$FAKE/static-stale" ] || [ "$tag" = "$(cat "$FAKE/old-tag")" ]; then echo "$tag" > "$FAKE/static-running"; fi
+    if [ -f "$FAKE/bad-rollback-files" ] && [ "$tag" = "$(cat "$FAKE/old-tag")" ]; then echo '{}' > "$FAKE/public-files-$tag.json"; fi
+    echo "up $tag" >> "$FAKE/log" ;;
   "compose ps") echo app-container ;;
   "image inspect") grep -qx "$(echo "$3" | sed 's/^minitandem-app://')" "$FAKE/images" ;;
-  "rm -f") rm -f "$FAKE/preview-up" ;;
-  "run -d") touch "$FAKE/preview-up"; echo container-id ;;
+  "rm -f") rm -f "$FAKE/preview-up" "$FAKE/preview-api-up" ;;
+  "network create") touch "$FAKE/preview-network" ;;
+  "network rm") rm -f "$FAKE/preview-network" ;;
+  "run -d")
+    case "$*" in *minitandem-app:*) touch "$FAKE/preview-api-up";; esac
+    case "$*" in *" -p "*) touch "$FAKE/preview-up";; esac
+    echo container-id ;;
   "inspect --format") if [ -f "$FAKE/unhealthy-$(cat "$FAKE/running")" ]; then echo unhealthy; else echo healthy; fi ;;
   "logs --tail") echo "fake preview log" ;;
   *) echo "fake docker: unexpected call: $*" >&2; exit 99 ;;
@@ -64,15 +75,15 @@ const git=(cwd,...args)=>{
 const json=(records,extra={})=>JSON.stringify({status:'ok',records,...extra});
 
 // A server checkout on commit "old" (branch main) with tag OLD in .env, and a newer commit "next" on the remote. 321 records are live.
-function scenario(t,{preview=310,previewExtra,publicNew,files={}}={}){
+function scenario(t,{preview=310,previewExtra,publicNew,previewFiles,publicFiles,files={}}={}){
   const base=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-deploy-'));
   t.after(()=>fs.rmSync(base,{recursive:true,force:true}));
   const origin=path.join(base,'origin.git'),work=path.join(base,'work'),server=path.join(base,'server'),fake=path.join(base,'fake'),bin=path.join(base,'bin');
   for(const folder of [work,fake,bin])fs.mkdirSync(folder);
   git(base,'init','--bare','-q','-b','main',origin);git(work,'init','-q','-b','main');git(work,'remote','add','origin',origin);
-  fs.writeFileSync(path.join(work,'a.txt'),'old\n');git(work,'add','.');git(work,'commit','-q','-m','old');git(work,'push','-q','origin','main');
+  fs.writeFileSync(path.join(work,'a.txt'),'old\n');fs.writeFileSync(path.join(work,'compose.yaml'),'image: caddy:2-alpine\n');git(work,'add','.');git(work,'commit','-q','-m','old');git(work,'push','-q','origin','main');
   git(base,'clone','-q',origin,server);
-  fs.writeFileSync(path.join(work,'a.txt'),'next\n');git(work,'commit','-q','-am','next');git(work,'push','-q','origin','main');
+  fs.writeFileSync(path.join(work,'a.txt'),'next\n');fs.writeFileSync(path.join(work,'compose.yaml'),'image: minitandem-caddy:current\n');git(work,'commit','-q','-am','next');git(work,'push','-q','origin','main');
   const oldSha=git(server,'rev-parse','HEAD'),nextSha=git(work,'rev-parse','HEAD');
   const oldTag=git(server,'rev-parse','--short',oldSha);
   fs.writeFileSync(path.join(server,'.env'),`ACME_EMAIL=owner@example.org\nMINITANDEM_TAG=${oldTag}\n`);
@@ -80,12 +91,16 @@ function scenario(t,{preview=310,previewExtra,publicNew,files={}}={}){
   fs.writeFileSync(path.join(fake,'gh.json'),JSON.stringify([{conclusion:'success',status:'completed',headSha:nextSha}]));
   fs.writeFileSync(path.join(fake,'images'),oldTag+'\n');fs.writeFileSync(path.join(fake,'running'),oldTag);
   fs.writeFileSync(path.join(fake,'old-tag'),oldTag);
+  fs.writeFileSync(path.join(fake,'static-running'),oldTag);
+  fs.writeFileSync(path.join(fake,`public-files-${oldTag}.json`),JSON.stringify({revision:'old-catalogue',records:321},null,2));
   // The image that was live before build-info.json existed answers with the record count only.
   fs.writeFileSync(path.join(fake,`public-${oldTag}.json`),json(321));
   // The new image: what its own preview says is also what the public site shows once it is switched (unless a test says otherwise).
   const newTag=git(work,'rev-parse','--short',nextSha);
   const previewAnswer=json(preview,{published:preview,archived:0,...(previewExtra??{revision:'0123456789abcdef',catalogueUpdated:'2026-10-15',commit:newTag})});
   fs.writeFileSync(path.join(fake,'preview.json'),previewAnswer);
+  fs.writeFileSync(path.join(fake,'preview-files.json'),previewFiles??JSON.stringify(JSON.parse(previewAnswer),null,2));
+  fs.writeFileSync(path.join(fake,`public-files-${newTag}.json`),publicFiles??JSON.stringify(JSON.parse(previewAnswer),null,2));
   fs.writeFileSync(path.join(fake,`public-${newTag}.json`),publicNew??previewAnswer);
   for(const [name,body] of Object.entries(files))fs.writeFileSync(path.join(fake,name.replace('<new>',newTag).replace('<old>',oldTag)),body);
   const env={...process.env,PATH:bin+path.delimiter+process.env.PATH,FAKE:fake,DEPLOY_HOST:'ubuntu@192.0.2.10',DEPLOY_KEY:path.join(base,'key'),DEPLOY_DIR:server,
@@ -95,12 +110,14 @@ function scenario(t,{preview=310,previewExtra,publicNew,files={}}={}){
   const tagInEnv=()=>/^MINITANDEM_TAG=(.*)$/m.exec(fs.readFileSync(path.join(server,'.env'),'utf8'))[1];
   return {run,log,env,oldSha,nextSha,oldTag,newTag,tagInEnv,server,fake,
     running:()=>fs.readFileSync(path.join(fake,'running'),'utf8').trim(),
+    staticRunning:()=>fs.readFileSync(path.join(fake,'static-running'),'utf8').trim(),
     previewUp:()=>fs.existsSync(path.join(fake,'preview-up')),
     branch:()=>git(server,'rev-parse','--abbrev-ref','HEAD'),head:()=>git(server,'rev-parse','HEAD')};
 }
 // The server is exactly as it was: same checkout on the branch, same tag, same running image, no preview left behind.
 const untouched=s=>{
-  assert.equal(s.branch(),'main');assert.equal(s.head(),s.oldSha);assert.equal(s.tagInEnv(),s.oldTag);assert.equal(s.running(),s.oldTag);assert.equal(s.previewUp(),false);
+  assert.equal(s.branch(),'main');assert.equal(s.head(),s.oldSha);assert.equal(s.tagInEnv(),s.oldTag);assert.equal(s.running(),s.oldTag);assert.equal(s.staticRunning(),s.oldTag);assert.equal(s.previewUp(),false);
+  for(const file of ['preview-api-up','preview-network'])assert.equal(fs.existsSync(path.join(s.fake,file)),false,file);
 };
 
 test('ops/deploy.sh refuses without exactly one full commit sha, and then touches neither GitHub nor the server',{skip:HAS_TOOLS?false:'bash or git is not installed'},t=>{
@@ -131,7 +148,7 @@ test('ops/deploy.sh refuses a preview with more than 15 % fewer records than the
   assert.match(result.stderr,/257 published cards is more than 15 % below the 321/);
   assert.match(result.stdout,new RegExp('Live now: tag '+s.oldTag));
   const log=s.log();
-  assert.ok(log.includes('docker compose build app'),'the image was built and previewed first');
+  assert.ok(log.includes('docker compose build app caddy'),'the image was built and previewed first');
   assert.equal(log.filter(line=>line.startsWith('up ')).length,0,'the live service was never recreated');
   untouched(s);
   // The edge: 321 * 0.85 = 272.85, so 272 is more than 15 % below and 273 is not.
@@ -160,13 +177,22 @@ test('ops/deploy.sh previews the new image without the live state, switches, che
   const log=s.log();
   const at=prefix=>log.findIndex(line=>line.startsWith(prefix));
   assert.ok(at('gh run list')<at('ssh'),'CI is checked before the server is touched');
-  assert.ok(at('docker compose build app')<at('docker run -d')&&at('docker run -d')<at('docker compose up'),'build, then preview, then switch');
+  assert.ok(at('docker compose build app caddy')<at('docker run -d')&&at('docker run -d')<at('docker compose up'),'build, then preview, then switch');
   assert.ok(log.includes('up '+s.newTag));
-  // The preview is bound to the server's loopback, runs with the live limits, and has a throw-away state: no named volume, no bind mount.
-  const preview=log.find(line=>line.startsWith('docker run -d'));
-  assert.match(preview,/-p 127\.0\.0\.1:18788:8787/);assert.match(preview,/--tmpfs \/state:/);assert.match(preview,/--read-only/);assert.match(preview,/--cap-drop ALL/);
-  assert.match(preview,new RegExp(`-e MINITANDEM_COMMIT=${s.newTag} minitandem-app:${s.newTag}$`));
-  assert.doesNotMatch(preview,/ -v |--volume|--mount|minitandem_state/);
+  // Only the edge preview publishes a loopback port; neither container mounts live state or a site volume.
+  const previews=log.filter(line=>line.startsWith('docker run -d'));
+  assert.equal(previews.length,2);
+  const [api,edge]=previews;
+  assert.match(api,/--network-alias app/);assert.match(api,/--tmpfs \/state:/);assert.doesNotMatch(api,/ -p /);
+  assert.match(api,new RegExp(`-e MINITANDEM_API_ONLY=1 -e MINITANDEM_COMMIT=${s.newTag} minitandem-app:${s.newTag}$`));
+  assert.match(edge,/-p 127\.0\.0\.1:18788:8080/);assert.ok(edge.includes('minitandem-caddy:'+s.newTag));
+  assert.match(edge,/caddy run --config \/etc\/caddy\/preview.Caddyfile/);
+  for(const preview of previews){assert.match(preview,/--read-only/);assert.match(preview,/--cap-drop ALL/);assert.doesNotMatch(preview,/ -v |--volume|--mount|minitandem_state/);}
+  assert.ok(log.some(line=>line.startsWith('docker network create minitandem-preview-')));
+  assert.ok(log.some(line=>line.startsWith('docker network rm minitandem-preview-')));
+  assert.ok(log.includes('curl http://127.0.0.1:18788/build-info.json'));
+  assert.ok(log.includes('curl https://site.test/build-info.json'));
+  assert.equal(s.staticRunning(),s.newTag);
   assert.equal(log.filter(line=>/^docker compose up/.test(line)).every(line=>line.includes('--no-build')),true,'the switch uses the image that was previewed');
 });
 
@@ -230,7 +256,7 @@ test('one SSH operation holds the server lock throughout build and refuses a con
   t.after(()=>{if(fs.existsSync(s.fake))fs.writeFileSync(path.join(s.fake,'release-build'),'');first.child.kill();});
   await waitFor(()=>fs.existsSync(path.join(s.fake,'build-entered')));
   const second=s.run(s.nextSha);assert.notEqual(second.status,0);assert.match(second.stderr,/another operation owns the lock/);
-  assert.equal(s.log().filter(row=>row==='docker compose build app').length,1);
+  assert.equal(s.log().filter(row=>row==='docker compose build app caddy').length,1);
   fs.writeFileSync(path.join(s.fake,'release-build'),'');assert.equal((await first.done).code,0);
   assert.equal(fs.existsSync(path.join(s.server,'.deploy-lock')),false);
 });
@@ -260,7 +286,7 @@ test('published-count shrink catches mass archival even when the total record co
   const s=scenario(t,{preview:321});
   fs.writeFileSync(path.join(s.fake,`public-${s.oldTag}.json`),json(321,{published:295,archived:26}));
   const preview=json(321,{published:240,archived:81,revision:'0123456789abcdef',commit:s.newTag});
-  fs.writeFileSync(path.join(s.fake,'preview.json'),preview);
+  fs.writeFileSync(path.join(s.fake,'preview.json'),preview);fs.writeFileSync(path.join(s.fake,'preview-files.json'),preview);
   const result=s.run(s.nextSha);assert.notEqual(result.status,0);assert.match(result.stderr,/240 published cards/);
   assert.match(result.stdout,/published 295 -> 240; archived 26 -> 81/);untouched(s);
 });
@@ -269,9 +295,55 @@ test('the published-count boundary is exact and legacy live images print their f
     const s=scenario(t,{preview:321});
     fs.writeFileSync(path.join(s.fake,`public-${s.oldTag}.json`),json(321,{published:295,archived:26}));
     const preview=json(321,{published,archived:321-published,revision:'0123456789abcdef',commit:s.newTag});
-    fs.writeFileSync(path.join(s.fake,'preview.json'),preview);fs.writeFileSync(path.join(s.fake,`public-${s.newTag}.json`),preview);
+    fs.writeFileSync(path.join(s.fake,'preview.json'),preview);fs.writeFileSync(path.join(s.fake,'preview-files.json'),preview);fs.writeFileSync(path.join(s.fake,`public-${s.newTag}.json`),preview);
     assert.equal(s.run(s.nextSha).status===0,accepted);
   }
   const legacy=scenario(t),result=legacy.run(legacy.nextSha);assert.equal(result.status,0,result.stderr);
   assert.match(result.stdout,/live image has no published count; using records/);
+});
+
+
+test('deploy refuses mismatched preview files before changing the live pair',{skip:HAS_TOOLS?false:'bash or git is not installed'},t=>{
+  for(const previewFiles of ['{}',JSON.stringify({revision:'ffffffffffffffff',records:310,published:310,archived:0,commit:'wrong'})]){
+    const s=scenario(t,{previewFiles}),result=s.run(s.nextSha);
+    assert.notEqual(result.status,0);assert.match(result.stderr,/preview files disagree with API/);
+    assert.equal(s.log().some(line=>line.startsWith('up ')),false);untouched(s);
+  }
+});
+test('deploy refuses an API preview carrying another commit',{skip:HAS_TOOLS?false:'bash or git is not installed'},t=>{
+  const s=scenario(t,{previewExtra:{revision:'0123456789abcdef',commit:'wrong'}}),result=s.run(s.nextSha);
+  assert.notEqual(result.status,0);assert.match(result.stderr,/wrong commit/);untouched(s);
+});
+test('a healthy new API with old public files triggers rollback of both images',{skip:HAS_TOOLS?false:'bash or git is not installed'},t=>{
+  const s=scenario(t,{files:{'static-stale':''}}),result=s.run(s.nextSha);
+  assert.notEqual(result.status,0);assert.match(result.stderr,/does not show the previewed build/);
+  assert.match(result.stdout,/Rolled back to tag/);untouched(s);
+});
+test('a code-only release still rejects the old static commit even with the same catalogue revision',{skip:HAS_TOOLS?false:'bash or git is not installed'},t=>{
+  const s=scenario(t,{publicFiles:JSON.stringify({revision:'0123456789abcdef',commit:'old'})}),result=s.run(s.nextSha);
+  assert.notEqual(result.status,0);assert.match(result.stdout,/Rolled back to tag/);untouched(s);
+});
+
+
+test('a planned rollback can preview and restore the release before the Caddy split',{skip:HAS_TOOLS?false:'bash or git is not installed'},t=>{
+  const s=scenario(t);assert.equal(s.run(s.nextSha).status,0);
+  fs.writeFileSync(path.join(s.fake,'gh.json'),JSON.stringify([{headSha:s.oldSha,status:'completed',conclusion:'success'}]));
+  const api={status:'ok',records:321,published:295,archived:26,revision:'old-catalogue',commit:s.oldTag};
+  const files={revision:'old-catalogue',records:321,published:295,archived:26};
+  fs.writeFileSync(path.join(s.fake,'preview.json'),JSON.stringify(api));
+  fs.writeFileSync(path.join(s.fake,'preview-files.json'),JSON.stringify(files,null,2));
+  fs.writeFileSync(path.join(s.fake,`public-${s.oldTag}.json`),JSON.stringify(api));
+  fs.writeFileSync(path.join(s.fake,`public-files-${s.oldTag}.json`),JSON.stringify(files,null,2));
+  const result=s.run(s.oldSha);assert.equal(result.status,0,result.stderr+result.stdout);
+  assert.equal(s.running(),s.oldTag);assert.equal(s.staticRunning(),s.oldTag);assert.equal(s.head(),s.oldSha);
+  assert.ok(s.log().some(line=>line.startsWith('docker run -d')&&line.includes(':18788:8787')));
+});
+
+test('rollback leaves recovery locked if the old API returns but the old files cannot be verified',{skip:HAS_TOOLS?false:'bash or git is not installed'},t=>{
+  const s=scenario(t,{files:{'static-stale':'','bad-rollback-files':''}}),result=s.run(s.nextSha);
+  assert.notEqual(result.status,0);assert.match(result.stderr,/ROLLBACK FAILED/);
+  assert.equal(s.running(),s.oldTag);
+  assert.equal(fs.existsSync(path.join(s.server,'.deploy-lock')),true);
+  const id=fs.readFileSync(path.join(s.server,'.deploy-lock','id'),'utf8').trim();
+  assert.match(fs.readFileSync(path.join(s.server,'.deployments',id),'utf8'),/stage=recovery-needed/);
 });
