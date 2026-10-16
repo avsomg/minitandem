@@ -453,6 +453,8 @@
   'weekly.5': 'Fridays',
   'weekly.6': 'Saturdays',
   'weekly.7': 'Sundays',
+  'foot.impressum': 'Legal notice',
+  'foot.privacy': 'Privacy',
   'foot.about': 'About the data',
   'foot.data': 'Your data and backup',
   'foot.places': 'All places as plain pages',

@@ -453,6 +453,8 @@
   'weekly.5': 'freitags',
   'weekly.6': 'samstags',
   'weekly.7': 'sonntags',
+  'foot.impressum': 'Impressum',
+  'foot.privacy': 'Datenschutz',
   'foot.about': 'Über die Daten',
   'foot.data': 'Ihre Daten und Sicherung',
   'foot.places': 'Alle Orte als einfache Seiten',
