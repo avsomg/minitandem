@@ -45,13 +45,13 @@ test('dry run validates evidence without writing and ordinary output is private'
   for(const name of ['ledger.json','summary.md'])assert.equal(fs.statSync(path.join(out,name)).mode&0o777,0o600);
 });
 
-test('all cards round-trip and inherited equals filled values minus independently journal-covered fields',async t=>{
+test('all cards round-trip and inherited equals filled values minus verified values',async t=>{
   const f=ledgerFixture(t),extra=fixtureCard('old-card');extra.practical.booking.value=false;
   f.setCards([f.base,extra]);const before=fingerprint(f.root),ledger=await buildLedger({root:f.root});
   const records=loadCatalog({base:f.root}).ACTIVITIES;
   assert.equal(records[0].practical.booking.value,false,'the fixture must compile the approved patch over the earlier true value');
   for(const card of records)assert.deepEqual(ledger.cards.find(row=>row.id===card.id).fields.map(({field,value,present})=>({field,value,present})),catalogueValues(card));
-  assert.equal(ledger.counts.journalCovered,2);assert.equal(ledger.counts.total.inherited,ledger.counts.filled-2);
+  assert.equal(ledger.counts.journalCovered,2);assert.equal(ledger.counts.total.inherited,ledger.counts.filled-ledger.counts.total.verified);
   assert.equal(row(ledger,'practical.booking','old-card').origin,'inherited','matching a verified value on another card is not provenance');
   assert.deepEqual(fingerprint(f.root),before,'immutable reads must not change inputs or create SQLite sidecars');
 });
