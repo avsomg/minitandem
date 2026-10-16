@@ -16,6 +16,9 @@
 #   DROP_KEEP                  archives to keep, default 14
 #   DROP_MAX_BACKUP_BYTES      default 2147483648
 #   DROP_MAX_HEARTBEAT_BYTES   default 16384
+#   DROP_TOTAL_BACKUP_BYTES    default 2147483648 (stored files plus the incoming archive)
+#   DROP_READ_SECONDS          default 300
+#   DROP_GZIP_SECONDS          default 30
 set -eu
 LC_ALL=C
 export LC_ALL
@@ -26,8 +29,65 @@ BACKUP_DIR=${DROP_BACKUP_DIR:-${HOME:?HOME is not set}/editorial-backups}
 KEEP=${DROP_KEEP:-14}
 MAX_BACKUP=${DROP_MAX_BACKUP_BYTES:-2147483648}
 MAX_HEARTBEAT=${DROP_MAX_HEARTBEAT_BYTES:-16384}
+TOTAL_BACKUP=${DROP_TOTAL_BACKUP_BYTES:-2147483648}
+READ_SECONDS=${DROP_READ_SECONDS:-300}
+GZIP_SECONDS=${DROP_GZIP_SECONDS:-30}
+tmp= receipt= limit_child= limit_guard= lock_token=
+UPLOAD_LOCK=$WATCH_DIR/.upload-lock
 
 refuse() { echo "minitandem-drop: $*" >&2; exit 1; }
+
+cleanup() {
+  drop_status=$?
+  trap - EXIT HUP INT TERM
+  [ -z "$limit_child" ] || { kill "$limit_child" 2>/dev/null || true; wait "$limit_child" 2>/dev/null || true; }
+  [ -z "$limit_guard" ] || { kill "$limit_guard" 2>/dev/null || true; wait "$limit_guard" 2>/dev/null || true; }
+  [ -z "$tmp" ] || rm -f "$tmp"
+  [ -z "$receipt" ] || rm -f "$receipt"
+  if [ -n "$lock_token" ] && [ "$(cat "$UPLOAD_LOCK/owner" 2>/dev/null)" = "$lock_token" ]; then
+    rm -f "$UPLOAD_LOCK/owner"; rmdir "$UPLOAD_LOCK" 2>/dev/null || true
+  fi
+  exit "$drop_status"
+}
+trap cleanup EXIT
+trap 'exit 1' HUP INT TERM
+
+take_upload_lock() {
+  for number in "$MAX_BACKUP" "$MAX_HEARTBEAT" "$TOTAL_BACKUP" "$READ_SECONDS" "$GZIP_SECONDS"; do
+    case $number in ''|*[!0-9]*) refuse 'limits must be positive integers' ;; esac
+    [ "$number" -gt 0 ] || refuse 'limits must be positive integers'
+  done
+  mkdir -p "$WATCH_DIR"
+  mkdir "$UPLOAD_LOCK" 2>/dev/null || refuse 'another upload is active, or its interrupted lock needs inspection'
+  lock_token="$$-$(date -u '+%s')"
+  printf '%s\n' "$lock_token" > "$UPLOAD_LOCK/owner"
+}
+
+# POSIX watchdog: the receiver needs no timeout utility on macOS. Commands here are the single-process head and gzip readers.
+limited() {
+  seconds=$1; shift
+  exec 8<&0
+  "$@" <&8 8<&- &
+  limit_child=$!
+  exec 8<&-
+  (
+    sleeper=
+    trap '[ -z "$sleeper" ] || kill "$sleeper" 2>/dev/null || true; exit 0' HUP INT TERM
+    sleep "$seconds" & sleeper=$!
+    wait "$sleeper"
+    kill -TERM "$limit_child" 2>/dev/null || exit 0
+    sleep 1 & sleeper=$!
+    wait "$sleeper"
+    kill -KILL "$limit_child" 2>/dev/null || true
+  ) </dev/null >/dev/null 2>&1 &
+  limit_guard=$!
+  if wait "$limit_child"; then limited_status=0; else limited_status=$?; fi
+  limit_child=
+  kill "$limit_guard" 2>/dev/null || true
+  wait "$limit_guard" 2>/dev/null || true
+  limit_guard=
+  return "$limited_status"
+}
 
 # sha256 of a file, as lowercase hex, with whichever tool the system has
 sha256() {
@@ -51,11 +111,11 @@ set -- $cmd
 
 heartbeat() {
   [ $# -eq 0 ] || refuse "heartbeat takes no arguments"
+  take_upload_lock
   mkdir -p "$WATCH_DIR"
   find "$WATCH_DIR" -maxdepth 1 -name '.heartbeat.*' -mmin +60 -exec rm -f {} + 2>/dev/null || true
   tmp=$WATCH_DIR/.heartbeat.$$
-  trap 'rm -f "$tmp"' EXIT
-  head -c $((MAX_HEARTBEAT + 1)) > "$tmp" || refuse "could not write the heartbeat"
+  limited "$READ_SECONDS" head -c $((MAX_HEARTBEAT + 1)) > "$tmp" || refuse "heartbeat read deadline or write failure"
   size=$(size_of "$tmp")
   [ "$size" -gt 0 ] || refuse "empty heartbeat"
   [ "$size" -le "$MAX_HEARTBEAT" ] || refuse "heartbeat larger than $MAX_HEARTBEAT bytes"
@@ -83,20 +143,27 @@ backup() {
   [ "${#want}" -eq 64 ] || refuse "checksum must be 64 hex characters"
   case $KEEP in '' | *[!0-9]*) refuse "DROP_KEEP is not a number" ;; esac
 
+  take_upload_lock
+
   mkdir -p "$BACKUP_DIR" "$WATCH_DIR"
   chmod 700 "$BACKUP_DIR"
   # Leftovers of uploads that were cut off
   find "$BACKUP_DIR" -maxdepth 1 -name '.incoming-*' -mmin +1440 -exec rm -f {} + 2>/dev/null || true
   final=$BACKUP_DIR/editorial-$day.tar.gz
   tmp=$BACKUP_DIR/.incoming-$day.$$
-  trap 'rm -f "$tmp"' EXIT
-  head -c $((MAX_BACKUP + 1)) > "$tmp" || refuse "could not store the upload (disk full?)"
+  used=$(find "$BACKUP_DIR" -type f -exec sh -c 'wc -c < "$1"' sh {} \; | awk '{sum+=$1} END {printf "%.0f",sum+0}')
+  remaining=$((TOTAL_BACKUP - used))
+  [ "$remaining" -gt 0 ] || refuse 'aggregate backup budget exhausted'
+  read_limit=$MAX_BACKUP
+  [ "$remaining" -ge "$read_limit" ] || read_limit=$remaining
+  limited "$READ_SECONDS" head -c $((read_limit + 1)) > "$tmp" || refuse "upload read deadline or write failure"
   size=$(size_of "$tmp")
   [ "$size" -gt 0 ] || refuse "empty archive"
   [ "$size" -le "$MAX_BACKUP" ] || refuse "archive larger than $MAX_BACKUP bytes"
+  [ "$size" -le "$remaining" ] || refuse "aggregate backup budget exceeded"
   got=$(sha256 "$tmp")
   [ "$got" = "$want" ] || refuse "checksum mismatch (received $got)"
-  gzip -t "$tmp" 2>/dev/null || refuse "not a gzip file"
+  limited "$GZIP_SECONDS" gzip -t "$tmp" 2>/dev/null || refuse "not a gzip file or gzip validation deadline"
 
   # ln fails when the name is taken, which makes "never overwrite" race-free. The same bytes again (a retry after a cut connection) is fine.
   if ln "$tmp" "$final" 2>/dev/null; then

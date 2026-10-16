@@ -8,7 +8,7 @@ import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import zlib from 'node:zlib';
-import {spawnSync} from 'node:child_process';
+import {spawnSync,spawn} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {buildHeartbeat} from './ops/cycle-run.mjs';
 import {processStart} from './editorial/process-lock.mjs';
@@ -150,6 +150,49 @@ for(const shell of SHELLS){
     assert.deepEqual(box.list(box.backups).filter(name=>name.startsWith('.')),[],'no temporary file is left');
     // tomorrow (UTC) is still accepted: the Mac's day in Zurich can be a day ahead of UTC late in the evening
     assert.equal(box.run(`backup ${dayFromNow(1)} ${sha(data)}`,data,{},shell).status,0);
+  });
+
+  test(`drop.sh (${shell}) bounds slow reads, refuses concurrent uploads and removes the lock and temporary input`,async t=>{
+    const box=dropSandbox(t),data=archive('slow upload');
+    const child=spawn(shell,[DROP],{env:{...box.env,SSH_ORIGINAL_COMMAND:`backup ${D0} ${sha(data)}`,DROP_READ_SECONDS:'1'},stdio:['pipe','pipe','pipe']});
+    let error='';child.stderr.on('data',chunk=>error+=chunk);child.stdout.resume();
+    const done=new Promise((resolve,reject)=>{child.on('error',reject);child.on('close',code=>resolve(code));});
+    t.after(()=>child.kill());
+    for(let i=0;i<100&&!fs.existsSync(path.join(box.watch,'.upload-lock','owner'));i++)await new Promise(resolve=>setTimeout(resolve,10));
+    assert.ok(fs.existsSync(path.join(box.watch,'.upload-lock','owner')));
+    const other=box.run(`backup ${D0} ${sha(data)}`,data,{},shell);
+    assert.equal(other.status,1);assert.match(other.stderr,/another upload is active/);
+    assert.equal(await done,1);assert.match(error,/read deadline/);
+    assert.deepEqual(box.list(box.backups),[]);assert.deepEqual(box.list(box.watch),[]);
+  });
+
+  test(`drop.sh (${shell}) refuses an upload beyond the aggregate budget without deleting stored backups`,t=>{
+    const box=dropSandbox(t),data=archive('next archive'),older=dayFromNow(-2);
+    assert.equal(box.run(`backup ${older} ${sha(data)}`,data,{},shell).status,0);
+    const result=box.run(`backup ${D0} ${sha(data)}`,data,{DROP_TOTAL_BACKUP_BYTES:String(data.length*2-1)},shell);
+    assert.equal(result.status,1);assert.match(result.stderr,/aggregate backup budget/);
+    assert.deepEqual(box.list(box.backups),[`editorial-${older}.tar.gz`]);
+    assert.deepEqual(box.list(box.watch),['backup.json']);
+    const edge=box.run(`backup ${D0} ${sha(data)}`,data,{DROP_TOTAL_BACKUP_BYTES:String(data.length*2)},shell);
+    assert.equal(edge.status,0,edge.stderr);
+  });
+
+  test(`drop.sh (${shell}) bounds gzip validation and cleans every rejected upload`,t=>{
+    const box=dropSandbox(t),data=archive('state'),bin=path.join(box.folder,'bin');
+    write(path.join(bin,'gzip'),'#!/bin/sh\nexec sleep 10\n',0o755);
+    const result=box.run(`backup ${D0} ${sha(data)}`,data,{PATH:bin+path.delimiter+box.env.PATH,DROP_GZIP_SECONDS:'1'},shell);
+    assert.equal(result.status,1);assert.match(result.stderr,/gzip validation deadline/);
+    assert.deepEqual(box.list(box.backups),[]);assert.deepEqual(box.list(box.watch),[]);
+  });
+
+  test(`drop.sh (${shell}) removes temporary files and its lock on a handled termination signal`,async t=>{
+    const box=dropSandbox(t),data=archive('interrupted');
+    const child=spawn(shell,[DROP],{env:{...box.env,SSH_ORIGINAL_COMMAND:`backup ${D0} ${sha(data)}`},stdio:['pipe','pipe','pipe']});
+    child.stderr.resume();child.stdout.resume();
+    const done=new Promise((resolve,reject)=>{child.on('error',reject);child.on('close',code=>resolve(code));});
+    for(let i=0;i<100&&!box.list(box.backups).some(name=>name.startsWith('.incoming-'));i++)await new Promise(resolve=>setTimeout(resolve,10));
+    child.kill('SIGTERM');assert.equal(await done,1);
+    assert.deepEqual(box.list(box.backups),[]);assert.deepEqual(box.list(box.watch),[]);
   });
 }
 

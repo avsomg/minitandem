@@ -268,7 +268,97 @@ restrict,command="/usr/local/sbin/minitandem-drop" ssh-ed25519 AAAA… minitande
 - `heartbeat`: liest höchstens 16 KB aus stdin (eine Zeile JSON aus druckbaren ASCII-Zeichen, `{` bis `}`) und legt sie atomar als `/var/lib/minitandem-watch/heartbeat.json` ab.
 - `backup JJJJ-MM-TT SHA256`: liest höchstens 2 GB aus stdin in eine Temporärdatei in `~/editorial-backups/`, prüft die SHA-256-Summe und dass es eine gzip-Datei ist, und benennt sie in `editorial-JJJJ-MM-TT.tar.gz` um. Das Datum darf nicht nach morgen (UTC) liegen. Ein vorhandenes Archiv mit anderem Inhalt wird nie überschrieben (dieselben Bytes noch einmal sind in Ordnung: Wiederholung nach abgebrochener Verbindung). Die 14 neuesten Archive bleiben, `/var/lib/minitandem-watch/backup.json` (`{at,name,bytes}`) hält den Eingang fest.
 
-Jedes Argument wird streng geprüft (nur Buchstaben, Ziffern, Leerzeichen und Bindestrich im ganzen Befehl). Der Schlüssel kann nichts lesen, auflisten oder löschen; wer ihn stiehlt, kann Heartbeats und Archive ablegen, mehr nicht. Er wird widerrufen, indem man die Zeile aus `authorized_keys` löscht.
+Jedes Argument wird streng geprüft (nur Buchstaben, Ziffern, Leerzeichen und Bindestrich im ganzen Befehl). Der Schlüssel kann nichts lesen, auflisten oder löschen; wer ihn stiehlt, kann innerhalb der Grenzen Heartbeats und Archive ablegen und diese Zustandsmeldungen verfälschen. Eine Dateisystemquota begrenzt zusätzlich den Schaden eines missbrauchten Schlüssels. Er wird widerrufen, indem man die Zeile aus `authorized_keys` löscht.
+
+### Grenzen des Upload-Empfängers (noch nicht auf dem Host installiert)
+
+`drop.sh` nimmt insgesamt nur einen Upload gleichzeitig an, Heartbeat oder Archiv. Eine zweite Verbindung wird sofort abgelehnt. Der gemeinsame Lock liegt in `/var/lib/minitandem-watch/.upload-lock` und nennt PID/Zeitkennung. Er wird bei normalem Ende und HUP/INT/TERM nur vom eigenen Prozess entfernt. Nach SIGKILL oder Stromverlust können Lock und Temporärdatei bleiben: Owner-PID und laufende Uploads untersuchen, erst dann den verwaisten Lock und die zugehörige `.incoming-*`-Datei entfernen. Eine lebende oder unbekannte Sperre nie wegen ihres Alters übernehmen.
+
+`DROP_READ_SECONDS` begrenzt das Lesen (Standard 300 Sekunden), `DROP_GZIP_SECONDS` die gzip-Prüfung (30 Sekunden). Ein POSIX-Wächter beendet den jeweiligen Leser; `timeout` ist keine zusätzliche Installationsvoraussetzung. Der Eingang bleibt grössenbeschränkt. `DROP_TOTAL_BACKUP_BYTES` begrenzt bestehende Dateien **plus** eingehendes Archiv auf insgesamt 2147483648 Bytes (2 GiB). Eine einzelne Prüf-Byteprobe erkennt Überlauf; danach wird die neue Datei verworfen. Retention löscht erst nach erfolgreicher Prüfung. Deshalb muss vor dem Upload Platz für eine weitere Kopie vorhanden sein; ein gefüllter Bestand wird nicht vorab gelöscht. Auch ein identischer Retry braucht vorübergehend Platz. Es wird nichts entpackt.
+
+Vor der Installation mit dem Eigentümer die Grösse des vorhandenen Archivverzeichnisses prüfen; liegt sie schon über dem Budget, lehnt der neue Empfänger Uploads ab. Ein anderes Budget nur ausdrücklich festlegen. Danach in dieser Reihenfolge auf dem Server (hier **nicht ausgeführt**):
+
+```sh
+cd /opt/minitandem
+sh -n ops/drop.sh
+dash -n ops/drop.sh
+sudo install -o root -g root -m 755 ops/drop.sh /usr/local/sbin/minitandem-drop
+```
+
+Mit dem bestehenden projektspezifischen Drop-Schlüssel einen kleinen Test-Heartbeat und ein Testarchiv über den normalen Client senden; Prüfsumme, Rechte und fehlende Temporärdateien prüfen. Kein Test mit Familiendaten. Der Watcher und die Timer bleiben zunächst unverändert. Ein abgelehnter paralleler Upload hat Exit-Code 1; der Client wiederholt ihn nicht als Netzwerkfehler. Nach Ende des ersten Uploads gezielt erneut senden oder den nächsten geplanten Lauf prüfen.
+
+### Empfohlene Benutzer- und Dateisystemgrenze (Vorschlag, nicht angewendet)
+
+Der Skript-Lock und das Budget ersetzen keine Betriebssystemgrenze. Die folgenden Befehle sind eine **separate, vom Eigentümer freizugebende Host-Änderung**. Keine bestehenden Konten oder globalen SSH-Regeln ersetzen. Der neue Benutzer gehört nur zu diesem Projekt. Zuerst den dedizierten Empfänger vorbereiten:
+
+```sh
+sudo useradd --system --user-group --create-home --home-dir /var/lib/minitandem-drop --shell /bin/sh minitandem-drop
+sudo install -d -o minitandem-drop -g minitandem-drop -m 700 /var/lib/minitandem-drop/editorial-backups
+sudo install -d -o root -g root -m 755 /etc/ssh/authorized_keys
+sudo install -o root -g root -m 600 /dev/null /etc/ssh/authorized_keys/minitandem-drop
+sudoedit /etc/ssh/authorized_keys/minitandem-drop
+```
+
+In die letzte Datei **nur** den bereits geprüften öffentlichen Schlüssel dieses Projekts mit `restrict,command="/usr/local/sbin/minitandem-drop"` eintragen, keinen privaten Schlüssel. Ein erneutes `install /dev/null` würde die Datei leeren; diesen Vorbereitungsschritt nur einmal ausführen. Alte Archive mit dem Eigentümer kopieren und prüfen, bevor der Client umgestellt wird; nichts aus anderen Backup-Verzeichnissen übernehmen.
+
+Eine feste root-eigene Wrapperdatei setzt die neuen Pfade, ohne vom SSH-Client gelieferte Umgebungsvariablen zu übernehmen:
+
+```sh
+sudo install -d -o root -g root -m 755 /usr/local/libexec
+sudo install -o root -g root -m 755 /opt/minitandem/ops/drop.sh /usr/local/libexec/minitandem-drop
+sudo tee /usr/local/sbin/minitandem-drop >/dev/null <<'WRAPPER'
+#!/bin/sh
+export PATH=/usr/sbin:/usr/bin:/sbin:/bin
+export WATCH_DIR=/var/lib/minitandem-watch
+export DROP_BACKUP_DIR=/var/lib/minitandem-drop/editorial-backups
+export DROP_KEEP=14
+export DROP_MAX_BACKUP_BYTES=2147483648
+export DROP_MAX_HEARTBEAT_BYTES=16384
+export DROP_TOTAL_BACKUP_BYTES=2147483648
+export DROP_READ_SECONDS=300
+export DROP_GZIP_SECONDS=30
+exec /usr/local/libexec/minitandem-drop
+WRAPPER
+sudo chown root:root /usr/local/sbin/minitandem-drop
+sudo chmod 755 /usr/local/sbin/minitandem-drop
+```
+
+Der Watch-Pfad muss beim tatsächlichen Wechsel dem neuen Benutzer gehören; der root-Watcher kann ihn weiter lesen. Nicht beide Client-Benutzer gleichzeitig betreiben. Erst nach einem geprüften Kopier-/Umschaltplan `sudo chown -R minitandem-drop:minitandem-drop /var/lib/minitandem-watch` ausführen und auf dem Mac `MINITANDEM_DROP_USER=minitandem-drop` setzen. Den alten Zugang erst nach erfolgreichen Tests widerrufen.
+
+Die Quota-Befehle gelten **nur für ein bereits mit Benutzerquotas eingerichtetes ext4-Dateisystem**. Sie brechen sonst ab. Ein nötiger Umbau von Mount/Fstab, ein neues Volume oder eine XFS-Quota braucht einen eigenen Plan; nicht das Root-Dateisystem blind remounten. Nach der Freigabe:
+
+```sh
+sudo apt-get install quota
+bash <<'QUOTA'
+set -euo pipefail
+quota_mount=$(findmnt -n -o TARGET --target /var/lib/minitandem-drop)
+[ "$(findmnt -n -o FSTYPE --target /var/lib/minitandem-drop)" = ext4 ]
+findmnt -n -o OPTIONS --target /var/lib/minitandem-drop | tr ',' '\n' | grep -qx usrquota
+sudo quotaon -u "$quota_mount"
+sudo setquota -u minitandem-drop 2097152 2097152 0 0 "$quota_mount"
+sudo quota -u minitandem-drop
+QUOTA
+```
+
+Soft- und Hard-Limit sind 2 GiB in KiB. Die Systemquota zählt auch Metadaten und andere Dateien dieses Benutzers; der nutzbare Archivraum kann deshalb etwas kleiner sein. Falls der Bestand nicht hineinpasst, anhalten und mit dem Eigentümer Platz/Retention entscheiden. Die App-Dateien und Familiendaten bleiben einem anderen Benutzer zugeordnet.
+
+Optional den Benutzer zusätzlich in `/etc/ssh/sshd_config.d/minitandem-drop.conf` einschränken (Datei vorher auf Konflikte prüfen, nicht überschreiben):
+
+```text
+Match User minitandem-drop
+    AuthorizedKeysFile /etc/ssh/authorized_keys/minitandem-drop
+    ForceCommand /usr/local/sbin/minitandem-drop
+    PermitTTY no
+    AllowTcpForwarding no
+    AllowAgentForwarding no
+    X11Forwarding no
+    PermitTunnel no
+    PermitUserEnvironment no
+    MaxSessions 1
+Match all
+```
+
+Vor einem Reload `sudo sshd -t` und `sudo sshd -T -C user=minitandem-drop,host=localhost,addr=127.0.0.1` prüfen. Nur bei gültiger, erwarteter Ausgabe `sudo systemctl reload ssh`. Eine bestehende Admin-Sitzung offen halten, dann den beschränkten Zugang testen. Der Skript-Lock gilt über Verbindungen hinweg; `MaxSessions 1` allein wäre keine globale Upload-Grenze. Diese Benutzer-, Quota- und SSH-Änderungen wurden in diesem Auftrag weder angewendet noch am echten Host geprüft.
 
 **Heartbeat: `ops/cycle-run.mjs`.** Das Programm in der plist des Zyklus ist nicht mehr `editorial/cycle.mjs`, sondern `ops/cycle-run.mjs`. Es startet den Zyklus mit denselben Argumenten, derselben Ausgabe und demselben Exit-Code und sendet danach einen Heartbeat: `{at, exit, ok, reason, paused, skipped, runId, startedAt, seconds, daily, failedSteps, needsOwner:{count,text}, approvedUpdates, jobsRun, record}`. Der Heartbeat enthält nur Zähler, Schrittnamen, Karten-IDs und kurze Codes, keine Kartentexte und keine Zitate. Ein Heartbeat, der nicht ankommt, wird im Log des Zyklus vermerkt (drei Versuche mit 15 und 45 Sekunden Pause bei nicht erreichbarem Server), ändert aber den Exit-Code nie. `--status` und `--dry-run` führen keinen Zyklus aus und senden nichts.
 
