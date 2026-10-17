@@ -30,6 +30,13 @@
       const phrase = first(a.age);
       return /confirm|check|not published|restriction|to be/i.test(first((a.english || a).age)) ? t('age.notPublished') : phrase;
     }
+    // A price that is not known. The cards say so in many ways ("Price not published", "The price is not published.", "Entry price not
+    // published", "The cost of access is not stated."); the interface says it once. Only that bare placeholder is replaced: a text that
+    // carries something (a menu, "no tariff stated", "Check the price") is shown as written. The decision reads the English phrase; the
+    // list and the text for sharing use the interface phrase, the card page keeps the organiser's wording (as it does for the age).
+    const NO_PRICE = /^(?:the )?(?:(?:entry|entrance) )?(?:price|cost of access) (?:is )?not (?:published|stated)\.?$/i;
+    const noPrice = a => a.priceKind === 'unknown' && NO_PRICE.test(String((a.english || a).price ?? '').trim());
+    const priceShort = a => noPrice(a) ? t('price.notPublished') : first(a.price);
     // The age as a bare number for sentences such as 'Fits age 3'.
     const ageBare = age => age === 0 ? t('age.underOne') : String(age);
     const ageLabel = age => !Number.isFinite(age) ? t('common.any') : age === 0 ? t('age.under1') : t('age.years', {n: age});
@@ -44,7 +51,7 @@
     // The next date without "Next:", for the table column that is already headed "Next date".
     const nextShort = upcoming => { const e = upcoming[0]; return `${dayDate(e.date)}, ${e.start ? clockLabel(e) : t('time.tbc')}` + (upcoming.length > 1 ? ' ' + t('date.more', {n: upcoming.length - 1}) : ''); };
     const cell = value => String(value ?? '');
-    return {dateLabel, shortDate, dayDate, dayLong, weekdayName, clockLabel, first, ageShort, ageLabel, ageBare, parentLong, parentShort, langText, nextText, nextShort, bounds, cell};
+    return {dateLabel, shortDate, dayDate, dayLong, weekdayName, clockLabel, first, ageShort, noPrice, priceShort, ageLabel, ageBare, parentLong, parentShort, langText, nextText, nextShort, bounds, cell};
   }
   window.MinitandemFormat = {create};
 })();

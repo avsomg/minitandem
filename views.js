@@ -120,7 +120,7 @@
       return `<li><a class="row c-${esc(a.category)}${time ? ' has-time' : ''}" href="${esc(hashFor(a.id))}" data-id="${esc(a.id)}">` + categoryIcon(a.category) +
         `<span class="r-main"><span class="r-cat">${time ? `<b class="r-time">${esc(time)}</b>` : ''}<span class="r-catname">${esc(t('category.' + a.category))}</span>${dist ? `<span class="r-dist">${esc(dist)}</span>` : ''}</span>` +
         `<span class="r-name"><span${en}>${nm(a.name)}</span>${saved ? `<span class="r-saved" title="${esc(t('row.saved'))}">${ICON.bookmarkOn(14)}<span class="sr">${esc(t('row.saved'))}</span></span>` : ''}</span><span class="r-town-d">${esc(placeLine(a))}</span></span>` +
-        `<span class="r-facts"><span class="r-town-m">${esc(a.town)}</span><span class="r-age${F.bounds(a) || fits ? ' known' : ''}">${ageMark}${esc(ageText)}</span><span class="r-price${a.priceKind !== 'unknown' ? ' known' : ''}"${en}>${esc(F.first(a.price))}</span></span>` +
+        `<span class="r-facts"><span class="r-town-m">${esc(a.town)}</span><span class="r-age${F.bounds(a) || fits ? ' known' : ''}">${ageMark}${esc(ageText)}</span><span class="r-price${a.priceKind !== 'unknown' ? ' known' : ''}"${F.noPrice(a) ? '' : en}>${esc(F.priceShort(a))}</span></span>` +
         `<span class="r-l3"><span class="r-when${lead || time || more ? ' is-wrap' : ''}">${whenHtml}</span><span class="r-status st${status === 'active' ? ' is-current' : ''}">${status === 'active' ? '' : `<i class="dot ${statusClass[status]}" aria-hidden="true"></i>`}${esc(t('status.' + status + '.short'))}</span></span></a></li>`;
     }
     // Under "today", "this weekend" or "next 7 days" a card that counts through its weekly hours is marked as in the week view, with the
@@ -389,7 +389,7 @@
     function mapBox(cards) {
       const items = cards.map(shown), located = items.filter(a => a.geo), missing = items.filter(a => !a.geo);
       const list = (rowsList, fallback) => rowsList.map(a => `<div class="map-list-row"><button type="button" class="linkbtn" data-open="${esc(a.id)}">${esc(a.name)}</button><p>${esc(a.address || fallback(a))}</p></div>`).join('');
-      return `<div class="map-shell"><p class="hint">${esc(t('map.caption', {located: located.length, total: items.length}))}</p>${located.length ? `<div id="places-map" class="places-map" role="region" aria-label="${esc(t('map.label'))}"></div><p id="map-error" role="status" hidden>${esc(t('map.tilesFailed'))}</p>` : ''}<p class="hint">${esc(t('map.credit'))}</p>` +
+      return `<div class="map-shell"><p class="hint">${esc(t('map.caption', {located: located.length, total: items.length, n: items.length}))}</p>${located.length ? `<div id="places-map" class="places-map" role="region" aria-label="${esc(t('map.label'))}"></div><p id="map-error" role="status" hidden>${esc(t('map.tilesFailed'))}</p>` : ''}<p class="hint">${esc(t('map.credit'))}</p>` +
         `<details class="more"><summary>${esc(t('map.addresses', {n: located.length}))}</summary>${list(located, () => '')}</details>` +
         (missing.length ? `<details class="more"><summary>${esc(t('map.missing', {n: missing.length}))}</summary><p class="hint">${esc(t('map.missingNote'))}</p>${list(missing, a => t('visit.addressTbc', {town: a.town}))}</details>` : '') + '</div>';
     }

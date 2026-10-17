@@ -186,8 +186,9 @@
     els.fchipList.innerHTML = V.filterChips(activeFilters());
     els.sheetDone.textContent = n ? t('filters.show', {n}) : t('filters.none');
     if (Number.isFinite(a0) && n && !publicView()) {
+      // Two counts in one sentence: n, the one the word "card" follows, chooses between "1 card" and "2 cards".
       const s = C.ageSummary(cards, a0);
-      els.countNote.textContent = t('note.age', {age: F.ageBare(a0), fits: s.fits, unknown: s.unknown}); els.countNote.hidden = false;
+      els.countNote.textContent = t('note.age', {age: F.ageBare(a0), fits: s.fits, unknown: s.unknown, n: s.fits}); els.countNote.hidden = false;
     } else els.countNote.hidden = true;
     // Said only when some of the cards listed here are shown in English although another language is chosen.
     retryCardText();
@@ -520,7 +521,7 @@
     'share-card': async () => {
       const a = V.shown(C.byId.get(state.openId)); if (!a) return;
       const upcoming = C.upcoming(a), url = location.origin + location.pathname + (I.lang() === 'en' ? '' : '?lang=' + I.lang()) + V.hashFor(a.id, 'catalog');
-      const text = [a.name, upcoming.length ? F.nextText(a, upcoming, []) : V.hoursLine(a), F.first(a.price)].filter(Boolean).join('\n');
+      const text = [a.name, upcoming.length ? F.nextText(a, upcoming, []) : V.hoursLine(a), F.priceShort(a)].filter(Boolean).join('\n');
       if (navigator.share) { try { await navigator.share({title: a.name, text, url}); return; } catch (error) { if (error?.name === 'AbortError') return; } }
       await copy(text + '\n' + url, t('share.cardCopied'));
     },

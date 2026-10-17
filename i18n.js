@@ -1,6 +1,7 @@
 /* Interface language: English, German, French. Every word the visitor reads comes from the dictionaries in strings-en.js,
    strings-de.js and strings-fr.js (window.MINITANDEM_STRINGS[lang][key]); no interface text lives in the logic.
-   Keys with a count have two forms, key_one and key_other, chosen with Intl.PluralRules; {name} marks a parameter.
+   Keys with a count have two forms, key_one and key_other, chosen with Intl.PluralRules from the parameter n (in a sentence with several
+   counts, n is the one the counted word follows); {name} marks a parameter.
    The card texts (names, schedules, notes) are English; in German and French their checked translations are shown where they are
    current (catalogue-i18n.js, data-de.js, data-fr.js), and English otherwise. */
 (() => {
