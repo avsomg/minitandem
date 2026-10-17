@@ -65,7 +65,7 @@ test('the real Dylan card (4 months to 4 years) is found with "under 1" in all t
 test('ages below two years read in months in English, German and French; a whole year or 2 years and more stays in years',()=>{
   const read=(lang,min,max)=>{const {F}=loadStack({...clock,lang});return F.ageShort({min,max});};
   const rows=[[0.33,null,'From 4 months','Ab 4 Monaten','Dès 4 mois'],[0.5,null,'From 6 months','Ab 6 Monaten','Dès 6 mois'],[1.5,null,'From 18 months','Ab 18 Monaten','Dès 18 mois'],
-    [1,null,'From 1 year','Ab 1 Jahr','Dès 1 an'],[2.5,null,'From 2.5 years','Ab 2.5 Jahren','Dès 2,5 ans'],
+    [1,null,'From 1 year','Ab 1 Jahr','Dès 1 an'],[3.5,null,'From 3.5 years','Ab 3.5 Jahren','Dès 3,5 ans'],
     [0.33,4,'4 months–4 years','4 Monate–4 Jahre','4 mois–4 ans'],[0.5,12,'6 months–12 years','6 Monate–12 Jahre','6 mois–12 ans'],[1.5,3,'18 months–3 years','18 Monate–3 Jahre','18 mois–3 ans'],
     [0.5,1,'6–12 months','6–12 Monate','6–12 mois'],[0,0.5,'Up to 6 months','Bis 6 Monate','Jusqu’à 6 mois'],[null,1.5,'Up to 18 months','Bis 18 Monate','Jusqu’à 18 mois'],
     [2,4.5,'2–4.5 years','2–4.5 Jahre','2–4,5 ans'],[2,4,'2–4 years','2–4 Jahre','2–4 ans'],[0,3,'Up to 3 years','Bis 3 Jahre','Jusqu’à 3 ans']];
