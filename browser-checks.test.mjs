@@ -4,7 +4,7 @@ import path from 'node:path';
 import os from 'node:os';
 import vm from 'node:vm';
 import test from 'node:test';
-import {engineName,targets,contextOptions,serveSite,prepareContext,expectFocus,worstShiftWindow} from './scripts/browser-support.mjs';
+import {engineName,targets,contextOptions,serveSite,prepareContext,expectFocus,worstShiftWindow,TEXT_SPACING,clippedLabels} from './scripts/browser-support.mjs';
 import {assertAccessible,blockingViolations} from './scripts/axe-checks.mjs';
 import {regressionFixtures} from './scripts/browser-fixtures.mjs';
 
@@ -98,4 +98,18 @@ test('layout shifts are totalled like Lighthouse: the worst window of shifts les
   assert.equal(worstShiftWindow([{startTime:100,value:0.1},{startTime:900,value:0.2}]),0.30000000000000004);
   assert.equal(worstShiftWindow([{startTime:100,value:0.1},{startTime:1100,value:0.05}]),0.1);
   assert.equal(worstShiftWindow([{startTime:0,value:0.01},{startTime:900,value:0.01},{startTime:1800,value:0.01},{startTime:2700,value:0.01},{startTime:3600,value:0.01},{startTime:4500,value:0.01},{startTime:5400,value:0.5}]),0.5);
+});
+
+test('the text spacing check applies the four values of WCAG 1.4.12 and runs with the other browser checks',async()=>{
+  for(const rule of ['line-height:1.5!important','letter-spacing:.12em!important','word-spacing:.16em!important','p{margin-bottom:2em!important}'])assert.ok(TEXT_SPACING.includes(rule),rule);
+  const run=fs.readFileSync(new URL('./scripts/browser-checks.mjs',import.meta.url),'utf8');
+  for(const script of ['verify-text-spacing.mjs','verify-pages.mjs'])assert.ok(run.includes(script),script);
+  for(const script of ['verify-text-spacing.mjs','verify-pages.mjs']){
+    const source=fs.readFileSync(new URL('./'+script,import.meta.url),'utf8');
+    assert.ok(source.includes('TEXT_SPACING')&&source.includes('clippedLabels'),script);
+  }
+  // The helper reads the page it is given; a page without a cut-off label reports nothing.
+  let evaluated;
+  assert.deepEqual(await clippedLabels({evaluate:async fn=>{evaluated=fn;return [];}}),[]);
+  assert.equal(typeof evaluated,'function');
 });
