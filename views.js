@@ -45,7 +45,18 @@
 
   function create(ctx) {
     const {t, C, P, X, F, store} = ctx;
-    const shown = a => (ctx.shown && a ? ctx.shown(a) : a), en = a => a.english || a;
+    // The card as the visitor reads it today: in the chosen language, without the notices that are over (planning.js current).
+    // One result per card and day, so that a card keeps its identity between calls.
+    const fresh = new WeakMap();
+    const shown = a => {
+      const card = ctx.shown && a ? ctx.shown(a) : a;
+      if (!card) return card;
+      const day = C.today(), hit = fresh.get(card);
+      if (hit?.day === day) return hit.card;
+      const out = P.current(card, day);
+      fresh.set(card, {day, card: out});
+      return out;
+    }, en = a => a.english || a;
     const age = () => store.personal.age;
     const state = () => ctx.state();
     const nm = s => esc(s).replace(/ · /g, NBSP + '· ');

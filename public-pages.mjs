@@ -2,11 +2,14 @@
 // texts are shown in the app (catalogue-i18n.js), not on these pages.
 import fs from 'node:fs';
 import path from 'node:path';
+import vm from 'node:vm';
 import {SITE_ORIGIN} from './site.mjs';
 import {CASE_STUDY_URLS} from './case-study.mjs';
 import {LEGAL_URLS,legalLinks} from './legal-pages.mjs';
 
 export const site=SITE_ORIGIN;
+// The app's own rule for notices that are over (planning.js current), so that a page does not show "Closed 3–10 October 2026" after the 10th.
+const planning=(()=>{const context={window:{}};vm.runInNewContext(fs.readFileSync(new URL('./planning.js',import.meta.url),'utf8'),context,{filename:'planning.js'});return context.window.MinitandemPlanning;})();
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const link=(url,text)=>/^https:\/\//i.test(url)?`<a href="${esc(url)}" rel="noopener noreferrer">${esc(text)}</a>`:esc(text);
 const active=a=>!['closed','excluded'].includes(a.status);
@@ -15,7 +18,8 @@ const labels={booking:'Booking',observe:'Watching first',trial:'Trial visit',lea
 function documentPage({title,description,canonical,prefix,body}){
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="light"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="index, follow"><link rel="canonical" href="${site}${canonical}"><meta property="og:site_name" content="Minitandem"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${site}${canonical}"><meta property="og:type" content="website"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(description)}"><meta name="theme-color" content="#ffffff"><link rel="icon" href="${prefix}assets/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="${prefix}assets/apple-touch-icon.png"><link rel="stylesheet" href="${prefix}styles.css"></head><body class="public-page"><a class="skip" href="#content">Skip to the content</a><div class="topwrap"><header class="wrap top"><a class="mark" href="${prefix}" aria-label="Minitandem">Mini<span>tandem</span></a><a class="ghost" href="${prefix}">Open the directory</a></header></div><main id="content" class="public-content">${body}</main><footer class="public-footer"><p>${legalLinks("en")}</p><p><a href="${prefix}places/">All places and activities</a> · <a href="${prefix}research.md">Catalogue with sources</a></p><p>Information from public sources; it does not confirm a booking or a free place. Check the details with the organiser before you go.</p></footer></body></html>\n`;
 }
-export function placePage(a,regions,date){
+export function placePage(card,regions,date){
+  const a=planning.current(card,date);
   const varyingAddress=a.events.some(e=>e.address&&e.address!==a.address);
   const addressText=varyingAddress?a.events.map(e=>`${e.date}: ${e.address||a.address||'Address to be confirmed'}`).join('; '):a.address||'Exact address to be confirmed';
   const facts=[['Age',a.age],['Adult',a.parentDetails||parent[a.parent]],['Language',a.languages.join(' · ')||'Not confirmed'],['Schedule',a.schedule],['Price, CHF',a.price],['Address',addressText]];
