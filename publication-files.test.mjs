@@ -81,7 +81,9 @@ test('package.json: a root test, build, demo and a separate browser script; brow
     assert.ok(lock.packages['node_modules/'+name].integrity);
   }
   assert.equal(pkg.private,true);
-  assert.equal(read('.nvmrc').trim(),pkg.engines.node.replace('>=',''));
+  // .nvmrc is the release CI and the image use (docker-files.test.mjs keeps it equal to the Dockerfile); engines is the oldest that runs it.
+  const parts=v=>v.split('.').map(Number),[have,need]=[parts(read('.nvmrc').trim()),parts(pkg.engines.node.replace('>=',''))];
+  assert.ok(have[0]===need[0]&&(have[1]>need[1]||have[1]===need[1]&&have[2]>=need[2]),'.nvmrc satisfies engines.node');
   const editorial=JSON.parse(read('editorial/package.json'));
   assert.equal(JSON.stringify(editorial).includes('playwright'),false);
 });
