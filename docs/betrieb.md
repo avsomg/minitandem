@@ -189,7 +189,10 @@ Caddy maskiert `request.remote_ip` und `request.client_ip` vor dem Schreiben (IP
 
 `roll_disabled` verhindert alte Rotationsdateien. Der einzige Zugriffsstrom liegt in `/var/log/caddy/access.json` auf einem 32-MB-tmpfs des Containers, ausserhalb aller Sicherungen. Bei Platzmangel kann das Protokoll Lücken haben; die Grösse ist keine Aufbewahrungsfrist. `docker/access-log-entrypoint.sh` begrenzt den schreibenden Prozess mit Alpines `timeout` auf 518400 Sekunden (sechs Tage) plus höchstens 60 Sekunden bis SIGKILL. Danach beendet sich der Container, Docker startet ihn durch `restart: unless-stopped` neu und legt das tmpfs neu an. Der Entrypoint leert die Datei zusätzlich vor jedem Start. Selbst der erste Eintrag einer Laufzeit verschwindet nach höchstens 518460 Sekunden, also vor sieben Tagen, ohne einen einzigen weiteren Zugriff. Stoppen oder Neuerstellen verwirft das tmpfs ebenfalls. Es braucht keinen Host-Timer. Den Container nicht pausieren oder mit seinem Speicherzustand archivieren; keine Log-Kopie aufbewahren.
 
-### Umstellung durch die Hauptsitzung (noch nicht angewendet)
+### Umstellung durch die Hauptsitzung (angewendet am 17. Oktober 2026)
+
+Ausgeführt mit `ops/deploy.sh` (Commit `4219ce9`, Operation `.deployments/90ba618c…`, `done`): Beide Container wurden neu erstellt, das alte Docker-Protokoll von Caddy mit vollen IP-Adressen ging mit dem alten Container. Danach geprüft: Das Zugriffsprotokoll liegt im tmpfs `/var/log/caddy` (32 MB, Modus 700) und zeigt gekürzte Adressen ohne URI und Header; das Container-Protokoll von Caddy enthält kein `remote_ip` und kein `client_ip`; Familienanfragen beantwortet der Dienst mit 503; die sechs Rechtsseiten antworten mit 200. Die Schritte unten bleiben als Anleitung für einen neuen Server.
+
 
 1. Den geprüften Commit auf dem Server bereitstellen. In `.env` `MINITANDEM_FAMILY_SYNC=0` setzen oder die Variable weglassen. Das neue App-Image bauen; die öffentliche Ausgabe muss `familySync:false` enthalten.
 2. Vor dem Umschalten lokal auf dem Server mit dem vorhandenen Caddy-Image prüfen (ohne Image-Download): `docker compose run --rm --no-deps --entrypoint caddy caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile`. Auch `timeout --help` im Image auf `-s` und `-k` prüfen. Diese echten Container-Prüfungen wurden im Arbeitsklon mangels Docker-Daemon nicht ausgeführt.
