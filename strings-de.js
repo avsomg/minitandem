@@ -176,6 +176,7 @@
   'age.underOne': 'unter 1',
   'age.notPublished': 'Alter nicht veröffentlicht',
   'time.tbc': 'Zeit noch nicht bestätigt',
+  'time.more': '+ weitere Zeiten',
   'date.next': 'Nächster Termin: {date}, {time}',
   'date.more': '(+{n})',
   'date.passed': 'Der zuletzt veröffentlichte Termin ist vorbei: {date}',

@@ -176,6 +176,7 @@
   'age.underOne': 'under 1',
   'age.notPublished': 'Age not published',
   'time.tbc': 'time to be confirmed',
+  'time.more': '+ more times',
   'date.next': 'Next: {date}, {time}',
   'date.more': '(+{n})',
   'date.passed': 'Last published date has passed: {date}',

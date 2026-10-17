@@ -63,6 +63,11 @@
       return '#' + p.toString();
     };
     const warningText = w => w.code ? t('warning.' + w.code) : w.text;
+    // A row has room for the first part of a schedule only. When the text goes on with more days or times, the line says so, so that
+    // "Mon 14:00–21:00" never reads as the whole opening hours. The English schedule decides (a translated card keeps it in a.english);
+    // a translation without a ";" is shown whole.
+    const moreHours = a => String(a.schedule).includes(';') && window.MinitandemCatalogue.moreTimes(en(a).schedule);
+    const hoursLine = a => F.first(a.schedule) + (moreHours(a) ? ' ' + t('time.more') : '');
     const placeLine = a => `${a.town} · ${ctx.C.regions[a.region]}`;
 
     /* ---------- list ---------- */
@@ -97,21 +102,31 @@
       const ageText = F.bounds(a) ? F.ageShort(a) : fits ? t('fit.yes', {age: F.ageBare(a0)}) : t('age.notPublished');
       const ageMark = F.bounds(a) ? fitMark(a) : fits ? ICON.tick(14) : '';
       // The table's "Next date" column needs no "Next:" before each date; the phone line keeps it.
+      const more = when === null && !next && moreHours(a);
       const whenHtml = when !== null ? (lead ? `<b>${esc(lead)}</b>${when ? ' · ' : ''}` : '') + `<span${en}>${esc(when)}</span>`
         : upcoming.length ? `<span class="w-full">${esc(next)}</span><span class="w-short">${esc(F.nextShort(upcoming))}</span>`
-        : next ? esc(next) : `<span${en}>${esc(F.first(a.schedule))}</span>`;
+        : next ? esc(next) : `<span${en}>${esc(F.first(a.schedule))}</span>` + (more ? ' ' + esc(t('time.more')) : '');
       return `<li><a class="row c-${esc(a.category)}${time ? ' has-time' : ''}" href="${esc(hashFor(a.id))}" data-id="${esc(a.id)}">` + categoryIcon(a.category) +
         `<span class="r-main"><span class="r-cat">${time ? `<b class="r-time">${esc(time)}</b>` : ''}<span class="r-catname">${esc(t('category.' + a.category))}</span>${dist ? `<span class="r-dist">${esc(dist)}</span>` : ''}</span>` +
         `<span class="r-name"><span${en}>${nm(a.name)}</span>${saved ? `<span class="r-saved" title="${esc(t('row.saved'))}">${ICON.bookmarkOn(14)}<span class="sr">${esc(t('row.saved'))}</span></span>` : ''}</span><span class="r-town-d">${esc(placeLine(a))}</span></span>` +
         `<span class="r-facts"><span class="r-town-m">${esc(a.town)}</span><span class="r-age${F.bounds(a) || fits ? ' known' : ''}">${ageMark}${esc(ageText)}</span><span class="r-price${a.priceKind !== 'unknown' ? ' known' : ''}"${en}>${esc(F.first(a.price))}</span></span>` +
-        `<span class="r-l3"><span class="r-when${lead || time ? ' is-wrap' : ''}">${whenHtml}</span><span class="r-status st${status === 'active' ? ' is-current' : ''}">${status === 'active' ? '' : `<i class="dot ${statusClass[status]}" aria-hidden="true"></i>`}${esc(t('status.' + status + '.short'))}</span></span></a></li>`;
+        `<span class="r-l3"><span class="r-when${lead || time || more ? ' is-wrap' : ''}">${whenHtml}</span><span class="r-status st${status === 'active' ? ' is-current' : ''}">${status === 'active' ? '' : `<i class="dot ${statusClass[status]}" aria-hidden="true"></i>`}${esc(t('status.' + status + '.short'))}</span></span></a></li>`;
     }
     // Under "today", "this weekend" or "next 7 days" a card that counts through its weekly hours is marked as in the week view, with the
     // time its schedule gives for the matching weekday when the text says it plainly (scheduleSlot), else its whole schedule.
+    // Without a day filter, weekdays chosen in the filter panel do the same: a card that repeats on each of them shows the time of each (for
+    // its next such day, so that "until" and "from" in the text are checked) when the text gives it plainly; otherwise the row is as usual.
     function dayRow(a) {
-      const info = C.whenInfo(a, state().f);
+      const f = state().f, K = window.MinitandemCatalogue, info = C.whenInfo(a, f);
+      if (!info && f.days.size) {
+        const slots = [...f.days].sort((x, y) => x - y).map(day => {
+          const date = [0, 1, 2, 3, 4, 5, 6].map(n => K.addDays(C.today(), n)).find(d => K.weekdayOf(d) === day), slot = C.repeatsOn(a, date) && K.scheduleSlot(en(a).schedule, day, date);
+          return slot ? `${t('weekday.' + day)} ${slot}` : '';
+        });
+        if (slots.every(Boolean)) return row(a, {when: slots.join(' · ')});
+      }
       if (!info || info.kind === 'session') return row(a);
-      const weekday = window.MinitandemCatalogue.weekdayOf(info.date), slot = window.MinitandemCatalogue.scheduleSlot((a.english || a).schedule, weekday, info.date);
+      const weekday = K.weekdayOf(info.date), slot = K.scheduleSlot((a.english || a).schedule, weekday, info.date);
       return row(a, {lead: t(info.kind === 'place' ? 'week.hoursMark' : 'week.regularMark'), when: slot ? `${t('weekday.' + weekday)} ${slot}` : shown(a).schedule});
     }
     const rows = items => items.map(dayRow).join('');
@@ -439,7 +454,7 @@
       return {title: t('conflict.title'), body: `<p>${esc(t('conflict.text'))}</p><p class="notice">${esc(t('conflict.counts', {lf: personal().favorites.length, lv: Object.keys(personal().visits).length, rf: remote.profile?.favorites?.length || 0, rv: Object.keys(remote.profile?.visits || {}).length}))}</p><div class="rowbtns"><button type="button" class="ghost" data-action="backup-export">${ICON.download(18)}${esc(t('conflict.backup'))}</button><button type="button" class="ghost" data-action="sync-use-remote">${esc(t('conflict.useService'))}</button><button type="button" class="go" data-action="sync-use-local">${esc(t('conflict.keepHere'))}</button></div><p class="hint">${esc(t('conflict.note'))}</p>`};
     }
     const copyFallback = text => ({title: t('copy.title'), body: `<p>${esc(t('copy.denied'))}</p><textarea class="field area copy-fallback" readonly>${esc(text)}</textarea>`});
-    return {esc, ICON, categoryIcon, nm, shown, row, dayRow, rows, filterChips, distanceText, week, weekGroup, reportMail, panel, detail, saveButton, visitPlans, visitRows, visitLabel, saved, changesBox, outing, viewTools, venueBox, mapBox, empty, about, data, shareList, planExchange, pilot, visitForm,
+    return {esc, ICON, categoryIcon, nm, shown, hoursLine, row, dayRow, rows, filterChips, distanceText, week, weekGroup, reportMail, panel, detail, saveButton, visitPlans, visitRows, visitLabel, saved, changesBox, outing, viewTools, venueBox, mapBox, empty, about, data, shareList, planExchange, pilot, visitForm,
       importConfirm, planImportConfirm, report, conflict, copyFallback, warningText, hashFor, organiserURL, mapURL, routeURL, placeOptionsHtml, cost, ageFitNote, statusClass, phoneHref};
   }
   window.MinitandemViews = {create, esc, ICON, PRACTICAL_ORDER};

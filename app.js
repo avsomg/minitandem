@@ -520,7 +520,7 @@
     'share-card': async () => {
       const a = shown(C.byId.get(state.openId)); if (!a) return;
       const upcoming = C.upcoming(a), url = location.origin + location.pathname + (I.lang() === 'en' ? '' : '?lang=' + I.lang()) + V.hashFor(a.id, 'catalog');
-      const text = [a.name, upcoming.length ? F.nextText(a, upcoming, []) : F.first(a.schedule), F.first(a.price)].filter(Boolean).join('\n');
+      const text = [a.name, upcoming.length ? F.nextText(a, upcoming, []) : V.hoursLine(a), F.first(a.price)].filter(Boolean).join('\n');
       if (navigator.share) { try { await navigator.share({title: a.name, text, url}); return; } catch (error) { if (error?.name === 'AbortError') return; } }
       await copy(text + '\n' + url, t('share.cardCopied'));
     },

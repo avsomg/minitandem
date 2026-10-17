@@ -98,6 +98,9 @@
     }
     return hits.length === 1 ? hits[0] : null;
   }
+  // Whether a schedule goes on after its first ";" with more days or times ("Mon 14:00–21:00; Tue 06:00–21:00"), not just with a remark
+  // ("; except holidays"). A row that shows only the first part uses it to say that there is more.
+  const moreTimes = schedule => { const rest = String(schedule || '').split(';').slice(1).join(';'); return Boolean(rest.match(TIMES)) || clauseDays(rest).size > 0; };
   // Every weekday one clause names: "Mon, Wed 09:00–18:00", "Sat–Sun", "1st and 3rd Fridays", "Daily".
   function clauseDays(clause) {
     const tokens = clause.match(/[A-Za-z]+|[–\-,/&]/g) || [], days = new Set();
@@ -169,9 +172,11 @@
     }
     // How a card meets a day filter: {date, kind} with kind 'session', 'regular' (a group or course) or 'place' (visited on one's own);
     // null when it does not, or when no day filter is on.
+    // The date named is a chosen weekday when there is one (days first): a row under "next 7 days" and "Sun" says Sunday, not today.
     function whenInfo(a, f) {
-      const dates = whenDates(f.when);
-      if (!dates) return null;
+      const all = whenDates(f.when);
+      if (!all) return null;
+      const dates = f.days?.size ? [...all.filter(d => f.days.has(weekdayOf(d))), ...all.filter(d => !f.days.has(weekdayOf(d)))] : all;
       for (const date of dates) if (sessionsOn(a, date).length) return {date, kind: 'session'};
       for (const date of dates) if (repeatsOn(a, date)) return {date, kind: a.format === 'self' ? 'place' : 'regular'};
       return null;
@@ -335,6 +340,6 @@
     return {PERSONAL: PERSONAL_KEYS, norm, isArchive, byId, localities, localityByKey, today, inFuture, upcoming, past, venueFor, ageFit, ageRank, bounded, needsReview, statusOf, searchText, setLocalText, matchesSearch, matches, filter,
       sortItems, activeCount, anyFilter, ageSummary, restoreFilters, serializeFilters, placeOptions, townCentre, centreTowns, distanceOf, week, weekCards, whenDates, whenInfo, sessionsOn, repeatsOn, regions, coverage, venues, activities};
   }
-  window.MinitandemCatalogue = {create, defaultFilters, swissNow, norm, canonicalId, isArchive, placeNames, placeKey, bounded, addDays, weekdayOf, distanceKm, roundKm, scheduleSlot, restrictedOn, RADIUS_KEYS, DAY_WHEN, ALIASES, MAX_AGE,
+  window.MinitandemCatalogue = {create, defaultFilters, swissNow, norm, canonicalId, isArchive, placeNames, placeKey, bounded, addDays, weekdayOf, distanceKm, roundKm, scheduleSlot, moreTimes, restrictedOn, RADIUS_KEYS, DAY_WHEN, ALIASES, MAX_AGE,
     CATEGORY_KEYS, FORMAT_KEYS, LANGUAGE_KEYS, PRICE_KEYS, STATUS_FILTER_KEYS, PERSONAL_KEYS, WHEN_KEYS, PRESET_KEYS, SCENARIO_KEYS, SORT_KEYS, DAY_KEYS, VIEWS};
 })();
