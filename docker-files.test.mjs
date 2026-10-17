@@ -108,6 +108,24 @@ test('Caddyfile: both names, www redirects to the apex, editor paths refused, ev
   assert.match(file,/email \{\$ACME_EMAIL\}/);
 });
 
+test('Caddyfile: read timeouts and a body cap for the API at the edge, cross-origin policies, no Via, and only modules the standard build has',()=>{
+  const file=read('docker/Caddyfile'),options=file.slice(0,file.indexOf('\nwww.minitandem.ch')),site=file.slice(file.indexOf('\nminitandem.ch {'));
+  // Only reads are limited; a slow download is not cut.
+  assert.match(options,/servers \{\s*timeouts \{\s*read_header 10s\s*read_body 30s\s*\}\s*\}/);
+  assert.doesNotMatch(options,/^\s*(?:write|idle)\s/m);
+  const header=site.match(/\n\theader \{([\s\S]*?)\n\t\}/)?.[1];assert.ok(header,'the site block sets headers');
+  for(const line of ['Cross-Origin-Opener-Policy same-origin','Cross-Origin-Resource-Policy same-origin','-Via','-Server','Strict-Transport-Security "max-age=86400"'])
+    assert.ok(header.split('\n').some(item=>item.trim()===line),line);
+  // Caddy adds Via in the proxy; it is removed there as well as in the header block.
+  assert.match(site,/reverse_proxy app:8787 \{[^}]*\n\t\theader_down -Via\n/);
+  // The edge fence is for the API paths and is not smaller than the largest body the service reads, or it would cut off a legitimate profile.
+  const fence=site.match(/request_body \/api\/\* \{\s*max_size (\d+)KiB\s*\}/);assert.ok(fence,'the API paths have a body cap');
+  const profile=read('server.mjs').match(/profile:(\d+)\*1024/);assert.ok(profile);
+  assert.ok(Number(fence[1])>=Number(profile[1]),'the edge cap is not below the service limit');
+  // A per-client rate limit needs a third-party module; the image is the standard one.
+  assert.doesNotMatch(file,/rate_limit/);
+});
+
 function freePort(){
   return new Promise((resolve,reject)=>{const server=net.createServer();server.listen(0,'127.0.0.1',()=>{const {port}=server.address();server.close(()=>resolve(port));});server.on('error',reject);});
 }
