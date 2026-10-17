@@ -35,7 +35,9 @@ export async function serveSite(input=process.env.APP_URL||pathToFileURL(path.jo
   const server=http.createServer((request,response)=>{
     let pathname;
     try{pathname=decodeURIComponent(new URL(request.url,'http://localhost').pathname);}catch{response.writeHead(400).end();return;}
-    const file=path.resolve(directory,'.'+(pathname==='/'?'/index.html':pathname));
+    const asked=path.resolve(directory,'.'+(pathname==='/'?'/index.html':pathname));
+    // A folder serves its index.html, like the real server does for /projekt/ and /places/…/.
+    const file=fs.existsSync(asked)&&fs.statSync(asked).isDirectory()?path.join(asked,'index.html'):asked;
     const relative=path.relative(directory,file),segments=relative.split(path.sep);
     if(!['GET','HEAD'].includes(request.method)||relative.startsWith('..')||path.isAbsolute(relative)||segments.some(part=>part.startsWith('.'))||
       segments.some((_,index)=>fs.existsSync(path.join(directory,...segments.slice(0,index+1)))&&fs.lstatSync(path.join(directory,...segments.slice(0,index+1))).isSymbolicLink())||

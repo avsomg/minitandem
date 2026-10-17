@@ -67,6 +67,10 @@ test('the snapshot server serves only the selected public directory and rejects 
   const site=await serveSite(pathToFileURL(path.join(directory,'index.html')).href);
   t.after(()=>site.close());
   assert.equal(await (await fetch(site.url)).text(),'<h1>Public fixture</h1>');
+  fs.mkdirSync(path.join(directory,'projekt'));fs.mkdirSync(path.join(directory,'empty'));
+  fs.writeFileSync(path.join(directory,'projekt','index.html'),'<h1>Case study fixture</h1>');
+  assert.equal(await (await fetch(site.url+'projekt/')).text(),'<h1>Case study fixture</h1>','A folder serves its index.html');
+  assert.equal((await fetch(site.url+'empty/')).status,404);
   for(const file of ['.private','link.txt','missing.js','%2e%2e%2fpackage.json','%ZZ']){
     const response=await fetch(site.url+file);
     assert([400,404].includes(response.status),file);

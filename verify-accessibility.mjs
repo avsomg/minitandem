@@ -63,6 +63,20 @@ try{
         await audit(lang+'-detail');
         await closeDetail();
       }
+      // The plain pages that search engines find: the dark "go" button keeps a readable label and a focus ring, the title keeps "Web-App" whole.
+      for(const [pathname,state] of [['places/fritime-piccolo-bulle/','place-page'],['projekt/','case-study']]){
+        await page.goto(url+pathname);
+        await audit(state);
+        const go=page.locator('a.go').first();
+        const look=await go.evaluate(el=>{const style=getComputedStyle(el);return {color:style.color,background:style.backgroundColor};});
+        assert.notEqual(look.color,look.background,pathname+': the dark button has no visible label');
+        await go.focus();
+        const ring=await go.evaluate(el=>{const style=getComputedStyle(el);return {visible:el.matches(':focus-visible'),style:style.outlineStyle,width:parseFloat(style.outlineWidth),color:style.outlineColor};});
+        assert(ring.visible&&ring.style==='solid'&&ring.width>=2&&ring.color!==look.color,pathname+': the dark button has no visible focus ring');
+        const title=await page.locator('h1').evaluate(h=>({width:h.getBoundingClientRect().width,parts:[...h.querySelectorAll('.nb')].map(part=>part.getClientRects().length)}));
+        assert(title.parts.every(lines=>lines===1),pathname+': a hyphenated word in the title breaks across lines');
+        if(!target.isMobile)assert(title.width>=600,pathname+': the title is squeezed to '+title.width+' px');
+      }
       assert.deepEqual(errors,[]);
     }finally{await context.close();}
 

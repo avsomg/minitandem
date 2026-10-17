@@ -40,6 +40,9 @@ function diagram(text) {
   return `<ol class="case-flow">${steps.map(([, step, actor]) => `<li><strong>${esc(step)}</strong><span>${esc(actor)}</span></li>`).join('')}</ol>`;
 }
 
+// A short hyphenated word in the title ("Web-App") stays on one line; tags are left alone.
+const keepTogether = html => html.split(/(<[^>]+>)/).map((part, i) => i % 2 ? part : part.replace(/(?<![\p{L}-])\p{L}{2,7}-\p{L}{2,7}(?![\p{L}-])/gu, '<span class="nb">$&</span>')).join('');
+
 export function caseStudyBody(markdown) {
   const html = [];
   for (const block of markdown.trim().split(/\n\s*\n/)) {
@@ -48,7 +51,7 @@ export function caseStudyBody(markdown) {
     if (/^\[(Knöpfe|Buttons):\]/.test(first)) { html.push(buttons(lines.join(' '))); continue; }
     if (/^\[(Schema|Diagram)\b/.test(first)) { html.push(diagram(lines.map(line => line.trim()).join(' '))); continue; }
     const heading = first.match(/^(#{1,3}) (.+)$/);
-    if (heading && lines.length === 1) { html.push(`<h${heading[1].length}>${inline(heading[2])}</h${heading[1].length}>`); continue; }
+    if (heading && lines.length === 1) { const level = heading[1].length, text = inline(heading[2]); html.push(`<h${level}>${level === 1 ? keepTogether(text) : text}</h${level}>`); continue; }
     const list = /^- /.test(first) ? 'ul' : /^\d+\. /.test(first) ? 'ol' : null;
     if (list) {
       // An item may continue on indented lines.
