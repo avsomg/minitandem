@@ -108,7 +108,19 @@ export function journalFields(journal){
   }
   return latest;
 }
-function supportedClaims(candidate,field){
+// The editor stage captures its sources again, so a binding may name a newer snapshot than the claim of the facts stage. It counts as the same
+// evidence only when it is the controller's own capture of the claim's page, kept in the draft, and still holds the claim's quote.
+function recaptureProblem(db,draft,claim,binding){
+  const stored=hex(binding.snapshotId)&&db.prepare('SELECT data FROM captured_evidence WHERE id=?').get(binding.snapshotId);
+  if(!stored)return 'recapture-not-registered';
+  let evidence;
+  try{evidence=validateSnapshot(JSON.parse(stored.data));}catch{return 'recapture-invalid';}
+  const bound=draft.snapshots?.find(item=>item.id===binding.snapshotId);
+  if(!bound||!equal(evidence,bound))return 'recapture-not-in-draft';
+  if(evidence.url!==claim.source)return 'recapture-source-differs';
+  return locateQuote(evidence,claim.quote)?null:'recapture-quote-missing';
+}
+function supportedClaims(candidate,field,db){
   const {payload,update,bindingField}=candidate;
   const stopped=reason=>({claims:[],problem:issue(reason)});
   if(!update.approval.approvedBindings?.includes(bindingField))return stopped('binding-not-approved');
@@ -130,13 +142,15 @@ function supportedClaims(candidate,field){
   for(const binding of bindings){
     if(!binding.claimKey)continue;
     const claim=(payload.approved||[]).find(claim=>claim.key===binding.claimKey);
-    const reject=reason=>{problem??=issue(reason,{claimId:binding.claimKey});};
+    const reject=(reason,details)=>{problem??=issue(reason,{claimId:binding.claimKey,...details});};
     if(!claim){reject('claim-not-found');continue;}
     if(claim.field!==field){reject('claim-field-differs');continue;}
     if(claim.status!=='supported'||!claim.note?.trim()){reject('claim-not-supported');continue;}
     if(CRITICAL_FIELDS.has(field)&&(claim.kind!=='official'||claim.scope!=='exact-card')){reject('claim-scope-differs');continue;}
     if(binding.transformation){reject('claim-transformed');continue;}
-    if(binding.source!==claim.source||binding.quote!==claim.quote||binding.snapshotId!==claim.snapshotId){reject('binding-differs');continue;}
+    if(binding.source!==claim.source||binding.quote!==claim.quote){reject('binding-differs');continue;}
+    const recapture=binding.snapshotId===claim.snapshotId?null:recaptureProblem(db,update.draft,claim,binding);
+    if(recapture){reject('binding-differs',{detail:recapture});continue;}
     if(CRITICAL_FIELDS.has(field)&&(binding.kind!=='official'||binding.scope!=='exact-card')){reject('binding-scope-differs');continue;}
     if(coverage&&!coverage.snapshotIds?.includes(binding.snapshotId)){reject('coverage-snapshot-differs');continue;}
     claims.push({claim,binding});
@@ -166,13 +180,15 @@ function verdictFor(root,db,candidate){
   }
   fail('verdict-artifact-missing','Missing claim verdict artifact for approval: '+job.id);
 }
-function capturedSnapshot(db,candidate,claim){
+// The claim's own snapshot. A binding that names another snapshot was proved a recapture by recaptureProblem, so the draft holds that one instead.
+function capturedSnapshot(db,candidate,claim,binding){
   const stored=db.prepare('SELECT data FROM captured_evidence WHERE id=?').get(claim.snapshotId);
   if(!stored)fail('snapshot-not-registered','Missing registered snapshot: '+claim.snapshotId,{snapshotId:claim.snapshotId,claimId:claim.key});
   const evidence=JSON.parse(stored.data);validateSnapshot(evidence);
   const bound=candidate.update.draft.snapshots?.find(item=>item.id===claim.snapshotId);
   const bundled=candidate.payload.bundle.snapshots?.find(item=>item.id===claim.snapshotId);
-  if(!bound||!bundled||!equal(evidence,bound)||!equal(evidence,bundled)||evidence.url!==claim.source||!locateQuote(evidence,claim.quote))
+  const recaptured=binding.snapshotId!==claim.snapshotId;
+  if(!bundled||!recaptured&&(!bound||!equal(evidence,bound))||!equal(evidence,bundled)||evidence.url!==claim.source||!locateQuote(evidence,claim.quote))
     fail('snapshot-provenance-differs','Claim quote or snapshot provenance differs: '+claim.key,{snapshotId:claim.snapshotId,claimId:claim.key});
   return evidence;
 }
@@ -233,7 +249,7 @@ export function validateLedger(ledger,records,{journal=null}={}){
       if(!row.journalCoverage&&row.verification)throw Error('Uncovered field carries a verification reason: '+card.id+'/'+slot.field);
       if(row.origin==='verified'){
         if(row.drift||!row.journalCoverage||row.verification||row.approvalJobId!==row.journalCoverage.jobId||!/^editorial\/agent-artifacts\/[a-f0-9]{64}\.json$/.test(row.approvalArtifact)||!row.evidence?.length)throw Error('Verified field lacks approval provenance: '+card.id+'/'+slot.field);
-        for(const proof of row.evidence)if(!proof.claimId||!proof.jobId||!hex(proof.snapshotId)||!hex(proof.quoteDigest)||!validDate(proof.approvedOn)||
+        for(const proof of row.evidence)if(!proof.claimId||!proof.jobId||!hex(proof.snapshotId)||!hex(proof.bindingSnapshotId)||!hex(proof.quoteDigest)||!validDate(proof.approvedOn)||
           !/^editorial\/agent-artifacts\/[a-f0-9]{64}\.json$/.test(proof.verdictArtifact)||typeof proof.sourceUrl!=='string')throw Error('Verified field lacks claim provenance: '+card.id+'/'+slot.field);
       }
     }
@@ -279,18 +295,18 @@ export async function buildLedger({root=workspace,generatedAt=new Date().toISOSt
           else if(row.origin==='unknown')row.verification=issue('unknown-value');
           else try{
             Object.assign(candidate,approval);
-            const supported=supportedClaims(candidate,slot.field),claims=claimsForValue(slot.field,slot.value,supported.claims);
+            const supported=supportedClaims(candidate,slot.field,db),claims=claimsForValue(slot.field,slot.value,supported.claims);
             if(!claims.length){row.verification=supported.problem||issue('value-differs',{comparedWith:'claim'});fields.push(row);continue;}
             validateFieldValue(slot.field,slot.value,{allowUnknown:false});
             if(!verdictCache.has(candidate.job.id))verdictCache.set(candidate.job.id,verdictFor(root,db,candidate));
             const verdict=verdictCache.get(candidate.job.id),evidence=[];
-            for(const {claim} of claims){
+            for(const {claim,binding} of claims){
               if(!verdict.artifact.result.verdicts.some(row=>row.key===claim.key&&row.verdict==='approve'&&row.reason?.trim()))
                 fail('claim-verdict-not-approved','Claim lacks an approving verdict: '+claim.key,{claimId:claim.key});
-              const captured=capturedSnapshot(db,candidate,claim);
+              const captured=capturedSnapshot(db,candidate,claim,binding);
               if(!pageCache.has(captured.id))pageCache.set(captured.id,await pageVersion(editorial,captured,watch));
               const pageRecord=pageCache.get(captured.id);
-              evidence.push({claimId:claim.key,jobId:verdict.artifact.jobId,verdictArtifact:verdict.path,snapshotId:captured.id,sourceUrl:claim.source,
+              evidence.push({claimId:claim.key,jobId:verdict.artifact.jobId,verdictArtifact:verdict.path,snapshotId:captured.id,bindingSnapshotId:binding.snapshotId,sourceUrl:claim.source,
                 pageRecordVersion:pageRecord?.version??null,pageRecord,quoteDigest:hash(normalizeQuote(claim.quote)),approvedOn:candidate.update.approvedOn});
             }
             Object.assign(row,evidence[0],{origin:'verified',approvalJobId:candidate.job.id,approvalArtifact:candidate.approvalArtifact,evidence});
