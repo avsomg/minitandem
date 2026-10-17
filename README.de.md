@@ -99,7 +99,7 @@ Die Release-Stufe der Redaktion (`editorial/release.mjs publish`) veröffentlich
 
 ## Wie das gebaut wurde
 
-Minitandem entstand, indem Coding-Agenten angeleitet wurden. OpenAI Codex hat den Code bis zum 8. Oktober 2026 geschrieben, seither Claude Code. Der Eigentümer legt die Regeln fest, entscheidet, was veröffentlicht wird, und prüft die Ergebnisse über Tests und Abläufe. Er schreibt den Code nicht selbst, und dieses Repository tut nicht so, als wäre es anders.
+Minitandem entstand, indem Coding-Agenten angeleitet wurden. OpenAI Codex hat den Code bis zum 8. Oktober 2026 geschrieben, seither Claude Code. Seit dem 15. Oktober 2026 übernimmt Codex wieder schriftlich festgelegte Aufgaben, zum Beispiel die Korrekturen aus seinem eigenen Review; Claude Code prüft und übernimmt diese Arbeit. Die Entscheidungen hinter dem Projekt stehen mit Datum und Begründung in [`docs/decisions.md`](docs/decisions.md) (Englisch). Der Eigentümer legt die Regeln fest, entscheidet, was veröffentlicht wird, und prüft die Ergebnisse über Tests und Abläufe. Er schreibt den Code nicht selbst, und dieses Repository tut nicht so, als wäre es anders.
 
 Die Geschichte dieses Repositorys beginnt mit seinem ersten Commit. Die Arbeit davor fand in einem privaten Projekt statt, das nicht Teil dieser Geschichte ist. Eine interne Kennung in `editorial/project-id.mjs` trägt noch den Wert eines früheren Arbeitstitels; sie zu ändern würde gespeicherten Zustand ungültig machen. Deshalb bleibt sie bestehen und ist im Audit ausgenommen.
 

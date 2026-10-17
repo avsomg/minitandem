@@ -99,7 +99,7 @@ The editorial release stage (`editorial/release.mjs publish`) still deploys a te
 
 ## How this was built
 
-Minitandem was built by directing coding agents. OpenAI Codex wrote the code until 8 October 2026; Claude Code has done so since then. The owner sets the rules, decides what is published and checks results through tests and process. He does not write the code himself, and this repository does not pretend otherwise.
+Minitandem was built by directing coding agents. OpenAI Codex wrote the code until 8 October 2026; Claude Code has done so since then. From 15 October 2026 Codex again takes written tasks, for example the fixes from its own review; Claude Code checks and merges that work. The decisions behind the project, with dates and reasons, are in [`docs/decisions.md`](docs/decisions.md). The owner sets the rules, decides what is published and checks results through tests and process. He does not write the code himself, and this repository does not pretend otherwise.
 
 The history of this repository starts at its first commit. The work before it happened in a private project, which is not part of this history. One internal identifier in `editorial/project-id.mjs` still carries the value of an earlier working title; changing it would make stored state stop validating, so it is kept and exempted in the audit.
 
