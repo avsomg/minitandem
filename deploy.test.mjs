@@ -48,6 +48,7 @@ case "$1 $2" in
     case "$*" in *--no-build*) grep -qx "$tag" "$FAKE/images" || { echo "image missing" >&2; exit 1; } ;; esac
     echo "$tag" > "$FAKE/running"; echo "up $tag" >> "$FAKE/log" ;;
   "compose ps") echo app-container ;;
+  "compose run") [ -f "$FAKE/caddy-invalid" ] && { echo "invalid Caddyfile" >&2; exit 1; }; echo "Valid configuration" ;;
   "image inspect") grep -qx "$(echo "$3" | sed 's/^minitandem-app://')" "$FAKE/images" ;;
   "rm -f") rm -f "$FAKE/preview-up" ;;
   "run -d") touch "$FAKE/preview-up"; echo container-id ;;
@@ -64,15 +65,17 @@ const git=(cwd,...args)=>{
 const json=(records,extra={})=>JSON.stringify({status:'ok',records,...extra});
 
 // A server checkout on commit "old" (branch main) with tag OLD in .env, and a newer commit "next" on the remote. 321 records are live.
-function scenario(t,{preview=310,previewExtra,publicNew,files={}}={}){
+function scenario(t,{preview=310,previewExtra,publicNew,files={},edge=false}={}){
   const base=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-deploy-'));
   t.after(()=>fs.rmSync(base,{recursive:true,force:true}));
   const origin=path.join(base,'origin.git'),work=path.join(base,'work'),server=path.join(base,'server'),fake=path.join(base,'fake'),bin=path.join(base,'bin');
   for(const folder of [work,fake,bin])fs.mkdirSync(folder);
   git(base,'init','--bare','-q','-b','main',origin);git(work,'init','-q','-b','main');git(work,'remote','add','origin',origin);
-  fs.writeFileSync(path.join(work,'a.txt'),'old\n');git(work,'add','.');git(work,'commit','-q','-m','old');git(work,'push','-q','origin','main');
+  fs.writeFileSync(path.join(work,'a.txt'),'old\n');fs.mkdirSync(path.join(work,'docker'));fs.writeFileSync(path.join(work,'docker','Caddyfile'),'old edge\n');
+  git(work,'add','.');git(work,'commit','-q','-m','old');git(work,'push','-q','origin','main');
   git(base,'clone','-q',origin,server);
-  fs.writeFileSync(path.join(work,'a.txt'),'next\n');git(work,'commit','-q','-am','next');git(work,'push','-q','origin','main');
+  fs.writeFileSync(path.join(work,'a.txt'),'next\n');if(edge)fs.writeFileSync(path.join(work,'docker','Caddyfile'),'new edge\n');
+  git(work,'commit','-q','-am','next');git(work,'push','-q','origin','main');
   const oldSha=git(server,'rev-parse','HEAD'),nextSha=git(work,'rev-parse','HEAD');
   const oldTag=git(server,'rev-parse','--short',oldSha);
   fs.writeFileSync(path.join(server,'.env'),`ACME_EMAIL=owner@example.org\nMINITANDEM_TAG=${oldTag}\n`);
@@ -274,4 +277,15 @@ test('the published-count boundary is exact and legacy live images print their f
   }
   const legacy=scenario(t),result=legacy.run(legacy.nextSha);assert.equal(result.status,0,result.stderr);
   assert.match(result.stdout,/live image has no published count; using records/);
+});
+
+test('a changed Caddyfile is validated before the switch and Caddy is recreated with it; an unchanged one leaves Caddy alone',{skip:HAS_TOOLS?false:'bash or git is not installed'},t=>{
+  const plain=scenario(t);assert.equal(plain.run(plain.nextSha).status,0);
+  assert.equal(plain.log().some(line=>line.includes('force-recreate caddy')||line.startsWith('docker compose run')),false);
+  const edge=scenario(t,{edge:true});const result=edge.run(edge.nextSha);assert.equal(result.status,0,result.stderr);
+  const log=edge.log(),at=prefix=>log.findIndex(line=>line.startsWith(prefix));
+  assert.ok(at('docker compose run')>=0&&at('docker compose run')<at('docker compose up -d --no-build'),'validated before the switch');
+  assert.ok(log.includes('docker compose up -d --no-build --force-recreate caddy'),'Caddy recreated');
+  const broken=scenario(t,{edge:true,files:{'caddy-invalid':''}});const refused=broken.run(broken.nextSha);
+  assert.notEqual(refused.status,0);assert.match(refused.stderr,/does not validate/);assert.equal(broken.tagInEnv(),broken.oldTag);
 });

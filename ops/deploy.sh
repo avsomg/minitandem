@@ -40,7 +40,7 @@ printf '%s\n' "$OP" > "$LOCK/id"
 printf 'operation=%s\npid=%s\n' "$OP" "$$" > "$LOCK/owner"
 mkdir -p .deployments && chmod 700 .deployments
 STATE=.deployments/$OP
-PREV_TAG= PREV_REF= NEW_TAG= STAGE=locked PREVIEW_UP=0
+PREV_TAG= PREV_REF= NEW_TAG= STAGE=locked PREVIEW_UP=0 EDGE_CHANGED=0
 PREVIEW=minitandem-preview-$OP
 say() { printf '%s\n' "$*"; }
 die() { say "deploy: $*" >&2; exit 1; }
@@ -67,7 +67,8 @@ cleanup() {
     switched)
       if [ "$(sed -n 's/^MINITANDEM_TAG=//p' .env)" != "$NEW_TAG" ]; then
         record recovery-needed; say 'deploy: live tag changed externally; rollback refused' >&2
-      elif git checkout --quiet "$PREV_REF" && set_tag "$PREV_TAG" && { docker compose up -d --no-build || docker compose up -d --build; } && wait_healthy; then
+      elif git checkout --quiet "$PREV_REF" && set_tag "$PREV_TAG" && { docker compose up -d --no-build || docker compose up -d --build; } \
+        && { [ "$EDGE_CHANGED" != 1 ] || docker compose up -d --no-build --force-recreate caddy; } && wait_healthy; then
         record rolled-back; say "Rolled back to tag $PREV_TAG ($PREV_REF); it is healthy."
       else record recovery-needed; say "ROLLBACK FAILED; recovery record: $STATE" >&2; fi ;;
   esac
@@ -104,6 +105,9 @@ NEW_TAG=$(git rev-parse --short "$SHA")
 if [ "$NEW_TAG" = "$PREV_TAG" ]; then record done; say 'Tag is already live; nothing to deploy.'; exit 0; fi
 record checkout
 git checkout --quiet --detach "$SHA"
+# Caddy reads its Caddyfile and entrypoint through bind mounts. A checkout replaces those files, but a running container keeps the old ones
+# and compose only recreates it when compose.yaml changes; so when they differ between the two commits, Caddy is validated and recreated.
+git diff --quiet "$PREV_REF" "$SHA" -- docker/Caddyfile docker/access-log-entrypoint.sh || EDGE_CHANGED=1
 MINITANDEM_TAG=$NEW_TAG docker compose build app
 PREVIEW_UP=1
 docker run -d --name "$PREVIEW" -p "127.0.0.1:$PORT:8787" --read-only --tmpfs /tmp \
@@ -122,10 +126,16 @@ PREVIEW_ARCHIVED=$(printf '%s' "$PREVIEW_JSON" | field archived)
 say "Preview: $PREVIEW_RECORDS records (live: $LIVE_RECORDS), revision $PREVIEW_REVISION, commit $PREVIEW_COMMIT"
 say "Status changes: published $LIVE_PUBLISHED -> $PREVIEW_PUBLISHED; archived ${LIVE_ARCHIVED:-unknown} -> $PREVIEW_ARCHIVED"
 [ $((PREVIEW_PUBLISHED * 100)) -ge $((LIVE_PUBLISHED * (100 - MAX_DROP))) ] || die "$PREVIEW_PUBLISHED published cards is more than $MAX_DROP % below the $LIVE_PUBLISHED that are live"
+if [ "$EDGE_CHANGED" = 1 ]; then
+  docker compose run --rm --no-deps --entrypoint caddy caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile >/dev/null 2>&1 \
+    || die 'the new Caddyfile does not validate with the Caddy image'
+  say 'Caddy configuration changed and validates; Caddy is recreated with the switch.'
+fi
 record switched
 owns || die 'operation ownership lost before switch'
 set_tag "$NEW_TAG"
 docker compose up -d --no-build
+if [ "$EDGE_CHANGED" = 1 ]; then docker compose up -d --no-build --force-recreate caddy; fi
 wait_healthy || die 'the new app container did not become healthy'
 verified=0
 for i in $(seq "$TRIES"); do
