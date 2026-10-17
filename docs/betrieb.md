@@ -15,7 +15,7 @@ Internet ──80/443──> Caddy (Container "caddy")  ──intern──> app 
 
 - `Dockerfile`: baut die Seite mit `node build.mjs --public` und startet `server.mjs` als unprivilegierter Benutzer. Der Healthcheck fragt `/healthz` ab.
 - `compose.yaml`: zwei Dienste, `app` und `caddy`, Projektname `minitandem`. Nur Caddy veröffentlicht Ports. Der Zustand liegt im benannten Volume `minitandem_state`.
-- `docker/Caddyfile`: `www.minitandem.ch` leitet dauerhaft auf `minitandem.ch` um; `minitandem.ch` wird mit `encode zstd gzip` ausgeliefert, die Editor-Pfade (`/admin`, `/api/v1/admin/*`) sind am Proxy gesperrt (404), alles andere geht an `app:8787`.
+- `docker/Caddyfile`: `www.minitandem.ch` leitet dauerhaft auf `minitandem.ch` um; `minitandem.ch` wird mit `encode zstd gzip` ausgeliefert, die Editor-Pfade (`/admin`, `/admin.js`, `/admin.css`, `/admin-icons.js`, `/api/v1/admin/*`) sind am Proxy gesperrt (404), alles andere geht an `app:8787`. Dazu kommen Lese-Timeouts, eine Grössengrenze für `/api/*` und die Header-Regeln (Abschnitt «Grenzen und Header am Rand»).
 - `ops/deploy.sh <Commit>`: das Update mit Prüfungen, vom Rechner des Eigentümers aus (siehe «Update»).
 - `docker/entrypoint.sh`: legt nur bei ausdrücklich eingeschaltetem Familienabgleich eine Demo-Familie an (Standard: aus) und startet den Dienst. Ein **Editor-Schlüssel** (`server.mjs new-admin`) wird auf dem Server **nie** erzeugt; ohne ihn antworten alle Editor-Routen mit 401.
 - Die redaktionelle Pipeline (`editorial/cycle.mjs`, die Worker) läuft **nicht** auf dem Server, sondern auf dem Rechner des Eigentümers; der Server hat keine Modell-Zugänge. Zu unterscheiden ist, was wo liegt:
@@ -200,6 +200,48 @@ Ausgeführt mit `ops/deploy.sh` (Commit `4219ce9`, Operation `.deployments/90ba6
 4. Beide Container mit `docker compose up -d --no-build --force-recreate` neu erstellen. `docker compose ps`, `/healthz`, die sechs rechtlichen Seiten und `/api/v1/family` (503) prüfen. `/state` darf keine neu erzeugte Familie oder neuen Demo-Schlüssel enthalten; alte Zustandsdateien bleiben gesperrt.
 5. Prüfanfragen mit IPv4/IPv6 und künstlichen Authorization-/Cookie-Werten senden. In `/var/log/caddy/access.json` nur maskierte IPs, keine Header oder URI erwarten. `docker compose logs caddy` darf keinen Zugriffsstrom enthalten. Das Mount als tmpfs prüfen. Mit einem Wegwerf-Container und verkürztem Timeout das Ende und den frischen, leeren tmpfs beim Neustart prüfen, ohne den Produktionscontainer dafür zu verändern.
 6. Erst nach diesen Prüfungen die Umstellung mit Datum dokumentieren. Die Veröffentlichung der neuen Datenschutzerklärung und diese Betriebsänderung gehören zu derselben Freigabe. Ein Rollback auf den alten Compose-Stand würde die bisherige Protokollierung und Demo-Familie wieder einschalten; deshalb bei einem Rollback diese Datenschutzkonfiguration beibehalten oder die Seite anhalten.
+
+## Grenzen und Header am Rand (noch nicht auf dem Server angewendet)
+
+Geprüft im Arbeitsklon mit einem echten Listener (`server-limits.test.mjs`) und durch Textprüfungen der Caddyfile (`docker-files.test.mjs`). Caddy selbst hat die Datei dort nicht gelesen (kein Docker-Daemon); das geschieht auf dem Server, siehe «Prüfen nach dem Umschalten».
+
+**Grösse der Anfrage.** Der Dienst liest nie mehr, als die Route braucht. Eine angekündigte Grösse über der Grenze wird sofort mit 413 abgewiesen und die Verbindung geschlossen; bei `Expect: 100-continue` erhält der Absender gar kein «weiter senden». Wer die Grösse nicht ankündigt (chunked), wird beim Lesen an der Grenze abgeschnitten. Ein Body, der über 512 KiB angekündigt wird, bekommt auf jeder Route 413, auch ohne Schlüssel.
+
+| Route | Grenze | Grund |
+| --- | --- | --- |
+| `PUT /api/v1/family` | 512 KiB | Eine Familie, die alle 321 Karten beobachtet (167 KiB), Notizen schreibt und Besuche plant, bleibt deutlich darunter. Ein Profil, das alle Textfelder aller 200 Besuche bis zum Rand füllt, passt nicht; der Abgleich meldet dann «offline». |
+| `POST /api/v1/corrections` | 16 KiB | Meldung höchstens 2000 Zeichen, Link höchstens 500; im ungünstigsten Fall rund 6 KB. |
+| `POST /api/v1/admin/corrections/<id>` | 4 KiB | Ein Wort als Status. |
+
+In Caddy gilt `request_body /api/* { max_size 512KiB }` als zweite Sperre (so gross wie die grösste Grenze des Dienstes).
+
+**Zeit.** Der Dienst: Kopf der Anfrage in 10 s (`headersTimeout`), ganze Anfrage in 30 s (`requestTimeout`; Node-Standard 60 s und 5 Minuten), Prüfung jede Sekunde. `keepAliveTimeout` steht auf 125 s: Caddy hält eine unbenutzte Verbindung zum Dienst bis zu zwei Minuten offen, und Node soll sie nicht früher schliessen, sonst schickt Caddy eine Anfrage in eine soeben geschlossene Verbindung. Caddy: `read_header 10s` und `read_body 30s` (`servers { timeouts { … } }`). Nur das Lesen ist begrenzt; Schreiben und Leerlauf behalten Caddys Standard, damit ein langsamer Download nicht abbricht.
+
+**Schreibzugriffe.** Höchstens 30 pro Minute und Familienschlüssel (Profil und Korrekturen zusammen), danach 429 mit `Retry-After`. Grund: Jeder angenommene `PUT` kopiert die Zustandsdatei und dreht die 20 Sicherungskopien weiter (siehe «Sichern und Wiederherstellen»); ein verlorener Schlüssel würde sie in Sekunden verdrängen. Gezählt wird im Speicher nach dem Hash des Schlüssels, nicht nach Adresse; ein Neustart leert die Tabelle. Lesen, andere Schlüssel und falsche Schlüssel (401) zählen nicht.
+
+**CORS.** Die Seite ruft den Dienst von derselben Herkunft aus auf (`connect-src 'self'`); ein Preflight kommt nur von einer Entwicklungsseite. Erlaubt ist `https://minitandem.ch`; `http://localhost:8787` und `http://127.0.0.1:8787` nur ausserhalb von `NODE_ENV=production` (das Image setzt es) oder wenn sie in `MINITANDEM_ORIGINS` stehen. Ein Preflight wird nur für `/api/v1/family` (GET, PUT) und `/api/v1/corrections` (POST) beantwortet, mit den Headern `Authorization` und `Content-Type`, `Max-Age` 600, und nur bei eingeschaltetem Familienabgleich; alles andere ist 403. Kein `*`, keine Credentials; die Editor-Routen brauchen keinen Preflight, das Panel wird vom Dienst selbst ausgeliefert.
+
+**Dateien, die nicht öffentlich sind.** `vercel.json` (ältere, schwächere CSP) und `assets/lucide.min.js` mit `LUCIDE-LICENSE` (nur für das Editor-Panel) kommen nicht mehr in `.publish/` und damit nicht ins Image; `/vercel.json` und `/assets/lucide.min.js` antworten 404. Beide Dateien bleiben im Repository. Das Panel auf dem Mac des Eigentümers lädt die Bibliothek unverändert, jetzt unter `/admin-icons.js`; Caddy sperrt diesen Pfad wie die anderen Editor-Pfade.
+
+**Header.** Neu: `Cross-Origin-Opener-Policy: same-origin` und `Cross-Origin-Resource-Policy: same-origin`. Ausgehende Links sind `noopener` und es gibt kein COEP; CORP betrifft nur unsere eigenen Antworten, die Kartenkacheln von `wmts.geo.admin.ch` bleiben unberührt. Der Header `Via: 1.1 Caddy` ist entfernt (im Header-Block und im Proxy, weil sich die Reihenfolge von Caddys beiden Schritten hier nicht prüfen liess). HSTS bleibt absichtlich bei einem Tag.
+
+### Prüfen nach dem Umschalten
+
+```
+docker compose run --rm --no-deps --entrypoint caddy caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile   # vor dem Umschalten
+curl -sI https://minitandem.ch/ | grep -i -E '^(cross-origin|via|strict)'     # zwei Cross-Origin-Zeilen und HSTS, kein via
+curl -s -o /dev/null -w '%{http_code}\n' https://minitandem.ch/vercel.json https://minitandem.ch/assets/lucide.min.js   # 404 und 404
+curl -s -m 5 -o /dev/null -w '%{http_code} %{time_total}s\n' -X POST -H 'Content-Type: application/json' -H 'Content-Length: 50000000' --data x https://minitandem.ch/api/v1/corrections   # 413, sofort
+curl -s -o /dev/null -w '%{http_code}\n' -H 'Origin: http://localhost:8787' https://minitandem.ch/healthz   # 403
+```
+
+Danach die Seite im Browser öffnen und die Karte aufrufen: Die Kacheln müssen erscheinen, die Konsole darf keine Fehler zu COOP oder CORP melden. Erscheint `via` trotz allem, das Ergebnis von `docker compose logs caddy` ansehen und die Stelle wählen, die Caddy tatsächlich anwendet.
+
+### Offen
+
+- **Begrenzung pro Adresse am Rand.** Caddys Standardmodule haben keine; ein Zusatzmodul würde das Image ändern und wurde nicht eingebaut. Im Dienst ist deshalb nur der Schlüssel das Merkmal: Eine Adresse gäbe es dort nur über `X-Forwarded-For`, der Dienst sieht sonst keine vollständige Adresse, und die Datenschutzerklärung sagt, dass nur gekürzte gespeichert werden. Ob eine Zählung allein im Speicher damit vereinbar wäre, entscheidet der Eigentümer. Unbegrenzt bleiben bis dahin Anfragen mit falschem Schlüssel (jede liest einmal die Zustandsdatei) und Zugriffe auf Seiten. Sollte das nötig werden: eine Regel auf dem Host (nftables) oder ein eigenes Caddy-Image; Entscheidung des Eigentümers.
+- **Grösstes Profil.** Wer alle Textfelder aller Besuche vollschreibt, überschreitet 512 KiB. Entweder die Felder im Client kürzen oder die Grenze (`BODY_LIMITS` in `server.mjs`, `max_size` in der Caddyfile, zusammen) anheben.
+- **Nicht Teil dieser Änderung:** DNS-CAA-Eintrag, die systemd-Einheit, HSTS (bleibt bei einem Tag). Das Vercel-Release (`editorial/release.mjs`) liefert `vercel.json` nicht mehr mit; wer diese Stufe auf den Server umstellt, braucht die Datei nicht mehr, wer sie nutzt, muss sie in den Snapshot legen.
 
 ## Überwachung per E-Mail über ein authentifiziertes Relay (Port 587)
 
@@ -514,6 +556,7 @@ Geprüft auf dem Entwicklungsrechner, ohne Docker:
 - `ops/healthcheck.sh` läuft im Test gegen einen Wegwerf-Server mit einem Ersatz für `sendmail`: eine Mail beim Ausfall, eine bei der Rückkehr, sonst keine.
 - `ops/deploy.sh` läuft im Test (`deploy.test.mjs`) mit Ersatzprogrammen für `ssh`, `docker`, `gh` und `curl`; der «Server» ist ein lokaler Git-Klon. Geprüft sind: Abbruch ohne genau einen vollständigen Commit, ohne grüne CI (kein, laufender oder fehlgeschlagener Lauf), bei 20 % weniger Karten (und die Grenze 272/273 von 321), bei geändertem Checkout; die Vorschau ohne Volume auf `127.0.0.1`; der Tag und der Rollback-Befehl am Ende; die Rückkehr zum alten Tag und Checkout, wenn der neue Container nicht `healthy` wird, das öffentliche `/healthz` die Vorschau nicht zeigt oder der Build scheitert.
 - Die Regeln aus `.dockerignore` werden im Test nachgebildet; kein privater Pfad der Audit-Liste gelangt in den Build-Kontext.
+- Grenzen des Dienstes (`server-limits.test.mjs`, echter Listener): 413 sofort bei angekündigten 50 MB und 5 gesendeten Byte (vorher Wartezeit), Grenzen je Route, Abbruch beim Lesen ohne angekündigte Länge, Abbruch bei hängendem Kopf oder Body, 429 pro Schlüssel, Preflight nur für die Familien-Routen, lokale Herkunft nur ausserhalb von `NODE_ENV=production`. Die Caddyfile ist nur als Text geprüft; `caddy validate` und die Header laufen erst auf dem Server (Abschnitt «Prüfen nach dem Umschalten»).
 
 Auf dem Server, am 14. Oktober 2026:
 
