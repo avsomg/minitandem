@@ -89,6 +89,14 @@ test('compose.yaml: Caddy is the only service with public ports, the state is a 
   assert.match(local,/profiles: \["edge"\]/);
 });
 
+test('compose: Caddy is a fixed release with only the capability to bind its ports, and Node in the image is a fixed release',()=>{
+  const compose=read('compose.yaml'),caddy=compose.slice(compose.indexOf('\n  caddy:'),compose.indexOf('\nvolumes:'));
+  assert.match(caddy,/image: caddy:\d+\.\d+\.\d+-alpine\n/);
+  assert.match(caddy,/cap_drop:\s*\n\s+- ALL/);assert.match(caddy,/cap_add:\s*\n\s+- NET_BIND_SERVICE\n/);
+  assert.match(caddy,/security_opt:\s*\n\s+- no-new-privileges:true/);
+  const node=read('Dockerfile').match(/ARG NODE_VERSION=(\d+\.\d+\.\d+)/);assert.ok(node);
+  assert.equal(read('.nvmrc').trim(),node[1],'CI tests the Node release the image runs');
+});
 test('Caddyfile: both names, www redirects to the apex, editor paths refused, everything else to the service',()=>{
   const file=read('docker/Caddyfile');
   assert.equal(file.split('{').length,file.split('}').length,'braces are balanced');

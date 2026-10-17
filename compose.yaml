@@ -37,7 +37,17 @@ services:
         max-file: "5"
 
   caddy:
-    image: caddy:2-alpine
+    # A fixed release, so a rebuild never picks up a new Caddy unseen. 2.11.7 was checked on the server on 17 October 2026
+    # (sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f). Raise it on purpose, after caddy validate.
+    image: caddy:2.11.7-alpine
+    # Caddy runs as root inside the container only to bind ports 80 and 443; it keeps that one capability and nothing else.
+    # Its data and config volumes belong to root, so it still writes certificates without DAC_OVERRIDE (tried 17 October 2026).
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    security_opt:
+      - no-new-privileges:true
     entrypoint: ["/bin/sh", "/etc/caddy/access-log-entrypoint.sh"]
     command: ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
     tmpfs:

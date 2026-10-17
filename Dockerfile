@@ -2,7 +2,7 @@
 # The public site plus the small service (server.mjs) in one image. Caddy in front of it is a separate container (compose.yaml).
 # Build from a clean clone of the repository, never from a working folder that holds private editorial state:
 # .dockerignore lists only what the build needs and names every private path again at the end.
-ARG NODE_VERSION=24.12.0
+ARG NODE_VERSION=24.22.0
 
 FROM node:${NODE_VERSION}-alpine AS dependencies
 WORKDIR /app/editorial
