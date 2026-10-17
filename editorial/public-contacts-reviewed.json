@@ -1,5 +1,5 @@
 {
-  "reviewedOn": "2026-10-14",
+  "reviewedOn": "2026-10-16",
   "rule": "Public catalogue contacts are organisation contacts only: the organisation's name, landline and role address (info@, secretariat@ ...). Never a mobile number, a private person's name or an e-mail address that carries a person's name; such a contact is left out and the source link leads families to it.",
   "digests": [
     "025d67400ac7b461766f549db890d0c40fd65562991bbbc0e7a0e59b3befe51b",
@@ -64,6 +64,7 @@
     "5b92a8363493e92332b1d1dfbda9b1476c10dcded3258adddbb8e50710769178",
     "5c4d6c981e0a6f93ba3cd291179b5b7c41bc810daed1c4f2577eac4000643f3f",
     "5d68ffa0eda14b3be254fe49c00648ece890981e6a5bdcbebc0eac31b4c33458",
+    "5df247859d216a098fd3c7c23ef9a7075e99788a08bdde132b740e646c456310",
     "5e235732f2a298cdfd65d1e7baef2d843124d94f76c54cf28534cf326b478a70",
     "5ffe2d0656864af7ed2f24901a7fd088638c4cdf2a5528e4481fe51d606f89ea",
     "6058ce8b9f0237b1514680c65dd02057c7127e75dc9ad5c8747a0186d8a913c7",

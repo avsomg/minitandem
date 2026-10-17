@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-15T14:33:44.351Z",
+  "generatedAt": "2026-10-17T20:31:43.618Z",
   "grain": "One published catalogue card; formats include groups, individual offers, events and self-guided visits.",
   "total": 321,
   "catalog": 295,
   "archive": 26,
-  "geocodedCards": 140,
-  "uniqueAddressPoints": 115,
+  "geocodedCards": 139,
+  "uniqueAddressPoints": 114,
   "byRegion": {
     "sense": 60,
     "sarine": 77,
@@ -22,9 +22,9 @@
     "self": 180
   },
   "storedStatus": {
-    "check": 101,
+    "check": 99,
     "future": 10,
-    "active": 184
+    "active": 186
   },
   "checkedDates": [
     "2026-09-27",

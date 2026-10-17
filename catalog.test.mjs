@@ -186,14 +186,14 @@ test('Estavayer reading workshop has dated bookable sessions for ages 0 to 4',()
 
 test('existing Fribourg AEF cafes expose the published autumn series',()=>{
   const {byId}=load();
-  for(const [id,count,last] of [
-    // Counts follow the approved updates of 2 and 3 October 2026, which list the meetings still ahead.
-    ['aef-mpe',10,'2026-12-15'],['aef-schonberg',11,'2026-12-16'],
-    ['aef-centre',12,'2026-12-17'],['aef-passerelles',4,'2026-12-16']
-  ]){
-    const record=byId.get(id);
-    assert.equal(record.events.length,count,id);
-    assert.equal(record.events.at(-1).date,last,id);
+  // The editorial pipeline keeps these series current (16 October 2026: aef-schonberg dropped its past meetings), so the test pins
+  // what must hold for any version: the series runs to its published end, every meeting has an exact date and start time, and
+  // its last meeting is that end (the data does not keep the meetings in date order; the interface sorts them).
+  for(const [id,last] of [['aef-mpe','2026-12-15'],['aef-schonberg','2026-12-16'],['aef-centre','2026-12-17'],['aef-passerelles','2026-12-16']]){
+    const record=byId.get(id),dates=record.events.map(e=>e.date);
+    assert.ok(record.events.length>0,id);
+    assert.ok(record.events.every(e=>/^\d{4}-\d{2}-\d{2}$/.test(e.date)&&/^\d{2}:\d{2}$/.test(e.start)),id);
+    assert.equal([...dates].sort().at(-1),last,id);
     assert.equal(record.scheduleValidThrough,last,id);
   }
 });

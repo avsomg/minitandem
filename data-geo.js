@@ -446,18 +446,6 @@
     }
   },
   {
-    "id": "aef-schonberg",
-    "address": "Salle polyvalente, Centre d'animation socioculturelle du Schönberg, Rte Mon-Repos 9, 1700 Fribourg",
-    "geo": {
-      "label": "Route Mon-Repos 9 1700 Fribourg",
-      "lat": 46.8084831237793,
-      "lon": 7.1737518310546875,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+Mon-Repos+9+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-10-13",
-      "precision": "address"
-    }
-  },
-  {
     "id": "aef-centre",
     "address": "Fribourg Centre – Restaurant Coop (4e étage), Avenue de la Gare 10, 1700 Fribourg",
     "geo": {

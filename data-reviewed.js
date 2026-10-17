@@ -183,6 +183,686 @@
         "What time does each meeting end?"
       ]
     }
+  },
+  {
+    "jobId": "c59e040d-8b04-4d3f-9fb8-eb83fc77cba4",
+    "approvedOn": "2026-10-16",
+    "baseRecord": {
+      "id": "aef-centre",
+      "name": "Café AEF · Fribourg Centre",
+      "category": "play",
+      "town": "Fribourg",
+      "route": "fribourg",
+      "format": "group",
+      "status": "check",
+      "min": null,
+      "max": null,
+      "age": "Age to be confirmed",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Thursdays 09:00–11:00 · published dates from 08.10 to 17.12.2026",
+      "days": [
+        4
+      ],
+      "events": [
+        {
+          "date": "2026-10-01",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-10-08",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-10-15",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-10-22",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-10-29",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-05",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-12",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-19",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-26",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-12-03",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-12-10",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-12-17",
+          "start": "09:00",
+          "end": "11:00"
+        }
+      ],
+      "address": "Fribourg Centre – Restaurant Coop (4e étage), Avenue de la Gare 10, 1700 Fribourg",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Éducation Familiale: FR 026 321 48 70; DE 026 322 86 33",
+          "phone": "026 321 48 70",
+          "email": "contact@educationfamiliale.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://tockify.com/educationfamiliale/detail/754/1790838000000",
+          "label": "AEF programme and published dates"
+        },
+        {
+          "url": "https://www.educationfamiliale.ch/fr/agenda",
+          "label": "AEF calendar"
+        },
+        {
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale",
+          "label": "Additional check: Autumn series"
+        }
+      ],
+      "notes": [
+        "A meeting for adults and children together. The price, the age limit and the language of the individual leader are not stated. A French-language listing does not guarantee German.",
+        "Coop restaurant on the 4th floor.",
+        "Only the dates from the published AEF programme have been entered in the calendar."
+      ],
+      "checked": "2026-09-28",
+      "scheduleValidThrough": "2026-12-17",
+      "reviewAfter": "2026-10-09",
+      "research": {
+        "date": "2026-10-02",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Autumn series",
+            "kind": "official",
+            "text": "The public AEF calendar confirms meetings on Thursdays 09:00–11:00 from 1 October to 17 December 2026 in the Coop restaurant on the 4th floor, Avenue de la Gare 10.",
+            "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+          },
+          {
+            "field": "schedule",
+            "kind": "official",
+            "text": "The calendar publishes meetings on Thursdays 09:00–11:00 from 8 October to 17 December 2026. Dates after 17 December are not confirmed by this schedule.",
+            "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+          }
+        ],
+        "remaining": [
+          "The cost, age limits, registration and a German-speaking leader are not stated in the calendar. This is a joint meeting, not supervision without a parent.",
+          "What age is the meeting intended for?",
+          "How much does participation cost?",
+          "Is advance registration required?",
+          "In what language is the meeting held, and is German available?",
+          "Must an adult stay with the child throughout the meeting?"
+        ]
+      },
+      "practical": {
+        "scenario": "event"
+      },
+      "region": "sarine",
+      "addressPrecision": "exact",
+      "geo": {
+        "label": "Avenue de la Gare 10 1700 Fribourg",
+        "lat": 46.80301284790039,
+        "lon": 7.152565956115723,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Avenue+de+la+Gare+10+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-10-13",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-16",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The public AEF calendar lists Thursday meetings, 09:00–11:00, from 17 September to 17 December 2026 in the Coop restaurant on the 4th floor, Avenue de la Gare 10. Dates after 17 December are not published.",
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+        }
+      ],
+      "remaining": [
+        "The cost, age limits, registration and a German-speaking leader are not stated in the calendar. This is a joint meeting, not supervision without a parent.",
+        "What age is the meeting intended for?",
+        "How much does participation cost?",
+        "Is advance registration required?",
+        "In what language is the meeting held, and is German available?",
+        "Must an adult stay with the child throughout the meeting?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "status": "active",
+        "schedule": "Thursdays 09:00–11:00 · published dates from 17.09 to 17.12.2026",
+        "parentDetails": "Parent-child café: adults attend with their children, share coffee and a snack, and talk with other adults about education while practising it together with the children."
+      },
+      "practicalPatch": {},
+      "cardId": "aef-centre",
+      "findings": [
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The public AEF calendar lists Thursday meetings, 09:00–11:00, from 17 September to 17 December 2026 in the Coop restaurant on the 4th floor, Avenue de la Gare 10. Dates after 17 December are not published.",
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+        }
+      ],
+      "remaining": [
+        "What age is the meeting intended for?",
+        "How much does participation cost?",
+        "Is advance registration required?",
+        "In what language is the meeting held, and is German available?",
+        "Must an adult stay with the child throughout the meeting?"
+      ]
+    }
+  },
+  {
+    "jobId": "3dfcbcb3-5340-41f5-b986-97845f824279",
+    "approvedOn": "2026-10-16",
+    "baseRecord": {
+      "id": "aef-schonberg",
+      "name": "Café AEF · Schönberg",
+      "category": "play",
+      "town": "Fribourg",
+      "route": "fribourg",
+      "format": "group",
+      "status": "check",
+      "min": null,
+      "max": null,
+      "age": "Age to be confirmed",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Wed 09:00–11:00 · on the listed dates from 7 October to 16 December 2026",
+      "days": [
+        3
+      ],
+      "events": [
+        {
+          "date": "2026-10-07",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-10-14",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-10-21",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-10-28",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-04",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-11",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-18",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-25",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-12-02",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-12-09",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-12-16",
+          "start": "09:00",
+          "end": "11:00"
+        }
+      ],
+      "address": "Salle polyvalente, Centre d'animation socioculturelle du Schönberg, Rte Mon-Repos 9, 1700 Fribourg",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Éducation Familiale: FR 026 321 48 70; DE 026 322 86 33",
+          "phone": "026 321 48 70",
+          "email": "contact@educationfamiliale.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://tockify.com/educationfamiliale/detail/758/1790751600000",
+          "label": "AEF programme and published dates"
+        },
+        {
+          "url": "https://www.educationfamiliale.ch/fr/agenda",
+          "label": "AEF calendar"
+        },
+        {
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale",
+          "label": "Additional check: Autumn series"
+        }
+      ],
+      "notes": [
+        "Adults and children attend together. The price, the age limit and the language of the individual leader are not stated. A French-language card does not guarantee German.",
+        "A place in the group has not been checked.",
+        "Only the dates from the published AEF programme have been entered in the calendar."
+      ],
+      "checked": "2026-09-28",
+      "scheduleValidThrough": "2026-12-16",
+      "reviewAfter": "2026-10-09",
+      "research": {
+        "date": "2026-10-03",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Autumn series",
+            "kind": "official",
+            "text": "The public AEF calendar confirms sessions on Wednesdays 09:00–11:00 from 30 September to 16 December 2026 at the Centre d’animation socioculturelle, Route Mon-Repos 9.",
+            "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+          },
+          {
+            "field": "Adult participation",
+            "kind": "official",
+            "text": "The session includes joint participation of adults and children.",
+            "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+          }
+        ],
+        "remaining": [
+          "The price, age limits, registration and a German-speaking leader are not stated in the calendar. This is a joint session, not childcare without a parent.",
+          "What age is the session intended for?",
+          "How much does it cost to take part?",
+          "Is advance registration required?",
+          "In what language is the session held?",
+          "Must an adult accompany each child?"
+        ]
+      },
+      "practical": {
+        "scenario": "event"
+      },
+      "region": "sarine",
+      "parentDetails": "Adults take part together with the children.",
+      "geo": {
+        "label": "Route Mon-Repos 9 1700 Fribourg",
+        "lat": 46.8084831237793,
+        "lon": 7.1737518310546875,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+Mon-Repos+9+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-10-13",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-16",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Adult participation",
+          "kind": "official",
+          "text": "The session includes joint participation of adults and children.",
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+        },
+        {
+          "field": "Autumn series",
+          "kind": "official",
+          "text": "The official AEF calendar lists the parent-child café on Wednesdays, 09:00–11:00, in the multipurpose hall of the Schönberg centre (Route Mon-Repos 9, Fribourg) on individually listed dates from 28 October to 16 December 2026.",
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+        }
+      ],
+      "remaining": [
+        "The price, age limits, registration and a German-speaking leader are not stated in the calendar. This is a joint session, not childcare without a parent.",
+        "What age is the session intended for?",
+        "How much does it cost to take part?",
+        "Is advance registration required?",
+        "In what language is the session held?",
+        "Must an adult accompany each child?",
+        "Must an adult stay for the whole session, or may they leave?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "status": "active",
+        "events": [
+          {
+            "date": "2026-10-28",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "",
+            "address": "Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-11-04",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "",
+            "address": "Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-11-11",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "",
+            "address": "Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-11-18",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "",
+            "address": "Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-11-25",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "",
+            "address": "Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-12-02",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "",
+            "address": "Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-12-09",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "",
+            "address": "Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-12-16",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "",
+            "address": "Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland"
+          }
+        ],
+        "schedule": "Wednesdays, 09:00-11:00, on the individually listed dates (next: 28 Oct 2026; last listed: 16 Dec 2026)",
+        "address": "Centre d'animation socioculturelle du Schönberg, Salle polyvalente, Rte Mon-Repos 9, 1700 Fribourg",
+        "addressPrecision": "exact",
+        "parentDetails": "Parent-child café: adults meet over coffee and a snack and practise education with the children present. The calendar does not say whether a parent must stay for the whole session or may leave.",
+        "contacts": [
+          {
+            "name": "Association pour l’Éducation Familiale",
+            "phone": "026 321 48 70",
+            "email": "contact@educationfamiliale.ch"
+          }
+        ]
+      },
+      "practicalPatch": {},
+      "cardId": "aef-schonberg",
+      "findings": [
+        {
+          "field": "Autumn series",
+          "kind": "official",
+          "text": "The official AEF calendar lists the parent-child café on Wednesdays, 09:00–11:00, in the multipurpose hall of the Schönberg centre (Route Mon-Repos 9, Fribourg) on individually listed dates from 28 October to 16 December 2026.",
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+        }
+      ],
+      "remaining": [
+        "What age is the session intended for?",
+        "How much does it cost to take part?",
+        "Is advance registration required?",
+        "In what language is the session held?",
+        "Must an adult stay for the whole session, or may they leave?"
+      ]
+    }
+  },
+  {
+    "jobId": "e359df9d-b0c0-4e71-b0f8-9efa7dbda5ad",
+    "approvedOn": "2026-10-17",
+    "baseRecord": {
+      "town": "Fribourg",
+      "route": "fribourg",
+      "region": "sarine",
+      "format": "event",
+      "status": "active",
+      "min": 0,
+      "max": 5,
+      "age": "0–5 years",
+      "parent": "yes",
+      "languages": [],
+      "days": [
+        2,
+        6
+      ],
+      "price": "Free, no registration",
+      "priceKind": "free",
+      "amount": 0,
+      "contacts": [
+        {
+          "name": "Office familial · ateliers découvertes",
+          "email": "atelierdecouverte@officefamilial.ch",
+          "phone": ""
+        }
+      ],
+      "sources": [
+        {
+          "label": "Autumn 2026 programme: age, venues, dates and conditions",
+          "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf"
+        },
+        {
+          "label": "Official announcements",
+          "url": "https://www.officefamilial.ch/fr/office-familial-fribourg/actualites"
+        }
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-04",
+      "scheduleValidThrough": "2026-11-17",
+      "notes": [
+        "The programme is explicitly described as parents-enfants. The language of each session is not stated. Confirmation of available places has not been received."
+      ],
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Joint format",
+            "kind": "official",
+            "text": "The autumn programme describes the workshops as sessions for parents with children aged 0–5.",
+            "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf"
+          },
+          {
+            "field": "Time and place",
+            "kind": "official",
+            "text": "Five dates: 6 and 10 October, 20 October, 3 and 17 November. Each session lasts one hour. The venue is the Office familial on the 3rd floor, Avenue de la Gare 14.",
+            "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf"
+          },
+          {
+            "field": "Participation",
+            "kind": "official",
+            "text": "The programme states that it is free and no prior registration is needed.",
+            "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf"
+          }
+        ],
+        "remaining": [
+          "The language of the session, conditions for families from another commune, the lift and the possibility of leaving early."
+        ]
+      },
+      "practical": {
+        "booking": {
+          "value": false,
+          "text": "Free, no prior registration",
+          "source": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf",
+          "checked": "2026-09-28"
+        },
+        "commitment": {
+          "value": false,
+          "text": "Individual sessions, no need to buy a course",
+          "source": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf",
+          "checked": "2026-09-28"
+        },
+        "indoor": {
+          "value": true,
+          "text": "Sessions take place indoors at the Office familial",
+          "source": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf",
+          "checked": "2026-09-28"
+        },
+        "duration": {
+          "value": 60,
+          "text": "One hour",
+          "source": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf",
+          "checked": "2026-09-28"
+        },
+        "access": {
+          "value": null,
+          "text": "3rd floor; check whether there is a lift and whether pushchair access is possible",
+          "source": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf",
+          "checked": "2026-09-28"
+        }
+      },
+      "id": "office-family-workshops",
+      "name": "Office familial · family workshops",
+      "category": "creative",
+      "address": "Avenue de la Gare 14, 1700 Fribourg",
+      "schedule": "6, 10, 20 October; 3 and 17 November 2026 · one hour each",
+      "intro": "Joint sessions about feelings, stories, games and movement. Topics and times are given for each date.",
+      "events": [
+        {
+          "date": "2026-10-06",
+          "start": "09:30",
+          "end": "10:30",
+          "title": "Getting to know emotions"
+        },
+        {
+          "date": "2026-10-10",
+          "start": "10:00",
+          "end": "11:00",
+          "title": "Saturday stories"
+        },
+        {
+          "date": "2026-10-20",
+          "start": "09:30",
+          "end": "10:30",
+          "title": "Games for speech development"
+        },
+        {
+          "date": "2026-11-03",
+          "start": "09:30",
+          "end": "10:30",
+          "title": "Yoga: animal movements"
+        },
+        {
+          "date": "2026-11-17",
+          "start": "09:30",
+          "end": "10:30",
+          "title": "Getting to know your body"
+        }
+      ],
+      "geo": {
+        "label": "Avenue de la Gare 14 1700 Fribourg",
+        "lat": 46.8033447265625,
+        "lon": 7.153006553649902,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Avenue+de+la+Gare+14+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-17",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Joint format",
+          "kind": "official",
+          "text": "The autumn programme describes the workshops as sessions for parents with children aged 0–5.",
+          "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf"
+        },
+        {
+          "field": "Time and place",
+          "kind": "official",
+          "text": "Five dates: 6 and 10 October, 20 October, 3 and 17 November. Each session lasts one hour. The venue is the Office familial on the 3rd floor, Avenue de la Gare 14.",
+          "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf"
+        },
+        {
+          "field": "Participation",
+          "kind": "official",
+          "text": "The programme states that it is free and no prior registration is needed.",
+          "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf"
+        },
+        {
+          "field": "Autumn dates on the official news page",
+          "kind": "official",
+          "text": "The Office familial news page currently lists three free autumn discovery workshops with no registration, held at Avenue de la Gare 14, Fribourg: Tuesday 20 October, Tuesday 3 November 2026 and Tuesday 17 November, each 9:30–10:30. Only the 3 November date is printed with a year.",
+          "url": "https://www.officefamilial.ch/fr/office-familial-fribourg/actualites"
+        }
+      ],
+      "remaining": [
+        "The language of the session, conditions for families from another commune, the lift and the possibility of leaving early.",
+        "Are the sessions of 6 and 10 October still on the programme? They are not on the organizer's news page.",
+        "Is 2026 the year of the 20 October and 17 November sessions? The news page prints no year.",
+        "What is the age range of each workshop, and may or must a parent stay with the child?",
+        "In which language are the sessions held?",
+        "Is there a lift to the 3rd floor, and can pushchairs be brought in?",
+        "Can families leave a session early?"
+      ]
+    },
+    "draft": {
+      "patch": {},
+      "practicalPatch": {},
+      "cardId": "office-family-workshops",
+      "findings": [
+        {
+          "field": "Autumn dates on the official news page",
+          "kind": "official",
+          "text": "The Office familial news page currently lists three free autumn discovery workshops with no registration, held at Avenue de la Gare 14, Fribourg: Tuesday 20 October, Tuesday 3 November 2026 and Tuesday 17 November, each 9:30–10:30. Only the 3 November date is printed with a year.",
+          "url": "https://www.officefamilial.ch/fr/office-familial-fribourg/actualites"
+        }
+      ],
+      "remaining": [
+        "Are the sessions of 6 and 10 October still on the programme? They are not on the organizer's news page.",
+        "Is 2026 the year of the 20 October and 17 November sessions? The news page prints no year.",
+        "What is the age range of each workshop, and may or must a parent stay with the child?",
+        "In which language are the sessions held?",
+        "Is there a lift to the 3rd floor, and can pushchairs be brought in?",
+        "Can families leave a session early?"
+      ]
+    }
   }
 ];
 })();

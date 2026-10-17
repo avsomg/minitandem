@@ -278,6 +278,1096 @@
           }
         ]
       }
+    },
+    {
+      "jobId": "c59e040d-8b04-4d3f-9fb8-eb83fc77cba4",
+      "editorJobId": "c9ec49a4-c8e8-4437-82de-33d557027472",
+      "approvalArtifact": "5d71755094fc94a682d28df9d99fca208164c83f05f6a6362bb0e044bf0ed3be",
+      "approval": {
+        "role": "verify",
+        "verdict": "approve",
+        "draftHash": "fcd764b9489783fbcb571f9f58d72e002756f25fc8a8d3957e1111d619fa0a83",
+        "checkedFields": [
+          "status",
+          "schedule",
+          "parentDetails",
+          "research.findings",
+          "research.remaining"
+        ],
+        "approvedBindings": [
+          "status",
+          "schedule",
+          "parentDetails",
+          "research.findings.0"
+        ]
+      },
+      "approvedOn": "2026-10-16",
+      "cardRevision": "c9bdfe75a857cfe7c2a834cfe03f5d109938a37c56af027e8993452708a52cf7",
+      "baseRecord": {
+        "id": "aef-centre",
+        "name": "Café AEF · Fribourg Centre",
+        "category": "play",
+        "town": "Fribourg",
+        "route": "fribourg",
+        "format": "group",
+        "status": "check",
+        "min": null,
+        "max": null,
+        "age": "Age to be confirmed",
+        "parent": "yes",
+        "languages": [],
+        "schedule": "Thursdays 09:00–11:00 · published dates from 08.10 to 17.12.2026",
+        "days": [
+          4
+        ],
+        "events": [
+          {
+            "date": "2026-10-01",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-10-08",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-10-15",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-10-22",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-10-29",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-11-05",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-11-12",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-11-19",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-11-26",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-12-03",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-12-10",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-12-17",
+            "start": "09:00",
+            "end": "11:00"
+          }
+        ],
+        "address": "Fribourg Centre – Restaurant Coop (4e étage), Avenue de la Gare 10, 1700 Fribourg",
+        "price": "Price not published",
+        "priceKind": "unknown",
+        "amount": null,
+        "contacts": [
+          {
+            "name": "Éducation Familiale: FR 026 321 48 70; DE 026 322 86 33",
+            "phone": "026 321 48 70",
+            "email": "contact@educationfamiliale.ch"
+          }
+        ],
+        "sources": [
+          {
+            "url": "https://tockify.com/educationfamiliale/detail/754/1790838000000",
+            "label": "AEF programme and published dates"
+          },
+          {
+            "url": "https://www.educationfamiliale.ch/fr/agenda",
+            "label": "AEF calendar"
+          },
+          {
+            "url": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "label": "Additional check: Autumn series"
+          }
+        ],
+        "notes": [
+          "A meeting for adults and children together. The price, the age limit and the language of the individual leader are not stated. A French-language listing does not guarantee German.",
+          "Coop restaurant on the 4th floor.",
+          "Only the dates from the published AEF programme have been entered in the calendar."
+        ],
+        "checked": "2026-09-28",
+        "scheduleValidThrough": "2026-12-17",
+        "reviewAfter": "2026-10-09",
+        "research": {
+          "date": "2026-10-02",
+          "outcome": "rechecked",
+          "findings": [
+            {
+              "field": "Autumn series",
+              "kind": "official",
+              "text": "The public AEF calendar confirms meetings on Thursdays 09:00–11:00 from 1 October to 17 December 2026 in the Coop restaurant on the 4th floor, Avenue de la Gare 10.",
+              "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+            },
+            {
+              "field": "schedule",
+              "kind": "official",
+              "text": "The calendar publishes meetings on Thursdays 09:00–11:00 from 8 October to 17 December 2026. Dates after 17 December are not confirmed by this schedule.",
+              "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+            }
+          ],
+          "remaining": [
+            "The cost, age limits, registration and a German-speaking leader are not stated in the calendar. This is a joint meeting, not supervision without a parent.",
+            "What age is the meeting intended for?",
+            "How much does participation cost?",
+            "Is advance registration required?",
+            "In what language is the meeting held, and is German available?",
+            "Must an adult stay with the child throughout the meeting?"
+          ]
+        },
+        "practical": {
+          "scenario": "event"
+        },
+        "region": "sarine",
+        "addressPrecision": "exact",
+        "geo": {
+          "label": "Avenue de la Gare 10 1700 Fribourg",
+          "lat": 46.80301284790039,
+          "lon": 7.152565956115723,
+          "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Avenue+de+la+Gare+10+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+          "checked": "2026-10-13",
+          "precision": "address"
+        }
+      },
+      "appliedRecordRevision": "383eb76bdae9f2c0b150b378d3b58e1ba44018f8c7e4329faacd2df5efa9182c",
+      "research": {
+        "date": "2026-10-16",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "schedule",
+            "kind": "official",
+            "text": "The public AEF calendar lists Thursday meetings, 09:00–11:00, from 17 September to 17 December 2026 in the Coop restaurant on the 4th floor, Avenue de la Gare 10. Dates after 17 December are not published.",
+            "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+          }
+        ],
+        "remaining": [
+          "The cost, age limits, registration and a German-speaking leader are not stated in the calendar. This is a joint meeting, not supervision without a parent.",
+          "What age is the meeting intended for?",
+          "How much does participation cost?",
+          "Is advance registration required?",
+          "In what language is the meeting held, and is German available?",
+          "Must an adult stay with the child throughout the meeting?"
+        ]
+      },
+      "draft": {
+        "cardId": "aef-centre",
+        "patch": {
+          "status": "active",
+          "schedule": "Thursdays 09:00–11:00 · published dates from 17.09 to 17.12.2026",
+          "parentDetails": "Parent-child café: adults attend with their children, share coffee and a snack, and talk with other adults about education while practising it together with the children."
+        },
+        "practicalPatch": {},
+        "findings": [
+          {
+            "field": "schedule",
+            "kind": "official",
+            "text": "The public AEF calendar lists Thursday meetings, 09:00–11:00, from 17 September to 17 December 2026 in the Coop restaurant on the 4th floor, Avenue de la Gare 10. Dates after 17 December are not published.",
+            "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+          }
+        ],
+        "remaining": [
+          "What age is the meeting intended for?",
+          "How much does participation cost?",
+          "Is advance registration required?",
+          "In what language is the meeting held, and is German available?",
+          "Must an adult stay with the child throughout the meeting?"
+        ],
+        "supersededFindings": [
+          "561e767ddca5ec32d4128a371819f7c78b97cc78e0f4c22cd7823e5398e1ca0f",
+          "340f30d6a087d9609fa64b3d3d62a3365af73610c500f2888b7407cfd7e4b2eb"
+        ],
+        "reviewLimitations": [
+          "The Tockify detail page for this café (detail/754/1790838000000) is unavailable and could not be captured.",
+          "The linked information flyer on SharePoint returns HTTP 403, so age, price, registration and language could not be checked there. The full review is not complete.",
+          "Age, price, language and registration remain unpublished in the sources that could be read."
+        ],
+        "bindings": [
+          {
+            "field": "status",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "\"end\": { \"date\": \"2026-10-22\", \"time\": \"11:00\" }, \"cancelled\": false",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "status-e10c4763a631",
+            "snapshotId": "9104939452d71cd0b69aeb72229080210c69d36d9fe756854350bca888e9e8f9"
+          },
+          {
+            "field": "schedule",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "\"location\": \"Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland\", \"start\": { \"date\": \"2026-09-17\", \"time\": \"09:00\" }, \"end\": { \"date\": \"2026-09-17\", \"time\": \"11:00\" }",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "9104939452d71cd0b69aeb72229080210c69d36d9fe756854350bca888e9e8f9"
+          },
+          {
+            "field": "schedule",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "\"location\": \"Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland\", \"start\": { \"date\": \"2026-12-17\", \"time\": \"09:00\" }, \"end\": { \"date\": \"2026-12-17\", \"time\": \"11:00\" }",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "9104939452d71cd0b69aeb72229080210c69d36d9fe756854350bca888e9e8f9"
+          },
+          {
+            "field": "parentDetails",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "9104939452d71cd0b69aeb72229080210c69d36d9fe756854350bca888e9e8f9"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "\"location\": \"Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland\", \"start\": { \"date\": \"2026-09-17\", \"time\": \"09:00\" }, \"end\": { \"date\": \"2026-09-17\", \"time\": \"11:00\" }",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "9104939452d71cd0b69aeb72229080210c69d36d9fe756854350bca888e9e8f9"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "\"location\": \"Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland\", \"start\": { \"date\": \"2026-12-17\", \"time\": \"09:00\" }, \"end\": { \"date\": \"2026-12-17\", \"time\": \"11:00\" }",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "9104939452d71cd0b69aeb72229080210c69d36d9fe756854350bca888e9e8f9"
+          }
+        ],
+        "snapshots": [
+          {
+            "schema": 1,
+            "project": "vmeste",
+            "id": "9104939452d71cd0b69aeb72229080210c69d36d9fe756854350bca888e9e8f9",
+            "url": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "finalUrl": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "fetchedAt": "2026-10-16T05:31:21.841Z",
+            "contentType": "application/json",
+            "parser": "calendar-selected-zurich-v1",
+            "textHash": "586778165afa5c0f876c3142e529886aa5dc5daf759a7f5d6b0946e7e605e8ca",
+            "rawHash": "75294e959592209599fb7ad4835b53c7fec40b92421207a17c24c4c969bee2e7",
+            "text": "{\n  \"provenance\": {\n    \"sourceSnapshotId\": \"51d759efc2e1323f53817f5cea1a1dfc64d1eeaf955d6639199f57ca257cb8b5\",\n    \"parser\": \"ical.js\",\n    \"timeZone\": \"Europe/Zurich\",\n    \"interpretation\": \"Selected source events; dates and times converted by code, not verbatim source quotations.\"\n  },\n  \"events\": [\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/754/1789628400000\",\n      \"title\": \" Café Parents-Enfants à Fribourg Centre\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQBOiqj_PRd2QICzvhY32NuYATpYBVlvqoeKLGQhK6UNvzw?e=YqRjff\",\n      \"location\": \"Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-09-17\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-09-17\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/754/1790233200000\",\n      \"title\": \" Café Parents-Enfants à Fribourg Centre\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQBOiqj_PRd2QICzvhY32NuYATpYBVlvqoeKLGQhK6UNvzw?e=YqRjff\",\n      \"location\": \"Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-09-24\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-09-24\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/754/1790838000000\",\n      \"title\": \" Café Parents-Enfants à Fribourg Centre\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQBOiqj_PRd2QICzvhY32NuYATpYBVlvqoeKLGQhK6UNvzw?e=YqRjff\",\n      \"location\": \"Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-10-01\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-10-01\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/754/1791442800000\",\n      \"title\": \" Café Parents-Enfants à Fribourg Centre\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQBOiqj_PRd2QICzvhY32NuYATpYBVlvqoeKLGQhK6UNvzw?e=YqRjff\",\n      \"location\": \"Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-10-08\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-10-08\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/754/1792047600000\",\n      \"title\": \" Café Parents-Enfants à Fribourg Centre\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQBOiqj_PRd2QICzvhY32NuYATpYBVlvqoeKLGQhK6UNvzw?e=YqRjff\",\n      \"location\": \"Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-10-15\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-10-15\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/754/1792652400000\",\n      \"title\": \" Café Parents-Enfants à Fribourg Centre\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQBOiqj_PRd2QICzvhY32NuYATpYBVlvqoeKLGQhK6UNvzw?e=YqRjff\",\n      \"location\": \"Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-10-22\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-10-22\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/754/1793260800000\",\n      \"title\": \" Café Parents-Enfants à Fribourg Centre\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQBOiqj_PRd2QICzvhY32NuYATpYBVlvqoeKLGQhK6UNvzw?e=YqRjff\",\n      \"location\": \"Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-10-29\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-10-29\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/754/1793865600000\",\n      \"title\": \" Café Parents-Enfants à Fribourg Centre\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQBOiqj_PRd2QICzvhY32NuYATpYBVlvqoeKLGQhK6UNvzw?e=YqRjff\",\n      \"location\": \"Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-11-05\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-11-05\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/754/1794470400000\",\n      \"title\": \" Café Parents-Enfants à Fribourg Centre\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQBOiqj_PRd2QICzvhY32NuYATpYBVlvqoeKLGQhK6UNvzw?e=YqRjff\",\n      \"location\": \"Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-11-12\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-11-12\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/754/1795075200000\",\n      \"title\": \" Café Parents-Enfants à Fribourg Centre\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQBOiqj_PRd2QICzvhY32NuYATpYBVlvqoeKLGQhK6UNvzw?e=YqRjff\",\n      \"location\": \"Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-11-19\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-11-19\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/754/1795680000000\",\n      \"title\": \" Café Parents-Enfants à Fribourg Centre\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQBOiqj_PRd2QICzvhY32NuYATpYBVlvqoeKLGQhK6UNvzw?e=YqRjff\",\n      \"location\": \"Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-11-26\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-11-26\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/754/1796284800000\",\n      \"title\": \" Café Parents-Enfants à Fribourg Centre\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQBOiqj_PRd2QICzvhY32NuYATpYBVlvqoeKLGQhK6UNvzw?e=YqRjff\",\n      \"location\": \"Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-12-03\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-12-03\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/754/1796889600000\",\n      \"title\": \" Café Parents-Enfants à Fribourg Centre\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQBOiqj_PRd2QICzvhY32NuYATpYBVlvqoeKLGQhK6UNvzw?e=YqRjff\",\n      \"location\": \"Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-12-10\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-12-10\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/754/1797494400000\",\n      \"title\": \" Café Parents-Enfants à Fribourg Centre\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQBOiqj_PRd2QICzvhY32NuYATpYBVlvqoeKLGQhK6UNvzw?e=YqRjff\",\n      \"location\": \"Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-12-17\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-12-17\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "jobId": "3dfcbcb3-5340-41f5-b986-97845f824279",
+      "editorJobId": "2bf68360-ec14-43c3-84a4-b582d9327225",
+      "approvalArtifact": "d18f35c9173cd0456f1056e323a0c9c371b486a72a7321f9ae62020a872063d1",
+      "approval": {
+        "role": "verify",
+        "verdict": "approve",
+        "draftHash": "199e4360b0c94b1638d8493f3a1756bbae9c58a1da33e057add2b6d4e1e92c1d",
+        "checkedFields": [
+          "status",
+          "events",
+          "schedule",
+          "address",
+          "addressPrecision",
+          "parentDetails",
+          "contacts",
+          "research.findings",
+          "research.remaining",
+          "research.findings.0",
+          "supersededFindings",
+          "reviewLimitations"
+        ],
+        "approvedBindings": [
+          "status",
+          "events",
+          "schedule",
+          "address",
+          "addressPrecision",
+          "parentDetails",
+          "contacts",
+          "research.findings.0"
+        ]
+      },
+      "approvedOn": "2026-10-16",
+      "cardRevision": "e6e6e800cacd4af97df9302404b99492685958ff2ca4707079419fb41861fe45",
+      "baseRecord": {
+        "id": "aef-schonberg",
+        "name": "Café AEF · Schönberg",
+        "category": "play",
+        "town": "Fribourg",
+        "route": "fribourg",
+        "format": "group",
+        "status": "check",
+        "min": null,
+        "max": null,
+        "age": "Age to be confirmed",
+        "parent": "yes",
+        "languages": [],
+        "schedule": "Wed 09:00–11:00 · on the listed dates from 7 October to 16 December 2026",
+        "days": [
+          3
+        ],
+        "events": [
+          {
+            "date": "2026-10-07",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-10-14",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-10-21",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-10-28",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-11-04",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-11-11",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-11-18",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-11-25",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-12-02",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-12-09",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-12-16",
+            "start": "09:00",
+            "end": "11:00"
+          }
+        ],
+        "address": "Salle polyvalente, Centre d'animation socioculturelle du Schönberg, Rte Mon-Repos 9, 1700 Fribourg",
+        "price": "Price not published",
+        "priceKind": "unknown",
+        "amount": null,
+        "contacts": [
+          {
+            "name": "Éducation Familiale: FR 026 321 48 70; DE 026 322 86 33",
+            "phone": "026 321 48 70",
+            "email": "contact@educationfamiliale.ch"
+          }
+        ],
+        "sources": [
+          {
+            "url": "https://tockify.com/educationfamiliale/detail/758/1790751600000",
+            "label": "AEF programme and published dates"
+          },
+          {
+            "url": "https://www.educationfamiliale.ch/fr/agenda",
+            "label": "AEF calendar"
+          },
+          {
+            "url": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "label": "Additional check: Autumn series"
+          }
+        ],
+        "notes": [
+          "Adults and children attend together. The price, the age limit and the language of the individual leader are not stated. A French-language card does not guarantee German.",
+          "A place in the group has not been checked.",
+          "Only the dates from the published AEF programme have been entered in the calendar."
+        ],
+        "checked": "2026-09-28",
+        "scheduleValidThrough": "2026-12-16",
+        "reviewAfter": "2026-10-09",
+        "research": {
+          "date": "2026-10-03",
+          "outcome": "rechecked",
+          "findings": [
+            {
+              "field": "Autumn series",
+              "kind": "official",
+              "text": "The public AEF calendar confirms sessions on Wednesdays 09:00–11:00 from 30 September to 16 December 2026 at the Centre d’animation socioculturelle, Route Mon-Repos 9.",
+              "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+            },
+            {
+              "field": "Adult participation",
+              "kind": "official",
+              "text": "The session includes joint participation of adults and children.",
+              "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+            }
+          ],
+          "remaining": [
+            "The price, age limits, registration and a German-speaking leader are not stated in the calendar. This is a joint session, not childcare without a parent.",
+            "What age is the session intended for?",
+            "How much does it cost to take part?",
+            "Is advance registration required?",
+            "In what language is the session held?",
+            "Must an adult accompany each child?"
+          ]
+        },
+        "practical": {
+          "scenario": "event"
+        },
+        "region": "sarine",
+        "parentDetails": "Adults take part together with the children.",
+        "geo": {
+          "label": "Route Mon-Repos 9 1700 Fribourg",
+          "lat": 46.8084831237793,
+          "lon": 7.1737518310546875,
+          "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+Mon-Repos+9+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+          "checked": "2026-10-13",
+          "precision": "address"
+        }
+      },
+      "appliedRecordRevision": "dea5d47d6b4244b40ae8283076697f7ce61d0a5beab7c36ed9d28f978a04e4eb",
+      "research": {
+        "date": "2026-10-16",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Adult participation",
+            "kind": "official",
+            "text": "The session includes joint participation of adults and children.",
+            "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+          },
+          {
+            "field": "Autumn series",
+            "kind": "official",
+            "text": "The official AEF calendar lists the parent-child café on Wednesdays, 09:00–11:00, in the multipurpose hall of the Schönberg centre (Route Mon-Repos 9, Fribourg) on individually listed dates from 28 October to 16 December 2026.",
+            "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+          }
+        ],
+        "remaining": [
+          "The price, age limits, registration and a German-speaking leader are not stated in the calendar. This is a joint session, not childcare without a parent.",
+          "What age is the session intended for?",
+          "How much does it cost to take part?",
+          "Is advance registration required?",
+          "In what language is the session held?",
+          "Must an adult accompany each child?",
+          "Must an adult stay for the whole session, or may they leave?"
+        ]
+      },
+      "draft": {
+        "cardId": "aef-schonberg",
+        "patch": {
+          "status": "active",
+          "events": [
+            {
+              "date": "2026-10-28",
+              "start": "09:00",
+              "end": "11:00",
+              "title": "",
+              "address": "Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland"
+            },
+            {
+              "date": "2026-11-04",
+              "start": "09:00",
+              "end": "11:00",
+              "title": "",
+              "address": "Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland"
+            },
+            {
+              "date": "2026-11-11",
+              "start": "09:00",
+              "end": "11:00",
+              "title": "",
+              "address": "Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland"
+            },
+            {
+              "date": "2026-11-18",
+              "start": "09:00",
+              "end": "11:00",
+              "title": "",
+              "address": "Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland"
+            },
+            {
+              "date": "2026-11-25",
+              "start": "09:00",
+              "end": "11:00",
+              "title": "",
+              "address": "Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland"
+            },
+            {
+              "date": "2026-12-02",
+              "start": "09:00",
+              "end": "11:00",
+              "title": "",
+              "address": "Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland"
+            },
+            {
+              "date": "2026-12-09",
+              "start": "09:00",
+              "end": "11:00",
+              "title": "",
+              "address": "Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland"
+            },
+            {
+              "date": "2026-12-16",
+              "start": "09:00",
+              "end": "11:00",
+              "title": "",
+              "address": "Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland"
+            }
+          ],
+          "schedule": "Wednesdays, 09:00-11:00, on the individually listed dates (next: 28 Oct 2026; last listed: 16 Dec 2026)",
+          "address": "Centre d'animation socioculturelle du Schönberg, Salle polyvalente, Rte Mon-Repos 9, 1700 Fribourg",
+          "addressPrecision": "exact",
+          "parentDetails": "Parent-child café: adults meet over coffee and a snack and practise education with the children present. The calendar does not say whether a parent must stay for the whole session or may leave.",
+          "contacts": [
+            {
+              "name": "Association pour l’Éducation Familiale",
+              "phone": "026 321 48 70",
+              "email": "contact@educationfamiliale.ch"
+            }
+          ]
+        },
+        "practicalPatch": {},
+        "findings": [
+          {
+            "field": "Autumn series",
+            "kind": "official",
+            "text": "The official AEF calendar lists the parent-child café on Wednesdays, 09:00–11:00, in the multipurpose hall of the Schönberg centre (Route Mon-Repos 9, Fribourg) on individually listed dates from 28 October to 16 December 2026.",
+            "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+          }
+        ],
+        "supersededFindings": [
+          "3efc48e77f71549fdc1c0ea938be62c67493596b16aa074ca4f84f1454e6d68d"
+        ],
+        "remaining": [
+          "What age is the session intended for?",
+          "How much does it cost to take part?",
+          "Is advance registration required?",
+          "In what language is the session held?",
+          "Must an adult stay for the whole session, or may they leave?"
+        ],
+        "reviewLimitations": [
+          "The card's Tockify detail page could not be captured (capture-unavailable) and the linked AEF flyer on SharePoint was not readable, so the full review of the exact-offer sources is incomplete. Age, price, registration and session language remain unknown.",
+          "This is a partial update only; checked is not renewed and no full review coverage is claimed."
+        ],
+        "bindings": [
+          {
+            "field": "status",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "\"end\": { \"date\": \"2026-10-28\", \"time\": \"11:00\" }, \"cancelled\": false",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "status-c9f27fce3347",
+            "snapshotId": "2befe08b2b1c7d6c65d274ed6528f8ca0625d362952fe7137229dd12add08e6e"
+          },
+          {
+            "field": "events",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "\"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\", \"start\": { \"date\": \"2026-10-28\", \"time\": \"09:00\" }, \"end\": { \"date\": \"2026-10-28\", \"time\": \"11:00\"",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-3d23f5b22a8e",
+            "snapshotId": "2befe08b2b1c7d6c65d274ed6528f8ca0625d362952fe7137229dd12add08e6e"
+          },
+          {
+            "field": "events",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "\"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\", \"start\": { \"date\": \"2026-11-04\", \"time\": \"09:00\" }, \"end\": { \"date\": \"2026-11-04\", \"time\": \"11:00\"",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-fa70a44b64e8",
+            "snapshotId": "2befe08b2b1c7d6c65d274ed6528f8ca0625d362952fe7137229dd12add08e6e"
+          },
+          {
+            "field": "events",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "\"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\", \"start\": { \"date\": \"2026-11-11\", \"time\": \"09:00\" }, \"end\": { \"date\": \"2026-11-11\", \"time\": \"11:00\"",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-2dc5632b3823",
+            "snapshotId": "2befe08b2b1c7d6c65d274ed6528f8ca0625d362952fe7137229dd12add08e6e"
+          },
+          {
+            "field": "events",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "\"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\", \"start\": { \"date\": \"2026-11-18\", \"time\": \"09:00\" }, \"end\": { \"date\": \"2026-11-18\", \"time\": \"11:00\"",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-8e30436ff27c",
+            "snapshotId": "2befe08b2b1c7d6c65d274ed6528f8ca0625d362952fe7137229dd12add08e6e"
+          },
+          {
+            "field": "events",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "\"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\", \"start\": { \"date\": \"2026-11-25\", \"time\": \"09:00\" }, \"end\": { \"date\": \"2026-11-25\", \"time\": \"11:00\"",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-d50e673b2dad",
+            "snapshotId": "2befe08b2b1c7d6c65d274ed6528f8ca0625d362952fe7137229dd12add08e6e"
+          },
+          {
+            "field": "events",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "\"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\", \"start\": { \"date\": \"2026-12-02\", \"time\": \"09:00\" }, \"end\": { \"date\": \"2026-12-02\", \"time\": \"11:00\"",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-bb99458910e0",
+            "snapshotId": "2befe08b2b1c7d6c65d274ed6528f8ca0625d362952fe7137229dd12add08e6e"
+          },
+          {
+            "field": "events",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "\"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\", \"start\": { \"date\": \"2026-12-09\", \"time\": \"09:00\" }, \"end\": { \"date\": \"2026-12-09\", \"time\": \"11:00\"",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-7f998808c7d0",
+            "snapshotId": "2befe08b2b1c7d6c65d274ed6528f8ca0625d362952fe7137229dd12add08e6e"
+          },
+          {
+            "field": "events",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "\"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\", \"start\": { \"date\": \"2026-12-16\", \"time\": \"09:00\" }, \"end\": { \"date\": \"2026-12-16\", \"time\": \"11:00\"",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-9b931baee970",
+            "snapshotId": "2befe08b2b1c7d6c65d274ed6528f8ca0625d362952fe7137229dd12add08e6e"
+          },
+          {
+            "field": "schedule",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "\"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\", \"start\": { \"date\": \"2026-10-28\", \"time\": \"09:00\" }, \"end\": { \"date\": \"2026-10-28\", \"time\": \"11:00\"",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "schedule-a2717fbe5a0f",
+            "snapshotId": "2befe08b2b1c7d6c65d274ed6528f8ca0625d362952fe7137229dd12add08e6e"
+          },
+          {
+            "field": "address",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "\"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\"",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "address-f325c9931332",
+            "snapshotId": "2befe08b2b1c7d6c65d274ed6528f8ca0625d362952fe7137229dd12add08e6e"
+          },
+          {
+            "field": "addressPrecision",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "\"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\"",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "addressPrecision-9224f9c6a749",
+            "snapshotId": "2befe08b2b1c7d6c65d274ed6528f8ca0625d362952fe7137229dd12add08e6e"
+          },
+          {
+            "field": "parentDetails",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "pratiquer l’éducation avec les enfants ici et maintenant",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "parentDetails-c0ac692794b1",
+            "snapshotId": "2befe08b2b1c7d6c65d274ed6528f8ca0625d362952fe7137229dd12add08e6e"
+          },
+          {
+            "field": "parentDetails",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "2befe08b2b1c7d6c65d274ed6528f8ca0625d362952fe7137229dd12add08e6e"
+          },
+          {
+            "field": "contacts",
+            "source": "https://www.educationfamiliale.ch/fr/agenda",
+            "quote": "contact@educationfamiliale.ch Nous soutenir/adhésion À propos de nous Contactez-nous : 026 321 48 70",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "contacts-17467a1f4674",
+            "snapshotId": "f75dc63dda7f0e1c3c188169cf5ce1b42cb1b041d0d1d982384610b706099029"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "\"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\", \"start\": { \"date\": \"2026-10-28\", \"time\": \"09:00\" }, \"end\": { \"date\": \"2026-10-28\", \"time\": \"11:00\"",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "2befe08b2b1c7d6c65d274ed6528f8ca0625d362952fe7137229dd12add08e6e"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "quote": "\"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\", \"start\": { \"date\": \"2026-12-16\", \"time\": \"09:00\" }, \"end\": { \"date\": \"2026-12-16\", \"time\": \"11:00\"",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "2befe08b2b1c7d6c65d274ed6528f8ca0625d362952fe7137229dd12add08e6e"
+          }
+        ],
+        "snapshots": [
+          {
+            "schema": 1,
+            "project": "vmeste",
+            "id": "2befe08b2b1c7d6c65d274ed6528f8ca0625d362952fe7137229dd12add08e6e",
+            "url": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "finalUrl": "https://tockify.com/api/feeds/ics/educationfamiliale",
+            "fetchedAt": "2026-10-16T08:32:11.680Z",
+            "contentType": "application/json",
+            "parser": "calendar-selected-zurich-v1",
+            "textHash": "243b45fae6dbd2138696e3f856d24ec758f27e58a6e5cadf0f8ee8d8eeb9766b",
+            "rawHash": "b4374e1055a12f9aca4fe9ee8bc7c0bbb4af213fc347cb80178969e80ceb19b0",
+            "text": "{\n  \"provenance\": {\n    \"sourceSnapshotId\": \"1d3b2e2d2b0c96626c7d0b367ea73ab720fa1643b8d17fe9ec4457a1c1de8f69\",\n    \"parser\": \"ical.js\",\n    \"timeZone\": \"Europe/Zurich\",\n    \"interpretation\": \"Selected source events; dates and times converted by code, not verbatim source quotations.\"\n  },\n  \"events\": [\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/758/1789542000000\",\n      \"title\": \" Café Parents-Enfants au Schönberg (Fribourg)\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQDfW7ZGh9h6QYx-9kUrlecjAa6K4x3T1q3hXrFwnzO2cSs?e=xVkmTa\\n\\n\\n\",\n      \"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-09-16\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-09-16\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/758/1790146800000\",\n      \"title\": \" Café Parents-Enfants au Schönberg (Fribourg)\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQDfW7ZGh9h6QYx-9kUrlecjAa6K4x3T1q3hXrFwnzO2cSs?e=xVkmTa\\n\\n\\n\",\n      \"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-09-23\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-09-23\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/758/1790751600000\",\n      \"title\": \" Café Parents-Enfants au Schönberg (Fribourg)\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQDfW7ZGh9h6QYx-9kUrlecjAa6K4x3T1q3hXrFwnzO2cSs?e=xVkmTa\\n\\n\\n\",\n      \"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-09-30\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-09-30\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/758/1791356400000\",\n      \"title\": \" Café Parents-Enfants au Schönberg (Fribourg)\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQDfW7ZGh9h6QYx-9kUrlecjAa6K4x3T1q3hXrFwnzO2cSs?e=xVkmTa\\n\\n\\n\",\n      \"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-10-07\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-10-07\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/758/1793174400000\",\n      \"title\": \" Café Parents-Enfants au Schönberg (Fribourg)\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQDfW7ZGh9h6QYx-9kUrlecjAa6K4x3T1q3hXrFwnzO2cSs?e=xVkmTa\\n\\n\\n\",\n      \"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-10-28\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-10-28\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/758/1793779200000\",\n      \"title\": \" Café Parents-Enfants au Schönberg (Fribourg)\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQDfW7ZGh9h6QYx-9kUrlecjAa6K4x3T1q3hXrFwnzO2cSs?e=xVkmTa\\n\\n\\n\",\n      \"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-11-04\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-11-04\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/758/1794384000000\",\n      \"title\": \" Café Parents-Enfants au Schönberg (Fribourg)\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQDfW7ZGh9h6QYx-9kUrlecjAa6K4x3T1q3hXrFwnzO2cSs?e=xVkmTa\\n\\n\\n\",\n      \"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-11-11\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-11-11\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/758/1794988800000\",\n      \"title\": \" Café Parents-Enfants au Schönberg (Fribourg)\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQDfW7ZGh9h6QYx-9kUrlecjAa6K4x3T1q3hXrFwnzO2cSs?e=xVkmTa\\n\\n\\n\",\n      \"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-11-18\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-11-18\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/758/1795593600000\",\n      \"title\": \" Café Parents-Enfants au Schönberg (Fribourg)\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQDfW7ZGh9h6QYx-9kUrlecjAa6K4x3T1q3hXrFwnzO2cSs?e=xVkmTa\\n\\n\\n\",\n      \"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-11-25\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-11-25\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/758/1796198400000\",\n      \"title\": \" Café Parents-Enfants au Schönberg (Fribourg)\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQDfW7ZGh9h6QYx-9kUrlecjAa6K4x3T1q3hXrFwnzO2cSs?e=xVkmTa\\n\\n\\n\",\n      \"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-12-02\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-12-02\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/758/1796803200000\",\n      \"title\": \" Café Parents-Enfants au Schönberg (Fribourg)\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQDfW7ZGh9h6QYx-9kUrlecjAa6K4x3T1q3hXrFwnzO2cSs?e=xVkmTa\\n\\n\\n\",\n      \"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-12-09\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-12-09\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    },\n    {\n      \"url\": \"https://tockify.com/educationfamiliale/detail/758/1797408000000\",\n      \"title\": \" Café Parents-Enfants au Schönberg (Fribourg)\",\n      \"description\": \"Retrouvez-nous le temps d’un café et d’un goûter pour des échanges entre adultes, sur le thème de l’éducation. Ensemble, nous nous exercerons à pratiquer l’éducation avec les enfants ici et maintenant.\\n\\n\\n> Flyer d'information https://educationfamiliale.sharepoint.com/:b:/g/IQDfW7ZGh9h6QYx-9kUrlecjAa6K4x3T1q3hXrFwnzO2cSs?e=xVkmTa\\n\\n\\n\",\n      \"location\": \"Centre d'animation socioculturelle du Schönberg, Salle polyvalente,Rte Mon-Repos 9, 1700 Fribourg, Switzerland\",\n      \"start\": {\n        \"date\": \"2026-12-16\",\n        \"time\": \"09:00\"\n      },\n      \"end\": {\n        \"date\": \"2026-12-16\",\n        \"time\": \"11:00\"\n      },\n      \"cancelled\": false,\n      \"recurrenceUnexpanded\": false\n    }\n  ]\n}"
+          },
+          {
+            "schema": 1,
+            "project": "vmeste",
+            "id": "f75dc63dda7f0e1c3c188169cf5ce1b42cb1b041d0d1d982384610b706099029",
+            "url": "https://www.educationfamiliale.ch/fr/agenda",
+            "finalUrl": "https://www.educationfamiliale.ch/fr/agenda",
+            "fetchedAt": "2026-10-16T08:32:13.307Z",
+            "contentType": "text/html;charset=utf-8",
+            "parser": "cheerio-visible-body-v1",
+            "textHash": "a2eb9191409e8f8ca45a414478b235f288873c0683512eb3258e02b22edd63b2",
+            "rawHash": "79c9a61918fd055bc503c4b3d3f9e4640a90e971a1f862136b6f86b3e1c952f5",
+            "text": "0\nPasser au contenu\nOuvrir le menu\nFermer le menu\nOuvrir le menu\nFermer le menu\nAgenda\nVous allez prochainement devenir parent∙s ? Vous êtes parent∙s d’un bébé ?\nParticipez à une rencontre (gratuite et sans inscription) de votre choix pour mieux connaître les professionnel∙le∙s de la petite enfance et du soutien à la parentalité du canton de Fribourg, échanger avec d’autres parents poser toutes questions utiles à cette étape de vie.\nRetrouvez toutes les dates des rencontres dans les différents districts sur www.devenir-famille.ch\nActivités de l’association\nRetrouvez ci-dessous le calendrier des évènements dans tout le canton. Un résumé de la semaine à venir est également publié chaque semaine sur notre compte Instagram.\nVous pouvez l’afficher sous forme de liste (bouton Agenda) ou de calendrier (bouton Mensuel).\nCliquez sur l’un des éléments pour obtenir les détails et sur retour pour revenir à la liste. Vous pouvez télécharger les flyers de nos activités, directement depuis le détail des évènements.\n1998-2026 © AEF\nAssociation pour l’Éducation Familiale\nc/o Maison des Associations, Boulevard de Pérolles 40, 1700 Fribourg\ncontact@educationfamiliale.ch\nNous soutenir/adhésion\nÀ propos de nous\nContactez-nous : 026 321 48 70\nUnterstützen Sie uns/Mitgliedschaft\nÜber uns\nKontaktieren Sie uns: 026 322 86 33\nChaque don est précieux !\nJeder Beitrag ist wertvoll!\nIBAN CH34 0900 0000 17 113537 3 | CCP 17 113537 3",
+            "captureMethod": "node-pinned-https"
+          }
+        ]
+      }
+    },
+    {
+      "jobId": "e359df9d-b0c0-4e71-b0f8-9efa7dbda5ad",
+      "editorJobId": "be6ff134-2943-4b12-8916-015ce2ef6f51",
+      "approvalArtifact": "a78efb5e84486adbe398fc8b60d855e6f8900590398c62c8bbf27e0ec983e83c",
+      "approval": {
+        "role": "verify",
+        "verdict": "approve",
+        "draftHash": "f6c0bc17ece54a5e185a0bbf6fdbf0dc44154cf6f92f5c4e47ecca2d52a87b6e",
+        "checkedFields": [
+          "research.findings",
+          "research.remaining"
+        ],
+        "approvedBindings": [
+          "research.findings.0"
+        ]
+      },
+      "approvedOn": "2026-10-17",
+      "cardRevision": "7ec75d342660e2b1c84712232fd5f337374b99a8b0d0bca1127d92d24b323021",
+      "baseRecord": {
+        "town": "Fribourg",
+        "route": "fribourg",
+        "region": "sarine",
+        "format": "event",
+        "status": "active",
+        "min": 0,
+        "max": 5,
+        "age": "0–5 years",
+        "parent": "yes",
+        "languages": [],
+        "days": [
+          2,
+          6
+        ],
+        "price": "Free, no registration",
+        "priceKind": "free",
+        "amount": 0,
+        "contacts": [
+          {
+            "name": "Office familial · ateliers découvertes",
+            "email": "atelierdecouverte@officefamilial.ch",
+            "phone": ""
+          }
+        ],
+        "sources": [
+          {
+            "label": "Autumn 2026 programme: age, venues, dates and conditions",
+            "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf"
+          },
+          {
+            "label": "Official announcements",
+            "url": "https://www.officefamilial.ch/fr/office-familial-fribourg/actualites"
+          }
+        ],
+        "checked": "2026-09-28",
+        "reviewAfter": "2026-10-04",
+        "scheduleValidThrough": "2026-11-17",
+        "notes": [
+          "The programme is explicitly described as parents-enfants. The language of each session is not stated. Confirmation of available places has not been received."
+        ],
+        "research": {
+          "date": "2026-09-28",
+          "outcome": "enriched",
+          "findings": [
+            {
+              "field": "Joint format",
+              "kind": "official",
+              "text": "The autumn programme describes the workshops as sessions for parents with children aged 0–5.",
+              "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf"
+            },
+            {
+              "field": "Time and place",
+              "kind": "official",
+              "text": "Five dates: 6 and 10 October, 20 October, 3 and 17 November. Each session lasts one hour. The venue is the Office familial on the 3rd floor, Avenue de la Gare 14.",
+              "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf"
+            },
+            {
+              "field": "Participation",
+              "kind": "official",
+              "text": "The programme states that it is free and no prior registration is needed.",
+              "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf"
+            }
+          ],
+          "remaining": [
+            "The language of the session, conditions for families from another commune, the lift and the possibility of leaving early."
+          ]
+        },
+        "practical": {
+          "booking": {
+            "value": false,
+            "text": "Free, no prior registration",
+            "source": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf",
+            "checked": "2026-09-28"
+          },
+          "commitment": {
+            "value": false,
+            "text": "Individual sessions, no need to buy a course",
+            "source": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf",
+            "checked": "2026-09-28"
+          },
+          "indoor": {
+            "value": true,
+            "text": "Sessions take place indoors at the Office familial",
+            "source": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf",
+            "checked": "2026-09-28"
+          },
+          "duration": {
+            "value": 60,
+            "text": "One hour",
+            "source": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf",
+            "checked": "2026-09-28"
+          },
+          "access": {
+            "value": null,
+            "text": "3rd floor; check whether there is a lift and whether pushchair access is possible",
+            "source": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf",
+            "checked": "2026-09-28"
+          }
+        },
+        "id": "office-family-workshops",
+        "name": "Office familial · family workshops",
+        "category": "creative",
+        "address": "Avenue de la Gare 14, 1700 Fribourg",
+        "schedule": "6, 10, 20 October; 3 and 17 November 2026 · one hour each",
+        "intro": "Joint sessions about feelings, stories, games and movement. Topics and times are given for each date.",
+        "events": [
+          {
+            "date": "2026-10-06",
+            "start": "09:30",
+            "end": "10:30",
+            "title": "Getting to know emotions"
+          },
+          {
+            "date": "2026-10-10",
+            "start": "10:00",
+            "end": "11:00",
+            "title": "Saturday stories"
+          },
+          {
+            "date": "2026-10-20",
+            "start": "09:30",
+            "end": "10:30",
+            "title": "Games for speech development"
+          },
+          {
+            "date": "2026-11-03",
+            "start": "09:30",
+            "end": "10:30",
+            "title": "Yoga: animal movements"
+          },
+          {
+            "date": "2026-11-17",
+            "start": "09:30",
+            "end": "10:30",
+            "title": "Getting to know your body"
+          }
+        ],
+        "geo": {
+          "label": "Avenue de la Gare 14 1700 Fribourg",
+          "lat": 46.8033447265625,
+          "lon": 7.153006553649902,
+          "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Avenue+de+la+Gare+14+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+          "checked": "2026-09-27",
+          "precision": "address"
+        }
+      },
+      "appliedRecordRevision": "917a4baafb41bc3556c337ad6d9a7f2d9ea9b0942961fffa6092d2f5980c2b9c",
+      "research": {
+        "date": "2026-10-17",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Joint format",
+            "kind": "official",
+            "text": "The autumn programme describes the workshops as sessions for parents with children aged 0–5.",
+            "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf"
+          },
+          {
+            "field": "Time and place",
+            "kind": "official",
+            "text": "Five dates: 6 and 10 October, 20 October, 3 and 17 November. Each session lasts one hour. The venue is the Office familial on the 3rd floor, Avenue de la Gare 14.",
+            "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf"
+          },
+          {
+            "field": "Participation",
+            "kind": "official",
+            "text": "The programme states that it is free and no prior registration is needed.",
+            "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf"
+          },
+          {
+            "field": "Autumn dates on the official news page",
+            "kind": "official",
+            "text": "The Office familial news page currently lists three free autumn discovery workshops with no registration, held at Avenue de la Gare 14, Fribourg: Tuesday 20 October, Tuesday 3 November 2026 and Tuesday 17 November, each 9:30–10:30. Only the 3 November date is printed with a year.",
+            "url": "https://www.officefamilial.ch/fr/office-familial-fribourg/actualites"
+          }
+        ],
+        "remaining": [
+          "The language of the session, conditions for families from another commune, the lift and the possibility of leaving early.",
+          "Are the sessions of 6 and 10 October still on the programme? They are not on the organizer's news page.",
+          "Is 2026 the year of the 20 October and 17 November sessions? The news page prints no year.",
+          "What is the age range of each workshop, and may or must a parent stay with the child?",
+          "In which language are the sessions held?",
+          "Is there a lift to the 3rd floor, and can pushchairs be brought in?",
+          "Can families leave a session early?"
+        ]
+      },
+      "draft": {
+        "cardId": "office-family-workshops",
+        "patch": {},
+        "practicalPatch": {},
+        "findings": [
+          {
+            "field": "Autumn dates on the official news page",
+            "kind": "official",
+            "text": "The Office familial news page currently lists three free autumn discovery workshops with no registration, held at Avenue de la Gare 14, Fribourg: Tuesday 20 October, Tuesday 3 November 2026 and Tuesday 17 November, each 9:30–10:30. Only the 3 November date is printed with a year.",
+            "url": "https://www.officefamilial.ch/fr/office-familial-fribourg/actualites"
+          }
+        ],
+        "remaining": [
+          "Are the sessions of 6 and 10 October still on the programme? They are not on the organizer's news page.",
+          "Is 2026 the year of the 20 October and 17 November sessions? The news page prints no year.",
+          "What is the age range of each workshop, and may or must a parent stay with the child?",
+          "In which language are the sessions held?",
+          "Is there a lift to the 3rd floor, and can pushchairs be brought in?",
+          "Can families leave a session early?"
+        ],
+        "bindings": [
+          {
+            "field": "research.findings.0",
+            "source": "https://www.officefamilial.ch/fr/office-familial-fribourg/actualites",
+            "quote": "Atelier d'automne, gratuit et sans inscription, organisé par l'Office familial, à nos locaux de l'Avenue de la Gare 14, Fribourg",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "15ce54211fb3ac8c182b3a3294322e4fe5cf0c266d25750ff9bdf37d02ede929"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://www.officefamilial.ch/fr/office-familial-fribourg/actualites",
+            "quote": "MARDI 20 octobre",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "15ce54211fb3ac8c182b3a3294322e4fe5cf0c266d25750ff9bdf37d02ede929"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://www.officefamilial.ch/fr/office-familial-fribourg/actualites",
+            "quote": "MARDI 3 novembre 2026",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "15ce54211fb3ac8c182b3a3294322e4fe5cf0c266d25750ff9bdf37d02ede929"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://www.officefamilial.ch/fr/office-familial-fribourg/actualites",
+            "quote": "MARDI 17 novembre",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "15ce54211fb3ac8c182b3a3294322e4fe5cf0c266d25750ff9bdf37d02ede929"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://www.officefamilial.ch/fr/office-familial-fribourg/actualites",
+            "quote": "9H30 - 10H30",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "15ce54211fb3ac8c182b3a3294322e4fe5cf0c266d25750ff9bdf37d02ede929"
+          }
+        ],
+        "reviewLimitations": [
+          "The autumn 2026 programme PDF (https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf) could not be captured: the controller recorded capture-unavailable, and the web tool returned only binary content. Age range, parent-child format, language, floor or lift access and the 6 and 10 October sessions could not be checked against it.",
+          "The news page now lists only three workshops: 20 October, 3 November 2026 and 17 November. The 20 October and 17 November entries have no printed year. The 6 and 10 October sessions on the card are not on the page and are unconfirmed by it.",
+          "The full review is incomplete. Do not renew checked and do not supply reviewCoverage."
+        ],
+        "snapshots": [
+          {
+            "schema": 1,
+            "project": "vmeste",
+            "id": "15ce54211fb3ac8c182b3a3294322e4fe5cf0c266d25750ff9bdf37d02ede929",
+            "url": "https://www.officefamilial.ch/fr/office-familial-fribourg/actualites",
+            "finalUrl": "https://www.officefamilial.ch/fr/office-familial-fribourg/actualites",
+            "fetchedAt": "2026-10-17T20:30:48.333Z",
+            "contentType": "text/html; charset=UTF-8",
+            "parser": "cheerio-visible-body-v1",
+            "textHash": "efeeb8fd0db0423269d988a86c88bdf385ae6f7f2d42c1cd853ed5fa2b238185",
+            "rawHash": "98265ecfa568bec8b96b1ba30df277f5b1e11ba5d837374a76837944485ad7dc",
+            "text": "Contact\nCONSULTATION COUPLE/FAMILLE\nMédiation Familiale\nConsultation Petite enfance\nAs'trame\nInfos générales\nDocumentation\nDocumentation\nDEU\nFRA\nCommuter la navigation\nActualités\nServices\nCONSULTATION COUPLE/FAMILLE\nOffre\nInfos pratiques\nNotre Équipe\nContact\nMédiation Familiale\nOffre\nInfos pratiques\nNotre Équipe\nContact\nConsultation Petite enfance\nOffre\nInfos pratiques\nNotre Équipe\nContact\nAs'trame\nOffre\nInfos pratiques\nNotre Équipe\nContact\nL'OfficeNotre équipe\nComité\nMission et Statuts\nRapports annuels\nPresse et médias\nFlyers\nPartenariats\nLectures suggérées\nSoutien / Dons\nConférences\nContact\nActualités\nL'Office Familial est en évolution permanente. Vous trouverez donc ici quelques actualités touchant de près à notre domaine. Prière de bien vouloir noter que l'Office ne peut être tenue responsable de contenus provenant de sources indépendantes et externes à notre association, qui pourraient figurer dans les informations ci-jointes. Merci de votre compréhension.\nATELIERS DÉCOUVERTE\nDes jeux pour stimuler le développement du langage\nAtelier d'automne, gratuit et sans inscription, organisé par l'Office familial, à nos locaux de l'Avenue de la Gare 14, Fribourg\nINFOS/PDF\nMARDI 20 octobre\n9h30 - 10h30\nOrganisation/partenariat:\nLe yoga des animaux\nAtelier d'automne, gratuit et sans inscription, organisé par l'Office familial, à nos locaux de l'Avenue de la Gare 14, Fribourg\nINFOS/PDF\nMARDI 3 novembre 2026\n9H30 - 10H30\nOrganisation/partenariat:\nLe petit enfant à la découverte de son corps\nAtelier d'automne, gratuit et sans inscription, organisé par l'Office familial, à nos locaux de l'Avenue de la Gare 14, Fribourg\nINFOS/PDF\nMARDI 17 novembre\n9h30 - 10h30\nOrganisation/partenariat:\nPOUR LES PROFESSIONNEL·LE·S\nL'enfant et la séparation de ses parents\nVendredi 20 novembre 2026 - 08h30 à 12h00\nFormatrices : Caroline Naef Grisel / Monica Loup\nINFOS/PDF\nInscription\nL'enfant et la maladie d'un·e proche\nMardi 24 novembre 2026 - 08h30 à 12h00\nFormatrices : Catherine Stalder Kunetka / Anne Dumoulin\nINFOS/PDF\nInscription\n2026-09-01\nDEVENIR FAMILLE\nINFOS/PDF\nL'Office familial a le plaisir d'être partenaire du projet \"Devenir famille\" au sein duquel les Infirmières de la Petite Enfance sont engagées au services des familles en devenir.\n« Devenir famille » est une nouvelle offre au sein de notre canton, à l’attention des futurs parents et parents d’un bébé. Elle fait partie de la Stratégie cantonale Petite Enfance et a trouvé – pour cette phase pilote – le soutien de la Loterie Romande.\nLes rencontres « Devenir famille » ont lieu dès septembre 2026 dans tous les districts. La participation est gratuite et sans inscription. Les familles sont accueillies dans la diversité de leur projet familial et peuvent venir à ces rencontres accompagnées de leur bébé ou autres enfants.\nToutes les informations (dates, lieux et horaires) se trouvent sur le site internet www.devenir-famille.ch\nRetrouvez le podcast Le Mag sur www.Radiofr.ch\n2026-06-15\nConsulation Petite Enfance\nINFOS/PDF\nLe service de Puériculture de l'Office familial change de nom et devient la Consultation Petite Enfance.\nLes Infirmières Petite Enfance sont désormais joignables à l'adresse : petite.enfance@officefamilial.ch.\nNotre Consultation Petite Enfance est accessible aux habitant·e·s du Grand Fribourg (Fribourg-Ville, Marly, Villars-sur-Glâne, Granges-Paccot, Givisiez).\nLes Infirmières Petite Enfance sont à disposition des parents pour toute question liée au développement, à l'alimentation, aux soins et à l'éducation de leur·s enfant·s de al naissance jusqu'à l'entrée à l'école.\n2026-04-07\nAnne, la Bretagne pas à pas\nINFOS/PDF\nDu 7 avril au 9 juillet 2026, Anne Dumoulin, intervenante As'trame Fribourg, vit son projet de marcher le long de l'océan, sur les côtes bretonnes pour un périple de trois mois porteur de sens. Suivre les traces du GR 34 est un projet personnel mais également solidaire.\nAnne marche pour prendre soin d'elle mais aussi afin de pérenniser l'accessibilité des prestations As'trame à toutes les familles en situation de précarité : chaque don récolté durant son aventure viendra renflouer le fonds de soutien d'Astrame Fribourg.\nPour tout connaître de ce projet, vous pouvez vous rendre sur son site internet www.pas-a-pas-solidaire.ch et suivre son compte instagram annelabretagnepasapas dédié.\nRetrouvez les articles parus dans la presse locale :\nLa Gruyère le 24 mars 2026\nFrapp le 2 avril 2026\nLa Liberté du 7 avril 2026\n2026-03-16\nEnfants de parents avec une addiction\nLors de la huitième édition de la Semaine nationale d’action dédiée aux enfants de parents avec une addiction, coordonnée par Addiction Suisse, plusieurs institutions fribourgeoises se sont unies pour sensibiliser à la réalité souvent méconnue des enfants confrontés à l’addiction d’un parent.\nUne nouvelle plateforme cantonale\nUne nouvelle plateforme cantonale met désormais à disposition l’ensemble des ressources existantes : offres de soutien, prestations d’accompagnement pour enfants, familles, parents et professionnels·les, brochures et guides nationaux. Cette plateforme vise à renforcer la visibilité du réseau fribourgeois, à faciliter l’accès à l’information et à orienter rapidement les personnes concernées et les professionnels·les.\nUn projet créatif d'autocollants pour sensibiliser\nDans un projet créatif mené par les jeunes de la Préfo, des autocollants originaux ont été conçus pour exprimer, à travers leurs propres mots et illustrations, ce que signifie grandir avec un parent souffrant d’addiction. Destinés à être diffusés dans les lieux fréquentés par les jeunes et les familles, ces visuels visent à rendre visible leur vécu, à ouvrir le dialogue et à bousculer les idées reçues. Par leur créativité et leur engagement, ils et elles ont su traduire avec force et authenticité le vécu des enfants concernés.\nDeux podcasts pour thématiser l'addiction d'un parent\nDans le cadre des podcasts « VLA.TI.PA : Ensemble, déconstruisons les clichés psy », réalisés par les psychologues Déborah Maret et Solène Maeder, deux nouveaux épisodes viennent enrichir la série. Leur objectif est d’ouvrir le dialogue et de déconstruire les idées reçues autour des problématiques psychiques et des addictions.\nDans le premier épisode, des intervenants·es du Torry et du Centre cantonal d’addictologie abordent les questions liées à la consommation d’alcool et à ses impacts sur la vie familiale. Le second épisode, réalisé avec des intervenantes du service As’trame Fribourg, présente les ressources, les approches et les moyens d'accompagnement destinés aux enfants concernés par l’addiction d’un parent.\n2022-08-25\nConférence Familles arc-en-ciel\nPar le passé, jugée impossible et/ou néfaste pour les enfants, la parentalité des personnes LGBT a toujours existé. Au cours des deux dernières décennies, ce n’est donc pas à l’émergence d’un nouveau phénomène que l’on a assisté mais à une évolution du regard porté sur les parents LGBT : la méconnaissance et les préjugés ayant peu à peu cédé la place à la reconnaissance des familles arc-en-ciel comme une constellation familiale parmi d’autres, ainsi qu’à une meilleure protection légale de celles-ci.\nIntervenant-e-s:\nCatherine Fussinger, historienne (santé, social et études genre)\nNicolas Ozelley, travailleur social spécialisé en protection de l'enfance\nMembres de l'Association faîtière Familles arc-en-ciel - www.famillesarcenciel.ch\nINFOS / FORMAT PDF\nLieu: Aula du Collège St-Michel (rue St-Pierre-Canisius 10, Fribourg)\nDate: Le jeudi 6 octobre 2022 à 19h30\nEntrée gratuite, tout public\nINSCRIPTION SOUHAITÉE\n(Photo Copyright KEYSTONE - Gaëtan Bally)\n2022-03-14\nNews sur le film \"La forêt de mon père\"\nDans le cadre des Journées de la Schizophrénie, les associations PA-F (Proches Aidants Fribourg) et Office familial / As’trame Fribourg, ainsi que la Plateforme de soutien des Proches du RFSM (Réseau fribourgeois de santé mentale) ont le plaisir de vous convier à l’Avant-Première du film :\nLA FORET DE MON PÈRE\nUn film de Vero CRATZBORN\nA Bulle : mercredi 23 mars à 18h15 au Cinéma Prado\nA Fribourg : lundi 28 mars à 18h15 au Cinéma Rex, en présence de la réalisatrice\nLes trois organisations offrent 60 places par projection. (LIMITE ATTEINTE. MERCI DE VOTRE INTÉRÊT!)\nPOUR ACHETER DES BILLETS POUR CES SÉANCES, SVP UTILISER CINEMOTION.\nProjections en français, sous-titrées en allemand.\n> Trailer\n> Capsule 1\n> Capsule 2\n> Capsule 3\n> Capsule 4\n2021-05-10\nLorsque la fragilité psychique envahit la famille\nNotre service As’trame Fribourg propose une nouvelle offre pour des familles dont le ou les parent·s connaissent des fragilités psychiques et/ou souffrent d’addictions. En effet, grandir dans un tel contexte pour un enfant ou un·e adolescent·e n’est pas toujours chose aisée. Ainsi, leur proposer un espace pour les aider à reconnaître ce qu’ils·elles vivent, les émotions qui les chahutent, et également les ressources qu’ils·elles ont, est le but de ce nouveau suivi intitulé Zig-Zag. Nous avons opté pour ce titre, car ces familles connaissent souvent beaucoup d’inconstance, des hauts et des bas, et c’est bien cette fluctuation que vivent également les enfants dans leur relation à leur parent concerné par ce type de fragilités.\nCe type de suivis est proposé depuis plusieurs années par la Fondation As’trame dans le canton de Vaud et est très apprécié tant par les familles que par le réseau des professionnels·les qui trouvent avec cette offre un espace privilégié pour les enfants et/ou adolescents·es. Grâce au soutien de Promotion Santé Suisse, nous avons enfin la possibilité de développer cette offre dans notre canton et nous réjouissons d’accueillir des familles concernées.\nNous bénéficions de trois lieux pour accueillir les familles qui nous sollicitent dans notre canton: Fribourg, Bulle et Estavayer-le-Lac. Grâce à cette présence dans plusieurs régions, nous atteignons une majorité de la population, ce qui nous réjouit. Toutes nos prestations sont disponibles en français et allemand, et si nécessaire, nous travaillons avec des interprètes communautaires.\nNos professionnels·es présenteront cette nouvelle offre le 18 juin de 8h30 à 10h30 lors du Petit Déjeuner de la Promotion de la Santé. Cette séance virtuelle est ouverte à tout un chacun :\nLiens :\nNotre flyer ZIGZAG à télécharger\nInformations (lien) DSAS sur le Petit Déjeuner de la Promotion de la Santé\nInformations (PDF) DSAS sur le Petit Déjeuner de la Promotion de la Santé\n2019-05-06\nAs'trame Fribourg: 10 ans dans notre canton!\nAfin de sensibiliser mieux encore la population fribourgeoise aux suivis proposés par notre service As'trame Fribourg, nous proposons un cycle de films en 2019-2020 traitant des thématiques du deuil, de la maladie, de la séparation et de leur impact au sein des familles.\nNous vous invitons à nous rejoindre lors de ces projections qui auront lieu dans différentes villes de notre canton.\nLe deuxième film \"Et les mistrals gagnants\" sera projeté le jeudi 13 juin 2019 à 18h au cinéma Rex à Fribourg: 100 entrées sont offertes par l'Office familial: inscrivez-vous (lien au formulaire)\n2019-05-01\nVieillir : une étape au cœur de votre relation de couple et de famille\nEn 2018, nos secteurs de consultation de couple et de médiation familiale ont mené une réflexion liée au vieillissement et à son impact au sein de la vie de couple et de la vie familiale, afin de répondre mieux encore aux préoccupations qui émergent dans ces étapes de vie, pour lesquelles les personnes nous sollicitent de plus en plus.\nAu moment de la retraite, les couples sont amenés à trouver de nouveaux équilibres. Ce temps de retraite peut être vécu très différemment d’un partenaire à l’autre. Des sentiments contradictoires et ambivalents coexistent bien souvent. Les attentes au sein du couple varient, de même que les éventuelles appréhensions. De plus, au fil du temps qui passe, les questionnements vont évoluer, selon notamment l’état de santé de chacun-e. Des peurs peuvent émerger de voir l’autre s’affaiblir, ou de sentir soi-même la perte de certaines capacités. D’autres fois, la retraite rime avec décision de séparation, sentiment de solitude ou, au contraire, nouvelle vie de couple.\nSur le plan intergénérationnel, le vieillissement des parents éveille fréquemment au sein des fratries des points de vue très divergents quant à la manière de soutenir cette étape de vie en sa qualité d’enfants. Le risque est parfois grand de se figer dans des positions qui empêchent le dialogue. Dans d’autres situations, les enfants sont tous d’accord, mais le parent concerné se sent n’avoir plus aucun droit quant à son autodétermination. La médiation intergénérationnelle s’avère être un espace très bénéfique et constructif pour aider à une meilleure compréhension des points de vue de chacun-e, et des inquiétudes qui en général les sous-tendent.\nPrendre le temps de parler de tous ces changements, mettre à plat les incompréhensions, nommer les tensions et les désaccords permettent à chacun-e de se sentir reconnu-e et aide à une plus grande bienveillance dans ces années de vie qui sont souvent confrontantes.\n2019-02-23\nAs'trame Fribourg: 10 ans dans notre canton!\nAfin de sensibiliser mieux encore la population fribourgeoise aux suivis proposés par notre service As'trame Fribourg, nous proposons un cycle de films en 2019 traitant des thématiques du deuil, de la maladie, de la séparation et de leur impact au sein des familles.\nNous vous invitons à nous rejoindre lors de ces projections qui auront lieu dans différentes villes de notre canton.\nLe premier film \"Un Ange passé trop vite\" sera projeté le mercredi 13 mars à 18h au cinéma Prado à Bulle: 100 entrées sont offertes par l'Office familial: inscrivez-vous (lien au formulaire)\n2017-10-02\nReprise des prestations As'trame\nDepuis le 1er octobre 2017, l'Office Familial a repris toutes les prestations proposées auparavant par l'Association As'trame Fribourg, qui a été dissoute au 30 septembre 2017. Ce choix a été fait en partenariat entre nos deux associations et a été vivement appuyé par nos principaux soutiens, dans le but de pérenniser l'offre As'trame et lui offrir une structure administrative et professionnelle en lien avec la forte augmentation de la demande ces dernières années.\nToutes les professionnelles As'trame, au bénéfice de nombreuses années d'expérience, ont été réengagées par notre association, afin de ne pas perdre les compétences acquises dans ce domaine, et proposer aux personnes concernées un accompagnement et soutien de qualité.\nDécouvrez les prestations complètes d'As'trame Fribourg!\n2017-04-03\nConsultations familiales en hausse à l’Office familial\nEn 2016, les entretiens familiaux ont connu une véritable hausse, avec un tiers de situations en plus.\nLes familles sont aujourd’hui en demande d’aide, qu’elles vivent selon un modèle traditionnel, recomposé, monoparental, séparé, homoparental. La communication, le respect de la place de chacun-e, le besoin de compréhension, l’autorité, les limites sont au cœur de ces entretiens qui permettent à tous les membres de la famille d’exprimer leurs ressentis et leurs besoins, dans un cadre respectueux de la parole et de la place de chacun-e au sein de la famille.\nLa médiation familiale a également accompagné un nombre croissant de situations où l’intergénérationnel s’exprime et s’interroge : fratrie adulte qui se réunit aux prises avec des questionnements essentiels quant à leurs parents âgés, médiations lors de conflits familiaux qui viennent empêcher la relation grands-parents-petits-enfants.\nRadio Fribourg - Invitée du mercredi - Chantal Valenzuela Schwaller\nRapport annuel Office familial (2016) PDF\n2017-03-16\nL’enfant face à la violence conjugale : sensibiliser les professionnels-les\nPari réussi pour la Commission cantonale contre la violence conjugale qui a réuni, en partenariat avec le Service de l’action sociale (secteur LAVI), plus de 200 professionnels-les à Grangeneuve pour les sensibiliser à l’impact de la violence conjugale sur les enfants et adolescents-es qui en sont témoins et de ce fait, victimes.\nFavoriser un soutien spécifique pour ces enfants et adolescents-es touchés-es en plein cœur par cette violence a été au cœur des interventions des spécialistes invités-es à cette journée de formation.\nL’Office familial est depuis dix ans membre de cette Commission très active, présidée par le Bureau de l’Egalité.\nhttp://latele.ch/play?i=l-actu-les-enfants-victimes-de-violences-conjugales-mis-en-lumiere-16-03-2017-1800\n2017-01-27\nDépression post-partum : lorsque maternité ne rime plus avec bonheur\nDifficile pour des mères de pouvoir nommer le fait que la maternité ne rime pas toujours avec bonheur! Une très grande majorité des mères connaît le «baby-blues», tandis que 10 à 20% des femmes développent une dépression post-partum. Et pourtant, beaucoup vont éprouver de la honte et ne pas se sentir être à la hauteur de cet évènement, alors qu’il est un des plus grands chamboulements que vit une femme, mais aussi son compagnon, ainsi que leur couple qui doit trouver un nouvel équilibre.\nN’hésitez pas à en parler à nos infirmières-puéricultrices.\nhttp://www.24heures.ch/savoirs/sante/vivais-bonheur-maternel/story/30121774\nhttp://www.grangettes.ch/fr/content/d%C3%A9pression-post-partum-halte-au-tabou\nhttp://www.24heures.ch/signatures/reflexions/voit-jamais-arriver-burnout-parental/story/14232848\nNotre flyer «Votre couple se découvre parents»\n2016-10-17\nEnquête nationale sur les relations: 77% des individus de 18 à 80 ans en couple\nQu’est-ce qui distingue les couples mariés des couples non mariés? Combien y a-t-il de femmes et d’hommes ne faisant pas ménage en commun avec leur partenaire?\nQuels sont les motifs de dispute les plus fréquents, et comment les partenaires abordent-ils les conflits? Ce sont-là quelques-unes des questions traitées dans la Publication de l’OFS (Office fédéral de la statistique), consacrée aux différences d’âge, de formation et d’origine dans les couples, à la situation des couples en union libre, au partage des rôles et aux conflits dans le couple, à la gestion du revenu du ménage et aux relations antérieures. De quoi brosser un tableau tout en nuances des relations de couple dans notre pays.\nRetrouvez toute l’enquête\nhttps://www.bfs.admin.ch/bfs/fr/home/statistiques/population/enquetes/efg.html\nhttps://media.wix.com/ugd/aed839_c06b0b250701481b91a3ed12149ab307.pdf\nLes prestations de l'Office Familial\naccès au service\nConseil Couples et Familles\nTensions au sein de votre couple? Difficultés familiales? Manque de communication?\naccès au service\nMédiation familiale\nSe séparer sans se déchirer? Préserver les enfants en cas de divorce? Mettre à plat des conflits familiaux?\naccès au service\nPetite Enfance\nComment va mon enfant? Son sommeil? Son alimentation? Son développement?\naccès au service\nAs'trame Fribourg\nPrendre soin de nos enfants lors d’une séparation? Les soutenir lors d’un deuil, d’une maladie?\nL'Office familial\nPlus de 100 ans au service de la communauté du grand Fribourg, au niveau local ET cantonal.\nA travers des décennies de changements, d'évolution, de redécouvertes familiales,\nl'Office a suivi et continue de suivre la population fribourgeoise,\ndans le respect de sa très grande diversité.\nNos partenaires\nL'Office Familial\nPlus de 100 ans au service de la communauté du grand Fribourg, au niveau local ET cantonal.\nA travers des décennies de changements, d'évolution, de redécouvertes familiales,\nl'Office a suivi et continue de suivre la population fribourgeoise,\ndans le respect de sa très grande diversité.\nActualités\nDEVENIR FAMILLE\n(2026-09-01)\nConsulation Petite Enfance\n(2026-06-15)\nAnne, la Bretagne pas à pas\n(2026-04-07)\nEnfants de parents avec une addiction\n(2026-03-16)\nLiens d'intérêt\nTPF Transports publics\nFribourg pour tous\nMétéo\nCouple+\nContact\nDocumentation\nContact\nOFFICE FAMILIAL\nAvenue de la Gare 14\n1700 Fribourg\nT. 026 322 10 14\nContactez-nous\n©2026 Tous droits réservés\nSphère privée | Dev/CMS GUIET.com\nContact Box\nContact Infos\nOffice Familial\nOFFICE FAMILIAL\nAvenue de la Gare 14\n1700 Fribourg\nT. 026 322 10 14\nContactez-nous\nHoraires\nPermanence téléphonique:\nLundi-vendredi\n8h00 - midi\nACCÈS DIRECT\nCONTACTCOUPLES\nCONTACTMÉDIATION\nCONTACTCONSULTATION PETITE ENFANCE\nCONTACTAS'TRAME\n×\n2026-09-01\nDEVENIR FAMILLE\nL'Office familial a le plaisir d'être partenaire du projet \"Devenir famille\" au sein duquel les Infirmières de la Petite Enfance sont engagées au services des familles en devenir.\n« Devenir famille » est une nouvelle offre au sein de notre canton, à l’attention des futurs parents et parents d’un bébé. Elle fait partie de la Stratégie cantonale Petite Enfance et a trouvé – pour cette phase pilote – le soutien de la Loterie Romande.\nLes rencontres « Devenir famille » ont lieu dès septembre 2026 dans tous les districts. La participation est gratuite et sans inscription. Les familles sont accueillies dans la diversité de leur projet familial et peuvent venir à ces rencontres accompagnées de leur bébé ou autres enfants.\nToutes les informations (dates, lieux et horaires) se trouvent sur le site internet www.devenir-famille.ch\nRetrouvez le podcast Le Mag sur www.Radiofr.ch\nFermer\n×\n2026-06-15\nConsulation Petite Enfance\nLe service de Puériculture de l'Office familial change de nom et devient la Consultation Petite Enfance.\nLes Infirmières Petite Enfance sont désormais joignables à l'adresse : petite.enfance@officefamilial.ch.\nNotre Consultation Petite Enfance est accessible aux habitant·e·s du Grand Fribourg (Fribourg-Ville, Marly, Villars-sur-Glâne, Granges-Paccot, Givisiez).\nLes Infirmières Petite Enfance sont à disposition des parents pour toute question liée au développement, à l'alimentation, aux soins et à l'éducation de leur·s enfant·s de al naissance jusqu'à l'entrée à l'école.\nFermer\n×\n2026-04-07\nAnne, la Bretagne pas à pas\nDu 7 avril au 9 juillet 2026, Anne Dumoulin, intervenante As'trame Fribourg, vit son projet de marcher le long de l'océan, sur les côtes bretonnes pour un périple de trois mois porteur de sens. Suivre les traces du GR 34 est un projet personnel mais également solidaire.\nAnne marche pour prendre soin d'elle mais aussi afin de pérenniser l'accessibilité des prestations As'trame à toutes les familles en situation de précarité : chaque don récolté durant son aventure viendra renflouer le fonds de soutien d'Astrame Fribourg.\nPour tout connaître de ce projet, vous pouvez vous rendre sur son site internet www.pas-a-pas-solidaire.ch et suivre son compte instagram annelabretagnepasapas dédié.\nRetrouvez les articles parus dans la presse locale :\nLa Gruyère le 24 mars 2026\nFrapp le 2 avril 2026\nLa Liberté du 7 avril 2026\nFermer\n×\n2026-03-16\nEnfants de parents avec une addiction\nLors de la huitième édition de la Semaine nationale d’action dédiée aux enfants de parents avec une addiction, coordonnée par Addiction Suisse, plusieurs institutions fribourgeoises se sont unies pour sensibiliser à la réalité souvent méconnue des enfants confrontés à l’addiction d’un parent.\nUne nouvelle plateforme cantonale\nUne nouvelle plateforme cantonale met désormais à disposition l’ensemble des ressources existantes : offres de soutien, prestations d’accompagnement pour enfants, familles, parents et professionnels·les, brochures et guides nationaux. Cette plateforme vise à renforcer la visibilité du réseau fribourgeois, à faciliter l’accès à l’information et à orienter rapidement les personnes concernées et les professionnels·les.\nUn projet créatif d'autocollants pour sensibiliser\nDans un projet créatif mené par les jeunes de la Préfo, des autocollants originaux ont été conçus pour exprimer, à travers leurs propres mots et illustrations, ce que signifie grandir avec un parent souffrant d’addiction. Destinés à être diffusés dans les lieux fréquentés par les jeunes et les familles, ces visuels visent à rendre visible leur vécu, à ouvrir le dialogue et à bousculer les idées reçues. Par leur créativité et leur engagement, ils et elles ont su traduire avec force et authenticité le vécu des enfants concernés.\nDeux podcasts pour thématiser l'addiction d'un parent\nDans le cadre des podcasts « VLA.TI.PA : Ensemble, déconstruisons les clichés psy », réalisés par les psychologues Déborah Maret et Solène Maeder, deux nouveaux épisodes viennent enrichir la série. Leur objectif est d’ouvrir le dialogue et de déconstruire les idées reçues autour des problématiques psychiques et des addictions.\nDans le premier épisode, des intervenants·es du Torry et du Centre cantonal d’addictologie abordent les questions liées à la consommation d’alcool et à ses impacts sur la vie familiale. Le second épisode, réalisé avec des intervenantes du service As’trame Fribourg, présente les ressources, les approches et les moyens d'accompagnement destinés aux enfants concernés par l’addiction d’un parent.\nFermer",
+            "captureMethod": "node-pinned-https"
+          }
+        ]
+      }
     }
   ]
 }
