@@ -13,6 +13,20 @@ Französisch und Englisch.
 Schwierig ist nicht die Seite, sondern die Daten. Angebote ändern sich, und ein Sprachmodell erfindet leicht eine
 Antwort, wenn eine Quelle nichts dazu sagt.
 
+## Was ich mache und was die Agenten machen
+
+Den Code schreiben KI-Agenten: Claude Code, früher Codex. Meine Arbeit:
+
+- Ich lege fest, was das Produkt tut und was nicht. Zum Beispiel: keine Namen von Privatpersonen im Katalog.
+- Ich lege die Anforderungen und Regeln fest. Die Agenten schreiben daraus die Specs, ich gebe sie frei.
+- Ich prüfe die Ergebnisse: Die Agenten führen Tests und Audits durch, ich lese ihre Berichte und sehe mir die
+  laufende Seite selbst an.
+- Ich entscheide, was veröffentlicht wird. Domain und Server habe ich ausgewählt und bezahlt.
+  Agenten haben beides nach meiner Freigabe eingerichtet.
+
+Code lese ich noch nicht flüssig. Die Abläufe kann ich erklären: Die vier wichtigsten Wege durch den Code stehen in
+[`docs/architektur.md`].
+
 ## Die Regel
 
 **Modelle lesen und schlagen vor. Code entscheidet und schreibt.**
@@ -41,50 +55,48 @@ Aus der Demo im Repository. Sie läuft ohne Netz und ohne Modell, mit aufgezeich
 
 ## Zahlen
 
-Stand 14. Oktober 2026.
+Stand 17. Oktober 2026.
 
 - 295 Einträge im Katalog, 26 im Archiv
 - alle 7 Bezirke des Kantons
-- 462 Quellen
-- 491 automatische Tests. Auf GitHub laufen sie bei jedem Push; 6 davon werden dort übersprungen.
+- 462 Quellen. Geprüft wurden die Einträge zwischen dem 22. September und dem 2. Oktober, die meisten am 27. und
+  28. September.
+- 904 automatische Tests. Auf GitHub laufen sie bei jedem Push; 7 davon werden dort übersprungen.
 - bewusst «unbekannt» gelassen: die Sprache bei 263 Einträgen, der Preis bei 189, das Mindestalter bei 199
 
-### Pipeline, 2. bis 13. Oktober 2026
+### Pipeline, 2. bis 17. Oktober 2026
 
-Die meisten Modell-Läufe (197 von 205) gingen noch über die frühere Route
-mit OpenAI Codex (2. und 3. Oktober), 8 über Claude. Die Regeln im Code sind für beide gleich.
+Die meisten Modell-Läufe (197 von 234) gingen über die frühere Route mit OpenAI Codex (2. und 3. Oktober), 37 ab dem 8. Oktober über Claude. Die Regeln im Code sind für beide gleich.
 
-- 205 Modell-Läufe: 72 Suche, 100 Prüfung, 33 Editor
-- 1219 vorgeschlagene Angaben. Bei 46 fand das Programm das Zitat nicht wörtlich in der Quelle, bei 33 stammte es
+- 234 Modell-Läufe: 77 Suche, 111 Prüfung, 46 Editor
+- 1340 vorgeschlagene Angaben. Bei 51 fand das Programm das Zitat nicht wörtlich in der Quelle, bei 36 stammte es
   nicht von einer offiziellen Seite des Angebots. Diese Angaben wurden auf «unbekannt» gesetzt.
-- 1078 Urteile des Prüf-Agenten: 567 bestätigt, 123 abgelehnt, 388 «braucht eine andere Quelle»
-- Entwürfe des Editor-Agenten: 20 genehmigt und übernommen, 5 wies das Programm ab, 5 lehnte der Prüf-Agent ab
-- 12 Antworten verletzten die Regeln (Schema oder Belege) und wurden verworfen, darunter die 5 abgewiesenen Entwürfe
-- Der Circuit Breaker hat sich nie geöffnet; einmal musste ein Mensch eingreifen.
+- 1199 Urteile des Prüf-Agenten: 637 bestätigt, 127 abgelehnt, 435 «braucht eine andere Quelle»
+- Entwürfe des Editor-Agenten: 23 genehmigt, 9 wies das Programm ab, 8 lehnte der Prüf-Agent ab
+- 16 Antworten verletzten die Regeln (Schema oder Belege) und wurden verworfen, darunter die 9 abgewiesenen Entwürfe
+- Der Circuit Breaker hat sich nie geöffnet. 6 Aufträge gingen zur Entscheidung an einen Menschen.
 
 [Quelle: interne Queue, gezählt mit learning/pipeline-counts.mjs, nur lesend; nicht im öffentlichen Repository.]
 
 ## Betrieb
 
 - Die Seite läuft in Docker-Containern auf einem Server in der Schweiz (Infomaniak Public Cloud), mit HTTPS über
-  Caddy. Auch diese Fallstudie kommt von dort.
-- Jede Nacht wird gesichert. Die Wiederherstellung wurde am 14. Oktober 2026 auf dem laufenden Server geübt.
-- Alle fünf Minuten prüft der Server, ob die Seite antwortet. Wenn nicht, kommt eine E-Mail.
+  Caddy. Auch diese Fallstudie wird von dort ausgeliefert.
+- Neue Versionen gehen nur über ein Deploy-Skript online. Es startet die neue Version zuerst in einer Vorschau auf
+  dem Server. Am 16. Oktober hat das Deploy-Skript einen Fehler in der Vorschau gefunden. Darum ist die neue Version
+  nicht live gegangen. Das Skript hat die alte Version beibehalten, und die Website ist ohne Unterbruch weitergelaufen. Eine
+  Viertelstunde später war die korrigierte Version online.
+- Jede Nacht wird gesichert, und mein Rechner holt sich eine Kopie. Die Wiederherstellung wurde am 14. Oktober 2026
+  auf dem laufenden Server geübt.
+- Alle fünf Minuten prüft der Server, ob die Seite antwortet. Wenn nicht, kommt eine E-Mail. Alle 30 Minuten prüft
+  er ausserdem, ob die Redaktions-Pipeline läuft und ob ihre Sicherung angekommen ist.
 - Die Redaktions-Pipeline läuft nicht auf dem Server, sondern auf meinem Rechner.
 
-## Was ich mache und was die Agenten machen
+## Prüfung vor dem Versand
 
-Den Code schreiben KI-Agenten: Claude Code, früher Codex. Meine Arbeit:
-
-- Ich lege fest, was das Produkt tut und was nicht. Zum Beispiel: keine Namen von Privatpersonen im Katalog.
-- Ich lege die Anforderungen und Regeln fest. Die Agenten schreiben daraus die Specs, ich gebe sie frei.
-- Ich prüfe die Ergebnisse: Die Agenten führen Tests und Audits durch, ich lese ihre Berichte und sehe mir die
-  laufende Seite selbst an.
-- Ich entscheide, was veröffentlicht wird. Domain und Server habe ich ausgewählt und bezahlt.
-  Agenten haben beides nach meiner Freigabe eingerichtet.
-
-Code lese ich noch nicht flüssig. Die Abläufe kann ich erklären: Die vier wichtigsten Wege durch den Code stehen in
-[`docs/architektur.md`].
+Am 17. Oktober, vor dem Versand dieser Seite, haben KI-Agenten und automatische Werkzeuge die App geprüft. Massstab
+waren WCAG 2.2 AA, OWASP ASVS (Stufe 1) und Core Web Vitals; dazu wurden acht typische Aufgaben in einem Browser in Handygrösse durchgespielt. Gefunden wurde zum Beispiel: Der Altersfilter für Kinder unter 1 Jahr blendete einen Babyschwimmkurs
+«ab 4 Monaten» aus. Neun Probleme wurden am selben Tag behoben; die Änderungen wurden nach meiner Freigabe veröffentlicht.
 
 ## Grenzen
 
