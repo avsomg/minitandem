@@ -126,6 +126,60 @@ test('full-review bindings can verify a retained field only against its exact ap
   assert.equal(row(await buildLedger({root:f.root}),'amount').origin,'inherited');
 });
 
+// The editor stage captures the source again: the same page and quote under a new snapshot id, which the draft binds and the claim does not name.
+function recapture(f,{text=f.evidence.text+' The page was captured again by the editor stage.',url=f.evidence.url,register=true,keep=true}={}){
+  const evidence=snapshot({url,fetchedAt:'2026-10-15T09:30:00.000Z',text});
+  if(register)mutateQueue(f,db=>db.prepare('INSERT OR REPLACE INTO captured_evidence VALUES (?,?,?)').run(evidence.id,JSON.stringify(evidence),evidence.fetchedAt));
+  if(keep)f.draft.snapshots=[evidence];
+  for(const binding of f.draft.bindings)binding.snapshotId=evidence.id;
+  resealFixture(f);return evidence;
+}
+const unverified=(ledger,detail,verified=0)=>{
+  const {verification}=row(ledger,'amount');
+  assert.equal(row(ledger,'amount').origin,'inherited');assert.equal(verification.reason,'binding-differs');assert.equal(verification.fatal,false);
+  assert.equal(verification.detail,detail);assert.equal(ledger.complete,true);assert.equal(ledger.counts.journalCovered,2);assert.equal(ledger.counts.journalVerified,verified);
+};
+
+test('a binding that names the editor recapture of the claim page is verified and records both snapshots',async t=>{
+  const f=ledgerFixture(t),same=await buildLedger({root:f.root});
+  assert.equal(row(same,'amount').snapshotId,f.evidence.id);assert.equal(row(same,'amount').bindingSnapshotId,f.evidence.id);
+  const again=recapture(f),ledger=await buildLedger({root:f.root});
+  assert.notEqual(again.id,f.evidence.id);assert.equal(ledger.counts.journalVerified,2);assert.deepEqual(ledger.counts.unverifiedReasons,{});
+  for(const field of ['amount','practical.booking']){
+    assert.equal(row(ledger,field).origin,'verified');assert.equal(row(ledger,field).snapshotId,f.evidence.id,'the claim keeps the snapshot of the facts stage');
+    assert.equal(row(ledger,field).bindingSnapshotId,again.id);assert.equal(row(ledger,field).evidence[0].bindingSnapshotId,again.id);
+  }
+  const records=loadCatalog({base:f.root}).ACTIVITIES;assert.doesNotThrow(()=>validateLedger(ledger,records,{journal:f.journal}));
+  const bare=structuredClone(ledger);delete row(bare,'amount').evidence[0].bindingSnapshotId;assert.throws(()=>validateLedger(bare,records),/claim provenance/);
+});
+
+for(const [name,detail,options] of [
+  ['no longer holds the quote','recapture-quote-missing',{text:'The page was rewritten and says something else now.'}],
+  ['is not registered by the controller','recapture-not-registered',{register:false}],
+  ['is missing from the draft snapshots','recapture-not-in-draft',{keep:false}],
+  ['is a capture of another page','recapture-source-differs',{url:'https://other.example.org/meeting'}]
+])test('a recapture that '+name+' leaves the field unverified with a reason',async t=>{
+  const f=ledgerFixture(t);recapture(f,options);
+  unverified(await buildLedger({root:f.root}),detail);
+});
+
+test('a recapture does not excuse a binding of another source or quote, nor a claim snapshot outside the bundle',async t=>{
+  const f=ledgerFixture(t),again=recapture(f);
+  f.draft.bindings[0].source='https://other.example.org/meeting';resealFixture(f);unverified(await buildLedger({root:f.root}),undefined,1);
+  f.draft.bindings[0].source=f.claims[0].source;f.draft.bindings[0].quote='No registration required.';resealFixture(f);
+  unverified(await buildLedger({root:f.root}),undefined,1);
+  f.draft.bindings[0].quote=f.claims[0].quote;f.bundle.snapshots=[again];resealFixture(f);
+  await assert.rejects(buildLedger({root:f.root}),/quote or snapshot provenance differs/);
+});
+
+test('a recapture is checked against the reviewed snapshots by the binding own snapshot',async t=>{
+  const f=ledgerFixture(t),again=recapture(f);delete f.draft.patch.amount;
+  f.draft.reviewCoverage={mode:'full',fields:[{field:'amount',value:0,outcome:'confirmed',snapshotIds:[again.id]}]};f.draft.bindings[0].field='review.amount';resealFixture(f);
+  assert.equal(row(await buildLedger({root:f.root}),'amount').origin,'verified');
+  f.draft.reviewCoverage.fields[0].snapshotIds=[f.evidence.id];resealFixture(f);
+  const ledger=await buildLedger({root:f.root});assert.equal(row(ledger,'amount').origin,'inherited');assert.equal(row(ledger,'amount').verification.reason,'coverage-snapshot-differs');
+});
+
 test('page-record version is linked by recorded bytes or text, never by quote survival alone',async t=>{
   const f=ledgerFixture(t),version=f.evidence.textHash.slice(0,12);
   writeJson(path.join(f.editorial,'source-watch.json'),{sources:[{id:'fixture-source',url:'https://www.fixture.example.org/meeting/',recordIds:['fixture']}]});
