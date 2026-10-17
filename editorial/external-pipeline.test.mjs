@@ -188,8 +188,12 @@ test('the real receipts reconcile with the current published catalogue',{skip:SK
   // Every receipt of a published card is current, held for editorial work, or explicitly
   // stale and back in verification. Closed cards keep their receipt as history only.
   const stageOf=new Map(current.rows.map(row=>[row.id,row.stage]));
+  // A card can also be in editorial work without a receipt (a proposed correction, for example from the accuracy audit of 16 October
+  // 2026), so only the editorial rows that hold a receipt are counted here.
+  const withReceipt=new Set(receipts.map(receipt=>receipt.id));
   const staleAwaitingReview=current.staleAddressReceipts.filter(id=>stageOf.get(id)!=='editorial');
-  assert.equal(current.summary.verified+current.summary.editorial+staleAwaitingReview.length,
+  const editorialWithReceipt=current.rows.filter(row=>row.stage==='editorial'&&withReceipt.has(row.id)).length;
+  assert.equal(current.summary.verified+editorialWithReceipt+staleAwaitingReview.length,
     receipts.filter(receipt=>stageOf.has(receipt.id)).length);
 });
 
