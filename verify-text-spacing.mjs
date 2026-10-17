@@ -24,7 +24,7 @@ try{
     const check=async state=>{
       // Layout settles after the dialog animation; the check reads the finished page.
       await page.waitForTimeout(150);
-      // The search placeholder is already cut below 360 px at the normal spacing (design review of 17 October, point 10); it is read from 360 px.
+      // The search placeholder is read from 360 px: at 320 px the German and French ones are still longer than the field with this spacing (design review of 17 October, point 10).
       const found=(await clippedLabels(page)).filter(item=>!(target.viewport.width<360&&/ of input#q /.test(item)));
       states.push(`${target.name} ${lang} ${state}`);
       for(const item of found)problems.push(`${target.name} ${lang} ${state}: ${item}`);

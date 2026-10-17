@@ -29,7 +29,7 @@
   'view.week': 'This week',
   'results.label': 'Results',
   'search.label': 'Search activities',
-  'search.placeholder': 'Search by name, town or topic',
+  'search.placeholder': 'Name, town or topic',
   'search.clear': 'Clear search',
   'pill.age': 'Child’s age',
   'pill.place': 'District or town',

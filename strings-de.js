@@ -29,7 +29,7 @@
   'view.week': 'Diese Woche',
   'results.label': 'Ergebnisse',
   'search.label': 'Angebote suchen',
-  'search.placeholder': 'Name, Ort oder Thema suchen',
+  'search.placeholder': 'Name, Ort oder Thema',
   'search.clear': 'Suche löschen',
   'pill.age': 'Alter des Kindes',
   'pill.place': 'Bezirk oder Ort',
