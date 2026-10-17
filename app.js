@@ -692,7 +692,8 @@
   document.body.dataset.icons = W.MinitandemCategoryIcons?.VARIANT || 'E';
   applyStatic(); buildPanel(); wirePanel();
   if (store.storageAvailable && store.personal.favorites.some(id => !store.personal.tracked[id])) store.persist();
-  render();
+  // The footer stays out of the page until the list is there (styles.css), so the list never pushes it down.
+  try { render(); } finally { document.body.classList.add('ready'); }
   if (first.activity) openDetail(first.activity, false);
   if (!store.storageAvailable) setTimeout(() => toast(t('storage.unavailable')), 100);
   sync.init();

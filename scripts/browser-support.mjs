@@ -22,6 +22,15 @@ export async function expectFocus(page,selector,message,timeout=3000){
   try{await page.waitForFunction(onIt,selector,{timeout});}
   catch{assert.fail(`${message} (focus is on ${await page.evaluate(()=>document.activeElement?.outerHTML.slice(0,90))})`);}
 }
+// The Lighthouse way to total layout shifts: the worst run of shifts, each less than 1 s after the last, within 5 s.
+export function worstShiftWindow(entries){
+  let worst=0,total=0,first=0,last=0;
+  for(const {startTime,value} of entries){
+    if(!total||startTime-last>=1000||startTime-first>=5000){total=0;first=startTime;}
+    total+=value;last=startTime;worst=Math.max(worst,total);
+  }
+  return worst;
+}
 export function artifactDirectory(check){
   const directory=path.join(root,'editorial/typesafe-runtime/browser-checks',engineName(),check);
   fs.mkdirSync(directory,{recursive:true});

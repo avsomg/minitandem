@@ -4,7 +4,7 @@ import path from 'node:path';
 import os from 'node:os';
 import vm from 'node:vm';
 import test from 'node:test';
-import {engineName,targets,contextOptions,serveSite,prepareContext,expectFocus} from './scripts/browser-support.mjs';
+import {engineName,targets,contextOptions,serveSite,prepareContext,expectFocus,worstShiftWindow} from './scripts/browser-support.mjs';
 import {assertAccessible,blockingViolations} from './scripts/axe-checks.mjs';
 import {regressionFixtures} from './scripts/browser-fixtures.mjs';
 
@@ -91,4 +91,11 @@ test('a focus check waits for focus that arrives late and names the element that
   assert.ok(!/document\.activeElement/.test(source('verify-accessibility.mjs')),'verify-accessibility.mjs reads the focus at once');
   assert.ok(!/document\.activeElement\.id/.test(source('verify-mobile.mjs')),'verify-mobile.mjs reads the focus at once');
   assert.ok(source('verify-accessibility.mjs').includes(`expectFocus(page,'#list .row[data-id="fritime-piccolo-bulle"]','Detail returns focus to its row')`));
+});
+
+test('layout shifts are totalled like Lighthouse: the worst window of shifts less than 1 s apart and 5 s long',()=>{
+  assert.equal(worstShiftWindow([]),0);
+  assert.equal(worstShiftWindow([{startTime:100,value:0.1},{startTime:900,value:0.2}]),0.30000000000000004);
+  assert.equal(worstShiftWindow([{startTime:100,value:0.1},{startTime:1100,value:0.05}]),0.1);
+  assert.equal(worstShiftWindow([{startTime:0,value:0.01},{startTime:900,value:0.01},{startTime:1800,value:0.01},{startTime:2700,value:0.01},{startTime:3600,value:0.01},{startTime:4500,value:0.01},{startTime:5400,value:0.5}]),0.5);
 });

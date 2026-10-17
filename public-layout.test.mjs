@@ -54,3 +54,19 @@ test('page titles on public pages use the whole column, and "Web-App" never brea
   assert.equal(read('.publish/projekt/en/index.html').match(/<h1>(.*?)<\/h1>/)[1], 'Minitandem: a web app built and run with AI agents');
   assert.equal(read('.publish/datenschutz/index.html').match(/<h1>(.*?)<\/h1>/)[1], 'Datenschutzerklärung');
 });
+
+test('the home page footer waits for the first list, stays in the page, and shows at once without scripting', () => {
+  const html = read('index.html'), app = read('app.js');
+  const footer = html.match(/<footer class="foot">[\s\S]*?<\/footer>/)[0];
+  assert.match(footer, /href="places\/"/);
+  assert.match(footer, /data-legal="impressum"/);
+  assert.match(footer, /data-legal="datenschutz"/);
+  // Hidden only where scripts run and only until app.js has rendered; the class is added even if rendering throws.
+  assert.match(css, /@media \(scripting: enabled\)\s*\{\s*body:not\(\.ready\) \.foot\s*\{\s*display:\s*none;\s*\}\s*\}/);
+  assert.equal((css.match(/body:not\(\.ready\)/g) || []).length, 1);
+  assert.match(app, /try \{ render\(\); \} finally \{ document\.body\.classList\.add\('ready'\); \}/);
+  assert.doesNotMatch(footer, /\shidden\b|style=/);
+  // Room kept for what the first render adds above the list, so nothing there moves either.
+  assert.match(rules.find(rule => rule.selectors.includes('.fchips')).body, /min-height:\s*44px/);
+  assert.match(rules.find(rule => rule.selectors.includes('.fp b')).body, /min-height:\s*1\.25em/);
+});

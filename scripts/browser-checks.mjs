@@ -6,7 +6,8 @@ import {root,serveSite,engineName} from './browser-support.mjs';
 const engine=engineName(),fixture=await serveSite();
 let failed=false;
 try{
-  for(const file of ['verify-age.mjs','verify-mobile.mjs','verify-accessibility.mjs']){
+  // Layout shift needs Chromium: WebKit has no layout-shift entries.
+  for(const file of ['verify-age.mjs','verify-mobile.mjs','verify-accessibility.mjs',...engine==='chromium'?['scripts/layout-shift.mjs']:[]]){
     console.log(`\n== ${engine}: ${file}`);
     const status=await new Promise((resolve,reject)=>{
       const child=spawn(process.execPath,[path.join(root,file)],{cwd:root,stdio:'inherit',env:{...process.env,APP_URL:fixture.url},timeout:300000});
