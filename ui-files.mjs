@@ -4,10 +4,12 @@ export const SCRIPTS=['features.js','strings-en.js','strings-de.js','strings-fr.
   'planning.js','exchange.js','storage-migration.js','catalogue.js','catalogue-i18n.js','format.js','store.js','sync.js','exports.js','category-icons.js','views.js','toast.js','map.js','app.js'];
 // The German and French card texts (scripts/compile-catalogue-i18n.mjs): app.js loads only the one of the chosen language.
 export const LAZY_SCRIPTS=['data-de.js','data-fr.js'];
-export const STATIC=['index.html','styles.css','manifest.webmanifest','sw.js','vercel.json','robots.txt'];
-// lucide.min.js and its licence are used only by the editorial admin panel, which the Mac service serves from .publish; .vercelignore keeps them off the public site.
+// vercel.json is not here: it belongs to the Vercel release stage (unused for Minitandem) and carries an older, weaker policy than the service and Caddy send. It stays in the repository, not in the build.
+export const STATIC=['index.html','styles.css','manifest.webmanifest','sw.js','robots.txt'];
+// assets/lucide.min.js and LUCIDE-LICENSE are used only by the editorial admin panel on the owner's Mac. They are not here, so they are not in the build;
+// server.mjs serves the script to the panel alone, at /admin-icons.js.
 // PHOSPHOR-LICENSE: the licence of the category icons, whose path data is inlined in category-icons.js.
-export const ASSETS=['lucide.min.js','LUCIDE-LICENSE','PHOSPHOR-LICENSE','favicon.svg','icon-512.png','apple-touch-icon.png','leaflet.js','leaflet.css','LICENSE','leaflet.markercluster.js','MarkerCluster.css','MIT-LICENCE.txt','papiliorama-outside.jpg'];
+export const ASSETS=['PHOSPHOR-LICENSE','favicon.svg','icon-512.png','apple-touch-icon.png','leaflet.js','leaflet.css','LICENSE','leaflet.markercluster.js','MarkerCluster.css','MIT-LICENCE.txt','papiliorama-outside.jpg'];
 // Loaded only when the map is opened; they are part of the offline shell all the same.
 export const LAZY_ASSETS=['leaflet.js','leaflet.css','leaflet.markercluster.js','MarkerCluster.css'];
 // Written by build.mjs and published next to the page: the catalogue with sources, linked from the footer and from every plain page.

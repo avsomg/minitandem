@@ -102,7 +102,7 @@ test('Caddyfile: both names, www redirects to the apex, editor paths refused, ev
   assert.equal(file.split('{').length,file.split('}').length,'braces are balanced');
   assert.match(file,/^www\.minitandem\.ch \{\s*\n\s+redir https:\/\/minitandem\.ch\{uri\} permanent/m);
   assert.match(file,/^minitandem\.ch \{/m);
-  assert.match(file,/@editor path \/admin \/admin\.js \/admin\.css \/api\/v1\/admin\/\*\s*\n\s+respond @editor 404/);
+  assert.match(file,/@editor path \/admin \/admin\.js \/admin\.css \/admin-icons\.js \/api\/v1\/admin\/\*\s*\n\s+respond @editor 404/);
   assert.match(file,/reverse_proxy app:8787/);
   assert.match(file,/health_uri \/healthz/);
   assert.match(file,/email \{\$ACME_EMAIL\}/);

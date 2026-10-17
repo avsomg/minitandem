@@ -44,10 +44,31 @@ test('index.html loads exactly the scripts in ui-files.mjs, in that order, witho
 test('the Vercel allow-list names every published file and nothing private',()=>{
   const allowed=read('.vercelignore').split('\n').filter(line=>line.startsWith('!')).map(line=>line.slice(1));
   for(const file of [...STATIC,...GENERATED,BUILD_INFO,...SCRIPTS,...LAZY_SCRIPTS].filter(f=>f!=='.vercelignore'))assert.ok(allowed.includes(file),file+' is published but not allowed through');
-  for(const file of ASSETS.filter(f=>!/^(?:lucide\.min\.js|LUCIDE-LICENSE)$/.test(f)))assert.ok(allowed.includes('assets/'+file),file);
+  for(const file of ASSETS)assert.ok(allowed.includes('assets/'+file),file);
   assert.ok(!allowed.some(item=>/editorial|archive-ru|server|\.test\.|verify/.test(item)));
   assert.ok(!allowed.includes('assets/lucide.min.js'),'the admin panel icons stay off the public site');
   for(const file of LAZY_ASSETS)assert.ok(allowed.includes('assets/'+file));
+});
+test('the public build holds neither the Vercel header policy nor the admin panel\'s icon library, and nothing public points to them',()=>{
+  const forbidden=/^(?:vercel\.json|lucide[\w.-]*|LUCIDE-LICENSE)$/;
+  assert.ok(!STATIC.includes('vercel.json'));
+  assert.deepEqual(ASSETS.filter(file=>forbidden.test(file)),[]);
+  // vercel.json and the library stay in the repository: the first for the unused Vercel stage, the second for the panel on the owner's Mac.
+  assert.ok(fs.existsSync(path.join(root,'vercel.json')));assert.ok(fs.existsSync(path.join(root,'assets/lucide.min.js')));
+  const built=[];
+  const walk=(folder,relative='')=>{for(const entry of fs.readdirSync(folder,{withFileTypes:true})){
+    const name=path.posix.join(relative,entry.name);
+    if(entry.isDirectory())walk(path.join(folder,entry.name),name);else built.push(name);
+  }};
+  walk(path.join(root,'.publish'));
+  assert.deepEqual(built.filter(name=>forbidden.test(path.posix.basename(name))),[],'.publish holds a file that must stay off the public site');
+  assert.ok(built.includes('assets/leaflet.js'),'the walk saw the build');
+  // Not named by the page, the offline shell, the manifest, or any script that reaches a visitor.
+  for(const name of built.filter(name=>/\.(?:html|js|css|webmanifest|xml|txt)$/.test(name)&&!name.startsWith('assets/leaflet')))
+    assert.doesNotMatch(fs.readFileSync(path.join(root,'.publish',name),'utf8'),/lucide|vercel\.json/i,name);
+  // The panel names its own path, and nothing but the service and the edge know it.
+  assert.match(read('editorial/admin.html'),/<script src="\/admin-icons\.js" defer><\/script>/);
+  assert.doesNotMatch(read('editorial/admin.html'),/assets\/lucide/);
 });
 test('the security policy keeps scripts and styles to the site itself',()=>{
   const headers=JSON.parse(read('vercel.json')).headers[0].headers;

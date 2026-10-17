@@ -40,6 +40,13 @@ test('Mac service authenticates family sync, conflicts and editorial intake',asy
     assert.equal((await fetch(base+'/.vercel/project.json')).status,404);
     assert.equal((await fetch(base+'/.gitignore')).status,404);
     assert.equal((await fetch(base+'/index.html')).status,200);
+    // What does not belong on the public site is not served from the build: the old Vercel header policy and the editor panel's icon library.
+    for(const route of ['/vercel.json','/assets/lucide.min.js','/assets/LUCIDE-LICENSE'])assert.equal((await fetch(base+route)).status,404,route);
+    // The panel itself still gets its library, at the path only the panel uses (Caddy refuses it on the public host).
+    const icons=await fetch(base+'/admin-icons.js');
+    assert.equal(icons.status,200);assert.match(icons.headers.get('content-type'),/^text\/javascript/);assert.equal(icons.headers.get('cache-control'),'no-store');
+    assert.ok((await icons.text()).length>100_000);
+    assert.match(await (await fetch(base+'/admin')).text(),/src="\/admin-icons\.js"/);
     assert.match((await fetch(base+'/assets/apple-touch-icon.png')).headers.get('content-type'),/^image\/png/);
     // Folders are served by their index page, as on a static host: the footer link, the sitemap and every card's plain page use them.
     assert.equal((await fetch(base+'/places/')).status,200);

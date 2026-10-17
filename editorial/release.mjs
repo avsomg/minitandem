@@ -11,7 +11,7 @@ import {SCRIPTS,LAZY_SCRIPTS,STATIC} from '../ui-files.mjs';
 
 export function sourceRevision(base=root,{generated=true}={}){
   const files={};
-  for(const file of [...new Set([...STATIC,...SCRIPTS,...LAZY_SCRIPTS])].concat(['research.md','.vercelignore',
+  for(const file of [...new Set([...STATIC,...SCRIPTS,...LAZY_SCRIPTS])].concat(['research.md','.vercelignore','vercel.json',
     'editorial/approved-updates.json','editorial/geocode-candidates.json','editorial/agent-policy.json',
     'editorial/agent-output.schema.json','editorial/package.json','editorial/package-lock.json',
     'build.mjs','maintain.mjs','public-pages.mjs','site.mjs','ui-files.mjs','verify-age.mjs'])){

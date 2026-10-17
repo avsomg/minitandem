@@ -79,9 +79,12 @@ function corrections(){
 }
 async function staticFile(req,res,pathname){
   if(pathname.split('/').some(segment=>segment.startsWith('.')||segment==='..'))return json(res,404,{error:'Not found'});
-  const editorial=pathname==='/admin'||pathname==='/admin.js'||pathname==='/admin.css';
-  let file=editorial?path.join(root,'editorial',pathname==='/admin'?'admin.html':pathname.slice(1)):path.join(root,'.publish',pathname==='/'?'index.html':pathname.slice(1));
-  const base=editorial?path.join(root,'editorial'):path.join(root,'.publish');
+  // The editor panel: its page, script and style, and the icon library it loads. The library lives in assets/ but is not part of the
+  // public build (ui-files.mjs), so it is served at a path of its own, which Caddy refuses with the others.
+  const panel={'/admin':['editorial','admin.html'],'/admin.js':['editorial','admin.js'],'/admin.css':['editorial','admin.css'],'/admin-icons.js':['assets','lucide.min.js']}[pathname];
+  const editorial=Boolean(panel);
+  let file=editorial?path.join(root,...panel):path.join(root,'.publish',pathname==='/'?'index.html':pathname.slice(1));
+  const base=editorial?path.join(root,panel[0]):path.join(root,'.publish');
   if(!path.resolve(file).startsWith(path.resolve(base)+path.sep)||!fs.existsSync(file))return json(res,404,{error:'Not found'});
   // A folder is served by its index.html, as static hosts do (/places/, /places/<id>/). Without the trailing slash the browser
   // is sent to the slashed path first, so the page's relative links resolve; the target is rebuilt from segments, never //host.
@@ -90,7 +93,7 @@ async function staticFile(req,res,pathname){
     file=path.join(file,'index.html');
   }
   if(!fs.existsSync(file)||!fs.statSync(file).isFile())return json(res,404,{error:'Not found'});
-  const headers={'Content-Type':mime[path.extname(file)]||'application/octet-stream','Cache-Control':pathname==='/admin'||pathname==='/admin.js'?'no-store':'public, max-age=0, must-revalidate','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://wmts.geo.admin.ch; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'"};
+  const headers={'Content-Type':mime[path.extname(file)]||'application/octet-stream','Cache-Control':pathname==='/admin'||pathname==='/admin.js'||pathname==='/admin-icons.js'?'no-store':'public, max-age=0, must-revalidate','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://wmts.geo.admin.ch; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'"};
   if(req.method==='HEAD'){res.writeHead(200,headers);return res.end();}
   // The file is opened before the status line goes out: one that vanished or cannot be read is answered as such, not as a broken 200.
   // An error after the first byte can only cut the connection (see fail).

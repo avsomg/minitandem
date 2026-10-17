@@ -30,7 +30,7 @@ minitandem.ch {
 
 	# The editor panel and the editor API belong to the owner's Mac. No editor key exists on this server, so the service
 	# would answer 401 anyway; the edge refuses these paths as well.
-	@editor path /admin /admin.js /admin.css /api/v1/admin/*
+	@editor path /admin /admin.js /admin.css /admin-icons.js /api/v1/admin/*
 	respond @editor 404
 
 	header {
