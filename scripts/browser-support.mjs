@@ -2,6 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import http from 'node:http';
+import assert from 'node:assert/strict';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 
 export const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
@@ -15,6 +16,12 @@ export const targets=[
   {name:'desktop',viewport:{width:1440,height:1000},isMobile:false,hasTouch:false,deviceScaleFactor:1}
 ];
 export const contextOptions=({name,...target})=>({...target,locale:'en-GB',timezoneId:'Europe/Zurich',acceptDownloads:true,reducedMotion:'reduce',serviceWorkers:'block'});
+// The app moves focus in a microtask after a dialog's close event, so a check waits for it instead of reading it at once.
+export async function expectFocus(page,selector,message,timeout=3000){
+  const onIt=selector=>document.activeElement===document.querySelector(selector);
+  try{await page.waitForFunction(onIt,selector,{timeout});}
+  catch{assert.fail(`${message} (focus is on ${await page.evaluate(()=>document.activeElement?.outerHTML.slice(0,90))})`);}
+}
 export function artifactDirectory(check){
   const directory=path.join(root,'editorial/typesafe-runtime/browser-checks',engineName(),check);
   fs.mkdirSync(directory,{recursive:true});

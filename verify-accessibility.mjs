@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import {loadPlaywright} from './playwright-loader.mjs';
-import {engineName,artifactDirectory,serveSite,prepareContext,contextOptions,targets} from './scripts/browser-support.mjs';
+import {engineName,artifactDirectory,serveSite,prepareContext,contextOptions,targets,expectFocus} from './scripts/browser-support.mjs';
 import {scanPage,assertAccessible,blockingViolations} from './scripts/axe-checks.mjs';
 import {regressionFixtures} from './scripts/browser-fixtures.mjs';
 
@@ -27,9 +27,9 @@ try{
       await audit('catalogue');
       // Keyboard access to search, a modal and the save action complements axe's DOM checks.
       await page.keyboard.press('Tab');
-      assert.equal(await page.locator('.skip').evaluate(el=>el===document.activeElement),true);
+      await expectFocus(page,'.skip','The first Tab reaches the skip link');
       await page.keyboard.press('Enter');
-      assert.equal(await page.evaluate(()=>document.activeElement.id),'results');
+      await expectFocus(page,'#results','The skip link moves focus to the results');
       await filters(true);
       await page.locator('#place').selectOption('d:gruyere');
       await audit('filters');
@@ -46,7 +46,7 @@ try{
       assert.equal(await page.locator('#detail-save [data-save]').getAttribute('aria-pressed'),'true');
       await page.keyboard.press('Escape');
       await page.waitForFunction(()=>!document.querySelector('#detail').open);
-      assert.equal(await row.evaluate(el=>el===document.activeElement),true,'Detail returns focus to its row');
+      await expectFocus(page,'#list .row[data-id="fritime-piccolo-bulle"]','Detail returns focus to its row');
       await page.locator('#q').fill('');
       await page.locator('.tab[data-view="saved"]').click();
       assert.equal(await page.locator('#list .row').count(),1);

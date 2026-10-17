@@ -4,7 +4,7 @@ import path from 'node:path';
 import os from 'node:os';
 import vm from 'node:vm';
 import test from 'node:test';
-import {engineName,targets,contextOptions,serveSite,prepareContext} from './scripts/browser-support.mjs';
+import {engineName,targets,contextOptions,serveSite,prepareContext,expectFocus} from './scripts/browser-support.mjs';
 import {assertAccessible,blockingViolations} from './scripts/axe-checks.mjs';
 import {regressionFixtures} from './scripts/browser-fixtures.mjs';
 
@@ -73,4 +73,18 @@ test('the snapshot server serves only the selected public directory and rejects 
   }
   assert.equal((await fetch(site.url,{method:'POST'})).status,404);
   assert.equal(await (await fetch(site.url,{method:'HEAD'})).text(),'');
+});
+
+test('a focus check waits for focus that arrives late and names the element that has it when it never comes',async()=>{
+  // Focus returns to a row in a microtask after the dialog's close event; reading it at once saw the body in 3 of 6 runs.
+  let polls=0;
+  const late={waitForFunction:async(check,selector,{timeout})=>{assert.equal(selector,'#row');assert.equal(timeout,3000);if(++polls<3)await new Promise(resolve=>setTimeout(resolve,5));},evaluate:async()=>'<body>'};
+  await expectFocus(late,'#row','Detail returns focus to its row');
+  const never={waitForFunction:async()=>{throw Error('Timeout');},evaluate:async()=>'<body>'};
+  await assert.rejects(expectFocus(never,'#row','Detail returns focus to its row'),/Detail returns focus to its row \(focus is on <body>\)/);
+  // The browser scripts wait for moved focus; only "focus stays where it was" is still read at once (the save button).
+  const source=file=>fs.readFileSync(new URL('./'+file,import.meta.url),'utf8');
+  assert.ok(!/document\.activeElement/.test(source('verify-accessibility.mjs')),'verify-accessibility.mjs reads the focus at once');
+  assert.ok(!/document\.activeElement\.id/.test(source('verify-mobile.mjs')),'verify-mobile.mjs reads the focus at once');
+  assert.ok(source('verify-accessibility.mjs').includes(`expectFocus(page,'#list .row[data-id="fritime-piccolo-bulle"]','Detail returns focus to its row')`));
 });
