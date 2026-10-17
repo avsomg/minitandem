@@ -61,7 +61,7 @@ npm run setup          # npm ci in editorial/ (einmalig nötig)
 npm test               # baut die Seite und führt danach alle Tests aus, die auf einem sauberen Klon laufen
 npm run demo           # die Pipeline weist ein falsches Ergebnis zurück, offline, in etwa einer Sekunde
 npm run build          # die Seite nach .publish/
-npm run test:browser   # Alter, Mobile-Ablauf, axe und Layout-Verschiebung (nur Chromium); BROWSER_ENGINE=chromium oder standardmässig webkit
+npm run test:browser   # Alter, Mobile-Ablauf, axe, Textabstände, einfache Seiten und Layout-Verschiebung (nur Chromium); BROWSER_ENGINE=chromium oder standardmässig webkit
 npm start              # der kleine Dienst auf http://127.0.0.1:8787 (Seite und Healthcheck; Familienabgleich aus)
 npm run audit:public   # keine kyrillischen Zeichen, kein früherer Arbeitstitel, keine persönliche Formulierung, keine privaten Kontakte; braucht eine gebaute Seite (npm run build); die CI führt es aus
 npm run scan:public    # Geheimnisse, persönliche Pfade, Kontaktdaten ausserhalb des Katalogs; die CI führt es aus
