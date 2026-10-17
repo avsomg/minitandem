@@ -28,7 +28,16 @@ const published=catalog.ACTIVITIES.filter(record=>!['closed','excluded'].include
 const statuses=new Set(['','discuss','contact','waiting','booked','visited','skip']);
 const hash=value=>crypto.createHash('sha256').update(value).digest('hex');
 const randomToken=()=>crypto.randomBytes(32).toString('base64url');
-const origins=new Set([SITE_ORIGIN,'http://localhost:8787','http://127.0.0.1:8787',...(process.env.MINITANDEM_ORIGINS||'').split(',').filter(Boolean)]);
+// The page's own origin, plus the two local ones of a development machine (npm start). The image sets NODE_ENV=production and gets only the site; more can be named in MINITANDEM_ORIGINS.
+const origins=new Set([SITE_ORIGIN,...(process.env.NODE_ENV==='production'?[]:['http://localhost:8787','http://127.0.0.1:8787']),...(process.env.MINITANDEM_ORIGINS||'').split(',').filter(Boolean)]);
+// The largest body a route reads is a family profile: one snapshot per saved card (all 321 cards: 167 KiB), notes of up to 10,000 characters,
+// up to 200 visits. 512 KiB holds a family that saved every card and wrote a good deal; it does not hold one that fills every text field of all 200 visits.
+// A correction is at most 2,000 characters of message and a 500-character link; an editor's review is one word.
+const BODY_LIMITS={profile:512*1024,correction:16*1024,review:4*1024};
+const MAX_BODY=Math.max(...Object.values(BODY_LIMITS));
+// What another origin may ask of the API, for the preflight answer: the family routes with the methods the app uses. Nothing else, and nothing of the editor routes.
+const PREFLIGHT_ROUTES=new Map([['/api/v1/family',['GET','PUT']],['/api/v1/corrections',['POST']]]);
+const PREFLIGHT_HEADERS=['authorization','content-type'];
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.json':'application/json','.webmanifest':'application/manifest+json','.txt':'text/plain; charset=utf-8','.xml':'application/xml','.md':'text/markdown; charset=utf-8','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.ico':'image/x-icon'};
 
 function readDb(){
@@ -60,12 +69,31 @@ function cleanProfile(raw){
     age:Number.isFinite(raw.age)&&raw.age>=0&&raw.age<=18?raw.age:null,
     origin:typeof raw.origin==='string'?raw.origin.replace(/[\u0000-\u001f\u007f]/g,'').trim().slice(0,80):''};
 }
-function json(res,status,value){res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});res.end(JSON.stringify(value));}
-async function body(req){
+function json(res,status,value,headers={}){res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store',...headers});res.end(JSON.stringify(value));}
+// A body over the limit is answered with 413 and the connection is closed: what the sender still has to say is not read.
+const tooLarge=()=>Object.assign(Error('Request too large'),{status:413});
+async function body(req,res,limit){
   if(!/^application\/json(?:;|$)/i.test(req.headers['content-type']||''))throw Error('JSON required');
+  // A size announced up front is refused before a byte is read. With Expect: 100-continue the sender has not sent the body yet and is told to go ahead only now.
+  if(Number(req.headers['content-length'])>limit)throw tooLarge();
+  if(/^100-continue$/i.test(req.headers.expect||''))res.writeContinue();
   let size=0,chunks=[];
-  for await(const chunk of req){size+=chunk.length;if(size>1_000_000)throw Error('Request too large');chunks.push(chunk);}
+  // destroyOnReturn:false, so that leaving the loop does not destroy the socket and the 413 can still be sent on it.
+  for await(const chunk of req.iterator({destroyOnReturn:false})){size+=chunk.length;if(size>limit)throw tooLarge();chunks.push(chunk);}
   return JSON.parse(Buffer.concat(chunks).toString('utf8'));
+}
+// Writes per family key and window. A leaked key must not be able to churn the disk: every accepted PUT copies the state file and rotates its 20 backups.
+// The table is keyed by the digest of an authenticated key, so it is as small as the number of families; no address or other visitor data is kept, and a restart empties it.
+// Returns 0 when the write may go ahead, otherwise the seconds until the window ends.
+export function writeLimiter(limit,windowMs=60_000,now=Date.now){
+  const windows=new Map();
+  return key=>{
+    const time=now();
+    for(const [name,window] of windows)if(time-window.start>=windowMs)windows.delete(name);
+    const window=windows.get(key)||{start:time,count:0};
+    windows.set(key,window);
+    return ++window.count<=limit?0:Math.ceil((window.start+windowMs-time)/1000);
+  };
 }
 function auth(req,db,admin=false){
   const token=/^Bearer ([A-Za-z0-9_-]{40,})$/.exec(req.headers.authorization||'')?.[1];
@@ -105,7 +133,7 @@ async function staticFile(req,res,pathname){
 // A request the caller can fix: malformed JSON, an error from the planning and exchange modules (they carry a code such as
 // 'plan.invalidVisit' or 'report.source'), or one of this file's own English messages. Operating-system errors also carry
 // a string code (ENOENT, EACCES), so the code must have the dotted module form to count; those stay a 500.
-const isClientError=error=>error instanceof SyntaxError||(typeof error?.code==='string'&&/^[a-z]+\.[A-Za-z]+$/.test(error.code))||/^(Invalid|JSON required|Request too large)/.test(error?.message||'');
+const isClientError=error=>error instanceof SyntaxError||(typeof error?.code==='string'&&/^[a-z]+\.[A-Za-z]+$/.test(error.code))||/^(Invalid|JSON required)/.test(error?.message||'');
 // What an error ends in. Before the reply has started it is a status and a short message, never a stack (that goes to the log);
 // once bytes are out nothing can be corrected, so the connection is cut. A visitor who closed the page is not worth a log line.
 // Log a fixed event and an allowlisted OS code only. Error messages, stacks and request objects can carry IPs or submitted data.
@@ -115,28 +143,45 @@ export function serviceError(error){
 }
 function fail(res,error){
   if(res.headersSent){if(error?.code!=='ERR_STREAM_PREMATURE_CLOSE')serviceError(error);return res.destroy();}
+  // The sender is gone: it closed the page, or was cut off for being too slow (see createServer). There is no one to answer and nothing to log.
+  if(res.destroyed)return;
+  if(error?.status===413)return json(res,413,{error:error.message},{Connection:'close'});
   if(isClientError(error))return json(res,400,{error:error.message});
   serviceError(error);return json(res,500,{error:'Server error'});
 }
 // One error boundary around the whole request: parsing the target, the static files and the API all run inside it, so nothing a
 // request does can end as an unhandled rejection that stops the process. The last resort cuts the connection and keeps the process.
 const guard=handler=>(req,res)=>handler(req,res).catch(error=>{try{fail(res,error);}catch(again){serviceError(again);res.destroy();}});
-export function createServer(){
-  return http.createServer(guard(async(req,res)=>{
+// A browser asks this only for a request from another origin, and the app is not one (connect-src 'self'): in practice a development page on
+// an allowed origin. Answered for the family routes alone, with the methods and headers the app uses, and only while family sync is on.
+// No wildcard and no credentials mode; the editor routes never need it, because the panel is served by this service itself.
+function preflight(req,res,pathname){
+  const origin=req.headers.origin,methods=PREFLIGHT_ROUTES.get(pathname);
+  const asked=String(req.headers['access-control-request-headers']||'').split(',').map(name=>name.trim().toLowerCase()).filter(Boolean);
+  if(!origin||!familySyncEnabled()||!methods?.includes(req.headers['access-control-request-method'])||!asked.every(name=>PREFLIGHT_HEADERS.includes(name)))
+    return json(res,403,{error:'Preflight not allowed'});
+  res.writeHead(204,{'Access-Control-Allow-Methods':methods.join(', '),'Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Max-Age':'600'});
+  res.end();
+}
+// The limits can be given for tests; the defaults are what runs. A whole request (head and body) must have arrived after 30 s and its head after 10 s,
+// where Node allows five minutes and one. Caddy keeps an idle connection to this service for up to two minutes (its default), so Node keeps one a little longer
+// than that: the proxy then never sends a request down a connection that Node has just closed. The check runs every second, not every thirty.
+export function createServer({requestTimeout=30_000,headersTimeout=10_000,keepAliveTimeout=125_000,writesPerMinute=30}={}){
+  const writes=writeLimiter(writesPerMinute);
+  const tooMany=(res,wait)=>json(res,429,{error:'Too many writes, try again later',code:'rate.limit'},{'Retry-After':String(wait)});
+  const handle=guard(async(req,res)=>{
     res.setHeader('X-Content-Type-Options','nosniff');
     res.setHeader('Referrer-Policy','no-referrer');
     const origin=req.headers.origin;
-    if(origin&&origins.has(origin)){
-      res.setHeader('Access-Control-Allow-Origin',origin);
-      res.setHeader('Vary','Origin');
-      res.setHeader('Access-Control-Allow-Headers','Authorization, Content-Type');
-      res.setHeader('Access-Control-Allow-Methods','GET, PUT, POST, OPTIONS');
-    }
-    if(req.method==='OPTIONS')return json(res,origin&&origins.has(origin)?204:403,{});
+    if(origin)res.setHeader('Vary','Origin');
     if(origin&&!origins.has(origin))return json(res,403,{error:'Origin not allowed'});
+    if(origin)res.setHeader('Access-Control-Allow-Origin',origin);
+    // A body announced as larger than any route reads is refused before anything else, whatever the route.
+    if(Number(req.headers['content-length'])>MAX_BODY)return fail(res,tooLarge());
     // A target that is not a URL ('//[') is the caller's mistake: 400, and the process goes on.
     let pathname;
     try{pathname=new URL(req.url,'http://localhost').pathname;}catch{return json(res,400,{error:'Malformed request target'});}
+    if(req.method==='OPTIONS')return preflight(req,res,pathname);
     // For container health checks and uptime monitors: answers from memory, reads no state and needs no key.
     // It also says which build is live (revision of the catalogue files, date of the latest review, deployed commit); nothing in it is secret.
     if(pathname==='/healthz'&&['GET','HEAD'].includes(req.method)){
@@ -154,7 +199,8 @@ export function createServer(){
         const family=db.families[key];
         if(req.method==='GET')return json(res,200,{revision:family.revision,profile:family.profile});
         if(req.method!=='PUT')return json(res,405,{error:'Method not allowed'});
-        const submitted=await body(req);
+        const wait=writes(key);if(wait)return tooMany(res,wait);
+        const submitted=await body(req,res,BODY_LIMITS.profile);
         const fresh=readDb(),currentKey=auth(req,fresh);
         if(!currentKey)return json(res,401,{error:'Invalid family key'});
         const current=fresh.families[currentKey];
@@ -164,8 +210,9 @@ export function createServer(){
         return json(res,200,{revision:current.revision,profile});
       }
       if(pathname==='/api/v1/corrections'&&req.method==='POST'){
-        if(!auth(req,db))return json(res,401,{error:'Invalid family key'});
-        const report=catalog.MinitandemExchange.report(await body(req),allowed);
+        const key=auth(req,db);if(!key)return json(res,401,{error:'Invalid family key'});
+        const wait=writes(key);if(wait)return tooMany(res,wait);
+        const report=catalog.MinitandemExchange.report(await body(req,res,BODY_LIMITS.correction),allowed);
         const id=hash(JSON.stringify(report)).slice(0,20),file=path.join(correctionDir,id+'.json');
         if(fs.existsSync(file))return json(res,200,{id,duplicate:true,status:'pending-review'});
         // Keys go only to families the owner knows, but a leaked key must not be able to fill the disk.
@@ -194,7 +241,7 @@ export function createServer(){
         if(!/^[a-f0-9]{20}$/.test(id))return json(res,404,{error:'Not found'});
         const file=path.join(correctionDir,id+'.json');
         if(!fs.existsSync(file))return json(res,404,{error:'Not found'});
-        const update=await body(req);
+        const update=await body(req,res,BODY_LIMITS.review);
         if(!['pending-review','ready-to-apply','rejected'].includes(update.status))return json(res,400,{error:'Invalid status'});
         const current=JSON.parse(fs.readFileSync(file,'utf8'));
         writeAtomic(file,{...current,status:update.status,reviewedAt:new Date().toISOString()});
@@ -204,7 +251,11 @@ export function createServer(){
     }catch(error){
       return fail(res,error);
     }
-  }));
+  });
+  const server=http.createServer({requestTimeout,headersTimeout,keepAliveTimeout,connectionsCheckingInterval:1000},handle);
+  // A sender that asks "may I send the body?" is answered by the route that wants it (see body), not before the route is known.
+  server.on('checkContinue',handle);
+  return server;
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
