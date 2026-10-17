@@ -745,14 +745,16 @@ test('default ordering puts published ages first and then sorts by name without 
 
 test('detail presentation preserves every note, finding, question, price and source for all records',()=>{
   for(const age of [null,AGE]){
-    const {records,V,t}=load({age});
+    const {records,V,t,P,C}=load({age});
+    // Whatever is not a notice that is over (past-notices.test.mjs) is shown: a text keeps all its clauses but the obsolete ones.
+    const kept=text=>P.withoutPastNotices(text,C.today());
     for(const a of records){
       const html=V.detail(a);
       const texts=[...a.notes,a.schedule,a.price,a.age,a.intro||'',...(a.research?.findings||[]).map(f=>f.text),...(a.research?.remaining||[]),
         ...Object.values(a.practical||{}).map(f=>f?.text).filter(Boolean),...a.contacts.flatMap(c=>[c.name,c.phone,c.email]).filter(Boolean),...a.sources.map(s=>s.label)];
       // An address that differs by date is shown with each date instead of once at the top.
       if(!a.events.some(e=>e.address&&e.address!==a.address))texts.push(a.address);
-      for(const text of texts)assert.ok(html.includes(V.esc(text)),a.id+': '+text);
+      for(const text of texts)assert.ok(!kept(text)||html.includes(V.esc(kept(text))),a.id+': '+text);
       for(const source of a.sources)assert.ok(html.includes(V.esc(source.url)),a.id+': '+source.url);
       assert.match(html,/class="d-actions"/);
       assert.match(html,/data-close/);

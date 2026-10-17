@@ -16,11 +16,14 @@
     const clockLabel = e => e.start ? `${e.start}${e.end ? '–' + e.end : ''}` : t('time.tbc');
     const first = s => String(s).split(';')[0].trim();
     const bounds = a => (a.min !== null && a.min > 0) || a.max !== null;
-    // 'From 3 years', 'Up to 5 years', '2–4 years'; without a real bound, the organiser's own first phrase.
+    // A bound under 2 years that is not a whole year reads in months (0.33 is 4 months, 1.5 is 18 months); from 2 years on it stays in years.
+    const inMonths = n => n !== null && n < 2 && !Number.isInteger(n), months = n => Math.round(n * 12);
+    // 'From 3 years', 'Up to 5 years', '2–4 years', 'From 4 months', '4 months–4 years', '4–12 months'; without a real bound, the organiser's own first phrase.
     function ageShort(a) {
       if (bounds(a)) {
-        if (a.max === null) return t('age.from', {n: a.min});
-        if (a.min === null || a.min === 0) return t('age.upTo', {n: a.max});
+        if (a.max === null) return inMonths(a.min) ? t('age.fromMonths', {n: months(a.min)}) : t('age.from', {n: a.min});
+        if (a.min === null || a.min === 0) return inMonths(a.max) ? t('age.upToMonths', {n: months(a.max)}) : t('age.upTo', {n: a.max});
+        if (inMonths(a.min) || inMonths(a.max)) return a.max < 2 ? t('age.rangeMonths', {min: months(a.min), max: months(a.max), n: months(a.max)}) : t('age.rangeMonthsYears', {min: months(a.min), max: a.max, n: a.max});
         return t('age.range', {min: a.min, max: a.max});
       }
       // The decision reads the English phrase (a translated card keeps it in a.english); the translated phrase is what is shown.

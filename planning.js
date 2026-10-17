@@ -100,17 +100,109 @@
   // From this age on, suitability is uncertain (not excluded). Only a real number is a bound: a missing field and null (how an editor clears it)
   // mean there is none, and 0 is a bound like any other. One rule for the match (catalogue.js ageFit) and for the reasons below.
   const ageUncertain=(a,age)=>Number.isFinite(a.ageUpperUncertainFrom)&&age>=a.ageUpperUncertainFrom;
+  // The age has reached the card's minimum. A whole age stands for that birthday, except 0: the first year, 0-11 months, so every minimum
+  // under 1 year (4 or 6 months) is reached. No minimum published: false (the caller decides what that means).
+  const ageFrom=(a,age)=>a.min!==null&&(age===0?a.min<1:age>=a.min);
   // Reasons are codes; the interface words them.
   function matchReasons(a,age,parentRequired,walkinRequired,date) {
     const reasons=[];
     if(age!==null){
-      if(a.min!==null&&age>=a.min&&(a.max===null||age<=a.max)&&!ageUncertain(a,age))reasons.push('ageInRange');
+      if(ageFrom(a,age)&&(a.max===null||age<=a.max)&&!ageUncertain(a,age))reasons.push('ageInRange');
       else reasons.push('ageToConfirm');
     }
     if(parentRequired&&a.parent==='yes')reasons.push('adultJoins');
     if(walkinRequired&&a.practical?.booking?.value===false)reasons.push('noBookingBySource');
     if(date&&a.events.some(e=>e.date===date))reasons.push('publishedDate');
     return reasons;
+  }
+  // ---- Notices that are over ----
+  // A notice that names a date or a range of dates, all behind us, is no longer news: "Closed 3-10 October 2026" on the 17th, "The next
+  // published meeting is 15 October 2026" on the 16th. It is not shown; the data keep it. The dates are read as the editorial alarm reads
+  // them (editorial/alarm.mjs lineDates, in English, German and French), and the same "still in force" rule applies: a closure "since /
+  // from" a past date, or without an end, is still in force and stays; only an explicit end in the past makes a notice obsolete.
+  // Conservative on top of that: every date of the clause must carry its year (a day and month alone may be a yearly closure, as
+  // "Closed on 25 December"; the alarm guesses the year, this does not), a closure, cancellation or "next" word must come right before
+  // the first date (within 60 characters, no weekday between), and a bare year is no date. Anything else stays. The unit is the clause
+  // (a sentence, or a part between ";" and the dot), so one obsolete clause of a paragraph goes and the rest stays.
+  const MONTHS={januar:1,jänner:1,janvier:1,january:1,jan:1,februar:2,février:2,fevrier:2,february:2,feb:2,févr:2,fév:2,märz:3,maerz:3,mars:3,march:3,mär:3,april:4,avril:4,apr:4,avr:4,
+    mai:5,may:5,juni:6,juin:6,june:6,jun:6,juli:7,juillet:7,july:7,jul:7,juil:7,august:8,août:8,aout:8,aug:8,september:9,septembre:9,sept:9,sep:9,oktober:10,octobre:10,october:10,okt:10,oct:10,
+    november:11,novembre:11,nov:11,dezember:12,décembre:12,decembre:12,december:12,dez:12,déc:12,dec:12};
+  const MONTH_RE=Object.keys(MONTHS).sort((a,b)=>b.length-a.length).join('|');
+  const NUMERIC_DATE=/(?<!\d)(\d{1,2})\.\s?(\d{1,2})\.(?:\s?(\d{4}|\d{2})(?!\d))?|(?<!\d)(\d{1,2})\/(\d{1,2})\/(\d{4}|\d{2})(?!\d)/gu;
+  const NAMED_DATE=new RegExp(`(?<!\\d)(\\d{1,2})(?:er)?\\.?\\s(${MONTH_RE})\\.?(?:\\s(\\d{4}))?(?![\\p{L}\\p{N}])`,'giu');
+  const word=source=>new RegExp(`(?<![\\p{L}\\p{N}])(?:${source})(?![\\p{L}\\p{N}])`,'iu');
+  const DATE_AHEAD=`(?:(?:dem|le|la|the|den|der|l')\\s*)?(?:\\d{1,2}(?:er)?\\.?\\s?(?:\\d{1,2}[./]|(?:${MONTH_RE})(?![\\p{L}]))|(?:${MONTH_RE})(?![\\p{L}])|20\\d\\d(?!\\d))`;
+  const SINCE=new RegExp(`(?<![\\p{L}\\p{N}])(?:seit|depuis|since|ab|dès|from|as of|per|à partir (?:du|de))\\s+${DATE_AHEAD}`,'iu');
+  const UNTIL=new RegExp(`(?<![\\p{L}\\p{N}])(?:bis(?: zum| und mit| am| ende)?|jusqu'(?:au|à|en|a)|until|till|through|thru|au|à|to)\\s+${DATE_AHEAD}|(?<=[\\d.])\\s*[–-]\\s*${DATE_AHEAD}`,'iu');
+  const START=new RegExp(`(?<![\\p{L}\\p{N}])(?:starts?|started|begins?|began|beginning|beginnt|startet|débute|commence)(?:\\s+(?:on|am|le|the|den|dem|vom|du))?\\s+${DATE_AHEAD}`,'iu');
+  const LASTING=word(['permanently','permanent closure','closed for good','until further notice','indefinitely','no longer (?:available|offered|takes? place)','dauerhaft','definitiv','endgültig','unbefristet',
+    'bis auf weiteres','auf unbestimmte zeit','betriebsaufgabe','aufgelöst','nicht (?:mehr )?weitergeführt','définitivement','définitives?',"jusqu'à nouvel (?:avis|ordre)",'durée indéterminée',
+    "cessation d'activités?","n'est plus (?:proposée?|organisée?)"].join('|'));
+  const NOTICE_CUE=new RegExp(`(?<![\\p{L}\\p{N}])(?:closed?|closures?|shut|renovations?|refurbishment|cancell?ed|postponed|suspended|unavailab\\p{L}*|next(?! to)|upcoming|geschlossen|schliessung|schliesst|nichtverfügbar\\p{L}*|gesperrt|sperrung|umbau|sanierung|bauarbeiten|abgesagt|verschoben|`+
+    `nächste[nrsm]?|kommende[nrsm]?|fermé\\p{L}*|fermetures?|indisponib\\p{L}*|inaccessib\\p{L}*|travaux|rénovations?|annulé\\p{L}*|reporté\\p{L}*|suspendu\\p{L}*|prochain\\p{L}*)(?![\\p{L}\\p{N}])`,'giu');
+  // A weekday between the closure word and the date means a standing rule ("Closed on Mondays and 5-9 October 2026"): the clause stays.
+  // A weekday right before the date only names the day ("Closed on Tuesday 6 October 2026").
+  const WEEKDAY_SOURCE="(?:mon|tues|wednes|thurs|fri|satur|sun)days?|(?:mon|diens|donners|frei|sams|sonn)tags?|mittwochs?|(?:lun|mar|mercre|jeu|vendre|same)dis?|dimanches?|wochenend\\p{L}*|week-?ends?";
+  const WEEKDAY=word(WEEKDAY_SOURCE),WEEKDAY_LAST=new RegExp(`(?<![\\p{L}\\p{N}])(?:${WEEKDAY_SOURCE})[\\s.,]*$`,'iu');
+  const noticeKey=text=>String(text).normalize('NFC').toLowerCase().replace(/ß/g,'ss').replace(/[’‘ʼ´`]/g,"'").replace(/[\u00a0\u202f\u2007\u2009]/g,' ').replace(/\s+/g,' ').trim();
+  const YEAR=/(?<!\d)(20\d\d)(?!\d)/g;
+  // The calendar days a text names, as {day:'YYYY-MM-DD', at:position}, and the days it names without a year, and the bare years left over.
+  function noticeDays(key) {
+    const found=[],rest=[];let yearless=0;
+    const add=(match,d,m,y)=>{
+      if(m<1||m>12||d<1||d>31)return;
+      rest.push([match.index,match[0].length]);
+      if(y)found.push({day:new Date(Date.UTC(y.length===2?2000+Number(y):Number(y),m-1,d)).toISOString().slice(0,10),at:match.index});else yearless++;
+    };
+    for(const x of key.matchAll(NUMERIC_DATE))add(x,Number(x[1]??x[4]),Number(x[2]??x[5]),x[3]??x[6]);
+    for(const x of key.matchAll(NAMED_DATE))add(x,Number(x[1]),MONTHS[x[2].toLowerCase()],x[3]);
+    let blank=key;for(const [at,length] of rest)blank=blank.slice(0,at)+' '.repeat(length)+blank.slice(at+length);
+    return {days:found.sort((a,b)=>a.at-b.at),yearless,years:[...blank.matchAll(YEAR)].map(m=>Number(m[1]))};
+  }
+  // true: this clause is a notice whose dates are all over and which is not still in force.
+  function pastNotice(clause,today) {
+    const key=noticeKey(clause),{days,yearless,years}=noticeDays(key);
+    if(!days.length||yearless||days.some(d=>d.day>=today)||years.some(y=>y>=Number(today.slice(0,4))))return false;
+    if(LASTING.test(key)||(SINCE.test(key)||START.test(key))&&!UNTIL.test(key))return false;
+    return [...key.matchAll(NOTICE_CUE)].some(cue=>{const gap=key.slice(cue.index+cue[0].length,days[0].at);return cue.index<days[0].at&&gap.length<=60&&!/[!?]/.test(gap)&&!WEEKDAY.test(gap.replace(WEEKDAY_LAST,''));});
+  }
+  // A text without its obsolete clauses ('' when nothing is left). "15. Oktober" is a date, not the end of a sentence; a part that is
+  // taken out takes its separator with it, and a text that began with a capital letter still does.
+  const CLAUSE_END=/\s*[;·]\s*|[.!?]\s+(?=[A-ZÀ-ÖØ-Þ“"«])/gu,MONTH_NEXT=new RegExp(`^(?:${MONTH_RE})(?![\\p{L}])`,'iu');
+  function withoutPastNotices(text,today) {
+    if(typeof text!=='string'||!text)return text;
+    const parts=[];let start=0,sep='';
+    for(const m of text.matchAll(CLAUSE_END)){
+      const sentence=/[.!?]/.test(m[0][0]);
+      if(sentence&&m[0][0]==='.'&&/\d$/.test(text.slice(0,m.index))&&MONTH_NEXT.test(text.slice(m.index+m[0].length)))continue;
+      parts.push({sep,clause:text.slice(start,m.index+(sentence?1:0))});sep=sentence?m[0].slice(1):m[0];start=m.index+m[0].length;
+    }
+    parts.push({sep,clause:text.slice(start)});
+    let out='',pending=null,dropped=false;
+    for(const p of parts){
+      if(pastNotice(p.clause,today)){dropped=true;if(pending===null)pending=p.sep;continue;}
+      const joined=out?pending??p.sep:'';
+      // What follows a taken-out clause starts a sentence when the text before it ended one (or began with a capital itself).
+      out+=joined+(pending!==null&&(out?/[.!?]$/.test(out):/^\p{Lu}/u.test(text))?p.clause.replace(/^\p{Ll}/u,c=>c.toUpperCase()):p.clause);pending=null;
+    }
+    if(!dropped)return text;
+    if(/[.!?]$/.test(text)&&out&&!/[.!?]$/.test(out))out+='.';
+    return out;
+  }
+  // The card as the visitor reads it today: the same card, or a copy without the obsolete clauses in the texts a notice can stand in
+  // (introduction, schedule, good-to-know, practical conditions and warnings, what was checked, what is left to confirm). A text that
+  // would be left empty stays, except in a list, where the entry goes. The key `english` of a translated card is kept.
+  function current(a,today) {
+    if(!a||!validDate(today))return a;
+    let changed=false;
+    const text=(value,keep)=>{const out=withoutPastNotices(value,today);if(out===value||(!out&&keep))return value;changed=true;return out;};
+    const list=items=>Array.isArray(items)?items.map(item=>text(item)).filter(Boolean):items;
+    const copy={...a,intro:text(a.intro,true),schedule:text(a.schedule,true),notes:list(a.notes)};
+    if(a.practical)copy.practical=Object.fromEntries(Object.entries(a.practical).map(([key,value])=>[key,key==='warnings'?list(value):value&&typeof value.text==='string'?{...value,text:text(value.text)}:value]));
+    if(a.research)copy.research={...a.research,findings:(a.research.findings||[]).map(f=>({...f,text:text(f.text)})).filter(f=>f.text),remaining:list(a.research.remaining||[])};
+    if(!changed)return a;
+    if(a.english)Object.defineProperty(copy,'english',{value:a.english});
+    return copy;
   }
   const admissionKeys=['dropin','reservation','course','unknown'];
   function admission(a) {
@@ -166,5 +258,5 @@
     const current=snapshot(a,previous.date);
     return trackedFieldKeys.filter(key=>previous.fields[key]!==current.fields[key]).map(key=>({key,before:previous.fields[key],after:current.fields[key]}));
   }
-  window.MinitandemPlanning={STALE_CHECK_DAYS,checkAge,checkStale,scenario,range,matches,needKeys,matchesNeeds,matchesWhen,facilityKeys,attendanceKeys,usefulnessKeys,informationKeys,warnings,ageUncertain,visit,visitFieldKeys,shareIds,shareURL,familyPrice,matchReasons,admission,admissionKeys,bookingStateKeys,outcomeKeys,validDate,validTime,validateVisits,mergeVisits,snapshot,validateTracked,changes,trackedFieldKeys,maxVisits,fail};
+  window.MinitandemPlanning={STALE_CHECK_DAYS,checkAge,checkStale,scenario,range,matches,needKeys,matchesNeeds,matchesWhen,facilityKeys,attendanceKeys,usefulnessKeys,informationKeys,warnings,ageUncertain,ageFrom,visit,visitFieldKeys,shareIds,shareURL,familyPrice,matchReasons,pastNotice,withoutPastNotices,noticeDays,current,admission,admissionKeys,bookingStateKeys,outcomeKeys,validDate,validTime,validateVisits,mergeVisits,snapshot,validateTracked,changes,trackedFieldKeys,maxVisits,fail};
 })();

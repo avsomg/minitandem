@@ -247,7 +247,7 @@
   }
   function mountMap(list) {
     const token = renderToken;
-    loadMapLibs().then(() => { if (token === renderToken && $('#places-map')) disposeMap = W.MinitandemMap.mount($('#places-map'), list.map(shown), t); })
+    loadMapLibs().then(() => { if (token === renderToken && $('#places-map')) disposeMap = W.MinitandemMap.mount($('#places-map'), list.map(V.shown), t); })
       .catch(() => { const note = $('#map-error'); if (note) note.hidden = false; });
   }
 
@@ -518,13 +518,13 @@
     'when-only': () => { const alt = whenAlternative(); state.f = {...K.defaultFilters(), when: state.f.when, sort: state.f.sort}; state.limit = PAGE; if (!alt.keepsAge && Number.isFinite(age())) setAge(null); else render(); },
     // The phone's share sheet with the card's name, next date (or its schedule), price and a link that opens it in this language.
     'share-card': async () => {
-      const a = shown(C.byId.get(state.openId)); if (!a) return;
+      const a = V.shown(C.byId.get(state.openId)); if (!a) return;
       const upcoming = C.upcoming(a), url = location.origin + location.pathname + (I.lang() === 'en' ? '' : '?lang=' + I.lang()) + V.hashFor(a.id, 'catalog');
-      const text = [a.name, upcoming.length ? F.nextText(a, upcoming, []) : F.first(a.schedule), F.first(a.price)].filter(Boolean).join('\n');
+      const text = [a.name, upcoming.length ? F.nextText(a, upcoming, []) : V.hoursLine(a), F.first(a.price)].filter(Boolean).join('\n');
       if (navigator.share) { try { await navigator.share({title: a.name, text, url}); return; } catch (error) { if (error?.name === 'AbortError') return; } }
       await copy(text + '\n' + url, t('share.cardCopied'));
     },
-    'copy-questions': () => { const a = shown(C.byId.get(state.openId)); copy([a.name, t('card.toConfirm') + ':', ...(a.research?.remaining || []).map(q => '- ' + q)].join('\n\n')); },
+    'copy-questions': () => { const a = V.shown(C.byId.get(state.openId)); copy([a.name, t('card.toConfirm') + ':', ...(a.research?.remaining || []).map(q => '- ' + q)].join('\n\n')); },
     'report-change': () => { const a = C.byId.get(state.openId); if (a) utility(V.report(a, !!sync.config)); },
     'more': () => { const firstNew = state.limit; state.limit += PAGE; render(); $$('#list .row')[firstNew]?.focus(); },
     'open-updates': () => { switchView('saved'); $('#saved-changes')?.focus(); },
