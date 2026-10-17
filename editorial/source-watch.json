@@ -2769,6 +2769,136 @@
         "ne-pour-lire-estavayer"
       ],
       "intervalDays": 30
+    },
+    {
+      "id": "claim-memo-programme-pdf",
+      "url": "https://www.ville-fribourg.ch/sites/default/files/inline-files/MEMOPROGRAMMEMAISEPTEMBRE2026.pdf",
+      "type": "pdf",
+      "recordIds": [
+        "memo-musik-entdecken-2026-09-29",
+        "memo-rat-exhibition-2026"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "MEMO"
+      ],
+      "maxBytes": 6000000
+    },
+    {
+      "id": "claim-office-familial-autumn-pdf",
+      "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf",
+      "type": "pdf",
+      "recordIds": [
+        "office-family-workshops",
+        "office-family-books"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Office familial"
+      ],
+      "maxBytes": 6000000
+    },
+    {
+      "id": "claim-memo-page-de",
+      "url": "https://www.ville-fribourg.ch/de/memo",
+      "type": "html",
+      "recordIds": [
+        "memo-musik-entdecken-2026-09-29",
+        "memo-rat-exhibition-2026"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "MEMO"
+      ]
+    },
+    {
+      "id": "claim-devenir-famille",
+      "url": "https://www.devenir-famille.ch",
+      "type": "html",
+      "recordIds": [
+        "devenir-famille-fribourg-2026-10-03"
+      ],
+      "intervalDays": 14,
+      "required": [
+        "Devenir"
+      ]
+    },
+    {
+      "id": "claim-estabiblio-home",
+      "url": "https://estabiblio.ch",
+      "type": "html",
+      "recordIds": [
+        "ne-pour-lire-estavayer",
+        "aef-estavayer-cafe"
+      ],
+      "intervalDays": 14,
+      "required": [
+        "Estavayer"
+      ]
+    },
+    {
+      "id": "claim-aef-agenda",
+      "url": "https://www.educationfamiliale.ch/fr/agenda",
+      "type": "html",
+      "recordIds": [
+        "aef-mpe",
+        "aef-schonberg",
+        "aef-centre",
+        "aef-passerelles"
+      ],
+      "intervalDays": 7,
+      "required": [
+        "Éducation"
+      ]
+    },
+    {
+      "id": "claim-coop-kids-menu",
+      "url": "https://www.coop-restaurant.ch/fr/manger-boire/menu-enfants.html",
+      "type": "html",
+      "recordIds": [
+        "coop-fribourg-play"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "enfants"
+      ]
+    },
+    {
+      "id": "claim-memo-lesen-spielen",
+      "url": "https://www.ville-fribourg.ch/de/lesen-spielen-bewegen",
+      "type": "html",
+      "recordIds": [
+        "memo-musik-entdecken-2026-09-29"
+      ],
+      "intervalDays": 14,
+      "required": [
+        "Lesen"
+      ]
+    },
+    {
+      "id": "claim-devenir-famille-flyer",
+      "url": "https://www.devenir-famille.ch/s/DF_Flyer-WEB.pdf",
+      "type": "pdf",
+      "recordIds": [
+        "devenir-famille-fribourg-2026-10-03"
+      ],
+      "intervalDays": 30,
+      "required": [
+        "Devenir"
+      ],
+      "maxBytes": 6000000
+    },
+    {
+      "id": "claim-ateliers-musique-courses",
+      "url": "https://lesateliersmusique.ch/cours",
+      "type": "html",
+      "recordIds": [
+        "memo-musik-entdecken-2026-09-29"
+      ],
+      "intervalDays": 14,
+      "required": [
+        "Ateliers"
+      ]
     }
   ]
 }
