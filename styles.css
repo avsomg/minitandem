@@ -35,7 +35,9 @@ button { cursor: pointer; }
 
 /* Header */
 .topwrap { border-bottom: 1px solid var(--r); }
-.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 8px; }
+.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; row-gap: 4px; padding-block: 8px; }
+/* The language switch goes on its own line, still on the right, when the logo leaves no room (increased text spacing at 320 px). */
+.top .seg { margin-left: auto; }
 .mark { display: inline-flex; align-items: center; min-height: 44px; font-size: 20px; font-weight: 600; letter-spacing: -0.025em; color: var(--t); text-decoration: none; }
 .mark span { font-weight: 400; color: var(--d); }
 
@@ -544,8 +546,7 @@ dialog .toast { z-index: 60; }
 /* a dark button on any public page: .public-content a, .public-breadcrumbs a and .public-footer a would otherwise paint its label dark */
 .public-page a.go { color: var(--inv); }
 
-/* the language switch of the legal notices: one pill like the app's EN/DE/FR switch, the current language in black, on its own line when the logo leaves no room */
-.public-page .top { flex-wrap: wrap; row-gap: 4px; }
+/* the language switch of the legal notices: one pill like the app's EN/DE/FR switch, the current language in black, on its own line when the logo leaves no room (the header wraps, see .top) */
 .langnav { display: flex; gap: 2px; padding: 2px; margin-left: auto; background: var(--raised); border-radius: 999px; }
 .langnav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; color: var(--d); font-size: 14px; font-weight: 500; text-decoration: none; }
 .langnav a[aria-current="page"] { background: var(--t); color: var(--inv); }

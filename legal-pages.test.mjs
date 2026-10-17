@@ -84,7 +84,8 @@ test('the language switch of the notices is one pill with a gap, never wrapped i
   assert.match(css,/\.langnav \{[^}]*display: flex;[^}]*gap: 2px;[^}]*border-radius: 999px;/);
   assert.match(css,/\.langnav a \{[^}]*min-height: 44px;/);
   assert.match(css,/\.langnav a\[aria-current="page"\] \{[^}]*background: var\(--t\); color: var\(--inv\);/);
-  assert.match(css,/\.public-page \.top \{ flex-wrap: wrap;/);
+  assert.match(css,/\.top \{[^}]*flex-wrap: wrap;/,'the header wraps on every page, so the switch goes on its own line when the logo leaves no room');
+  assert.match(css,/\.top \.seg \{ margin-left: auto;/);
 });
 
 test('the description of a notice is the first sentences under its second heading, at most about one line of a search result',()=>{
