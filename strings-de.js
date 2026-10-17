@@ -508,6 +508,7 @@
   'data.tripTitle': 'Für unterwegs',
   'data.tripText': 'Adressen, Telefonnummern und Angaben zu Ihren gemerkten Orten als Textdatei, ohne persönliche Aufzeichnungen.',
   'data.tripButton': 'Adressen herunterladen',
+  'data.tripNone': 'Verfügbar, sobald Sie ein Angebot gemerkt haben.',
   'data.catalogueTitle': 'Katalog',
   'data.catalogueText': 'Die CSV-Datei enthält nur Katalogangaben der aktuellen Liste, ohne persönliche Notizen und Status.',
   'data.catalogueButton': 'Aktuelle Liste herunterladen',

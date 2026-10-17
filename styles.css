@@ -224,6 +224,9 @@ dialog::backdrop { background: rgb(0 0 0 / 0.4); }
 .go { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 24px; border: 0; border-radius: 999px; background: var(--t); color: var(--inv); font-weight: 500; font-size: 16px; text-decoration: none; }
 .go.grow { flex: 1; }
 .ghost { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 0 18px; border: 0; border-radius: 999px; background: var(--raised); color: var(--t); font-weight: 500; font-size: 14.5px; }
+/* A button that cannot be pressed yet looks it: grey words and a dashed outline (as on a date that is over) instead of the fill. The reason is written next to it. */
+.ghost:disabled:not(#nearGeo), .go:disabled { background: transparent; border: 1px dashed var(--edge); color: var(--d); cursor: not-allowed; }
+.sheet-body .why { margin-top: 8px; }
 
 /* Card detail */
 .d-top { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px 8px 12px; }
@@ -278,11 +281,11 @@ dialog .toast { position: absolute; top: 76px; bottom: auto; }
 
 @media (hover: hover) {
   .row:hover { background: var(--raised); }
-  .chip:not([aria-pressed="true"]):hover, .ghost:hover, .iconbtn:hover { background: var(--edge); }
+  .chip:not([aria-pressed="true"]):hover, .ghost:not(:disabled):hover, .iconbtn:hover { background: var(--edge); }
   .seg button:not([aria-pressed="true"]):hover { color: var(--t); }
   .fp:not(.on):not(.main):hover { background: #e2e2e2; }
   .fp.main:not(.on):hover { background: var(--surface); }
-  .go:hover { opacity: 0.86; }
+  .go:not(:disabled):hover { opacity: 0.86; }
   .linkbtn:hover { text-decoration-thickness: 2px; }
   .srcs a:hover { text-decoration-color: var(--t); }
 }

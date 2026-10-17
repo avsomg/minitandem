@@ -508,6 +508,7 @@
   'data.tripTitle': 'For the trip',
   'data.tripText': 'Addresses, phone numbers and details of your saved places as a text file, without personal records.',
   'data.tripButton': 'Download addresses',
+  'data.tripNone': 'Available once you have saved an activity.',
   'data.catalogueTitle': 'Catalogue',
   'data.catalogueText': 'The CSV contains only catalogue details of the current list, without personal notes and statuses.',
   'data.catalogueButton': 'Download the current list',

@@ -508,6 +508,7 @@
   'data.tripTitle': 'Pour le trajet',
   'data.tripText': 'Adresses, numéros de téléphone et détails de vos lieux enregistrés dans un fichier texte, sans vos données personnelles.',
   'data.tripButton': 'Télécharger les adresses',
+  'data.tripNone': 'Disponible dès que vous avez enregistré une activité.',
   'data.catalogueTitle': 'Catalogue',
   'data.catalogueText': 'Le CSV ne contient que les détails du catalogue pour la liste actuelle, sans notes ni statuts personnels.',
   'data.catalogueButton': 'Télécharger la liste actuelle',
