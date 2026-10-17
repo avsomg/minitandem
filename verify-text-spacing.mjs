@@ -4,7 +4,7 @@
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import {loadPlaywright} from './playwright-loader.mjs';
-import {engineName,artifactDirectory,serveSite,prepareContext,contextOptions,clippedLabels,TEXT_SPACING} from './scripts/browser-support.mjs';
+import {engineName,artifactDirectory,serveSite,prepareContext,contextOptions,clippedLabels,spacingStyle} from './scripts/browser-support.mjs';
 const engine=engineName(),playwright=loadPlaywright();
 const screenshots=artifactDirectory('text-spacing');
 const fixture=await serveSite(),url=fixture.url;
@@ -32,7 +32,7 @@ try{
     };
     const closeDialog=async selector=>{await page.keyboard.press('Escape');await page.waitForFunction(selector=>!document.querySelector(selector).open,selector);};
     await page.goto(url+'?lang='+lang);await page.waitForSelector('#list .row');
-    await page.addStyleTag({content:TEXT_SPACING});
+    await page.addStyleTag({content:spacingStyle()});
     await check('list');
     // Filters: a sheet on a phone, a column beside the list on a desktop (read with the list). A long district name is the longest pill text.
     if(phone){
@@ -60,5 +60,5 @@ try{
     await context.close();
   }
   assert.deepEqual(problems,[],'Text is cut off with the text spacing of WCAG 1.4.12:\n'+problems.join('\n'));
-  console.log(JSON.stringify({result:'PASS',engine,states:states.length,spacing:TEXT_SPACING,viewports:VIEWPORTS.map(v=>v.name)},null,2));
+  console.log(JSON.stringify({result:'PASS',engine,states:states.length,spacing:spacingStyle(),viewports:VIEWPORTS.map(v=>v.name)},null,2));
 }finally{if(browser)await browser.close();await fixture.close();}

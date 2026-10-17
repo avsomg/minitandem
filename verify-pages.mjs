@@ -4,7 +4,7 @@
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import {loadPlaywright} from './playwright-loader.mjs';
-import {engineName,artifactDirectory,serveSite,prepareContext,contextOptions,clippedLabels,TEXT_SPACING} from './scripts/browser-support.mjs';
+import {engineName,artifactDirectory,serveSite,prepareContext,contextOptions,clippedLabels,spacingStyle} from './scripts/browser-support.mjs';
 const engine=engineName(),playwright=loadPlaywright();
 const screenshots=artifactDirectory('pages');
 const fixture=await serveSite(),url=fixture.url;
@@ -41,7 +41,7 @@ try{
         assert.ok(others.every(other=>other.background!==own.background&&other.color!==own.color),where+': the other languages are not painted like it');
       }
       for(const spacing of [false,true]){
-        if(spacing)await page.addStyleTag({content:TEXT_SPACING});
+        if(spacing)await page.addStyleTag({content:spacingStyle()});
         for(const item of await clippedLabels(page))problems.push(`${where}${spacing?' with text spacing':''}: ${item}`);
       }
       if(route==='/datenschutz/fr/'||route==='/impressum/')await page.screenshot({path:path.join(screenshots,`${width}-${route.replaceAll('/','_')}.png`)});

@@ -24,6 +24,10 @@ export async function expectFocus(page,selector,message,timeout=3000){
 }
 // WCAG 1.4.12 (text spacing): the values a reader may set, as the success criterion names them. Applied to a page, no label may be cut off.
 export const TEXT_SPACING='*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}';
+// GitHub's Linux runners set the interface in DejaVu Sans, a wider face than the Mac's; with TEXT_SPACING_WIDE_FONT=1 the check forces a
+// face of that width (Verdana here, DejaVu Sans where Verdana is missing), so a label too tight for the wider face fails on a Mac as well.
+export const WIDE_FONT='*{font-family:Verdana,"DejaVu Sans",sans-serif!important}';
+export function spacingStyle(env=process.env){return env.TEXT_SPACING_WIDE_FONT?TEXT_SPACING+WIDE_FONT:TEXT_SPACING;}
 // What a box cuts off: a box that hides its overflow (also by an ellipsis or a line clamp) and holds more than it shows, a search field whose
 // placeholder is longer than the field, and anything that makes the page wider than the screen. Scroll containers are not cutting anything off.
 // Left out on purpose: text that is visually hidden (the word beside an icon), and the two columns of the list that hold the organiser's own
@@ -52,7 +56,9 @@ export function clippedLabels(page){
       if(probe.getBoundingClientRect().width>room+1)out.push('placeholder «'+input.placeholder+'» of '+describe(input)+` [${Math.ceil(probe.getBoundingClientRect().width)} > ${Math.floor(room)}]`);
       probe.remove();
     }
-    if(document.documentElement.scrollWidth>innerWidth)out.push(`the page is wider than the screen [${document.documentElement.scrollWidth} > ${innerWidth}]`);
+    // Chromium on a phone widens the layout viewport (innerWidth) to a page that is too wide; the visual viewport stays the width of the screen.
+    const screen=Math.min(innerWidth,window.visualViewport?.width||innerWidth);
+    if(document.documentElement.scrollWidth>screen)out.push(`the page is wider than the screen [${document.documentElement.scrollWidth} > ${screen}]`);
     return out;
   });
 }

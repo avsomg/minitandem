@@ -4,7 +4,7 @@ import path from 'node:path';
 import os from 'node:os';
 import vm from 'node:vm';
 import test from 'node:test';
-import {engineName,targets,contextOptions,serveSite,prepareContext,expectFocus,worstShiftWindow,TEXT_SPACING,clippedLabels} from './scripts/browser-support.mjs';
+import {engineName,targets,contextOptions,serveSite,prepareContext,expectFocus,worstShiftWindow,TEXT_SPACING,WIDE_FONT,spacingStyle,clippedLabels} from './scripts/browser-support.mjs';
 import {assertAccessible,blockingViolations} from './scripts/axe-checks.mjs';
 import {regressionFixtures} from './scripts/browser-fixtures.mjs';
 
@@ -106,8 +106,12 @@ test('the text spacing check applies the four values of WCAG 1.4.12 and runs wit
   for(const script of ['verify-text-spacing.mjs','verify-pages.mjs'])assert.ok(run.includes(script),script);
   for(const script of ['verify-text-spacing.mjs','verify-pages.mjs']){
     const source=fs.readFileSync(new URL('./'+script,import.meta.url),'utf8');
-    assert.ok(source.includes('TEXT_SPACING')&&source.includes('clippedLabels'),script);
+    assert.ok(source.includes('spacingStyle')&&source.includes('clippedLabels'),script);
   }
+  // TEXT_SPACING_WIDE_FONT=1 adds a wide face to the same spacing, so the check is as strict on a Mac as on the Linux runners.
+  assert.equal(spacingStyle({}),TEXT_SPACING);
+  assert.equal(spacingStyle({TEXT_SPACING_WIDE_FONT:'1'}),TEXT_SPACING+WIDE_FONT);
+  assert.match(WIDE_FONT,/font-family:Verdana,"DejaVu Sans",sans-serif!important/);
   // The helper reads the page it is given; a page without a cut-off label reports nothing.
   let evaluated;
   assert.deepEqual(await clippedLabels({evaluate:async fn=>{evaluated=fn;return [];}}),[]);
