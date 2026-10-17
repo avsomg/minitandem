@@ -25,8 +25,11 @@
     const stamp = () => new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
     const calendar = (product, body) => ['BEGIN:VCALENDAR', 'VERSION:2.0', `PRODID:-//Minitandem//${product}//${ctx.lang().toUpperCase()}`, 'CALSCALE:GREGORIAN', ...ZURICH, ...body, 'END:VCALENDAR'].map(foldLine).join('\r\n') + '\r\n';
 
+    // The card as it reads today (planning.js current): a closure or a "next meeting" that is over does not travel into a file.
+    const current = a => P.current(a, today());
+
     function eventFile(id, index) {
-      const a = byId.get(id), e = a?.events[index];
+      const a = current(byId.get(id)), e = a?.events[index];
       if (!e) return null;
       const date = e.date.replace(/-/g, '');
       const lines = ['BEGIN:VEVENT', `UID:${a.id}-${date}-${e.start || 'date'}@${UID_DOMAIN}`, `DTSTAMP:${stamp()}`];
@@ -63,13 +66,13 @@
     function csvFile(items, statusOfCard) {
       const headers = ['name', 'category', 'town', 'district', 'address', 'age', 'adult', 'language', 'schedule', 'price', 'status', 'contacts', 'sources', 'checked'].map(k => t('csv.' + k));
       const cell = s => { let text = String(s ?? ''); if (/^\s*[=+\-@]|^[\t\r\n]/.test(text)) text = "'" + text; return '"' + text.replace(/"/g, '""') + '"'; };
-      const rows = items.map(a => [a.name, t('category.' + a.category), a.town, regions[a.region], a.address, a.age, format.parentLong(a), format.langText(a) || t('lang.unknown'), a.schedule, a.price,
+      const rows = items.map(current).map(a => [a.name, t('category.' + a.category), a.town, regions[a.region], a.address, a.age, format.parentLong(a), format.langText(a) || t('lang.unknown'), a.schedule, a.price,
         t('status.' + statusOfCard(a) + '.long'), a.contacts.map(c => [c.name, c.phone, c.email].filter(Boolean).join(' ')).join('; '), a.sources.map(s => s.url).join(' '), a.checked]);
       return {name: `minitandem-catalogue-${today()}.csv`, text: '\uFEFF' + [headers, ...rows].map(r => r.map(cell).join(';')).join('\r\n'), type: 'text/csv;charset=utf-8'};
     }
     function addressesFile(items) {
       const text = [t('addresses.title'), t('addresses.saved', {date: format.dateLabel(today())}), t('addresses.noPrivate'), '',
-        ...items.flatMap(a => [a.name, a.address || t('common.addressTbc'), a.schedule, a.price, t('addresses.participation', {value: t('admission.' + P.admission(a))}), t('addresses.age', {value: a.age}), t('addresses.adult', {value: format.parentLong(a)}),
+        ...items.map(current).flatMap(a => [a.name, a.address || t('common.addressTbc'), a.schedule, a.price, t('addresses.participation', {value: t('admission.' + P.admission(a))}), t('addresses.age', {value: a.age}), t('addresses.adult', {value: format.parentLong(a)}),
           ...a.contacts.map(c => [c.name, c.phone, c.email].filter(Boolean).join(' · ')), t('addresses.checked', {date: a.checked}), ...a.sources.map(s => s.url), ''])].join('\n');
       return {name: `minitandem-addresses-${today()}.txt`, text, type: 'text/plain;charset=utf-8'};
     }
