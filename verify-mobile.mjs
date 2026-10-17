@@ -5,7 +5,7 @@ import path from 'node:path';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {loadPlaywright} from './playwright-loader.mjs';
-import {engineName,artifactDirectory,serveSite,prepareContext,contextOptions,targets} from './scripts/browser-support.mjs';
+import {engineName,artifactDirectory,serveSite,prepareContext,contextOptions,targets,expectFocus} from './scripts/browser-support.mjs';
 const engine=engineName(),playwright=loadPlaywright();
 const screenshots=artifactDirectory('mobile');
 const fixture=await serveSite(),url=fixture.url;
@@ -53,7 +53,7 @@ try{
   await page.locator('#toFilters').scrollIntoViewIfNeeded();
   assert.equal(await page.locator('#toFilters').evaluate(el=>getComputedStyle(el.closest('#endnav')).position),'static','Back to filters is a plain block, never floating');
   await page.locator('#toFilters').click();
-  assert.equal(await page.evaluate(()=>document.activeElement.id),'fpAge');
+  await expectFocus(page,'#fpAge','Back to the filters moves focus to the age control');
   assert.equal(await page.locator('#q').evaluate(el=>el.getBoundingClientRect().top>=0&&el.getBoundingClientRect().top<400),true,'The search field is back in view');
 
   // Filter sheet: district, then the count and the reset.

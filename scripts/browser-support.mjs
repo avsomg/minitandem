@@ -2,6 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import http from 'node:http';
+import assert from 'node:assert/strict';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 
 export const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
@@ -15,6 +16,21 @@ export const targets=[
   {name:'desktop',viewport:{width:1440,height:1000},isMobile:false,hasTouch:false,deviceScaleFactor:1}
 ];
 export const contextOptions=({name,...target})=>({...target,locale:'en-GB',timezoneId:'Europe/Zurich',acceptDownloads:true,reducedMotion:'reduce',serviceWorkers:'block'});
+// The app moves focus in a microtask after a dialog's close event, so a check waits for it instead of reading it at once.
+export async function expectFocus(page,selector,message,timeout=3000){
+  const onIt=selector=>document.activeElement===document.querySelector(selector);
+  try{await page.waitForFunction(onIt,selector,{timeout});}
+  catch{assert.fail(`${message} (focus is on ${await page.evaluate(()=>document.activeElement?.outerHTML.slice(0,90))})`);}
+}
+// The Lighthouse way to total layout shifts: the worst run of shifts, each less than 1 s after the last, within 5 s.
+export function worstShiftWindow(entries){
+  let worst=0,total=0,first=0,last=0;
+  for(const {startTime,value} of entries){
+    if(!total||startTime-last>=1000||startTime-first>=5000){total=0;first=startTime;}
+    total+=value;last=startTime;worst=Math.max(worst,total);
+  }
+  return worst;
+}
 export function artifactDirectory(check){
   const directory=path.join(root,'editorial/typesafe-runtime/browser-checks',engineName(),check);
   fs.mkdirSync(directory,{recursive:true});
@@ -28,7 +44,9 @@ export async function serveSite(input=process.env.APP_URL||pathToFileURL(path.jo
   const server=http.createServer((request,response)=>{
     let pathname;
     try{pathname=decodeURIComponent(new URL(request.url,'http://localhost').pathname);}catch{response.writeHead(400).end();return;}
-    const file=path.resolve(directory,'.'+(pathname==='/'?'/index.html':pathname));
+    const asked=path.resolve(directory,'.'+(pathname==='/'?'/index.html':pathname));
+    // A folder serves its index.html, like the real server does for /projekt/ and /places/…/.
+    const file=fs.existsSync(asked)&&fs.statSync(asked).isDirectory()?path.join(asked,'index.html'):asked;
     const relative=path.relative(directory,file),segments=relative.split(path.sep);
     if(!['GET','HEAD'].includes(request.method)||relative.startsWith('..')||path.isAbsolute(relative)||segments.some(part=>part.startsWith('.'))||
       segments.some((_,index)=>fs.existsSync(path.join(directory,...segments.slice(0,index+1)))&&fs.lstatSync(path.join(directory,...segments.slice(0,index+1))).isSymbolicLink())||
