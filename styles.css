@@ -55,17 +55,20 @@ h1 { margin: 0; font-size: 28px; font-weight: 400; letter-spacing: -0.032em; lin
 .search .si { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--d); pointer-events: none; }
 #q { width: 100%; height: 52px; padding: 0 52px 0 48px; border: 1px solid var(--field-edge); border-radius: 999px; background: var(--field); color: var(--t); appearance: none; -webkit-appearance: none; }
 #q::placeholder { color: var(--d); opacity: 1; }
+/* The room kept for the clear button is not needed while the field is empty: the placeholder may use it. */
+#q:placeholder-shown { padding-right: 16px; }
 #q::-webkit-search-cancel-button { display: none; }
 #q:focus { outline: none; border-color: var(--t); box-shadow: 0 0 0 3px var(--ring); }
 .clear { position: absolute; right: 4px; top: 4px; width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; display: grid; place-items: center; color: var(--d); }
 
-/* Filter entry (phone and tablet): under the search field, scrolls away with the page. Nothing here is fixed or sticky.
+/* Filter entry (phone and tablet): under the search field, scrolls away with the page. Nothing here is fixed or sticky. The two lines of a pill grow
+   with their text (a long district name, increased text spacing) and are never cut off.
    A pill holds the current value and turns black once it is set; "Filters" opens the sheet for everything else
    and turns black while any filter is on. The count of active filters is written out in the count bar below. */
 .fbar { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px; margin-top: 8px; }
 .fp { min-width: 0; min-height: 52px; padding: 6px 18px; border: 0; border-radius: 999px; background: var(--raised); color: var(--t); display: grid; align-content: center; justify-items: start; text-align: left; transition: background-color 150ms var(--ease), color 150ms var(--ease); }
-.fp small { max-width: 100%; overflow: hidden; overflow-wrap: anywhere; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font-size: 11.5px; line-height: 1.2; color: var(--d); }
-.fp b { min-height: 1.25em; max-width: 100%; overflow: hidden; overflow-wrap: anywhere; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font-size: 14.5px; font-weight: 600; line-height: 1.25; }
+.fp small { max-width: 100%; overflow-wrap: anywhere; font-size: 11.5px; line-height: 1.2; color: var(--d); }
+.fp b { min-height: 1.25em; max-width: 100%; overflow-wrap: anywhere; font-size: 14.5px; font-weight: 600; line-height: 1.25; }
 .fp.on { background: var(--t); color: var(--inv); }
 .fp.on small { color: #d0d0d0; }
 .fp.main { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--bg); box-shadow: inset 0 0 0 1px var(--edge); font-size: 15px; font-weight: 600; }
@@ -105,8 +108,8 @@ h1 { margin: 0; font-size: 28px; font-weight: 400; letter-spacing: -0.032em; lin
 .row { display: grid; grid-template-columns: var(--icon-col) minmax(0, 1fr); grid-template-areas: "tile cat" "tile name" "tile facts" "tile l3"; column-gap: 12px; row-gap: 3px; align-items: start; padding: 14px; min-height: 64px; color: inherit; text-decoration: none; }
 .r-main { display: contents; }
 .r-cat { grid-area: cat; display: flex; align-items: baseline; column-gap: 10px; min-width: 0; font-size: 13px; line-height: 1.3; color: var(--d); }
-/* The category gives way (it is cut short) so that a session's time and the distance stay on the same line. */
-.r-catname { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* The category gives way (it wraps onto a second line) so that a session's time and the distance stay on the same line. */
+.r-catname { min-width: 0; overflow-wrap: anywhere; }
 .r-time { flex: none; color: var(--t); font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; }
 /* Straight-line distance, shown once the visitor sets a point: on the category line, pushed to its right end. */
 .r-dist { flex: none; margin-left: auto; color: var(--t); font-weight: 500; white-space: nowrap; font-variant-numeric: tabular-nums; }
@@ -177,7 +180,8 @@ legend.glabel { margin-bottom: 10px; }
 .field:focus { outline: none; border-color: var(--t); box-shadow: 0 0 0 3px var(--ring); }
 input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
 input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-.agebox { display: grid; grid-template-columns: 110px 1fr; align-items: center; gap: 12px; }
+/* The field takes the width the panel gives it, so that its placeholder ("Peu importe") is read whole at any text spacing; the unit keeps its own width. */
+.agebox { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; }
 .agebox .unit { font-size: 14px; color: var(--d); }
 .select { position: relative; display: block; }
 .select select { padding-right: 40px; text-overflow: ellipsis; cursor: pointer; }
@@ -224,6 +228,9 @@ dialog::backdrop { background: rgb(0 0 0 / 0.4); }
 .go { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 24px; border: 0; border-radius: 999px; background: var(--t); color: var(--inv); font-weight: 500; font-size: 16px; text-decoration: none; }
 .go.grow { flex: 1; }
 .ghost { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 0 18px; border: 0; border-radius: 999px; background: var(--raised); color: var(--t); font-weight: 500; font-size: 14.5px; }
+/* A button that cannot be pressed yet looks it: grey words and a dashed outline (as on a date that is over) instead of the fill. The reason is written next to it. */
+.ghost:disabled:not(#nearGeo), .go:disabled { background: transparent; border: 1px dashed var(--edge); color: var(--d); cursor: not-allowed; }
+.sheet-body .why { margin-top: 8px; }
 
 /* Card detail */
 .d-top { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px 8px 12px; }
@@ -278,11 +285,11 @@ dialog .toast { position: absolute; top: 76px; bottom: auto; }
 
 @media (hover: hover) {
   .row:hover { background: var(--raised); }
-  .chip:not([aria-pressed="true"]):hover, .ghost:hover, .iconbtn:hover { background: var(--edge); }
+  .chip:not([aria-pressed="true"]):hover, .ghost:not(:disabled):hover, .iconbtn:hover { background: var(--edge); }
   .seg button:not([aria-pressed="true"]):hover { color: var(--t); }
   .fp:not(.on):not(.main):hover { background: #e2e2e2; }
   .fp.main:not(.on):hover { background: var(--surface); }
-  .go:hover { opacity: 0.86; }
+  .go:not(:disabled):hover { opacity: 0.86; }
   .linkbtn:hover { text-decoration-thickness: 2px; }
   .srcs a:hover { text-decoration-color: var(--t); }
 }
@@ -317,7 +324,7 @@ dialog .toast { position: absolute; top: 76px; bottom: auto; }
 }
 /* The list becomes a table (one line per activity, columns to compare) only when the list column is wide enough. */
 @media (min-width: 1200px) {
-  .listhead, .row { display: grid; grid-template-columns: var(--icon-col) minmax(0, 1.6fr) 112px 136px minmax(0, 1.1fr) 104px; grid-template-areas: none; column-gap: 14px; align-items: center; }
+  .listhead, .row { display: grid; grid-template-columns: var(--icon-col) minmax(0, 1.5fr) 112px 136px minmax(0, 1.1fr) 116px; grid-template-areas: none; column-gap: 14px; align-items: center; }
   .listhead { padding: 0 16px 8px; font-size: 12.5px; color: var(--d); font-weight: 500; }
   .row { padding: 12px 16px; row-gap: 0; }
   .row > *, .r-name, .r-facts, .r-l3, .chev, .cat-icon { grid-area: auto; }
@@ -327,9 +334,11 @@ dialog .toast { position: absolute; top: 76px; bottom: auto; }
   .r-facts, .r-l3 { display: contents; }
   .r-facts > span, .r-when, .r-l3 .r-status { font-size: 14px; }
   .r-facts > span { align-items: flex-start; min-width: 0; line-height: 1.35; }
-  .r-l3 .r-status { order: 0; }
+  /* The status is a label: it wraps inside its column (increased letter or word spacing, a longer word in another language) instead of running out of it. */
+  .r-l3 .r-status { order: 0; white-space: normal; align-items: flex-start; }
+  .r-l3 .r-status .dot { margin-top: 0.4em; }
   .r-when { white-space: normal; overflow: visible; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; line-height: 1.35; color: var(--d); }
-  .r-age, .r-price { display: -webkit-box !important; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+  .r-age, .r-price { display: -webkit-box !important; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; overflow-wrap: break-word; }
   /* Week view: the time or the weekly schedule is read whole. */
   .r-when.is-wrap { display: block; overflow: visible; }
   /* The column is headed "Next date": the date without "Next:". */
@@ -339,7 +348,6 @@ dialog .toast { position: absolute; top: 76px; bottom: auto; }
 }
 @media (max-width: 380px) {
   h1 { font-size: 27px; }
-  .agebox { grid-template-columns: 96px 1fr; }
 }
 /* Small phones (360px): tighter pill padding so both labels stay whole. */
 @media (max-width: 389px) {
@@ -510,6 +518,8 @@ dialog .toast { z-index: 60; }
 .public-content { max-width: 760px; margin-inline: auto; padding: 20px 16px 8px; }
 /* the global h1 cap of 22ch (wide screens) is for the app's short title; page titles use the whole column */
 .public-content h1 { font-size: 30px; max-width: none; }
+/* A long German heading (Datenschutzerklärung) breaks at 320 px with increased letter spacing instead of leaving the page wider than the screen. */
+.public-content h1, .public-content h2 { overflow-wrap: break-word; hyphens: auto; }
 .public-content h2 { margin: 28px 0 10px; font-size: 18px; font-weight: 600; letter-spacing: -0.02em; }
 .public-content dl { margin: 0; }
 .public-facts, .visit-conditions { padding: 4px 16px; background: var(--surface); border-radius: 16px; }
@@ -533,6 +543,13 @@ dialog .toast { z-index: 60; }
 .public-actions a { text-decoration: none; }
 /* a dark button on any public page: .public-content a, .public-breadcrumbs a and .public-footer a would otherwise paint its label dark */
 .public-page a.go { color: var(--inv); }
+
+/* the language switch of the legal notices: one pill like the app's EN/DE/FR switch, the current language in black, on its own line when the logo leaves no room */
+.public-page .top { flex-wrap: wrap; row-gap: 4px; }
+.langnav { display: flex; gap: 2px; padding: 2px; margin-left: auto; background: var(--raised); border-radius: 999px; }
+.langnav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; color: var(--d); font-size: 14px; font-weight: 500; text-decoration: none; }
+.langnav a[aria-current="page"] { background: var(--t); color: var(--inv); }
+@media (hover: hover) { .langnav a:not([aria-current]):hover { color: var(--t); } }
 
 /* the case-study page (/projekt/): text, two buttons and a five-step diagram; no script, like the place pages */
 .case h3 { margin: 22px 0 8px; font-size: 16px; font-weight: 600; }

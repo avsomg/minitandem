@@ -162,3 +162,20 @@ test('the plain page of a card follows the same rule, by the date it is built on
   assert.ok(!vully.includes('unavailability due to works')&&vully.includes('Check for new restrictions before the trip.'),'a note keeps its other sentence');
   assert.equal(ile.practical.warnings[0],'Closed 3–10 October 2026','the data are not changed');
 });
+
+test('the files the visitor downloads follow the same rule: no obsolete closure or "next meeting" in the calendar entry, the catalogue or the address list',()=>{
+  const card={id:'closure-files',name:'Closure files',category:'play',town:'Testdorf',region:'sense',status:'active',format:'group',min:null,max:null,age:'3–5',parent:'unknown',languages:[],
+    schedule:'Wed 09:00–10:00; closed 3–10 October 2026',days:[3],events:[{date:'2026-10-21',start:'09:00',end:'10:00'}],address:'Weg 1',price:'Free',priceKind:'free',contacts:[],
+    sources:[],notes:['Good to know. The next published meeting is 10 October 2026.','Bring a towel.'],checked:'2026-09-27'};
+  for(const [today,over] of [['2026-10-10',false],['2026-10-11',true]]){
+    const S=loadStack({today}),byId=new Map([[card.id,card]]);
+    const EX=S.window.MinitandemExports.create({t:S.t,lang:S.I.lang,P:S.P,byId,regions:S.regions,today:S.C.today,format:S.F});
+    const ics=EX.eventFile(card.id,0).text.replace(/\r\n /g,''),csv=EX.csvFile([card],()=>'active').text,addresses=EX.addressesFile([card]).text;
+    for(const [name,text] of [['calendar entry',ics],['catalogue',csv],['address list',addresses]])
+      assert.equal(/closed 3–10 October 2026/.test(text),!over,`${today}: the closure in the ${name}`);
+    assert.equal(ics.includes('next published meeting'),!over,today+': the next meeting in the calendar entry');
+    assert.ok(ics.includes('Bring a towel.')&&ics.includes('Wed 09:00–10:00'),today+': what is not over stays');
+    assert.ok(csv.includes('Wed 09:00–10:00')&&addresses.includes('Wed 09:00–10:00'),today+': the hours stay');
+    assert.equal(card.schedule,'Wed 09:00–10:00; closed 3–10 October 2026','the card is not changed');
+  }
+});

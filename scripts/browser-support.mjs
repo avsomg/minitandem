@@ -22,6 +22,40 @@ export async function expectFocus(page,selector,message,timeout=3000){
   try{await page.waitForFunction(onIt,selector,{timeout});}
   catch{assert.fail(`${message} (focus is on ${await page.evaluate(()=>document.activeElement?.outerHTML.slice(0,90))})`);}
 }
+// WCAG 1.4.12 (text spacing): the values a reader may set, as the success criterion names them. Applied to a page, no label may be cut off.
+export const TEXT_SPACING='*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}';
+// What a box cuts off: a box that hides its overflow (also by an ellipsis or a line clamp) and holds more than it shows, a search field whose
+// placeholder is longer than the field, and anything that makes the page wider than the screen. Scroll containers are not cutting anything off.
+// Left out on purpose: text that is visually hidden (the word beside an icon), and the two columns of the list that hold the organiser's own
+// text, clamped to two lines or one line on purpose because the card page holds the whole text: the schedule and a price that says something.
+// A price that is only "not published" is a label (the interface phrase) and is checked like one.
+export function clippedLabels(page){
+  return page.evaluate(()=>{
+    const out=[],phrase=window.MinitandemI18n?.t('price.notPublished');
+    const describe=el=>el.tagName.toLowerCase()+(el.id?'#'+el.id:'')+(typeof el.className==='string'&&el.className.trim()?'.'+el.className.trim().split(/\s+/).slice(0,2).join('.'):'')+' «'+(el.textContent||'').trim().replace(/\s+/g,' ').slice(0,40)+'»';
+    for(const el of document.querySelectorAll('body *')){
+      const box=el.getBoundingClientRect(),style=getComputedStyle(el);
+      if(!box.width||!box.height||style.visibility==='hidden'||el.closest('svg,.sr,.skip,.leaflet-container')||el.clientWidth<=1||!(el.textContent||'').trim())continue;
+      if(el.matches('.r-when')||el.matches('.r-price')&&el.textContent.trim()!==phrase)continue;
+      const hides=axis=>!['visible','auto','scroll'].includes(axis);
+      const wide=(hides(style.overflowX)||style.textOverflow==='ellipsis')&&el.scrollWidth>el.clientWidth+1;
+      const tall=(hides(style.overflowY)||(style.webkitLineClamp&&style.webkitLineClamp!=='none'))&&el.scrollHeight>el.clientHeight+1;
+      if(wide||tall)out.push(describe(el)+` [${wide?`${el.scrollWidth} > ${el.clientWidth} wide`:''}${wide&&tall?', ':''}${tall?`${el.scrollHeight} > ${el.clientHeight} high`:''}]`);
+    }
+    // The measure of a placeholder is its text laid out like the field's own: font, letter and word spacing.
+    for(const input of document.querySelectorAll('input[placeholder]')){
+      if(!input.getBoundingClientRect().width)continue;
+      const style=getComputedStyle(input),probe=document.createElement('span');
+      probe.style.cssText=`position:absolute;visibility:hidden;white-space:nowrap;font:${style.font};letter-spacing:${style.letterSpacing};word-spacing:${style.wordSpacing}`;
+      probe.textContent=input.placeholder;document.body.append(probe);
+      const room=input.clientWidth-parseFloat(style.paddingLeft)-parseFloat(style.paddingRight);
+      if(probe.getBoundingClientRect().width>room+1)out.push('placeholder «'+input.placeholder+'» of '+describe(input)+` [${Math.ceil(probe.getBoundingClientRect().width)} > ${Math.floor(room)}]`);
+      probe.remove();
+    }
+    if(document.documentElement.scrollWidth>innerWidth)out.push(`the page is wider than the screen [${document.documentElement.scrollWidth} > ${innerWidth}]`);
+    return out;
+  });
+}
 // The Lighthouse way to total layout shifts: the worst run of shifts, each less than 1 s after the last, within 5 s.
 export function worstShiftWindow(entries){
   let worst=0,total=0,first=0,last=0;

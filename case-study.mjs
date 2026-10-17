@@ -15,7 +15,7 @@ const PAGES = {
 const SWITCH = {de: 'Deutsch', en: 'English'};
 const BUTTONS = {'Zur App': '/', 'Open the app': '/', 'Code auf GitHub': REPOSITORY, 'Code on GitHub': REPOSITORY};
 
-const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+export const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
 function inline(text) {
   return esc(text)
     .replace(/\[`docs\/architektur\.md`\]/g, `<a href="${REPOSITORY}/blob/main/docs/architektur.md"><code>docs/architektur.md</code></a>`)
