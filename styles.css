@@ -340,7 +340,9 @@ dialog .toast { position: absolute; top: 76px; bottom: auto; }
   .r-l3 .r-status { order: 0; white-space: normal; align-items: flex-start; }
   .r-l3 .r-status .dot { margin-top: 0.4em; }
   .r-when { white-space: normal; overflow: visible; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; line-height: 1.35; color: var(--d); }
-  .r-age, .r-price { display: -webkit-box !important; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; overflow-wrap: break-word; }
+  .r-age, .r-price { display: -webkit-box !important; -webkit-box-orient: vertical; overflow-wrap: break-word; }
+  /* The age slot and the interface's phrase for an unknown price are labels and grow with their text; only the organiser's own words in the price slot are clamped to two lines (the card page holds them whole). */
+  .r-price.own { -webkit-line-clamp: 2; overflow: hidden; }
   /* Week view: the time or the weekly schedule is read whole. */
   .r-when.is-wrap { display: block; overflow: visible; }
   /* The column is headed "Next date": the date without "Next:". */

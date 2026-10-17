@@ -49,6 +49,16 @@ test('a text that carries something is shown as written, and a known price is ne
   assert.match(V.rows([card('p',{price:'Price not published.',priceKind:'unknown'})]),/class="r-price"/,'it keeps the grey of an unknown price');
 });
 
+test('the list clamps the organiser\'s own words in the price slot and never the interface phrase for an unknown price',()=>{
+  const {V}=loadStack(clock);
+  assert.match(V.rows([card('o',{price:'Summer menu 2026: coffee CHF 4.50',priceKind:'unknown'})]),/class="r-price own"/);
+  assert.match(V.rows([card('f',{price:'Free',priceKind:'free'})]),/class="r-price known own"/);
+  assert.doesNotMatch(V.rows([card('p',{price:'Price not published.',priceKind:'unknown'})]),/class="r-price[^"]* own"/);
+  const css=fs.readFileSync(path.join(root,'styles.css'),'utf8');
+  assert.match(css,/\.r-price\.own \{[^}]*-webkit-line-clamp: 2;[^}]*overflow: hidden;/);
+  assert.doesNotMatch(css,/\.r-age[^{]*\{[^}]*-webkit-line-clamp/,'the age slot holds interface phrases and grows with them');
+});
+
 test('the card page keeps the organiser\'s wording of an unknown price',()=>{
   const {V}=loadStack(clock);
   for(const text of PLACEHOLDERS)assert.ok(V.detail(card('p',{price:text,priceKind:'unknown'})).includes(V.esc(text)),text);
