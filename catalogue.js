@@ -188,7 +188,7 @@
     // true: the published limits include this age; false: they exclude it; null: nothing published that decides it.
     function ageFit(a, age) {
       if (!Number.isFinite(age)) return null;
-      if ((a.min !== null && age < a.min) || (a.max !== null && age > a.max)) return false;
+      if ((a.min !== null && !P.ageFrom(a, age)) || (a.max !== null && age > a.max)) return false;
       if (P.ageUncertain(a, age)) return null;
       if (a.ageException) return true;
       if (a.min === null) return null;
@@ -199,7 +199,7 @@
     // The status a visitor sees. A card for older children is 'future' until the chosen age reaches its minimum; from then on it
     // needs checking until the season is confirmed. (With an age below the minimum the age filter hides the card.)
     const statusOf = (a, age) => isArchive(a) ? a.status
-      : a.status === 'future' ? (Number.isFinite(age) && a.min !== null && age >= a.min ? 'check' : 'future')
+      : a.status === 'future' ? (Number.isFinite(age) && P.ageFrom(a, age) ? 'check' : 'future')
       : needsReview(a) ? 'check' : a.status;
 
     // The card's text in the interface language, when a translation is shown (set by app.js): search finds both it and the English.
