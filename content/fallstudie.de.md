@@ -42,7 +42,7 @@ Code lese ich noch nicht. Die Abläufe kann ich erklären: Die vier wichtigsten 
 
 ## Ein Beispiel: Eine falsche Angabe wird abgefangen
 
-Aus der Demo im Repository. Sie läuft ohne Netz und ohne Modell, mit aufgezeichneten Antworten (`npm run demo`).
+Aus der Demo im Repository. Sie läuft ohne Netz und ohne Modell, mit vorbereiteten Beispielantworten (`npm run demo`).
 
 1. Der Such-Agent liest die Seite einer Spielgruppe. Er findet «children aged 2 to 4 years» und schlägt ein Alter von
    2 bis 4 Jahren vor. Aus «Registration is not needed» macht er «kostenlos».

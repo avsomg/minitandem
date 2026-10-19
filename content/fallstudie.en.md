@@ -40,7 +40,7 @@ I cannot read code yet. I can explain how it works: the four main paths through 
 
 ## An example: a wrong fact is caught
 
-From the demo in the repository. It runs without network and without a model, on recorded answers (`npm run demo`).
+From the demo in the repository. It runs without network and without a model, on prepared example answers (`npm run demo`).
 
 1. The search agent reads a playgroup's page. It finds "children aged 2 to 4 years" and proposes an age of 2 to 4 years. From
    "Registration is not needed" it makes "free".
