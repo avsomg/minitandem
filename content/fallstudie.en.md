@@ -14,7 +14,7 @@ a source says nothing.
 
 ## What I do and what the agents do
 
-AI agents write the code: Claude Code, earlier Codex. My part:
+AI agents write the code: Claude Code and Codex. My part:
 
 - I decide what the product does and what it does not. For example: no names of private persons in the catalogue.
 - I set the requirements and the rules. The agents write the specs from them, and I approve them.
@@ -22,7 +22,7 @@ AI agents write the code: Claude Code, earlier Codex. My part:
   myself.
 - I decide what gets published. I chose and paid for the domain and the server. Agents set up both after my approval.
 
-I cannot read code fluently yet. I can explain how it works: the four main paths through the code are described in
+I cannot read code yet. I can explain how it works: the four main paths through the code are described in
 [`docs/architektur.md`] (German).
 
 ## The rule

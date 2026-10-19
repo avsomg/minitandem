@@ -15,7 +15,7 @@ Antwort, wenn eine Quelle nichts dazu sagt.
 
 ## Was ich mache und was die Agenten machen
 
-Den Code schreiben KI-Agenten: Claude Code, früher Codex. Meine Arbeit:
+Den Code schreiben KI-Agenten: Claude Code und Codex. Meine Arbeit:
 
 - Ich lege fest, was das Produkt tut und was nicht. Zum Beispiel: keine Namen von Privatpersonen im Katalog.
 - Ich lege die Anforderungen und Regeln fest. Die Agenten schreiben daraus die Specs, ich gebe sie frei.
@@ -24,7 +24,7 @@ Den Code schreiben KI-Agenten: Claude Code, früher Codex. Meine Arbeit:
 - Ich entscheide, was veröffentlicht wird. Domain und Server habe ich ausgewählt und bezahlt.
   Agenten haben beides nach meiner Freigabe eingerichtet.
 
-Code lese ich noch nicht flüssig. Die Abläufe kann ich erklären: Die vier wichtigsten Wege durch den Code stehen in
+Code lese ich noch nicht. Die Abläufe kann ich erklären: Die vier wichtigsten Wege durch den Code stehen in
 [`docs/architektur.md`].
 
 ## Die Regel
