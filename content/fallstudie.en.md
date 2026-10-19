@@ -92,6 +92,7 @@ hid a baby swimming course "from 4 months". Nine issues were fixed the same day,
 
 ## Limits
 
+- Only a few facts have been through the strict chain of quote and independent check so far. The base catalogue was checked from 22 September to 2 October with an earlier process, with sources on every entry.
 - All entries are in German, French and English. Language models translated the German and French texts. A
   program checked numbers, times, weekdays and the like, and further language models checked the meaning. No native
   speaker of German or French has read them yet. The plain single pages without JavaScript (under /places/)

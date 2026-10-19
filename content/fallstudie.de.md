@@ -100,6 +100,7 @@ waren WCAG 2.2 AA, OWASP ASVS (Stufe 1) und Core Web Vitals; dazu wurden acht ty
 
 ## Grenzen
 
+- Die strenge Kette aus Zitat und unabhängiger Prüfung haben bisher erst wenige Angaben durchlaufen. Der Grundbestand wurde vom 22. September bis 2. Oktober mit einem früheren Verfahren geprüft, mit Quellen bei jedem Eintrag.
 - Alle Einträge gibt es auf Deutsch, Französisch und Englisch. Sprachmodelle haben die deutschen und französischen
   Texte übersetzt. Ein Programm hat Zahlen, Uhrzeiten, Wochentage und Ähnliches geprüft, weitere Sprachmodelle den
   Sinn. Gelesen hat die Texte noch niemand mit Deutsch oder Französisch als Muttersprache. Die einfachen
