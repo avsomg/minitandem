@@ -33,9 +33,14 @@ test('built app, project pages, directory and every card link to existing legal 
   const sitemap=read('.publish/sitemap.xml');
   for(const url of LEGAL_URLS)assert.ok(sitemap.includes(`<loc>${SITE_ORIGIN}${url}</loc>`));
   const pages=['.publish/index.html','.publish/projekt/index.html','.publish/projekt/en/index.html','.publish/places/index.html'];
-  for(const folder of fs.readdirSync(path.join(root,'.publish/places'),{withFileTypes:true}).filter(entry=>entry.isDirectory()))pages.push(`.publish/places/${folder.name}/index.html`);
+  for(const folder of fs.readdirSync(path.join(root,'.publish/places'),{withFileTypes:true}).filter(entry=>entry.isDirectory())){
+    pages.push(`.publish/places/${folder.name}/index.html`);
+    // A place has its German and French page in a folder of its own; a language folder (places/de/) is the directory.
+    for(const lang of ['de','fr'])if(fs.existsSync(path.join(root,`.publish/places/${folder.name}/${lang}/index.html`)))pages.push(`.publish/places/${folder.name}/${lang}/index.html`);
+  }
   for(const file of pages){
-    const html=read(file),lang=file.includes('/projekt/index')?'de':file.endsWith('.publish/index.html')?'de':'en';
+    // The plain pages are in the language of their folder (places/de/, places/<id>/fr/), English otherwise.
+    const html=read(file),lang=file.match(/places\/(?:[^/]+\/)?(de|fr)\/index\.html$/)?.[1]||(file.includes('/projekt/index')?'de':file.endsWith('.publish/index.html')?'de':'en');
     const footer=html.match(/<footer\b[^>]*>(.*?)<\/footer>/s)[1];
     for(const kind of ['impressum','datenschutz'])assert.ok(footer.includes(`href="${legalURL(kind,lang)}"`),file+' '+kind);
   }

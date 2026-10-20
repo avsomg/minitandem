@@ -139,47 +139,47 @@ test('public pages use one data source, escape content and contain no personal s
   assert.doesNotMatch(html,/<script|SECRET|localStorage/);assert.match(html,/&lt;script&gt;/);
   assert.ok(html.includes(`${SITE_ORIGIN}/places/mpe/`));
   assert.match(html,/<html lang="en">/);
-  assert.match(html,/schema.org\/Article/);assert.match(html,/Visit conditions/);
-  assert.match(html,/Additional conditions/);
+  assert.match(html,/schema.org\/Article/);assert.match(html,/Practical facts/);
+  assert.match(html,/Good to know/);
 });
-test('public pages are English, branded and carry the headings and links the directory promises',()=>{
+test('public pages are English, branded and carry the headings and links the directory promises (the words are the app\'s own English)',()=>{
   const mpe=allowed.get('mpe'),regions=catalog.CATALOG_REGIONS;
   const html=placePage(mpe,regions,'2026-09-27');
   assert.ok(html.includes(`<title>${mpe.name} · ${mpe.town} | Minitandem</title>`));
   assert.ok(html.includes(`<link rel="canonical" href="${SITE_ORIGIN}/places/mpe/">`));
   assert.ok(html.includes(`<meta property="og:url" content="${SITE_ORIGIN}/places/mpe/">`));
-  assert.match(html,/<h2>Visit conditions<\/h2>/);assert.match(html,/<h2>Contact<\/h2>/);assert.match(html,/<h2>Sources<\/h2>/);
-  assert.match(html,/>Open the card and plan a visit<\/a>/);assert.match(html,/>Address on the map<\/a>/);
+  assert.match(html,/<h2>Practical facts<\/h2>/);assert.match(html,/<h2>Contact<\/h2>/);assert.match(html,/<h2>Sources<\/h2>/);
+  assert.match(html,/>Open the card<\/a>/);assert.match(html,/>Show on map<\/a>/);
   const dated=allowed.get('museum'),withDates=placePage(dated,regions,'2026-09-27');
   assert.match(withDates,/<h2>Published dates<\/h2>/);
   const pending=catalog.ACTIVITIES.find(a=>!['closed','excluded'].includes(a.status)&&a.research?.remaining.length);
-  assert.ok(pending);assert.match(placePage(pending,regions,'2026-09-27'),/<h2>To confirm before you go<\/h2>/);
+  assert.ok(pending);assert.match(placePage(pending,regions,'2026-09-27'),/<h2>Still to confirm<\/h2>/);
   assert.doesNotMatch(withoutStoredIds(html+withDates),oldName);
   assert.doesNotMatch(html+withDates,/vercel\.app/);
 });
 test('public Suniai page lists the venue for each date without a misleading global map link',()=>{
   const a=allowed.get('suniai-family-yoga');
-  const html=placePage(a,catalog.CATALOG_REGIONS,'2026-09-29');
-  assert.match(html,/2026-11-07: Warpelstrasse 9, Düdingen/);
-  assert.match(html,/2026-10-03: Aloha YOGA Paradise/);
-  assert.doesNotMatch(html,/>Address on the map<\/a>/);
+  const html=placePage(a,catalog.CATALOG_REGIONS,'2026-09-29'),{F}=loadStack({lang:'en'});
+  assert.ok(html.includes(F.dateLabel('2026-11-07')+': Warpelstrasse 9, Düdingen'));
+  assert.ok(html.includes(F.dateLabel('2026-10-03')+': Aloha YOGA Paradise'));
+  assert.doesNotMatch(html,/>Show on map<\/a>/);
 });
 test('two Schwarzsee beaches remain separate map searches, not one route destination',()=>{
   const a=allowed.get('beaches');
   const html=placePage(a,catalog.CATALOG_REGIONS,'2026-09-29');
   assert.equal(a.addressPrecision,'area');
-  assert.match(html,/Find Gypsera/);
-  assert.match(html,/Find Staldenmotta/);
-  assert.doesNotMatch(html,/>Address on the map<\/a>/);
+  assert.match(html,/Show on map: Gypsera/);
+  assert.match(html,/Show on map: Staldenmotta/);
+  assert.doesNotMatch(html,/>Show on map<\/a>/);
   assert.ok(P.warnings(a,'2026-09-29').some(w=>w.code==='entranceUnknown'),'the exact entrance is reported as unknown');
 });
 test('static directory and sitemap include all public records and no archives',()=>{
   const dir=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-public-'));
   try{
     assert.equal(generatePublicPages(catalog.ACTIVITIES,catalog.CATALOG_REGIONS,dir,'2026-09-27'),COUNTS.catalog);
-    // One page per published card, plus the home page, the directory, project pages and legal notices.
-    const sitemap=fs.readFileSync(path.join(dir,'sitemap.xml'),'utf8'),fixedPages=['/','/places/','/projekt/','/projekt/en/',...LEGAL_URLS];
-    assert.equal((sitemap.match(/<loc>/g)||[]).length,COUNTS.catalog+fixedPages.length);
+    // Three pages (English, German, French) per published card, plus the home page, the directory in three languages, project pages and legal notices.
+    const sitemap=fs.readFileSync(path.join(dir,'sitemap.xml'),'utf8'),fixedPages=['/','/places/','/places/de/','/places/fr/','/projekt/','/projekt/en/',...LEGAL_URLS];
+    assert.equal((sitemap.match(/<loc>/g)||[]).length,3*COUNTS.catalog+fixedPages.length);
     for(const page of fixedPages)assert.ok(sitemap.includes(`<loc>${SITE_ORIGIN}${page}</loc>`),page);
     assert.ok(sitemap.includes(`<loc>${SITE_ORIGIN}/projekt/</loc>`)&&sitemap.includes(`<loc>${SITE_ORIGIN}/projekt/en/</loc>`));
     assert.ok(sitemap.includes(`<loc>${SITE_ORIGIN}/</loc>`)&&sitemap.includes(`<loc>${SITE_ORIGIN}/places/mpe/</loc>`));
