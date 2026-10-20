@@ -96,6 +96,7 @@ hid a baby swimming course "from 4 months". Nine issues were fixed the same day,
 - All entries are in German, French and English. Language models translated the German and French texts. A
   program checked numbers, times, weekdays and the like, and further language models checked the meaning. No native
   speaker of German or French has read them yet.
+- When a card's translation is out of date, the simple single pages (under /places/) show the English text with a note.
 - Many fields are "unknown". That is on purpose, but less convenient for parents.
 - If the whole server goes down, it cannot send an e-mail any more. An outside check is still missing.
 - Syncing between devices exists in the code but is switched off. Records therefore stay in the browser where they were made.

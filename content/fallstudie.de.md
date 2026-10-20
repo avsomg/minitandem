@@ -104,6 +104,7 @@ waren WCAG 2.2 AA, OWASP ASVS (Stufe 1) und Core Web Vitals; dazu wurden acht ty
 - Alle Einträge gibt es auf Deutsch, Französisch und Englisch. Sprachmodelle haben die deutschen und französischen
   Texte übersetzt. Ein Programm hat Zahlen, Uhrzeiten, Wochentage und Ähnliches geprüft, weitere Sprachmodelle den
   Sinn. Gelesen hat die Texte noch niemand mit Deutsch oder Französisch als Muttersprache.
+- Ist die Übersetzung einer Karte nicht mehr aktuell, zeigen die einfachen Einzelseiten (unter /places/) den englischen Text mit einem Hinweis.
 - Viele Felder sind «unbekannt». Das ist Absicht, aber für Eltern weniger bequem.
 - Fällt der ganze Server aus, kann er keine E-Mail mehr schicken. Eine Prüfung von aussen fehlt noch.
 - Der Abgleich zwischen Geräten ist im Code vorhanden, aber ausgeschaltet. Aufzeichnungen bleiben darum in dem Browser, in dem sie entstanden sind.
