@@ -141,6 +141,12 @@ export function claudeUsage(event,route,toolCalls){
     sessionId:event.session_id||null,apiCostEstimateUsd:event.total_cost_usd??null,
     costCaveat:'CLI estimate is not subscription billing or a quota percentage'};
 }
+// With --json-schema the CLI delivers the answer as a tool_use block named
+// StructuredOutput, even under --tools ''. That block is the answer channel,
+// not a tool the model chose, so a no-tools worker must not count it; any other
+// tool_use block (or one without a name) is still a real call and still stops the run.
+export const STRUCTURED_OUTPUT_TOOL='StructuredOutput';
+export const isRealToolUse=block=>block?.type==='tool_use'&&block.name!==STRUCTURED_OUTPUT_TOOL;
 // Saved-text experiments need the same environment and isolation, with no tools.
 // cwd is supplied by the caller so experiment files stay in its output folder.
 export async function runClaudeNoTools({prompt,schema,model,effort='low',cwd,timeoutMs=60000},
@@ -163,7 +169,7 @@ export async function runClaudeNoTools({prompt,schema,model,effort='low',cwd,tim
     const parse=line=>{
       if(!line.trim())return;
       let event;try{event=JSON.parse(line);}catch{stop('Invalid Claude event JSON');return;}
-      if(event.type==='assistant')for(const block of event.message?.content||[])if(block.type==='tool_use')toolCalls++;
+      if(event.type==='assistant')for(const block of event.message?.content||[])if(isRealToolUse(block))toolCalls++;
       if(toolCalls)stop('No-tools worker attempted a tool call');
       if(event.type==='result'){if(result)stop('Duplicate Claude result');else result=event;}
     };
