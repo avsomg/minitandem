@@ -41,6 +41,13 @@ test('source fetches reject credentials, local addresses and unsafe redirects',a
   let calls=0;
   await assert.rejects(captureUrl('https://example.org',{lookupImpl:async()=>[{address:'10.0.0.4'}],fetchImpl:async()=>{calls++;}}),/non-public/);
   assert.equal(calls,0);
+  // Reserved blocks are refused at their own size; public neighbours such as WordPress.com hosting (192.0.78.x) are fetched.
+  for(const address of ['192.0.0.8','192.0.2.1','192.88.99.1','192.168.1.1','198.18.0.1','198.19.255.1','198.51.100.7','203.0.113.9','100.64.0.1'])
+    await assert.rejects(captureUrl('https://example.org',{lookupImpl:async()=>[{address}],fetchImpl:async()=>{calls++;}}),/non-public/,address);
+  assert.equal(calls,0);
+  for(const address of ['192.0.78.9','198.51.1.1','203.0.1.1'])
+    assert.equal((await captureUrl('https://example.org',{now,lookupImpl:async()=>[{address}],
+      fetchImpl:async()=>new Response('<body><p>Open Monday to Friday.</p></body>',{headers:{'content-type':'text/html'}})})).text,'Open Monday to Friday.',address);
   await assert.rejects(captureUrl('https://example.org',{lookupImpl:async()=>[{address:'93.184.216.34'}],fetchImpl:async()=>new Response('',{status:302,headers:{location:'https://localhost/private'}})}),/Non-public/);
 });
 test('capture keeps provenance and blocks unsupported or oversized responses',async()=>{

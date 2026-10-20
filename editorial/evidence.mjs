@@ -32,9 +32,12 @@ export function publicUrl(value){
 function publicAddress(address){
   if(net.isIP(address)===6)return /^[23][0-9a-f]{3}:/i.test(address)&&!/^2001:db8:/i.test(address);
   if(net.isIP(address)!==4)return false;
-  const [a,b]=address.split('.').map(Number);
-  return !(a===0||a===10||a===127||a>=224||a===169&&b===254||a===172&&b>=16&&b<=31||
-    a===192&&[0,168].includes(b)||a===100&&b>=64&&b<=127||a===198&&[18,19,51].includes(b)||a===203&&b===0);
+  // The reserved blocks of RFC 6890, each at its own size. Until 20 October 2026 the documentation and protocol blocks were taken as
+  // whole /16s, which refused every site hosted at WordPress.com (192.0.78.0/24) and other public addresses in 192.0, 198.51 and 203.0.
+  const [a,b,c]=address.split('.').map(Number);
+  return !(a===0||a===10||a===127||a>=224||a===169&&b===254||a===172&&b>=16&&b<=31||a===192&&b===168||
+    a===192&&b===0&&(c===0||c===2)||a===192&&b===88&&c===99||a===100&&b>=64&&b<=127||a===198&&(b===18||b===19)||
+    a===198&&b===51&&c===100||a===203&&b===0&&c===113);
 }
 
 export async function writeJsonAtomic(file,value){
