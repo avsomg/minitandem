@@ -177,7 +177,10 @@ test('a job that failed through a fixed controller defect gets one replacement o
   // An editor job refused for the practical format is repeated itself; the new, named refusal never qualifies.
   const draft=queue.enqueue({kind:'editorial',cardId:'sled',inputRevision:'editorial',priority:800,payload:{card:sled,cardRevision:digest(sled)}});
   fail(draft,'Invalid practical patch');
-  assert.equal(recoverDefectJob(queue,draft.id,'practical-checked','The prompt now names checked.',{getInputs}).kind,'editorial');
+  const repeated=recoverDefectJob(queue,draft.id,'practical-checked','The prompt now names checked.',{getInputs});
+  assert.equal(repeated.kind,'editorial');
+  // Sync does not retire the replacement as an editorial job it did not plan.
+  queue.reconcile([]);assert.equal(queue.get(repeated.jobId).state,'ready');
   const named=queue.enqueue({kind:'editorial',cardId:'sled',inputRevision:'editorial-2',payload:{card:sled,cardRevision:digest(sled)}});
   fail(named,'Invalid practical patch: costNote: checked needs a YYYY-MM-DD date');
   assert.throws(()=>recoverDefectJob(queue,named.id,'practical-checked','No.',{getInputs}),/this defect/);

@@ -527,7 +527,8 @@ export function recoverDefectJob(queue,id,defect,note,{getInputs=currentInputs}=
     if(old.payload.defectRecovery||editor.payload.defectRecovery)throw Error('This chain was recovered once already; it stays with a person');
     const card=getInputs().records.find(record=>record.id===old.card_id);
     if(!card||digest(card)!==editor.payload.cardRevision)throw Error('Card changed; synchronize instead of recovering this job');
-    const payload={...editor.payload,previousJobId:old.id,defectRecovery:{defect,previousAttempts:old.attempt,previousError:old.error,note}};
+    // resumeJob keeps sync from retiring the replacement as an unplanned editorial job, as for the input-budget recovery.
+    const payload={...editor.payload,previousJobId:old.id,resumeJob:true,defectRecovery:{defect,previousAttempts:old.attempt,previousError:old.error,note}};
     const next=queue.enqueue({kind:editor.kind,cardId:old.card_id,inputRevision:digest(['defect-recovery',defect,old.input_revision]),priority:editor.priority,payload});
     queue.db.prepare("UPDATE jobs SET state='superseded',updated_at=? WHERE id=?").run(queue.now(),old.id);
     queue.event(old.id,'contract-defect-recovered',{nextJobId:next.id,defect,note,previousAttempts:old.attempt});
