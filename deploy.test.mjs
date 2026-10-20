@@ -72,6 +72,7 @@ case "$1 $2" in
   "compose build")
     if [ -f "$FAKE/wait-build" ]; then touch "$FAKE/build-entered"; while [ ! -f "$FAKE/release-build" ]; do sleep 0.02; done; fi
     [ -f "$FAKE/build-fails" ] && { echo "build failed" >&2; exit 1; }
+    [ -f "$FAKE/build-reads-stdin" ] && cat >/dev/null
     echo "$MINITANDEM_TAG" >> "$FAKE/images" ;;
   "compose up")
     tag=$(sed -n 's/^MINITANDEM_TAG=//p' .env)
@@ -82,7 +83,8 @@ case "$1 $2" in
     if [ -f "$FAKE/bad-rollback-files" ] && [ "$tag" = "$(cat "$FAKE/old-tag")" ]; then echo '{}' > "$FAKE/public-files-$tag.json"; fi
     echo "up $tag" >> "$FAKE/log" ;;
   "compose ps") echo app-container ;;
-  "compose run") echo "validated with tag $MINITANDEM_TAG" >> "$FAKE/log"; [ -f "$FAKE/caddy-invalid" ] && { echo "invalid Caddyfile" >&2; exit 1; }; echo "Valid configuration" ;;
+  # As the real one: compose run reads stdin, where the deploy program arrives through ssh.
+  "compose run") cat >/dev/null; echo "validated with tag $MINITANDEM_TAG" >> "$FAKE/log"; [ -f "$FAKE/caddy-invalid" ] && { echo "invalid Caddyfile" >&2; exit 1; }; echo "Valid configuration" ;;
   "image inspect") grep -qx "$(echo "$3" | sed 's/^minitandem-app://')" "$FAKE/images" ;;
   "rm -f") rm -f "$FAKE/preview-up" "$FAKE/preview-api-up" ;;
   "network create") touch "$FAKE/preview-network" ;;
@@ -389,6 +391,17 @@ test('a release with Caddy images builds both images, previews Caddy and the API
   assert.equal(log.filter(line=>/^docker compose up/.test(line)).every(line=>line.includes('--no-build')),true,'the switch uses the images that were previewed');
   assert.equal(log.includes('docker compose up -d --no-build --force-recreate caddy'),false,'the new image tag recreates Caddy by itself');
   assert.match(result.stdout,/Preview files: same build and commit as the API/);
+});
+
+test('a command that reads the rest of the program from stdin makes the deployment fail, not succeed, and the checkout returns',{skip:HAS_TOOLS?false:'bash or git is not installed'},t=>{
+  const s=split(t);fs.writeFileSync(path.join(s.fake,'build-reads-stdin'),'');
+  const result=s.run(s.nextSha);
+  assert.notEqual(result.status,0,result.stdout);assert.match(result.stderr,/ended at stage checkout without finishing/);
+  assert.equal(s.tagInEnv(),s.oldTag);assert.equal(s.running(),s.oldTag);assert.equal(git(s.server,'rev-parse','HEAD'),s.oldSha);
+  assert.equal(s.log().some(line=>line.startsWith('docker compose up')),false,'nothing was switched');
+  const records=fs.readdirSync(path.join(s.server,'.deployments'));
+  assert.match(fs.readFileSync(path.join(s.server,'.deployments',records[0]),'utf8'),/stage=rolled-back/);
+  assert.equal(fs.existsSync(path.join(s.server,'.deploy-lock')),false,'the lock is released');
 });
 
 test('the preview of a release with Caddy images refuses files that do not match its API, before anything is switched',{skip:HAS_TOOLS?false:'bash or git is not installed'},t=>{

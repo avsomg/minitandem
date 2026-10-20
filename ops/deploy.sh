@@ -111,6 +111,9 @@ cleanup() {
   local status=$?
   trap - EXIT HUP INT TERM
   set +e
+  # Every way to success records done first. Ending anywhere else with status 0 means the program stopped early (a command that read
+  # the rest of it from stdin): that is a failure, and the stage decides the way back as for any other failure.
+  if [ "$status" -eq 0 ] && [ "$STAGE" != done ]; then say "deploy: the program ended at stage $STAGE without finishing" >&2; status=1; fi
   if ! owns; then say "deploy: ownership changed; no cleanup or rollback of another operation ($OP)" >&2; exit "$status"; fi
   if [ "$PREVIEW_UP" = 1 ]; then docker rm -f "$PREVIEW" "$PREVIEW_API" >/dev/null 2>&1; docker network rm "$PREVIEW_NETWORK" >/dev/null 2>&1; fi
   case "$STAGE" in
@@ -221,7 +224,9 @@ if [ "$EDGE_RELEASE" = 1 ]; then
 fi
 if [ "$EDGE_RELEASE" = 1 ] || [ "$EDGE_CHANGED" = 1 ]; then
   # The real Caddyfile (certificates, access log) cannot run in the preview; the Caddy image of the release has to accept it.
-  if ! checked=$(MINITANDEM_TAG=$NEW_TAG docker compose run --rm --no-deps --entrypoint caddy caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile 2>&1); then
+  # -T and </dev/null: this program reaches bash through ssh on stdin, and compose run reads stdin. On 20 October 2026 it swallowed the
+  # rest of the program here; bash then ended without switching and reported success (the cleanup below now refuses that).
+  if ! checked=$(MINITANDEM_TAG=$NEW_TAG docker compose run --rm -T --no-deps --entrypoint caddy caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile 2>&1 </dev/null); then
     printf '%s\n' "$checked" | tail -n 20 >&2
     die 'the new Caddyfile does not validate with the Caddy image'
   fi
