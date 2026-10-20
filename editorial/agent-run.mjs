@@ -330,7 +330,8 @@ export function qaRun(queue,job,{check=()=>{},renew=()=>{},blockingBudget=()=>18
   const manifest=testedManifest;
   queue.transaction(()=>{
     queue.requireLease(job.id,job.token,'qa');
-    queue.db.prepare("UPDATE jobs SET state='superseded',updated_at=? WHERE kind='qa' AND state IN ('ready','retry') AND id<>?").run(queue.now(),job.id);
+    // A passing QA of the whole site replaces every earlier QA run, including failed ones that reached attention.
+    queue.db.prepare("UPDATE jobs SET state='superseded',updated_at=? WHERE kind='qa' AND state IN ('ready','retry','attention') AND id<>?").run(queue.now(),job.id);
     queue.db.prepare("UPDATE jobs SET state='superseded',updated_at=? WHERE kind='release' AND state IN ('ready','retry') AND input_revision<>?").run(queue.now(),manifest.revision);
     queue.db.prepare(`INSERT INTO releases VALUES (?,?,?,?) ON CONFLICT(revision) DO UPDATE SET
       state=CASE WHEN releases.state='published' THEN 'published' ELSE 'tested' END,
@@ -400,7 +401,10 @@ export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=r
       if(monotonic()-startedAt>=policy.maxRunMinutes*60000){stopReason='run-time-budget';break;}
       const circuitOpen=Boolean(queue.circuit()?.open);
       if(circuitOpen&&!chain&&role!=='qa'){stopReason='systemic-failure-circuit';break;}
-      syncImpl(queue);
+      const synced=syncImpl(queue);
+      // QA builds the whole site, and the build stops while an editorial correction blocks publication. Claiming QA then only spends its
+      // attempts (six QA jobs reached attention that way by 20 October 2026), so it waits, ready, until the corrections are resolved.
+      const qaWaits=(synced?.input?.pipeline?.publication?.blockedIds||[]).length>0;
       const priorities=new Map(),downstream=new Map(),urgent=new Map();
       for(const job of queue.list().filter(j=>(j.state==='ready'||j.state==='retry'&&j.retry_after<=queue.now())&&(!cardId||j.card_id===cardId))){
         const assigned=Object.keys(ROLE_KINDS).find(r=>ROLE_KINDS[r].includes(job.kind));
@@ -409,7 +413,7 @@ export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=r
         if(urgentJob(job,queue.now()))urgent.set(assigned,Math.max(urgent.get(assigned)||0,job.priority));
       }
       const blocked=gate.ready===false;
-      const roles=await gatedRoles(runRoles({role,chain,circuitOpen,priorities,downstream,first:i===0}),priorities,gate);let job,assignedRole;
+      const roles=await gatedRoles(runRoles({role,chain,circuitOpen,priorities,downstream,first:i===0}).filter(r=>!qaWaits||r!=='qa'),priorities,gate);let job,assignedRole;
       if(gate.ready===false&&!blocked)queue.event(null,'worker-preflight-failed',{provider,reason:gate.reason,tries:gate.tries});
       for(const selection of [...(i===0?[{urgentOnly:true}]:[]),...(chain?[{kinds:DOWNSTREAM}]:[]),{}]){
         const order=selection.urgentOnly?[...roles].sort((a,b)=>(urgent.get(b)??-Infinity)-(urgent.get(a)??-Infinity)):roles;
@@ -502,6 +506,34 @@ export function upgradeInvestigatedJob(queue,id,note,{getInputs=currentInputs,ex
 export function upgradeInputBudgetJob(queue,id,note,options={}){
   return upgradeInvestigatedJob(queue,id,note,{...options,expectedFailure:'input-budget'});
 }
+// Controller defects found on 20 October 2026. A job that failed through one of them did not fail on its card: the rule or the prompt was
+// wrong. On the operator's note it gets one replacement: the old row is superseded with its error, attempts and events intact, and the
+// replacement names it and repeats the editor's work under the corrected contract. Any other failure, and a failed recovery, stays with a person.
+export const CONTRACT_DEFECTS={
+  // workflow.mjs: a bound confirmation of the current value now resolves a required field that was right.
+  'correction-confirmation':{error:/^Correction not resolved by draft: (?!every required field is unchanged)/,kinds:['review-patch']},
+  // worker-prompt.mjs: the editor is now told the practical fact format, checked date included.
+  'practical-checked':{error:/^Invalid practical patch$/,kinds:['editorial','integrate']},
+};
+export function recoverDefectJob(queue,id,defect,note,{getInputs=currentInputs}={}){
+  if(!note?.trim())throw Error('Defect recovery needs an investigation note');
+  const rule=CONTRACT_DEFECTS[defect];if(!rule)throw Error('Unknown contract defect');
+  return queue.transaction(()=>{
+    const old=queue.get(id);
+    if(!old||!['retry','attention'].includes(old.state)||!rule.kinds.includes(old.kind)||!rule.error.test(old.error||''))throw Error('Only a job that failed through this defect may be recovered');
+    // A failed review repeats the editor's work: the draft itself lacked what the corrected contract asks for.
+    const editor=old.kind==='review-patch'?queue.get(old.payload.editorJobId):old;
+    if(!editor||!['editorial','integrate'].includes(editor.kind))throw Error('The editor job of this review is missing');
+    if(old.payload.defectRecovery||editor.payload.defectRecovery)throw Error('This chain was recovered once already; it stays with a person');
+    const card=getInputs().records.find(record=>record.id===old.card_id);
+    if(!card||digest(card)!==editor.payload.cardRevision)throw Error('Card changed; synchronize instead of recovering this job');
+    const payload={...editor.payload,previousJobId:old.id,defectRecovery:{defect,previousAttempts:old.attempt,previousError:old.error,note}};
+    const next=queue.enqueue({kind:editor.kind,cardId:old.card_id,inputRevision:digest(['defect-recovery',defect,old.input_revision]),priority:editor.priority,payload});
+    queue.db.prepare("UPDATE jobs SET state='superseded',updated_at=? WHERE id=?").run(queue.now(),old.id);
+    queue.event(old.id,'contract-defect-recovered',{nextJobId:next.id,defect,note,previousAttempts:old.attempt});
+    return {previousJobId:old.id,jobId:next.id,kind:editor.kind,defect,previousAttempts:old.attempt};
+  });
+}
 export function requestQa(queue,base=root){
   const revision=sourceRevision(base,{generated:false});
   return queue.transaction(()=>{
@@ -516,6 +548,13 @@ export function requestQa(queue,base=root){
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const upgradeId=process.argv.find(x=>x.startsWith('--upgrade-input-job='))?.split('=')[1];
   const repairId=process.argv.find(x=>x.startsWith('--repair-contract-job='))?.split('=')[1];
+  const recoverId=process.argv.find(x=>x.startsWith('--recover-defect-job='))?.split('=')[1];
+  if(recoverId){
+    const queue=new JobQueue(path.join(here,'workflow-state','jobs.sqlite'));
+    try{console.log(JSON.stringify(recoverDefectJob(queue,recoverId,process.argv.find(x=>x.startsWith('--defect='))?.slice(9),process.argv.find(x=>x.startsWith('--note='))?.slice(7)),null,2));}
+    finally{queue.close();}
+    process.exit(0);
+  }
   if(upgradeId||repairId){
     const queue=new JobQueue(path.join(here,'workflow-state','jobs.sqlite'));
     try{console.log(JSON.stringify((upgradeId?upgradeInputBudgetJob:upgradeInvestigatedJob)(queue,upgradeId||repairId,process.argv.find(x=>x.startsWith('--note='))?.slice(7)),null,2));}

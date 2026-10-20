@@ -62,6 +62,8 @@ Search writes candidates and typed field claims. A claim needs a field, a typed 
 
 QA runs, in order: `editorial/compile-review.mjs`, `maintain.mjs`, `build.mjs`, `editorial/profile.mjs`, the public gates (`editorial/public-audit.mjs --strict`, then `scripts/scan-public.mjs`: the same two commands CI runs as `npm run audit:public` and `npm run scan:public`; a contact that no person has reviewed, a Swiss mobile number, a tracked private path, a secret or a personal path fails QA), the unit tests (`node --test` over the root and `editorial/` test files), `verify-age.mjs` and `verify-mobile.mjs`. It copies the public files to `workflow-state/release-snapshots/HASH` and tests that snapshot. Operator-requested QA for code changes: `node editorial/agent-run.mjs --role=qa --request-qa --limit=1`. A change to sources or built files while QA runs voids the result.
 
+QA builds the whole site, and the build stops while an editorial correction blocks publication. A batch therefore does not claim QA while any card is blocked: the QA job stays ready with its attempts and runs once the corrections are resolved. A passing QA supersedes every earlier QA job, failed ones in attention included.
+
 `npm run test:browser` serves the built `.publish/` snapshot on a temporary loopback port and runs the age checks on phone (393×852) and desktop (1440×1000), the full phone flow, and axe on both viewports. `APP_URL` can select another snapshot (including a file URL). `BROWSER_ENGINE` selects `webkit` (the local default) or `chromium`; the existing Playwright directory overrides still take precedence. Root `npm ci` installs the locked Playwright and axe-core packages; it does not supply browser binaries. The checks fix the clock, replace map tiles with an empty local response and refuse other external requests. JavaScript and console errors fail the checks.
 
 The axe states cover the catalogue, open filters, filtered results, a detail dialog, saved records after reload, German and French catalogues and details, and the F04 age-bound / F05 date regressions. Regression cards exist only in a browser response; the real Plaffeien card is also checked on 20 October 2026. Serious and critical violations fail; lesser violations and incomplete checks are printed and retained in the JSON report. An invented low-contrast page must fail the same gate. Screenshots and full axe results go to `editorial/typesafe-runtime/browser-checks/ENGINE/`. GitHub CI runs this command in Chromium and WebKit in a separate browser job with no dependency on the unit job; WebKit still runs if Chromium fails. CI uploads the reports and screenshots for seven days. These checks do not establish full accessibility: a manual keyboard, browser zoom and small-screen review remains necessary. The queue's existing QA stage still calls the age and mobile scripts directly; it does not invoke the axe pass.
@@ -126,6 +128,20 @@ and independent patch-review path. Repeated syncs create no duplicate replacemen
 A changed card or an input that still does not fit is not replayed. The older
 `--upgrade-input-job` command still applies only to retryable jobs; use sync for
 an exhausted input-budget failure. No SQL edit or manual attempt reset is needed.
+
+Two controller defects found on 20 October 2026 have their own recovery. A
+correction review refused a required field that the editor had rightly left
+unchanged (`Correction not resolved by draft: days`, rodelbahn): a bound
+confirmation of the current value now resolves such a field, and at least one
+required field must still change. An editor left out `checked` in a practical
+fact (`Invalid practical patch`, swim-tentlingen): the editor prompt now states
+the format, and the refusal names the field and the reason. For a job that failed
+through one of them, with an investigation note:
+`node editorial/agent-run.mjs --recover-defect-job=ID --defect=correction-confirmation|practical-checked --note="..."`.
+It supersedes the failed row with its error, attempts and events intact and
+enqueues one replacement of the editor job, which names the old row. A changed
+card, another failure, a failure under the corrected rule and a chain that was
+recovered once already are refused; those stay with a person.
 
 ## Booking shadow experiment
 

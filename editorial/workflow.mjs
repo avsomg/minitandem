@@ -351,7 +351,10 @@ export function validateDraft(draft,card,{historical=false}={}){
   if(draft.practicalPatch){
     const allowed=new Set(PRACTICAL_FIELDS);
     for(const [key,fact] of Object.entries(draft.practicalPatch)){
-      if(!allowed.has(key)||!fact?.text||new URL(fact.source).protocol!=='https:'||!date(fact.checked)||fact.checked>today()||!Object.hasOwn(fact,'value'))throw Error('Invalid practical patch');
+      // The message names the field and what is missing: an editor twice left out checked (swim-tentlingen, 18 and 19 October 2026).
+      const problem=!allowed.has(key)?'not a practical field':!fact?.text?'no text':new URL(fact.source).protocol!=='https:'?'source is not https':
+        !date(fact.checked)?'checked needs a YYYY-MM-DD date':fact.checked>today()?'checked is in the future':!Object.hasOwn(fact,'value')?'no value':null;
+      if(problem)throw Error(`Invalid practical patch: ${key}: ${problem}`);
       if(!historical)validateFieldValue('practical.'+key,fact.value);
     }
   }
@@ -531,10 +534,16 @@ export function commitResult(queue,{jobId,token,role,result},{getInputs=currentI
         for(const {file,correction} of job.payload.corrections){
           if(input.corrections.get(file)?.status!=='proposed'||digest(input.corrections.get(file))!==digest(correction))throw Error('Correction changed');
           if(!correction.requiredFields?.length)throw Error('Legacy correction needs an explicit reviewed scope before automatic application');
+          // Each required field is resolved by a bound change or by a bound confirmation: the draft repeats the current value with its own
+          // quote, which the reviewer checks like a change. The audits of 16 and 19 October named days with every schedule fault, and the days
+          // were often right (rodelbahn, 19 October 2026). Confirmations alone do not close a correction; that stays a person's decision.
+          let changed=0;
           for(const field of correction.requiredFields){
             const keys=field.split('.'),before=keys.reduce((value,key)=>value?.[key],card),after=keys.reduce((value,key)=>value?.[key],updated);
-            if(!boundFields.includes(field)||after===undefined||digest(before??null)===digest(after))throw Error(`Correction not resolved by draft: ${field}`);
+            if(!boundFields.includes(field)||after===undefined)throw Error(`Correction not resolved by draft: ${field}`);
+            if(digest(before??null)!==digest(after))changed++;
           }
+          if(!changed)throw Error('Correction not resolved by draft: every required field is unchanged');
           const applied={...correction,status:'applied',appliedOn:today(),appliedRecordRevision:revision,
             checks:[...Object.entries(draft.patch).map(([key,value])=>({path:[key],value})),
               ...Object.entries(draft.practicalPatch||{}).map(([key,value])=>({path:['practical',key],value})),

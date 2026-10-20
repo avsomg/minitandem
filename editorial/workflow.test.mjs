@@ -28,6 +28,13 @@ function fixture(t){
 }
 const draft={cardId:'a',patch:{min:2,age:'2–5 years'},findings:[{field:'Age',kind:'official',text:'Admission for ages 2–5.',url:'https://example.org/course'}],remaining:['The language of the session is not established.'],
   snapshots:[evidence],bindings:['min','age','research.findings.0'].map(field=>({field,source:evidence.url,quote:'children aged 2 to 5',kind:'official',scope:'exact-card',snapshotId:evidence.id}))};
+test('a practical fact without its checked date is refused with the field and the reason named',()=>{
+  const fact={value:null,text:'The price covers the whole course.',source:'https://example.org/course',checked:'2026-10-01'};
+  validateDraft({...draft,practicalPatch:{costNote:fact}},card);
+  const {checked,...undated}=fact;
+  assert.throws(()=>validateDraft({...draft,practicalPatch:{costNote:undated}},card),/Invalid practical patch: costNote: checked needs a YYYY-MM-DD date/);
+  assert.throws(()=>validateDraft({...draft,practicalPatch:{nonsense:fact}},card),/Invalid practical patch: nonsense: not a practical field/);
+});
 test('a draft whose public text contains Cyrillic is rejected, and source quotes are exempt',()=>{
   const russian='\u043f\u0440\u0438\u0432\u0435'; // a Russian word, written as escapes
   validateDraft(draft,card);
@@ -621,6 +628,30 @@ test('an unrelated edit cannot close a correction whose scoped field did not cha
     checkedFields:['min','age','research.findings','research.remaining'],approvedBindings:['min','age','research.findings.0'],checkedCorrectionFiles:['fix']}},
     {...f,getInputs:()=>original}),/Correction not resolved/);
   assert.equal(fs.existsSync(path.join(f.outputRoot,'editorial/approved-updates.json')),false);
+});
+test('a correction closes with a bound change plus a bound confirmation of a field that was right, never with confirmations alone',t=>{
+  const review=(patch,requiredFields)=>{
+    const f=fixture(t);registerCaptured(f.queue,evidence);
+    const correction={schema:1,id:'a',proposedOn:today(),status:'proposed',source:evidence.url,issue:'Price and ages may be wrong.',proposal:'Check the page.',requiredFields};
+    const original={...input,corrections:new Map([['fix',correction]])},bound=Object.keys(patch);
+    const quote=field=>['price','priceKind'].includes(field)?'Admission is free.':'children aged 2 to 5';
+    const fixed={...draft,patch,bindings:[...bound,'research.findings.0'].map(field=>({field,source:evidence.url,quote:quote(field),kind:'official',scope:'exact-card',snapshotId:evidence.id}))};
+    f.queue.enqueue({kind:'integrate',cardId:'a',inputRevision:'confirm',payload:{card,cardRevision:digest(card),corrections:[{file:'fix',correction}]}});
+    const editor=f.queue.claim('editor','editor');
+    commitResult(f.queue,{jobId:editor.id,token:editor.token,role:'editor',result:{draft:fixed}},{...f,getInputs:()=>original});
+    const reviewer=f.queue.claim('verify','independent');
+    const approve=()=>commitResult(f.queue,{jobId:reviewer.id,token:reviewer.token,role:'verify',result:{verdict:'approve',reason:'Fields checked.',draftHash:digest(fixed),
+      checkedFields:[...bound,'research.findings','research.remaining'],approvedBindings:[...bound,'research.findings.0'],checkedCorrectionFiles:['fix']}},{...f,getInputs:()=>original});
+    return {approve,journal:path.join(f.outputRoot,'editorial/approved-updates.json')};
+  };
+  // min was right (2) and is confirmed with its quote; the price changes. The correction closes.
+  const closed=review({min:2,price:'Free',priceKind:'free'},['min','price','priceKind']);
+  closed.approve();assert.equal(fs.existsSync(closed.journal),true);
+  // Confirmations alone, or a required field the draft does not address, leave the correction open.
+  const unchanged=review({min:2,age:'2–5 years'},['min','age']);
+  assert.throws(unchanged.approve,/every required field is unchanged/);assert.equal(fs.existsSync(unchanged.journal),false);
+  const missing=review({price:'Free',priceKind:'free'},['price','days']);
+  assert.throws(missing.approve,/Correction not resolved by draft: days/);assert.equal(fs.existsSync(missing.journal),false);
 });
 test('runtime will not replay an approved patch over a newer catalogue base',()=>{
   const text=fs.readFileSync(new URL('../regions.js',import.meta.url),'utf8');

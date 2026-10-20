@@ -9,7 +9,7 @@ import {snapshot,captureUrl,capturedViews,monitorRecord,hash} from './evidence.m
 import {writeRecord} from './page-record.mjs';
 import {JobQueue,digest} from './jobs.mjs';
 import {retireStaleReadyJobs,assertCaptured,registerCaptured} from './workflow.mjs';
-import {captureClaims,prepareEvidence,captureDraft,watchFor,promptFor,failJob,runRoles,runCodex,workerEvidenceFiles,normalizePilotSources,upgradeInputBudgetJob,upgradeInvestigatedJob,requestQa,timedWorker,withJobLease,runJobs,qaRun} from './agent-run.mjs';
+import {recoverDefectJob,captureClaims,prepareEvidence,captureDraft,watchFor,promptFor,failJob,runRoles,runCodex,workerEvidenceFiles,normalizePilotSources,upgradeInputBudgetJob,upgradeInvestigatedJob,requestQa,timedWorker,withJobLease,runJobs,qaRun} from './agent-run.mjs';
 
 const now=new Date().toISOString(),url='https://example.org/course';
 const first=snapshot({url,fetchedAt:now,text:'Official source: admission is free. Course is on Monday.'});
@@ -140,6 +140,47 @@ test('one urgent slot precedes downstream work, and a search lead cannot take fr
     worker:async job=>{order.push(job.card_id);return {result:{},usage:{}};},
     commitImpl:(queue,{jobId,token,role})=>queue.finish(jobId,token,role,{})});
   assert.deepEqual(order,['closure','started']);
+});
+test('QA waits, ready and with its attempts, while an editorial correction blocks publication, and other work goes on',async t=>{
+  const {queue,directory}=leaseFixture(t),order=[];
+  queue.enqueue({kind:'qa',cardId:'catalogue',inputRevision:'qa',priority:1000});
+  const qa=()=>queue.list().find(job=>job.kind==='qa');
+  const blocked=()=>({input:{pipeline:{publication:{blockedIds:['corrected-card']}}}});
+  const run=(role,chain)=>runJobs({queue,role,chain,limit:2,syncImpl:blocked,prepareImpl:async job=>job,reportFile:path.join(directory,'report.json'),
+    worker:async job=>{order.push(job.kind);return {result:{},usage:{}};},commitImpl:(queue,{jobId,token,role})=>queue.finish(jobId,token,role,{})});
+  await run('search',true);
+  assert.deepEqual(order,['search']);assert.equal(qa().state,'ready');assert.equal(qa().attempt,0);
+  // Asked for QA alone, the batch claims nothing rather than a build that is known to stop.
+  assert.deepEqual((await run('qa',false)).results,[]);assert.equal(qa().state,'ready');assert.equal(qa().attempt,0);
+});
+test('a job that failed through a fixed controller defect gets one replacement of its editor job, with its history kept',t=>{
+  const {queue}=leaseFixture(t),sled={id:'sled',name:'Sled run'},getInputs=()=>({records:[sled]});
+  const fail=(job,error)=>queue.db.prepare("UPDATE jobs SET state='attention',attempt=3,error=? WHERE id=?").run(error,job.id);
+  const editor=queue.enqueue({kind:'integrate',cardId:'sled',inputRevision:'draft',priority:700,payload:{card:sled,cardRevision:digest(sled),corrections:[{file:'fix'}]}});
+  const review=queue.enqueue({kind:'review-patch',cardId:'sled',inputRevision:'review',priority:770,payload:{editorJobId:editor.id}});
+  fail(review,'Correction not resolved by draft: days');
+  assert.throws(()=>recoverDefectJob(queue,review.id,'correction-confirmation','',{getInputs}),/note/);
+  assert.throws(()=>recoverDefectJob(queue,review.id,'practical-checked','Wrong defect.',{getInputs}),/this defect/);
+  assert.throws(()=>recoverDefectJob(queue,review.id,'correction-confirmation','Card moved on.',{getInputs:()=>({records:[{...sled,name:'Other'}]})}),/Card changed/);
+  const result=recoverDefectJob(queue,review.id,'correction-confirmation','Days were right; a bound confirmation now resolves them.',{getInputs});
+  assert.equal(queue.get(review.id).state,'superseded');assert.equal(queue.get(review.id).attempt,3);
+  const next=queue.get(result.jobId);
+  assert.equal(next.kind,'integrate');assert.equal(next.state,'ready');assert.deepEqual(next.payload.corrections,[{file:'fix'}]);
+  assert.equal(next.payload.previousJobId,review.id);assert.equal(next.payload.defectRecovery.previousAttempts,3);
+  // A recovered chain that fails again stays with a person, and so does a failure under the corrected rule.
+  const again=queue.enqueue({kind:'review-patch',cardId:'sled',inputRevision:'review-2',payload:{editorJobId:next.id}});
+  fail(again,'Correction not resolved by draft: days');
+  assert.throws(()=>recoverDefectJob(queue,again.id,'correction-confirmation','Again.',{getInputs}),/recovered once already/);
+  const fresh=queue.enqueue({kind:'review-patch',cardId:'sled',inputRevision:'review-3',payload:{editorJobId:editor.id}});
+  fail(fresh,'Correction not resolved by draft: every required field is unchanged');
+  assert.throws(()=>recoverDefectJob(queue,fresh.id,'correction-confirmation','No.',{getInputs}),/this defect/);
+  // An editor job refused for the practical format is repeated itself; the new, named refusal never qualifies.
+  const draft=queue.enqueue({kind:'editorial',cardId:'sled',inputRevision:'editorial',priority:800,payload:{card:sled,cardRevision:digest(sled)}});
+  fail(draft,'Invalid practical patch');
+  assert.equal(recoverDefectJob(queue,draft.id,'practical-checked','The prompt now names checked.',{getInputs}).kind,'editorial');
+  const named=queue.enqueue({kind:'editorial',cardId:'sled',inputRevision:'editorial-2',payload:{card:sled,cardRevision:digest(sled)}});
+  fail(named,'Invalid practical patch: costNote: checked needs a YYYY-MM-DD date');
+  assert.throws(()=>recoverDefectJob(queue,named.id,'practical-checked','No.',{getInputs}),/this defect/);
 });
 test('capture resolves each quote in its own controller snapshot, including derived calendar evidence',async()=>{
   const bundle={project:'vmeste',cardId:card.id,claims:[claim('priceKind','free','admission is free'),claim('events',[{date:'2026-10-03',start:'09:30'}],'2026-10-03 starts at 09:30')]};
