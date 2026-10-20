@@ -17,6 +17,7 @@ Internet ──80/443──> Caddy (Container "caddy")  ──intern──> app 
 - `compose.yaml`: zwei Dienste, `app` und `caddy`, Projektname `minitandem`. Nur Caddy veröffentlicht Ports. Der Zustand liegt im benannten Volume `minitandem_state`.
 - `docker/Caddyfile`: `www.minitandem.ch` leitet dauerhaft auf `minitandem.ch` um; `minitandem.ch` wird mit `encode zstd gzip` ausgeliefert, die Editor-Pfade (`/admin`, `/admin.js`, `/admin.css`, `/admin-icons.js`, `/api/v1/admin/*`) sind am Proxy gesperrt (404), alles andere geht an `app:8787`. Dazu kommen Lese-Timeouts, eine Grössengrenze für `/api/*` und die Header-Regeln (Abschnitt «Grenzen und Header am Rand»).
 - `ops/deploy.sh <Commit>`: das Update mit Prüfungen, vom Rechner des Eigentümers aus (siehe «Update»).
+- Vorbereitet, aber noch nicht angewendet: Caddy liefert die gebauten Dateien aus einem eigenen Image desselben Commits selbst und reicht nur `/api/*` und `/healthz` an den Dienst weiter (Abschnitt «Caddy liefert die Dateien selbst»). Die Beschreibung in diesem Überblick gilt bis zum Umschalten.
 - `docker/entrypoint.sh`: legt nur bei ausdrücklich eingeschaltetem Familienabgleich eine Demo-Familie an (Standard: aus) und startet den Dienst. Ein **Editor-Schlüssel** (`server.mjs new-admin`) wird auf dem Server **nie** erzeugt; ohne ihn antworten alle Editor-Routen mit 401.
 - Die redaktionelle Pipeline (`editorial/cycle.mjs`, die Worker) läuft **nicht** auf dem Server, sondern auf dem Rechner des Eigentümers; der Server hat keine Modell-Zugänge. Zu unterscheiden ist, was wo liegt:
   - **App-Image** (Container `app`): die öffentliche Seite und der Dienst, **keine** privaten redaktionellen Daten. Das Image wird mit `--public` aus einem sauberen Checkout gebaut, und `.dockerignore` hält alle privaten Pfade aus dem Build-Kontext.
@@ -61,6 +62,8 @@ curl -fsS https://minitandem.ch/healthz
 - `revision`: Prüfsumme (SHA-256, 16 Zeichen) der Katalogdateien, aus denen die Seite gebaut wurde. `build.mjs` schreibt sie mit `catalogueUpdated` (Datum der jüngsten Prüfung im Katalog) und `records` nach `.publish/build-info.json`; die Datei enthält keine Uhrzeit, derselbe Stand ergibt dieselbe Datei. Der Dienst liest sie beim Start. Die Revision ändert sich nur, wenn sich der Katalog ändert, nicht bei Änderungen am Code.
 - `commit`: der Wert von `MINITANDEM_TAG` aus `.env` (kurze Commit-ID, siehe «Update»). `compose.yaml` gibt ihn als `MINITANDEM_COMMIT` an den Dienst weiter. Ist der Tag leer oder läuft der Dienst ausserhalb von Compose, fehlt das Feld; mit dem Standardwert `current` aus `.env.example` steht dort `current`.
 
+- Noch nicht angewendet (mit den Caddy-Images): `/build-info.json` kommt dann aus dem Caddy-Image und trägt zusätzlich `commit`, den Tag des Releases. Der Wert in `/healthz` und der in `/build-info.json` müssen gleich sein; sonst laufen Dateien und API von verschiedenen Releases.
+
 Nichts davon ist geheim.
 
 ## Update
@@ -76,7 +79,9 @@ Gebraucht werden auf dem Mac `gh` (angemeldet), Node und `ssh` mit dem Admin-Sch
 
 Danach läuft die gesamte Operation in **einer SSH-Sitzung** auf dem Server. Ein atomar angelegtes Verzeichnis `/opt/minitandem/.deploy-lock` sperrt Aufbau, Vorschau, Umschalten, Prüfung und Fehlerbehandlung. Jeder Aufruf erhält eine zufällige Operations-ID. Die Sperre nennt ID und PID des Servers. Ein zweiter Aufruf scheitert sofort, auch bei einer unvollständigen oder verwaisten Sperre. Es gibt keine automatische Übernahme nach einer Zeitfrist.
 
-Caddy liest `docker/Caddyfile` und `docker/access-log-entrypoint.sh` über Bind-Mounts. Ein Checkout ersetzt diese Dateien, ein laufender Container behält aber die alten, und Compose erstellt ihn nur neu, wenn sich `compose.yaml` ändert (so geschehen am 18. Oktober 2026: neue Header wirkten erst nach einem Neustart von Caddy). Unterscheiden sich die beiden Dateien zwischen altem und neuem Commit, prüft das Skript die neue Konfiguration vor dem Umschalten mit dem Caddy-Image (`caddy validate`) und erstellt Caddy mit dem Umschalten neu; der Rollback tut dasselbe in die Gegenrichtung.
+Caddy liest (bis zu den Caddy-Images) `docker/Caddyfile` und `docker/access-log-entrypoint.sh` über Bind-Mounts. Ein Checkout ersetzt diese Dateien, ein laufender Container behält aber die alten, und Compose erstellt ihn nur neu, wenn sich `compose.yaml` ändert (so geschehen am 18. Oktober 2026: neue Header wirkten erst nach einem Neustart von Caddy). Unterscheiden sich diese Dateien (`docker/Caddyfile`, `docker/site.caddy`, `docker/preview.Caddyfile`, `docker/access-log-entrypoint.sh`) zwischen altem und neuem Commit, prüft das Skript die neue Konfiguration vor dem Umschalten mit dem Caddy-Image (`caddy validate`) und erstellt Caddy mit dem Umschalten neu; der Rollback tut dasselbe in die Gegenrichtung.
+
+Mit den Caddy-Images (noch nicht angewendet) gehören `docker/Caddyfile`, `docker/site.caddy`, `docker/preview.Caddyfile` und `docker/access-log-entrypoint.sh` zum Image des Releases und werden nicht mehr eingebunden; die Prüfung dieser Dateien, die Vorschau mit zwei Containern und die Kontrolle der Dateien beim Rollback beschreibt der Abschnitt «Caddy liefert die Dateien selbst». Das Skript behandelt ein Ziel vor den Caddy-Images (ein geplanter Rollback) wie bisher.
 
 Die Datei `.deployments/<Operations-ID>` hält vorherigen Checkout und Image-Tag, Ziel-Commit und Ziel-Tag, Phase und Zeitpunkt. Sie wird vor den jeweiligen Änderungen atomar ersetzt. Die Vorschau heisst `minitandem-preview-<Operations-ID>`, ist nur auf Loopback erreichbar und nutzt ein eigenes tmpfs statt des Familien-Volumes. Der Schrumpf-Schutz vergleicht `published`, also sichtbare Karten ohne closed/excluded, mit live (maximal 15 % Rückgang). `archived` zählt closed/excluded; beide Zahlen stehen neben `records` in `/healthz` und `build-info.json`. Eine Statuszeile nennt published und archived vorher → nachher. Fehlt dem alten Live-Image `published`, wird mit einer sichtbaren Warnung einmalig `records` als Vergleich verwendet. Die neue Vorschau muss beide Statuszahlen liefern, und ihre Summe muss `records` sein; das öffentliche Ergebnis muss Revision und Commit der Vorschau tragen.
 
@@ -115,9 +120,11 @@ cat .env.new > .env
 rm .env.new
 docker compose up -d --no-build
 curl -fsS https://minitandem.ch/healthz
+curl -sS https://minitandem.ch/build-info.json
 docker inspect --format '{{.State.Health.Status}}' "$(docker compose ps -q app)" | grep -qx healthy
 printf 'recovery=rolled-back at %s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" >> "$record"
-docker rm -f "minitandem-preview-$op" >/dev/null 2>&1 || true
+docker rm -f "minitandem-preview-$op" "minitandem-preview-api-$op" >/dev/null 2>&1 || true
+docker network rm "minitandem-preview-net-$op" >/dev/null 2>&1 || true
 [ "$(cat .deploy-lock/id)" = "$op" ]
 rm .deploy-lock/id .deploy-lock/owner
 rmdir .deploy-lock/recovery
@@ -126,11 +133,139 @@ trap - EXIT
 RECOVER
 ```
 
-Fehlt das alte Image, die Folge anhalten; zuerst am protokollierten alten Commit mit dem Eigentümer neu bauen. Eine Recovery, die an einer Prüfung scheitert, lässt die äussere Sperre stehen. Eine nach SIGKILL selbst verwaiste `recovery`-Sperre ebenfalls erst nach Prozessprüfung entfernen. Diese Befehle sind dokumentiert, nicht ausgeführt.
+Bei der Ausgabe von `/healthz` und `/build-info.json` von Hand prüfen, dass `revision` in beiden gleich ist und, wenn eines der beiden `commit` nennt, dass es `previous_tag` ist: Die Folge vergleicht das nicht selbst. Fehlt das alte Image, die Folge anhalten; zuerst am protokollierten alten Commit mit dem Eigentümer neu bauen. Eine Recovery, die an einer Prüfung scheitert, lässt die äussere Sperre stehen. Eine nach SIGKILL selbst verwaiste `recovery`-Sperre ebenfalls erst nach Prozessprüfung entfernen. Diese Befehle sind dokumentiert, nicht ausgeführt.
 
 ## Rollback
 
-Nach einem erfolgreichen Deployment ist ein geplanter Rollback ein **neuer** Aufruf von `ops/deploy.sh <vollständiger alter Commit>` mit der Freigabe des Eigentümers. Er nimmt dieselbe Sperre, prüft CI und Vorschau und hinterlässt eine eigene Operations-ID. Alte Images erst löschen, wenn die neue Version ausreichend beobachtet wurde. Das Familien-Volume wird beim Deployment nicht ersetzt.
+Nach einem erfolgreichen Deployment ist ein geplanter Rollback ein **neuer** Aufruf von `ops/deploy.sh <vollständiger alter Commit>` mit der Freigabe des Eigentümers. Er nimmt dieselbe Sperre, prüft CI und Vorschau und hinterlässt eine eigene Operations-ID. Alte Images erst löschen, wenn die neue Version ausreichend beobachtet wurde. Das Familien-Volume wird beim Deployment nicht ersetzt. Mit den Caddy-Images (noch nicht angewendet) kehrt der Rollback Dateien und API zusammen zurück und prüft beide; Einzelheiten und die Übung stehen im Abschnitt «Caddy liefert die Dateien selbst».
+
+## Caddy liefert die Dateien selbst (noch nicht auf dem Server angewendet)
+
+**Stand 20. Oktober 2026.** Vorbereitet im Arbeitsklon (Branch `caddy-static`). Nicht ausgeführt wurden: ein Image-Build, `caddy validate` und ein Lauf von Caddy (in der Arbeitsumgebung gab es weder Caddy noch das Caddy-Image und kein Netz), die Vorschau, das Umschalten und die Rollback-Übung auf dem Server. Alle Befehle unten sind dokumentiert, nicht ausgeführt. Bis zum Umschalten gilt weiter, was die Abschnitte oben beschreiben (Caddy mit Bind-Mounts, alles über den Dienst).
+
+**Warum.** Bisher beantwortet der Dienst (`server.mjs`) die Seiten und die Familien-API. Ein Fehler im API-Pfad kann deshalb auch den Katalog mitnehmen (Befund F01 der Prüfung). Künftig liefert Caddy die gebauten Dateien selbst und reicht nur `/api/*` und `/healthz` an den Dienst weiter. Fällt der Dienst aus, bleiben Startseite, Karten, Service Worker, Impressum und Datenschutzerklärung erreichbar; die API antwortet dann mit 502 oder 503.
+
+**Wie die Dateien zu Caddy kommen.** Das Dockerfile hat zwei Ziele aus derselben Build-Stufe: `app` (der Dienst, wie bisher) und `edge` (Caddy). `edge` beginnt bei `caddy:2.11.7-alpine` (dieselbe festgesetzte Version wie bisher) und enthält `/srv/site` (der gebaute `.publish`-Ordner), `Caddyfile`, `site.caddy`, `preview.Caddyfile` und `access-log-entrypoint.sh` unter `/etc/caddy/`. `compose.yaml` baut beide Images mit demselben Tag (`minitandem-app:<Tag>`, `minitandem-caddy:<Tag>`) und denselben Build-Argumenten; nichts aus dem Checkout wird mehr in Caddy eingebunden. Damit gehören Dateien, Header, Routen und API eines Tags zu einem Commit, und ein Rollback bringt alles zusammen zurück. Verworfen wurde ein gemeinsames Volume, das der Dienst beim Start füllt: Es wäre veränderlicher Zustand, die Dateien könnten von einem anderen Commit stammen als die API, und ein Rollback müsste das Volume zurückspielen. `RELEASE_COMMIT` (der Tag) wird zusätzlich in `build-info.json` des Images eingetragen; so unterscheidet sich ein reines Code-Release auch bei gleicher Katalogrevision.
+
+**Was bleibt, wie es ist.** Die Zugriffsprotokolle (maskierte IPs, Header, URI und Host gelöscht, `roll_disabled`, tmpfs, höchstens sechs Tage plus 60 Sekunden), das Protokoll `log default` ohne Besucherfelder, die Lese-Timeouts (`read_header 10s`, `read_body 30s`), die Grenze `request_body /api/*` mit 512 KiB, die Sperre der Editor-Pfade (`/admin`, `/admin.js`, `/admin.css`, `/admin-icons.js`, `/api/v1/admin/*`: 404 am Rand), die Härtung von Caddy (`cap_drop: ALL`, nur `NET_BIND_SERVICE`, `no-new-privileges`, Eintrittsskript und tmpfs für das Protokoll), die Version 2.11.7, HSTS mit einem Tag, `Cross-Origin-Opener-Policy` und `Cross-Origin-Resource-Policy`, kein `Via` und kein `Server`. Die Regeln des Dienstes für die API (Grössen, Zeiten, Schreibgrenze, Origins und Preflight) gelten unverändert, denn die API-Anfragen gehen weiterhin an ihn.
+
+**Header der Dateien.** Was der Dienst für eine Datei sendete, steht jetzt in `docker/site.caddy`, und was der Rand davor setzte, dort ebenfalls. Der Test `edge-static.test.mjs` liest diese Datei als Text und vergleicht sie für jede gebaute Datei (rund 350) mit der Antwort des echten Dienstes (`server.mjs`) plus den Rand-Headern; er schlägt fehl, sobald eine Seite davon abweicht (Gegenprobe: ein geänderter Wert der CSP, ein fehlender Header, ein anderer Typ für `.md`, entferntes `-Via` und ein anderer Text einer Fehlerantwort wurden vom Test gefunden).
+
+| Header | Wert | vorher von |
+| --- | --- | --- |
+| `Content-Security-Policy` | `default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://wmts.geo.admin.ch; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'` | Dienst |
+| `Cache-Control` | `public, max-age=0, must-revalidate` (Fehlerantworten: `no-store`) | Dienst |
+| `Content-Type` | Tabelle des Dienstes: `.html`, `.js`, `.css`, `.txt`, `.md` mit `charset=utf-8`; `.svg`, `.png`, `.json`, `.webmanifest`, `.xml`, `.jpg`/`.jpeg`, `.webp`, `.ico`; alles andere `application/octet-stream` (z. B. `assets/LICENSE`) | Dienst |
+| `X-Content-Type-Options` | `nosniff` | Dienst und Rand |
+| `Referrer-Policy` | `no-referrer` | Dienst und Rand |
+| `Strict-Transport-Security` | `max-age=86400` | Rand |
+| `X-Frame-Options` | `DENY` | Rand |
+| `Permissions-Policy` | `camera=(), microphone=(), geolocation=(self)` | Rand |
+| `Cross-Origin-Opener-Policy`, `Cross-Origin-Resource-Policy` | `same-origin` | Rand |
+| `Via`, `Server` | entfernt | Rand |
+
+Pfade wie vorher: `/` und jeder Ordner liefern ihre `index.html` (`/projekt/`, `/impressum/`, `/datenschutz/`, `/places/`, `/places/<id>/`); ohne Schrägstrich folgt 301 auf die Adresse mit Schrägstrich. Es gibt keinen Rückfall auf `index.html` für unbekannte Pfade, keine Verzeichnisliste und keine Pfade mit Punkt-Segmenten (404, auch `/.vercelignore`). Der Service Worker bleibt `/sw.js` im Stamm mit dem Scope der ganzen Seite, ohne `Service-Worker-Allowed`. `sitemap.xml`, `robots.txt`, `manifest.webmanifest` und `build-info.json` kommen mit ihren bisherigen Typen. Ein Origin-Header, der nicht `https://minitandem.ch` ist, wird für eine Datei wie vom Dienst mit 403 abgewiesen; `OPTIONS` auf eine Datei ist 403, jede andere Methode ausser `GET` und `HEAD` ist 405 (JSON mit `no-store`, gleicher Text).
+
+**Unterschiede, die bleiben.** Caddys Dateiauslieferung fügt `ETag`, `Last-Modified` und `Accept-Ranges` hinzu; mit `max-age=0, must-revalidate` fragen Browser nach und erhalten 304, wenn sich nichts geändert hat (die Antwort des Dienstes kannte das nicht). Ein Pfad mit doppeltem Schrägstrich am Anfang (`//projekt`) wird vom Dienst als Adresse mit Host gelesen und liefert die Startseite; Caddy leitet auf `/projekt/` um. Besucher senden das nicht.
+
+### Prüfungen im Repository (im Arbeitsklon ausgeführt)
+
+- `edge-static.test.mjs`: Header, Typen, Cache-Regel und Fehlerantworten der Routen gegen den echten Dienst (siehe oben); ausserdem ein Test mit echtem Caddy, der **übersprungen** wird, wenn kein Caddy angegeben ist (`MINITANDEM_CADDY_BIN`). Er startet Caddy mit `docker/preview.Caddyfile` gegen den Dienst und vergleicht jede gebaute Datei, jeden Ordner, die Fehlerpfade und die Methoden mit der Antwort des Dienstes plus Rand-Headern, prüft `caddy validate` für das echte `Caddyfile` und zeigt zuletzt, dass die Dateien nach dem Stopp des Dienstes weiter mit 200 antworten und die API mit 502 oder 503. **Dieser Test lief bisher nicht.**
+- `docker-files.test.mjs`, `access-log.test.mjs`: Compose, Dockerfile und Caddyfile als Text (zwei Ziele, gleiche Tags und Argumente, kein Bind-Mount, festgesetzte Version, Protokollregeln, Reihenfolge der Routen).
+- `deploy.test.mjs`: das Skript mit Ersatzprogrammen für `ssh`, `docker`, `gh` und `curl`, auch für ein Release mit Caddy-Images, für den Rückweg zu einem Release davor und für alle Fehlerfälle unten.
+- `server.test.mjs`: `MINITANDEM_API_ONLY=1` (der Dienst beantwortet dann nur noch `/healthz` und `/api/*`).
+
+### Vorprüfung auf dem Server (vor dem Umschalten, ohne Eingriff in den Betrieb)
+
+`release` ist der vollständige Commit. Die Befehle laufen auf dem Server in einem frischen Klon und bauen die beiden Images; die Live-Container, `.env` und der Checkout unter `/opt/minitandem` bleiben unberührt. Eine vorhandene `.deploy-lock` ist ein Grund zum Anhalten, nicht zum Löschen. `DEPLOY_HOST` ist der Server (Benutzer und Adresse, siehe «Update»).
+
+```bash
+ssh -i "$HOME/.ssh/minitandem_ed25519" -o IdentitiesOnly=yes "$DEPLOY_HOST" bash -s -- "$release" <<'PREFLIGHT'
+set -euo pipefail
+release=$1
+[[ $release =~ ^[0-9a-f]{40}$ ]]
+[ ! -e /opt/minitandem/.deploy-lock ]
+git -C /opt/minitandem fetch --tags --quiet
+scratch=$(mktemp -d)
+binary=minitandem-edge-binary-$$
+contract=minitandem-edge-contract-$$
+trap 'docker rm -f "$contract" "$binary" >/dev/null 2>&1 || true; rm -rf "$scratch"' EXIT
+git clone --quiet --no-hardlinks /opt/minitandem "$scratch/checkout"
+cd "$scratch/checkout"
+git checkout --quiet --detach "$release"
+tag=$(git rev-parse --short HEAD)
+export ACME_EMAIL=owner@example.org MINITANDEM_TAG=$tag
+docker compose config -q
+docker compose build app caddy
+# 1. Das Caddy-Image des Releases liest die echten Dateien (Caddyfile mit Zertifikaten und Protokoll, und die Vorschau).
+docker run --rm -e ACME_EMAIL --tmpfs /var/log/caddy --entrypoint caddy "minitandem-caddy:$tag" validate --config /etc/caddy/Caddyfile --adapter caddyfile
+docker run --rm --entrypoint caddy "minitandem-caddy:$tag" validate --config /etc/caddy/preview.Caddyfile --adapter caddyfile
+# 2. Das Caddy-Programm aus dem Image gegen den echten Dienst, ohne Netz und ohne Familiendaten.
+docker create --name "$binary" "minitandem-caddy:$tag" >/dev/null
+docker cp "$binary:/usr/bin/caddy" "$scratch/caddy"
+docker create --name "$contract" --network none --cap-drop ALL --security-opt no-new-privileges:true --memory 512m --pids-limit 200 \
+  -e MINITANDEM_CADDY_BIN=/tmp/caddy --entrypoint node "minitandem-app:$tag" --test /app/edge-static.test.mjs >/dev/null
+docker cp edge-static.test.mjs "$contract:/app/edge-static.test.mjs"
+docker cp "$scratch/caddy" "$contract:/tmp/caddy"
+docker start -a "$contract"
+[ "$(docker inspect --format '{{.State.ExitCode}}' "$contract")" = 0 ]
+PREFLIGHT
+```
+
+(`edge-static.test.mjs` kommt aus dem frischen Klon; das Image enthält keine Testdateien.) In der Ausgabe muss der Test «real Caddy: …» mit einem Haken erscheinen und `skipped 0` stehen; ein übersprungener Test ist kein Erfolg. Scheitert er, zuerst die Meldung lesen: Sie nennt Pfad und Header. Die Ursache kann in `docker/site.caddy` oder im Test liegen, denn der Test lief noch nie gegen ein echtes Caddy.
+
+### Umschalten
+
+Mit dem Eigentümer, nach grüner CI für den Commit (das Skript prüft das selbst) und erfolgreicher Vorprüfung:
+
+```bash
+previous=$(ssh -i "$HOME/.ssh/minitandem_ed25519" -o IdentitiesOnly=yes "$DEPLOY_HOST" 'git -C /opt/minitandem rev-parse HEAD')
+printf 'release=%s\nprevious=%s\n' "$release" "$previous"          # beide ausserhalb des Checkouts notieren
+ops/deploy.sh "$release"
+curl -fsS https://minitandem.ch/healthz
+curl -fsS https://minitandem.ch/build-info.json                    # enthält jetzt "commit": den Tag des Releases
+curl -sI https://minitandem.ch/ | grep -i -E '^(content-security|strict|x-content|x-frame|referrer|permissions|cross-origin|cache-control|via|server)'
+curl -sI https://minitandem.ch/sw.js https://minitandem.ch/projekt/ https://minitandem.ch/places/ | grep -i -E '^(HTTP|content-type)'
+docker compose ps    # auf dem Server: beide Dienste «running», app «healthy»; das Caddy-Image heisst minitandem-caddy:<Tag>
+```
+
+Was `ops/deploy.sh` bei einem Release mit Caddy-Images zusätzlich tut (erkannt daran, dass `compose.yaml` ein `minitandem-caddy` baut):
+
+1. Es baut beide Images (`docker compose build app caddy`) mit dem Tag des neuen Commits.
+2. Vorschau: ein Netz nur für diese Operation, darin der Dienst als `minitandem-preview-api-<ID>` (mit `MINITANDEM_API_ONLY=1`, ohne öffentliche Dateien, mit eigenem tmpfs statt des Familien-Volumes) und Caddy als `minitandem-preview-<ID>` aus `minitandem-caddy:<Tag>` mit `preview.Caddyfile`. Nur Caddy veröffentlicht einen Port, auf der Loopback-Adresse des Servers. Antwortet in der Vorschau eine Datei, kommt sie aus dem Caddy-Image.
+3. Die Dateien und die API der Vorschau müssen zusammenpassen: `revision`, `records`, `published`, `archived` und `commit` aus `/build-info.json` (Caddy) und `/healthz` (über Caddy beim Dienst) sind gleich, und der Commit der API ist der Tag des neuen Commits. `index.html`, `app.js`, `sw.js`, `styles.css` und `sitemap.xml` aus Caddy haben dieselbe SHA-256-Summe wie die Dateien im Image des Dienstes. Die Seiten `/`, `/projekt/`, `/impressum/`, `/datenschutz/`, `/places/`, `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest` und `/sw.js` antworten mit ihrem Typ (etwa `/sw.js` als `text/javascript`; unter `nosniff` würde ein anderer Typ den Service Worker stilllegen), den neun Headern der Tabelle (CSP, HSTS, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, COOP, CORP, `Cache-Control`) und ohne `Via`. `/projekt` ohne Schrägstrich antwortet 301, `/api/v1/family` erreicht den Dienst (503 bei ausgeschaltetem Familienabgleich, sonst 401) und die Editor-Pfade antworten mit 404. Der Schrumpf-Schutz für `published` gilt wie bisher.
+4. Das echte `Caddyfile` wird mit dem Caddy-Image des neuen Tags validiert (`MINITANDEM_TAG` ist dafür gesetzt, weil `.env` bis zum Umschalten noch den alten Tag nennt). Scheitert das, bleibt alles beim Alten; die Meldung von `caddy validate` wird ausgegeben.
+5. Umschalten (`.env`, `docker compose up -d --no-build`). Der neue Tag erstellt Dienst und Caddy neu; der Dienst wird dabei zuerst ersetzt und Caddy erst, wenn er gesund ist. In dieser Zeit schickt das alte Caddy noch alles an den neuen Dienst; der beantwortet Dateien weiter selbst (`MINITANDEM_API_ONLY` ist in `compose.yaml` bewusst nicht gesetzt), die Seite bleibt also vollständig. Beim Neustart von Caddy selbst gibt es wie bei jedem früheren Caddy-Wechsel eine Lücke von Sekunden.
+6. Danach müssen das öffentliche `/healthz` **und** `/build-info.json` Revision und Commit der Vorschau tragen, und die Header- und 404-Prüfung der Vorschau wird gegen die öffentliche Adresse wiederholt (Zertifikat, echtes `Caddyfile`, Protokoll). Jede Abweichung löst den Rollback aus.
+
+Bei einem Release **vor** den Caddy-Images (das Ziel eines geplanten Rollbacks) bleibt alles wie im Abschnitt «Update»: eine Vorschau mit einem Container, `/healthz` als Vergleich.
+
+Geändert hat sich auch die Liste der Dateien, deren Unterschied zwischen altem und neuem Commit Caddy prüfen und neu erstellen lässt: `docker/Caddyfile`, `docker/site.caddy`, `docker/preview.Caddyfile` und `docker/access-log-entrypoint.sh`. Bei einem Release mit Caddy-Images wird das Caddy-Image ohnehin mit dem Tag gewechselt; dort läuft die Validierung immer, ein zusätzliches `--force-recreate` entfällt.
+
+### Rollback und Übung
+
+Der automatische Rollback bei einem Fehler nach dem Umschalten stellt Checkout und Tag wieder her, startet die alte Compose-Konfiguration (für den ersten Rückweg also wieder das Caddy-Image `caddy:2.11.7-alpine` mit den Bind-Mounts) und prüft danach `/healthz` (Anzahl, Revision, Commit wie vor der Operation) und, wenn die alte Seite sie lieferte, die Dateien aus `/build-info.json` (Revision und Commit). Erst dann gilt er als gelungen; sonst bleibt die Sperre mit `recovery-needed` stehen (Abschnitt «Unterbrochenes Deployment wiederherstellen»). Die Images beider Tags bleiben auf dem Server, bis der Eigentümer sie entfernt.
+
+Die Übung, im selben Zug und nur mit der Freigabe des Eigentümers: zurück auf den vorherigen Commit (ein Release vor den Caddy-Images, eine Vorschau mit einem Container), die öffentlichen Antworten prüfen, danach wieder vor.
+
+```bash
+ops/deploy.sh "$previous"
+curl -fsS https://minitandem.ch/healthz
+curl -fsS https://minitandem.ch/build-info.json            # ohne "commit": die Dateien liefert wieder der Dienst
+ops/deploy.sh "$release"
+curl -fsS https://minitandem.ch/healthz
+curl -fsS https://minitandem.ch/build-info.json
+```
+
+Nach jedem Wechsel müssen `revision` in `/healthz` und in `/build-info.json` gleich sein. Alte Images erst nach der Übung und ausreichender Beobachtung löschen (`docker image ls 'minitandem-*'`; jedes Release hinterlässt zwei Images, das Caddy-Image enthält neben Caddy rund 6 MB Dateien).
+
+### Offen bei der Umstellung auf Caddy-Images
+
+- **Caddy hat diese Dateien noch nie gelesen.** Die Routen sind nach der Dokumentation von Caddy geschrieben und gegen den echten Dienst als Text geprüft, nicht gegen Caddy. Mit der Vorprüfung und der Vorschau werden sie zum ersten Mal ausgeführt. Stellen, die dabei zuerst zu prüfen sind: die Abfrage `@origin not header !Origin` (ein Origin-Header ist vorhanden), die maskierten Klammern in den JSON-Antworten (`\{`), der Platzhalter `{http.matchers.file.relative}` für die Umleitung und die Typen je Endung. Der Test mit echtem Caddy zeigt jede davon einzeln.
+- **`MINITANDEM_API_ONLY=1` in `compose.yaml`** erst in einem späteren Deployment, wenn die Umstellung abgeschlossen ist (sonst fände das alte Caddy beim Umschalten für einige Sekunden keine Dateien beim Dienst).
+- **Origins.** Die Routen kennen nur `https://minitandem.ch`, wie der Dienst in Produktion. Setzt jemand `MINITANDEM_ORIGINS` in `compose.yaml`, müssen `docker/site.caddy` und der Test mit angepasst werden; `compose.yaml` setzt es heute nicht.
+- **Nach der Übung** hier Datum, vollständige Commits (`release`, `previous`), Operations-IDs und Ergebnis eintragen und die Überschrift dieses Abschnitts ändern. Bis dahin ist nichts davon bestätigt.
+- **Protokoll.** Caddy protokolliert wie bisher jede Anfrage (Seiten und Dateien eingeschlossen) im tmpfs von 32 MB; die Grösse des Protokolls hat sich nicht geändert, weil Caddy auch vorher jede Anfrage sah.
 
 ## Sichern und Wiederherstellen des State-Volumes
 
