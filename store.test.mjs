@@ -1,6 +1,7 @@
 // The visitor's own records and where they live: backup validation, saving that merges with other tabs, the visit limit,
 // blocked storage and the small side records (corrections waiting for the service, the service connection).
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import test from 'node:test';
 import {loadStack} from './test-support.mjs';
 
@@ -145,6 +146,21 @@ test('unreadable stored data leaves an empty profile and a storage that is repor
   const s=loadStack();
   const store=s.window.MinitandemStore.create({storage:refusing,byId:s.byId,P:s.P,today:s.C.today,statusKeys:s.K.PERSONAL_KEYS});
   assert.equal(store.storageAvailable,false);assert.equal(store.persist(),false);
+});
+
+test('a storage in the page memory only (the page\'s stand-in for a refused browser storage) is never reported as available',()=>{
+  // app.js gives the store such a stand-in when the browser refuses localStorage: it works, but nothing survives a reload.
+  const s=loadStack(),map=new Map();
+  const memoryOnly={memoryOnly:true,getItem:k=>map.get(k)??null,setItem:(k,v)=>{map.set(k,String(v));},removeItem:k=>{map.delete(k);}};
+  const store=s.window.MinitandemStore.create({storage:memoryOnly,byId:s.byId,P:s.P,today:s.C.today,statusKeys:s.K.PERSONAL_KEYS});
+  assert.equal(store.storageAvailable,false,'the data dialog says the browser cannot save, not that it can');
+  store.personal.notes.mpe='kept on the page';
+  assert.equal(store.persist(),false,'a save into it reads like a failed one, so the page says the records last only until it is closed or reloaded');
+  assert.equal(store.storageAvailable,false);
+  assert.equal(store.personal.notes.mpe,'kept on the page','the page keeps the records meanwhile');
+  assert.equal(JSON.parse(map.get(FAMILY)).notes.mpe,'kept on the page');
+  const app=fs.readFileSync(new URL('app.js',import.meta.url),'utf8');
+  assert.match(app,/catch \{ return \{memoryOnly: true, getItem:/,'the page marks its stand-in');
 });
 
 test('persist merges this tab with an unseen update from another tab',()=>{

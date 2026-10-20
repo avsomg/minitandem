@@ -8,8 +8,9 @@
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
 
   /* ---------- storage, language, modules ---------- */
+  // A browser that refuses its storage gets one in the page's memory instead; memoryOnly tells the store that nothing survives a reload.
   const memory = new Map();
-  const storageOf = name => { try { const s = W[name]; s.getItem('minitandem-probe'); return s; } catch { return {getItem: key => memory.get(name + key) ?? null, setItem: (key, value) => { memory.set(name + key, String(value)); }, removeItem: key => { memory.delete(name + key); }}; } };
+  const storageOf = name => { try { const s = W[name]; s.getItem('minitandem-probe'); return s; } catch { return {memoryOnly: true, getItem: key => memory.get(name + key) ?? null, setItem: (key, value) => { memory.set(name + key, String(value)); }, removeItem: key => { memory.delete(name + key); }}; } };
   const local = storageOf('localStorage'), session = storageOf('sessionStorage');
   try { W.MinitandemMigration.run(local, session); } catch {}
   I.init();

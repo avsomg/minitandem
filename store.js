@@ -24,7 +24,10 @@
         age: Number.isFinite(raw.age) && raw.age >= 0 && raw.age <= 18 ? raw.age : null,
         origin: Object.hasOwn(raw, 'origin') ? cleanOrigin(raw.origin) : fallbackOrigin};
     }
-    const store = {KEYS, validateBackup, cleanOrigin, emptyPersonal, personal: emptyPersonal(), baseline: emptyPersonal(), storageAvailable: true};
+    // A storage in the page's memory only (app.js, when the browser refuses its own) keeps the records until the page is closed or reloaded:
+    // it is never reported as available, and a save into it returns false like a failed one.
+    const lasting = !storage.memoryOnly;
+    const store = {KEYS, validateBackup, cleanOrigin, emptyPersonal, personal: emptyPersonal(), baseline: emptyPersonal(), storageAvailable: lasting};
     try { const stored = storage.getItem(KEYS.family); if (stored) store.personal = validateBackup(JSON.parse(stored)); } catch { store.storageAvailable = false; }
     store.baseline = structuredClone(store.personal);
 
@@ -57,8 +60,8 @@
         for (const id of latest.favorites) if (!latest.tracked[id]) latest.tracked[id] = P.snapshot(byId.get(id), today());
         if (Object.keys(latest.visits).length > P.maxVisits) throw fail('visits.limit', 'Visit limit');
         storage.setItem(KEYS.family, JSON.stringify(latest));
-        store.adopt(latest); store.storageAvailable = true; onSaved();
-        return true;
+        store.adopt(latest); store.storageAvailable = lasting; onSaved();
+        return lasting;
       } catch (error) { if (error?.code !== 'visits.limit') store.storageAvailable = false; return false; }
     };
 
