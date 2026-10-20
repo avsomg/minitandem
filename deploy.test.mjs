@@ -374,7 +374,9 @@ test('a release with Caddy images builds both images, previews Caddy and the API
   assert.match(api,/--network minitandem-preview-net-\S+ --network-alias app /);assert.doesNotMatch(api,/ -p /);assert.match(api,/--tmpfs \/state:/);
   assert.match(api,new RegExp(`-e MINITANDEM_API_ONLY=1 -e MINITANDEM_COMMIT=${s.newTag} minitandem-app:${s.newTag}$`));
   // Caddy: the image of the same tag, the preview file, the only published port (on the loopback), no persistent volume.
-  assert.match(edge,/-p 127\.0\.0\.1:18788:8080/);assert.match(edge,new RegExp(`minitandem-caddy:${s.newTag} caddy run --config /etc/caddy/preview\\.Caddyfile --adapter caddyfile$`));
+  assert.match(edge,/-p 127\.0\.0\.1:18788:8080/);
+  // The Caddy binary starts only with the capability it carries as a file capability; the API keeps none.
+  assert.match(edge,/--cap-drop ALL --cap-add NET_BIND_SERVICE /);assert.doesNotMatch(api,/--cap-add/);assert.match(edge,new RegExp(`minitandem-caddy:${s.newTag} caddy run --config /etc/caddy/preview\\.Caddyfile --adapter caddyfile$`));
   for(const preview of previews){assert.match(preview,/--read-only/);assert.match(preview,/--cap-drop ALL/);assert.doesNotMatch(preview,/ -v |--volume|--mount|minitandem_state|caddy-data/);}
   // The files and the API of the preview are checked against each other before anything is switched.
   assert.ok(log.includes('curl http://127.0.0.1:18788/build-info.json'));

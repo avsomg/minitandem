@@ -179,8 +179,10 @@ if [ "$EDGE_RELEASE" = 1 ]; then
     --tmpfs /state:rw,uid=1000,gid=1000,mode=0700,size=16m --cap-drop ALL --security-opt no-new-privileges:true --memory 512m --pids-limit 200 \
     -e MINITANDEM_API_ONLY=1 -e MINITANDEM_COMMIT="$NEW_TAG" "minitandem-app:$NEW_TAG" >/dev/null
   # The preview Caddyfile imports the same routes as the real one, on plain HTTP without certificates, an admin endpoint or an access log.
+  # The Caddy binary of the image carries the file capability cap_net_bind_service, and the kernel refuses to start it without that
+  # capability ("operation not permitted", found by a local run on 20 October 2026), so the preview keeps it, as compose.yaml does.
   docker run -d --name "$PREVIEW" --network "$PREVIEW_NETWORK" -p "127.0.0.1:$PORT:8080" --read-only \
-    --tmpfs /tmp --tmpfs /data --tmpfs /config --cap-drop ALL --security-opt no-new-privileges:true --memory 256m --pids-limit 200 \
+    --tmpfs /tmp --tmpfs /data --tmpfs /config --cap-drop ALL --cap-add NET_BIND_SERVICE --security-opt no-new-privileges:true --memory 256m --pids-limit 200 \
     "minitandem-caddy:$NEW_TAG" caddy run --config /etc/caddy/preview.Caddyfile --adapter caddyfile >/dev/null
 else
   docker run -d --name "$PREVIEW" -p "127.0.0.1:$PORT:8787" --read-only --tmpfs /tmp \

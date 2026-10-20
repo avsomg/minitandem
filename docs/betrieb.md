@@ -187,9 +187,8 @@ release=$1
 [ ! -e /opt/minitandem/.deploy-lock ]
 git -C /opt/minitandem fetch --tags --quiet
 scratch=$(mktemp -d)
-binary=minitandem-edge-binary-$$
 contract=minitandem-edge-contract-$$
-trap 'docker rm -f "$contract" "$binary" >/dev/null 2>&1 || true; rm -rf "$scratch"' EXIT
+trap 'docker rm -f "$contract" >/dev/null 2>&1 || true; rm -rf "$scratch"' EXIT
 git clone --quiet --no-hardlinks /opt/minitandem "$scratch/checkout"
 cd "$scratch/checkout"
 git checkout --quiet --detach "$release"
@@ -201,8 +200,9 @@ docker compose build app caddy
 docker run --rm -e ACME_EMAIL --tmpfs /var/log/caddy --entrypoint caddy "minitandem-caddy:$tag" validate --config /etc/caddy/Caddyfile --adapter caddyfile
 docker run --rm --entrypoint caddy "minitandem-caddy:$tag" validate --config /etc/caddy/preview.Caddyfile --adapter caddyfile
 # 2. Das Caddy-Programm aus dem Image gegen den echten Dienst, ohne Netz und ohne Familiendaten.
-docker create --name "$binary" "minitandem-caddy:$tag" >/dev/null
-docker cp "$binary:/usr/bin/caddy" "$scratch/caddy"
+# Read as plain bytes: docker cp would keep the file capability, and without it the kernel refuses to start the copy in the test container.
+docker run --rm --network none --entrypoint cat "minitandem-caddy:$tag" /usr/bin/caddy >"$scratch/caddy"
+chmod 755 "$scratch/caddy"
 docker create --name "$contract" --network none --cap-drop ALL --security-opt no-new-privileges:true --memory 512m --pids-limit 200 \
   -e MINITANDEM_CADDY_BIN=/tmp/caddy --entrypoint node "minitandem-app:$tag" --test /app/edge-static.test.mjs >/dev/null
 docker cp edge-static.test.mjs "$contract:/app/edge-static.test.mjs"
