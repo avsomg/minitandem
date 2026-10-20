@@ -317,12 +317,18 @@ export function readPipelineInputs(){
     approvedUpdates:fs.existsSync(path.join(editorial,'approved-updates.json'))?loadFile('approved-updates.json').updates:[]};
 }
 
+// The report on the current private state, approval journal included. The build and the command line both use this one call, so no
+// caller can leave the journal out (until 20 October 2026 the build did, and an approved address change then failed QA).
+export function currentPipelineReport(records,receipts,date){
+  const {receiptBaseline,registry,candidates,disputes,decisions,corrections,approvedUpdates}=readPipelineInputs();
+  return pipelineReport(records,receipts,receiptBaseline,registry,candidates,disputes,decisions,date,corrections,approvedUpdates);
+}
+
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const date=process.argv.find(arg=>arg.startsWith('--date='))?.slice(7)||
     new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Zurich'});
   const records=loadCatalog().ACTIVITIES,{receipts}=readExternalReviewInputs();
-  const {receiptBaseline,registry,candidates,disputes,decisions,corrections,approvedUpdates}=readPipelineInputs();
-  const report=pipelineReport(records,receipts,receiptBaseline,registry,candidates,disputes,decisions,date,corrections,approvedUpdates);
+  const report=currentPipelineReport(records,receipts,date);
   const output=path.join(editorial,'external-pipeline-report.json');
   const temp=`${output}.tmp-${process.pid}`;
   fs.writeFileSync(temp,JSON.stringify(report,null,2)+'\n');fs.renameSync(temp,output);

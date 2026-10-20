@@ -197,6 +197,12 @@ test('the real receipts reconcile with the current published catalogue',{skip:SK
     receipts.filter(receipt=>stageOf.has(receipt.id)).length);
 });
 
+test('the build reads the approval journal: it calls the one report that loads it, never pipelineReport directly',()=>{
+  const build=fs.readFileSync(path.join(root,'build.mjs'),'utf8');
+  assert.match(build,/assertEditorialReady\(currentPipelineReport\(records,receipts,today\)\)/);
+  assert.doesNotMatch(build,/\bpipelineReport\(|readPipelineInputs\(/);
+});
+
 test('an approved later address update makes the earlier receipt stale instead of halting the queue',()=>{
   const moved=records.map(record=>record.id==='a'?{...record,address:'Main 1, building C, Fribourg'}:record);
   const update={approvedOn:'2026-10-03',baseRecord:{id:'a',address:'Main 1, Fribourg'},

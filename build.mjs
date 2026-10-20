@@ -11,7 +11,7 @@ import {generateLegalPages} from './legal-pages.mjs';
 import {SCRIPTS,LAZY_SCRIPTS,STATIC,ASSETS,GENERATED,BUILD_INFO} from './ui-files.mjs';
 import {preparePublicOutput} from './public-output.mjs';
 import {externalReviewReport,assertPublicationReviewed,readExternalReviewInputs} from './editorial/external-review.mjs';
-import {pipelineReport,readPipelineInputs,assertEditorialReady} from './editorial/external-pipeline.mjs';
+import {currentPipelineReport,assertEditorialReady} from './editorial/external-pipeline.mjs';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const output = path.join(root, '.publish');
@@ -38,9 +38,7 @@ if(!privateEvidence&&!publicOnly)throw Error('Private editorial evidence is miss
 if(privateEvidence){
   const {receipts,legacyRecords,baseline}=readExternalReviewInputs();
   assertPublicationReviewed(externalReviewReport(records,receipts,legacyRecords,baseline,today));
-  const {receiptBaseline,registry,candidates,disputes,decisions,corrections}=readPipelineInputs();
-  const pipeline=pipelineReport(records,receipts,receiptBaseline,registry,candidates,disputes,decisions,today,corrections);
-  assertEditorialReady(pipeline);
+  assertEditorialReady(currentPipelineReport(records,receipts,today));
 }
 const publicationGates=privateEvidence?'checked':'skipped: no private editorial evidence in this checkout';
 const statuses = {active:'Current information available',check:'Needs confirmation',future:'For later; see age and conditions',closed:'Closed',excluded:'Archive / not included'};
