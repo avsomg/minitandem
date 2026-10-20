@@ -208,7 +208,7 @@ try{
   assert.equal(await page.locator('#contentNote').isVisible(),false,'No card falls back to English, so no note');
   const firstId=await page.locator('#list .row').first().getAttribute('data-id');
   await page.locator('#list .row').first().click();
-  assert.notEqual(await page.locator('#detail a.go').textContent(),'Open organiser’s page');
+  assert.notEqual(await page.locator('#detail a.go').textContent(),'Open the organiser’s page');
   const cardName=(await page.locator('#detail .d-name').textContent()).replace(/\u00a0/g,' ');
   assert.equal(cardName,await page.evaluate(id=>window.MINITANDEM_CARDS.de[id].strings.name,firstId),'The card shows its German name');
   assert.equal(await page.locator('#detail .d-english').count(),0);
@@ -262,7 +262,7 @@ try{
   await page.evaluate(()=>{Storage.prototype.setItem=function(){throw new DOMException('Quota','QuotaExceededError');};});
   await page.locator('#importFile').setInputFiles({name:'backup.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({version:1,favorites:['museum'],notes:{museum:'Temporary import'},statuses:{},age:2}))});
   await page.locator('#confirm-import').click();
-  assert.match(await page.locator('#toast').textContent(),/only in memory/);
+  assert.match(await page.locator('#toast').textContent(),/kept only until you close or reload this page/);
   await page.reload();
   await page.setViewportSize({width:320,height:740});await noOverflow();
   await page.setViewportSize({width:852,height:393});await noOverflow();

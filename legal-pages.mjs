@@ -6,8 +6,8 @@ import {caseStudyBody, esc} from './case-study.mjs';
 
 export const LEGAL_LABELS = {
   de: {impressum: 'Impressum', datenschutz: 'Datenschutz', skip: 'Zum Inhalt', app: 'Zur App', language: 'Sprache'},
-  fr: {impressum: 'Mentions légales', datenschutz: 'Protection des données', skip: 'Aller au contenu', app: 'Ouvrir le répertoire', language: 'Langue'},
-  en: {impressum: 'Legal notice', datenschutz: 'Privacy', skip: 'Skip to the content', app: 'Open the directory', language: 'Language'},
+  fr: {impressum: 'Mentions légales', datenschutz: 'Protection des données', skip: 'Aller au contenu', app: 'Ouvrir l’application', language: 'Langue'},
+  en: {impressum: 'Legal notice', datenschutz: 'Privacy', skip: 'Skip to the content', app: 'Open the app', language: 'Language'},
 };
 // How each language names itself in the language switch of a plain page (the notices, and the place pages).
 export const LANGUAGE_NAMES = {de: 'Deutsch', fr: 'Français', en: 'English'};

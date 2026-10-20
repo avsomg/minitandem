@@ -48,7 +48,7 @@ export const sentences = text => String(text).split(/(?<=[.!?])\s+/);
 // The few words these pages need that the interface has no key for. German and French were written for the pages, close to the
 // wording of the neighbouring dictionary keys (breadcrumb, the name of the directory, the end of the search-result description).
 export const PAGE_TEXT = {
-  en: {breadcrumb: 'Breadcrumb', places: 'Places and activities', placesTitle: 'Places and activities for families', tail: 'Schedule, address, conditions of taking part and sources.'},
+  en: {breadcrumb: 'Breadcrumb', places: 'Places and activities', placesTitle: 'Places and activities for families', tail: 'Schedule, address, conditions for taking part and sources.'},
   de: {breadcrumb: 'Navigationspfad', places: 'Orte und Angebote', placesTitle: 'Orte und Angebote für Familien', tail: 'Zeiten, Adresse, Teilnahmebedingungen und Quellen.'},
   fr: {breadcrumb: 'Fil d’Ariane', places: 'Lieux et activités', placesTitle: 'Lieux et activités pour les familles', tail: 'Horaires, adresse, conditions de participation et sources.'}
 };

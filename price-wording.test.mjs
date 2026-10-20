@@ -77,25 +77,26 @@ test('the real catalogue: one phrase for the placeholder in every language, with
   }
 });
 
-test('"1 card" and "2 cards": the counted sentences have a singular and a plural in every language',()=>{
+test('"1 activity" and "2 activities": the counted sentences have a singular and a plural in every language',()=>{
   const en=loadStack({lang:'en'}).t,de=loadStack({lang:'de'}).t,fr=loadStack({lang:'fr'}).t;
   const note=(t,fits)=>t('note.age',{age:'2',fits,unknown:9,n:fits});
-  assert.equal(note(en,1),'For age 2: an age limit is stated on 1 card and not published on 9.');
-  assert.equal(note(en,2),'For age 2: an age limit is stated on 2 cards and not published on 9.');
-  assert.equal(note(en,0),'For age 2: an age limit is stated on 0 cards and not published on 9.');
-  assert.equal(note(de,1),'Für Alter 2: 1 mit passender Altersgrenze, 9 ohne veröffentlichte Altersangabe.');
-  assert.equal(note(fr,1),'Âge 2 : 1 avec une limite d’âge compatible, 9 sans âge publié.');
-  assert.equal(en('map.caption',{located:1,total:1,n:1}),'1 of 1 card has a checked address point. Several activities can be in one building.');
-  assert.match(en('map.caption',{located:3,total:5,n:5}),/^3 of 5 cards have a checked address point/);
-  assert.match(de('map.caption',{located:1,total:1,n:1}),/^Bei 1 von 1 Eintrag gibt es/);
-  assert.match(de('map.caption',{located:3,total:5,n:5}),/^Bei 3 von 5 Einträgen gibt es/);
-  assert.equal(en('map.cluster',{n:1}),'1 card; zoom into the group');assert.equal(en('map.cluster',{n:12}),'12 cards; zoom into the group');
-  assert.equal(de('map.cluster',{n:1}),'1 Eintrag; in die Gruppe hineinzoomen');assert.equal(de('map.cluster',{n:12}),'12 Einträge; in die Gruppe hineinzoomen');
-  assert.equal(fr('map.cluster',{n:1}),'Groupe de 1 fiche ; zoomez pour les voir');assert.equal(fr('map.cluster',{n:12}),'Groupe de 12 fiches ; zoomez pour les voir');
+  assert.equal(note(en,1),'Age 2: 1 activity with a matching age limit, 9 without a clear age limit.');
+  assert.equal(note(en,2),'Age 2: 2 activities with a matching age limit, 9 without a clear age limit.');
+  assert.equal(note(en,0),'Age 2: 0 activities with a matching age limit, 9 without a clear age limit.');
+  assert.equal(note(de,1),'Alter 2: 1 mit passender Altersgrenze, 9 ohne klare Altersgrenze.');
+  assert.equal(note(fr,1),'Âge 2\u00a0: 1 avec une limite d’âge compatible, 9 sans limite d’âge claire.');
+  // The map caption is a label with two numbers, so it needs no agreement with either of them.
+  assert.equal(en('map.caption',{located:1,total:1,n:1}),'Activities on the map: 1 of 1. Several activities can be in one building.');
+  assert.match(en('map.caption',{located:3,total:5,n:5}),/^Activities on the map: 3 of 5\./);
+  assert.match(de('map.caption',{located:1,total:1,n:1}),/^Angebote auf der Karte: 1 von 1\./);
+  assert.match(de('map.caption',{located:3,total:5,n:5}),/^Angebote auf der Karte: 3 von 5\./);
+  assert.equal(en('map.cluster',{n:1}),'1 activity; zoom in to see it');assert.equal(en('map.cluster',{n:12}),'12 activities; zoom in to see them');
+  assert.equal(de('map.cluster',{n:1}),'1 Angebot; zum Anzeigen hineinzoomen');assert.equal(de('map.cluster',{n:12}),'12 Angebote; zum Anzeigen hineinzoomen');
+  assert.equal(fr('map.cluster',{n:1}),'Groupe de 1 activité\u00a0; zoomez pour la voir');assert.equal(fr('map.cluster',{n:12}),'Groupe de 12 activités\u00a0; zoomez pour les voir');
   // The map page on the screen: one card.
   const S=loadStack(clock);
-  assert.ok(S.V.mapBox([S.byId.get('mpe')]).includes('<p class="hint">1 of 1 card has a checked address point.'));
-  assert.ok(S.V.mapBox([S.byId.get('mpe'),S.byId.get('museum')]).includes('<p class="hint">2 of 2 cards have a checked address point.'));
+  assert.ok(S.V.mapBox([S.byId.get('mpe')]).includes('<p class="hint">Activities on the map: 1 of 1.'));
+  assert.ok(S.V.mapBox([S.byId.get('mpe'),S.byId.get('museum')]).includes('<p class="hint">Activities on the map: 2 of 2.'));
 });
 
 test('no English sentence counts cards without a singular and a plural; French keeps its no-break space before : ; ? !',()=>{

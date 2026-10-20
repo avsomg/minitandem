@@ -92,7 +92,7 @@ test('no dead end: an empty day filter offers what the same day finds without th
   assert.ok(some.includes(V.esc(t('empty.whenAlt',{n:23,when:t('when.weekend')}))));
   assert.match(some,/data-action="when-only"/);
   assert.ok(V.empty('when',{n:0,when:'today'}).includes(V.esc(t('empty.whenNone',{when:t('when.today')}))));
-  assert.match(t('note.whenRegular'),/Holidays and closures are not in the data/);
+  assert.match(t('note.whenRegular'),/Holidays and closures are not taken into account/);
 });
 
 test('distance limit: a checked address point, else the town centre; unknown distances are left out while it is on',()=>{

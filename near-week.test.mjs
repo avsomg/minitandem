@@ -311,7 +311,7 @@ test('the week view: a row to jump to a day, dated sessions open and time first,
   assert.ok(html.includes('<span>Autumn morning</span>'));
   // Wednesday: the regular group and the places are folded into a count each, and their rows are not built yet.
   const wednesday=html.slice(html.indexOf('id="wd-2026-10-14"'),html.indexOf('id="wd-2026-10-15"'));
-  assert.ok(wednesday.includes('<summary>1 regular group or course on Wednesdays</summary><div class="wfold-body"></div>'));
+  assert.ok(wednesday.includes('<summary>1 regular activity on Wednesdays</summary><div class="wfold-body"></div>'));
   assert.ok(wednesday.includes('<summary>2 places open by their weekly hours</summary><div class="wfold-body"></div>'));
   assert.ok(wednesday.indexOf('data-kind="regular"')<wednesday.indexOf('data-kind="places"'));
   assert.ok(!html.includes('Group card')&&!html.includes('Place A'),'folded rows are not in the page');
@@ -328,10 +328,10 @@ test('the week view: a row to jump to a day, dated sessions open and time first,
   assert.ok(html.includes('Place A')&&!html.includes('Group card'));
   // The counts are worded with the weekday in every language.
   I.setLang('de',{persist:false});
-  assert.equal(t('week.regular',{n:2,day:t('weekly.3')}),'2 regelmässige Gruppen- und Kursangebote, jeweils mittwochs');
+  assert.equal(t('week.regular',{n:2,day:t('weekly.3')}),'2 regelmässige Angebote, jeweils mittwochs');
   assert.equal(t('week.places',{n:2}),'2 Orte laut Öffnungszeiten geöffnet');
   I.setLang('fr',{persist:false});
-  assert.equal(t('week.regular',{n:1,day:t('weekly.3')}),'1 groupe ou cours régulier le mercredi');
+  assert.equal(t('week.regular',{n:1,day:t('weekly.3')}),'1 activité régulière le mercredi');
   assert.equal(t('week.places',{n:1}),'1 lieu ouvert selon ses horaires');
   html=V.week(days);
   assert.ok(html.includes('Aujourd’hui · mercredi 14 octobre'),'the weekday stays small after "today"');

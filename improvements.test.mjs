@@ -149,7 +149,7 @@ test('public pages are English, branded and carry the headings and links the dir
   assert.ok(html.includes(`<link rel="canonical" href="${SITE_ORIGIN}/places/mpe/">`));
   assert.ok(html.includes(`<meta property="og:url" content="${SITE_ORIGIN}/places/mpe/">`));
   assert.match(html,/<h2>Practical facts<\/h2>/);assert.match(html,/<h2>Contact<\/h2>/);assert.match(html,/<h2>Sources<\/h2>/);
-  assert.match(html,/>Open the card<\/a>/);assert.match(html,/>Show on map<\/a>/);
+  assert.match(html,/>Open the activity<\/a>/);assert.match(html,/>Show on map<\/a>/);
   const dated=allowed.get('museum'),withDates=placePage(dated,regions,'2026-09-27');
   assert.match(withDates,/<h2>Published dates<\/h2>/);
   const pending=catalog.ACTIVITIES.find(a=>!['closed','excluded'].includes(a.status)&&a.research?.remaining.length);
@@ -330,7 +330,7 @@ test('ordinary CSV export excludes personal notes and statuses',()=>{
   assert.doesNotMatch(withoutStoredIds(out.text),oldName);
   assert.equal(out.text.charCodeAt(0),0xFEFF,'a byte order mark lets spreadsheets read the accents');
   const [header,line,...rest]=out.text.slice(1).split('\r\n');
-  assert.equal(header,'"Name";"Category";"Place";"District";"Address";"Age";"Adult";"Language";"Schedule";"Price";"Status";"Contacts";"Sources";"Checked"');
+  assert.equal(header,'"Name";"Category";"Town";"District";"Address";"Age";"Adult";"Language";"Schedule";"Price";"Status";"Contacts";"Sources";"Checked"');
   assert.equal(rest.length,0);assert.ok(line.endsWith(`"${row.checked}"`));
 });
 test('CSV cells that a spreadsheet could read as formulas are neutralised and quotes are doubled',()=>{

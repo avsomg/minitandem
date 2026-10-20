@@ -58,10 +58,10 @@ try{
     await page.locator('.chip.age[data-age="6"]').click();
     assert.equal(await age(),null);assert.equal(await count(),total);
 
-    // Boundaries: 'Under 1' and the published limits of two cards.
+    // Boundaries: 'Under 1 year' and the published limits of two cards.
     await page.locator('.chip.age[data-age="0"]').click();
     await filters(false);
-    assert.equal(await page.locator('#fpAgeV').textContent(),'Under 1');
+    assert.equal(await page.locator('#fpAgeV').textContent(),'Under 1 year');
     await page.locator('#q').fill('Maison de la Petite Enfance');
     assert.equal(await page.locator('#list .row[data-id="mpe"]').count(),1,'A card for 0-4 fits under 1');
     assert.equal(await page.locator('#list .row[data-id="mpe"] .tick').count(),1,'...and shows the tick');
