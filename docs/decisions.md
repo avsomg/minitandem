@@ -72,3 +72,9 @@ The decisions that shape Minitandem, newest last. Each says what was decided, wh
 - **Decision:** before the link is sent, the live site is checked against WCAG 2.2 AA, OWASP ASVS level 1 and Core Web Vitals, with eight family tasks walked through on a phone-sized screen; the findings are fixed the same day.
 - **Why:** a first visit should work.
 - **Follows:** for example, the age filter "under 1" now includes offers from four months, and past closure notices are no longer shown.
+
+## 20 October 2026 · The web server serves the catalogue itself
+
+- **Decision:** Caddy serves the built pages and files from its own image of each release; only `/api/*` and `/healthz` reach the service.
+- **Why:** a fault in the service can no longer take the catalogue with it (finding F01 of the review), and the files, their headers and the API of one release are switched and rolled back together.
+- **Follows:** the switch was rehearsed on the owner's Mac and on the server before the site was touched. That found three faults in the deployment path, among them a check that ended a deployment early and still reported success; all three are fixed and tested. A rollback to the previous release and forward again was practised the same day.
