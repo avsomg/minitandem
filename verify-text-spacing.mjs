@@ -56,6 +56,10 @@ try{
     await check('week');
     await page.locator('.tab[data-view="saved"]').click();await page.waitForSelector('#list .row');
     await check('saved');
+    // The plain page of a place in the same language (no script): its labels, dates and note hold with the spacing too.
+    await page.goto(url+'places/fritime-piccolo-bulle/'+{en:'',de:'de/',fr:'fr/'}[lang]);
+    await page.addStyleTag({content:spacingStyle()});
+    await check('plain page');
     assert.deepEqual(errors,[],target.name+' '+lang);
     await context.close();
   }

@@ -37,7 +37,7 @@ export function loadStack({today='2026-10-14',nowHm='10:00',lang='en',local={},s
   const store=W.MinitandemStore.create({storage:localStorage,byId:C.byId,P,today:C.today,statusKeys:K.PERSONAL_KEYS,canonicalId:K.canonicalId});
   // The same state object the page keeps; tests change it directly.
   const state={view:'catalog',venueId:'',sharedIds:[],f:K.defaultFilters(),limit:24,openId:null,outingDate:today,near:null,nearStatus:'',weekOpen:new Set()};
-  const V=W.MinitandemViews.create({t,C,P,X,F,store,state:()=>state});
+  const V=W.MinitandemViews.create({t,C,P,X,F,store,state:()=>state,lang:I.lang});
   const EX=W.MinitandemExports.create({t,lang:I.lang,P,byId:C.byId,regions:W.CATALOG_REGIONS,today:C.today,format:F});
   return {window:W,context,I,t,P,X,K,C,F,store,V,EX,state,localStorage,sessionStorage,records:W.ACTIVITIES,byId:C.byId,regions:W.CATALOG_REGIONS,
     // the filtered list the page would show for the current state

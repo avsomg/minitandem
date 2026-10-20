@@ -46,5 +46,9 @@
     return setLang(detect(browserLanguages, stored), {persist: false});
   }
   const locale = () => LOCALES[current];
-  window.MinitandemI18n = {LANGS, LOCALES, STORAGE_KEY, detect, t, setLang, init, locale, lang: () => current, form, dictionaries};
+  // Where the plain pages of a place are (the build writes them, public-pages.mjs; the card page and the footer link to them): English at the
+  // address these pages have always had, German and French in a folder beside it. 'places/' is the directory, 'places/<id>/' a place.
+  const PLAIN_PAGE_FOLDER = {en: '', de: 'de/', fr: 'fr/'};
+  const plainPage = (lang, id = '') => 'places/' + (id ? id + '/' : '') + (PLAIN_PAGE_FOLDER[lang] ?? '');
+  window.MinitandemI18n = {LANGS, LOCALES, STORAGE_KEY, detect, t, setLang, init, locale, lang: () => current, form, dictionaries, plainPage};
 })();
