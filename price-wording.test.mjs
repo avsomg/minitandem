@@ -99,6 +99,18 @@ test('"1 activity" and "2 activities": the counted sentences have a singular and
   assert.ok(S.V.mapBox([S.byId.get('mpe'),S.byId.get('museum')]).includes('<p class="hint">Activities on the map: 2 of 2.'));
 });
 
+test('the map caption and its address lists count what the map plots: an area or an address that changes by date is not on the map',()=>{
+  const S=loadStack(clock),K=S.window.MinitandemCatalogue,mpe=S.byId.get('mpe');
+  const area={...S.byId.get('beaches'),geo:{lat:46.67,lon:7.28}};
+  const moving=S.records.find(a=>a.geo&&a.events.some(e=>e.address&&e.address!==a.address));
+  assert.ok(mpe.geo&&K.onMap(mpe));assert.equal(K.onMap(area),false);assert.ok(moving,'a card with a point and an address by date');assert.equal(K.onMap(moving),false);
+  const html=S.V.mapBox([mpe,area,moving]);
+  assert.ok(html.includes(`<p class="hint">${S.V.esc(S.t('map.caption',{located:1,total:3,n:3}))}</p>`),'1 of 3, not 3 of 3: two of them have a point that the map does not plot');
+  assert.ok(html.includes(S.V.esc(S.t('map.addresses',{n:1}))));assert.ok(html.includes(S.V.esc(S.t('map.missing',{n:2}))));
+  // Without any card the map plots, there is no map box to mount.
+  assert.ok(!S.V.mapBox([area,moving]).includes('id="places-map"'));
+});
+
 test('no English sentence counts cards without a singular and a plural; French keeps its no-break space before : ; ? !',()=>{
   const {window:W}=loadStack(),en=W.MINITANDEM_STRINGS.en,fr=W.MINITANDEM_STRINGS.fr;
   for(const [key,text] of Object.entries(en))if(/\{\w+\}\s+cards?\b/.test(text))assert.ok(/_(one|other)$/.test(key),key+' counts cards but has one form');

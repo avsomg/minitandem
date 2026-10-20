@@ -3,7 +3,8 @@
 (() => {
   'use strict';
   window.MinitandemMap={mount(container,items,t=key=>key){
-    const mapped=items.filter(a=>a.geo&&a.addressPrecision!=='area'&&!a.events.some(e=>e.address&&e.address!==a.address));
+    // The plotting rule is the catalogue's (catalogue.js onMap), the same one the caption and the address lists count with.
+    const mapped=items.filter(window.MinitandemCatalogue.onMap);
     if(!mapped.length){container.textContent=t('map.noPoints');return ()=>{};}
     if(!window.L){container.textContent=t('map.notLoaded');return ()=>{};}
     const map=L.map(container,{scrollWheelZoom:false,zoomControl:false});

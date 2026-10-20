@@ -34,6 +34,9 @@
   const placeKey = (region, name) => `${region}|${name}`;
   // Only a real bound counts as a published age limit; 'from 0 years' with no upper limit says nothing about who may come.
   const bounded = a => (a.min !== null && a.min > 0) || a.max !== null;
+  // A card the map plots: one confirmed address point, not a descriptive area, and no date with an address of its own. The map (map.js)
+  // and its caption and address lists (views.js mapBox) use this one rule, so that the counts match the points.
+  const onMap = a => Boolean(a.geo) && a.addressPrecision !== 'area' && !a.events.some(e => e.address && e.address !== a.address);
   function defaultFilters() {
     return {query: '', place: '', categories: new Set(), formats: new Set(), languages: new Set(), days: new Set(), needs: new Set(), when: '', price: '', status: '',
       scenario: '', preset: '', indoor: false, radius: 0, parentMatch: false, includeUnknownAge: true, planStatus: '', sort: 'default'};
@@ -340,6 +343,6 @@
     return {PERSONAL: PERSONAL_KEYS, norm, isArchive, byId, localities, localityByKey, today, inFuture, upcoming, past, venueFor, ageFit, ageRank, bounded, needsReview, statusOf, searchText, setLocalText, matchesSearch, matches, filter,
       sortItems, activeCount, anyFilter, ageSummary, restoreFilters, serializeFilters, placeOptions, townCentre, centreTowns, distanceOf, week, weekCards, whenDates, whenInfo, sessionsOn, repeatsOn, regions, coverage, venues, activities};
   }
-  window.MinitandemCatalogue = {create, defaultFilters, swissNow, norm, canonicalId, isArchive, placeNames, placeKey, bounded, addDays, weekdayOf, distanceKm, roundKm, scheduleSlot, moreTimes, restrictedOn, RADIUS_KEYS, DAY_WHEN, ALIASES, MAX_AGE,
+  window.MinitandemCatalogue = {create, defaultFilters, swissNow, norm, canonicalId, isArchive, placeNames, placeKey, bounded, onMap, addDays, weekdayOf, distanceKm, roundKm, scheduleSlot, moreTimes, restrictedOn, RADIUS_KEYS, DAY_WHEN, ALIASES, MAX_AGE,
     CATEGORY_KEYS, FORMAT_KEYS, LANGUAGE_KEYS, PRICE_KEYS, STATUS_FILTER_KEYS, PERSONAL_KEYS, WHEN_KEYS, PRESET_KEYS, SCENARIO_KEYS, SORT_KEYS, DAY_KEYS, VIEWS};
 })();

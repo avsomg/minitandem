@@ -217,7 +217,8 @@
     const more = !isMap && !isWeek && shown.length < n;
     els.more.hidden = !more; els.moreBtn.textContent = more ? t('list.more', {shown: shown.length, total: n}) : '';
     els.endnav.hidden = isMap || !n || publicView();
-    els.endNote.textContent = af ? t('end.filtered', {shown: shown.length, total: n, n: af}) : t('end.all', {shown: shown.length, n: total}); els.endNote.hidden = isWeek;
+    // The line under the list counts what this view lists (a search, Saved, the archive), never the whole catalogue.
+    els.endNote.textContent = af ? t('end.filtered', {shown: shown.length, total: n, n: af}) : t('end.all', {shown: shown.length, n}); els.endNote.hidden = isWeek;
     // saved overview, tools, updates banner
     els.viewTools.innerHTML = V.viewTools(view, store.personal.favorites.length > 0, n); els.viewTools.hidden = !els.viewTools.innerHTML;
     const overview = view === 'saved' ? V.saved() : null;

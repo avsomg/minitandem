@@ -12,7 +12,8 @@ const unfold=text=>text.replace(/\r\n /g,'');
 const shared=loadStack(clock);
 
 function mountMap(items,t){
-  const context={window:{}};
+  // map.js plots with the catalogue's rule (onMap), as on the page, where catalogue.js is loaded before it.
+  const context={window:{MinitandemCatalogue:shared.window.MinitandemCatalogue}};
   vm.runInNewContext(fs.readFileSync(file('map.js'),'utf8'),context);
   const container={textContent:''};
   const stop=context.window.MinitandemMap.mount(container,items,t);

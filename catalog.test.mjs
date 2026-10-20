@@ -817,6 +817,25 @@ test('question copying uses public questions only, never personal notes, age or 
   assert.doesNotMatch(handler,/personal|notes|statuses|favorites|visits|origin|\bage\b|store\./);
 });
 
+test('the line under the list counts what this view lists, not the whole catalogue',()=>{
+  // The line is set in app.js (DOM wiring): without filters it names the results of the view (a search, Saved, the archive), as the
+  // "Show more" button does, and with filters it names them as well; the catalogue total belongs only to the count bar.
+  const source=fs.readFileSync(path.join(root,'app.js'),'utf8');
+  const line=source.split('\n').find(l=>l.includes("els.endNote.textContent ="));
+  assert.ok(line,"the end note was not found in app.js: update this test");
+  assert.match(line,/t\('end\.all', \{shown: shown\.length, n\}\)/);
+  assert.match(line,/t\('end\.filtered', \{shown: shown\.length, total: n, n: af\}\)/);
+  assert.doesNotMatch(line,/n: total\b/);
+  // A search that finds 3 of 295 says 3 of 3 under the list, in every language and also for a single result.
+  for(const lang of ['en','de','fr']){
+    const {t}=load({lang});
+    for(const n of [1,3]){const text=t('end.all',{shown:n,n});assert.ok(text.includes(String(n))&&!text.includes(String(COUNTS.catalog)),lang+' '+text);}
+  }
+  const {t}=load();
+  assert.equal(t('end.all',{shown:3,n:3}),'Activities shown: 3 of 3');
+  assert.equal(t('end.filtered',{shown:1,total:1,n:2}),'Activities shown: 1 of 1 · 2 filters active','no "1 of 1 activities"');
+});
+
 test('additional findings and open questions participate in catalogue search',()=>{
   const {C,list,state,byId}=load();
   state.f.query='tropical';
