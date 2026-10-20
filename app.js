@@ -484,8 +484,8 @@
     if (!state.openId || !input || !total) return;
     const ages = $$('#family-children .family-child-age').map(field => field.value.trim() === '' ? NaN : Number(field.value));
     const result = P.familyPrice(C.byId.get(state.openId), ages, Number(input.value));
-    total.textContent = result ? 'CHF ' + result.total : t('cost.invalid');
-    $('#family-breakdown').textContent = result ? t('cost.breakdown', {adults: result.adultTotal, children: result.childTotals.join(' + ')}) : '';
+    total.textContent = result ? 'CHF ' + F.amount(result.total) : t('cost.invalid');
+    $('#family-breakdown').textContent = result ? t('cost.breakdown', {adults: F.amount(result.adultTotal), children: result.childTotals.map(F.amount).join(' + ')}) : '';
   }
 
   /* ---------- optional family service ---------- */
@@ -526,7 +526,7 @@
       if (navigator.share) { try { await navigator.share({title: a.name, text, url}); return; } catch (error) { if (error?.name === 'AbortError') return; } }
       await copy(text + '\n' + url, t('share.cardCopied'));
     },
-    'copy-questions': () => { const a = V.shown(C.byId.get(state.openId)); copy([a.name, t('card.toConfirm') + ':', ...(a.research?.remaining || []).map(q => '- ' + q)].join('\n\n')); },
+    'copy-questions': () => { const a = V.shown(C.byId.get(state.openId)); copy([a.name, t('card.toConfirm') + F.colon(), ...(a.research?.remaining || []).map(q => '- ' + q)].join('\n\n')); },
     'report-change': () => { const a = C.byId.get(state.openId); if (a) utility(V.report(a, !!sync.config)); },
     'more': () => { const firstNew = state.limit; state.limit += PAGE; render(); $$('#list .row')[firstNew]?.focus(); },
     'open-updates': () => { switchView('saved'); $('#saved-changes')?.focus(); },

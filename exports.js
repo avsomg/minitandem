@@ -27,6 +27,8 @@
 
     // The card as it reads today (planning.js current): a closure or a "next meeting" that is over does not travel into a file.
     const current = a => P.current(a, today());
+    // The check date inside a sentence, written as the interface writes dates ('28 Sept 2026'); a card without a valid date keeps what it has.
+    const checkedLabel = a => P.validDate(a.checked) ? format.dateLabel(a.checked) : a.checked;
 
     function eventFile(id, index) {
       const a = current(byId.get(id)), e = a?.events[index];
@@ -36,10 +38,10 @@
       if (e.start) { lines.push(`DTSTART;TZID=Europe/Zurich:${date}T${e.start.replace(':', '')}00`); if (e.end) lines.push(`DTEND;TZID=Europe/Zurich:${date}T${e.end.replace(':', '')}00`); }
       else lines.push(`DTSTART;VALUE=DATE:${date}`, `DTEND;VALUE=DATE:${dayAfter(e.date)}`);
       const course = P.admission(a) === 'course';
-      const participation = t('admission.' + P.admission(a)) + (course ? '; ' + t('ics.courseJoin') : '');
+      const participation = t('admission.' + P.admission(a)) + (course ? format.semicolon() + ' ' + t('ics.courseJoin') : '');
       lines.push(`SUMMARY:${icsEscape((course ? t('ics.coursePrefix') + ' · ' : '') + (e.title ? e.title + ' · ' : '') + a.name + (e.start ? '' : ' ' + t('ics.timeTbc')))}`,
         `LOCATION:${icsEscape(eventAddress(a, e) || t('ics.addressTbc', {town: a.town}))}`,
-        `DESCRIPTION:${icsEscape([e.title || a.name, participation, t('ics.notBooking'), a.schedule, a.price, ...a.notes, t('ics.checked', {date: a.checked}), ...a.sources.map(s => s.url)].join('\n'))}`, 'END:VEVENT');
+        `DESCRIPTION:${icsEscape([e.title || a.name, participation, t('ics.notBooking'), a.schedule, a.price, ...a.notes, t('ics.checked', {date: checkedLabel(a)}), ...a.sources.map(s => s.url)].join('\n'))}`, 'END:VEVENT');
       return {name: `${a.id}-${e.date}.ics`, text: calendar('Family Activities', lines), type: 'text/calendar;charset=utf-8'};
     }
     function planFile(plan) {
@@ -73,7 +75,7 @@
     function addressesFile(items) {
       const text = [t('addresses.title'), t('addresses.saved', {date: format.dateLabel(today())}), t('addresses.noPrivate'), '',
         ...items.map(current).flatMap(a => [a.name, a.address || t('common.addressTbc'), a.schedule, a.price, t('addresses.participation', {value: t('admission.' + P.admission(a))}), t('addresses.age', {value: a.age}), t('addresses.adult', {value: format.parentLong(a)}),
-          ...a.contacts.map(c => [c.name, c.phone, c.email].filter(Boolean).join(' · ')), t('addresses.checked', {date: a.checked}), ...a.sources.map(s => s.url), ''])].join('\n');
+          ...a.contacts.map(c => [c.name, c.phone, c.email].filter(Boolean).join(' · ')), t('addresses.checked', {date: checkedLabel(a)}), ...a.sources.map(s => s.url), ''])].join('\n');
       return {name: `minitandem-addresses-${today()}.txt`, text, type: 'text/plain;charset=utf-8'};
     }
     return {eventFile, planFile, planJson, backupFile, pilotFile, correctionFile, csvFile, addressesFile};

@@ -1,6 +1,7 @@
 // The list row (age slot, next-date column, week-row classes), the chips that name active filters, and the card page's actions
 // (share, report an error by e-mail) and its language marks when a card falls back to English.
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import test from 'node:test';
 import {loadStack} from './test-support.mjs';
 
@@ -44,6 +45,20 @@ test('active filters are named as chips that remove them; the rainy-day switch s
   assert.ok(!some.includes('data-quick'),'no switch while the filter is on');
   const fr=stack({lang:'fr'});
   assert.ok(fr.V.filterChips([{key:'age',label:'3 ans'}]).includes('aria-label="Retirer le filtre\u00a0: 3 ans"'));
+});
+
+test('a colon the code puts between a label and a name is French in French: a no-break space before it, none in English and German',()=>{
+  for(const [lang,space] of [['en',''],['de',''],['fr','\u00a0']]){
+    const S=stack({lang}),a=S.byId.get('mpe');
+    assert.equal(S.F.colon(),space+':',lang);assert.equal(S.F.semicolon(),space+';',lang);
+    assert.ok(S.V.saveButton(a).includes(`aria-label="${S.V.esc(S.t('card.save'))}${space}: ${S.V.esc(a.name)}"`),lang+' save button');
+    const rows=S.V.visitRows([['v-one',{activity:'mpe',date:'2026-10-20',time:'',booking:'unconfirmed',outcome:''}]]);
+    assert.ok(rows.includes(`aria-label="${S.V.esc(S.t('visit.edit'))}${space}: ${S.V.esc(a.name)}, `),lang+' visit row');
+  }
+  // The questions copied from a card page start with "Still to confirm" and the language's colon (app.js, DOM wiring).
+  const app=fs.readFileSync(new URL('app.js',import.meta.url),'utf8');
+  assert.match(app,/t\('card\.toConfirm'\) \+ F\.colon\(\)/);
+  assert.doesNotMatch(app,/t\('card\.toConfirm'\) \+ ':'/);
 });
 
 test('the card page: Share and Report an error under the facts; the e-mail names the card, its id and link; the correction form only with the family service',()=>{

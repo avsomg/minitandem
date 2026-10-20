@@ -207,7 +207,8 @@ test('offline address export has a version date, contacts and no private notes o
   assert.ok(file.text.includes(word(s,'addresses.noPrivate')));
   assert.match(file.text,/https:\/\//);
   assert.ok(file.text.includes(a.address));assert.ok(file.text.includes(a.contacts[0].phone));assert.ok(file.text.includes(a.contacts[0].email));
-  assert.ok(file.text.includes(word(s,'addresses.checked',{date:a.checked})));
+  assert.ok(file.text.includes(word(s,'addresses.checked',{date:s.F.dateLabel(a.checked)})),'the check date reads as a date, not as 2026-09-27');
+  assert.ok(!file.text.includes(word(s,'addresses.checked',{date:a.checked})));
   assert.doesNotMatch(file.text,/PRIVATE_/);
 });
 test('ICS course export warns that attendance is not confirmed and never exports family records',()=>{
@@ -237,6 +238,16 @@ test('ICS text escapes backslashes, line breaks, commas and semicolons',()=>{
   assert.ok(description.includes(s.t('admission.course')+'\\; '+s.t('ics.courseJoin').replace(/,/g,'\\,')));
   assert.doesNotMatch(description.replace(/\\\\/g,''),/(^|[^\\]);/,'every semicolon in DESCRIPTION is escaped');
   for(const line of text.split('\r\n').filter(l=>/^(SUMMARY|LOCATION):/.test(l)))assert.doesNotMatch(line.replace(/\\\\/g,''),/(^|[^\\]);/,line);
+});
+test('ICS description: French sets a no-break space before the semicolon the code adds, and the check date reads as a date',()=>{
+  for(const [lang,space] of [['en',''],['fr','\u00a0']]){
+    const s=loadStack({lang}),escape=s.window.MinitandemExports.icsEscape,card=s.byId.get('swim-tentlingen');
+    const text=unfold(s.EX.eventFile('swim-tentlingen',5).text);
+    const description=text.split('\r\n').find(line=>line.startsWith('DESCRIPTION:'));
+    assert.ok(description.includes(escape(s.t('admission.course'))+space+'\\; '+escape(s.t('ics.courseJoin'))),lang+': '+description.slice(0,160));
+    assert.ok(description.includes(escape(s.t('ics.checked',{date:s.F.dateLabel(card.checked)}))),lang+': the check date as the interface writes dates');
+    assert.ok(!description.includes(card.checked),lang+': not the raw '+card.checked);
+  }
 });
 test('ICS text follows the interface language',()=>{
   const de=load(null,{lang:'de'}),text=unfold(de.EX.eventFile('swim-tentlingen',5).text);

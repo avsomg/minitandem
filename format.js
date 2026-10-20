@@ -51,7 +51,14 @@
     // The next date without "Next:", for the table column that is already headed "Next date".
     const nextShort = upcoming => { const e = upcoming[0]; return `${dayDate(e.date)}, ${e.start ? clockLabel(e) : t('time.tbc')}` + (upcoming.length > 1 ? ' ' + t('date.more', {n: upcoming.length - 1}) : ''); };
     const cell = value => String(value ?? '');
-    return {dateLabel, shortDate, dayDate, dayLong, weekdayName, clockLabel, first, ageShort, noPrice, priceShort, ageLabel, ageBare, parentLong, parentShort, langText, nextText, nextShort, bounds, cell};
+    // An amount in francs as the Swiss write it, in every language: two decimals and a point (12.50, 19.00). Passed to t() as text, so
+    // that the interface language does not turn the point into a comma.
+    const amount = n => Number(n).toFixed(2);
+    // The colon or semicolon the code puts between two parts (a label and a name, two clauses): French sets a no-break space before it.
+    const NBSP = String.fromCharCode(160);
+    const mark = sign => (/^fr\b/.test(locale()) ? NBSP : '') + sign;
+    const colon = () => mark(':'), semicolon = () => mark(';');
+    return {dateLabel, shortDate, dayDate, dayLong, weekdayName, clockLabel, first, ageShort, noPrice, priceShort, ageLabel, ageBare, parentLong, parentShort, langText, nextText, nextShort, bounds, cell, amount, colon, semicolon};
   }
   window.MinitandemFormat = {create};
 })();

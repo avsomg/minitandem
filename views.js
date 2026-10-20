@@ -236,7 +236,7 @@
     };
     function saveButton(card) {
       const a = shown(card), on = personal().favorites.includes(a.id);
-      return `<button type="button" class="iconbtn save-button${on ? ' saved' : ''}" data-save="${esc(a.id)}" aria-pressed="${on}" aria-label="${esc(t(on ? 'card.unsave' : 'card.save'))}: ${esc(a.name)}" title="${esc(t(on ? 'card.unsave' : 'card.save'))}">${on ? ICON.bookmarkOn(20) : ICON.bookmark(20)}</button>`;
+      return `<button type="button" class="iconbtn save-button${on ? ' saved' : ''}" data-save="${esc(a.id)}" aria-pressed="${on}" aria-label="${esc(t(on ? 'card.unsave' : 'card.save'))}${F.colon()} ${esc(a.name)}" title="${esc(t(on ? 'card.unsave' : 'card.save'))}">${on ? ICON.bookmarkOn(20) : ICON.bookmark(20)}</button>`;
     }
     function ageFitNote(a) {
       const a0 = age();
@@ -270,13 +270,13 @@
       return section(t('cost.title'), `<div class="costbox"><label class="costl" for="family-adults">${esc(t('cost.adults'))}<input class="field short" id="family-adults" type="number" min="1" max="4" step="1" value="1"></label>` +
         `<div id="family-children"><label class="costl">${esc(t('cost.childAge'))}<input class="field short family-child-age" type="number" min="0" max="15" step="0.5" value="${esc(age() ?? '')}"></label></div>` +
         `<button type="button" class="linkbtn" data-action="add-child">${esc(t('cost.addChild'))}</button>` +
-        `<p id="family-total" class="family-total" role="status" aria-live="polite">${result ? 'CHF ' + result.total : esc(t('cost.unknownAge'))}</p><p id="family-breakdown" class="hint">${result ? esc(t('cost.breakdown', {adults: result.adultTotal, children: result.childTotals.join(' + ')})) : ''}</p>` +
+        `<p id="family-total" class="family-total" role="status" aria-live="polite">${result ? 'CHF ' + F.amount(result.total) : esc(t('cost.unknownAge'))}</p><p id="family-breakdown" class="hint">${result ? esc(t('cost.breakdown', {adults: F.amount(result.adultTotal), children: result.childTotals.map(F.amount).join(' + ')})) : ''}</p>` +
         `<p class="hint">${esc(tariff.note)}</p>${link(tariff.source, esc(t('cost.tariffSource')) + ICON.out(14), 'inline-link')}</div>`, 'cost-section');
     }
     function visitRows(entries) {
       return entries.map(([id, v]) => {
         const a = shown(C.byId.get(v.activity)), label = visitLabel(v);
-        return `<div class="visit-row"><div><strong>${esc(label)}</strong><p>${esc(a.name)}</p><p class="hint">${esc(t('booking.' + v.booking))}${v.outcome ? ' · ' + esc(t('outcome.' + v.outcome)) : ''}</p></div><button type="button" class="iconbtn" data-edit-visit="${esc(id)}" aria-label="${esc(t('visit.edit'))}: ${esc(a.name)}, ${esc(label)}" title="${esc(t('visit.edit'))}">${ICON.pencil(20)}</button></div>`;
+        return `<div class="visit-row"><div><strong>${esc(label)}</strong><p>${esc(a.name)}</p><p class="hint">${esc(t('booking.' + v.booking))}${v.outcome ? ' · ' + esc(t('outcome.' + v.outcome)) : ''}</p></div><button type="button" class="iconbtn" data-edit-visit="${esc(id)}" aria-label="${esc(t('visit.edit'))}${F.colon()} ${esc(a.name)}, ${esc(label)}" title="${esc(t('visit.edit'))}">${ICON.pencil(20)}</button></div>`;
       }).join('');
     }
     const visitLabel = v => (v.date ? F.dateLabel(v.date) : t('visit.noDate')) + (v.time ? ' · ' + v.time : '');

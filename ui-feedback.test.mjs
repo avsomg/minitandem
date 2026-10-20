@@ -93,7 +93,7 @@ test('family price updates for several children and rejects incomplete ages',()=
 test('the card page starts the price from the chosen age and says what is missing when there is none',()=>{
   const total=html=>/id="family-total"[^>]*>([^<]*)</.exec(html)[1];
   const known=stack(2.5),withAge=known.V.detail(known.byId.get('beo-funpark'));
-  assert.equal(total(withAge),'CHF 19');
+  assert.equal(total(withAge),'CHF 19.00');
   assert.match(withAge,/class="field short family-child-age"[^>]*value="2.5"/);
   assert.ok(/id="family-breakdown"[^>]*>([^<]+)</.exec(withAge)[1].length>0);
   const unknown=stack(),withoutAge=unknown.V.detail(unknown.byId.get('beo-funpark'));
@@ -103,6 +103,23 @@ test('the card page starts the price from the chosen age and says what is missin
   const baby=stack(0.5);assert.doesNotMatch(total(baby.V.detail(baby.byId.get('beo-funpark'))),/CHF \d/);
   // Cards without a tariff have no calculator.
   assert.doesNotMatch(unknown.V.detail(unknown.byId.get('mpe')),/family-total/);
+});
+
+test('amounts read as the Swiss write them, CHF 12.50, in every language: two decimals and a point, also in French',()=>{
+  const {F}=stack();
+  assert.equal(F.amount(12.5),'12.50');assert.equal(F.amount(19),'19.00');assert.equal(F.amount(0),'0.00');
+  // A tariff with half francs, on the French card page: the total and the line under it keep the point and both decimals.
+  const fr=loadStack({lang:'fr',local:{'minitandem-family-v1':{version:1,favorites:[],notes:{},statuses:{},age:3}}}),beo=fr.byId.get('beo-funpark');
+  const card={...beo,practical:{...beo.practical,tariff:{...beo.practical.tariff,adult:12.5}}};
+  const html=fr.V.detail(card);
+  assert.equal(/id="family-total"[^>]*>([^<]*)</.exec(html)[1],'CHF 22.50');
+  const breakdown=/id="family-breakdown"[^>]*>([^<]*)</.exec(html)[1];
+  assert.match(breakdown,/CHF\s12\.50\b/);assert.match(breakdown,/CHF\s10\.00\b/);
+  assert.doesNotMatch(breakdown,/12,5|12\.5(?!0)/);
+  // The page script formats the total and the line the same way when the fields change.
+  const app=fs.readFileSync(new URL('app.js',import.meta.url),'utf8');
+  assert.match(app,/'CHF ' \+ F\.amount\(result\.total\)/);
+  assert.match(app,/adults: F\.amount\(result\.adultTotal\), children: result\.childTotals\.map\(F\.amount\)/);
 });
 
 test('the price controls in the card markup are the ones the page script updates',()=>{
