@@ -185,11 +185,12 @@ test('real Caddy: the preview configuration answers every built file, folder, re
   const folder=fs.mkdtempSync(path.join(temp,'caddy-')),port=await freePort();
   const reference=await listen(t),upstream=reference.base.replace('http://','');
   // The real routes, with the paths of this machine: the site folder and the service's address replace the two container values.
+  // The listener keeps http:// in front: a site address with a host and no scheme is HTTPS for Caddy, even with auto_https off.
   const siteFile=path.join(folder,'site.caddy'),previewFile=path.join(folder,'preview.Caddyfile');
   const siteText=read('docker/site.caddy').replace('root * /srv/site',`root * "${publish}"`).replace('reverse_proxy app:8787',`reverse_proxy ${upstream}`);
   assert.notEqual(siteText,read('docker/site.caddy'));
   fs.writeFileSync(siteFile,siteText);
-  const previewText=read('docker/preview.Caddyfile').replace('/etc/caddy/site.caddy',siteFile).replace(':8080',`127.0.0.1:${port}`);
+  const previewText=read('docker/preview.Caddyfile').replace('/etc/caddy/site.caddy',siteFile).replace(':8080',`http://127.0.0.1:${port}`);
   assert.ok(previewText.includes(siteFile)&&previewText.includes(`127.0.0.1:${port}`));
   fs.writeFileSync(previewFile,previewText);
   const environment={...process.env,XDG_DATA_HOME:path.join(folder,'data'),XDG_CONFIG_HOME:path.join(folder,'config'),ACME_EMAIL:'owner@example.org'};
