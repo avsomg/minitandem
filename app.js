@@ -55,7 +55,7 @@
   // or 'failed'. weekOpen: the days of the week view whose regular offers are unfolded.
   const state = {view: 'catalog', venueId: '', sharedIds: [], f: K.defaultFilters(), limit: 24, openId: null, outingDate: '', opener: null, returnId: null,
     near: null, nearStatus: '', weekOpen: new Set()};
-  const V = W.MinitandemViews.create({t, C, P, X, F, store, state: () => state, shown, inEnglish, origin: location.origin, syncConnected: () => Boolean(sync?.config)});
+  const V = W.MinitandemViews.create({t, C, P, X, F, store, state: () => state, shown, inEnglish, lang: I.lang, origin: location.origin, syncConnected: () => Boolean(sync?.config)});
   const EX = W.MinitandemExports.create({t, lang: I.lang, P, byId: C.byId, regions: W.CATALOG_REGIONS, today: C.today, format: F});
   const PAGE = 24;
   const SESSION_FILTERS = store.KEYS.filters;
@@ -95,6 +95,7 @@
     for (const [attr, target] of [['i18nLabel', 'aria-label'], ['i18nPlaceholder', 'placeholder'], ['i18nTitle', 'title']])
       for (const node of $$(`[data-${attr.replace(/[A-Z]/g, c => '-' + c.toLowerCase())}]`)) node.setAttribute(target, t(node.dataset[attr]));
     for (const node of $$('[data-legal]')) node.href = '/' + node.dataset.legal + '/' + (I.lang() === 'de' ? '' : I.lang() + '/');
+    for (const node of $$('[data-places]')) node.href = I.plainPage(I.lang());
     document.title = t('meta.title');
     $('meta[name="description"]')?.setAttribute('content', t('meta.description'));
     for (const b of $$('#langSeg button')) b.setAttribute('aria-pressed', String(b.dataset.lang === I.lang()));

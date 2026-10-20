@@ -1,6 +1,6 @@
 /* Markup of the interface: list rows, the filter panel, the week view, the card page, the saved view and the dialogs. Every function returns an
    HTML string built from card content (escaped) and words from the dictionaries (through t). No DOM access, no events:
-   app.js puts the markup into the page and wires it. ctx = {t, C, P, X, F, store, state, shown, inEnglish} (see app.js): shown(card) is the
+   app.js puts the markup into the page and wires it. ctx = {t, C, P, X, F, store, state, shown, inEnglish, lang} (see app.js): shown(card) is the
    card as the visitor reads it (its German or French translation where one is current), inEnglish(card) says that a card falls back to English.
    Logic, links to maps and the comparison of saved cards keep the English card. */
 (() => {
@@ -80,6 +80,8 @@
     const moreHours = a => String(a.schedule).includes(';') && window.MinitandemCatalogue.moreTimes(en(a).schedule);
     const hoursLine = a => F.first(a.schedule) + (moreHours(a) ? ' ' + t('time.more') : '');
     const placeLine = a => `${a.town} · ${ctx.C.regions[a.region]}`;
+    // The plain page of a place in the interface language (places/<id>/, places/<id>/de/, places/<id>/fr/); the address scheme is i18n.js's.
+    const plainPage = id => window.MinitandemI18n.plainPage(ctx.lang ? ctx.lang() : 'en', id);
 
     /* ---------- list ---------- */
     function fitMark(a) {
@@ -339,7 +341,7 @@
       if (photo || a.practical?.gallery) out += section(t('card.photos'), (photo ? `<figure class="place-photo"><img src="${esc(photo.path)}" alt="${esc(photo.alt)}" loading="lazy" width="960" height="443"><figcaption>${esc(photo.caption)} ${link(photo.source, esc(photo.credit), 'inline-link')}</figcaption></figure>` : '') + (a.practical.gallery ? link(a.practical.gallery, esc(t('card.gallery')) + ICON.out(14), 'inline-link') : '') + `<p class="hint">${esc(t('card.photoNote'))}</p>`);
       out += section(t('card.sources'), a.sources.filter(s => /^https:\/\//i.test(s.url)).length ? `<ul class="srcs"${en}>${a.sources.filter(s => /^https:\/\//i.test(s.url)).map(s => `<li>${link(s.url, `<span>${esc(s.label)}</span>${ICON.out(16)}`)}</li>`).join('')}</ul><p class="hint">${esc(P.checkAge(a, C.today()) === null ? t('card.sourceNoteUndated') : t('card.sourceNote', {date: F.dateLabel(a.checked)}))}${C.needsReview(a) ? ' ' + esc(t('card.reviewDue')) : ''}</p>` : `<p class="np">${esc(t('card.noSources'))}</p>`);
       // The correction form reaches the editors only through the family service; without it, the e-mail under the facts is the way.
-      out += `<div class="d-more">${ctx.syncConnected?.() ? `<button type="button" class="linkbtn" data-action="report-change">${ICON.flag(16)} ${esc(t('card.report'))}</button>` : ''}${!C.isArchive(a) ? `<a class="linkbtn" href="places/${esc(a.id)}/">${esc(t('card.publicPage'))}</a>` : ''}</div></div>`;
+      out += `<div class="d-more">${ctx.syncConnected?.() ? `<button type="button" class="linkbtn" data-action="report-change">${ICON.flag(16)} ${esc(t('card.report'))}</button>` : ''}${!C.isArchive(a) ? `<a class="linkbtn" href="${esc(plainPage(a.id))}">${esc(t('card.publicPage'))}</a>` : ''}</div></div>`;
       const url = organiserURL(a), first = a.contacts.find(c => c.phone), mail = a.contacts.find(c => c.email);
       const secondary = [!variedAddress && a.addressPrecision !== 'area' && a.address ? link(routeURL(a), ICON.route(18) + esc(t('card.directions')), 'ghost') : link(mapURL(a), ICON.pin(18) + esc(t('card.map')), 'ghost'),
         first ? `<a class="ghost" href="${esc(phoneHref(first.phone))}">${ICON.phone(18)}${esc(t('card.call'))}</a>` : '', mail ? `<a class="ghost" href="mailto:${esc(mail.email)}">${ICON.mail(18)}${esc(t('card.write'))}</a>` : '',

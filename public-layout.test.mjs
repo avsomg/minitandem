@@ -19,7 +19,10 @@ const compare = (a, b) => a[0] - b[0] || a[1] - b[1] || a[2] - b[2];
 function builtPublicPages() {
   const pages = ['projekt/index.html', 'projekt/en/index.html', 'places/index.html'];
   for (const kind of ['impressum', 'datenschutz']) for (const lang of ['', 'fr/', 'en/']) pages.push(`${kind}/${lang}index.html`);
-  for (const folder of fs.readdirSync(path.join(root, '.publish/places'), {withFileTypes: true}).filter(entry => entry.isDirectory())) pages.push(`places/${folder.name}/index.html`);
+  for (const folder of fs.readdirSync(path.join(root, '.publish/places'), {withFileTypes: true}).filter(entry => entry.isDirectory())) {
+    pages.push(`places/${folder.name}/index.html`);
+    for (const lang of ['de', 'fr']) if (fs.existsSync(path.join(root, `.publish/places/${folder.name}/${lang}/index.html`))) pages.push(`places/${folder.name}/${lang}/index.html`);
+  }
   return pages.map(file => ({file, html: read('.publish/' + file)}));
 }
 
@@ -27,6 +30,8 @@ test('every dark .go button on a public page gets the inverse text colour, whate
   const pages = builtPublicPages(), withButton = pages.filter(page => /<a class="go[ "]/.test(page.html));
   // The two page types that have the button: every place card and the case study in both languages.
   assert.ok(withButton.filter(page => /^places\/[^/]+\/index\.html$/.test(page.file)).length > 100);
+  // The German and French page of a place has the button too.
+  for (const lang of ['de', 'fr']) assert.ok(withButton.filter(page => page.file.endsWith(`/${lang}/index.html`) && page.file.split('/').length === 4).length > 100, lang);
   assert.deepEqual(withButton.filter(page => page.file.startsWith('projekt/')).map(page => page.file).sort(), ['projekt/en/index.html', 'projekt/index.html']);
   for (const {file, html} of withButton) assert.match(html, /<body class="public-page[ "]/, `${file}: .go needs the public-page class for its rule`);
   const goRule = rules.find(rule => rule.selectors.includes('.public-page a.go'));

@@ -1,5 +1,5 @@
-// The plain pages (the legal notices, the case study, the directory of places): every page has a description, the language switch of a
-// notice is one row with a gap between the links and marks the page's own language, and no page is wider than the screen or cuts a label
+// The plain pages (the legal notices, the case study, the directory of places and a place, each in its languages): every page has a description, the language switch of a
+// notice or a place page is one row with a gap between the links and marks the page's own language, and no page is wider than the screen or cuts a label
 // off at 320, 375 and 1280 px, also with the text spacing of WCAG 1.4.12.
 import path from 'node:path';
 import assert from 'node:assert/strict';
@@ -9,7 +9,10 @@ const engine=engineName(),playwright=loadPlaywright();
 const screenshots=artifactDirectory('pages');
 const fixture=await serveSite(),url=fixture.url;
 const NOTICES=['/impressum/','/impressum/fr/','/impressum/en/','/datenschutz/','/datenschutz/fr/','/datenschutz/en/'];
-const PAGES=[...NOTICES,'/projekt/','/projekt/en/','/places/','/places/beo-funpark/'];
+// The directory and a place in each of its three languages (English at /places/, German and French in a folder beside it).
+const PLACES=['/places/','/places/de/','/places/fr/','/places/beo-funpark/','/places/beo-funpark/de/','/places/beo-funpark/fr/'];
+const PAGES=[...NOTICES,'/projekt/','/projekt/en/',...PLACES];
+const SWITCHED=[...NOTICES,...PLACES];
 const WIDTHS=[320,375,1280];
 const problems=[];
 let browser;
@@ -23,7 +26,7 @@ try{
       await page.goto(url+route.slice(1));
       const where=`${width}px ${route}`;
       assert.ok((await page.locator('meta[name="description"]').getAttribute('content'))?.trim().length>=50,where+': a meta description');
-      if(NOTICES.includes(route)){
+      if(SWITCHED.includes(route)){
         const switcher=await page.evaluate(()=>{
           const links=[...document.querySelectorAll('nav.langnav a')],boxes=links.map(a=>a.getBoundingClientRect());
           const paint=a=>{const style=getComputedStyle(a);return {background:style.backgroundColor,color:style.color};};
