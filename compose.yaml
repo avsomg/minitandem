@@ -1,13 +1,17 @@
 # The site and the service behind Caddy with automatic HTTPS for minitandem.ch and www.minitandem.ch.
 # Runs minitandem.ch since 14 October 2026. See docs/betrieb.md (German) for deploy, update, rollback, backup and restore.
+# Both images are built from the same commit and carry the same tag (MINITANDEM_TAG): Caddy serves the public files from its own image
+# and sends only /api/* and /healthz to the service. docs/betrieb.md («Caddy liefert die Dateien selbst») has the switch and the way back.
 name: minitandem
 
 services:
   app:
     build:
       context: .
+      target: app
       args:
         MINITANDEM_FAMILY_SYNC: ${MINITANDEM_FAMILY_SYNC:-0}
+        RELEASE_COMMIT: ${MINITANDEM_TAG:-current}
     image: minitandem-app:${MINITANDEM_TAG:-current}
     restart: unless-stopped
     environment:
@@ -17,6 +21,9 @@ services:
       MINITANDEM_CORRECTION_DIR: /state/corrections
       # /healthz reports it as "commit". The tag is the short commit id of the deployed version (.env.example), empty if unset.
       MINITANDEM_COMMIT: ${MINITANDEM_TAG:-}
+      # Not set here on purpose: the service still answers public files itself when it is asked for them, which the switch to the
+      # Caddy images relies on (the old Caddy sends everything to the new service for a moment). The deploy preview sets
+      # MINITANDEM_API_ONLY=1 and so proves that Caddy alone serves every file. Set it here in a later deployment, once the switch is done.
     volumes:
       - state:/state
     expose:
@@ -37,9 +44,15 @@ services:
         max-file: "5"
 
   caddy:
-    # A fixed release, so a rebuild never picks up a new Caddy unseen. 2.11.7 was checked on the server on 17 October 2026
-    # (sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f). Raise it on purpose, after caddy validate.
-    image: caddy:2.11.7-alpine
+    # Built from the pinned Caddy release (FROM caddy:2.11.7-alpine in the Dockerfile) with this commit's public files, Caddyfile and log script inside.
+    # Nothing of the checkout is mounted: the files, their headers and the API the tag names are one release, and a rollback returns all of it.
+    build:
+      context: .
+      target: edge
+      args:
+        MINITANDEM_FAMILY_SYNC: ${MINITANDEM_FAMILY_SYNC:-0}
+        RELEASE_COMMIT: ${MINITANDEM_TAG:-current}
+    image: minitandem-caddy:${MINITANDEM_TAG:-current}
     # Caddy runs as root inside the container only to bind ports 80 and 443; it keeps that one capability and nothing else.
     # Its data and config volumes belong to root, so it still writes certificates without DAC_OVERRIDE (tried 17 October 2026).
     cap_drop:
@@ -63,8 +76,6 @@ services:
     environment:
       ACME_EMAIL: ${ACME_EMAIL:?Set ACME_EMAIL in .env (copy .env.example)}
     volumes:
-      - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
-      - ./docker/access-log-entrypoint.sh:/etc/caddy/access-log-entrypoint.sh:ro
       - caddy-data:/data
       - caddy-config:/config
     mem_limit: 256m

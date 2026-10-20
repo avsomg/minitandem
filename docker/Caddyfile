@@ -30,39 +30,17 @@
 	}
 }
 
+# The routes, headers and the API paths are shared with the deploy preview (docker/preview.Caddyfile) and live in the image of the release.
+import /etc/caddy/site.caddy
+
 www.minitandem.ch {
 	redir https://minitandem.ch{uri} permanent
 }
 
 minitandem.ch {
-	encode zstd gzip
-
-	# The editor panel and the editor API belong to the owner's Mac. No editor key exists on this server, so the service
-	# would answer 401 anyway; the edge refuses these paths as well.
-	@editor path /admin /admin.js /admin.css /admin-icons.js /api/v1/admin/*
-	respond @editor 404
-
-	header {
-		# One day for the first weeks. Raise it once the certificate renewal has been seen to work.
-		Strict-Transport-Security "max-age=86400"
-		X-Content-Type-Options nosniff
-		X-Frame-Options DENY
-		Referrer-Policy no-referrer
-		Permissions-Policy "camera=(), microphone=(), geolocation=(self)"
-		# The page opens no window that needs a link back to it (outgoing links are noopener), and nothing of ours is meant to be loaded by another site.
-		# Map tiles from wmts.geo.admin.ch are not affected: CORP governs our own responses only, and no COEP is set.
-		Cross-Origin-Opener-Policy same-origin
-		Cross-Origin-Resource-Policy same-origin
-		-Server
-		# reverse_proxy adds this itself; it says nothing a visitor needs. Also removed on the proxy's side below.
-		-Via
-	}
-
-	# A second fence behind the service's own limits (server.mjs: 512 KiB for a family profile, less for the other routes). Nothing larger
-	# is read from an API caller; the edge answers 413 for it.
-	request_body /api/* {
-		max_size 512KiB
-	}
+	# Public files from /srv/site in this image; only /api/* and /healthz go to the service. Editor paths, headers, cross-origin policies,
+	# the body cap and the proxy settings are in the snippet.
+	import catalogue
 
 	log {
 		output file /var/log/caddy/access.json {
@@ -88,11 +66,5 @@ minitandem.ch {
 				resp_headers delete
 			}
 		}
-	}
-
-	reverse_proxy app:8787 {
-		health_uri /healthz
-		health_interval 30s
-		header_down -Via
 	}
 }

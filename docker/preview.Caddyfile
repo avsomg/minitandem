@@ -1,0 +1,12 @@
+{
+	# The deploy preview (ops/deploy.sh) runs this file from the Caddy image of the release to be switched to: plain HTTP on a private
+	# network, no certificates, no admin endpoint, no access log. It answers exactly as the real edge does, because it imports the same routes.
+	admin off
+	auto_https off
+}
+
+import /etc/caddy/site.caddy
+
+:8080 {
+	import catalogue
+}

@@ -1,0 +1,153 @@
+# What the public site answers, shared by the real edge (docker/Caddyfile) and the isolated deploy preview (docker/preview.Caddyfile).
+# Both read it from the Caddy image of a release, so the files in /srv/site, their headers and the API paths belong to one commit.
+# Use: `import /etc/caddy/site.caddy` at the top of a Caddyfile, then `import catalogue` inside a site block.
+#
+# The headers and the rules for public files repeat what server.mjs (staticFile and createServer) answered when it served them itself;
+# edge-static.test.mjs compares both, so a change in one must be made in the other. Braces in JSON bodies are escaped (\{ \}):
+# Caddy would otherwise read them as placeholders.
+(catalogue) {
+	encode zstd gzip
+
+	header {
+		# One day for the first weeks. Raise it once the certificate renewal has been seen to work.
+		Strict-Transport-Security "max-age=86400"
+		X-Content-Type-Options nosniff
+		X-Frame-Options DENY
+		Referrer-Policy no-referrer
+		Permissions-Policy "camera=(), microphone=(), geolocation=(self)"
+		# The page opens no window that needs a link back to it (outgoing links are noopener), and nothing of ours is meant to be loaded by another site.
+		# Map tiles from wmts.geo.admin.ch are not affected: CORP governs our own responses only, and no COEP is set.
+		Cross-Origin-Opener-Policy same-origin
+		Cross-Origin-Resource-Policy same-origin
+		-Server
+		# reverse_proxy adds this itself; it says nothing a visitor needs. Also removed on the proxy's side below.
+		-Via
+	}
+
+	# A second fence behind the service's own limits (server.mjs: 512 KiB for a family profile, less for the other routes). Nothing larger
+	# is read from an API caller; the edge answers 413 for it.
+	request_body /api/* {
+		max_size 512KiB
+	}
+
+	# The editor panel and the editor API belong to the owner's Mac. No editor key exists on this server, so the service
+	# would answer 401 anyway; the edge refuses these paths as well. They are not among the public files either.
+	@editor path /admin /admin.js /admin.css /admin-icons.js /api/v1/admin/*
+	handle @editor {
+		respond 404
+	}
+
+	# The only two kinds of request that reach the service.
+	@backend path /api/* /healthz
+	handle @backend {
+		reverse_proxy app:8787 {
+			health_uri /healthz
+			health_interval 30s
+			header_down -Via
+		}
+	}
+
+	# Everything else is a public file of this image (what the service did for any path outside /api/ and /healthz).
+	# No fallback to index.html for unknown paths, no directory listing, no dot paths.
+	handle {
+		root * /srv/site
+		route {
+			# Answered as the service does: a request that names another origin is refused, whatever the path. Only the site's own origin
+			# is allowed (the service adds the development origins only outside production, and MINITANDEM_ORIGINS is not set).
+			# "Origin present" is written as "not without Origin" (header !Origin means the field must be absent).
+			@origin not header !Origin
+			header @origin Vary Origin
+			@siteOrigin header Origin https://minitandem.ch
+			header @siteOrigin Access-Control-Allow-Origin https://minitandem.ch
+			@foreignOrigin {
+				not header !Origin
+				not header Origin https://minitandem.ch
+			}
+			handle @foreignOrigin {
+				header Content-Type "application/json; charset=utf-8"
+				header Cache-Control no-store
+				respond `\{"error":"Origin not allowed"\}` 403
+			}
+			# A preflight is only ever answered for the family routes, which are the service's. For a public file it is refused.
+			@preflight method OPTIONS
+			handle @preflight {
+				header Content-Type "application/json; charset=utf-8"
+				header Cache-Control no-store
+				respond `\{"error":"Preflight not allowed"\}` 403
+			}
+			@notRead not method GET HEAD
+			handle @notRead {
+				header Content-Type "application/json; charset=utf-8"
+				header Cache-Control no-store
+				respond `\{"error":"Method not allowed"\}` 405
+			}
+			@hidden path_regexp hidden (^|/)\.
+			handle @hidden {
+				header Content-Type "application/json; charset=utf-8"
+				header Cache-Control no-store
+				respond `\{"error":"Not found"\}` 404
+			}
+
+			# A folder is served by its index.html. Without the trailing slash the browser is sent to the slashed path first, so the page's
+			# relative links resolve. The target is the folder's own cleaned path from the file matcher, never a path taken from the request
+			# (//host would be read as another site).
+			@directory {
+				file {path}/
+				not path */
+			}
+			redir @directory {http.matchers.file.relative} 301
+			@index {
+				path */
+				file {path}index.html
+			}
+			rewrite @index {path}index.html
+
+			# A path that ends in a slash is not a file (the service answered 404 for /sw.js/).
+			@existing {
+				file {path}
+				not path */
+			}
+			handle @existing {
+				route {
+					# Types as in server.mjs (the table `mime`); anything else is a download, as there.
+					header Content-Type application/octet-stream
+					header Cache-Control "public, max-age=0, must-revalidate"
+					header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://wmts.geo.admin.ch; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'"
+					@html path *.html
+					header @html Content-Type "text/html; charset=utf-8"
+					@js path *.js
+					header @js Content-Type "text/javascript; charset=utf-8"
+					@css path *.css
+					header @css Content-Type "text/css; charset=utf-8"
+					@svg path *.svg
+					header @svg Content-Type image/svg+xml
+					@png path *.png
+					header @png Content-Type image/png
+					@json path *.json
+					header @json Content-Type application/json
+					@webmanifest path *.webmanifest
+					header @webmanifest Content-Type application/manifest+json
+					@txt path *.txt
+					header @txt Content-Type "text/plain; charset=utf-8"
+					@xml path *.xml
+					header @xml Content-Type application/xml
+					@md path *.md
+					header @md Content-Type "text/markdown; charset=utf-8"
+					@jpg path *.jpg *.jpeg
+					header @jpg Content-Type image/jpeg
+					@webp path *.webp
+					header @webp Content-Type image/webp
+					@ico path *.ico
+					header @ico Content-Type image/x-icon
+					file_server {
+						disable_canonical_uris
+					}
+				}
+			}
+
+			header Content-Type "application/json; charset=utf-8"
+			header Cache-Control no-store
+			respond `\{"error":"Not found"\}` 404
+		}
+	}
+}

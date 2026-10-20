@@ -27,7 +27,9 @@ test('access log lifetime is bounded below seven days by process time and volati
   assert.match(caddy,/tmpfs:\s*\n\s+- \/var\/log\/caddy:size=32m,mode=0700/);
   assert.match(caddy,/entrypoint: \["\/bin\/sh", "\/etc\/caddy\/access-log-entrypoint.sh"\]/);
   assert.match(caddy,/command: \["caddy", "run"/);
-  assert.match(caddy,/access-log-entrypoint.sh:\/etc\/caddy\/access-log-entrypoint.sh:ro/);
+  // The script is in the Caddy image of the release (not mounted from the checkout, where a running container would keep an older copy).
+  assert.match(read('Dockerfile'),/^COPY docker\/Caddyfile docker\/site\.caddy docker\/preview\.Caddyfile docker\/access-log-entrypoint\.sh \/etc\/caddy\/$/m);
+  assert.doesNotMatch(caddy,/access-log-entrypoint\.sh:/);
 });
 test('service error logging cannot include an IP from an exception or nested request',()=>{
   const before=console.error,lines=[];console.error=(...args)=>lines.push(args.join(' '));

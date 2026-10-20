@@ -253,3 +253,19 @@ test('a static file that cannot be read gets a plain 500 or 404, and a stream th
     await service.close();
   }
 });
+
+test('the production API mode serves health and family routes while Caddy owns every public file',async()=>{
+  const previous=process.env.MINITANDEM_API_ONLY;
+  process.env.MINITANDEM_API_ONLY='1';
+  const {createServer}=await import('./server.mjs?api-only='+Date.now());
+  if(previous===undefined)delete process.env.MINITANDEM_API_ONLY;else process.env.MINITANDEM_API_ONLY=previous;
+  const server=createServer();await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+  const base='http://127.0.0.1:'+server.address().port;
+  try{
+    for(const route of ['/','/index.html','/projekt/','/places/','/sw.js','/robots.txt','/sitemap.xml','/admin'])
+      assert.equal((await fetch(base+route)).status,404,route);
+    assert.equal((await fetch(base+'/healthz')).status,200);
+    assert.equal((await fetch(base+'/healthz',{method:'POST'})).status,405);
+    assert.equal((await fetch(base+'/api/v1/family')).status,401);
+  }finally{await new Promise(resolve=>server.close(resolve));}
+});

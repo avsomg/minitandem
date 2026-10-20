@@ -22,6 +22,9 @@ const queueFile=process.env.MINITANDEM_QUEUE_FILE||path.join(root,'editorial/wor
 const buildInfo=(()=>{try{return JSON.parse(fs.readFileSync(path.join(root,'.publish',BUILD_INFO),'utf8'));}catch{return {};}})();
 // The commit the deploy script put on the image (compose.yaml passes MINITANDEM_TAG); absent when the service runs outside a deployment.
 const commit=process.env.MINITANDEM_COMMIT||null;
+// With MINITANDEM_API_ONLY=1 the service answers /healthz and /api/* only; every public file then comes from Caddy. The deploy preview runs it so, which
+// proves that Caddy's own files are complete. compose.yaml does not set it yet (docs/betrieb.md); without it the service serves .publish itself, for local use.
+const apiOnly=process.env.MINITANDEM_API_ONLY==='1';
 const catalog=loadCatalog();
 const allowed=new Map(catalog.ACTIVITIES.map(a=>[a.id,a]));
 const published=catalog.ACTIVITIES.filter(record=>!['closed','excluded'].includes(record.status)).length;
@@ -188,6 +191,7 @@ export function createServer({requestTimeout=30_000,headersTimeout=10_000,keepAl
       res.writeHead(200,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});
       return res.end(req.method==='HEAD'?undefined:JSON.stringify({status:'ok',records:allowed.size,published,archived:allowed.size-published,revision:buildInfo.revision??null,catalogueUpdated:buildInfo.catalogueUpdated??null,...(commit&&{commit})}));
     }
+    if(apiOnly&&pathname!=='/healthz'&&!pathname.startsWith('/api/'))return json(res,404,{error:'Not found'});
     if(!pathname.startsWith('/api/'))return ['GET','HEAD'].includes(req.method)?staticFile(req,res,pathname):json(res,405,{error:'Method not allowed'});
     if(!familySyncEnabled() && (pathname==='/api/v1/family'||pathname.startsWith('/api/v1/family/')||pathname==='/api/v1/corrections'))
       return json(res,503,{error:'Family sync is disabled',code:'sync.disabled'});
