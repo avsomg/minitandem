@@ -10,7 +10,7 @@ E-Mail: hello@minitandem.ch
 
 ## Ihre Aufzeichnungen
 
-Favoriten, Notizen, Status, Besuchspläne, das Alter des Kindes und der gespeicherte Startpunkt bleiben in Ihrem Browser. Auch Filter, der gewählte Ort für Entfernungen und die Sprache werden dort gespeichert. Eine Sicherungsdatei, die Sie exportieren, wird auf Ihr Gerät heruntergeladen. Diese Daten werden nicht an unseren Server gesendet. Sie können Ihre Aufzeichnungen in der Oberfläche ändern oder die gespeicherten Websitedaten im Browser löschen. Heruntergeladene Dateien löschen Sie auf Ihrem Gerät.
+Gemerkte Angebote, Notizen, Status, Besuchspläne, das Alter des Kindes und der gespeicherte Startpunkt bleiben in Ihrem Browser. Auch Filter, der gewählte Ort für Entfernungen und die Sprache werden dort gespeichert. Eine Sicherungsdatei, die Sie exportieren, wird auf Ihr Gerät heruntergeladen. Diese Daten werden nicht an unseren Server gesendet. Sie können Ihre Aufzeichnungen in der Oberfläche ändern oder die gespeicherten Websitedaten im Browser löschen. Heruntergeladene Dateien löschen Sie auf Ihrem Gerät.
 
 Der Abgleich zwischen Geräten ist ausgeschaltet. Der Server nimmt keine Familiendaten an.
 
@@ -20,7 +20,7 @@ Die Seite fragt den Standort nur ab, wenn Sie es verlangen, und zwar über den O
 
 Wenn Sie die Karte öffnen, lädt Ihr Browser die Kartenkacheln direkt vom Geoportal des Bundes (wmts.geo.admin.ch). Dabei sieht das Bundesamt für Landestopografie swisstopo Ihre IP-Adresse und welche Kacheln angefragt werden. Ihr Standort wird nicht übertragen, aber die Kacheln zeigen, welchen Kartenausschnitt Sie ansehen.
 
-Google Maps öffnet sich erst nach einem Klick auf den Link, und zwar ausserhalb dieser Website. Der Link enthält das Ziel und, falls Sie einen Startpunkt eingetragen haben, auch diesen. Dort gilt die Datenschutzerklärung von Google. Auch Links zu Veranstaltern und Quellen öffnen deren Websites erst nach einem Klick.
+Google Maps öffnet sich erst nach einem Klick auf den Link, und zwar ausserhalb dieser Website. Der Link enthält das Ziel und, falls Sie einen Startpunkt eingetragen haben, auch diesen. Dort gilt die Datenschutzerklärung von Google. Auch Links zu Anbietern und Quellen öffnen deren Websites erst nach einem Klick.
 
 ## Fehler melden
 
@@ -30,7 +30,7 @@ E-Mails an hello@minitandem.ch werden in einem Postfach bei Infomaniak in der Sc
 
 ## Zugriffsprotokoll
 
-Für die Fehlersuche schreibt der Server zu jedem Zugriff einen Eintrag: Zeitpunkt, Anfragemethode, Antwortstatus, Dauer, Grösse der Antwort und technische Angaben zur Verbindung (Protokoll, Verschlüsselung). Die IP-Adresse wird nur gekürzt gespeichert (IPv4 auf /24, IPv6 auf /48). Die Adresse der aufgerufenen Seite und die Angaben, die Ihr Browser mitsendet, werden nicht gespeichert. Gelöscht werden die Einträge spätestens nach sieben Tagen. Fehlermeldungen des Servers enthalten keine IP-Adressen.
+Für die Fehlersuche schreibt der Server zu jedem Zugriff einen Eintrag: Zeitpunkt, Anfragemethode, Antwortstatus, Dauer, Grösse der Antwort und technische Angaben zur Verbindung (Protokoll, Verschlüsselung). Die IP-Adresse wird nur gekürzt gespeichert (IPv4 auf /24, IPv6 auf /48). Die Adresse der aufgerufenen Seite wird nicht gespeichert, und von den Angaben, die Ihr Browser mitsendet, wird nichts über die oben genannten hinaus gespeichert. Gelöscht werden die Einträge spätestens nach sieben Tagen. Fehlermeldungen des Servers enthalten keine IP-Adressen.
 
 ## Cookies und externe Inhalte
 

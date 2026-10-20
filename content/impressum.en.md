@@ -8,7 +8,7 @@ E-mail: hello@minitandem.ch
 
 ## Activity information
 
-The information comes from the organisers’ public websites and can change. Its accuracy is not guaranteed. Each entry shows when it was last checked. Please check the details directly with the organiser before a visit.
+The information comes from the organisers’ public websites and can change. Its accuracy is not guaranteed. Each activity shows when its sources were last checked. Please check the details directly with the organiser before a visit.
 
 ## Licence
 

@@ -8,7 +8,7 @@ E-mail : hello@minitandem.ch
 
 ## Informations sur les activités
 
-Les informations proviennent des sites publics des organisateurs et peuvent changer. Leur exactitude n’est pas garantie. Chaque fiche indique quand elle a été vérifiée pour la dernière fois. Avant une visite, vérifiez les détails directement auprès de l’organisateur.
+Les informations proviennent des sites publics des organisateurs et peuvent changer. Leur exactitude n’est pas garantie. Chaque activité indique quand ses sources ont été vérifiées pour la dernière fois. Avant une visite, vérifiez les détails directement auprès de l’organisateur.
 
 ## Licence
 

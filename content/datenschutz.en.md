@@ -10,7 +10,7 @@ E-mail: hello@minitandem.ch
 
 ## Your records
 
-Favourites, notes, statuses, visit plans, the child’s age and the saved starting point stay in your browser. Filters, the town selected for distances and the language are stored there too. A backup file that you export is downloaded to your device. These records are not sent to our server. You can change your records in the interface or delete the site’s stored data in your browser. Delete downloaded files on your device.
+Saved activities, notes, statuses, visit plans, the child’s age and the saved starting point stay in your browser. Filters, the town selected for distances and the language are stored there too. A backup file that you export is downloaded to your device. These records are not sent to our server. You can change your records in the interface or delete the site’s stored data in your browser. You can delete downloaded files on your device.
 
 Syncing between devices is switched off. The server accepts no family data.
 
@@ -30,7 +30,7 @@ E-mails to hello@minitandem.ch are stored in a mailbox at Infomaniak in Switzerl
 
 ## Access log
 
-For troubleshooting, the server writes an entry for each request: time, request method, response status, duration, response size and technical details of the connection (protocol, encryption). The IP address is stored only in shortened form (IPv4 to /24, IPv6 to /48). The address of the requested page and the details your browser sends are not stored. Entries are deleted after seven days at the latest. The server’s error messages contain no IP addresses.
+For troubleshooting, the server writes an entry for each request: time, request method, response status, duration, response size and technical details of the connection (protocol, encryption). The IP address is stored only in shortened form (IPv4 to /24, IPv6 to /48). The address of the requested page is not stored, and nothing else your browser sends is stored beyond the details listed above. Entries are deleted after seven days at the latest. The server’s error messages contain no IP addresses.
 
 ## Cookies and external content
 

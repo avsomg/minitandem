@@ -10,7 +10,7 @@ E-mail : hello@minitandem.ch
 
 ## Vos données
 
-Les favoris, notes, statuts, plans de visite, l’âge de l’enfant et le point de départ enregistré restent dans votre navigateur. Les filtres, la localité choisie pour les distances et la langue y sont aussi enregistrés. Un fichier de sauvegarde que vous exportez est téléchargé sur votre appareil. Ces données ne sont pas envoyées à notre serveur. Vous pouvez modifier vos données dans l’interface ou effacer les données du site dans votre navigateur. Vous pouvez effacer les fichiers téléchargés sur votre appareil.
+Les activités enregistrées, notes, statuts, plans de visite, l’âge de l’enfant et le point de départ enregistré restent dans votre navigateur. Les filtres, la localité choisie pour les distances et la langue y sont aussi enregistrés. Un fichier de sauvegarde que vous exportez est téléchargé sur votre appareil. Ces données ne sont pas envoyées à notre serveur. Vous pouvez modifier vos données dans l’interface ou effacer les données du site dans votre navigateur. Vous pouvez effacer les fichiers téléchargés sur votre appareil.
 
 La synchronisation entre appareils est désactivée. Le serveur n’accepte aucune donnée familiale.
 
@@ -30,7 +30,7 @@ Les e-mails adressés à hello@minitandem.ch sont conservés dans une boîte aux
 
 ## Journal des accès
 
-Pour rechercher les causes des erreurs, le serveur écrit une entrée pour chaque accès : date et heure, méthode de la requête, statut de la réponse, durée, taille de la réponse et informations techniques sur la connexion (protocole, chiffrement). L’adresse IP n’est enregistrée que sous forme tronquée (IPv4 à /24, IPv6 à /48). L’adresse de la page demandée et les informations envoyées par votre navigateur ne sont pas enregistrées. Les entrées sont supprimées après sept jours au plus tard. Les messages d’erreur du serveur ne contiennent aucune adresse IP.
+Pour rechercher les causes des erreurs, le serveur écrit une entrée pour chaque accès : date et heure, méthode de la requête, statut de la réponse, durée, taille de la réponse et informations techniques sur la connexion (protocole, chiffrement). L’adresse IP n’est enregistrée que sous forme tronquée (IPv4 à /24, IPv6 à /48). L’adresse de la page demandée n’est pas enregistrée, et aucune autre information envoyée par votre navigateur n’est enregistrée au-delà de celles indiquées ci-dessus. Les entrées sont supprimées après sept jours au plus tard. Les messages d’erreur du serveur ne contiennent aucune adresse IP.
 
 ## Cookies et contenus externes
 
