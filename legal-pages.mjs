@@ -14,20 +14,24 @@ export const LANGUAGE_NAMES = {de: 'Deutsch', fr: 'Français', en: 'English'};
 export const legalURL = (kind, lang) => `/${kind}/${lang === 'de' ? '' : lang + '/'}`;
 export const LEGAL_URLS = Object.keys(LEGAL_LABELS).flatMap(lang => ['impressum', 'datenschutz'].map(kind => legalURL(kind, lang)));
 export const legalLinks = lang => ['impressum', 'datenschutz'].map(kind => `<a href="${legalURL(kind, lang)}">${LEGAL_LABELS[lang][kind]}</a>`).join(' · ');
+// The first sentences of a paragraph, as many as fit in what a search result shows (about 160 characters); the first one always.
+export function firstSentences(paragraph, max = 160) {
+  let text = '';
+  for (const sentence of paragraph.replace(/\s*\n\s*/g, ' ').split(/(?<=[.!?])\s+(?=[A-ZÀ-ÖØ-Þ“"«])/)) {
+    if (text && (text + ' ' + sentence).length > max) break;
+    text += (text ? ' ' : '') + sentence;
+  }
+  return text;
+}
 // The description is taken from the notice itself, so that no new wording needs checking: the first sentence or two of the first paragraph
-// under the second heading (what stays in the browser; what the entries are). A search result shows about 160 characters.
+// under the second heading (what stays in the browser; what the entries are).
 export function legalDescription(markdown) {
   const blocks = markdown.trim().split(/\n\s*\n/);
   let headings = 0;
   for (const block of blocks) {
     if (/^## /.test(block)) { headings++; continue; }
     if (headings < 2 || /^(#|- |\d+\. |\[)/.test(block)) continue;
-    let text = '';
-    for (const sentence of block.replace(/\s*\n\s*/g, ' ').split(/(?<=[.!?])\s+(?=[A-ZÀ-ÖØ-Þ“"«])/)) {
-      if (text && (text + ' ' + sentence).length > 160) break;
-      text += (text ? ' ' : '') + sentence;
-    }
-    return text;
+    return firstSentences(block);
   }
   throw Error('No paragraph under the second heading for the description');
 }

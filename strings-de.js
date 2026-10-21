@@ -797,6 +797,14 @@
   'childcare.pill.near': 'Entfernung ab',
   'childcare.nearNone': 'Nicht gewählt',
   'childcare.nearLocation': 'Ihr Standort',
+  // The guides for parents (childcare.js GUIDE_KEYS): the block in the tab, and the guide pages' own words (daycare-guides.mjs). A guide's
+  // name is the title of its text, content/daycare/<key>.<lang>.md.
+  'childcare.guides.title': 'Ratgeber',
+  'childcare.guides.back': 'Tab Kita öffnen',
+  'childcare.guide.getting-a-place': 'Einen Kitaplatz im Kanton Freiburg finden',
+  'childcare.guide.what-it-costs': 'Was die Kinderbetreuung kostet',
+  'childcare.guide.when-it-does-not-work': 'Wenn eine Kita Ihr Kind nicht aufnehmen kann oder die Eingewöhnung schwierig ist',
+  'childcare.guide.settling-in': 'Eingewöhnung',
   'import.childcare_one': 'Kita-Anmeldungen: {n}. Sie ersetzt die Anmeldung für dieselbe Einrichtung in diesem Browser.',
   'import.childcare_other': 'Kita-Anmeldungen: {n}. Sie ersetzen die Anmeldungen für dieselben Einrichtungen in diesem Browser.'
 };

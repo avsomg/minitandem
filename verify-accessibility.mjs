@@ -84,7 +84,7 @@ try{
       await audit('daycare-map');
       await page.locator('[data-cview="list"]').click();
       // The plain pages that search engines find: the dark "go" button keeps a readable label and a focus ring, the title keeps "Web-App" whole.
-      for(const [pathname,state] of [['places/fritime-piccolo-bulle/','place-page'],['places/fritime-piccolo-bulle/de/','place-page-de'],['places/fritime-piccolo-bulle/fr/','place-page-fr'],['projekt/','case-study']]){
+      for(const [pathname,state] of [['places/fritime-piccolo-bulle/','place-page'],['places/fritime-piccolo-bulle/de/','place-page-de'],['places/fritime-piccolo-bulle/fr/','place-page-fr'],['projekt/','case-study'],['daycare/getting-a-place/fr/','daycare-guide-fr']]){
         await page.goto(url+pathname);
         await audit(state);
         const go=page.locator('a.go').first();

@@ -797,6 +797,14 @@
   'childcare.pill.near': 'Distance from',
   'childcare.nearNone': 'Not set',
   'childcare.nearLocation': 'Your location',
+  // The guides for parents (childcare.js GUIDE_KEYS): the block in the tab, and the guide pages' own words (daycare-guides.mjs). A guide's
+  // name is the title of its text, content/daycare/<key>.<lang>.md.
+  'childcare.guides.title': 'Guides',
+  'childcare.guides.back': 'Open the Daycare tab',
+  'childcare.guide.getting-a-place': 'Getting a daycare place in canton Fribourg',
+  'childcare.guide.what-it-costs': 'What daycare costs',
+  'childcare.guide.when-it-does-not-work': 'When a crèche cannot take your child, or settling in is hard',
+  'childcare.guide.settling-in': 'Settling in',
   'import.childcare_one': 'Daycare applications: {n}. It replaces the one for the same place in this browser.',
   'import.childcare_other': 'Daycare applications: {n}. They replace the ones for the same places in this browser.'
 };

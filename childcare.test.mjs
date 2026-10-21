@@ -213,7 +213,8 @@ test('the tab\'s words exist in English, German and French, for every kind, stat
   const S=stack(),D=S.window.MINITANDEM_STRINGS,M=S.window.MinitandemChildcare;
   const keys=[...M.TYPE_KEYS.map(k=>'childcare.type.'+k),...M.SUBSIDY_KEYS.map(k=>'childcare.subsidy.'+k),...M.LANGUAGE_KEYS.map(k=>'childcare.lang.'+k),
     ...M.APPROACH_KEYS.map(k=>'childcare.approach.'+k),...['', ...M.APPLICATION_KEYS].map(k=>'childcare.status.'+(k||'none')),...M.RULE_KEYS.map(k=>'childcare.rule.'+k),
-    ...M.DETAIL_ROWS.map(k=>'childcare.fact.'+k),...M.VIEW_KEYS.map(k=>'childcare.show.'+k),'tab.childcare','view.childcare','childcare.map.cluster_one','childcare.map.cluster_other'];
+    ...M.DETAIL_ROWS.map(k=>'childcare.fact.'+k),...M.VIEW_KEYS.map(k=>'childcare.show.'+k),...M.GUIDE_KEYS.map(k=>'childcare.guide.'+k),'childcare.guides.title','childcare.guides.back',
+    'tab.childcare','view.childcare','childcare.map.cluster_one','childcare.map.cluster_other'];
   for(const lang of ['en','de','fr'])assert.deepEqual(keys.filter(k=>!D[lang][k]),[],lang);
   assert.deepEqual([D.en['tab.childcare'],D.de['tab.childcare'],D.fr['tab.childcare']],['Daycare','Kita','Crèche']);
   for(const lang of ['de','fr'])assert.ok(D[lang]['data.backupText'].includes(lang==='de'?'Kita-Anmeldungen':'inscriptions en crèche'));
