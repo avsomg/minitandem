@@ -908,7 +908,7 @@ To confirm before visiting:
 - Adult: Together with an adult
 - Language: To be confirmed
 - Schedule: Wed–Sat 10:00–23:00; Sun and public holidays 10:00–17:00; Mon–Tue closed
-- Price: Children's dishes CHF 10–16; for children up to 4 an empty plate is free (confirm whether 4-year-olds are included)
+- Price: Children's dishes CHF 10–16; for children up to 4 an empty plate is free
 - Contact: Le Sarrazin; 026 475 12 44; restaurant@lesarrazin.ch
 - The tourist office confirms play areas indoors and outdoors. The range of toys, the size and a separate area for young children are not described.
 - Children's menu for children up to 10: vegetables CHF 10, pasta with tomato sauce CHF 12, mini burger or nuggets with a side dish CHF 15, mini steak with a side dish CHF 16.
@@ -1758,7 +1758,7 @@ To confirm before visiting:
 - Age: Age to be confirmed
 - Adult: Together with an adult
 - Language: To be confirmed
-- Schedule: Wednesday 7 October 2026, 15:00–17:00; Saturday 7 November 2026, 09:00–11:00
+- Schedule: 7 October 15:00–17:00; 7 November 09:00–11:00
 - Price: Price not published
 - Contact: Éducation Familiale: FR 026 321 48 70; DE 026 322 86 33; 026 321 48 70; contact@educationfamiliale.ch
 - Date: 2026-10-07 15:00–17:00
@@ -4931,7 +4931,7 @@ To confirm before visiting:
 - Age: Special area for ages 0–6
 - Adult: Independent family visit; check the rules for accompanying adults in the mini area.
 - Language: To be confirmed
-- Schedule: Centre's general hours: daily, Mon–Fri 09:00–22:00, Sat–Sun 09:00–20:00; mini area hours not confirmed
+- Schedule: According to the centre's page: daily, Mon–Fri 09:00–22:00, Sat–Sun 09:00–20:00
 - Price: Price not published
 - Contact: L'Entrepôt; 026 913 72 12; info@lentrepot.ch
 - The mini area is described as having a small trampoline, a play area and a ball pit; the centre also has KAPLA.
@@ -5078,7 +5078,7 @@ To confirm before visiting:
 
 ### Additional check: 2026-09-28
 
-- **Visit and rental** (Organiser source): Current hours: Wednesday and Friday 16:00–18:00, Saturday 09:00–11:00. Subscription prices differ for residents of Glâne and people from outside the district. [Source](https://ludotheque-glane.ch/fr/infos-pratiques)
+- **Visit and rental** (Organiser source): Current hours: Wednesday and Friday 16:00–18:00, Saturday 09:00–11:00; the subscription depends on residence in Glâne. [Source](https://ludotheque-glane.ch/fr/infos-pratiques)
 
 To confirm before visiting:
 - Confirm whether extended play on site without renting is allowed, and the holiday timetable.
@@ -5234,7 +5234,7 @@ To confirm before visiting:
 - District: Glâne
 - Checked: 2026-09-28
 - Address: Start at the school, 1608 Chapelle (Glâne)
-- Age: Family hike; with young children, consider whether they can manage 4 km and 130 m of ascent
+- Age: Family hike; with young children, consider whether they can manage the route
 - Adult: Independent walk with a parent.
 - Language: To be confirmed
 - Schedule: Open route; walk in daylight and suitable weather
@@ -6412,7 +6412,7 @@ To confirm before visiting:
 - Schedule: The 2026 season ended on 14 September; check the next summer season.
 - Price: According to the published tariff: adult CHF 7, free up to 5 years; confirm for the new season.
 - Contact: Piscine communale de Broc; 026 921 17 36; commune@broc.ch
-- The 2026 season has ended. Check the dates for next summer.
+- The pool was closed on 28 September.
 - The large slide and diving boards do not mean young children may use them; the children's pool requires adult supervision.
 
 ### Additional check: 2026-09-28
@@ -7270,14 +7270,14 @@ To confirm before visiting:
 - **Availability and format** (Organiser source): Tourist list of 22.06.2020: Woodland play area and picnic zone at the foot of the La Berra lift. [Source](https://fribourg.ch/wp-content/uploads/2022/01/Places-de-pique-nique.pdf)
 
 To confirm before visiting:
-- Confirm the condition of the play area and the walk: the 2020 list gives 15–20 minutes on foot from the car park.
+- Confirm the condition of the play area and the walk: the tourist list describes 15–20 minutes from the car park.
 
 - [Tourist list of picnic sites, 22.06.2020](https://fribourg.ch/wp-content/uploads/2022/01/Places-de-pique-nique.pdf)
 
 ### Visit conditions
 
 - Indoors: Tourist list of 22.06.2020: Woodland play area and picnic zone at the foot of the La Berra lift. [Source](https://fribourg.ch/wp-content/uploads/2022/01/Places-de-pique-nique.pdf)
-- Important: Confirm the condition of the play area and the walk: the 2020 list gives 15–20 minutes on foot from the car park.
+- Important: Confirm the condition of the play area and the walk: the tourist list describes 15–20 minutes from the car park.
 
 ## Forêt de Sautaux · forest playground
 
@@ -7322,7 +7322,7 @@ To confirm before visiting:
 - Schedule: Lakeside picnic area; seasonal opening hours and swimming safety are not published
 - Price: Price not published
 - Contact: La Gruyère Tourisme; 026 919 85 00; info@la-gruyere.ch
-- A lakeside picnic area with tables, shade and a public WC; a shower is mentioned only in a 2020 list.
+- The tourist list describes a lakeshore, tables, shade, a public WC and a shower.
 - The description and equipment are based on a document from 2020; a current check is needed before a visit.
 
 ### Additional check: 2026-10-02
@@ -7339,7 +7339,7 @@ To confirm before visiting:
 ### Visit conditions
 
 - Indoors: Tourist list of 22.06.2020: lakeshore, tables, shade, a public WC and a shower. [Source](https://fribourg.ch/wp-content/uploads/2022/01/Places-de-pique-nique.pdf)
-- Important: Check that access to the water is safe and whether the facilities work; the shower is mentioned only in the 2020 list, and no separate play area is listed.
+- Important: Check that access to the water is safe and whether the facilities work; the shower is mentioned only in the tourist list, and a separate play area is not listed.
 - Coordinates of the address (not the entrance): 46.691768646240234, 7.112246990203857. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Imp.+de+Thusy+89+1649+Pont-la-Ville&type=locations&origins=address&limit=5&sr=4326)
 
 ## Auberge du Lion d’Or · restaurant with a playground
@@ -8094,7 +8094,7 @@ To confirm before visiting:
 - Contact: Commission culturelle de Grolley; culture.grolley@bluewin.ch
 - Date: 2026-10-10 09:00–18:00
 - Outdoor event; suitable for a walk with a parent, but not all the entertainment is necessarily available to young children.
-- This event takes place on one day only: 10 October 2026.
+- After 10 October this activity is no longer current.
 
 ### Additional check: 2026-09-28
 
