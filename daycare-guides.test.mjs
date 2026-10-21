@@ -1,5 +1,5 @@
 // The Daycare guides: every guide in English, German and French with its checked text unchanged, the three versions pointing at each other,
-// the sitemap, no script and the way back to the Daycare tab.
+// the sitemap, no script, the way back to the Daycare tab, and the tab's block that links the guides of the interface language.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -147,6 +147,21 @@ test('the guide names of the dictionaries are the titles of the texts, in every 
     const {t} = loadStack({lang});
     for (const slug of GUIDES) assert.equal(t('childcare.guide.' + slug), guideTitle(markdown(slug, lang)), slug + '.' + lang);
   }
+});
+
+test('the Daycare tab shows a Guides block that links the four guides of the interface language, under the list, the map and the applications', () => {
+  for (const lang of PAGE_LANGS) {
+    const {CV, CH, t} = loadStack({lang, today: '2026-10-21'});
+    const block = CV.guides();
+    assert.ok(block.startsWith(`<section class="cc-guides" aria-labelledby="ccGuidesTitle"><h3 class="cc-guides-title" id="ccGuidesTitle">${t('childcare.guides.title')}</h3>`), lang);
+    const links = [...block.matchAll(/<a href="([^"]+)">([^<]+)<\/a>/g)];
+    assert.deepEqual(links.map(m => m[1]), GUIDES.map(slug => guideURL(slug, lang)), lang + ': the pages of the interface language');
+    assert.deepEqual(links.map(m => m[2].replace(/&#39;/g, "'")), GUIDES.map(slug => guideTitle(markdown(slug, lang))), lang);
+    for (const [href] of links.map(m => m.slice(1))) assert.ok(fs.existsSync(path.join(root, '.publish', href, 'index.html')), 'built: ' + href);
+    for (const view of ['list', 'map', 'mine']) assert.ok(CV.box(CH.places.slice(0, 3), {view}).includes(block), lang + ' ' + view);
+    assert.ok(!CV.box([], {status: 'loading'}).includes('cc-guides'), 'not while the places are loading');
+  }
+  assert.equal(loadStack({lang: 'de'}).t('childcare.guides.title'), 'Ratgeber');
 });
 
 test('the layout of a guide: two levels of lists, bold, links to other sites and a closing note; anything else stops the build', () => {

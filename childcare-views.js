@@ -1,6 +1,6 @@
 /* Markup of the Daycare tab: the list rows, the filter panel, the map shell, a place's page with the rules of the family's commune and the
-   family's own application, and the list of applications. As in views.js: HTML strings built from the data (escaped) and words from the
-   dictionaries, no DOM access and no events; app.js puts them into the page and wires them.
+   family's own application, the list of applications and the links to the guides. As in views.js: HTML strings built from the data
+   (escaped) and words from the dictionaries, no DOM access and no events; app.js puts them into the page and wires them.
    ctx = {t, F, V, K, CH, store, state, lang}: V is views.js (escaping, icons, the age and distance controls, addresses), CH the places
    (childcare.js). The texts of the places and communes are written in English; in German or French each is shown in its current
    translation where there is one (CH.factText, ruleText, communeName), otherwise in English with lang="en". */
@@ -118,12 +118,18 @@
       const count = Object.keys(store.childcare.applications).filter(id => CH().byId.has(id)).length;
       return `<div class="seg cc-parts" role="group" aria-label="${esc(t('childcare.views'))}">` + M().VIEW_KEYS.map(k => `<button type="button" data-cview="${k}" aria-pressed="${k === view}">${esc(t('childcare.show.' + k))}${k === 'mine' && count ? ` <b>${count}</b>` : ''}</button>`).join('') + '</div>';
     }
-    // The tab below the filters: the list, the map or the applications, and where the list of places comes from (its parts are switched
-    // above the search, parts()). status: '' once the places are there, 'loading' or 'failed' before.
+    // The guides for parents in the interface language, each a plain page without script (daycare-guides.mjs), linked like any page of the site.
+    function guides() {
+      const lang = ctx.lang?.() || 'en', I = window.MinitandemI18n;
+      return `<section class="cc-guides" aria-labelledby="ccGuidesTitle"><h3 class="cc-guides-title" id="ccGuidesTitle">${esc(t('childcare.guides.title'))}</h3><ul class="guide-links">` +
+        M().GUIDE_KEYS.map(k => `<li><a href="/${esc(I.guidePage(lang, k))}">${esc(t('childcare.guide.' + k))}</a></li>`).join('') + '</ul></section>';
+    }
+    // The tab below the filters: the list, the map or the applications, where the list of places comes from (its parts are switched
+    // above the search, parts()), and the guides. status: '' once the places are there, 'loading' or 'failed' before.
     function box(items, {view = 'list', limit = 24, status = ''} = {}) {
       if (status) return `<div class="empty cc-status" role="status"><p class="hint">${esc(t(status === 'loading' ? 'childcare.loading' : 'childcare.failed'))}</p>${status === 'failed' ? `<button type="button" class="ghost" data-action="cc-retry">${esc(t('childcare.retry'))}</button>` : ''}</div>`;
       const body = view === 'map' ? mapBox(items) : view === 'mine' ? mine() : list(items, limit);
-      return body + `<p class="hint cc-source">${esc(t('childcare.source'))}</p>`;
+      return body + `<p class="hint cc-source">${esc(t('childcare.source'))}</p>` + guides();
     }
 
     /* ---------- filter panel ---------- */
@@ -263,7 +269,7 @@
       return `<section class="dsec cc-mine-list"><div class="group">${communeSelect('cc-commune-mine')}</div>` +
         (items.length ? items.map(item).join('') : `<p class="hint cc-empty">${esc(t('childcare.mine.empty'))}</p>`) + `<p class="hint">${esc(t('childcare.mine.private'))}</p></section>`;
     }
-    return {icon, ageShort, priceDate, englishNote, marks, row, list, mapBox, parts, box, panel, filterLabel, filterChips, facts, communeSelect, rules, renewal, applicationBox, detail, mine, sourceLabel, distanceText};
+    return {icon, ageShort, priceDate, englishNote, marks, row, list, mapBox, parts, guides, box, panel, filterLabel, filterChips, facts, communeSelect, rules, renewal, applicationBox, detail, mine, sourceLabel, distanceText};
   }
   window.MinitandemChildcareViews = {create};
 })();
