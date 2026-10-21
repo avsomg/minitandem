@@ -10,7 +10,7 @@ E-Mail: hello@minitandem.ch
 
 ## Ihre Aufzeichnungen
 
-Gemerkte Angebote, Notizen, Status, Besuchspläne, Kita-Anmeldungen, das Alter des Kindes und der gespeicherte Startpunkt bleiben in Ihrem Browser. Auch Filter, der gewählte Ort für Entfernungen und die Sprache werden dort gespeichert. Eine Sicherungsdatei, die Sie exportieren, wird auf Ihr Gerät heruntergeladen. Diese Daten werden nicht an unseren Server gesendet. Sie können Ihre Aufzeichnungen in der Oberfläche ändern oder die gespeicherten Websitedaten im Browser löschen. Heruntergeladene Dateien löschen Sie auf Ihrem Gerät.
+Gemerkte Angebote, Notizen, Status, Besuchspläne, Kita-Anmeldungen, das Alter des Kindes und der gespeicherte Startpunkt bleiben in Ihrem Browser. Auch Filter, der gewählte Ort für Entfernungen, die für die Kita-Anmeldungen gewählte Gemeinde und die Sprache werden dort gespeichert. Eine Sicherungsdatei, die Sie exportieren, wird auf Ihr Gerät heruntergeladen. Diese Daten werden nicht an unseren Server gesendet. Sie können Ihre Aufzeichnungen in der Oberfläche ändern oder die gespeicherten Websitedaten im Browser löschen. Heruntergeladene Dateien löschen Sie auf Ihrem Gerät.
 
 Der Abgleich zwischen Geräten ist ausgeschaltet. Der Server nimmt keine Familiendaten an.
 

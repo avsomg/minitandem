@@ -10,7 +10,7 @@ E-mail : hello@minitandem.ch
 
 ## Vos données
 
-Les activités enregistrées, notes, statuts, plans de visite, inscriptions en crèche, l’âge de l’enfant et le point de départ enregistré restent dans votre navigateur. Les filtres, la localité choisie pour les distances et la langue y sont aussi enregistrés. Un fichier de sauvegarde que vous exportez est téléchargé sur votre appareil. Ces données ne sont pas envoyées à notre serveur. Vous pouvez modifier vos données dans l’interface ou effacer les données du site dans votre navigateur. Vous pouvez effacer les fichiers téléchargés sur votre appareil.
+Les activités enregistrées, notes, statuts, plans de visite, inscriptions en crèche, l’âge de l’enfant et le point de départ enregistré restent dans votre navigateur. Les filtres, la localité choisie pour les distances, la commune choisie pour les inscriptions en crèche et la langue y sont aussi enregistrés. Un fichier de sauvegarde que vous exportez est téléchargé sur votre appareil. Ces données ne sont pas envoyées à notre serveur. Vous pouvez modifier vos données dans l’interface ou effacer les données du site dans votre navigateur. Vous pouvez effacer les fichiers téléchargés sur votre appareil.
 
 La synchronisation entre appareils est désactivée. Le serveur n’accepte aucune donnée familiale.
 

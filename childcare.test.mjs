@@ -215,7 +215,12 @@ test('the tab\'s words exist in English, German and French, for every kind, stat
   for(const lang of ['en','de','fr'])assert.deepEqual(keys.filter(k=>!D[lang][k]),[],lang);
   assert.deepEqual([D.en['tab.childcare'],D.de['tab.childcare'],D.fr['tab.childcare']],['Daycare','Kita','Crèche']);
   for(const lang of ['de','fr'])assert.ok(D[lang]['data.backupText'].includes(lang==='de'?'Kita-Anmeldungen':'inscriptions en crèche'));
-  assert.ok(D.en['about.privacy'].includes('daycare applications')&&D.en['data.backupText'].includes('daycare applications'));
+  assert.ok(D.en['about.privacy'].includes('daycare applications and the commune chosen for them')&&D.en['data.backupText'].includes('daycare applications'));
+  for(const [lang,words] of [['de','Kita-Anmeldungen und die dafür gewählte Gemeinde'],['fr','inscriptions en crèche et la commune choisie pour elles']])assert.ok(D[lang]['about.privacy'].includes(words),lang);
+  // The notice names the commune in the sentence after the applications: the first sentence is also the page's search description (at most 170 characters).
+  for(const [lang,words] of [['en','daycare applications, the child'],['en','the commune chosen for the daycare applications'],['de','Kita-Anmeldungen, das Alter'],['de','die für die Kita-Anmeldungen gewählte Gemeinde'],
+    ['fr','inscriptions en crèche, l’âge'],['fr','la commune choisie pour les inscriptions en crèche']])
+    assert.ok(fs.readFileSync(path.join(root,`content/datenschutz.${lang}.md`),'utf8').includes(words),'privacy notice '+lang+': '+words);
   for(const [key,value] of Object.entries(D.fr).filter(([k])=>k.startsWith('childcare.')))assert.ok(!/ [:;?!»]|« /.test(value),'fr '+key+' needs a no-break space');
   assert.ok(!Object.values(D.de).some(v=>v.includes('ß')),'Swiss German: no sharp s');
 });

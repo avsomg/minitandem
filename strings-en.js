@@ -484,7 +484,7 @@
   'about.dates': 'Only concrete dates that organisers have published are shown as dates. Weekly hours, school holidays and seasonal exceptions are not turned into dates. Sessions can be cancelled. A group that is full for now stays in the directory: ask the organiser about available places.',
   'about.price': 'In the list, prices for a course, a season pass or an adult are shown as published; they are not converted into the cost of one family visit. A price that is not known never counts as free.',
   'about.privacyTitle': 'Your records',
-  "about.privacy": "Saved activities, notes, statuses, visit plans, daycare applications, the child’s age and the saved starting point stay in this browser, as do your filters, the town chosen for distances and the language. Family sync is switched off; these records are not sent to the server. Export a backup file to keep a copy on your device.",
+  "about.privacy": "Saved activities, notes, statuses, visit plans, daycare applications and the commune chosen for them, the child’s age and the saved starting point stay in this browser, as do your filters, the town chosen for distances and the language. Family sync is switched off; these records are not sent to the server. Export a backup file to keep a copy on your device.",
   'about.scope': 'The directory lists organised activities and places that families can visit on their own. Nurseries and schools are not among them; daycare places have a tab of their own.',
   'about.termsTitle': 'Words used',
   'about.terms': 'Ludothek or ludothèque: a toy and game lending library. ElKi, or Eltern-Kind: a class for a child together with an adult. Krabbelgruppe: a meeting of small children with their carers, not a nursery.',
