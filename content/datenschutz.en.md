@@ -10,7 +10,7 @@ E-mail: hello@minitandem.ch
 
 ## Your records
 
-Saved activities, notes, statuses, visit plans, the child’s age and the saved starting point stay in your browser. Filters, the town selected for distances and the language are stored there too. A backup file that you export is downloaded to your device. These records are not sent to our server. You can change your records in the interface or delete the site’s stored data in your browser. You can delete downloaded files on your device.
+Saved activities, notes, statuses, visit plans, daycare applications, the child’s age and the saved starting point stay in your browser. Filters, the town selected for distances and the language are stored there too. A backup file that you export is downloaded to your device. These records are not sent to our server. You can change your records in the interface or delete the site’s stored data in your browser. You can delete downloaded files on your device.
 
 Syncing between devices is switched off. The server accepts no family data.
 
