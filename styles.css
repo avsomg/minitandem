@@ -571,7 +571,8 @@ dialog .toast { z-index: 60; }
 }
 
 /* The Daycare guides (/daycare/<slug>/, daycare-guides.mjs): text like the case study's, a list inside an item, the closing note in grey.
-   The list of guides is the same at the end of a guide and in the Daycare tab; on a guide, the guide itself is marked. */
+   The list of guides is the same at the end of a guide and in the Daycare tab (one line under its introduction that opens it); on a guide,
+   the guide itself is marked. */
 .guide > h1:first-child { margin-top: 12px; }
 .case li > ul { margin-top: 6px; }
 .guide-checked { color: var(--d); font-size: 14px; }
@@ -581,8 +582,8 @@ ul.guide-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 6p
 /* the guide being read, in black like the current language of the switch */
 .guide-links a[aria-current="page"] { background: var(--t); color: var(--inv); }
 @media (hover: hover) { .guide-links a:not([aria-current]):hover { background: var(--raised); } }
-.cc-guides { margin-top: 8px; }
-.cc-guides-title { margin: 0 0 8px; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.viewguides details.more { margin: 0 0 6px; }
+.viewguides details.more[open] { margin-bottom: 12px; }
 
 /* The Daycare tab: the same frame as the lists (title, search, pills, rows, card dialog); its parts are a switch like the language switch. */
 .viewlead { margin: 0 0 6px; color: var(--d); font-size: 14px; max-width: 72ch; }

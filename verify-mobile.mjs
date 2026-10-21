@@ -277,7 +277,20 @@ try{
       assert(tabs.every(tab=>tab.width>=44&&tab.height>=44),`A view below 44 px at ${width} px in ${lang}`);
     }
   }
+  // The Daycare tab: its guides are one line under the introduction that opens them, so the switch of its parts and the search stay on a
+  // phone's first screen in every language.
+  await page.locator('.tab[data-view="childcare"]').click();await page.waitForSelector('#childcareBox .row');
+  for(const width of [360,390]){
+    await page.setViewportSize({width,height:844});
+    for(const lang of ['en','de','fr']){
+      await page.locator(`#langSeg [data-lang="${lang}"]`).click();await page.evaluate(()=>window.scrollTo(0,0));
+      const top=await page.evaluate(()=>({line:document.querySelector('#viewGuides summary').getBoundingClientRect().height,links:document.querySelectorAll('#viewGuides a').length,
+        open:document.querySelector('#viewGuides details').open,search:document.querySelector('.search').getBoundingClientRect().bottom}));
+      assert(top.line>=44&&top.line<=48&&top.links===4&&!top.open,`The guides are not one closed line of four links at ${width} px in ${lang}`);
+      assert(top.search<=844,`The guides push the search off the first screen at ${width} px in ${lang}`);
+    }
+  }
   await page.locator('#langSeg [data-lang="en"]').click();
   assert.deepEqual(errors,[]);
-  console.log(JSON.stringify({result:'PASS',engine,target:'iPhone 15, 393x852 @3x',url,checks:['bounded batch and show more','nothing fixed on a phone','44px tap targets','16px inputs','way back to the filters','district filter and reload','browser back and forward','notes, status and favourites','ICS timezone','cross-tab merge','saved view','visit planning','age boundaries and unknown ages','empty state and reset','map','three languages and defaults','backup download','storage failure warning','320px, landscape and desktop overflow','one line of views at 360 and 390 px','no JavaScript errors']},null,2));
+  console.log(JSON.stringify({result:'PASS',engine,target:'iPhone 15, 393x852 @3x',url,checks:['bounded batch and show more','nothing fixed on a phone','44px tap targets','16px inputs','way back to the filters','district filter and reload','browser back and forward','notes, status and favourites','ICS timezone','cross-tab merge','saved view','visit planning','age boundaries and unknown ages','empty state and reset','map','three languages and defaults','backup download','storage failure warning','320px, landscape and desktop overflow','one line of views at 360 and 390 px','the Daycare guides in one line above the search','no JavaScript errors']},null,2));
 }finally{if(browser)await browser.close();await fixture.close();}

@@ -1,5 +1,5 @@
 // The Daycare guides: every guide in English, German and French with its checked text unchanged, the three versions pointing at each other,
-// the sitemap, no script, the way back to the Daycare tab, and the tab's block that links the guides of the interface language.
+// the sitemap, no script, the way back to the Daycare tab, and the tab's line that opens the guides of the interface language.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -149,19 +149,24 @@ test('the guide names of the dictionaries are the titles of the texts, in every 
   }
 });
 
-test('the Daycare tab shows a Guides block that links the four guides of the interface language, under the list, the map and the applications', () => {
+test('the Daycare tab shows the guides of the interface language under its introduction, one line that opens the four links', () => {
   for (const lang of PAGE_LANGS) {
     const {CV, CH, t} = loadStack({lang, today: '2026-10-21'});
     const block = CV.guides();
-    assert.ok(block.startsWith(`<section class="cc-guides" aria-labelledby="ccGuidesTitle"><h3 class="cc-guides-title" id="ccGuidesTitle">${t('childcare.guides.title')}</h3>`), lang);
+    assert.ok(block.startsWith(`<details class="more cc-guides"><summary>${t('childcare.guides.title')}</summary><ul class="guide-links">`), lang + ': closed until opened');
     const links = [...block.matchAll(/<a href="([^"]+)">([^<]+)<\/a>/g)];
     assert.deepEqual(links.map(m => m[1]), GUIDES.map(slug => guideURL(slug, lang)), lang + ': the pages of the interface language');
     assert.deepEqual(links.map(m => m[2].replace(/&#39;/g, "'")), GUIDES.map(slug => guideTitle(markdown(slug, lang))), lang);
     for (const [href] of links.map(m => m.slice(1))) assert.ok(fs.existsSync(path.join(root, '.publish', href, 'index.html')), 'built: ' + href);
-    for (const view of ['list', 'map', 'mine']) assert.ok(CV.box(CH.places.slice(0, 3), {view}).includes(block), lang + ' ' + view);
-    assert.ok(!CV.box([], {status: 'loading'}).includes('cc-guides'), 'not while the places are loading');
+    for (const view of ['list', 'map', 'mine']) assert.ok(!CV.box(CH.places.slice(0, 3), {view}).includes('cc-guides'), lang + ' ' + view + ': not at the bottom of the tab');
   }
   assert.equal(loadStack({lang: 'de'}).t('childcare.guides.title'), 'Ratgeber');
+  // In the page: between the introduction and the switch of the tab's parts, shown with them once the places are loaded, hidden in the
+  // other views, and written again only when its words change, so that an open list stays open while the list below changes.
+  const index = fs.readFileSync(path.join(root, 'index.html'), 'utf8'), app = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
+  assert.ok(index.indexOf('id="viewLead"') < index.indexOf('<div class="viewguides" id="viewGuides" hidden></div>') && index.indexOf('id="viewGuides"') < index.indexOf('id="viewParts"'));
+  assert.match(app, /const guides = CV\.guides\(\); if \(guides !== childcareGuides\) \{ els\.viewGuides\.innerHTML = guides; childcareGuides = guides; \} els\.viewGuides\.hidden = !CH\.loaded;/);
+  assert.match(app, /els\.viewLead\.hidden = true; els\.viewGuides\.hidden = true;/);
 });
 
 test('the layout of a guide: two levels of lists, bold, links to other sites and a closing note; anything else stops the build', () => {

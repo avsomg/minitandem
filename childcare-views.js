@@ -118,18 +118,20 @@
       const count = Object.keys(store.childcare.applications).filter(id => CH().byId.has(id)).length;
       return `<div class="seg cc-parts" role="group" aria-label="${esc(t('childcare.views'))}">` + M().VIEW_KEYS.map(k => `<button type="button" data-cview="${k}" aria-pressed="${k === view}">${esc(t('childcare.show.' + k))}${k === 'mine' && count ? ` <b>${count}</b>` : ''}</button>`).join('') + '</div>';
     }
-    // The guides for parents in the interface language, each a plain page without script (daycare-guides.mjs), linked like any page of the site.
+    // The guides for parents in the interface language, each a plain page without script (daycare-guides.mjs), linked like any page of the
+    // site. Under the tab's introduction, above its parts: one line that opens the four links, so that a phone still shows the switch and
+    // the search on its first screen (the four titles need three lines or more at 390 px).
     function guides() {
       const lang = ctx.lang?.() || 'en', I = window.MinitandemI18n;
-      return `<section class="cc-guides" aria-labelledby="ccGuidesTitle"><h3 class="cc-guides-title" id="ccGuidesTitle">${esc(t('childcare.guides.title'))}</h3><ul class="guide-links">` +
-        M().GUIDE_KEYS.map(k => `<li><a href="/${esc(I.guidePage(lang, k))}">${esc(t('childcare.guide.' + k))}</a></li>`).join('') + '</ul></section>';
+      return `<details class="more cc-guides"><summary>${esc(t('childcare.guides.title'))}</summary><ul class="guide-links">` +
+        M().GUIDE_KEYS.map(k => `<li><a href="/${esc(I.guidePage(lang, k))}">${esc(t('childcare.guide.' + k))}</a></li>`).join('') + '</ul></details>';
     }
-    // The tab below the filters: the list, the map or the applications, where the list of places comes from (its parts are switched
-    // above the search, parts()), and the guides. status: '' once the places are there, 'loading' or 'failed' before.
+    // The tab below the filters: the list, the map or the applications, and where the list of places comes from (its parts are switched
+    // above the search, parts()). status: '' once the places are there, 'loading' or 'failed' before.
     function box(items, {view = 'list', limit = 24, status = ''} = {}) {
       if (status) return `<div class="empty cc-status" role="status"><p class="hint">${esc(t(status === 'loading' ? 'childcare.loading' : 'childcare.failed'))}</p>${status === 'failed' ? `<button type="button" class="ghost" data-action="cc-retry">${esc(t('childcare.retry'))}</button>` : ''}</div>`;
       const body = view === 'map' ? mapBox(items) : view === 'mine' ? mine() : list(items, limit);
-      return body + `<p class="hint cc-source">${esc(t('childcare.source'))}</p>` + guides();
+      return body + `<p class="hint cc-source">${esc(t('childcare.source'))}</p>`;
     }
 
     /* ---------- filter panel ---------- */
