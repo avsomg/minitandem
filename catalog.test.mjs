@@ -413,11 +413,11 @@ test('visitor research covers sixteen venues and preserves provenance for nine e
 
 test('visitor research notes keep their caveats in the catalogue',()=>{
   const {byId}=load();
-  assert.match(byId.get('bistro11-duedingen').notes.join(' '),/photographs show a wooden toy coffee machine/);
+  assert.match(byId.get('bistro11-duedingen').notes.join(' '),/Photos in a Bärner Mamis article show a wooden toy coffee machine/);
   assert.match(byId.get('kafi8-kerzers').notes.join(' '),/copy of a Google review/);
-  assert.match(byId.get('jardin-muntelier').notes.join(' '),/"2 years ago"/);
+  assert.match(byId.get('jardin-muntelier').notes.join(' '),/one was shown as 2 years old/);
   assert.match(byId.get('beachhouse-muntelier').notes.join(' '),/not two independent confirmations/);
-  assert.match(byId.get('migros-avry-play').notes.join(' '),/do not confirm that it currently works/);
+  assert.match(byId.get('migros-avry-play').notes.join(' '),/do not confirm that it is currently available/);
 });
 
 test('follow-up preserves dated caveats, closures and price units',()=>{
@@ -430,7 +430,7 @@ test('follow-up preserves dated caveats, closures and price units',()=>{
   assert.match(byId.get('beachhouse-muntelier').price,/Summer menu 2026/);
   assert.equal(byId.get('sarrazin-lossy').amount,null,'free empty plate is not free admission');
   assert.match(byId.get('sarrazin-lossy').notes.join(' '),/not a free children's dish/);
-  assert.match(byId.get('beo-funpark').schedule,/Mon–Fri 11–18; Sat 10–20; Sun 10–18/);
+  assert.match(byId.get('beo-funpark').schedule,/Mon–Fri 11:00–18:00; Sat 10:00–20:00; Sun 10:00–18:00/);
   assert.match(byId.get('beo-funpark').notes.join(' '),/there is no supervision by staff/);
 });
 
@@ -572,7 +572,7 @@ test('uncertain sources do not become current eligibility or invented calendar d
   assert.deepEqual(Array.from(yoga.days),[],'suspended hours are not treated as a current weekly event');
   assert.match(yoga.schedule,/November 2026/);
   assert.equal(byId.get('candles-plaffeien').events.length,0);
-  assert.match(byId.get('candles-plaffeien').schedule,/contradicts itself/);
+  assert.match(byId.get('candles-plaffeien').schedule,/exact dates to be confirmed \(the dates and weekdays on the website do not match\)/);
   assert.equal(byId.get('fyfauter').status,'check');
   assert.equal(byId.get('psymolo').research.findings.length,1);
   assert.equal(byId.get('psymolo').status,'check');

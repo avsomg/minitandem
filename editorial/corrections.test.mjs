@@ -32,7 +32,7 @@ test('all thirteen October 2 corrections match the compiled catalogue, not just 
 });
 
 test('new-season gym schedules agree with day filters and visit conditions',()=>{
-  for(const [id,day,start] of [['bewegungsinsel',1,'07.09.2026'],['elki-giffers',3,'09.09.2026'],['elki-heitenried',3,'09.09.2026']]){
+  for(const [id,day,start] of [['bewegungsinsel',1,'07.09.2026'],['elki-giffers',3,'09.09.2026'],['elki-heitenried',3,'9 September 2026']]){
     const card=byId.get(id);
     assert.deepEqual(Array.from(card.days),[day]);
     assert.ok(card.schedule.includes(start));
