@@ -42,6 +42,13 @@
   // The practical facts in the order the card shows them. The translation of the cards (catalogue-i18n.js, and the translation pipeline,
   // which reads this line) uses the same order.
   const PRACTICAL_ORDER = ['indoor', 'playArea', 'changing', 'toilet', 'feeding', 'access', 'parking', 'booking', 'observe', 'duration', 'commitment', 'groupSize', 'leader', 'trial', 'leave', 'standardGerman', 'costNote'];
+  // A finding of the research has a short heading ("Team", "Payment terms"). A few are headed by the name of a card field instead
+  // ("parentDetails", "practical.playArea"), which is code, not a word for parents: fieldLabel gives the key of the interface's own label
+  // for that field ('' for any other heading). The card page and research.md (build.mjs) use it.
+  const FIELD_LABELS = {intro: 'card.about', parentDetails: 'fact.parent', age: 'fact.age', schedule: 'fact.schedule', price: 'fact.price', address: 'fact.address',
+    languages: 'fact.languages', format: 'fact.format', events: 'dates.title', notes: 'card.goodToKnow',
+    ...Object.fromEntries([...PRACTICAL_ORDER, 'warnings'].map(key => ['practical.' + key, 'practical.' + key]))};
+  const fieldLabel = field => typeof field === 'string' && Object.hasOwn(FIELD_LABELS, field) ? FIELD_LABELS[field] : '';
 
   function create(ctx) {
     const {t, C, P, X, F, store} = ctx;
@@ -335,8 +342,15 @@
       const warn = (a.practical?.warnings || []).filter(take);
       if (groups.length || warn.length) out += section(t('card.practical'), `<dl class="pr">${groups.map(([k, f]) => `<div class="fr"><dt>${esc(t('practical.' + k))}</dt><dd>${cardText(f.text)}${f.source ? ' ' + link(f.source, esc(t('card.source')), 'inline-link') : ''}</dd></div>`).join('')}${warn.length ? `<div class="fr"><dt>${esc(t('practical.warnings'))}</dt><dd${en}>${warn.length > 1 ? `<ul>${warn.map(w => `<li>${esc(w)}</li>`).join('')}</ul>` : esc(warn[0])}</dd></div>` : ''}</dl>`);
       out += cost(a);
-      const found = (a.research?.findings || []).filter(f => take(f.text));
-      if (found.length) out += section(t('card.checkedTitle'), `<div class="found"${en}>${found.map(f => `<div>${f.field ? `<span class="ff">${esc(f.field)}</span>` : ''}<p>${esc(f.text)}</p></div>`).join('')}</div><p class="hint">${esc(t('card.checkedOn', {date: F.dateLabel(a.research.date)}))}</p>`);
+      // A heading that is a field name shows the interface's label for the field (fieldLabel). The English heading decides, since a
+      // translation may have rendered the name word by word ("Angaben zum Elternteil"); when a finding was dropped as over (planning.js
+      // current), the positions no longer match the English card and the shown heading decides. Such a label is in the interface language.
+      const findings = a.research?.findings || [], englishFindings = (a.english || a).research?.findings || [], uiLang = ctx.lang ? ctx.lang() : 'en';
+      const found = findings.map((f, i) => {
+        const key = fieldLabel(englishFindings.length === findings.length ? englishFindings[i]?.field : f.field);
+        return key ? {...f, field: t(key), label: true} : f;
+      }).filter(f => take(f.text));
+      if (found.length) out += section(t('card.checkedTitle'), `<div class="found"${en}>${found.map(f => `<div>${f.field ? `<span class="ff"${f.label && en ? ` lang="${esc(uiLang)}"` : ''}>${esc(f.field)}</span>` : ''}<p>${esc(f.text)}</p></div>`).join('')}</div><p class="hint">${esc(t('card.checkedOn', {date: F.dateLabel(a.research.date)}))}</p>`);
       const rem = (a.research?.remaining || []).filter(take);
       if (rem.length) out += section(t('card.toConfirm'), bullets(rem, en) + `<button type="button" class="linkbtn" data-action="copy-questions">${ICON.copy(16)} ${esc(t('card.copyQuestions'))}</button>`);
       out += visitPlans(a) + notesBox(a);
@@ -478,5 +492,5 @@
     return {esc, ICON, categoryIcon, nm, shown, hoursLine, row, dayRow, rows, filterChips, distanceText, week, weekGroup, reportMail, panel, ageGroup, nearGroup, detail, saveButton, visitPlans, visitRows, visitLabel, saved, changesBox, outing, viewTools, venueBox, mapBox, empty, about, data, shareList, planExchange, pilot, visitForm,
       importConfirm, planImportConfirm, report, conflict, copyFallback, warningText, hashFor, organiserURL, mapURL, routeURL, placeOptionsHtml, cost, ageFitNote, statusClass, phoneHref};
   }
-  window.MinitandemViews = {create, esc, ICON, PRACTICAL_ORDER};
+  window.MinitandemViews = {create, esc, ICON, PRACTICAL_ORDER, fieldLabel};
 })();

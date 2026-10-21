@@ -44,6 +44,10 @@ const publicationGates=privateEvidence?'checked':'skipped: no private editorial 
 const statuses = {active:'Current information available',check:'Needs confirmation',future:'For later; see age and conditions',closed:'Closed',excluded:'Archive / not included'};
 const parent = {yes:'Together with an adult',no:'Separate format',unknown:'To be confirmed'};
 const latestReview=records.reduce((latest,a)=>a.research?.date>latest?a.research.date:latest,'2026-09-27');
+// A finding headed by the name of a card field ("parentDetails") gets the English label of that field, as on the card page (views.js).
+const ui={window:{}};
+for(const file of ['strings-en.js','views.js'])vm.runInNewContext(fs.readFileSync(path.join(root,file),'utf8'),ui);
+const findingHeading=field=>{const key=ui.window.MinitandemViews.fieldLabel(field);return key?ui.window.MINITANDEM_STRINGS.en[key]:field;};
 const lines = ['# Minitandem: catalogue with sources', '', `Catalogue updated ${latestReview}. The date of the in-depth check is shown on each card. Free places and future work are not guaranteed. All prices are in CHF; payment units are stated separately. Personal notes are not part of this file.`, ''];
 for (const a of records) {
   lines.push(`## ${a.name}`, '', `- Status: ${statuses[a.status]}`, `- Place: ${a.town}`, `- District: ${context.window.CATALOG_REGIONS[a.region]}`, `- Checked: ${a.checked}`, `- Address: ${a.address || 'To be confirmed'}${a.addressPrecision==='area'?' (descriptive area, exact entrances not established)':''}`, `- Age: ${a.age}`, `- Adult: ${a.parentDetails || parent[a.parent]}`, `- Language: ${a.languages.join(', ') || 'To be confirmed'}`, `- Schedule: ${a.schedule}`, `- Price: ${a.price}`);
@@ -53,7 +57,7 @@ for (const a of records) {
   if(a.research){
     lines.push('',`### Additional check: ${a.research.date}`,'');
     const kinds={official:'Organiser source',visitor:'Visitor experience',historical:'Historical information',inference:'Assessment from a source'};
-    for(const f of a.research.findings) lines.push(`- **${f.field}** (${kinds[f.kind]}): ${f.text} [Source](${f.url})`);
+    for(const f of a.research.findings) lines.push(`- **${findingHeading(f.field)}** (${kinds[f.kind]}): ${f.text} [Source](${f.url})`);
     if(a.research.remaining.length) lines.push('','To confirm before visiting:',...a.research.remaining.map(q=>`- ${q}`),'');
   }
   for (const s of a.sources) lines.push(`- [${s.label}](${s.url})`);

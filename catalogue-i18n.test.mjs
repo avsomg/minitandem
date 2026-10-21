@@ -19,7 +19,7 @@ function translated(lang,{data=files[lang],cards=null}={}){
   const all=cards||S.records,CI=S.window.MinitandemCatalogueI18n,order=S.window.MinitandemViews.PRACTICAL_ORDER;
   const shown=CI.overlay(all,data,order);
   S.C.setLocalText(shown.text);
-  const V=S.window.MinitandemViews.create({t:S.t,C:S.C,P:S.P,X:S.X,F:S.F,store:S.store,state:()=>S.state,shown:shown.card,inEnglish:a=>!shown.translated(a)});
+  const V=S.window.MinitandemViews.create({t:S.t,C:S.C,P:S.P,X:S.X,F:S.F,store:S.store,state:()=>S.state,shown:shown.card,inEnglish:a=>!shown.translated(a),lang:S.I.lang});
   return {...S,CI,order,shown,V};
 }
 const PRIVATE_FOLDER=translationsFolder();
@@ -181,4 +181,34 @@ test('the English-only notice is gone; a short note names the cards shown in Eng
   const app=fs.readFileSync(path.join(root,'app.js'),'utf8');
   assert.match(app,/cards\.filter\(inEnglish\)\.length/);
   assert.match(app,/script\.src = `data-\$\{lang\}\.js`/,'only the chosen language is loaded, from this site');
+});
+
+test('a finding headed by the name of a card field shows the interface label for that field, also where a translation rendered the name',()=>{
+  const {window:W}=loadStack(),V=W.MinitandemViews;
+  assert.equal(V.fieldLabel('parentDetails'),'fact.parent');assert.equal(V.fieldLabel('practical.playArea'),'practical.playArea');
+  assert.equal(V.fieldLabel('events'),'dates.title');assert.equal(V.fieldLabel('schedule'),'fact.schedule');
+  for(const heading of ['Team','Payment terms','Schedule','practical.nothing','constructor','toString',undefined])assert.equal(V.fieldLabel(heading),'',String(heading));
+  const heads=page=>[...page.matchAll(/<span class="ff"[^>]*>([^<]*)<\/span>/g)].map(m=>m[1]);
+  // A card of the catalogue with two findings, headed here by two field names; its German text renders one of them word by word.
+  const {records,CI,order}=translated('de');
+  const card=structuredClone(records.find(a=>a.status==='active'&&a.research?.findings?.length>=2&&a.research.findings.every(f=>f.text)));
+  card.research.findings[0].field='parentDetails';card.research.findings[1].field='practical.playArea';
+  const english=loadStack().V.detail(card),D=W.MINITANDEM_STRINGS;
+  assert.deepEqual(heads(english).slice(0,2),[D.en['fact.parent'],D.en['practical.playArea']]);
+  const strings=Object.fromEntries(Object.entries(CI.unitStrings(card,order)).map(([key,text])=>[key,'DE '+text]));
+  strings['research.findings[0].field']='Angaben zum Elternteil';
+  const {V:german}=translated('de',{cards:[card],data:{[card.id]:{rev:CI.revision(card,order),strings}}});
+  const page=german.detail(card);
+  assert.deepEqual(heads(page).slice(0,2),[D.de['fact.parent'],D.de['practical.playArea']]);
+  assert.ok(!page.includes('Angaben zum Elternteil')&&!page.includes('practical.playArea<'));
+  // A card shown in English under the German interface: the label is German and says so.
+  const {V:fallback}=translated('de',{cards:[card],data:{}});
+  assert.match(fallback.detail(card),new RegExp(`<span class="ff" lang="de">${D.de['fact.parent']}</span>`));
+  // The real cards: no heading on a card page in any language, and none in research.md, is the name of a field.
+  for(const lang of ['en',...LANGS]){
+    const {V:view,records:all}=lang==='en'?{V:loadStack().V,records}:translated(lang);
+    for(const a of all)for(const heading of heads(view.detail(a)))assert.ok(!V.fieldLabel(heading)&&!/^(?:Angaben zu[mr] (?:Elternteil|Begleitung)|Anlässe)$/.test(heading),`${lang} ${a.id}: ${heading}`);
+  }
+  const research=fs.readFileSync(path.join(root,'research.md'),'utf8');
+  for(const [,heading] of research.matchAll(/^- \*\*(.+?)\*\* \(/gm))assert.equal(V.fieldLabel(heading),'',heading);
 });

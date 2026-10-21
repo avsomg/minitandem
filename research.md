@@ -870,7 +870,7 @@ To confirm before visiting:
 
 ### Additional check: 2026-10-02
 
-- **practical.playArea** (Organiser source): The official Coop Restaurant Fribourg page lists a children's area among the services of the branch. [Source](https://www.coop-restaurant.ch/fr/restaurantfinder/finderdetailpage.3743.html)
+- **Play area** (Organiser source): The official Coop Restaurant Fribourg page lists a children's area among the services of the branch. [Source](https://www.coop-restaurant.ch/fr/restaurantfinder/finderdetailpage.3743.html)
 
 To confirm before visiting:
 - Size, equipment and visibility of the area.
@@ -1598,7 +1598,7 @@ To confirm before visiting:
 ### Additional check: 2026-10-02
 
 - **Autumn series** (Organiser source): The public AEF calendar confirms meetings at the MPE on Tuesdays 09:00–11:00 from 29 September to 15 December 2026, with the listed dates, except 8 December. Adults discuss parenting and interact with the children together. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
-- **parentDetails** (Organiser source): At the meeting, adults discuss parenting over coffee and try out ways of interacting with the children on the spot. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
+- **Adult** (Organiser source): At the meeting, adults discuss parenting over coffee and try out ways of interacting with the children on the spot. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
 
 To confirm before visiting:
 - The cost, age limits, registration and a German-speaking facilitator are not stated in the calendar. This is a joint meeting, not childcare without a parent.
@@ -1694,7 +1694,7 @@ To confirm before visiting:
 
 ### Additional check: 2026-10-16
 
-- **schedule** (Organiser source): The public AEF calendar lists Thursday meetings, 09:00–11:00, from 17 September to 17 December 2026 in the Coop restaurant on the 4th floor, Avenue de la Gare 10. Dates after 17 December are not published. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
+- **Schedule** (Organiser source): The public AEF calendar lists Thursday meetings, 09:00–11:00, from 17 September to 17 December 2026 in the Coop restaurant on the 4th floor, Avenue de la Gare 10. Dates after 17 December are not published. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
 
 To confirm before visiting:
 - The cost, age limits, registration and a German-speaking leader are not stated in the calendar. This is a joint meeting, not supervision without a parent.
@@ -2444,8 +2444,8 @@ To confirm before visiting:
 
 ### Additional check: 2026-10-02
 
-- **events** (Organiser source): The Erntedank family service will take place on 4 October 2026, 09:30–10:30, in the Zentrum-EG-Saal at Weissenstein 57, 1718 Rechthalten. [Source](https://www.ref-weissenstein.ch/)
-- **parentDetails** (Organiser source): Different generations take part together in family services. [Source](https://www.ref-weissenstein.ch/)
+- **Published dates** (Organiser source): The Erntedank family service will take place on 4 October 2026, 09:30–10:30, in the Zentrum-EG-Saal at Weissenstein 57, 1718 Rechthalten. [Source](https://www.ref-weissenstein.ch/)
+- **Adult** (Organiser source): Different generations take part together in family services. [Source](https://www.ref-weissenstein.ch/)
 
 To confirm before visiting:
 - Check the language of the service, the conditions for attending with young children and any possible fees.
