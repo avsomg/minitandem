@@ -56,6 +56,15 @@ try{
     await check('week');
     await page.locator('.tab[data-view="saved"]').click();await page.waitForSelector('#list .row');
     await check('saved');
+    // The Daycare tab: its list, a place's page with the rules of a commune and an application, and the list of applications.
+    await page.locator('.tab[data-view="childcare"]').click();await page.waitForSelector('#childcareBox .row');
+    await check('daycare');
+    await page.locator('#childcareBox .row[data-place]').nth(1).click();await page.waitForFunction(()=>document.querySelector('#detail').open);
+    await page.locator('#cc-commune').selectOption('fribourg');await page.locator('#cc-status').selectOption('waiting');
+    await check('daycare place');
+    await closeDialog('#detail');
+    await page.locator('[data-cview="mine"]').click();await page.waitForSelector('.cc-app');
+    await check('daycare applications');
     // The plain page of a place in the same language (no script): its labels, dates and note hold with the spacing too.
     await page.goto(url+'places/fritime-piccolo-bulle/'+{en:'',de:'de/',fr:'fr/'}[lang]);
     await page.addStyleTag({content:spacingStyle()});

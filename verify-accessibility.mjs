@@ -63,6 +63,26 @@ try{
         await audit(lang+'-detail');
         await closeDetail();
       }
+      // The Daycare tab (in French, after the loop): its list, a place's page with a commune's rules and an application, the applications, the map.
+      await page.locator('.tab[data-view="childcare"]').click();await page.waitForSelector('#childcareBox .row');
+      await audit('daycare');
+      await page.locator('#q').fill('Providence');
+      const place=page.locator('#childcareBox .row[data-place="creche-la-providence-fribourg"]');
+      await place.focus();await place.press('Enter');
+      await page.waitForFunction(()=>document.querySelector('#detail').open);
+      await page.locator('#cc-commune').selectOption('fribourg');
+      await page.locator('#cc-status').selectOption('waiting');
+      await page.locator('#cc-registered').fill('2026-09-15');
+      await audit('daycare-place');
+      await page.keyboard.press('Escape');
+      await page.waitForFunction(()=>!document.querySelector('#detail').open);
+      await expectFocus(page,'#childcareBox .row[data-place="creche-la-providence-fribourg"]','The place\'s page returns focus to its row');
+      await page.locator('#q').fill('');
+      await page.locator('[data-cview="mine"]').click();await page.waitForSelector('.cc-app');
+      await audit('daycare-applications');
+      await page.locator('[data-cview="map"]').click();await page.waitForSelector('#places-map');
+      await audit('daycare-map');
+      await page.locator('[data-cview="list"]').click();
       // The plain pages that search engines find: the dark "go" button keeps a readable label and a focus ring, the title keeps "Web-App" whole.
       for(const [pathname,state] of [['places/fritime-piccolo-bulle/','place-page'],['places/fritime-piccolo-bulle/de/','place-page-de'],['places/fritime-piccolo-bulle/fr/','place-page-fr'],['projekt/','case-study']]){
         await page.goto(url+pathname);
