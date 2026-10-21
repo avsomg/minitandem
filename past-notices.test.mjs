@@ -142,7 +142,7 @@ test('the real cards: which are affected on 17 October 2026, in all three langua
     const ile=V.detail(S.byId.get('ile')),krabbel=V.detail(S.byId.get('krabbel-ursen'));
     assert.ok(!closureWords[lang].test(ile),lang+': no "Closed 3–10 October 2026" on the card of L’île aux trésors');
     assert.ok(/class="warns"/.test(ile),lang+': its other warnings stay');
-    assert.match(ile,lang==='en'?/closed 3–10 October</:lang==='de'?/geschlossen 3–10 Oktober</:/fermé 3–10 octobre</,lang+': the closure in its schedule has no year, so it stays');
+    assert.match(ile,lang==='en'?/closed 3–10 October</:lang==='de'?/geschlossen 3\.–10\. Oktober</:/fermé 3–10 octobre</,lang+': the closure in its schedule has no year, so it stays');
     assert.ok(!nextMeeting[lang].test(krabbel),lang+': no "next published meeting 15 October" on the card of Krabbelgruppe Ursen');
     assert.ok(krabbel.includes(shown?shown.card(S.byId.get('krabbel-ursen')).research.findings[0].text.split('. ')[0]:S.byId.get('krabbel-ursen').research.findings[0].text.split('. ')[0]),lang+': the rest of that finding stays');
     // A closure that has not ended yet stays: the café in Kerzers is closed until 18 October.
