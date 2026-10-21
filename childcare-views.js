@@ -35,7 +35,10 @@
     // A source as the family reads it: the site and the last part of the address ("crechelaprovidence.ch › tarifs").
     function sourceLabel(url) {
       try {
-        const u = new URL(url), last = decodeURIComponent(u.pathname.split('/').filter(Boolean).at(-1) || '').replace(/\.(pdf|html?|php|aspx?)$/i, '').slice(0, 40);
+        const u = new URL(url), name = decodeURIComponent(u.pathname.split('/').filter(Boolean).at(-1) || '').replace(/\.(pdf|html?|php|aspx?)$/i, '');
+        // A long file name is cut after a whole word where it can be, and the ellipsis says that it goes on.
+        const cut = name.slice(0, 40), at = Math.max(cut.lastIndexOf(' '), cut.lastIndexOf('-'), cut.lastIndexOf('_'));
+        const last = name.length > 40 ? (at > 20 ? cut.slice(0, at) : cut.slice(0, 39)).trimEnd() + '…' : name;
         return u.hostname.replace(/^www\./, '') + (last ? ' › ' + last : '');
       } catch { return url; }
     }
@@ -146,25 +149,23 @@
     const filterChips = active => active.map(f => `<button type="button" class="chip fchip" data-remove="${esc(f.key)}" aria-label="${esc(t('filters.remove', {name: f.label}))}">${esc(f.label)}${ICON.x(14)}</button>`).join('');
 
     /* ---------- a place's page ---------- */
-    // A row of a place's page: its texts ({text, english}, each in its own language), what goes under them, and the pages they rest on.
-    // english records whether a text of the page stayed English.
+    // A row of a place's page: its texts ({text, english}, each in its own language, one per line), what goes under them, and the pages
+    // they rest on. english records whether a text of the page stayed English.
     let english = false;
     const factRow = (p, label, keys, parts, sub = () => '') => {
       const hit = keys.filter(k => value(p, k) !== null);
       if (!hit.length) return fr(label, `<span class="np">${esc(t(keys.some(k => M().pending(p, k)) ? 'childcare.pending' : 'childcare.notPublished'))}</span>`);
       const shown = parts().filter(x => x.text);
       if (shown.some(x => x.english)) english = true;
-      return fr(label, `${shown.map(textSpan).join(', ')}${sub()}${sourceLine([...new Set(hit.flatMap(k => M().sources(p, k)))])}`);
+      return fr(label, `${shown.map(textSpan).join('<br>')}${sub()}${sourceLine([...new Set(hit.flatMap(k => M().sources(p, k)))])}`);
     };
-    // The age as the place words it; a minimum given only as a number is said in the interface language. An English upper limit follows in
-    // lower case when the two read as one English sentence.
+    // The age as the place words it, the minimum and the upper limit on lines of their own (they may be in two languages, and each starts
+    // as a sentence does); a minimum given only as a number is said in the interface language.
     function ageText(p) {
       const from = value(p, 'ageFrom'), to = value(p, 'ageTo');
       const first = from?.text ? CH().factText(p, 'ageFrom') : !from ? null : {english: false, text: Number.isFinite(from.weeks) ? t('childcare.age.fromWeeks', {n: from.weeks})
         : from.months === 0 ? t('childcare.age.fromBirth') : t('age.fromMonths', {n: from.months})};
-      const last = to?.text ? CH().factText(p, 'ageTo') : null;
-      if (first && last?.english && (first.english || !foreign())) last.text = last.text.charAt(0).toLowerCase() + last.text.slice(1);
-      return [first, last].filter(Boolean);
+      return [first, to?.text ? CH().factText(p, 'ageTo') : null].filter(Boolean);
     }
     const dayRange = days => { const s = [...days].sort((a, b) => a - b); return s.length > 1 && s.every((d, i) => !i || d === s[i - 1] + 1) ? `${t('weekday.' + s[0])}–${t('weekday.' + s.at(-1))}` : s.map(d => t('weekday.' + d)).join(', '); };
     function facts(p) {

@@ -106,7 +106,8 @@ test('a place\'s page: the rows of the accepted preview, each published fact wit
   const S=stack(),p=S.CH.byId.get(PROVIDENCE),html=S.CV.detail(p);
   const rows=[...html.matchAll(/<div class="fr"><dt>([^<]+)<\/dt>/g)].map(m=>m[1]);
   assert.deepEqual(rows.slice(0,11),['Age','Days and hours','Closed','Price','How to register','Free places','Meals','Settling in','Trial period','Approach','Languages']);
-  assert.ok(html.includes('<span>From 12 weeks</span>, <span>until compulsory school entry (oldest group 30 months to 4 years)</span>'));
+  assert.ok(html.includes('<span>From 12 weeks</span><br><span>Until compulsory school entry (oldest group 30 months to 4 years)</span>'),'the minimum and the upper limit, each on its line');
+  assert.equal(S.CV.sourceLabel('https://ville-fribourg.ch/files/R%C3%A9ponse%20%C3%A0%20la%20question%20no%20114_Accueil%20cr%C3%A8ches.pdf'),'ville-fribourg.ch › Réponse à la question no 114_Accueil…','a long file name ends with an ellipsis');
   assert.ok(html.includes('<span class="sub">Prices valid from 1 Aug 2021</span>'));
   assert.match(html,/<div class="fr"><dt>Free places<\/dt><dd><span class="np">Not published by the place<\/span><\/dd><\/div>/);
   assert.ok(html.includes('<a href="https://www.crechelaprovidence.ch/horaires/" target="_blank" rel="noopener noreferrer">crechelaprovidence.ch › horaires</a>'));
