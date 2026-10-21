@@ -379,18 +379,17 @@ dialog .toast { position: absolute; top: 76px; bottom: auto; }
 .tab { min-height: 44px; padding: 0 18px; border: 0; border-radius: 999px; background: var(--raised); color: var(--chip); font-weight: 500; font-size: 14.5px; display: inline-flex; align-items: center; gap: 6px; transition: background-color 150ms var(--ease), color 150ms var(--ease); }
 .tab[aria-pressed="true"] { background: var(--t); color: var(--inv); }
 .tabn { font-variant-numeric: tabular-nums; font-size: 12.5px; opacity: .8; }
-/* Phones: the four views share one line (they wrap, evenly, only on the narrowest screens). */
-@media (max-width: 419px) {
-  .tabs { gap: 6px; }
-  .tab { flex: 1 1 auto; justify-content: center; padding: 0 9px; font-size: 14px; }
-}
-/* Narrow phones: Saved becomes a bookmark with the count; its word stays for screen readers. The four views keep one line. */
+/* Phones: the five views share one line from 360 px in all three languages (French says "7 jours" in the tab, the view's title says the rest)
+   and wrap only on the narrowest screens. Saved becomes a bookmark with the count; its word stays for screen readers. The text keeps its size. */
 .tab-icon { display: none; }
-@media (max-width: 379px) {
+@media (max-width: 419px) {
+  .tabs { gap: 4px; }
+  .tab { flex: 1 1 auto; justify-content: center; min-width: 44px; padding: 0 7px; font-size: 14px; }
   .tab-icon { display: block; }
   .tab-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .tabs { gap: 4px; }
-  .tab { padding: 0 7px; }
+}
+@media (max-width: 379px) {
+  .tab { padding: 0 5px; }
 }
 .viewtitle { margin: 0 0 4px; font-size: 22px; font-weight: 500; letter-spacing: -0.025em; }
 .syncstate, .updates, .viewtools { margin: 0 0 6px; }
@@ -595,8 +594,8 @@ dialog .toast { z-index: 60; }
 @media (max-width: 559px) {
   .cc-facts .fr, .cc-rules .fr, .cc-app .pr .fr { grid-template-columns: minmax(0, 1fr); gap: 2px; }
 }
-/* Phones: the Daycare tab keeps its own width; where the five views need two lines (French), it starts the second one. */
-@media (max-width: 419px) { .tab[data-view="childcare"] { flex-grow: 0; } }
+/* The narrowest phones: where the five views need two lines, the Daycare tab starts the second one at its own width. */
+@media (max-width: 359px) { .tab[data-view="childcare"] { flex-grow: 0; } }
 .cc-rules-title { margin: 18px 0 8px; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
 .cc-rules + .hint, .cc-rules ~ .hint { margin-top: 8px; }
 .cc-two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }

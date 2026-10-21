@@ -20,7 +20,7 @@
   'tab.list': 'Liste',
   'tab.map': 'Carte',
   'tab.saved': 'Enregistrés',
-  'tab.week': '7 prochains jours',
+  'tab.week': '7 jours',
   'view.saved': 'Activités enregistrées et plans',
   'view.map': 'Carte',
   'view.shared': 'Sélection partagée',

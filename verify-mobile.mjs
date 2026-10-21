@@ -267,6 +267,17 @@ try{
   await page.setViewportSize({width:320,height:740});await noOverflow();
   await page.setViewportSize({width:852,height:393});await noOverflow();
   await page.setViewportSize({width:1440,height:1000});await noOverflow();
+  // The five views share one line on a 360 and a 390 px phone in every language, each still a 44 px target.
+  for(const width of [360,390]){
+    await page.setViewportSize({width,height:800});
+    for(const lang of ['en','de','fr']){
+      await page.locator(`#langSeg [data-lang="${lang}"]`).click();
+      const tabs=await page.locator('.tabs .tab').evaluateAll(list=>list.map(tab=>{const box=tab.getBoundingClientRect();return {top:Math.round(box.top),width:box.width,height:box.height};}));
+      assert.equal(new Set(tabs.map(tab=>tab.top)).size,1,`The views wrap at ${width} px in ${lang}`);
+      assert(tabs.every(tab=>tab.width>=44&&tab.height>=44),`A view below 44 px at ${width} px in ${lang}`);
+    }
+  }
+  await page.locator('#langSeg [data-lang="en"]').click();
   assert.deepEqual(errors,[]);
-  console.log(JSON.stringify({result:'PASS',engine,target:'iPhone 15, 393x852 @3x',url,checks:['bounded batch and show more','nothing fixed on a phone','44px tap targets','16px inputs','way back to the filters','district filter and reload','browser back and forward','notes, status and favourites','ICS timezone','cross-tab merge','saved view','visit planning','age boundaries and unknown ages','empty state and reset','map','three languages and defaults','backup download','storage failure warning','320px, landscape and desktop overflow','no JavaScript errors']},null,2));
+  console.log(JSON.stringify({result:'PASS',engine,target:'iPhone 15, 393x852 @3x',url,checks:['bounded batch and show more','nothing fixed on a phone','44px tap targets','16px inputs','way back to the filters','district filter and reload','browser back and forward','notes, status and favourites','ICS timezone','cross-tab merge','saved view','visit planning','age boundaries and unknown ages','empty state and reset','map','three languages and defaults','backup download','storage failure warning','320px, landscape and desktop overflow','one line of views at 360 and 390 px','no JavaScript errors']},null,2));
 }finally{if(browser)await browser.close();await fixture.close();}
