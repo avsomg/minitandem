@@ -60,7 +60,8 @@
       return {name: `minitandem-plan-${today()}.ics`, text: calendar('Personal Plan', lines), type: 'text/calendar;charset=utf-8'};
     }
     const planJson = plan => ({name: `minitandem-plan-${today()}.json`, text: JSON.stringify(plan, null, 2), type: 'application/json'});
-    const backupFile = personal => ({name: `minitandem-backup-${today()}.json`, text: JSON.stringify({...personal, exportedAt: new Date().toISOString()}, null, 2), type: 'application/json'});
+    // The backup holds the family record and, apart from it, the Daycare applications (store.js keeps them under a key of their own).
+    const backupFile = (personal, childcare = null) => ({name: `minitandem-backup-${today()}.json`, text: JSON.stringify({...personal, ...(childcare ? {childcare} : {}), exportedAt: new Date().toISOString()}, null, 2), type: 'application/json'});
     const pilotFile = metrics => ({name: 'minitandem-pilot-summary.json', text: JSON.stringify(metrics, null, 2), type: 'application/json'});
     const correctionFile = report => ({name: `minitandem-correction-${report.activity}.json`, text: JSON.stringify(report, null, 2), type: 'application/json'});
 
