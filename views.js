@@ -70,7 +70,9 @@
       const p = new URLSearchParams({view});
       if (view === 'shared') p.set('list', state().sharedIds.join(','));
       if (view === 'venue') p.set('venue', state().venueId);
-      if (id) p.set('activity', id);
+      // The Daycare tab: its map or the family's applications, and a place instead of an activity.
+      if (view === 'childcare' && state().cview && state().cview !== 'list') p.set('show', state().cview);
+      if (id) p.set(view === 'childcare' ? 'place' : 'activity', id);
       return '#' + p.toString();
     };
     const warningText = w => w.code ? t('warning.' + w.code) : w.text;
@@ -189,13 +191,17 @@
     const chip = (kind, val, label, count) => `<button type="button" class="chip" data-kind="${kind}" data-val="${esc(val)}" aria-pressed="false">${esc(label)}${count !== undefined ? ` <span class="num">${count}</span>` : ''}</button>`;
     const group = (id, label, body, cls = 'group') => `<fieldset class="${cls}" id="${id}"><legend class="glabel">${esc(label)}</legend>${body}</fieldset>`;
     const switchRow = (id, label, hint) => `<div class="switchrow"><div><span class="sw-t" id="${id}L">${esc(label)}</span>${hint ? `<span class="hint">${esc(hint)}</span>` : ''}</div><button type="button" class="switch" id="${id}" role="switch" aria-checked="false" aria-labelledby="${id}L"></button></div>`;
+    // The child's age: the field, the buttons 0 to 6 and a hint; extra goes at the end of the group (the list's switch for unknown ages).
+    // The Daycare panel (childcare-views.js) uses the same group, so the age is one choice for both lists.
+    function ageGroup(hint = t('filter.ageHint'), extra = '') {
+      const ageButtons = [0, 1, 2, 3, 4, 5, 6].map(n => `<button type="button" class="chip age" data-age="${n}" aria-pressed="false" aria-label="${esc(n === 0 ? `0 (${F.ageLabel(0)})` : F.ageLabel(n))}">${n}</button>`).join('');
+      return `<fieldset class="group" id="g-age"><legend class="glabel">${esc(t('filter.age'))}</legend>` +
+        `<div class="agebox"><input class="field" id="age" type="number" inputmode="numeric" min="0" max="6" step="1" placeholder="${esc(t('common.any'))}" aria-label="${esc(t('filter.ageInput'))}" aria-describedby="ageHint"><span class="unit">${esc(t('filter.ageUnit'))}</span></div>` +
+        `<div class="chips ages" role="group" aria-label="${esc(t('filter.agePick'))}">${ageButtons}</div><p class="hint" id="ageHint" data-text="${esc(hint)}">${esc(hint)}</p>` + extra + '</fieldset>';
+    }
     function panel() {
       const count = key => C.activities.filter(a => !['closed', 'excluded'].includes(a.status) && a[key.field] === key.value).length;
-      const ageButtons = [0, 1, 2, 3, 4, 5, 6].map(n => `<button type="button" class="chip age" data-age="${n}" aria-pressed="false" aria-label="${esc(n === 0 ? `0 (${F.ageLabel(0)})` : F.ageLabel(n))}">${n}</button>`).join('');
-      return nearGroup() + `<fieldset class="group" id="g-age"><legend class="glabel">${esc(t('filter.age'))}</legend>` +
-        `<div class="agebox"><input class="field" id="age" type="number" inputmode="numeric" min="0" max="6" step="1" placeholder="${esc(t('common.any'))}" aria-label="${esc(t('filter.ageInput'))}" aria-describedby="ageHint"><span class="unit">${esc(t('filter.ageUnit'))}</span></div>` +
-        `<div class="chips ages" role="group" aria-label="${esc(t('filter.agePick'))}">${ageButtons}</div><p class="hint" id="ageHint" data-text="${esc(t('filter.ageHint'))}">${esc(t('filter.ageHint'))}</p>` +
-        `<div id="unkRow" hidden>${switchRow('unk', t('filter.unknownAge'), t('filter.unknownAgeHint'))}</div></fieldset>` +
+      return nearGroup() + ageGroup(t('filter.ageHint'), `<div id="unkRow" hidden>${switchRow('unk', t('filter.unknownAge'), t('filter.unknownAgeHint'))}</div>`) +
         `<div class="group" id="g-place"><label class="glabel" for="place">${esc(t('filter.place'))}</label><span class="select"><select class="field" id="place">${placeOptionsHtml()}</select></span></div>` +
         group('g-cat', t('filter.category'), `<div class="chips">${C_KEYS.category.map(k => chip('cat', k, t('category.' + k), count({field: 'category', value: k}))).join('')}</div>`) +
         group('g-fmt', t('filter.format'), `<div class="chips">${C_KEYS.format.map(k => chip('fmt', k, t('format.' + k), count({field: 'format', value: k}))).join('')}</div>`) +
@@ -451,8 +457,10 @@
         select('outcome', t('visit.outcome'), P.outcomeKeys, 'outcome') + text('observations', t('visit.observations'), 3000) +
         `<p class="hint">${esc(t('visit.privateNote'))}</p><div class="rowbtns"><button type="submit" class="go">${ICON.check(18)}${esc(t('visit.save'))}</button><button type="button" class="ghost" data-close-utility>${esc(t('common.cancel'))}</button></div></form>`};
     }
-    function importConfirm(imported) {
-      return {title: t('import.title'), body: `<p>${esc(t('import.contents', {favorites: imported.favorites.length, notes: Object.keys(imported.notes).length, statuses: Object.keys(imported.statuses).length, visits: Object.keys(imported.visits).length}))}</p><p class="notice">${esc(t('import.note', {age: F.ageLabel(imported.age), origin: imported.origin || t('common.notStated')}))}</p><div class="rowbtns"><button type="button" class="go" id="confirm-import">${esc(t('import.confirm'))}</button><button type="button" class="ghost" data-close-utility>${esc(t('common.cancel'))}</button></div>`};
+    // childcare: the Daycare applications in the file (store.validateChildcare), or null for a file without them.
+    function importConfirm(imported, childcare = null) {
+      const applications = childcare ? Object.keys(childcare.applications).length : 0;
+      return {title: t('import.title'), body: `<p>${esc(t('import.contents', {favorites: imported.favorites.length, notes: Object.keys(imported.notes).length, statuses: Object.keys(imported.statuses).length, visits: Object.keys(imported.visits).length}))}</p>${applications ? `<p>${esc(t('import.childcare', {n: applications}))}</p>` : ''}<p class="notice">${esc(t('import.note', {age: F.ageLabel(imported.age), origin: imported.origin || t('common.notStated')}))}</p><div class="rowbtns"><button type="button" class="go" id="confirm-import">${esc(t('import.confirm'))}</button><button type="button" class="ghost" data-close-utility>${esc(t('common.cancel'))}</button></div>`};
     }
     function planImportConfirm(preview) {
       return {title: t('planImport.title'), body: `<p>${esc(t('planImport.counts', {added: preview.added, changed: preview.changed}))}</p><p class="notice">${esc(t('planImport.note'))}</p><ul class="plain">${Object.values(preview.clean.visits).map(v => `<li><strong>${esc(shown(C.byId.get(v.activity)).name)}</strong><br>${esc(visitLabel(v))}<br>${esc(t('booking.' + v.booking))}</li>`).join('')}</ul><div class="rowbtns"><button type="button" class="go" id="confirm-plan-import">${ICON.check(18)}${esc(t('planImport.confirm'))}</button><button type="button" class="ghost" data-close-utility>${esc(t('common.cancel'))}</button></div>`};
@@ -467,7 +475,7 @@
       return {title: t('conflict.title'), body: `<p>${esc(t('conflict.text'))}</p><p class="notice">${esc(t('conflict.counts', {lf: personal().favorites.length, lv: Object.keys(personal().visits).length, rf: remote.profile?.favorites?.length || 0, rv: Object.keys(remote.profile?.visits || {}).length}))}</p><div class="rowbtns"><button type="button" class="ghost" data-action="backup-export">${ICON.download(18)}${esc(t('conflict.backup'))}</button><button type="button" class="ghost" data-action="sync-use-remote">${esc(t('conflict.useService'))}</button><button type="button" class="go" data-action="sync-use-local">${esc(t('conflict.keepHere'))}</button></div><p class="hint">${esc(t('conflict.note'))}</p>`};
     }
     const copyFallback = text => ({title: t('copy.title'), body: `<p>${esc(t('copy.denied'))}</p><textarea class="field area copy-fallback" readonly>${esc(text)}</textarea>`});
-    return {esc, ICON, categoryIcon, nm, shown, hoursLine, row, dayRow, rows, filterChips, distanceText, week, weekGroup, reportMail, panel, detail, saveButton, visitPlans, visitRows, visitLabel, saved, changesBox, outing, viewTools, venueBox, mapBox, empty, about, data, shareList, planExchange, pilot, visitForm,
+    return {esc, ICON, categoryIcon, nm, shown, hoursLine, row, dayRow, rows, filterChips, distanceText, week, weekGroup, reportMail, panel, ageGroup, nearGroup, detail, saveButton, visitPlans, visitRows, visitLabel, saved, changesBox, outing, viewTools, venueBox, mapBox, empty, about, data, shareList, planExchange, pilot, visitForm,
       importConfirm, planImportConfirm, report, conflict, copyFallback, warningText, hashFor, organiserURL, mapURL, routeURL, placeOptionsHtml, cost, ageFitNote, statusClass, phoneHref};
   }
   window.MinitandemViews = {create, esc, ICON, PRACTICAL_ORDER};

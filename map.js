@@ -1,8 +1,9 @@
 /* Map of the places that have one confirmed address point. Leaflet comes from assets/, tiles from swisstopo.
-   Every visible word comes from the translator passed in as t(key, params). */
+   Every visible word comes from the translator passed in as t(key, params). openKey: the data attribute of the buttons in a popup that open
+   a record ('open' for an activity, 'place' for the Daycare tab). */
 (() => {
   'use strict';
-  window.MinitandemMap={mount(container,items,t=key=>key){
+  window.MinitandemMap={mount(container,items,t=key=>key,{openKey='open'}={}){
     // The plotting rule is the catalogue's (catalogue.js onMap), the same one the caption and the address lists count with.
     const mapped=items.filter(window.MinitandemCatalogue.onMap);
     if(!mapped.length){container.textContent=t('map.noPoints');return ()=>{};}
@@ -25,7 +26,7 @@
       const a=group[0],latlng=[a.geo.lat,a.geo.lon];bounds.push(latlng);
       const popup=document.createElement('div');popup.className='map-popup';
       const address=document.createElement('p');address.textContent=a.geo.label;popup.append(address);
-      for(const place of group){const button=document.createElement('button');button.type='button';button.className='linkbtn';button.dataset.open=place.id;button.textContent=place.name;popup.append(button);}
+      for(const place of group){const button=document.createElement('button');button.type='button';button.className='linkbtn';button.dataset[openKey]=place.id;button.textContent=place.name;popup.append(button);}
       const marker=L.marker(latlng,{recordCount:group.length,icon:L.divIcon({className:'place-marker',html:String(group.length),iconSize:[44,44],iconAnchor:[22,22]}),title:group.map(a=>a.name).join('; '),alt:group.map(a=>a.name).join('; '),keyboard:true});
       marker.bindPopup(popup,{maxWidth:260}).addTo(markers);
     }

@@ -19,7 +19,8 @@
   // The "when" choices that mean days (as opposed to "has upcoming dates"): they count regular groups and opening hours as well.
   const DAY_WHEN = ['today', 'weekend', 'week'];
   const DAY_KEYS = [1, 2, 3, 4, 5, 6, 7];
-  const VIEWS = ['catalog', 'week', 'map', 'saved', 'archive', 'shared', 'venue'];
+  // 'childcare' is the Daycare tab (childcare.js); the address names it like the other views.
+  const VIEWS = ['catalog', 'week', 'map', 'saved', 'archive', 'shared', 'venue', 'childcare'];
   const MAX_AGE = 18;
   // Places have a German and a French name; a visitor may type either.
   const ALIASES = {Fribourg: 'Freiburg', Murten: 'Morat', 'Düdingen': 'Guin', Tafers: 'Tavel', Plaffeien: 'Planfayon', Kerzers: 'Chiètres', Meyriez: 'Merlach',

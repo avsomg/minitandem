@@ -1,5 +1,6 @@
-/* Minitandem: page wiring. The logic lives in catalogue.js, store.js, sync.js, exports.js and planning.js, the markup in views.js and
-   the words in the strings-*.js dictionaries. This file connects them to the page: state, events, dialogs, history and the language. */
+/* Minitandem: page wiring. The logic lives in catalogue.js, childcare.js, store.js, sync.js, exports.js and planning.js, the markup in views.js
+   and childcare-views.js, the words in the strings-*.js dictionaries. This file connects them to the page: state, events, dialogs, history and
+   the language. */
 (() => {
   'use strict';
   const W = window;
@@ -50,13 +51,23 @@
   // (no current translation of this card); '' when it is shown in the chosen language or while its file is still loading.
   const inEnglish = a => cardText.lang === 'en' || cardText.loading === cardText.lang ? '' : cardText.failed.has(cardText.lang) ? 'failed' : cardText.overlay?.translated(a) ? '' : 'stale';
   C.setLocalText(a => cardText.overlay ? cardText.overlay.text(a) : '');
+  /* The Daycare tab: its places and commune rules (data-childcare.js) are loaded from this site the first time the tab is opened, like the
+     card texts of a language. Until then CH has no places; childcare.status is 'idle', 'loading', 'failed' or '' once they are there. */
+  const CHM = W.MinitandemChildcare;
+  const childcareOf = data => CHM.create({data, K, clock: {today: C.today}, t});
+  let CH = childcareOf(W.CHILDCARE || null);
+  const childcare = {status: W.CHILDCARE ? '' : 'idle'};
   let sync = null;
-  const store = W.MinitandemStore.create({storage: local, byId: C.byId, P, today: C.today, statusKeys: K.PERSONAL_KEYS, canonicalId: K.canonicalId, onSaved: () => sync?.queue()});
+  const store = W.MinitandemStore.create({storage: local, byId: C.byId, P, today: C.today, statusKeys: K.PERSONAL_KEYS, canonicalId: K.canonicalId, onSaved: () => sync?.queue(),
+    applicationKeys: CHM.APPLICATION_KEYS});
   // near: the point distances are measured from, {kind: 'town', name, lat, lon} or {kind: 'geo', lat, lon}; nearStatus: '', 'locating'
   // or 'failed'. weekOpen: the days of the week view whose regular offers are unfolded.
+  // The Daycare tab: cf its filters, cview its part ('list', 'map', 'mine'), cLimit the rows shown, placeId the place whose page is open,
+  // pendingPlace a place asked for (by the address) before the places were loaded.
   const state = {view: 'catalog', venueId: '', sharedIds: [], f: K.defaultFilters(), limit: 24, openId: null, outingDate: '', opener: null, returnId: null,
-    near: null, nearStatus: '', weekOpen: new Set()};
+    near: null, nearStatus: '', weekOpen: new Set(), cf: CHM.defaultFilters(), cview: 'list', cLimit: 24, placeId: null, returnPlace: null, pendingPlace: ''};
   const V = W.MinitandemViews.create({t, C, P, X, F, store, state: () => state, shown, inEnglish, lang: I.lang, origin: location.origin, syncConnected: () => Boolean(sync?.config)});
+  const CV = W.MinitandemChildcareViews.create({t, F, V, K, CH: () => CH, store, state: () => state, lang: I.lang});
   const EX = W.MinitandemExports.create({t, lang: I.lang, P, byId: C.byId, regions: W.CATALOG_REGIONS, today: C.today, format: F});
   const PAGE = 24;
   const SESSION_FILTERS = store.KEYS.filters;
@@ -70,7 +81,7 @@
   const els = {};
   for (const id of ['q', 'qClear', 'fbar', 'fpAge', 'fpAgeV', 'fpPlace', 'fpPlaceV', 'fpMore', 'count', 'countNote', 'whenNote', 'barR', 'fcount', 'list', 'listhead', 'empty', 'endnav', 'endNote', 'toFilters', 'more', 'moreBtn', 'fchips', 'fchipList',
     'sheet', 'sheetBody', 'sheetDone', 'sheetClose', 'colBody', 'detail', 'utility', 'utilityTitle', 'utilityBody', 'panel', 'toast', 'viewTitle', 'viewTools', 'savedBox', 'mapBox', 'updates',
-    'syncState', 'contentNote', 'importFile', 'planImportFile', 'results', 'tabSaved', 'nearNote', 'nearText', 'nearOpen', 'resetTop', 'weekBox'])
+    'syncState', 'contentNote', 'importFile', 'planImportFile', 'results', 'tabSaved', 'nearNote', 'nearText', 'nearOpen', 'resetTop', 'weekBox', 'viewLead', 'viewParts', 'childcareBox'])
     els[id] = document.getElementById(id);
   const toast = W.MinitandemToast.create({node: els.toast, document});
   const wide = W.matchMedia('(min-width: 1000px)');
@@ -80,7 +91,10 @@
   function readHash() {
     const p = new URLSearchParams(location.hash.slice(1));
     const view = K.VIEWS.includes(p.get('view')) ? p.get('view') : 'catalog';
-    return {view, venueId: p.get('venue') || '', sharedIds: P.shareIds(p.get('list'), C.byId), activity: C.byId.has(p.get('activity')) ? p.get('activity') : null};
+    // A place of the Daycare tab is checked by the form of its id here: the places may not be loaded yet.
+    const place = p.get('place') || '';
+    return {view, venueId: p.get('venue') || '', sharedIds: P.shareIds(p.get('list'), C.byId), activity: C.byId.has(p.get('activity')) ? p.get('activity') : null,
+      place: /^[a-z0-9][a-z0-9-]{0,119}$/.test(place) ? place : null, cview: CHM.VIEW_KEYS.includes(p.get('show')) ? p.get('show') : 'list'};
   }
   function setHash(id = null, push = false) {
     const next = V.hashFor(id);
@@ -88,7 +102,7 @@
     try { history[push ? 'pushState' : 'replaceState']({minitandemDetail: push && !!id}, '', next); } catch {}
   }
   const first = readHash();
-  state.view = first.view; state.venueId = first.venueId; state.sharedIds = first.sharedIds;
+  state.view = first.view; state.venueId = first.venueId; state.sharedIds = first.sharedIds; state.cview = first.cview;
 
   /* ---------- language ---------- */
   function applyStatic() {
@@ -101,8 +115,11 @@
     $('meta[name="description"]')?.setAttribute('content', t('meta.description'));
     for (const b of $$('#langSeg button')) b.setAttribute('aria-pressed', String(b.dataset.lang === I.lang()));
   }
+  // The filter panel of the view: the activities' or the Daycare tab's (the same age and distance controls in both).
   function buildPanel() {
-    els.panel.innerHTML = V.panel();
+    const kind = state.view === 'childcare' ? 'childcare' : 'activities';
+    els.panel.innerHTML = kind === 'childcare' ? CV.panel() : V.panel();
+    els.panel.dataset.kind = kind;
     els.panel.hidden = false;
     placePanel();
   }
@@ -116,6 +133,7 @@
   function refreshCards() {
     render();
     if (state.openId && els.detail.open) { const body = $('.d-body', els.detail), top = body?.scrollTop || 0; els.detail.innerHTML = V.detail(C.byId.get(state.openId)); const next = $('.d-body', els.detail); if (next) next.scrollTop = top; }
+    if (state.placeId && els.detail.open && CH.byId.has(state.placeId)) { const top = $('.d-body', els.detail)?.scrollTop || 0; els.detail.innerHTML = CV.detail(CH.byId.get(state.placeId)); const next = $('.d-body', els.detail); if (next) next.scrollTop = top; }
     if (els.utility.open && utilityRebuild) utilityRebuild();
   }
 
@@ -145,6 +163,7 @@
     const f = state.f, [kind, ...rest] = key.split(':'), value = rest.join(':');
     const sets = {cat: f.categories, fmt: f.formats, lang: f.languages, day: f.days, need: f.needs};
     if (kind === 'age') { setAge(null); return; }
+    if (kind === 'cc') { CH.remove(state.cf, value); state.cLimit = PAGE; render(); return; }
     if (sets[kind]) sets[kind].delete(kind === 'day' ? Number(value) : value);
     else if (kind === 'place') f.place = '';
     else if (kind === 'indoor') f.indoor = false;
@@ -159,6 +178,12 @@
     if (disposeMap) { disposeMap(); disposeMap = null; }
     renderToken++;
     try { session.setItem(SESSION_FILTERS, JSON.stringify(C.serializeFilters(state.f))); } catch {}
+    if (state.view === 'childcare') { renderChildcare(); return; }
+    // Back from the Daycare tab: the activities' panel, search words and second pill.
+    if (els.panel.dataset.kind !== 'activities') buildPanel();
+    els.childcareBox.hidden = true; els.childcareBox.innerHTML = ''; els.viewLead.hidden = true; els.viewParts.hidden = true; els.viewParts.innerHTML = '';
+    $('label[for="q"]').textContent = t('search.label'); els.q.placeholder = t('search.placeholder');
+    els.fpPlace.dataset.open = 'place'; $('small', els.fpPlace).textContent = t('pill.place');
     const list = lastItems = items();
     const key = list.map(a => a.id).join('|');
     if (key !== resultKey) { state.limit = PAGE; resultKey = key; }
@@ -255,12 +280,125 @@
       .catch(() => { const note = $('#map-error'); if (note) note.hidden = false; });
   }
 
+  /* ---------- the Daycare tab ---------- */
+  function loadChildcare() {
+    if (CH.loaded || childcare.status === 'loading' || childcare.status === 'failed') return;
+    childcare.status = 'loading';
+    const script = document.createElement('script');
+    script.src = 'data-childcare.js';
+    script.onload = () => {
+      if (W.CHILDCARE) { CH = childcareOf(W.CHILDCARE); childcare.status = ''; } else childcare.status = 'failed';
+      if (state.view === 'childcare') { buildPanel(); render(); openPendingPlace(); }
+    };
+    script.onerror = () => { childcare.status = 'failed'; script.remove(); if (state.view === 'childcare') render(); };
+    document.head.append(script);
+  }
+  // The chips of the filters that are on: the child's age and the distance limit (shared with the activity list), then the tab's own.
+  function childcareChips() {
+    const a0 = age(), out = [];
+    if (Number.isFinite(a0)) out.push({key: 'age', label: F.ageLabel(a0)});
+    if (state.f.radius && state.near) out.push({key: 'radius', label: t('near.radiusKm', {km: state.f.radius})});
+    return out.concat(CH.active(state.cf).map(f => ({key: 'cc:' + f.key, label: CV.filterLabel(f)})));
+  }
+  let childcareKey = '';
+  // The tab in the same frame as the lists: title, search, the two pills (age, and where distances are measured from), count, filter chips,
+  // then its own box with the list, the map or the family's applications.
+  function renderChildcare() {
+    loadChildcare();
+    if (els.panel.dataset.kind !== 'childcare') buildPanel();
+    const a0 = age(), view = state.cview, status = CH.loaded ? '' : childcare.status === 'failed' ? 'failed' : 'loading';
+    const list = CH.filter(state.cf, {age: a0, near: state.near, radius: state.f.radius}), n = list.length, total = CH.places.length;
+    const key = list.map(p => p.id).join('|');
+    if (key !== childcareKey) { state.cLimit = PAGE; childcareKey = key; }
+    const chips = childcareChips(), af = chips.length, mine = view === 'mine', filtering = !status && !mine;
+    document.body.dataset.view = 'childcare';
+    for (const b of $$('[data-view].tab')) { const on = b.dataset.view === 'childcare'; b.setAttribute('aria-pressed', String(on)); if (on) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); }
+    els.tabSaved.querySelector('.tabn').textContent = String(store.personal.favorites.filter(id => C.byId.has(id)).length);
+    els.viewTitle.textContent = t('view.childcare'); els.viewTitle.hidden = false;
+    els.viewLead.textContent = CH.loaded ? t('childcare.lead', {date: F.dateLabel(CH.checkedOn())}) : ''; els.viewLead.hidden = !CH.loaded;
+    els.viewParts.innerHTML = CH.loaded ? CV.parts(view) : ''; els.viewParts.hidden = !CH.loaded;
+    $('label[for="q"]').textContent = t('childcare.search.label'); els.q.placeholder = t('childcare.search.placeholder');
+    if (els.q.value !== state.cf.query) els.q.value = state.cf.query;
+    els.qClear.hidden = !state.cf.query; $('.search').hidden = !filtering; els.fbar.hidden = !filtering;
+    els.fpAgeV.textContent = F.ageLabel(a0); els.fpAge.classList.toggle('on', Number.isFinite(a0));
+    els.fpPlace.dataset.open = 'near'; $('small', els.fpPlace).textContent = t('childcare.pill.near');
+    els.fpPlaceV.textContent = !state.near ? t('childcare.nearNone') : state.near.kind === 'town' ? state.near.name : t('childcare.nearLocation');
+    els.fpPlace.classList.toggle('on', Boolean(state.near));
+    els.fpMore.classList.toggle('on', af > 0); els.fpMore.setAttribute('aria-label', af ? t('filters.buttonActive', {n: af}) : t('filters.button'));
+    const applications = Object.keys(store.childcare.applications).filter(id => CH.byId.has(id)).length;
+    els.count.innerHTML = status ? '' : mine ? `<b>${applications}</b> ${esc(t('childcare.mine.count', {n: applications}))}`
+      : n === total && !CH.anyFilter(state.cf) && !af ? `<b>${n}</b> ${esc(t('childcare.count', {n}))}` : `<b>${n}</b> ${esc(t('childcare.countOf', {n: total, total}))}`;
+    els.barR.hidden = !filtering; els.nearOpen.hidden = Boolean(state.near) || view === 'map';
+    // The line of chips shows only while a filter is on: this tab has no rainy-day switch to offer.
+    els.fchips.hidden = !filtering || !(af || CH.anyFilter(state.cf)); els.resetTop.hidden = !(af || CH.anyFilter(state.cf));
+    els.fcount.textContent = af ? t('filters.active', {n: af}) : ''; els.fcount.hidden = !af;
+    els.fchipList.innerHTML = CV.filterChips(chips);
+    els.sheetDone.textContent = n ? t('childcare.filters.show', {n}) : t('childcare.filters.none');
+    els.countNote.hidden = true; els.whenNote.hidden = true;
+    // The facts are English for now: said once at the top when another language is chosen.
+    els.contentNote.hidden = I.lang() === 'en' || Boolean(status); els.contentNote.textContent = els.contentNote.hidden ? '' : t('childcare.english');
+    els.nearNote.hidden = !state.near || !filtering || !n;
+    els.nearText.textContent = !state.near ? '' : state.near.kind === 'town' ? t('near.listFromTown', {town: state.near.name}) : t('near.listFromLocation');
+    for (const el of [els.listhead, els.list, els.mapBox, els.weekBox, els.empty, els.more, els.viewTools, els.savedBox, els.updates]) el.hidden = true;
+    for (const el of [els.list, els.mapBox, els.weekBox, els.savedBox, els.viewTools, els.updates]) el.innerHTML = '';
+    els.endnav.hidden = view !== 'list' || !n || Boolean(status); els.endNote.hidden = false; els.endNote.textContent = t('childcare.end', {shown: Math.min(state.cLimit, n), n});
+    els.childcareBox.hidden = false; els.childcareBox.innerHTML = CV.box(list, {view, limit: state.cLimit, status});
+    syncPanel();
+    if (view === 'map' && n && !status) mountChildcareMap(list);
+  }
+  function mountChildcareMap(list) {
+    const token = renderToken, words = (key, params) => t(key === 'map.cluster' ? 'childcare.map.cluster' : key, params);
+    loadMapLibs().then(() => { if (token === renderToken && $('#places-map')) disposeMap = W.MinitandemMap.mount($('#places-map'), list.map(CH.mapItem), words, {openKey: 'place'}); })
+      .catch(() => { const note = $('#map-error'); if (note) note.hidden = false; });
+  }
+  // A place's page in the card dialog. Asked for by the address before the places are loaded, it opens once they are.
+  function openPlace(id, push = true) {
+    if (!CH.loaded) { state.pendingPlace = id; return; }
+    const p = CH.byId.get(id); if (!p) return;
+    if (!els.detail.open) { state.opener = document.activeElement; state.returnPlace = id; state.returnId = null; }
+    if (push) setHash(id, !state.placeId && !state.openId);
+    state.placeId = id; state.openId = null;
+    els.detail.innerHTML = CV.detail(p);
+    if (!els.detail.open) els.detail.showModal();
+    $('.d-body', els.detail).scrollTop = 0;
+  }
+  function openPendingPlace() { const id = state.pendingPlace; state.pendingPlace = ''; if (id && state.view === 'childcare') openPlace(id, false); }
+  // My application at the open place: a status, two dates and a note, saved in this browser at each change (store.js).
+  function setApplication(id, patch) {
+    const applications = store.childcare.applications, next = {...(applications[id] || CHM.emptyApplication()), ...patch};
+    if (CHM.isEmptyApplication(next)) delete applications[id]; else applications[id] = next;
+    const saved = store.saveChildcare();
+    const hint = $('#cc-renewal'); if (hint) hint.textContent = CV.renewal(id);
+    return saved;
+  }
+  function chooseCommune(select) {
+    store.childcare.commune = select.value;
+    if (!store.saveChildcare()) toast(t('storage.failed'));
+    const rules = $('#cc-rules'); if (rules) rules.innerHTML = CV.rules();
+    const hint = $('#cc-renewal'); if (hint && state.placeId) hint.textContent = CV.renewal(state.placeId);
+    const id = select.id; render(); if (id === 'cc-commune-mine') $('#cc-commune-mine')?.focus();
+  }
+
   /* ---------- filter panel ---------- */
   function syncPanel() {
     const f = state.f, a0 = age(), panel = els.panel;
     const ageIn = $('#age', panel); if (!ageIn) return;
     if (document.activeElement !== ageIn) ageIn.value = Number.isFinite(a0) ? a0 : '';
     for (const b of $$('.chip.age', panel)) b.setAttribute('aria-pressed', String(a0 === Number(b.dataset.age)));
+    const town = $('#nearTown', panel), note = $('#nearState', panel);
+    if (document.activeElement !== town) town.value = state.near?.kind === 'town' ? state.near.name : '';
+    note.textContent = state.nearStatus === 'locating' ? t('near.locating') : state.nearStatus === 'failed' ? t('near.failed')
+      : !state.near ? '' : state.near.kind === 'town' ? t('near.fromTown', {town: state.near.name}) : t('near.fromLocation');
+    note.classList.toggle('err', state.nearStatus === 'failed');
+    $('#nearGeo', panel).disabled = state.nearStatus === 'locating';
+    $('#nearClear', panel).hidden = !state.near;
+    const radius = $('#nearRadius', panel); radius.disabled = !state.near; radius.value = String(state.near ? state.f.radius : 0);
+    if (panel.dataset.kind === 'childcare') {
+      const cf = state.cf, sets = {type: cf.types, subsidy: cf.subsidy, lang: cf.languages, approach: cf.approaches};
+      for (const b of $$('.chip[data-ckind]', panel)) b.setAttribute('aria-pressed', String(Boolean(sets[b.dataset.ckind]?.has(b.dataset.val))));
+      $('#ccOpens', panel).value = cf.opensBy; $('#ccCloses', panel).value = cf.closesAfter;
+      return;
+    }
     $('#unkRow', panel).hidden = !Number.isFinite(a0);
     $('#unk', panel).setAttribute('aria-checked', String(f.includeUnknownAge));
     $('#place', panel).value = f.place;
@@ -279,14 +417,6 @@
     $('#adult', panel).setAttribute('aria-checked', String(f.parentMatch));
     $('#sort option[value="near"]', panel).disabled = !state.near;
     $('#sort', panel).value = f.sort;
-    const town = $('#nearTown', panel), note = $('#nearState', panel);
-    if (document.activeElement !== town) town.value = state.near?.kind === 'town' ? state.near.name : '';
-    note.textContent = state.nearStatus === 'locating' ? t('near.locating') : state.nearStatus === 'failed' ? t('near.failed')
-      : !state.near ? '' : state.near.kind === 'town' ? t('near.fromTown', {town: state.near.name}) : t('near.fromLocation');
-    note.classList.toggle('err', state.nearStatus === 'failed');
-    $('#nearGeo', panel).disabled = state.nearStatus === 'locating';
-    $('#nearClear', panel).hidden = !state.near;
-    const radius = $('#nearRadius', panel); radius.disabled = !state.near; radius.value = String(state.near ? state.f.radius : 0);
   }
   function togglePanelValue(kind, val) {
     const f = state.f, toggle = (set, v) => set.has(v) ? set.delete(v) : set.add(v);
@@ -320,11 +450,13 @@
       else if (e.target.id === 'nearRadius') setRadius(Number(e.target.value));
       else if (e.target.id === 'sort') { state.f.sort = e.target.value; render(); }
       else if (e.target.id === 'nearTown') chooseTown(e.target.value);
+      else if (e.target.id === 'ccOpens' || e.target.id === 'ccCloses') { CH.toggle(state.cf, e.target.id === 'ccOpens' ? 'opens' : 'closes', e.target.value); state.cLimit = PAGE; render(); }
     });
     panel.addEventListener('click', e => {
       const b = e.target.closest('button'); if (!b) return;
       if (b.dataset.age !== undefined) { const n = Number(b.dataset.age); $('#ageHint', panel).classList.remove('err'); setAge(age() === n ? null : n); }
       else if (b.dataset.kind) togglePanelValue(b.dataset.kind, b.dataset.val);
+      else if (b.dataset.ckind) { CH.toggle(state.cf, b.dataset.ckind, b.dataset.val); state.cLimit = PAGE; render(); }
       else if (b.id === 'unk') { state.f.includeUnknownAge = !state.f.includeUnknownAge; render(); }
       else if (b.id === 'adult') { state.f.parentMatch = !state.f.parentMatch; render(); }
       else if (b.id === 'nearGeo') locate();
@@ -382,8 +514,10 @@
     W.scrollTo({top: Math.max(0, $('.search').getBoundingClientRect().top + W.pageYOffset - 12), behavior: reduce ? 'auto' : 'smooth'});
     els.fpAge.focus({preventScroll: true});
   }
+  // Reset in the Daycare tab clears its own filters and the distance limit; in the lists, every filter. Both forget the child's age.
   function reset() {
-    state.f = K.defaultFilters(); state.limit = PAGE;
+    if (state.view === 'childcare') { state.cf = CHM.defaultFilters(); state.f.radius = 0; state.cLimit = PAGE; } else state.f = K.defaultFilters();
+    state.limit = PAGE;
     store.personal.age = null; if (!store.persist()) toast(t('storage.failed'));
     els.q.value = ''; render();
   }
@@ -391,26 +525,33 @@
   /* ---------- card page ---------- */
   function openDetail(id, push = true) {
     const a = C.byId.get(id); if (!a) return;
-    if (!els.detail.open) { state.opener = document.activeElement; state.returnId = id; }
+    if (!els.detail.open) { state.opener = document.activeElement; state.returnId = id; state.returnPlace = null; }
     if (push) setHash(id, !state.openId);
-    state.openId = id;
+    state.openId = id; state.placeId = null;
     els.detail.innerHTML = V.detail(a);
     if (!els.detail.open) els.detail.showModal();
     $('.d-body', els.detail).scrollTop = 0;
   }
+  // One step back per close: Chromium can send the dialog two cancel events for one Escape (seen with a date field in focus), and a second
+  // step back would leave the view as well.
+  let goingBack = false;
   function closeDetail() {
-    if (history.state?.minitandemDetail) { history.back(); return; }
-    state.openId = null; setHash(); els.detail.close();
+    if (history.state?.minitandemDetail) { if (!goingBack) { goingBack = true; history.back(); } return; }
+    state.openId = null; state.placeId = null; setHash(); els.detail.close();
   }
   els.detail.addEventListener('cancel', e => { e.preventDefault(); closeDetail(); });
+  // The focus goes back to the row the card or place was opened from.
+  let closedAt = 0;
+  function restoreFocus() {
+    const restored = (state.returnId && $(`#list [data-id="${CSS.escape(state.returnId)}"]`)) ||
+      (state.returnPlace && $$(`#childcareBox [data-place="${CSS.escape(state.returnPlace)}"]`).find(el => el.getClientRects().length));
+    (restored || (state.opener?.isConnected ? state.opener : els.results)).focus({preventScroll: true});
+  }
   els.detail.addEventListener('close', () => {
-    state.openId = null; render();
+    state.openId = null; state.placeId = null; render(); closedAt = Date.now();
     // After whatever closed the dialog has finished: Chromium fires 'close' inside dialog.close(), so the hashchange handler that
     // called it renders the list again afterwards and would drop the focus from the row it replaces.
-    queueMicrotask(() => {
-      const restored = state.returnId && $(`#list [data-id="${CSS.escape(state.returnId)}"]`);
-      (restored || (state.opener?.isConnected ? state.opener : els.results)).focus({preventScroll: true});
-    });
+    queueMicrotask(restoreFocus);
   });
 
   /* ---------- dialogs ---------- */
@@ -532,7 +673,9 @@
     'report-change': () => { const a = C.byId.get(state.openId); if (a) utility(V.report(a, !!sync.config)); },
     'more': () => { const firstNew = state.limit; state.limit += PAGE; render(); $$('#list .row')[firstNew]?.focus(); },
     'open-updates': () => { switchView('saved'); $('#saved-changes')?.focus(); },
-    'backup-export': () => { download(EX.backupFile(store.personal)); toast(t('toast.backupExported')); },
+    'backup-export': () => { download(EX.backupFile(store.personal, store.childcare)); toast(t('toast.backupExported')); },
+    'cc-more': () => { const firstNew = state.cLimit; state.cLimit += PAGE; render(); $$('#childcareBox .row')[firstNew]?.focus(); },
+    'cc-retry': () => { childcare.status = 'idle'; render(); },
     'backup-import': () => els.importFile.click(),
     'csv': () => { download(EX.csvFile(lastItems.length ? lastItems : items(), a => C.statusOf(a, age()))); toast(t('toast.csvExported')); },
     'offline-addresses': () => { const list = store.personal.favorites.map(id => C.byId.get(id)).filter(Boolean); if (list.length) { download(EX.addressesFile(list)); toast(t('toast.addressesExported')); } },
@@ -570,6 +713,9 @@
     if (d.lang) { switchLanguage(d.lang); return; }
     if (el.id === 'brand') { e.preventDefault(); state.f = K.defaultFilters(); state.view = 'catalog'; setHash(null, true); render(); W.scrollTo(0, 0); return; }
     if (el.hasAttribute('data-reset')) { reset(); return; }
+    // A place of the Daycare tab (a row, a map popup, the list of applications); a row opened in a new tab keeps its link.
+    if (d.place) { if (el.tagName === 'A' && (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1)) return; e.preventDefault(); if (els.utility.open) els.utility.close(); openPlace(d.place); return; }
+    if (d.cview) { state.cview = CHM.VIEW_KEYS.includes(d.cview) ? d.cview : 'list'; state.cLimit = PAGE; setHash(null, true); render(); $(`[data-cview="${state.cview}"]`)?.focus(); return; }
     if (d.view) { if (els.utility.open) els.utility.close(); if (els.detail.open) els.detail.close(); switchView(d.view); return; }
     if (d.venue && C.venues.some(v => v.id === d.venue)) { state.venueId = d.venue; state.view = 'venue'; setHash(null, true); if (els.detail.open) els.detail.close(); render(); W.scrollTo(0, 0); return; }
     if (d.plan) { editVisit(d.plan, null, el.hasAttribute('data-plan-event') ? Number(d.planEvent) : null); return; }
@@ -607,10 +753,18 @@
     else if (el.id === 'family-adults' || el.matches?.('.family-child-age')) updateFamilyPrice();
     else if (el.id === 'personal-status' && state.openId) { store.personal.statuses[state.openId] = el.value; store.persist(); render(); }
     else if (el.id === 'detail-origin') { store.personal.origin = store.cleanOrigin(el.value); el.value = store.personal.origin; toast(t(store.persist() ? 'data.startSaved' : 'storage.failed')); }
+    else if (el.matches?.('[data-commune-select]')) chooseCommune(el);
+    else if (['cc-status', 'cc-registered', 'cc-renew'].includes(el.id) && state.placeId) {
+      const field = {'cc-status': 'status', 'cc-registered': 'registered', 'cc-renew': 'renewBy'}[el.id];
+      if (field !== 'status' && el.value && !P.validDate(el.value)) { toast(t('childcare.mine.invalidDate')); return; }
+      if (!setApplication(state.placeId, {[field]: el.value})) toast(t('storage.failed'));
+      render();
+    }
   });
   document.addEventListener('input', e => {
     const el = e.target;
     if (el.id === 'personal-note' && state.openId) { store.personal.notes[state.openId] = el.value; const saved = store.persist(); $('#note-state').textContent = t(saved ? 'mine.saved' : 'mine.notSaved'); }
+    else if (el.id === 'cc-note' && state.placeId) { const saved = setApplication(state.placeId, {note: el.value.slice(0, 2000)}); $('#cc-note-state').textContent = t(saved ? 'childcare.mine.saved' : 'mine.notSaved'); }
     else if (el.id === 'family-adults' || el.matches?.('.family-child-age')) updateFamilyPrice();
     else if (el.id === 'report-text') el.setCustomValidity('');
   });
@@ -624,8 +778,9 @@
     }
   });
   els.panel.addEventListener('submit', e => e.preventDefault());
-  els.q.addEventListener('input', e => { state.f.query = e.target.value; state.limit = PAGE; render(); });
-  els.qClear.addEventListener('click', () => { els.q.value = ''; state.f.query = ''; state.limit = PAGE; render(); els.q.focus(); });
+  // The search field serves the Daycare tab too, with its own words.
+  els.q.addEventListener('input', e => { if (state.view === 'childcare') { state.cf.query = e.target.value; state.cLimit = PAGE; } else { state.f.query = e.target.value; state.limit = PAGE; } render(); });
+  els.qClear.addEventListener('click', () => { els.q.value = ''; if (state.view === 'childcare') state.cf.query = ''; else state.f.query = ''; state.limit = PAGE; render(); els.q.focus(); });
   els.moreBtn.addEventListener('click', actions.more);
   els.toFilters.addEventListener('click', toFilters);
   for (const b of [els.nearOpen, $('#nearChange')]) b.addEventListener('click', openNear);
@@ -640,13 +795,17 @@
     const file = e.target.files[0]; e.target.value = ''; if (!file) return;
     try {
       if (file.size > 10e6) throw Object.assign(Error('File too large'), {code: 'file.tooLarge'});
-      const imported = store.validateBackup(JSON.parse(await file.text()), store.personal.origin);
+      const raw = JSON.parse(await file.text());
+      const imported = store.validateBackup(raw, store.personal.origin);
+      // The Daycare applications travel beside the family record in the same file; an older file has none.
+      const childcareFile = raw?.childcare === undefined ? null : store.validateChildcare(raw.childcare);
       if (new Set([...Object.keys(store.personal.visits), ...Object.keys(imported.visits)]).size > P.maxVisits) throw P.fail('visits.merge', 'More than 200 visits after merging.');
-      utility(V.importConfirm(imported));
+      utility(V.importConfirm(imported, childcareFile));
       $('#confirm-import').addEventListener('click', () => {
         const p = store.personal;
         store.personal = {...p, favorites: [...new Set([...p.favorites, ...imported.favorites])], notes: {...p.notes, ...imported.notes}, statuses: {...p.statuses, ...imported.statuses}, visits: {...p.visits, ...imported.visits}, tracked: {...p.tracked, ...imported.tracked}, age: imported.age, origin: imported.origin};
-        const saved = store.persist(imported); els.utility.close(); render(); toast(t(saved ? 'import.done' : 'import.memory'));
+        const saved = store.persist(imported), savedChildcare = childcareFile ? store.saveChildcare(childcareFile) : true;
+        els.utility.close(); render(); toast(t(saved && savedChildcare ? 'import.done' : 'import.memory'));
       });
     } catch (error) { toast(error instanceof SyntaxError ? t('import.unreadable') : errorText(error)); }
   });
@@ -668,12 +827,25 @@
 
   /* ---------- history, other tabs, start ---------- */
   W.addEventListener('hashchange', () => {
+    goingBack = false;
     const h = readHash();
-    state.view = h.view; state.venueId = h.venueId; state.sharedIds = h.sharedIds;
-    if (h.activity) openDetail(h.activity, false); else if (els.detail.open) els.detail.close();
+    state.view = h.view; state.venueId = h.venueId; state.sharedIds = h.sharedIds; state.cview = h.cview;
+    if (h.place && h.view === 'childcare') openPlace(h.place, false); else if (h.activity) openDetail(h.activity, false); else if (els.detail.open) els.detail.close();
     render();
+    // A dialog Chromium closed itself just before this step back (a second Escape it does not let the page cancel) lost the focus to this render.
+    if (!els.detail.open && Date.now() - closedAt < 1000 && document.activeElement === document.body) restoreFocus();
   });
   W.addEventListener('storage', e => {
+    // Daycare applications changed in another tab: the lists follow; an open place's application too, unless it is being edited here.
+    if (e.key === store.KEYS.childcare && store.storageAvailable) {
+      try { store.reloadChildcare(); } catch { toast(t('storage.otherTab')); return; }
+      render();
+      const box = $('#cc-mine');
+      if (box && state.placeId && CH.byId.has(state.placeId) && !box.contains(document.activeElement)) box.outerHTML = CV.applicationBox(CH.byId.get(state.placeId));
+      const rules = $('#cc-rules'), select = $('#cc-commune');
+      if (rules && select && document.activeElement !== select) { select.value = store.childcare.commune; rules.innerHTML = CV.rules(); }
+      return;
+    }
     if (e.key !== store.KEYS.family || !store.storageAvailable) return;
     try {
       const id = state.openId, noteBefore = id ? store.personal.notes[id] : undefined;
@@ -699,6 +871,7 @@
   // The footer stays out of the page until the list is there (styles.css), so the list never pushes it down.
   try { render(); } finally { document.body.classList.add('ready'); }
   if (first.activity) openDetail(first.activity, false);
+  else if (first.place && state.view === 'childcare') openPlace(first.place, false);
   if (!store.storageAvailable) setTimeout(() => toast(t('storage.unavailable')), 100);
   sync.init();
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname))) W.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));

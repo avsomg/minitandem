@@ -570,3 +570,43 @@ dialog .toast { z-index: 60; }
   .case-flow { grid-template-columns: 1fr; gap: 20px; }
   .case-flow li + li::before { content: "↓" / ""; left: 50%; top: -18px; transform: translateX(-50%); }
 }
+
+/* The Daycare tab: the same frame as the lists (title, search, pills, rows, card dialog); its parts are a switch like the language switch. */
+.viewlead { margin: 0 0 6px; color: var(--d); font-size: 14px; max-width: 72ch; }
+.childcare { display: grid; gap: 10px; min-width: 0; }
+.viewparts { margin: 2px 0 10px; }
+.cc-parts { display: inline-flex; max-width: 100%; }
+.cc-parts button { padding: 0 12px; }
+.cc-parts button b { margin-left: 4px; font-variant-numeric: tabular-nums; }
+/* Ink 6.7:1 on the row (#f6f6f6), 6.1:1 on its hover (#ececec), 6.5:1 on the tint. */
+.c-childcare { --ink: #155e75; --tint: #cffafe; }
+.r-status svg { margin-right: 5px; }
+.cc-source { margin-top: 4px; }
+.facts dd .cc-src, .pr dd .sub { display: block; margin-top: 3px; font-size: 12.5px; color: var(--d); overflow-wrap: anywhere; }
+.cc-src a { color: var(--d); text-underline-offset: 2px; }
+.cc-badges { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
+.cc-badges span { padding: 3px 10px; border-radius: 999px; background: var(--raised); font-size: 13px; font-weight: 500; }
+.cc-commune .glabel, .cc-mine .glabel { display: block; margin: 12px 0 6px; }
+.cc-commune .hint, .cc-mine .hint { margin-top: 6px; }
+.cc-commune p.hint, .cc-mine p.hint, .cc-mine-list p.hint, .cc-about p.hint { font-size: 14px; line-height: 1.45; }
+.cc-about p.hint + p.hint { margin-top: 8px; }
+.cc-badges + .d-checked { margin-top: 8px; }
+/* A phone reads a fact or a rule under its label, as in the preview the owner accepted: the texts are long. */
+@media (max-width: 559px) {
+  .cc-facts .fr, .cc-rules .fr, .cc-app .pr .fr { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+}
+/* Phones: the Daycare tab keeps its own width; where the five views need two lines (French), it starts the second one. */
+@media (max-width: 419px) { .tab[data-view="childcare"] { flex-grow: 0; } }
+.cc-rules-title { margin: 18px 0 8px; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.cc-rules + .hint, .cc-rules ~ .hint { margin-top: 8px; }
+.cc-two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
+.cc-two input[type="date"] { min-width: 0; }
+@media (max-width: 359px) { .cc-two { grid-template-columns: minmax(0, 1fr); } }
+.cc-mine-list { margin-top: 4px; display: grid; gap: 10px; }
+.cc-mine-list .group { margin-bottom: 4px; }
+.cc-app { display: grid; gap: 6px; padding: 12px 16px; border-radius: 16px; background: var(--surface); }
+.cc-app .pr { padding: 0; background: transparent; }
+.cc-app-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 12px; }
+.cc-app-name { padding-left: 0; font-size: 16px; font-weight: 600; text-align: left; overflow-wrap: anywhere; }
+.cc-app-status { font-size: 14px; font-weight: 600; }
+.cc-overdue { color: #b91c1c; font-weight: 600; }

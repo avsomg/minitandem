@@ -24,6 +24,9 @@
 !storage-migration.js
 !catalogue.js
 !catalogue-i18n.js
+!childcare.js
+!childcare-views.js
+!data-childcare.js
 !data-de.js
 !data-fr.js
 !format.js

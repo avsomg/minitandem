@@ -70,7 +70,7 @@ for (const a of records) {
   lines.push('');
 }
 fs.writeFileSync(path.join(root, 'research.md'), lines.join('\n'));
-// The catalogue as published: its layers and the German and French card texts that the app loads on demand.
+// The catalogue as published: its layers, the German and French card texts and the Daycare places that the app loads on demand.
 const revisionInputs=['data.js','data-reviewed.js','data-practical.js','data-geo.js','regions.js',...LAZY_SCRIPTS];
 const revision=crypto.createHash('sha256').update(revisionInputs.map(file=>fs.readFileSync(path.join(root,file))).join('\n')).digest('hex').slice(0,16);
 const revisionDir=path.join(root,'editorial','catalog-versions',revision);

@@ -46,7 +46,7 @@ test('German and French do not copy the English interface text for ordinary labe
 
 // Every word the interface can show must have a dictionary entry: literal keys in the code, and the families built from key lists.
 const used=new Set();
-for(const file of ['views.js','app.js','exports.js','format.js','map.js','sync.js']){
+for(const file of ['views.js','childcare-views.js','childcare.js','app.js','exports.js','format.js','map.js','sync.js']){
   const source=fs.readFileSync(path.join(root,file),'utf8');
   for(const m of source.matchAll(/\bt\('([A-Za-z0-9_.]+)'(?!\s*\+)/g))used.add(m[1]);
 }

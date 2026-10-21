@@ -38,7 +38,7 @@ test('index.html loads exactly the scripts in ui-files.mjs, in that order, witho
   assert.ok(!/\son[a-z]+="/.test(index),'no inline event handlers');
   assert.ok(!/<link[^>]+href="https?:/.test(index.replace(/rel="canonical"[^>]*/g,'')),'no external stylesheet or font');
   for(const file of [...STATIC,...SCRIPTS,...LAZY_SCRIPTS])assert.ok(fs.existsSync(path.join(root,file)),file);
-  for(const file of LAZY_SCRIPTS)assert.ok(!index.includes(file),file+' is loaded only for its language, by app.js');
+  for(const file of LAZY_SCRIPTS)assert.ok(!index.includes(file),file+' is loaded only when needed (its language, the Daycare tab), by app.js');
   for(const file of ASSETS)assert.ok(fs.existsSync(path.join(root,'assets',file)),file);
 });
 test('the Vercel allow-list names every published file and nothing private',()=>{
