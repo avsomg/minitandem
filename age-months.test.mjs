@@ -62,6 +62,22 @@ test('the real Dylan card (4 months to 4 years) is found with "under 1" in all t
   }
 });
 
+test('with age 0 a minimum in months is a match of the age filter, not a promise that every baby under 1 fits',()=>{
+  // ageFrom() lets 0 reach every minimum below 1 year, so a card from 4 months is listed for "under 1". The card page and the row say
+  // that the age filter matches and show the minimum in months; they never say "fits age 0".
+  for(const lang of ['en','de','fr']){
+    const S=loadStack({...clock,lang,local:{'minitandem-family-v1':{version:1,favorites:[],notes:{},statuses:{},age:0}}}),a=S.byId.get('swim-courtepin-babies');
+    assert.ok(a.min>0&&a.min<1&&S.C.ageFit(a,0)===true,lang);
+    const html=S.V.detail(a),note=html.match(/id="detail-age-fit">(?:<svg[\s\S]*?<\/svg>)?([^<]*)</)[1];
+    assert.equal(note,S.V.esc(S.t('fit.yes',{age:S.F.ageBare(0)})),lang);
+    assert.ok(html.includes(S.V.esc(S.F.ageShort(a))),lang+': the minimum in months is on the page');
+    assert.ok(S.V.row(a).includes(S.V.esc(S.t('fit.sr',{age:S.F.ageBare(0)}))),lang+': the row says the same to a screen reader');
+  }
+  const en=loadStack(clock).t;
+  assert.equal(en('fit.yes',{age:'0 (under 1)'}),'Matches age filter: 0 (under 1)');
+  for(const lang of ['en','de','fr'])assert.doesNotMatch(loadStack({...clock,lang}).t('fit.yes',{age:'0'}),/^(Fits|Passt zum Alter |Compatible avec l’âge)/);
+});
+
 test('ages below two years read in months in English, German and French; a whole year or 2 years and more stays in years',()=>{
   const read=(lang,min,max)=>{const {F}=loadStack({...clock,lang});return F.ageShort({min,max});};
   const rows=[[0.33,null,'From 4 months','Ab 4 Monaten','Dès 4 mois'],[0.5,null,'From 6 months','Ab 6 Monaten','Dès 6 mois'],[1.5,null,'From 18 months','Ab 18 Monaten','Dès 18 mois'],
