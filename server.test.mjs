@@ -140,7 +140,7 @@ test('/healthz names the build that is live: revision of the built files, date o
   // build-info.json holds no time of day (a build must be reproducible); the revision is the content hash of the catalogue files that were built.
   assert.deepEqual(Object.keys(info),['revision','catalogueUpdated','records','published','archived']);
   assert.ok(info.published>0&&info.archived>0);assert.equal(info.published+info.archived,info.records);
-  const files=['data.js','data-reviewed.js','data-practical.js','data-geo.js','regions.js','data-de.js','data-fr.js','data-childcare.js'];
+  const files=['data.js','data-reviewed.js','data-practical.js','data-geo.js','regions.js','data-de.js','data-fr.js','data-childcare.js','data-childcare-de.js','data-childcare-fr.js'];
   const revision=crypto.createHash('sha256').update(files.map(file=>fs.readFileSync(built+file)).join('\n')).digest('hex').slice(0,16);
   assert.equal(info.revision,revision);
   assert.equal(info.catalogueUpdated,/^Catalogue updated (\d{4}-\d{2}-\d{2})\./m.exec(fs.readFileSync(built+'research.md','utf8'))[1]);

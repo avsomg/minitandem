@@ -6,7 +6,8 @@ import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import vm from 'node:vm';
-import {compile,code,publishedFacts,requotedAfter,websiteOf,renewalMonths,PLACE_FACTS,COMMUNE_FACTS,TYPES} from './scripts/compile-childcare.mjs';
+import {spawnSync} from 'node:child_process';
+import {compile,code,publishedFacts,requotedAfter,websiteOf,renewalMonths,texts,digest,translationsFor,textsCode,textsFile,LANGS,PLACE_FACTS,COMMUNE_FACTS,TYPES} from './scripts/compile-childcare.mjs';
 import {root} from './test-support.mjs';
 
 const NULLS=Object.fromEntries(Object.keys(PLACE_FACTS).map(key=>[key,{value:null,reason:'not-stated'}]));
@@ -124,6 +125,48 @@ test('every fact of a place and of a commune is expected, and the kinds of care 
   assert.deepEqual(publishedFacts(record,null,PLACE_FACTS,'x',{leaveOut:true}),{facts:{},pending:['hours']},'no second reading at all: nothing is published');
 });
 
+test('the texts to translate: every published English text with a stable id and a context, nothing unpublished, nothing private',t=>{
+  const all={'creche-a':verified({hours:'confirmed',price:'confirmed',meals:'confirmed'})};
+  const {data}=compile(folder(t,{verdicts:all}));
+  const list=texts(data);
+  assert.deepEqual(list.map(item=>item.id),['place/creche-a/hours','place/creche-a/price','place/creche-a/meals','commune/fribourg/name','commune/fribourg/renewal','commune/fribourg/calculator']);
+  assert.deepEqual(list.map(item=>item.en).slice(0,4),['Mon–Fri 06:30–18:30','CHF 18.00 to 86.55 a day','Lunch included','Fribourg (city)']);
+  assert.ok(list.every(item=>item.context.length>20&&!/PRIVATE/.test(item.context)),'each with a context for the translator');
+  assert.match(list[0].context,/Days and opening hours at the daycare place "Crèche A" in Fribourg/);
+  const pending=compile(folder(t,{verdicts:{'creche-a':verified({hours:'confirmed',price:'confirmed'})}}),{leaveOut:true}).data;
+  assert.ok(!texts(pending).some(item=>item.id==='place/creche-a/meals'),'a fact waiting for its reading is not offered for translation');
+  assert.deepEqual(texts(data).map(item=>item.id),list.map(item=>item.id),'the same data gives the same ids');
+});
+test('translations: only those of the current English are written; a changed, unknown or broken one is named, one with contact data stops',t=>{
+  const all={'creche-a':verified({hours:'confirmed',price:'confirmed',meals:'confirmed'})};
+  const dir=folder(t,{verdicts:all}),list=texts(compile(dir).data);
+  assert.deepEqual(translationsFor(list,dir,'de'),{data:{},report:{found:false,translated:0,stale:[],unknown:[],invalid:[]}},'no translations: every text stays English');
+  fs.mkdirSync(path.join(dir,'translations'));
+  const write=value=>fs.writeFileSync(path.join(dir,'translations','de.json'),JSON.stringify(value));
+  write({'place/creche-a/hours':{en_digest:digest('Mon–Fri 06:30–18:30'),text:'Mo–Fr 06:30–18:30'},'place/creche-a/meals':{en_digest:digest('Lunch'),text:'Mittagessen'},
+    'place/creche-b/hours':{en_digest:digest('x'),text:'y'},'commune/fribourg/name':{en_digest:digest('Fribourg (city)'),text:''}});
+  const {data,report}=translationsFor(list,dir,'de');
+  assert.deepEqual(data,{'place/creche-a/hours':{en:digest('Mon–Fri 06:30–18:30'),text:'Mo–Fr 06:30–18:30'}});
+  assert.deepEqual(report,{found:true,translated:1,stale:['place/creche-a/meals'],unknown:['place/creche-b/hours'],invalid:['commune/fribourg/name']});
+  write({'place/creche-a/meals':{en_digest:digest('Lunch included'),text:'Schreiben Sie an kitchen@a.example.org'}});
+  assert.throws(()=>translationsFor(list,dir,'de'),/translations\/de\.json place\/creche-a\/meals: an e-mail address/);
+  const file=textsCode('de',data),context={window:{}};vm.runInNewContext(file,context);
+  assert.deepEqual(JSON.parse(JSON.stringify(context.window.MINITANDEM_CHILDCARE_TEXTS.de)),data);
+  assert.ok(file.includes('Loaded with the Daycare tab when the interface is German'));
+});
+test('--export-texts writes the list for the translators and leaves the repository as it is',t=>{
+  const all={'creche-a':verified({hours:'confirmed',price:'confirmed',meals:'confirmed'})};
+  const dir=folder(t,{verdicts:all}),out=path.join(dir,'texts-en.json'),before=fs.readFileSync(path.join(root,'data-childcare.js'),'utf8');
+  const run=spawnSync(process.execPath,[path.join(root,'scripts/compile-childcare.mjs'),dir,'--export-texts',out],{encoding:'utf8'});
+  assert.equal(run.status,0,run.stderr);
+  const list=JSON.parse(fs.readFileSync(out,'utf8'));
+  assert.deepEqual(list,texts(compile(dir).data));
+  assert.deepEqual(Object.keys(list[0]),['id','en','context']);
+  assert.deepEqual(JSON.parse(run.stdout),{file:out,texts:6,places:3,communes:3,sameAsRepository:false});
+  assert.equal(fs.readFileSync(path.join(root,'data-childcare.js'),'utf8'),before,'the data file is not written');
+  assert.notEqual(spawnSync(process.execPath,[path.join(root,'scripts/compile-childcare.mjs'),dir,'--export-texts'],{encoding:'utf8'}).status,0,'a file is needed');
+});
+
 // The file as published: what the page and the tests read.
 const published=load(fs.readFileSync(path.join(root,'data-childcare.js'),'utf8'));
 test('data-childcare.js: places with a kind, a point in the canton, dated checks and facts that each name their https pages; no private field',()=>{
@@ -150,4 +193,18 @@ test('data-childcare.js: places with a kind, a point in the canton, dated checks
   assert.doesNotMatch(text,/"(?:quote|quotes|snapshotId|notes|problems|held|hold|reason|email|phone)"/);
   assert.doesNotMatch(text,/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/,'no e-mail address');
   assert.equal(published.communes.find(c=>c.id==='fribourg')?.renewMonths,4,'Fribourg city: renew every 4 months');
+});
+test('data-childcare-de.js and -fr.js: translations of texts that are published, each with the digest of its English; French typography',()=>{
+  const ids=new Set(texts(published).map(item=>item.id)),english=new Map(texts(published).map(item=>[item.id,item.en]));
+  for(const lang of LANGS){
+    const context={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,textsFile(lang)),'utf8'),context);
+    const data=context.window.MINITANDEM_CHILDCARE_TEXTS[lang];
+    assert.ok(data&&typeof data==='object',lang);
+    for(const [id,entry] of Object.entries(data)){
+      assert.ok(ids.has(id),lang+' '+id+': a published text');
+      assert.equal(entry.en,digest(english.get(id)),lang+' '+id+': a translation of the current English');
+      assert.ok(typeof entry.text==='string'&&entry.text.trim()&&!/[\u0400-\u04FF]/.test(entry.text),lang+' '+id);
+      if(lang==='fr')assert.ok(!/ [:;?!]|« | »/.test(entry.text.replace(/https?:\/\/\S+/g,'')),'fr '+id+': a no-break space before : ; ? ! and inside « »');
+    }
+  }
 });

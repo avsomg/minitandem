@@ -6,6 +6,7 @@ import path from 'node:path';
 import test from 'node:test';
 import {loadStack,root} from './test-support.mjs';
 import {SCRIPTS,LAZY_SCRIPTS} from './ui-files.mjs';
+import {texts,digest} from './scripts/compile-childcare.mjs';
 
 const today='2026-10-21';
 const stack=(options={})=>loadStack({today,...options});
@@ -105,7 +106,7 @@ test('a place\'s page: the rows of the accepted preview, each published fact wit
   const S=stack(),p=S.CH.byId.get(PROVIDENCE),html=S.CV.detail(p);
   const rows=[...html.matchAll(/<div class="fr"><dt>([^<]+)<\/dt>/g)].map(m=>m[1]);
   assert.deepEqual(rows.slice(0,11),['Age','Days and hours','Closed','Price','How to register','Free places','Meals','Settling in','Trial period','Approach','Languages']);
-  assert.ok(html.includes('From 12 weeks, until compulsory school entry (oldest group 30 months to 4 years)'));
+  assert.ok(html.includes('<span>From 12 weeks</span>, <span>until compulsory school entry (oldest group 30 months to 4 years)</span>'));
   assert.ok(html.includes('<span class="sub">Prices valid from 1 Aug 2021</span>'));
   assert.match(html,/<div class="fr"><dt>Free places<\/dt><dd><span class="np">Not published by the place<\/span><\/dd><\/div>/);
   assert.ok(html.includes('<a href="https://www.crechelaprovidence.ch/horaires/" target="_blank" rel="noopener noreferrer">crechelaprovidence.ch › horaires</a>'));
@@ -229,8 +230,45 @@ test('the page: a fifth tab, a box for the tab, its two scripts in the shell and
   assert.match(index,/<button type="button" class="tab" data-view="childcare" aria-pressed="false"><span data-i18n="tab.childcare">Daycare<\/span><\/button>/);
   assert.ok(index.includes('<div id="childcareBox" class="childcare" hidden></div>')&&index.includes('<p class="viewlead" id="viewLead" hidden></p>'));
   assert.ok(SCRIPTS.indexOf('childcare.js')<SCRIPTS.indexOf('app.js')&&SCRIPTS.indexOf('views.js')<SCRIPTS.indexOf('childcare-views.js'));
-  assert.ok(LAZY_SCRIPTS.includes('data-childcare.js')&&!index.includes('data-childcare.js'));
-  assert.ok(sw.includes("'/data-childcare.js'")&&sw.includes("'/childcare-views.js'"));
-  assert.match(app,/script\.src = 'data-childcare\.js'/);
+  for(const file of ['data-childcare.js','data-childcare-de.js','data-childcare-fr.js'])assert.ok(LAZY_SCRIPTS.includes(file)&&!index.includes(file)&&sw.includes(`'/${file}'`),file);
+  assert.ok(sw.includes("'/childcare-views.js'"));
+  assert.match(app,/script\.src = 'data-childcare\.js'/);assert.match(app,/script\.src = `data-childcare-\$\{lang\}\.js`/);
   assert.ok(stack().K.VIEWS.includes('childcare'),'the address names the tab');
+});
+
+// German texts for the tab as the page gets them (data-childcare-de.js): {id: {en, text}}, set up in the stack's own window.
+function translated(entries,lang='de',fileLang=lang){
+  const S=stack({lang}),W=S.window,M=W.MinitandemChildcare;
+  (W.MINITANDEM_CHILDCARE_TEXTS||={})[fileLang]=entries;
+  const CH=M.create({data:W.CHILDCARE,K:S.K,clock:{today:()=>today},t:S.t,translate:M.translator(()=>W.MINITANDEM_CHILDCARE_TEXTS?.[S.I.lang()],W.MinitandemCatalogueI18n.sha256)});
+  const CV=W.MinitandemChildcareViews.create({t:S.t,F:S.F,V:S.V,K:S.K,CH:()=>CH,store:S.store,state:()=>S.state,lang:S.I.lang});
+  return {...S,CH,CV};
+}
+test('translated texts: shown while their English is the one they were made from, English (marked) once it changed, and said so',()=>{
+  const p='creche-la-providence-fribourg',hours=stack().CH.byId.get(p).facts.hours.value.text,meals=stack().CH.byId.get(p).facts.meals.value.text;
+  const S=translated({[`place/${p}/hours`]:{en:digest(hours),text:'Mo–Fr 06:30–18:15 (übersetzt)'},[`place/${p}/meals`]:{en:digest('an older English text'),text:'Veraltete Übersetzung'},
+    'commune/fribourg/name':{en:digest('Fribourg (city)'),text:'Freiburg (Stadt)'}});
+  const html=S.CV.detail(S.CH.byId.get(p));
+  assert.ok(html.includes('<span>Mo–Fr 06:30–18:15 (übersetzt)</span>'),'the current translation, without an English mark');
+  assert.ok(!html.includes('Veraltete Übersetzung')&&html.includes(`<span lang="en">${S.V.esc(meals)}</span>`),'a translation of an older English is not shown');
+  assert.ok(html.includes('<p class="hint d-english">Angaben zu den Einrichtungen ohne aktuelle Übersetzung erscheinen auf Englisch.</p>'));
+  assert.match(S.CV.communeSelect('cc-commune'),/<option value="fribourg">Freiburg \(Stadt\)<\/option>/);
+  S.store.childcare.commune='fribourg';
+  assert.ok(S.CV.rules().includes('Einen Platz bekommen: Freiburg (Stadt)')&&S.CV.renewal(p).startsWith('Freiburg (Stadt): '));
+  assert.deepEqual(JSON.parse(JSON.stringify(S.CH.coverage())),{total:texts(S.window.CHILDCARE).length,translated:2});
+  // With no translations at all, everything is English as before, and the page says the texts will follow.
+  const none=translated({});
+  assert.ok(none.CV.detail(none.CH.byId.get(p)).includes(`<p class="hint d-english">Die Angaben zu den Einrichtungen sind vorerst auf Englisch; Deutsch und Französisch folgen.</p>`));
+  assert.equal(none.CH.coverage().translated,0);
+  // Back in English, the German file that was loaded is not used.
+  const en=translated({[`place/${p}/hours`]:{en:digest(hours),text:'Mo–Fr'}},'en','de');
+  assert.ok(!en.CV.detail(en.CH.byId.get(p)).includes('Mo–Fr<'));
+});
+test('the page asks for the same ids and digests the compile script exports: a full set of translations covers every text',()=>{
+  const list=texts(stack().window.CHILDCARE);
+  assert.equal(new Set(list.map(item=>item.id)).size,list.length,'ids are unique');
+  const S=translated(Object.fromEntries(list.map(item=>[item.id,{en:digest(item.en),text:'DE '+item.en}])));
+  assert.deepEqual(JSON.parse(JSON.stringify(S.CH.coverage())),{total:list.length,translated:list.length});
+  for(const p of S.CH.places.slice(0,40))assert.ok(!S.CV.detail(p).includes(' lang="en"'),p.id+': every text of its page is translated');
+  assert.equal(S.window.MinitandemCatalogueI18n.sha256(list[0].en),digest(list[0].en),'the page computes the digest the script records');
 });

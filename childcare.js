@@ -55,12 +55,28 @@
     for (let k = 2; next < today && k < 600; k++) next = addMonths(registered, months * k);
     return next;
   }
+  // The ids of the family-facing texts, as the compile script exports them for translation (scripts/compile-childcare.mjs texts()):
+  // 'place/<id>/<fact>', 'commune/<id>/<rule>' and 'commune/<id>/name'.
+  const textId = (kind, record, key) => `${kind}/${record.id}/${key}`;
+  // getData() gives the translations of the interface language ({id: {en, text}}, data-childcare-de.js or -fr.js) or nothing. A text is
+  // translated while its English still has the digest the translation was made from (sha256, catalogue-i18n.js); otherwise it stays English.
+  function translator(getData, sha256) {
+    const digests = new Map();
+    const translate = (id, english) => {
+      const entry = getData()?.[id];
+      if (!entry || typeof entry.text !== 'string' || !entry.text.trim() || typeof english !== 'string') return null;
+      if (!digests.has(english)) digests.set(english, sha256(english));
+      return digests.get(english) === entry.en ? entry.text : null;
+    };
+    translate.data = getData;
+    return translate;
+  }
   const emptyApplication = () => ({status: '', registered: '', renewBy: '', note: ''});
   const isEmptyApplication = a => !a || !(a.status || a.registered || a.renewBy || a.note);
 
   // data: window.CHILDCARE (or nothing while it is loading); K: catalogue.js for distances and text matching; clock.today(); t only makes
-  // the kinds of care searchable in the interface language, as catalogue.js does with the categories.
-  function create({data = null, K, clock, t = key => key}) {
+  // the kinds of care searchable in the interface language, as catalogue.js does with the categories; translate: a translator() or nothing.
+  function create({data = null, K, clock, t = key => key, translate = () => null}) {
     const places = data?.places || [], communes = data?.communes || [];
     const byId = new Map(places.map(p => [p.id, p])), communeById = new Map(communes.map(c => [c.id, c]));
     const today = () => clock.today();
@@ -117,11 +133,26 @@
     // A place in the shape map.js plots (catalogue.js onMap): its point from the canton's list, the address as the popup's label.
     const addressLine = p => [p.address, [p.postcode, p.town].filter(Boolean).join(' ')].filter(Boolean).join(', ');
     const mapItem = p => ({id: p.id, name: p.name, geo: {lat: p.lat, lon: p.lon, label: addressLine(p) || p.name}, events: [], addressPrecision: ''});
+    // A text in the interface language where a current translation exists: {text, english}, english true while it is shown in English.
+    const text = (kind, record, key, english) => { const shown = english ? translate(textId(kind, record, key), english) : null; return shown ? {text: shown, english: false} : {text: english || '', english: true}; };
+    const factText = (p, key) => text('place', p, key, value(p, key)?.text);
+    const ruleText = (c, key) => text('commune', c, key, value(c, key)?.text);
+    const communeName = c => text('commune', c, 'name', c.name);
+    // How many of the texts are shown translated now, counted once per language file.
+    let counted = {data: undefined, value: null};
+    function coverage() {
+      const current = translate.data?.();
+      if (counted.value && counted.data === current) return counted.value;
+      const all = [...places.flatMap(p => Object.keys(p.facts).filter(k => value(p, k)?.text).map(k => factText(p, k))),
+        ...communes.flatMap(c => [communeName(c), ...Object.keys(c.facts).filter(k => value(c, k)?.text).map(k => ruleText(c, k))])];
+      counted = {data: current, value: {total: all.length, translated: all.filter(x => !x.english).length}};
+      return counted.value;
+    }
     // The latest date a place or a commune was checked, said once at the top of the tab.
     const checkedOn = () => [...places, ...communes].reduce((d, r) => r.checked > d ? r.checked : d, '');
     return {places, communes, byId, communeById, loaded: Boolean(data), today, distance, matches, sort, filter, active, toggle, remove, anyFilter, typeCounts,
-      communeOptions, renewMonths, addressLine, mapItem, checkedOn, ageFit, approaches, value, sources, pending};
+      communeOptions, renewMonths, addressLine, mapItem, checkedOn, ageFit, approaches, value, sources, pending, text, factText, ruleText, communeName, coverage};
   }
-  window.MinitandemChildcare = {create, defaultFilters, value, sources, pending, ageFit, approaches, minMonths, maxYears, addMonths, nextRenewal, emptyApplication, isEmptyApplication,
+  window.MinitandemChildcare = {create, defaultFilters, value, sources, pending, ageFit, approaches, minMonths, maxYears, addMonths, nextRenewal, emptyApplication, isEmptyApplication, textId, translator,
     TYPE_KEYS, SUBSIDY_KEYS, LANGUAGE_KEYS, APPROACH_KEYS, OPENS_KEYS, CLOSES_KEYS, APPLICATION_KEYS, VIEW_KEYS, DETAIL_ROWS, RULE_KEYS};
 })();

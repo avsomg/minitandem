@@ -657,6 +657,7 @@
   'view.childcare': 'Kita',
   'childcare.lead': 'Kitas, Halbtagesbetreuung, Tagesfamilien, Spielgruppen und Maternelles im Kanton Freiburg. Angaben aus den öffentlichen Seiten der Einrichtung und der Gemeinde, geprüft am {date}. Freie Plätze ändern sich täglich: Fragen Sie die Einrichtung.',
   'childcare.english': 'Die Angaben zu den Einrichtungen sind vorerst auf Englisch; Deutsch und Französisch folgen.',
+  'childcare.englishSome': 'Angaben zu den Einrichtungen ohne aktuelle Übersetzung erscheinen auf Englisch.',
   'childcare.source': 'Art, Name, Adresse und Kartenpunkt jeder Einrichtung: die offene Liste der Einrichtungen des Kantons (Quelle: Etat de Fribourg).',
   'childcare.views': 'Teile der Kita-Ansicht',
   'childcare.show.list': 'Liste',

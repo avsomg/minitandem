@@ -4,8 +4,8 @@ export const SCRIPTS=['features.js','strings-en.js','strings-de.js','strings-fr.
   'planning.js','exchange.js','storage-migration.js','catalogue.js','catalogue-i18n.js','childcare.js','format.js','store.js','sync.js','exports.js','category-icons.js','views.js','childcare-views.js',
   'toast.js','map.js','app.js'];
 // Loaded by app.js only when needed: the German and French card texts (scripts/compile-catalogue-i18n.mjs), only the one of the chosen language,
-// and the places of the Daycare tab (scripts/compile-childcare.mjs), the first time the tab is opened.
-export const LAZY_SCRIPTS=['data-de.js','data-fr.js','data-childcare.js'];
+// and the places of the Daycare tab with their German or French texts (scripts/compile-childcare.mjs), the first time the tab is opened.
+export const LAZY_SCRIPTS=['data-de.js','data-fr.js','data-childcare.js','data-childcare-de.js','data-childcare-fr.js'];
 // vercel.json is not here: it belongs to the Vercel release stage (unused for Minitandem) and carries an older, weaker policy than the service and Caddy send. It stays in the repository, not in the build.
 export const STATIC=['index.html','styles.css','manifest.webmanifest','sw.js','robots.txt'];
 // assets/lucide.min.js and LUCIDE-LICENSE are used only by the editorial admin panel on the owner's Mac. They are not here, so they are not in the build;

@@ -52,11 +52,14 @@
   const inEnglish = a => cardText.lang === 'en' || cardText.loading === cardText.lang ? '' : cardText.failed.has(cardText.lang) ? 'failed' : cardText.overlay?.translated(a) ? '' : 'stale';
   C.setLocalText(a => cardText.overlay ? cardText.overlay.text(a) : '');
   /* The Daycare tab: its places and commune rules (data-childcare.js) are loaded from this site the first time the tab is opened, like the
-     card texts of a language. Until then CH has no places; childcare.status is 'idle', 'loading', 'failed' or '' once they are there. */
+     card texts of a language. Until then CH has no places; childcare.status is 'idle', 'loading', 'failed' or '' once they are there.
+     Their German or French texts (data-childcare-de.js, -fr.js) come with the tab in that language; a text without a current translation,
+     and every text until the file is there, is shown in English. */
   const CHM = W.MinitandemChildcare;
-  const childcareOf = data => CHM.create({data, K, clock: {today: C.today}, t});
+  const childcareTranslate = CHM.translator(() => W.MINITANDEM_CHILDCARE_TEXTS?.[I.lang()], CI.sha256);
+  const childcareOf = data => CHM.create({data, K, clock: {today: C.today}, t, translate: childcareTranslate});
   let CH = childcareOf(W.CHILDCARE || null);
-  const childcare = {status: W.CHILDCARE ? '' : 'idle'};
+  const childcare = {status: W.CHILDCARE ? '' : 'idle', texts: {loading: '', failed: new Set()}};
   let sync = null;
   const store = W.MinitandemStore.create({storage: local, byId: C.byId, P, today: C.today, statusKeys: K.PERSONAL_KEYS, canonicalId: K.canonicalId, onSaved: () => sync?.queue(),
     applicationKeys: CHM.APPLICATION_KEYS});
@@ -126,7 +129,7 @@
   function switchLanguage(lang) {
     if (lang === I.lang()) return;
     I.setLang(lang);
-    cardText.failed.delete(lang); cardLanguage(lang);
+    cardText.failed.delete(lang); cardLanguage(lang); childcare.texts.failed.delete(lang);
     applyStatic(); buildPanel(); refreshCards();
   }
   // Everything that shows card text, again: after a language switch and when a language's card texts arrive.
@@ -293,6 +296,18 @@
     script.onerror = () => { childcare.status = 'failed'; script.remove(); if (state.view === 'childcare') render(); };
     document.head.append(script);
   }
+  // The tab's texts in the interface language: loaded once per language; a file that fails is tried again after a language switch.
+  function loadChildcareTexts(lang) {
+    const texts = childcare.texts;
+    if (lang === 'en' || W.MINITANDEM_CHILDCARE_TEXTS?.[lang] || texts.loading === lang || texts.failed.has(lang)) return;
+    texts.loading = lang;
+    const script = document.createElement('script');
+    script.src = `data-childcare-${lang}.js`;
+    const done = () => { texts.loading = ''; if (state.view === 'childcare' && I.lang() === lang) refreshCards(); };
+    script.onload = () => { if (!W.MINITANDEM_CHILDCARE_TEXTS?.[lang]) texts.failed.add(lang); done(); };
+    script.onerror = () => { texts.failed.add(lang); script.remove(); done(); };
+    document.head.append(script);
+  }
   // The chips of the filters that are on: the child's age and the distance limit (shared with the activity list), then the tab's own.
   function childcareChips() {
     const a0 = age(), out = [];
@@ -304,7 +319,7 @@
   // The tab in the same frame as the lists: title, search, the two pills (age, and where distances are measured from), count, filter chips,
   // then its own box with the list, the map or the family's applications.
   function renderChildcare() {
-    loadChildcare();
+    loadChildcare(); loadChildcareTexts(I.lang());
     if (els.panel.dataset.kind !== 'childcare') buildPanel();
     const a0 = age(), view = state.cview, status = CH.loaded ? '' : childcare.status === 'failed' ? 'failed' : 'loading';
     const list = CH.filter(state.cf, {age: a0, near: state.near, radius: state.f.radius}), n = list.length, total = CH.places.length;
@@ -335,8 +350,10 @@
     els.fchipList.innerHTML = CV.filterChips(chips);
     els.sheetDone.textContent = n ? t('childcare.filters.show', {n}) : t('childcare.filters.none');
     els.countNote.hidden = true; els.whenNote.hidden = true;
-    // The facts are English for now: said once at the top when another language is chosen.
-    els.contentNote.hidden = I.lang() === 'en' || Boolean(status); els.contentNote.textContent = els.contentNote.hidden ? '' : t('childcare.english');
+    // In German or French: said once at the top while some texts of the places are English (all of them until translations exist).
+    const covered = status || I.lang() === 'en' ? null : CH.coverage();
+    els.contentNote.hidden = !covered || covered.translated === covered.total;
+    els.contentNote.textContent = els.contentNote.hidden ? '' : t(covered.translated ? 'childcare.englishSome' : 'childcare.english');
     els.nearNote.hidden = !state.near || !filtering || !n;
     els.nearText.textContent = !state.near ? '' : state.near.kind === 'town' ? t('near.listFromTown', {town: state.near.name}) : t('near.listFromLocation');
     for (const el of [els.listhead, els.list, els.mapBox, els.weekBox, els.empty, els.more, els.viewTools, els.savedBox, els.updates]) el.hidden = true;

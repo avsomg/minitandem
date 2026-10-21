@@ -657,6 +657,7 @@
   'view.childcare': 'Daycare',
   'childcare.lead': 'Crèches, half-day crèches, family day care, playgroups and maternelles in canton Fribourg. Information from the place’s and the commune’s public pages, checked on {date}. Free places change daily: ask the place.',
   'childcare.english': 'The details of the places are in English for now; German and French will follow.',
+  'childcare.englishSome': 'Details of the places without a current translation are shown in English.',
   'childcare.source': 'Kind, name, address and map point of each place: the canton’s open list of places (Source: Etat de Fribourg).',
   'childcare.views': 'Parts of the Daycare view',
   'childcare.show.list': 'List',

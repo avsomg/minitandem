@@ -2,7 +2,8 @@
    family's own application, and the list of applications. As in views.js: HTML strings built from the data (escaped) and words from the
    dictionaries, no DOM access and no events; app.js puts them into the page and wires them.
    ctx = {t, F, V, K, CH, store, state, lang}: V is views.js (escaping, icons, the age and distance controls, addresses), CH the places
-   (childcare.js). The facts of the places are written in English for now; in German or French they carry lang="en". */
+   (childcare.js). The texts of the places and communes are written in English; in German or French each is shown in its current
+   translation where there is one (CH.factText, ruleText, communeName), otherwise in English with lang="en". */
 (() => {
   'use strict';
   const M = () => window.MinitandemChildcare;
@@ -22,8 +23,12 @@
     const {t, F, V, K, store} = ctx, esc = V.esc, ICON = V.ICON;
     const CH = () => ctx.CH(), state = () => ctx.state();
     const today = () => CH().today();
-    // Fact texts are English until they are translated; the interface around them follows the chosen language.
-    const en = () => ctx.lang && ctx.lang() !== 'en' ? ' lang="en"' : '';
+    // A text shown in English while the interface is German or French says so to the browser and to screen readers.
+    const foreign = () => Boolean(ctx.lang && ctx.lang() !== 'en');
+    const mark = shown => shown.english && foreign() ? ' lang="en"' : '';
+    const textSpan = shown => `<span${mark(shown)}>${esc(shown.text)}</span>`;
+    // Said on a place's page when one of its texts is English: none of the texts is translated yet, or this one is not.
+    const englishNote = () => t(CH().coverage().translated ? 'childcare.englishSome' : 'childcare.english');
     const value = (record, key) => M().value(record, key);
     const application = id => store.childcare.applications[id] || null;
     const link = (url, label, cls = '') => /^https:\/\//i.test(url || '') ? `<a${cls ? ` class="${cls}"` : ''} href="${esc(url)}" target="_blank" rel="noopener noreferrer">${label}</a>` : '';
@@ -141,33 +146,42 @@
     const filterChips = active => active.map(f => `<button type="button" class="chip fchip" data-remove="${esc(f.key)}" aria-label="${esc(t('filters.remove', {name: f.label}))}">${esc(f.label)}${ICON.x(14)}</button>`).join('');
 
     /* ---------- a place's page ---------- */
-    const factRow = (p, label, keys, text, sub = () => '') => {
+    // A row of a place's page: its texts ({text, english}, each in its own language), what goes under them, and the pages they rest on.
+    // english records whether a text of the page stayed English.
+    let english = false;
+    const factRow = (p, label, keys, parts, sub = () => '') => {
       const hit = keys.filter(k => value(p, k) !== null);
       if (!hit.length) return fr(label, `<span class="np">${esc(t(keys.some(k => M().pending(p, k)) ? 'childcare.pending' : 'childcare.notPublished'))}</span>`);
-      return fr(label, `<span${en()}>${esc(text())}</span>${sub()}${sourceLine([...new Set(hit.flatMap(k => M().sources(p, k)))])}`);
+      const shown = parts().filter(x => x.text);
+      if (shown.some(x => x.english)) english = true;
+      return fr(label, `${shown.map(textSpan).join(', ')}${sub()}${sourceLine([...new Set(hit.flatMap(k => M().sources(p, k)))])}`);
     };
+    // The age as the place words it; a minimum given only as a number is said in the interface language. An English upper limit follows in
+    // lower case when the two read as one English sentence.
     function ageText(p) {
       const from = value(p, 'ageFrom'), to = value(p, 'ageTo');
-      const first = from ? from.text || (Number.isFinite(from.weeks) ? `From ${from.weeks} weeks` : from.months === 0 ? 'From birth' : `From ${from.months} months`) : '';
-      const last = to?.text ? (first ? to.text.charAt(0).toLowerCase() + to.text.slice(1) : to.text) : '';
-      return [first, last].filter(Boolean).join(', ');
+      const first = from?.text ? CH().factText(p, 'ageFrom') : !from ? null : {english: false, text: Number.isFinite(from.weeks) ? t('childcare.age.fromWeeks', {n: from.weeks})
+        : from.months === 0 ? t('childcare.age.fromBirth') : t('age.fromMonths', {n: from.months})};
+      const last = to?.text ? CH().factText(p, 'ageTo') : null;
+      if (first && last?.english && (first.english || !foreign())) last.text = last.text.charAt(0).toLowerCase() + last.text.slice(1);
+      return [first, last].filter(Boolean);
     }
     const dayRange = days => { const s = [...days].sort((a, b) => a - b); return s.length > 1 && s.every((d, i) => !i || d === s[i - 1] + 1) ? `${t('weekday.' + s[0])}–${t('weekday.' + s.at(-1))}` : s.map(d => t('weekday.' + d)).join(', '); };
     function facts(p) {
-      const v = key => value(p, key), sub = text => `<span class="sub">${esc(text)}</span>`;
+      const v = key => value(p, key), sub = text => `<span class="sub">${esc(text)}</span>`, one = key => () => [CH().factText(p, key)];
       const rows = {
         age: () => factRow(p, t('childcare.fact.age'), ['ageFrom', 'ageTo'], () => ageText(p)),
-        hours: () => v('hours') ? factRow(p, t('childcare.fact.hours'), ['hours'], () => v('hours').text) :
-          v('days') ? fr(t('childcare.fact.hours'), esc(dayRange(v('days'))) + sourceLine(M().sources(p, 'days'))) : factRow(p, t('childcare.fact.hours'), ['hours', 'days'], () => ''),
-        closures: () => factRow(p, t('childcare.fact.closures'), ['closures'], () => v('closures').text),
-        price: () => factRow(p, t('childcare.fact.price'), ['price'], () => v('price').text, () => v('price').validFrom ? sub(priceDate(v('price').validFrom)) : ''),
-        registration: () => factRow(p, t('childcare.fact.registration'), ['registration'], () => v('registration').text),
-        availability: () => factRow(p, t('childcare.fact.availability'), ['availability'], () => v('availability').text, () => v('availability').statedOn ? sub(t('childcare.statedOn', {date: F.dateLabel(v('availability').statedOn)})) : ''),
-        meals: () => factRow(p, t('childcare.fact.meals'), ['meals'], () => v('meals').text),
-        settlingIn: () => factRow(p, t('childcare.fact.settlingIn'), ['settlingIn'], () => v('settlingIn').text),
-        trialPeriod: () => factRow(p, t('childcare.fact.trialPeriod'), ['trialPeriod'], () => v('trialPeriod').text),
-        pedagogy: () => factRow(p, t('childcare.fact.pedagogy'), ['pedagogy'], () => v('pedagogy').text),
-        languages: () => v('languages') ? fr(t('childcare.fact.languages'), esc(v('languages').map(l => M().LANGUAGE_KEYS.includes(l) ? t('childcare.lang.' + l) : l.toUpperCase()).join(' · ')) + sourceLine(M().sources(p, 'languages'))) : factRow(p, t('childcare.fact.languages'), ['languages'], () => '')
+        hours: () => v('hours') ? factRow(p, t('childcare.fact.hours'), ['hours'], one('hours')) :
+          v('days') ? fr(t('childcare.fact.hours'), esc(dayRange(v('days'))) + sourceLine(M().sources(p, 'days'))) : factRow(p, t('childcare.fact.hours'), ['hours', 'days'], () => []),
+        closures: () => factRow(p, t('childcare.fact.closures'), ['closures'], one('closures')),
+        price: () => factRow(p, t('childcare.fact.price'), ['price'], one('price'), () => v('price').validFrom ? sub(priceDate(v('price').validFrom)) : ''),
+        registration: () => factRow(p, t('childcare.fact.registration'), ['registration'], one('registration')),
+        availability: () => factRow(p, t('childcare.fact.availability'), ['availability'], one('availability'), () => v('availability').statedOn ? sub(t('childcare.statedOn', {date: F.dateLabel(v('availability').statedOn)})) : ''),
+        meals: () => factRow(p, t('childcare.fact.meals'), ['meals'], one('meals')),
+        settlingIn: () => factRow(p, t('childcare.fact.settlingIn'), ['settlingIn'], one('settlingIn')),
+        trialPeriod: () => factRow(p, t('childcare.fact.trialPeriod'), ['trialPeriod'], one('trialPeriod')),
+        pedagogy: () => factRow(p, t('childcare.fact.pedagogy'), ['pedagogy'], one('pedagogy')),
+        languages: () => v('languages') ? fr(t('childcare.fact.languages'), esc(v('languages').map(l => M().LANGUAGE_KEYS.includes(l) ? t('childcare.lang.' + l) : l.toUpperCase()).join(' · ')) + sourceLine(M().sources(p, 'languages'))) : factRow(p, t('childcare.fact.languages'), ['languages'], () => [])
       };
       return `<dl class="facts cc-facts">${M().DETAIL_ROWS.map(k => rows[k]()).join('')}</dl>`;
     }
@@ -175,7 +189,7 @@
     // list of applications, which can both be in the page at once.
     function communeSelect(id) {
       const {communes, regions} = CH().communeOptions(), chosen = store.childcare.commune;
-      const option = c => `<option value="${esc(c.id)}"${c.id === chosen ? ' selected' : ''}>${esc(c.name)}</option>`;
+      const option = c => { const name = CH().communeName(c); return `<option value="${esc(c.id)}"${mark(name)}${c.id === chosen ? ' selected' : ''}>${esc(name.text)}</option>`; };
       return `<label class="glabel" for="${id}">${esc(t('childcare.commune.choose'))}</label><span class="select"><select class="field" id="${id}" data-commune-select><option value="">${esc(t('childcare.commune.none'))}</option>` +
         `<optgroup label="${esc(t('childcare.commune.communes'))}">${communes.map(option).join('')}</optgroup><optgroup label="${esc(t('childcare.commune.regions'))}">${regions.map(option).join('')}</optgroup></select></span>` +
         `<p class="hint">${esc(t('childcare.commune.hint'))}</p>`;
@@ -184,22 +198,25 @@
     function rules(communeId = store.childcare.commune) {
       const c = CH().communeById.get(communeId);
       if (!c) return `<p class="hint">${esc(t('childcare.commune.missing'))}</p>`;
+      const name = CH().communeName(c).text;
+      // The names of subsidised crèches are proper names: they are not translated and not marked as English.
       const rows = M().RULE_KEYS.map(k => {
         const v = value(c, k); if (!v) return '';
         if (k === 'calculator') return fr(t('childcare.rule.calculator'), link(v.url, esc(t('childcare.calculatorLink')) + ICON.out(14), 'inline-link') + sourceLine(M().sources(c, k)));
-        return fr(t('childcare.rule.' + k), `<span${en()}>${esc(v.text ?? (v.names || []).join(', '))}</span>${sourceLine(M().sources(c, k))}`);
+        return fr(t('childcare.rule.' + k), (v.text ? textSpan(CH().ruleText(c, k)) : esc((v.names || []).join(', '))) + sourceLine(M().sources(c, k)));
       }).join('');
-      return `<h4 class="cc-rules-title">${esc(t('childcare.commune.rules', {name: c.name}))}</h4>` +
-        (rows ? `<dl class="pr cc-rules">${rows}</dl>` : `<p class="hint">${esc(t('childcare.commune.nothing', {name: c.name}))}</p>`) +
+      return `<h4 class="cc-rules-title">${esc(t('childcare.commune.rules', {name}))}</h4>` +
+        (rows ? `<dl class="pr cc-rules">${rows}</dl>` : `<p class="hint">${esc(t('childcare.commune.nothing', {name}))}</p>`) +
         (c.pending?.length ? `<p class="hint">${esc(t('childcare.commune.pending'))}</p>` : '') + `<p class="hint">${esc(t('childcare.commune.checked', {date: F.dateLabel(c.checked)}))}</p>`;
     }
     // Next to the date of registration: the renewal interval of the chosen commune, when its confirmed rule states one, and the next date.
     function renewal(id) {
       const c = CH().communeById.get(store.childcare.commune), months = c?.renewMonths, registered = application(id)?.registered || '';
       if (!c) return t('childcare.mine.noCommune');
-      if (!months) return t('childcare.mine.noInterval', {name: c.name});
+      const name = CH().communeName(c).text;
+      if (!months) return t('childcare.mine.noInterval', {name});
       const next = M().nextRenewal(registered, months, today());
-      return t('childcare.mine.interval', {name: c.name, n: months}) + (next ? ' ' + t('childcare.mine.next', {date: F.dateLabel(next)}) : '');
+      return t('childcare.mine.interval', {name, n: months}) + (next ? ' ' + t('childcare.mine.next', {date: F.dateLabel(next)}) : '');
     }
     function applicationBox(p) {
       const a = application(p.id) || M().emptyApplication(), field = (id, label, value) => `<div><label class="glabel" for="${id}">${esc(label)}</label><input class="field" id="${id}" type="date" min="2000-01-01" max="2099-12-31" value="${esc(value)}"></div>`;
@@ -217,11 +234,13 @@
     }
     function detail(p) {
       const where = [CH().addressLine(p) || p.town, t('card.canton')].filter(Boolean).join(' · '), badges = marks(p, {languages: true});
+      english = false;
+      const rows = facts(p);
       return `<div class="d-top"><button type="button" class="ghost" data-close>${ICON.back(18)}${esc(t('card.back'))}</button><span class="d-actions"><button type="button" class="iconbtn" data-action="copy-link" aria-label="${esc(t('card.copyLink'))}" title="${esc(t('card.copyLink'))}">${ICON.link(20)}</button></span></div>` +
         `<div class="d-body" tabindex="-1" autofocus><p class="d-kicker">${esc(typeLabel(p))}</p><h2 class="d-name" id="dTitle">${V.nm(p.name)}</h2><p class="d-where">${esc(where)}</p>` +
         (badges.length ? `<p class="cc-badges">${badges.map(b => `<span>${esc(b)}</span>`).join('')}</p>` : '') +
-        `<p class="d-checked">${esc(t('childcare.checked', {date: F.dateLabel(p.checked)}))}</p>` + (en() ? `<p class="hint d-english">${esc(t('childcare.english'))}</p>` : '') +
-        facts(p) + `<div class="d-second">${link(directions(p), ICON.route(18) + esc(t('card.directions')), 'ghost')}</div>` +
+        `<p class="d-checked">${esc(t('childcare.checked', {date: F.dateLabel(p.checked)}))}</p>` + (english && foreign() ? `<p class="hint d-english">${esc(englishNote())}</p>` : '') +
+        rows + `<div class="d-second">${link(directions(p), ICON.route(18) + esc(t('card.directions')), 'ghost')}</div>` +
         `<section class="dsec cc-commune"><h3>${esc(t('childcare.commune.title'))}</h3>${communeSelect('cc-commune')}<div id="cc-rules">${rules()}</div></section>` +
         applicationBox(p) +
         `<section class="dsec cc-about"><h3>${esc(t('foot.about'))}</h3><p class="hint">${esc(t('childcare.lead', {date: F.dateLabel(p.checked)}))}</p><p class="hint">${esc(t('childcare.source'))}</p></section></div>` +
@@ -243,7 +262,7 @@
       return `<section class="dsec cc-mine-list"><div class="group">${communeSelect('cc-commune-mine')}</div>` +
         (items.length ? items.map(item).join('') : `<p class="hint cc-empty">${esc(t('childcare.mine.empty'))}</p>`) + `<p class="hint">${esc(t('childcare.mine.private'))}</p></section>`;
     }
-    return {icon, ageShort, priceDate, marks, row, list, mapBox, parts, box, panel, filterLabel, filterChips, facts, communeSelect, rules, renewal, applicationBox, detail, mine, sourceLabel, distanceText};
+    return {icon, ageShort, priceDate, englishNote, marks, row, list, mapBox, parts, box, panel, filterLabel, filterChips, facts, communeSelect, rules, renewal, applicationBox, detail, mine, sourceLabel, distanceText};
   }
   window.MinitandemChildcareViews = {create};
 })();

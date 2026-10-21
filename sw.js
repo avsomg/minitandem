@@ -1,4 +1,4 @@
-const CACHE = 'minitandem-shell-2026-10-21-daycare-1';
+const CACHE = 'minitandem-shell-2026-10-21-daycare-2';
 const SHELL = [
   '/', '/index.html', '/styles.css', '/manifest.webmanifest',
   '/features.js', '/strings-en.js', '/strings-de.js', '/strings-fr.js', '/i18n.js',
@@ -10,7 +10,7 @@ const SHELL = [
 ];
 // The German and French card texts and the places of the Daycare tab are not in the shell: each is cached the first time it is loaded, so a
 // visitor keeps only the language they use (and the places once they opened the tab), offline included.
-const ON_USE = ['/data-de.js', '/data-fr.js', '/data-childcare.js'];
+const ON_USE = ['/data-de.js', '/data-fr.js', '/data-childcare.js', '/data-childcare-de.js', '/data-childcare-fr.js'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting()));
 });

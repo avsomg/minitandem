@@ -657,6 +657,7 @@
   'view.childcare': 'Crèche',
   'childcare.lead': 'Crèches, garderies, accueil familial de jour, groupes de jeux et maternelles du canton de Fribourg. Informations tirées des pages publiques de la structure et de la commune, vérifiées le {date}. Les places libres changent chaque jour : demandez à la structure.',
   'childcare.english': 'Les informations sur les structures sont pour l’instant en anglais ; l’allemand et le français suivront.',
+  'childcare.englishSome': 'Les informations sur les structures sans traduction à jour s’affichent en anglais.',
   'childcare.source': 'Type, nom, adresse et point sur la carte de chaque structure : la liste ouverte des structures du canton (Source : Etat de Fribourg).',
   'childcare.views': 'Parties de la vue Crèche',
   'childcare.show.list': 'Liste',

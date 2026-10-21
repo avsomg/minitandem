@@ -7,13 +7,20 @@
 // scan ...") needs a new reading. Notes are read for that alone and never written out. The folder is never named in the output.
 // --leave-out-unconfirmed: instead of stopping, leave such facts out and list them (in the output as "pending", without their values),
 // for a preview while the second reading is still to come.
-// Usage: node scripts/compile-childcare.mjs <folder> [--leave-out-unconfirmed]
+// German and French: <folder>/translations/de.json and fr.json ({id: {en_digest, text}}, the digest being sha256 of the English text) become
+// data-childcare-de.js and data-childcare-fr.js, which the tab loads with the interface language. Only translations of the current English
+// are written; a text without one is shown in English. --export-texts <file> writes every published English text with its id and a context
+// ({id, en, context}) for the translators instead, and changes nothing in the repository.
+// Usage: node scripts/compile-childcare.mjs <folder> [--leave-out-unconfirmed] [--export-texts <file>]
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 
 export const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 export const OUTPUT='data-childcare.js';
+export const LANGS=['de','fr'];
+export const textsFile=lang=>`data-childcare-${lang}.js`;
 export const TYPES=['creche','garderie','family-day-care','playgroup','nature-playgroup','maternelle'];
 // The fields a published value may have, per fact. Anything else in a value stops the script, so that a new field is looked at before it is published.
 export const PLACE_FACTS={ageFrom:['months','weeks','text'],ageTo:['years','text'],days:null,hours:['text','opensAt','closesAt'],closures:['text'],languages:null,
@@ -158,6 +165,52 @@ export function compile(folder,{leaveOut=false}={}){
   const source={name:'Etat de Fribourg',licence:list.places[0]?.source?.licence||'OGD, Source : Etat de Fribourg',url:list.source||'',fetchedOn:list.generatedOn||''};
   return {data:{schema:1,source,places,communes},report};
 }
+// The family-facing English texts of the published data, each with a stable id: the text of a place's fact ('place/<id>/<fact>'), of a
+// commune's rule ('commune/<id>/<rule>') and a commune's name ('commune/<id>/name', which often explains the body in English). childcare.js
+// asks for a translation with the same ids. Names of places and of subsidised crèches are proper names and stay as they are.
+const FACT_WORDS={ageFrom:'Minimum age',ageTo:'Upper age limit',hours:'Days and opening hours',closures:'When the place is closed',pedagogy:'Educational approach',
+  subsidised:'Whether the place is subsidised',price:'Price',meals:'Meals',registration:'How to register',availability:'Free places',settlingIn:'Settling in',trialPeriod:'Trial period'};
+const RULE_WORDS={registration:'Waiting list',registrationFrom:'From when a family can register',renewal:'Keeping a request on the waiting list',residency:'Who can register',
+  registrationFee:'Registration fee',tariff:'What parents pay',calculator:'Description of the price calculator',privateSupport:'Help for private or other crèches'};
+export function texts({places,communes}){
+  const out=[],put=(id,en,context)=>{if(typeof en==='string'&&en.trim())out.push({id,en,context});};
+  for(const p of places)for(const [key,fact] of Object.entries(p.facts))
+    put(`place/${p.id}/${key}`,fact.value?.text,`${FACT_WORDS[key]||key} at the daycare place "${p.name}"${p.town?' in '+p.town:''}, canton Fribourg; shown to families under that heading.`);
+  for(const c of communes){
+    put(`commune/${c.id}/name`,c.name,'Name of a commune or regional body in canton Fribourg, in the list "Where do you live?". Keep the place names; translate only the words that explain.');
+    for(const [key,fact] of Object.entries(c.facts))put(`commune/${c.id}/${key}`,fact.value?.text,`${RULE_WORDS[key]||key}: a rule of ${c.name} for a place in a crèche, shown under "Getting a place in ${c.name}".`);
+  }
+  return out;
+}
+export const digest=text=>crypto.createHash('sha256').update(text,'utf8').digest('hex');
+// One language's translations of the current texts: {id: {en, text}}, en the digest of the English they were made from. A translation of
+// an English text that has changed since (stale) or of a text that is not published now (unknown) is left out and named; one with
+// contact details or Cyrillic stops the script, as a published English text would.
+export function translationsFor(list,folder,lang){
+  const file=path.join(folder,'translations',lang+'.json'),report={found:fs.existsSync(file),translated:0,stale:[],unknown:[],invalid:[]},data={};
+  if(!report.found)return {data,report};
+  const raw=readJson(file),byId=new Map(list.map(item=>[item.id,item]));
+  if(!raw||typeof raw!=='object'||Array.isArray(raw))throw Error(`translations/${lang}.json must hold {id: {en_digest, text}}`);
+  for(const [id,entry] of Object.entries(raw)){
+    const english=byId.get(id);
+    if(!english){report.unknown.push(id);continue;}
+    if(!entry||typeof entry.text!=='string'||!entry.text.trim()||!/^[0-9a-f]{64}$/.test(entry.en_digest||'')){report.invalid.push(id);continue;}
+    if(entry.en_digest!==digest(english.en)){report.stale.push(id);continue;}
+    checkText(entry.text,`translations/${lang}.json ${id}`);
+    data[id]={en:entry.en_digest,text:entry.text};report.translated++;
+  }
+  return {data,report};
+}
+const LANGUAGE={de:'German',fr:'French'};
+export function textsCode(lang,data){
+  return `/* Generated by scripts/compile-childcare.mjs from the checked ${LANGUAGE[lang]} translations of the Daycare texts. Per text (its id is the one of
+   texts() there): en, the digest of the English it was translated from, and the translation. A text whose English has changed since is
+   shown in English (childcare.js translator). Loaded with the Daycare tab when the interface is ${LANGUAGE[lang]}. */
+(window.MINITANDEM_CHILDCARE_TEXTS = window.MINITANDEM_CHILDCARE_TEXTS || {}).${lang} = {
+${Object.entries(data).map(([id,entry])=>JSON.stringify(id)+':'+JSON.stringify(entry)).join(',\n')}
+};
+`;
+}
 export function code({schema,source,places,communes}){
   return `/* Generated by scripts/compile-childcare.mjs: the preschool places of canton Fribourg from the canton's open list (OGD, "Source : Etat de
    Fribourg"), each with the facts that a second reading confirmed, and the rules of the communes and regional bodies. A record lists its
@@ -174,9 +227,24 @@ ${communes.map(commune=>JSON.stringify(commune)).join(',\n')}
 `;
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
-  const folder=process.argv[2];
+  const args=process.argv.slice(2),folder=args[0],exportAt=args.indexOf('--export-texts'),exportFile=exportAt>=0?args[exportAt+1]:'';
   if(!folder||folder.startsWith('--')||!fs.existsSync(folder))throw Error('Pass the private childcare folder as the first argument');
-  const {data,report}=compile(path.resolve(folder),{leaveOut:process.argv.includes('--leave-out-unconfirmed')}),text=code(data);
-  fs.writeFileSync(path.join(root,OUTPUT),text);
-  console.log(JSON.stringify({file:OUTPUT,bytes:Buffer.byteLength(text),...report},null,2));
+  if(exportAt>=0&&(!exportFile||exportFile.startsWith('--')))throw Error('--export-texts needs a file to write');
+  const {data,report}=compile(path.resolve(folder),{leaveOut:args.includes('--leave-out-unconfirmed')}),text=code(data),list=texts(data);
+  if(exportFile){
+    // For the translators: the texts only. The repository is left as it is; the line says whether its data file holds the same texts.
+    fs.writeFileSync(exportFile,JSON.stringify(list,null,2)+'\n');
+    const current=fs.existsSync(path.join(root,OUTPUT))&&fs.readFileSync(path.join(root,OUTPUT),'utf8')===text;
+    console.log(JSON.stringify({file:exportFile,texts:list.length,places:list.filter(item=>item.id.startsWith('place/')).length,communes:list.filter(item=>item.id.startsWith('commune/')).length,
+      sameAsRepository:current},null,2));
+  }else{
+    fs.writeFileSync(path.join(root,OUTPUT),text);
+    const languages={};
+    for(const lang of LANGS){
+      const {data:translated,report:langReport}=translationsFor(list,path.resolve(folder),lang),file=textsFile(lang);
+      fs.writeFileSync(path.join(root,file),textsCode(lang,translated));
+      languages[lang]={file,texts:list.length,...langReport};
+    }
+    console.log(JSON.stringify({file:OUTPUT,bytes:Buffer.byteLength(text),...report,languages},null,2));
+  }
 }
