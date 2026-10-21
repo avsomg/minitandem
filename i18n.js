@@ -50,5 +50,8 @@
   // address these pages have always had, German and French in a folder beside it. 'places/' is the directory, 'places/<id>/' a place.
   const PLAIN_PAGE_FOLDER = {en: '', de: 'de/', fr: 'fr/'};
   const plainPage = (lang, id = '') => 'places/' + (id ? id + '/' : '') + (PLAIN_PAGE_FOLDER[lang] ?? '');
-  window.MinitandemI18n = {LANGS, LOCALES, STORAGE_KEY, detect, t, setLang, init, locale, lang: () => current, form, dictionaries, plainPage};
+  // The Daycare guides in the same scheme (daycare-guides.mjs builds them, the Daycare tab links them): 'daycare/<slug>/' in English,
+  // 'daycare/<slug>/de/' and 'daycare/<slug>/fr/' beside it.
+  const guidePage = (lang, slug) => 'daycare/' + slug + '/' + (PLAIN_PAGE_FOLDER[lang] ?? '');
+  window.MinitandemI18n = {LANGS, LOCALES, STORAGE_KEY, detect, t, setLang, init, locale, lang: () => current, form, dictionaries, plainPage, guidePage};
 })();

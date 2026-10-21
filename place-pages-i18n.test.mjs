@@ -10,6 +10,7 @@ import {loadCatalog} from './editorial/quality.mjs';
 import {generatePublicPages, placePage} from './public-pages.mjs';
 import {PAGE_LANGS, PAGE_TEXT, languageLayer, placeURL, directoryURL, sentences} from './place-languages.mjs';
 import {LEGAL_LABELS, LANGUAGE_NAMES, legalURL} from './legal-pages.mjs';
+import {GUIDE_URLS} from './daycare-guides.mjs';
 import {SITE_ORIGIN} from './site.mjs';
 import {loadStack} from './test-support.mjs';
 
@@ -104,7 +105,7 @@ test('the sitemap lists every page of every language once, and the other pages a
   assert.equal(new Set(locs).size, locs.length, 'no address twice');
   for (const page of allPages()) assert.ok(locs.includes(SITE_ORIGIN + page.url), page.url);
   for (const url of ['/', '/projekt/', '/projekt/en/', legalURL('impressum', 'de'), legalURL('datenschutz', 'fr')]) assert.ok(locs.includes(SITE_ORIGIN + url), url);
-  assert.equal(locs.length, 3 * published.length + 3 + 2 + 6 + 1);
+  assert.equal(locs.length, 3 * published.length + 3 + 2 + 6 + GUIDE_URLS.length + 1);
 });
 
 test('the pages carry the app\'s own words, dates and ages in each language, from the dictionaries and the formatting functions', () => {

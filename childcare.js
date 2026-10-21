@@ -17,6 +17,8 @@
   // The rows of a place's page, in the order of the preview the owner accepted, and the rules of a commune.
   const DETAIL_ROWS = ['age', 'hours', 'closures', 'price', 'registration', 'availability', 'meals', 'settlingIn', 'trialPeriod', 'pedagogy', 'languages'];
   const RULE_KEYS = ['registration', 'registrationFrom', 'renewal', 'residency', 'registrationFee', 'tariff', 'privateSupport', 'subsidisedPlaces', 'calculator'];
+  // The guides for parents, in the order of the tab's list: plain pages built from content/daycare/<key>.<lang>.md (daycare-guides.mjs).
+  const GUIDE_KEYS = ['getting-a-place', 'what-it-costs', 'when-it-does-not-work', 'settling-in'];
   const defaultFilters = () => ({query: '', types: new Set(), subsidy: new Set(), languages: new Set(), approaches: new Set(), opensBy: '', closesAfter: ''});
   // A published fact's value (null when the place or commune does not publish it) and the pages it rests on.
   const value = (record, key) => record?.facts?.[key]?.value ?? null;
@@ -154,5 +156,5 @@
       communeOptions, renewMonths, addressLine, mapItem, checkedOn, ageFit, approaches, value, sources, pending, text, factText, ruleText, communeName, coverage};
   }
   window.MinitandemChildcare = {create, defaultFilters, value, sources, pending, ageFit, approaches, minMonths, maxYears, addMonths, nextRenewal, emptyApplication, isEmptyApplication, textId, translator,
-    TYPE_KEYS, SUBSIDY_KEYS, LANGUAGE_KEYS, APPROACH_KEYS, OPENS_KEYS, CLOSES_KEYS, APPLICATION_KEYS, VIEW_KEYS, DETAIL_ROWS, RULE_KEYS};
+    TYPE_KEYS, SUBSIDY_KEYS, LANGUAGE_KEYS, APPROACH_KEYS, OPENS_KEYS, CLOSES_KEYS, APPLICATION_KEYS, VIEW_KEYS, DETAIL_ROWS, RULE_KEYS, GUIDE_KEYS};
 })();

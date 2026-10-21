@@ -84,7 +84,7 @@
   const els = {};
   for (const id of ['q', 'qClear', 'fbar', 'fpAge', 'fpAgeV', 'fpPlace', 'fpPlaceV', 'fpMore', 'count', 'countNote', 'whenNote', 'barR', 'fcount', 'list', 'listhead', 'empty', 'endnav', 'endNote', 'toFilters', 'more', 'moreBtn', 'fchips', 'fchipList',
     'sheet', 'sheetBody', 'sheetDone', 'sheetClose', 'colBody', 'detail', 'utility', 'utilityTitle', 'utilityBody', 'panel', 'toast', 'viewTitle', 'viewTools', 'savedBox', 'mapBox', 'updates',
-    'syncState', 'contentNote', 'importFile', 'planImportFile', 'results', 'tabSaved', 'nearNote', 'nearText', 'nearOpen', 'resetTop', 'weekBox', 'viewLead', 'viewParts', 'childcareBox'])
+    'syncState', 'contentNote', 'importFile', 'planImportFile', 'results', 'tabSaved', 'nearNote', 'nearText', 'nearOpen', 'resetTop', 'weekBox', 'viewLead', 'viewGuides', 'viewParts', 'childcareBox'])
     els[id] = document.getElementById(id);
   const toast = W.MinitandemToast.create({node: els.toast, document});
   const wide = W.matchMedia('(min-width: 1000px)');
@@ -184,7 +184,7 @@
     if (state.view === 'childcare') { renderChildcare(); return; }
     // Back from the Daycare tab: the activities' panel, search words and second pill.
     if (els.panel.dataset.kind !== 'activities') buildPanel();
-    els.childcareBox.hidden = true; els.childcareBox.innerHTML = ''; els.viewLead.hidden = true; els.viewParts.hidden = true; els.viewParts.innerHTML = '';
+    els.childcareBox.hidden = true; els.childcareBox.innerHTML = ''; els.viewLead.hidden = true; els.viewGuides.hidden = true; els.viewParts.hidden = true; els.viewParts.innerHTML = '';
     $('label[for="q"]').textContent = t('search.label'); els.q.placeholder = t('search.placeholder');
     els.fpPlace.dataset.open = 'place'; $('small', els.fpPlace).textContent = t('pill.place');
     const list = lastItems = items();
@@ -315,7 +315,7 @@
     if (state.f.radius && state.near) out.push({key: 'radius', label: t('near.radiusKm', {km: state.f.radius})});
     return out.concat(CH.active(state.cf).map(f => ({key: 'cc:' + f.key, label: CV.filterLabel(f)})));
   }
-  let childcareKey = '';
+  let childcareKey = '', childcareGuides = '';
   // The tab in the same frame as the lists: title, search, the two pills (age, and where distances are measured from), count, filter chips,
   // then its own box with the list, the map or the family's applications.
   function renderChildcare() {
@@ -331,6 +331,8 @@
     els.tabSaved.querySelector('.tabn').textContent = String(store.personal.favorites.filter(id => C.byId.has(id)).length);
     els.viewTitle.textContent = t('view.childcare'); els.viewTitle.hidden = false;
     els.viewLead.textContent = CH.loaded ? t('childcare.lead', {date: F.dateLabel(CH.checkedOn())}) : ''; els.viewLead.hidden = !CH.loaded;
+    // The guides under the introduction: written again only when their words change (a language switch), so an open list stays open.
+    const guides = CV.guides(); if (guides !== childcareGuides) { els.viewGuides.innerHTML = guides; childcareGuides = guides; } els.viewGuides.hidden = !CH.loaded;
     els.viewParts.innerHTML = CH.loaded ? CV.parts(view) : ''; els.viewParts.hidden = !CH.loaded;
     $('label[for="q"]').textContent = t('childcare.search.label'); els.q.placeholder = t('childcare.search.placeholder');
     if (els.q.value !== state.cf.query) els.q.value = state.cf.query;

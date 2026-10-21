@@ -1,4 +1,4 @@
-// The plain pages (the legal notices, the case study, the directory of places and a place, each in its languages): every page has a description, the language switch of a
+// The plain pages (the legal notices, the case study, the directory of places and a place, a Daycare guide, each in its languages): every page has a description, the language switch of a
 // notice or a place page is one row with a gap between the links and marks the page's own language, and no page is wider than the screen or cuts a label
 // off at 320, 375 and 1280 px, also with the text spacing of WCAG 1.4.12.
 import path from 'node:path';
@@ -11,8 +11,10 @@ const fixture=await serveSite(),url=fixture.url;
 const NOTICES=['/impressum/','/impressum/fr/','/impressum/en/','/datenschutz/','/datenschutz/fr/','/datenschutz/en/'];
 // The directory and a place in each of its three languages (English at /places/, German and French in a folder beside it).
 const PLACES=['/places/','/places/de/','/places/fr/','/places/beo-funpark/','/places/beo-funpark/de/','/places/beo-funpark/fr/'];
-const PAGES=[...NOTICES,'/projekt/','/projekt/en/',...PLACES];
-const SWITCHED=[...NOTICES,...PLACES];
+// A Daycare guide in its three languages, and the guide with the longest title in German.
+const GUIDES=['/daycare/getting-a-place/','/daycare/getting-a-place/de/','/daycare/getting-a-place/fr/','/daycare/when-it-does-not-work/de/'];
+const PAGES=[...NOTICES,'/projekt/','/projekt/en/',...PLACES,...GUIDES];
+const SWITCHED=[...NOTICES,...PLACES,...GUIDES];
 const WIDTHS=[320,375,1280];
 const problems=[];
 let browser;

@@ -8,6 +8,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import {SITE_ORIGIN} from './site.mjs';
 import {CASE_STUDY_URLS} from './case-study.mjs';
+import {GUIDE_URLS} from './daycare-guides.mjs';
 import {LEGAL_URLS,LEGAL_LABELS,LANGUAGE_NAMES,legalLinks} from './legal-pages.mjs';
 import {PAGE_LANGS,ROOT_LANG,PAGE_TEXT,languageLayer,placeURL,directoryURL,sentences} from './place-languages.mjs';
 
@@ -110,7 +111,7 @@ export function generatePublicPages(records,regions,output,date){
     for(const a of items)write(placeURL(a.id,lang),placePage(a,regions,date,lang,text));
     write(directoryURL(lang),directoryPage(items,regions,lang,text));
   }
-  const urls=[`${site}/`,...PAGE_LANGS.map(lang=>site+directoryURL(lang)),...[...CASE_STUDY_URLS,...LEGAL_URLS].map(url=>site+url),...items.flatMap(a=>PAGE_LANGS.map(lang=>site+placeURL(a.id,lang)))];
+  const urls=[`${site}/`,...PAGE_LANGS.map(lang=>site+directoryURL(lang)),...[...CASE_STUDY_URLS,...LEGAL_URLS,...GUIDE_URLS].map(url=>site+url),...items.flatMap(a=>PAGE_LANGS.map(lang=>site+placeURL(a.id,lang)))];
   fs.writeFileSync(path.join(output,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+urls.map(url=>`<url><loc>${esc(url)}</loc></url>`).join('')+'</urlset>\n');
   return items.length;
 }

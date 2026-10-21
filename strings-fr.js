@@ -797,6 +797,14 @@
   'childcare.pill.near': 'Distances depuis',
   'childcare.nearNone': 'Non défini',
   'childcare.nearLocation': 'Votre position',
+  // The guides for parents (childcare.js GUIDE_KEYS): the block in the tab, and the guide pages' own words (daycare-guides.mjs). A guide's
+  // name is the title of its text, content/daycare/<key>.<lang>.md.
+  'childcare.guides.title': 'Guides',
+  'childcare.guides.back': 'Ouvrir l’onglet Crèche',
+  'childcare.guide.getting-a-place': 'Obtenir une place en crèche dans le canton de Fribourg',
+  'childcare.guide.what-it-costs': 'Ce que coûte l’accueil de jour',
+  'childcare.guide.when-it-does-not-work': 'Quand une crèche ne peut pas accueillir votre enfant ou que l’adaptation est difficile',
+  'childcare.guide.settling-in': 'L’adaptation',
   'import.childcare_one': 'Inscriptions en crèche : {n}. Elle remplace celle de la même structure dans ce navigateur.',
   'import.childcare_other': 'Inscriptions en crèche : {n}. Elles remplacent celles des mêmes structures dans ce navigateur.'
 };

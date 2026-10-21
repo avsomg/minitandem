@@ -224,7 +224,7 @@ test('the site builds from the files the Docker build context lets in',t=>{
   if(fs.existsSync(path.join(root,'editorial/node_modules')))fs.symlinkSync(path.join(root,'editorial/node_modules'),path.join(context,'editorial/node_modules'));
   const build=spawnSync(process.execPath,['build.mjs','--public'],{cwd:context,encoding:'utf8',env:{...process.env,MINITANDEM_FAMILY_SYNC:'0'}});
   assert.equal(build.status,0,build.stderr.slice(-800));
-  for(const file of ['index.html','projekt/index.html','projekt/en/index.html','places/index.html','impressum/index.html','impressum/fr/index.html','impressum/en/index.html','datenschutz/index.html','datenschutz/fr/index.html','datenschutz/en/index.html','sitemap.xml','build-info.json'])
+  for(const file of ['index.html','projekt/index.html','projekt/en/index.html','places/index.html','impressum/index.html','impressum/fr/index.html','impressum/en/index.html','datenschutz/index.html','datenschutz/fr/index.html','datenschutz/en/index.html','daycare/getting-a-place/index.html','daycare/getting-a-place/de/index.html','daycare/settling-in/fr/index.html','sitemap.xml','build-info.json'])
     assert.ok(fs.existsSync(path.join(context,'.publish',file)),file);
   assert.match(fs.readFileSync(path.join(context,'.publish/features.js'),'utf8'),/familySync":false/);
   const enabled=spawnSync(process.execPath,['build.mjs','--public'],{cwd:context,encoding:'utf8',env:{...process.env,MINITANDEM_FAMILY_SYNC:'1'}});
