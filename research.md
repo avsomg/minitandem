@@ -677,7 +677,7 @@ To confirm before visiting:
 
 ### Additional check: 2026-09-27
 
-- **Schedule** (Organiser source): The group page gives Friday 10:00–11:00, Turnhalle Alterswil. Children from 3 years are invited with parents or grandparents. No separate ElKi programme for 2026/27 was found in the published news. [Source](https://sv-alterswil.ch/verein/Riegen/elki)
+- **Schedule** (Organiser source): The group page gives Friday 10:00–11:00, Turnhalle Alterswil, not 09:00. Children from 3 years are invited with parents or grandparents. No separate ElKi programme for 2026/27 was found in the news items reviewed. [Source](https://sv-alterswil.ch/verein/Riegen/elki)
 
 To confirm before visiting:
 - Confirm the current time, the cost and whether a trial visit is possible; no official admission is stated for children under 3.
@@ -1576,7 +1576,7 @@ To confirm before visiting:
 - Checked: 2026-09-28
 - Address: Maison de la Petite Enfance, Route des Arsenaux 23A, 1700 Fribourg
 - Age: Check the age
-- Adult: Adults discuss parenting over coffee and try out ways of interacting with the children on the spot. Whether an adult must be present is not stated.
+- Adult: Adults discuss parenting over coffee and try interacting with the children on the spot. Must an adult be present?
 - Language: To be confirmed
 - Schedule: Published meetings: 6, 13, 20 and 27 October; 3, 10, 17 and 24 November; 1 and 15 December 2026, on Tuesdays 09:00–11:00.
 - Price: Price not published
@@ -1591,14 +1591,14 @@ To confirm before visiting:
 - Date: 2026-11-24 09:00–11:00 · Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg · Maison de la Petite Enfance, Rte des Arsenaux 23A, 1700 Fribourg
 - Date: 2026-12-01 09:00–11:00 · Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg · Maison de la Petite Enfance, Rte des Arsenaux 23A, 1700 Fribourg
 - Date: 2026-12-15 09:00–11:00 · Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg · Maison de la Petite Enfance, Rte des Arsenaux 23A, 1700 Fribourg
-- A meeting for adults and children together. The price, the age limit and the language of the individual facilitator are not stated. A listing in French does not guarantee that German is spoken.
-- Availability of places is not confirmed.
-- Only the dates from the published AEF programme are listed here.
+- A meeting for adults and children together. The price, the age limit and the language of the individual facilitator are not stated. A French-language card does not guarantee German.
+- A place in the group has not been checked.
+- Only the dates from the published AEF programme have been added to the calendar.
 
 ### Additional check: 2026-10-02
 
 - **Autumn series** (Organiser source): The public AEF calendar confirms meetings at the MPE on Tuesdays 09:00–11:00 from 29 September to 15 December 2026, with the listed dates, except 8 December. Adults discuss parenting and interact with the children together. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
-- **Adult** (Organiser source): At the meeting, adults discuss parenting over coffee and try out ways of interacting with the children on the spot. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
+- **Adult** (Organiser source): At the meeting, adults discuss parenting over coffee and try interacting with the children here and now. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
 
 To confirm before visiting:
 - The cost, age limits, registration and a German-speaking facilitator are not stated in the calendar. This is a joint meeting, not childcare without a parent.
@@ -1611,7 +1611,7 @@ To confirm before visiting:
 
 - [AEF programme and published dates](https://tockify.com/educationfamiliale/detail/755/1790665200000)
 - [AEF calendar](https://www.educationfamiliale.ch/fr/agenda)
-- [Autumn series](https://tockify.com/api/feeds/ics/educationfamiliale)
+- [Additional check: Autumn series](https://tockify.com/api/feeds/ics/educationfamiliale)
 
 ### Visit conditions
 
@@ -2286,7 +2286,7 @@ To confirm before visiting:
 - Price: From CHF 50; check the family composition included in the rate
 - Contact: Au fil de l’Ondena; aufildelondena@gmail.com
 - Farm, nature, games and crafts with a parent. The last published dates end on 22.08.2026.
-- Not to be confused with Haricot 4–13.
+- A detour from the direct route. Not to be confused with Haricot 4–13.
 
 ### Additional check: 2026-09-27
 
@@ -2298,7 +2298,7 @@ To confirm before visiting:
 
 - [Official source](https://www.aufildelondena.ch/petitpois)
 - [Booking and prices](https://www.aufildelondena.ch/book-online)
-- [Team](https://www.aufildelondena.ch/qui-sommesnous)
+- [Additional check: Team](https://www.aufildelondena.ch/qui-sommesnous)
 
 ### Visit conditions
 
@@ -2323,14 +2323,14 @@ To confirm before visiting:
 
 ### Additional check: 2026-09-27
 
-- **Dates and rain** (Organiser source): The detailed programme lists only the sessions on 28 September and 5 October 2026, 15:30–17:30. In case of rain, they are moved to the cafeteria of the Levant swimming pool. Visitors can listen to and tell stories, sing and borrow books. Adults take part. Registration is not required. A multilingual format is announced, but the languages of each session are not stated. [Source](https://www.livrechange.ch/fr/encore-des-histoires-informations-543.html)
+- **Dates and rain** (Organiser source): Only the sessions on 28 September and 5 October 2026, 15:30–17:30, remain in the detailed programme. In case of rain, they are moved to the cafeteria of the Levant swimming pool. Visitors can listen to and tell stories, sing and borrow books. Adults take part. Registration is not required. A multilingual format is announced, but the languages of each session are not stated. [Source](https://www.livrechange.ch/fr/encore-des-histoires-informations-543.html)
 
 To confirm before visiting:
 - The language of a specific session, the exact entrance to the alternative venue and age recommendations.
 
 - [Official source](https://www.livrechange.ch/fr/activites-regulieres.html)
 - [Published dates and location](https://www.ville-fribourg.ch/agenda/encore-des-histoires-quartier-du-jura)
-- [Dates and rain](https://www.livrechange.ch/fr/encore-des-histoires-informations-543.html)
+- [Additional check: Dates and rain](https://www.livrechange.ch/fr/encore-des-histoires-informations-543.html)
 
 ### Visit conditions
 
@@ -2761,18 +2761,18 @@ To confirm before visiting:
 - Schedule: Mon, Tue 15:00–17:00 · Wed, Sat 09:30–11:30 · Thu 15:00–19:00. During school holidays: Thu 17:00–19:00 and Sat 09:30–11:30
 - Price: According to the 2025/26 directory: free for children, CHF 40 / year for adults; new tariff to be confirmed
 - Contact: Bibliothek Tafers; 026 494 52 55; bibliothek@tafers.ch
-- The language of the host or service is not confirmed.
+- The language of the host/service is not confirmed
 
 ### Additional check: 2026-09-27
 
-- **New schedule** (Organiser source): The new online catalogue of the Tafers library lists Thursday as continuous opening, 15:00–19:00. During school holidays, the hours are Thursday 17:00–19:00 and Saturday 09:30–11:30. [Source](https://www.winmedio.net/tafers/)
+- **New schedule** (Organiser source): In the new live catalogue of Tafers, Thursday is listed as continuous 15:00–19:00. During school holidays, Thursday 17:00–19:00 and Saturday 09:30–11:30 remain. [Source](https://www.winmedio.net/tafers/)
 
 To confirm before visiting:
-- The CHF 40 tariff relates to the previous 2025/26 directory; the current tariff and the terms of the children's membership are to be confirmed.
+- The CHF 40 tariff relates to the previous 2025/26 directory; confirm the current tariff and the terms of the children's membership.
 
 - [Official source](https://primarschule-tafers.ch/wp-content/uploads/2025/07/Schulinformation_25_26.pdf)
 - [Cantonal library register](https://www.fr.ch/bcu/app/bibliotheques/97)
-- [New schedule](https://www.winmedio.net/tafers/)
+- [Additional check: New schedule](https://www.winmedio.net/tafers/)
 - Coordinates of the address (not the entrance): 46.81391906738281, 7.2185821533203125. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Juchstrasse+9+OS+Tafers&type=locations&origins=address&limit=5&sr=4326)
 
 ## Bibliothèque régionale de Marly
@@ -3031,14 +3031,14 @@ To confirm before visiting:
 - Age: From 2 years; up to 7 with an accompanying person aged 16+
 - Adult: Together with an adult
 - Language: To be confirmed
-- Schedule: Sep–Oct: Mon–Thu 13:00–17:00; Fri 13:00–19:00; Sat 10:30–19:00; Sun 10:30–17:00
+- Schedule: Sep–Oct: Mon–Thu 13–17; Fri 13–19; Sat 10:30–19; Sun 10:30–17
 - Price: CHF 7 / ride for an adult with a child under 7
 - Contact: Kaisereggbahnen; 026 412 10 23; info@kaisereggbahnen.ch
 - Only in dry weather. An attraction, not a group activity; the age limit does not mean that a child will enjoy the speed.
 
 ### Additional check: 2026-09-27
 
-- **Eligibility** (Organiser source): From 2 years; a child under 7 rides free with an accompanying person aged 16 or over, who pays CHF 7 for the ride. Children ride alone from 7 years. Two children may not ride together. [Source](https://kaisereggbahnen-schwarzsee.ch/angebot/sommer-rodelbahn/)
+- **Eligibility** (Organiser source): From 2 years; a child under 7 rides free with an accompanying person aged 16 or over, and the adult ride of CHF 7 is paid. Children ride alone from 7 years. Two children may not ride together. [Source](https://kaisereggbahnen-schwarzsee.ch/angebot/sommer-rodelbahn/)
 
 To confirm before visiting:
 - Before setting out, check that the weather is dry and that the attraction is operating.
@@ -3815,9 +3815,9 @@ To confirm before visiting:
 - Checked: 2026-09-28
 - Address: Schaalgasse 6, 3280 Murten
 - Age: Family visit; no age limits stated
-- Adult: Visit the library with an adult; no childcare is provided.
+- Adult: Independent visit to the library with an adult, with no childcare provided.
 - Language: To be confirmed
-- Schedule: Mon, Fri 15:00–18:00 · Tue, Thu 09:00–11:00 · Wed 15:00–19:00 · Sat 09:00–13:00
+- Schedule: Mon, Fri 15–18 · Tue, Thu 09–11 · Wed 15–19 · Sat 09–13
 - Price: Visiting on site is free; for borrowing to take home: adult CHF 50, first child CHF 20, each further child CHF 10 / year, according to the published rules
 - Contact: Stadtbibliothek Murten; 026 670 55 24; stadtbibliothek@murten-morat.ch
 - There are children's books, picture books, audiobooks, Tonies and Buchstart packs. A Buchstart pack being available does not mean that a session of the same name is currently held.
@@ -3833,7 +3833,7 @@ To confirm before visiting:
 - The rules were published before 2026: check holiday exceptions and the current borrowing charge before a visit. It has not been established whether there is a separate play corner or a changing table.
 
 - [Cantonal library: opening hours, charges and contacts](https://www.fr.ch/de/kub/app/bibliotheques/83)
-- [Open visit](https://www.winmedio.net/murten/api/images/imageopac/193)
+- [Additional check: Open visit](https://www.winmedio.net/murten/api/images/imageopac/193)
 - Coordinates of the address (not the entrance): 46.927528381347656, 7.116694927215576. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Schaalgasse+6+3280+Murten&type=locations&origins=address&limit=5&sr=4326)
 
 ## Bibliothèque de Courtepin · family visit
@@ -5029,15 +5029,15 @@ To confirm before visiting:
 - District: Glâne
 - Checked: 2026-09-28
 - Address: Rue du Château 126, 1680 Romont FR
-- Age: From birth until the child starts school (1H), approximately 0–4 years
-- Adult: The child comes with a parent or another adult close to the child; one or two specialists receive the families.
+- Age: From birth to the start of 1H (approximately 0–4 years)
+- Adult: The child comes with a parent or another close adult; one or two specialists receive the families.
 - Language: To be confirmed
 - Schedule: Mon 14:00–17:30; Wed 09:00–11:30
 - Price: Free
 - Contact: La Maison des Pitchounes; contact@lamaisondespitchounes.ch
-- No booking; you can come for part of the opening hours. This is a place for free play, not a day nursery.
+- No booking; you can come for part of the window. This is a free-play place, not a Kita.
 - The ground floor is listed as accessible for a pushchair. During school holidays the organiser announces separate Wednesday sessions.
-- The website uses both Rue and Route du Château; its contact details give Rue du Château 126. For navigation, check the pin on the map.
+- The page uses both Rue and Route du Château; the contact block at the bottom gives Rue du Château 126. For navigation, check the pin on the map.
 
 ### Additional check: 2026-09-28
 
@@ -5052,7 +5052,7 @@ To confirm before visiting:
 
 - Booking: No booking [Source](https://lamaisondespitchounes.ch/)
 - Observation: You can first simply stay near the child [Source](https://lamaisondespitchounes.ch/)
-- Leaving early: You can stay as long as you like during opening hours [Source](https://lamaisondespitchounes.ch/)
+- Leaving early: Free time of stay within the reception window [Source](https://lamaisondespitchounes.ch/)
 - Course payment: Free entry [Source](https://lamaisondespitchounes.ch/)
 - Indoors: Indoor free play [Source](https://lamaisondespitchounes.ch/)
 - Pushchair access: The organiser states that the ground floor is accessible with a pushchair [Source](https://lamaisondespitchounes.ch/)
@@ -5233,7 +5233,7 @@ To confirm before visiting:
 - Place: Chapelle (Glâne)
 - District: Glâne
 - Checked: 2026-09-28
-- Address: Start at the school, 1608 Chapelle (Glâne)
+- Address: Départ à l’école, 1608 Chapelle (Glâne)
 - Age: Family hike; with young children, consider whether they can manage the route
 - Adult: Independent walk with a parent.
 - Language: To be confirmed
@@ -5620,7 +5620,7 @@ To confirm before visiting:
 - Price: Price not published
 - Contact: Cabane du Petit Oiseau; 021 948 77 01; cabane@rathvel.ch
 - Mini zoo at the buvette; the small summer train runs only during the buvette's opening hours.
-- In winter the mini zoo is open only when the buvette is open. The mini zoo is announced to reopen by 20 December at the latest, depending on snow.
+- In winter the mini zoo is open only when the buvette is open; the page states that it reopens by 20 December at the latest, subject to snow.
 - A separate charge for the train and for visiting the animals is not published. Check the weather, whether the buvette is open and the cost before travelling.
 
 ### Additional check: 2026-09-28
@@ -5628,7 +5628,7 @@ To confirm before visiting:
 - **Animals and train** (Organiser source): The mini zoo is open when the buvette is open; the small train runs in summer only. Summer hours are published until 11 October 2026. [Source](https://fribourg.ch/fr/les-paccots/buvettes-alpage/cabane-du-petit-oiseau/)
 
 To confirm before visiting:
-- The train price is not published. Winter availability depends on whether the buvette is open and on the weather.
+- The price of the train and winter availability depend on whether the buvette is open and on the weather.
 
 - [Mini zoo, train, season, opening hours and contact](https://fribourg.ch/fr/les-paccots/buvettes-alpage/cabane-du-petit-oiseau/)
 
@@ -5814,7 +5814,7 @@ To confirm before visiting:
 - Place: Attalens
 - District: Veveyse
 - Checked: 2026-09-28
-- Address: Start: La Jaqua, 1616 Attalens
+- Address: Départ La Jaqua, 1616 Attalens
 - Age: Family walk; the youngest child may need to be carried
 - Adult: Self-guided walk with an adult.
 - Language: To be confirmed
@@ -5848,7 +5848,7 @@ To confirm before visiting:
 - Place: Châtel-St-Denis
 - District: Veveyse
 - Checked: 2026-09-28
-- Address: Start opposite the Le Bivouac campsite, 1618 Châtel-St-Denis
+- Address: Départ en face du camping Le Bivouac, 1618 Châtel-St-Denis
 - Age: Family walk; choose exercises to suit the age
 - Adult: A parent accompanies the child on the forest loop.
 - Language: To be confirmed
@@ -5950,7 +5950,7 @@ To confirm before visiting:
 - Place: Les Paccots
 - District: Veveyse
 - Checked: 2026-09-28
-- Address: Start at Les Rosalys car park, Route des Dailles, 1619 Les Paccots
+- Address: Départ parking Les Rosalys, Route des Dailles, 1619 Les Paccots
 - Age: Family walk; with young children, consider the climb and that you may need to carry them.
 - Adult: Self-guided walk with an adult.
 - Language: To be confirmed
@@ -6249,7 +6249,7 @@ To confirm before visiting:
 - Place: Murist
 - District: Broye
 - Checked: 2026-09-28
-- Address: Start at the municipal administration, 1489 Murist
+- Address: Départ administration communale, 1489 Murist
 - Age: Age limits are not published
 - Adult: Together with an adult
 - Language: To be confirmed
@@ -6350,7 +6350,7 @@ To confirm before visiting:
 - Schedule: Wed–Thu 09:00–22:00; Fri 09:00–23:00; Sat–Sun 08:30–23:00
 - Price: Price is not published.
 - Contact: Café-Restaurant de l’Aérodrome; 026 921 08 27; restoaerodrome@outlook.com
-- You can watch the aerodrome, but aircraft activity and the safety of the viewing area are not guaranteed.
+- You can watch the aerodrome, but the page does not promise any aircraft activity or the safety of the viewing area.
 - The restaurant's opening hours are published for 2026. The play area may be unavailable during a private event.
 
 ### Additional check: 2026-09-28
@@ -6358,14 +6358,14 @@ To confirm before visiting:
 - **Availability and format** (Organiser source): The aerodrome restaurant lists a large play area and a terrace. [Source](https://fribourg.ch/fr/la-gruyere/restaurants/cafe-restaurant-de-laerodrome/)
 
 To confirm before visiting:
-- The age range for the play equipment, the prices and the availability of the play area without an order are not described.
+- The age of the equipment, the prices and the availability of the play area without an order are not described.
 
 - [Large play area, terrace and opening hours](https://fribourg.ch/fr/la-gruyere/restaurants/cafe-restaurant-de-laerodrome/)
 
 ### Visit conditions
 
 - Indoors: The aerodrome restaurant lists a large play area and a terrace. [Source](https://fribourg.ch/fr/la-gruyere/restaurants/cafe-restaurant-de-laerodrome/)
-- Important: The age range for the play equipment, the prices and the availability of the play area without an order are not described.
+- Important: The age of the equipment, the prices and the availability of the play area without an order are not described.
 - Coordinates of the address (not the entrance): 46.5944709777832, 7.093081474304199. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l%E2%80%99A%C3%A9rodrome+40+1663+Epagny&type=locations&origins=address&limit=5&sr=4326)
 
 ## Piscine de Charmey · swimming with a parent
@@ -7010,7 +7010,7 @@ To confirm before visiting:
 - Place: Greng
 - District: See / Lac
 - Checked: 2026-09-28
-- Address: Start at the obelisk car park, 3280 Meyriez
+- Address: Départ parking de l’obélisque, 3280 Meyriez
 - Age: Age limits are not published
 - Adult: Together with an adult
 - Language: To be confirmed
@@ -7070,7 +7070,7 @@ To confirm before visiting:
 - Place: Albeuve
 - District: Gruyère / Greyerz
 - Checked: 2026-09-28
-- Address: Start of the Parcours Vita, 1669 Albeuve
+- Address: Départ du parcours Vita, 1669 Albeuve
 - Age: Age limits are not published
 - Adult: Together with an adult
 - Language: To be confirmed
@@ -7132,7 +7132,7 @@ To confirm before visiting:
 - Place: Crésuz
 - District: Gruyère / Greyerz
 - Checked: 2026-09-28
-- Address: Village centre, near the church, 1653 Crésuz
+- Address: Centre du village, près de l’église, 1653 Crésuz
 - Age: Age limits not published
 - Adult: Together with an adult
 - Language: To be confirmed
@@ -7195,7 +7195,7 @@ To confirm before visiting:
 - Place: Grandvillard
 - District: Gruyère / Greyerz
 - Checked: 2026-09-28
-- Address: At the village entrance, near the Le Pic Vert restaurant, 1666 Grandvillard
+- Address: À l’entrée du village près du restaurant Le Pic Vert, 1666 Grandvillard
 - Age: Age limits are not published
 - Adult: Together with an adult
 - Language: To be confirmed
@@ -7225,7 +7225,7 @@ To confirm before visiting:
 - Place: Jaun
 - District: Gruyère / Greyerz
 - Checked: 2026-09-28
-- Address: On the way out of Jaun towards the Jaunpass, 1656 Jaun
+- Address: Sortie de Jaun vers le Jaunpass, 1656 Jaun
 - Age: Age limits are not published
 - Adult: Together with an adult
 - Language: To be confirmed
@@ -7255,7 +7255,7 @@ To confirm before visiting:
 - Place: La Roche
 - District: Gruyère / Greyerz
 - Checked: 2026-09-28
-- Address: Le Brand, at the foot of the La Berra lifts, 1634 La Roche
+- Address: Le Brand, pied des remontées de La Berra, 1634 La Roche
 - Age: Age limits are not published
 - Adult: Together with an adult
 - Language: To be confirmed
@@ -7285,7 +7285,7 @@ To confirm before visiting:
 - Place: Le Pâquier
 - District: Gruyère / Greyerz
 - Checked: 2026-09-28
-- Address: Forêt de Sautaux, near the station, 1661 Le Pâquier
+- Address: Forêt de Sautaux, près de la gare, 1661 Le Pâquier
 - Age: Age limits are not published
 - Adult: Together with an adult
 - Language: To be confirmed
@@ -7566,7 +7566,7 @@ To confirm before visiting:
 - Place: Rue
 - District: Glâne
 - Checked: 2026-09-28
-- Address: Start in Rue, 1673 Rue
+- Address: Départ Rue, 1673 Rue
 - Age: Age limits are not published
 - Adult: Together with an adult
 - Language: To be confirmed
@@ -8421,7 +8421,7 @@ To confirm before visiting:
 - Place: Corminboeuf
 - District: Sarine / Saane
 - Checked: 2026-09-28
-- Address: Corminboeuf, 1720; check the start point in the GPX route file
+- Address: Corminboeuf, 1720; check the start point against the GPX
 - Age: Age limits are not published
 - Adult: Together with an adult
 - Language: To be confirmed
@@ -8663,7 +8663,7 @@ To confirm before visiting:
 - Place: Surpierre
 - District: Broye
 - Checked: 2026-09-28
-- Address: Place de pique-nique Surpierre; ask the commune for the exact access route.
+- Address: Place de pique-nique Surpierre; ask for the exact access route.
 - Age: Age limits are not published.
 - Adult: Together with an adult
 - Language: To be confirmed
@@ -9417,7 +9417,7 @@ To confirm before visiting:
 - Place: Le Châtelard
 - District: Glâne
 - Checked: 2026-09-28
-- Address: Le Châtelard, 1689; check the start point in the tourism office's GPX route file
+- Address: Le Châtelard, 1689; start by the tourism GPX
 - Age: Age limits are not published.
 - Adult: Together with an adult
 - Language: To be confirmed
