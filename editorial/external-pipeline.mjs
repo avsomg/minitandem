@@ -213,7 +213,7 @@ export function pipelineReport(records,receipts,receiptBaseline,registry,candida
     validateDecision(decision,disputes.get(id));
     if(decision.decidedOn>date)throw Error(`Future external decision: ${id}`);
   }
-  const staleAddress=new Set();
+  const staleAddress=new Set(),renamed=new Set();
   for(const receipt of receipts){
     if(!published.some(record=>record.id===receipt.id))continue;
     if(baseline.has(receipt.id)&&receipt.checkedOn<=receiptBaseline.cutoffOn)continue;
@@ -225,11 +225,14 @@ export function pipelineReport(records,receipts,receiptBaseline,registry,candida
         throw Error(`Candidate revision predates receipt: ${receipt.id}`);
       continue;
     }
+    const record=byId.get(receipt.id);
+    // A card renamed after its external review goes back to external search under its present name. Until 22 October 2026 the rename
+    // stopped the whole pipeline as a bypassed search (nine cards got English names in the wording review of 21 October).
+    if(candidate.name!==record.name||candidate.town!==record.town){renamed.add(receipt.id);continue;}
     const dispute=disputes.get(receipt.id)?.candidateRevision===candidate?.revision?
       disputes.get(receipt.id):null;
     const decision=dispute&&decisions.get(receipt.id)?.candidateRevision===candidate?.revision?
       decisions.get(receipt.id):null;
-    const record=byId.get(receipt.id);
     const addressChanged=candidate.address!==record.address;
     const addressReview=receipt.addressReview;
     if(addressChanged&&(
@@ -245,7 +248,6 @@ export function pipelineReport(records,receipts,receiptBaseline,registry,candida
     }
     if(candidate.collectedOn>receipt.checkedOn||candidate.reviewAfter<=receipt.checkedOn||
       candidate.identityUrl!==receipt.identityUrl||
-      candidate.name!==record.name||candidate.town!==record.town||
       CHANNELS.some(name=>!candidate.channels[name].queries.some(query=>
         receipt.channels[name].queries.includes(query)))||
       dispute&&(!decision||decision.rulings.some(ruling=>ruling.verdict==='unresolved')))
@@ -268,7 +270,8 @@ export function pipelineReport(records,receipts,receiptBaseline,registry,candida
     const newCandidate=candidate&&(!receipt||receipt.candidateRevision!==candidate.revision||
       candidate.collectedOn>receipt.checkedOn||stale);
     let researchStage;
-    if(newCandidate&&candidate.reviewAfter>date){
+    if(renamed.has(id))researchStage='search';
+    else if(newCandidate&&candidate.reviewAfter>date){
       if(dispute&&!decision)researchStage='adjudicate';
       else if(decision?.rulings.some(ruling=>ruling.verdict==='unresolved'))
         researchStage=decision.reviewAfter<=date?'search':'await-source';
@@ -295,7 +298,7 @@ export function pipelineReport(records,receipts,receiptBaseline,registry,candida
     researchSummary:Object.fromEntries(stages.filter(stage=>stage!=='editorial').map(stage=>
       [stage,rows.filter(row=>row.researchStage===stage).length])),
     publication:{blockedIds:rows.filter(row=>!row.publicationEligible).map(row=>row.id)},
-    staleAddressReceipts:[...staleAddress],
+    staleAddressReceipts:[...staleAddress],renamedReceipts:[...renamed],
     queues:Object.fromEntries(stages.filter(stage=>stage!=='verified').map(stage=>
       [stage,rows.filter(row=>stage==='editorial'?row.editorialStatus==='required':row.researchStage===stage).map(row=>row.id)])),rows};
 }

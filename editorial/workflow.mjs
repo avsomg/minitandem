@@ -411,6 +411,7 @@ export function commitResult(queue,{jobId,token,role,result},{getInputs=currentI
       if(!safeId(candidate?.id)||candidate.revision===input.candidates.get(card.id)?.revision)throw Error('Candidate must have a new revision');
       validateCandidate(candidate,card,venueGroups(input.records,input.registry));
       if(candidate.collectedOn!==today())throw Error('Candidate must use the current date');
+      if(candidate.name!==card.name||candidate.town!==card.town)throw Error('Candidate must carry the card name and town');
       writes.push({file:`editorial/external-candidates/${card.id}.json`,data:candidate});
     }else if(job.kind==='verify'){
       if(input.candidates.get(card.id)?.revision!==job.payload.candidate?.revision)throw Error('Candidate changed; result is stale');

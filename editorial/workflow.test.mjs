@@ -608,6 +608,13 @@ test('same revision labels cannot conceal changed dependency content',t=>{
   assert.throws(()=>commitResult(f.queue,{jobId:job.id,token:job.token,role:'verify',result:{receipt:receiptFor(card)}},
     {...f,getInputs:()=>changed}),/dependencies changed/);
 });
+// A renamed card goes back to external search; a candidate under another name could never get a valid receipt, so it is refused here.
+test('a search candidate carries the card name and town as they stand',t=>{
+  const f=fixture(t);f.queue.enqueue(taskSpecs(input)[0]);const job=f.queue.claim('search','searcher');
+  assert.throws(()=>commitResult(f.queue,{jobId:job.id,token:job.token,role:'search',result:{candidate:{...candidateFor(card),name:'Exakter Kurs'}}},f),/card name and town/);
+  commitResult(f.queue,{jobId:job.id,token:job.token,role:'search',result:{candidate:candidateFor(card)}},f);
+  assert.equal(JSON.parse(fs.readFileSync(path.join(f.outputRoot,'editorial/external-candidates/a.json'),'utf8')).name,card.name);
+});
 test('reopening a dispute removes the previous decision and receipt',t=>{
   const f=fixture(t),candidate=candidateFor(card),oldQuestion={key:'old',topic:'address',issue:'Old entrance question.',urls:[evidence.url]};
   const oldDispute={schema:1,id:'a',candidateRevision:'v1',openedOn:today(),questions:[oldQuestion]};

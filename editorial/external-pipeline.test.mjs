@@ -65,6 +65,16 @@ test('new receipts cannot bypass search or an unresolved dispute',()=>{
     new Map([['a',unresolved]])),/bypasses search or adjudication/);
 });
 
+// Nine cards got English names in the wording review of 21 October 2026, and the next sync stopped the whole cycle on the first of them.
+test('a card renamed after its external review goes back to search instead of stopping the pipeline',()=>{
+  const renamed=[{...records[0],name:'Event A (renamed)'},records[1]];
+  const result=pipelineReport(renamed,[receipt],baseline,registry,new Map([['a',candidate]]),new Map(),new Map(),'2026-09-29',new Map());
+  assert.deepEqual(result.renamedReceipts,['a']);assert.equal(result.rows.find(row=>row.id==='a').researchStage,'search');
+  assert.deepEqual(report([receipt],new Map([['a',candidate]])).renamedReceipts,[]);
+  // Everything else a receipt has to match still stops it.
+  assert.throws(()=>pipelineReport(renamed,[{...receipt,identityUrl:'https://example.org/other'}],baseline,registry,new Map([['a',{...candidate,name:renamed[0].name}]]),
+    new Map(),new Map(),'2026-09-29',new Map()),/bypasses search/);
+});
 test('a refreshed candidate invalidates the previous dispute and decision',()=>{
   const refreshed={...candidate,revision:'v2'};
   assert.deepEqual(report([],new Map([['a',refreshed]]),new Map([['a',dispute]]),
