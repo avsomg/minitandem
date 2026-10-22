@@ -82,7 +82,8 @@ export function taskSpecs(input,{quality=null,monitor=null,date=today()}={}){
     if(intake.status!=='pending-review')continue;
     const card=byId.get(intake.report.activity);if(!card)continue;
     jobs.push({kind:'facts',cardId:card.id,inputRevision:digest(['intake',file,intake,card]),priority:450,
-      payload:{card,cardRevision:digest(card),triggerRevision:digest(['intake',file,intake]),requestedReview:'partial',date,intakeReference:file,reportedTopic:intake.report.topic}});
+      payload:{card,cardRevision:digest(card),triggerRevision:digest(['intake',file,intake]),requestedReview:'partial',date,intakeReference:file,reportedTopic:intake.report.topic,
+        reportedIssue:{topic:intake.report.topic,message:intake.report.message,source:intake.report.source||'',fields:intake.fields||[]}}});
   }
   return jobs;
 }
@@ -124,7 +125,7 @@ export function resumeAwaitingSources(queue,input,monitor,date=today(),sources=[
         payload:{card,cardRevision:digest(card),date,triggerRevision,requestedReview:job.payload.requestedReview||'partial',resumeJob:true,resumedFrom:job.id,
           sourceVersions:versions,sourceTasks:(job.payload.sourceTasks||[]).map(row=>{const version=monitor?.sources?.[row.sourceId]?.hash||row.version;
             const task=monitor?.queue?.find(task=>task.id===row.taskId),signal=task?sourceSignal(task):row.signal;return {...row,version,signal,key:digest([card.id,row.sourceId,version,signal])};}),
-          sourceIssues:job.payload.sourceIssues||[],urgent:job.payload.urgent}});
+          sourceIssues:job.payload.sourceIssues||[],urgent:job.payload.urgent,...(job.payload.reportedIssue&&{reportedIssue:job.payload.reportedIssue})}});
       condition.resumedBy=next.id;queue.event(job.id,'source-work-resumed',{jobId:next.id,reason});resumed.push(next.id);
     }
     queue.db.prepare('UPDATE jobs SET payload=? WHERE id=?').run(JSON.stringify({...job.payload,resumeWhen:condition}),job.id);
@@ -401,7 +402,7 @@ export function commitResult(queue,{jobId,token,role,result},{getInputs=currentI
     const next=(kind,payload,priority=job.priority)=>{
       const nextPayload={chainId,sourceTasks:job.payload.sourceTasks||[],sourceVersions:job.payload.sourceVersions||[],
         sourceIssues:job.payload.sourceIssues||[],urgent:job.payload.urgent,triggerRevision:job.payload.triggerRevision,
-        ...payload,requestedReview:job.payload.requestedReview||'partial',card,cardRevision:digest(card),date:today()};
+        ...(job.payload.reportedIssue&&{reportedIssue:job.payload.reportedIssue}),...payload,requestedReview:job.payload.requestedReview||'partial',card,cardRevision:digest(card),date:today()};
       followups.push({kind,cardId:card.id,inputRevision:digest([kind,nextPayload]),priority,payload:nextPayload});
     };
     let state='done';

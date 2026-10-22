@@ -21,7 +21,7 @@ export const sourceSignal=issue=>issue.kind+':'+issue.id+':'+digest(issue.detail
 export function urgentJob(job,now=new Date().toISOString()){
   if(job.payload.urgent)return true;
   if(job.payload.sourceIssues?.some(issue=>issue.kind==='possible-closure'||issue.details?.fields?.includes('address')))return true;
-  if(job.payload.corrections?.some(row=>row.correction?.requiredFields?.includes('address'))||job.payload.reportedTopic==='address')return true;
+  if(job.payload.corrections?.some(row=>row.correction?.requiredFields?.includes('address'))||job.payload.reportedTopic==='Address or closure')return true;
   const date=new Date(now).toLocaleDateString('en-CA',{timeZone:'Europe/Zurich'}),until=new Date(Date.parse(date+'T12:00:00Z')+14*86400000).toISOString().slice(0,10);
   return Boolean(job.payload.card?.events?.some(event=>event.date>=date&&event.date<=until));
 }

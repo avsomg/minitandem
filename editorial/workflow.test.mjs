@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import vm from 'node:vm';
-import {JobQueue,digest,failureCategory} from './jobs.mjs';
+import {JobQueue,digest,failureCategory,urgentJob} from './jobs.mjs';
 import {commitResult,validateClaims,validateDraft,applyDraftRecord,citationProblems,taskSpecs,registerCaptured,validateBindings,mergeResearch,today,unprocessedSpecs,assertFullReviewPermission,retireStaleReadyJobs,orderDraftEvents,resumeAwaitingSources} from './workflow.mjs';
 import {resolveFromDispositions} from './review.mjs';
 import {snapshot} from './evidence.mjs';
@@ -182,6 +182,26 @@ test('stale cards request a full primary review, while source signals and family
   assert.equal(unprocessedSpecs(f.queue,[full]).length,1);
   const intake=taskSpecs({...data,intakeReports:new Map([['report',{status:'pending-review',report:{activity:'a',topic:'address'}}]])},{date})[0];
   assert.equal(intake.payload.requestedReview,'partial');
+});
+// Until 22 October 2026 a report reached the workers as its topic alone, so the editors could not hand over the contradictions their own
+// review of the card texts had found. The researcher still gets no more than the topic and fields: the text would anchor its extraction.
+test('a report reaches the editor and the reviewer whole, and the researcher as its topic and fields',t=>{
+  const f=fixture(t);registerCaptured(f.queue,evidence);
+  const report={activity:'a',topic:'Address or closure',message:'notes[1] says second floor; practical.access says first floor.',source:'https://example.org/course',date:'2026-10-22'};
+  const spec=taskSpecs({...input,pipeline:{rows:[]},intakeReports:new Map([['r',{status:'pending-review',report,fields:['address','practical.access']}]])},{date:'2026-10-22'})[0];
+  assert.deepEqual(spec.payload.reportedIssue,{topic:report.topic,message:report.message,source:report.source,fields:['address','practical.access']});
+  assert.equal(urgentJob(spec),true);
+  f.queue.enqueue(spec);
+  const search=f.queue.claim('search','search'),research=promptFor(search);
+  assert.doesNotMatch(research,/second floor/);assert.match(research,/"reportedIssue":\{"topic":"Address or closure","fields":\["address","practical\.access"\]\}/);
+  assert.match(research,/Research those fields as well/);
+  commitResult(f.queue,{jobId:search.id,token:search.token,role:'search',result:{bundle}},f);
+  const verify=f.queue.claim('verify','verify');assert.deepEqual(verify.payload.reportedIssue,spec.payload.reportedIssue);
+  commitResult(f.queue,{jobId:verify.id,token:verify.token,role:'verify',result:{verdicts:[{key:'age',verdict:'approve',reason:'Published for this course.'}]}},f);
+  const editor=f.queue.list().find(job=>job.kind==='integrate');
+  assert.deepEqual(editor.payload.reportedIssue,spec.payload.reportedIssue);
+  assert.match(promptFor(editor),/second floor/);assert.match(promptFor(editor),/so that no contradiction it names is left/);
+  assert.doesNotMatch(promptFor({id:'j',kind:'integrate',input_revision:'r',payload:{card}}),/reportedIssue is/);
 });
 test('stale workers cannot change shared files',t=>{
   const f=fixture(t);const spec=taskSpecs(input)[0];f.queue.enqueue({...spec,payload:{...spec.payload,cardRevision:'old'}});

@@ -378,6 +378,19 @@ test('editorial intake deduplicates reports and leaves catalogue data unchanged'
     assert.equal(fs.readFileSync(path.join(root,'data-practical.js'),'utf8'),before);
   }finally{if(created)fs.rmSync(created);fs.rmSync(folder,{recursive:true,force:true});}
 });
+test('editorial intake records the fields an editors\' report names, and only fields of the catalogue',()=>{
+  const folder=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-intake-')),input=path.join(folder,'report.json');
+  const env={...process.env,MINITANDEM_CORRECTION_DIR:path.join(folder,'corrections')};
+  const run=(...args)=>JSON.parse(execFileSync(process.execPath,[path.join(root,'editorial/intake.mjs'),input,...args],{encoding:'utf8',env,stdio:'pipe'}));
+  try{
+    fs.writeFileSync(input,JSON.stringify({type:'vmeste-correction',version:1,activity:'mpe',topic:'Schedule',date:'2026-10-22',message:'Automated intake fixture, not a factual correction'}));
+    const plain=run(),named=run('--fields=schedule,events');
+    assert.notEqual(named.file,plain.file);
+    assert.equal(Object.hasOwn(JSON.parse(fs.readFileSync(plain.file,'utf8')),'fields'),false);
+    assert.deepEqual(JSON.parse(fs.readFileSync(named.file,'utf8')).fields,['schedule','events']);
+    for(const fields of ['--fields=research.findings','--fields=price,price','--fields='])assert.throws(()=>run(fields),/Unknown or repeated report field/);
+  }finally{fs.rmSync(folder,{recursive:true,force:true});}
+});
 test('editorial intake accepts only the English correction topics',()=>{
   const folder=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-intake-')),input=path.join(folder,'report.json');
   const env={...process.env,MINITANDEM_CORRECTION_DIR:path.join(folder,'corrections')};
