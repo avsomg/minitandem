@@ -203,6 +203,18 @@ test('a report reaches the editor and the reviewer whole, and the researcher as 
   assert.match(promptFor(editor),/second floor/);assert.match(promptFor(editor),/so that no contradiction it names is left/);
   assert.doesNotMatch(promptFor({id:'j',kind:'integrate',input_revision:'r',payload:{card}}),/reportedIssue is/);
 });
+// On 26 October 2026 five new cards would have waited behind 73 routine searches, while each of them stopped every build.
+test('a card added after the review baseline is searched and verified ahead of routine rechecks',()=>{
+  const old={...card,id:'b',name:'Older course'},row=(id,researchStage)=>({id,researchStage,editorialStatus:'clear'});
+  const quality={queue:[{id:'a',priority:20,stale:false,sourceIssues:[],critical:[]},{id:'b',priority:200,stale:false,sourceIssues:[],critical:[]}]};
+  const data=stage=>({...input,records:[card,old],receiptBaseline:{schema:1,cutoffOn:'2026-09-29',ids:['b']},pipeline:{rows:[row('a',stage),row('b',stage)]}});
+  const priorityOf=(stage,id)=>taskSpecs(data(stage),{quality}).find(spec=>spec.cardId===id&&spec.kind===stage).priority;
+  assert.equal(priorityOf('search','a'),450);assert.equal(priorityOf('verify','a'),510);
+  assert.equal(priorityOf('search','b'),200,'a card of the baseline keeps its quality priority');
+  // Once the new card has its receipt it is an ordinary card.
+  const reviewed={...data('search'),receipts:[{id:'a'}]};
+  assert.equal(taskSpecs(reviewed,{quality}).find(spec=>spec.cardId==='a'&&spec.kind==='search').priority,20);
+});
 test('stale workers cannot change shared files',t=>{
   const f=fixture(t);const spec=taskSpecs(input)[0];f.queue.enqueue({...spec,payload:{...spec.payload,cardRevision:'old'}});
   const job=f.queue.claim('search','one');
