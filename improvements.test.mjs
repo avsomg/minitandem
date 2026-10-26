@@ -159,7 +159,10 @@ test('public pages are English, branded and carry the headings and links the dir
   assert.doesNotMatch(html+withDates,/vercel\.app/);
 });
 test('public Suniai page lists the venue for each date without a misleading global map link',()=>{
-  const a=allowed.get('suniai-family-yoga');
+  // Since 26 October 2026 the 3 October session at the studio has passed and every Suniai date is at the card's own address, so the
+  // real card no longer has dates at another venue. The card as published until then (studio address, later dates moved) keeps the case.
+  const studio='Aloha YOGA Paradise, Hauptstrasse 20, 3186 Düdingen',moved='Warpelstrasse 9, Düdingen';
+  const a={...allowed.get('suniai-family-yoga'),address:studio,events:[['2026-10-03',studio],['2026-11-07',moved],['2026-12-12',moved]].map(([date,address])=>({date,start:'10:00',end:'11:00',title:'',address}))};
   const html=placePage(a,catalog.CATALOG_REGIONS,'2026-09-29'),{F}=loadStack({lang:'en'});
   assert.ok(html.includes(F.dateLabel('2026-11-07')+': Warpelstrasse 9, Düdingen'));
   assert.ok(html.includes(F.dateLabel('2026-10-03')+': Aloha YOGA Paradise'));
@@ -207,9 +210,11 @@ test('freshness queue prioritizes imminent meetings and the whole 0–6 audience
   const report=JSON.parse(execFileSync(process.execPath,[path.join(root,'maintain.mjs'),'--date=2026-09-28'],{encoding:'utf8'}));
   assert.deepEqual(report.due,[]);
   const byId=new Map(report.needsConfirmation.map(row=>[row.id,row]));
-  // aef-mpe was confirmed active by an approved update on 2 October 2026 and no longer waits here.
-  assert.equal(byId.has('aef-mpe'),false);
-  assert.equal(byId.get('aef-passerelles').priority,'now');
+  // aef-mpe and aef-passerelles were confirmed active by approved updates (2 and 20 October 2026) and no longer wait here.
+  for(const id of ['aef-mpe','aef-passerelles'])assert.equal(byId.has(id),false,id);
+  // herbstbasteln still waits for confirmation, and its meeting of 30 September is two days after the report date.
+  assert.equal(byId.get('herbstbasteln').nextEvent,'2026-09-30');
+  assert.equal(byId.get('herbstbasteln').priority,'now');
   assert.deepEqual(report.targetAge,{min:0,max:6});
   assert.equal(byId.get('krabbel-giffers').priority,'review');
   assert.equal(byId.get('krabbel-giffers').ageFit,'confirmed');

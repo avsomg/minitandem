@@ -470,7 +470,8 @@ test('deep review covers active cards and preserves receipts for ended events',(
   const counts=Object.fromEntries(['enriched','rechecked','unresolved','reused'].map(outcome=>[outcome,main.filter(a=>a.research.outcome===outcome).length]));
   assert.equal(Object.values(counts).reduce((sum,count)=>sum+count,0),main.length);
   assert.ok(counts.enriched>=134 && counts.unresolved>=34);
-  assert.deepEqual(ids(records.filter(a=>C.isArchive(a)&&a.research)).sort(),['alpabzug','chocolat','memo-musik-entdecken-2026-09-29','plage-chevroux']);
+  // memo-rat-mission-2026-09-30 was closed by an approved update on 26 October 2026, once its only date (30 September) had passed.
+  assert.deepEqual(ids(records.filter(a=>C.isArchive(a)&&a.research)).sort(),['alpabzug','chocolat','memo-musik-entdecken-2026-09-29','memo-rat-mission-2026-09-30','plage-chevroux']);
   for(const id of ['swim-duedingen','playgrounds-marly','elki-kerzers'])assert.deepEqual(Array.from(byId.get(id).days),[],`${id}: stale schedule must not appear as a weekday`);
   assert.equal(byId.get('playgrounds-marly').scheduleValidThrough,null);
   assert.equal(byId.get('elki-kerzers').scheduleValidThrough,null);
@@ -509,7 +510,8 @@ test('all four expanded districts have sourced cards and participate in normal f
 test('canton follow-up preserves uncertainty and filters across every district',()=>{
   const {records,list,state,byId}=load();
   const followup=records.filter(a=>a.research?.findings.some(f=>FOLLOWUP_FIELDS.includes(f.field)));
-  assert.equal(followup.length,108);
+  // 107 since 25 October 2026: an approved update replaced the follow-up finding of moliere-trail with a newer one ('Start and duration').
+  assert.equal(followup.length,107);
   assert.deepEqual([...new Set(followup.map(a=>a.region))].sort(),['broye','glane','gruyere','sarine','see','sense','veveyse']);
   for(const a of followup){
     assert.ok(a.address&&a.sources.length&&a.notes.length>=2,a.id); // a card may have no contact since 14 October 2026
@@ -556,7 +558,8 @@ test('See follow-up cards use normal filters and do not revive obsolete schedule
   store.personal.age=null;state.f.days.add(6);
   assert.ok(ids(list()).includes('suniai-family-yoga'));
   for(const id of ['familybloom-yoga','kibim-murten','baby-bade-murten','gym-parents-misery'])assert.ok(!ids(list()).includes(id),id);
-  assert.equal(byId.get('suniai-family-yoga').events.length,3);
+  // Two since 26 October 2026: the 3 October session has passed and the approved update keeps only 7 November and 12 December.
+  assert.equal(byId.get('suniai-family-yoga').events.length,2);
   assert.equal(byId.get('jeux-apav-vully-2026').events[0].start,'');
   assert.equal(byId.get('familybloom-yoga').amount,null);
   for(const id of ['stimm-family','baby-bade-murten','gym-parents-misery'])assert.equal(byId.get(id).min,null,`${id}: historical age must remain unconfirmed`);
@@ -581,12 +584,15 @@ test('uncertain sources do not become current eligibility or invented calendar d
 
 test('corrected schedules and price units reach real app data',()=>{
   const {byId}=load();
-  assert.match(byId.get('biblio-tafers').schedule,/15:00–19:00/);
+  // The cantonal library register, rechecked by an approved update on 21 October 2026, splits Thursday into two opening periods.
+  assert.match(byId.get('biblio-tafers').schedule,/Thu 15:00–17:00 and 18:00–19:30/);
   assert.match(byId.get('ludo-giffers').schedule,/1st and 3rd/);
   assert.equal(byId.get('memo-library').priceKind,'free');
-  assert.equal(byId.get('library-murten').priceKind,'free');
-  assert.equal(byId.get('library-murten').amount,0);
-  assert.match(byId.get('library-murten').price,/to take home/);
+  // Since 22 October 2026 (approved update) the cantonal page is the price source: it names only the annual subscription and leaves open
+  // whether a visit without borrowing needs one, so the kind is unknown and the yearly charge is not an admission amount.
+  assert.equal(byId.get('library-murten').priceKind,'unknown');
+  assert.equal(byId.get('library-murten').amount,null,'an annual subscription cannot be a flat admission price');
+  assert.match(byId.get('library-murten').price,/annual subscription/);
   assert.equal(byId.get('swim-courtepin-babies').amount,324);
   assert.match(byId.get('swim-courtepin-babies').price,/adult entry included/);
   assert.equal(byId.get('candles-giffers').amount,null,'price per weight cannot be a flat admission price');

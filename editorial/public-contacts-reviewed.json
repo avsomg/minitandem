@@ -1,5 +1,5 @@
 {
-  "reviewedOn": "2026-10-16",
+  "reviewedOn": "2026-10-26",
   "rule": "Public catalogue contacts are organisation contacts only: the organisation's name, landline and role address (info@, secretariat@ ...). Never a mobile number, a private person's name or an e-mail address that carries a person's name; such a contact is left out and the source link leads families to it.",
   "digests": [
     "025d67400ac7b461766f549db890d0c40fd65562991bbbc0e7a0e59b3befe51b",
@@ -10,6 +10,7 @@
     "092c5114b029cb4da0a1ad72fbd356f080b0c00b357e2f4f01f78cc92c8e1b56",
     "0a7452fcc680d09e7eedc52b695b6dc5a7f69a1c36404bf64e1c0e9900347f8d",
     "0bdb5bcf17b8bad39aae8cab628d699abc71d999bcd9eca6d2182abc8e02eb5c",
+    "0ca31d5766da094522a982ff1199d14d57cd50be5c0a680d715cf6bb99334e2b",
     "0ce75a6b5b47a55cf72ca5812fa6e286a059fe9c63de33efda5058de4aedf885",
     "0d42485e9c35ca73333ffa506152b098148cb815414b2753a5329ac98f0e6b54",
     "0d66c48cb7ec84cdd6ed9be6544071e23220c650e3be3418bfae5a41c31f7218",
@@ -37,6 +38,7 @@
     "2dea1d729fb3bb7b8b15ca5ffa0c98176355d065d79569bfb9d5f75473c43e26",
     "2f9985a6fad66dac6958acaac13df42958c064fc4a5d2a444d56e04f99c51dc0",
     "3340f8613ca78f25d2bc4eeee36c756054641510a98e4a178762a8a5e0aff77b",
+    "351ad934036a02fc9024bfd5167a3d01245164c552e11c74785c32a8ce780276",
     "36ba6a9c38fe62ac4c8fe1e302c2a6761b230c9eb800a6f6b1c41da78f6af24f",
     "37e1ae77e6764b3cc00a6becfa3a6e860be2450512c16335f11064b746710026",
     "3c05e6024bd7c8c797216174f38e9e4f6bf61a6f5c2d896418b259a9a383059a",
@@ -177,6 +179,7 @@
     "ee8537af5cf9223fa150b86ebdae29268b990f675c16fb204e216f141404daa8",
     "f14444d66e5f724cf4b5dba0e4a8020a02f646617607dd3c552e07b85e107cd5",
     "f2c0027bbf6603d3c23c4fb1f5f7db2c4f6dbabee262b3967757e93cf462b5cd",
+    "f311c095b91666d8c10a1d172d603a833558cf5eaefa6f40dad0e7a075b51beb",
     "f40fc5d80d40d0660b88a2dbea92521ed2daec95da352073673a739a9e936082",
     "f4516aadcda2c6826172413f5c52c46cd7e8c96309f5dfa5d97aae69eb13a1da",
     "f6a2adb5afb6a41204774b3d49bc3e5955f507939104e80fe611a22d42fbd62f",

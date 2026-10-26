@@ -10,6 +10,11 @@ const file=name=>path.join(root,name);
 // Calendar lines are folded at 73 bytes; unfold them before reading a line.
 const unfold=text=>text.replace(/\r\n /g,'');
 const shared=loadStack(clock);
+// Suniai as published until 26 October 2026: the 3 October session at the studio named on the card, 7 November and 12 December at
+// Warpelstrasse 9. Since then that session has passed and every date is at the card's own address, so the real card no longer has a
+// date at another venue; this copy of it keeps the case.
+const STUDIO='Aloha YOGA Paradise, Hauptstrasse 20, 3186 Düdingen',MOVED='Warpelstrasse 9, Düdingen';
+const movingSuniai=a=>({...a,address:STUDIO,events:[['2026-10-03',STUDIO],['2026-11-07',MOVED],['2026-12-12',MOVED]].map(([date,address])=>({date,start:'10:00',end:'11:00',title:'',address}))});
 
 function mountMap(items,t){
   // map.js plots with the catalogue's rule (onMap), as on the page, where catalogue.js is loaded before it.
@@ -52,7 +57,9 @@ test('dated events of courses are never offered as bookable one-off events; drop
 });
 
 test('the changed venue of the November Suniai event is the location of that date only',()=>{
-  const {EX,byId}=shared,a=byId.get('suniai-family-yoga');
+  // A stack of its own, so that the copy with dates at two venues replaces the real card for the calendar files of this test only.
+  const {EX,byId}=loadStack(clock);byId.set('suniai-family-yoga',movingSuniai(byId.get('suniai-family-yoga')));
+  const a=byId.get('suniai-family-yoga');
   const location=index=>unfold(EX.eventFile(a.id,index).text).split('\r\n').find(line=>line.startsWith('LOCATION:'));
   const october=a.events.findIndex(e=>e.date==='2026-10-03'),november=a.events.findIndex(e=>e.date==='2026-11-07');
   assert.ok(october>=0&&november>=0);
@@ -68,11 +75,14 @@ test('the changed venue of the November Suniai event is the location of that dat
 
 test('map does not plot a multi-venue event at its first date only',()=>{
   const {byId,t}=shared;
-  const container=mountMap([byId.get('suniai-family-yoga')],t);
+  // With an address point, as the card had then: only the dates at two venues keep it off the map.
+  const moving={...movingSuniai(byId.get('suniai-family-yoga')),geo:{lat:46.848,lon:7.19}};
+  const container=mountMap([moving],t);
   assert.equal(container.textContent,t('map.noPoints'));
   assert.match(container.textContent,/no single confirmed point/);
   // Without a translator the keys themselves show, so a missing dictionary never produces a blank map.
-  assert.equal(mountMap([byId.get('suniai-family-yoga')]).textContent,'map.noPoints');
+  assert.equal(mountMap([moving]).textContent,'map.noPoints');
+  assert.equal(mountMap([{...moving,events:[]}],t).textContent,t('map.notLoaded'),'the same card at one venue is plotted');
 });
 
 test('map does not plot a descriptive area as an exact point',()=>{
@@ -93,15 +103,17 @@ test('map keeps a single-venue card with an address point while dropping the unp
 
 test('search by occurrence title finds the programme, although its general text never mentions that title',()=>{
   const {state,list,C,byId}=loadStack(clock),workshops=byId.get('office-family-workshops');
-  const titles=workshops.events.map(e=>e.title);
-  assert.ok(titles.includes('Getting to know emotions')&&titles.includes('Saturday stories'));
-  for(const title of ['Getting to know emotions','Saturday stories']){
+  // Since 24 October 2026 the card lists one workshop, and its intro names that title. In this stack of its own the card gets two of its
+  // earlier sessions back, whose titles its text never mentions ('Saturday stories', used before, now matches Suniai's own text).
+  const titles=['Getting to know emotions','Games for speech development'];
+  workshops.events=[{date:'2026-10-06',start:'09:30',end:'10:30',title:titles[0]},{date:'2026-10-20',start:'09:30',end:'10:30',title:titles[1]}];
+  for(const title of titles){
     assert.equal(C.matchesSearch(C.searchText(workshops),title),false,title+' is not in the programme text');
     state.f.query=title;
     assert.deepEqual(Array.from(list(),a=>a.id),['office-family-workshops'],title);
   }
   // Every word of the query must belong to the same text or to the same occurrence title.
-  state.f.query='Saturday emotions';
+  state.f.query='speech emotions';
   assert.equal(list().length,0);
 });
 
@@ -165,8 +177,9 @@ test('planning returns codes or card text only, never interface wording',()=>{
   assert.deepEqual(Array.from(P.matchReasons(mpe,9,false,false,null)),['ageToConfirm']);
   assert.deepEqual(Array.from(P.matchReasons(mpe,null,false,false,null)),[]);
   const workshops=shared.byId.get('office-family-workshops');
-  assert.ok(P.matchReasons(workshops,null,false,false,'2026-10-06').includes('publishedDate'));
-  assert.ok(!P.matchReasons(workshops,null,false,false,'2026-10-07').includes('publishedDate'));
+  // Its one published date since the approved update of 24 October 2026; the day after has none.
+  assert.ok(P.matchReasons(workshops,null,false,false,'2026-11-03').includes('publishedDate'));
+  assert.ok(!P.matchReasons(workshops,null,false,false,'2026-11-04').includes('publishedDate'));
 });
 
 test('the uncertain upper age counts only as a number: missing and null mean no bound, 0 and a positive value are bounds',()=>{
@@ -250,13 +263,15 @@ test('map publishes only unique exact-address matches, never arbitrary first sea
   assert.equal(byId.get('aef-villars').geo.label,'Route de Villars-Vert 26 1752 Villars-sur-Glâne');
   assert.equal(byId.get('aef-estavayer-cafe').geo.label,'Route de la Chapelle 33 1470 Estavayer-le-Lac');
   assert.equal(byId.get('ne-pour-lire-estavayer').geo.label,'Route de la Chapelle 33 1470 Estavayer-le-Lac');
-  assert.equal(byId.get('encore-jura').geo.label,"Route de l'Aurore 2a 1700 Fribourg");
+  // Since 20 October 2026 the verified address is no. 2, not 2A: the 2a point is not carried over; no. 2 has its own exact match.
+  assert.equal(byId.get('encore-jura').geo.label,"Route de l'Aurore 2 1700 Fribourg");
   assert.equal(byId.get('aef-vignettaz').geo.label,'Route de la Gruyère 9 1700 Fribourg');
   assert.equal(byId.get('aef-jura').geo.label,'Avenue du Général-Guisan 59 1700 Fribourg');
   assert.equal(byId.get('aef-farvagny').geo,undefined,'the newly sourced address needs its own exact registry match');
   assert.equal(byId.get('aef-attalens').geo.label,"Rue de l'Eglise 26 1616 Attalens");
   assert.equal(byId.get('aef-attalens-alimentation').geo.label,"Rue de l'Eglise 26 1616 Attalens");
-  assert.equal(byId.get('suniai-family-yoga').geo.label,'Hauptstrasse 20 3186 Düdingen');
+  // Since 26 October 2026 Suniai is at Warpelstrasse 9: the Hauptstrasse 20 point of the earlier address is not carried over.
+  assert.equal(byId.get('suniai-family-yoga').geo.label,'Warpelstrasse 9 3186 Düdingen');
   assert.equal(byId.get('schlittschuh-gurmels').geo,undefined,'no exact Sportweg 21 registry match');
   assert.equal(byId.get('arconciel-arche-play').geo.label,"Place de l'Arche 1 1732 Arconciel");
   assert.equal(byId.get('nuvilly-batailles-play').geo,undefined,'a street name is not an exact entrance');
@@ -280,7 +295,8 @@ test('new programmes have sourced exact dates and retain unknown local language 
   assert.match(a.practical.commitment.text,/31 May/);assert.equal(a.practical.groupSize.value,6);
   assert.ok(a.research.findings.length>=4);
   const workshop=byId.get('office-family-workshops'),books=byId.get('office-family-books');
-  assert.equal(workshop.events.length+books.events.length,6);assert.equal(workshop.max,5);assert.equal(books.max,4);
+  // Two since 24 October 2026: the organiser's page lists one workshop with a year (3 November), so the approved update keeps that one.
+  assert.equal(workshop.events.length+books.events.length,2);assert.equal(workshop.max,5);assert.equal(books.max,4);
   assert.ok(workshop.events.every(e=>e.title));assert.equal(workshop.practical.booking.value,false);
   assert.ok(workshop.research.findings.length>=3);assert.ok(books.research.findings.length>=3);
 });

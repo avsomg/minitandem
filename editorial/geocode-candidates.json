@@ -5446,5 +5446,121 @@
         "lon": 7.148173809051514
       }
     ]
+  },
+  "Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland": {
+    "query": "Av. de la Gare 10 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Av.+de+la+Gare+10+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-10-26",
+    "results": [
+      {
+        "label": "Avenue de la Gare 10 1700 Fribourg",
+        "lat": 46.80301284790039,
+        "lon": 7.152565956115723
+      },
+      {
+        "label": "Avenue de la Gare 10a 1700 Fribourg",
+        "lat": 46.80292892456055,
+        "lon": 7.153146743774414
+      }
+    ]
+  },
+  "Rue de Locarno 3, 1700 Fribourg": {
+    "query": "Rue de Locarno 3 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+Locarno+3+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-10-26",
+    "results": [
+      {
+        "label": "Rue de Locarno 3 1700 Fribourg",
+        "lat": 46.800140380859375,
+        "lon": 7.15151309967041
+      },
+      {
+        "label": "Rue de Locarno 3d 1700 Fribourg",
+        "lat": 46.800323486328125,
+        "lon": 7.150839328765869
+      },
+      {
+        "label": "Rue de Locarno 3b 1700 Fribourg",
+        "lat": 46.800357818603516,
+        "lon": 7.151099681854248
+      },
+      {
+        "label": "Rue de Locarno 3a 1700 Fribourg",
+        "lat": 46.800296783447266,
+        "lon": 7.151211261749268
+      },
+      {
+        "label": "Rue de Locarno 3c 1700 Fribourg",
+        "lat": 46.800357818603516,
+        "lon": 7.150999069213867
+      }
+    ]
+  },
+  "Route de l'Aurore 2, Fribourg": {
+    "query": "Route de l'Aurore 2",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l%27Aurore+2&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-10-26",
+    "results": [
+      {
+        "label": "Route de l'Aurore 2 1700 Fribourg",
+        "lat": 46.81232452392578,
+        "lon": 7.150873184204102
+      },
+      {
+        "label": "Route de l'Aurore 2 2053 Cernier",
+        "lat": 47.05925369262695,
+        "lon": 6.907195091247559
+      },
+      {
+        "label": "Route de l'Aurore 2c 1700 Fribourg",
+        "lat": 46.81208038330078,
+        "lon": 7.151440620422363
+      },
+      {
+        "label": "Route de l'Aurore 2b 1700 Fribourg",
+        "lat": 46.81204605102539,
+        "lon": 7.151182174682617
+      },
+      {
+        "label": "Route de l'Aurore 2d 1700 Fribourg",
+        "lat": 46.812103271484375,
+        "lon": 7.151651859283447
+      }
+    ]
+  },
+  "Warpelstrasse 9, 3186 Düdingen": {
+    "query": "Warpelstrasse 9 3186 Düdingen",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Warpelstrasse+9+3186+D%C3%BCdingen&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-10-26",
+    "results": [
+      {
+        "label": "Warpelstrasse 9 3186 Düdingen",
+        "lat": 46.86082077026367,
+        "lon": 7.202414035797119
+      },
+      {
+        "label": "Warpelstrasse 9a 3186 Düdingen",
+        "lat": 46.860992431640625,
+        "lon": 7.202587127685547
+      }
+    ]
+  },
+  "Route du Château 126, 1680 Romont (Maison St-Charles)": {
+    "query": "Route du Château 126 1680 Romont Maison St-Charles",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+du+Ch%C3%A2teau+126+1680+Romont+Maison+St-Charles&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-10-26",
+    "results": []
+  },
+  "Chemin de l'Abbaye 19, 1725 Hauterive": {
+    "query": "Chemin de l'Abbaye 19 1725 Hauterive",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+de+l%27Abbaye+19+1725+Hauterive&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-10-26",
+    "results": [
+      {
+        "label": "Chemin de l'Abbaye 19 1725 Posieux",
+        "lat": 46.76399612426758,
+        "lon": 7.117739677429199
+      }
+    ]
   }
 }

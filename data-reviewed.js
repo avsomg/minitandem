@@ -863,6 +863,4624 @@
         "Can families leave a session early?"
       ]
     }
+  },
+  {
+    "jobId": "e1888f1a-a075-4e91-98f8-4551848bc62e",
+    "approvedOn": "2026-10-18",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": null,
+      "age": "Games and toys from infancy",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Tue 15–18; Wed 09–11:30 and 13:30–18:30; Fri 15–19; 2nd and 4th Sat 09–11:30",
+      "days": [
+        2,
+        3,
+        5,
+        6
+      ],
+      "events": [],
+      "address": "Rue du Marché 10, 1630 Bulle",
+      "price": "Membership CHF 25/year + loan CHF 2–10 per game; family subscription from CHF 60/year",
+      "priceKind": "year",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Ludothèque de la Gruyère",
+          "phone": "",
+          "email": "info@ludotheque-gruyere.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://ludothequegruyere.ch/jouer-a-la-ludo/",
+          "label": "On-site play, opening hours and address"
+        },
+        {
+          "url": "https://ludothequegruyere.ch/tarifs/",
+          "label": "Membership and loan prices"
+        }
+      ],
+      "notes": [
+        "On-site play during regular hours is stated as being for members. Thursday 09:30–11:00 is a separate free Fritime Piccolo.",
+        "On Mondays only Click & Collect is available. It is not a family play time.",
+        "Loans last 2–4 weeks. A refundable deposit of CHF 10 is stated for registration."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "ludo-gruyere-bulle",
+      "region": "gruyere",
+      "name": "Ludothèque de la Gruyère · play and loan",
+      "category": "books",
+      "town": "Bulle",
+      "parentDetails": "On-site play together with an adult. The adult is responsible for the child and the materials.",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "On-site play",
+            "kind": "official",
+            "text": "Regular on-site play is intended for members of the ludothèque. The Thursday Fritime Piccolo is separately open to everyone.",
+            "url": "https://ludothequegruyere.ch/jouer-a-la-ludo/"
+          },
+          {
+            "field": "Fee",
+            "kind": "official",
+            "text": "Membership without a subscription is CHF 25 per year plus loans. A family subscription is from CHF 60 per year.",
+            "url": "https://ludothequegruyere.ch/tarifs/"
+          }
+        ],
+        "remaining": [
+          "Clarify the rules for on-site play for a family from another district, and the age of specific toys."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": true,
+          "text": "Play indoors at the ludothèque",
+          "source": "https://ludothequegruyere.ch/jouer-a-la-ludo/",
+          "checked": "2026-09-28"
+        },
+        "booking": {
+          "value": null,
+          "text": "Membership registration is required for regular on-site play",
+          "source": "https://ludothequegruyere.ch/tarifs/",
+          "checked": "2026-09-28"
+        },
+        "commitment": {
+          "value": true,
+          "text": "Regular play is tied to annual membership. Fritime Piccolo is free",
+          "source": "https://ludothequegruyere.ch/jouer-a-la-ludo/",
+          "checked": "2026-09-28"
+        },
+        "gallery": "https://ludothequegruyere.ch/jouer-a-la-ludo/"
+      },
+      "intro": "A library of games and toys, with on-site play for members.",
+      "geo": {
+        "label": "Rue du Marché 10 1630 Bulle",
+        "lat": 46.61845397949219,
+        "lon": 7.058451175689697,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+du+March%C3%A9+10+1630+Bulle&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-28",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-18",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Fee",
+          "kind": "official",
+          "text": "Membership without a subscription is CHF 25 per year plus loans. A family subscription is from CHF 60 per year.",
+          "url": "https://ludothequegruyere.ch/tarifs/"
+        },
+        {
+          "field": "Thursday morning",
+          "kind": "official",
+          "text": "On Thursday mornings (09:00–11:30) the ludothèque is open to everyone, with free activities for children aged 2–6 accompanied by an adult (Fritime Piccolo).",
+          "url": "https://ludothequegruyere.ch/jouer-a-la-ludo/"
+        }
+      ],
+      "remaining": [
+        "Clarify the rules for on-site play for a family from another district, and the age of specific toys."
+      ]
+    },
+    "draft": {
+      "patch": {
+        "schedule": "Tue 15–18; Wed 09–11:30 and 13:30–18:30; Thu 09–11:30 (open to all); Fri 15–19; 2nd and 4th Sat 09–11:30",
+        "days": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "notes": [
+          "On-site play during regular opening hours is for members of the ludothèque. On Thursday mornings it is open to everyone, with free activities for children aged 2–6 accompanied by an adult (Fritime Piccolo).",
+          "On Mondays only Click & Collect is offered, 08:00–11:00.",
+          "Loans last 4 weeks (minimum 2 weeks). A deposit of CHF 10 is requested at registration."
+        ]
+      },
+      "practicalPatch": {},
+      "cardId": "ludo-gruyere-bulle",
+      "findings": [
+        {
+          "field": "Thursday morning",
+          "kind": "official",
+          "text": "On Thursday mornings (09:00–11:30) the ludothèque is open to everyone, with free activities for children aged 2–6 accompanied by an adult (Fritime Piccolo).",
+          "url": "https://ludothequegruyere.ch/jouer-a-la-ludo/"
+        }
+      ],
+      "remaining": []
+    }
+  },
+  {
+    "jobId": "0ae64a7d-b1da-430f-b6ef-945b29b53314",
+    "approvedOn": "2026-10-20",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age limits are not published",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Route in daylight; buy cards in advance or on site",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Chemin de l’Abbaye 19, 1725 Posieux",
+      "price": "CHF 10 per game card; the cost of the walk itself is not stated",
+      "priceKind": "visit",
+      "amount": 10,
+      "contacts": [
+        {
+          "name": "Fribourg Tourisme",
+          "phone": "026 350 11 11",
+          "email": "info@fribourgtourisme.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/fribourg/activites-en-plein-air/boucle-hauterive-la-souche/",
+          "label": "Tourism: family loop, 3.12 km, card and price"
+        },
+        {
+          "url": "https://fribourg.ch/wp-content/uploads/2026/03/Fribourg-Tourisme_City-guide-2026_web.pdf",
+          "label": "2026 guide: six stands and on-site card purchase"
+        }
+      ],
+      "notes": [
+        "Walking loop of about an hour according to the organiser; allow more time with young children.",
+        "The card is paid for separately; the route itself is not described as paid."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "hauterive-souche-family",
+      "region": "sarine",
+      "name": "Hauterive–La Souche · family game",
+      "category": "nature",
+      "town": "Hauterive (FR)",
+      "intro": "The tourist office confirms an easy family loop of 3.12 km from the abbey and a game card for CHF 10.",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "The tourist office confirms an easy family loop of 3.12 km from the abbey and a game card for CHF 10.",
+            "url": "https://fribourg.ch/fr/fribourg/activites-en-plein-air/boucle-hauterive-la-souche/"
+          }
+        ],
+        "remaining": [
+          "Pushchair access, the languages of the game material and the arrangements for selling the card on site need to be checked."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "The tourist office confirms an easy family loop of 3.12 km from the abbey and a game card for CHF 10.",
+          "source": "https://fribourg.ch/fr/fribourg/activites-en-plein-air/boucle-hauterive-la-souche/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "Pushchair access, the languages of the game material and the arrangements for selling the card on site need to be checked."
+        ]
+      },
+      "geo": {
+        "label": "Chemin de l'Abbaye 19 1725 Posieux",
+        "lat": 46.76399612426758,
+        "lon": 7.117739677429199,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+de+l%E2%80%99Abbaye+19+1725+Posieux&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-28",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-20",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "The tourist office confirms an easy family loop of 3.12 km from the abbey and a game card for CHF 10.",
+          "url": "https://fribourg.ch/fr/fribourg/activites-en-plein-air/boucle-hauterive-la-souche/"
+        },
+        {
+          "field": "Address",
+          "kind": "official",
+          "text": "The tourist office page lists the address Abbaye d'Hauterive, Chemin de l'Abbaye 19, 1725 Hauterive.",
+          "url": "https://fribourg.ch/fr/fribourg/activites-en-plein-air/boucle-hauterive-la-souche/"
+        }
+      ],
+      "remaining": [
+        "Pushchair access, the languages of the game material and the arrangements for selling the card on site need to be checked."
+      ]
+    },
+    "draft": {
+      "patch": {
+        "address": "Chemin de l'Abbaye 19, 1725 Hauterive"
+      },
+      "practicalPatch": {},
+      "cardId": "hauterive-souche-family",
+      "findings": [
+        {
+          "field": "Address",
+          "kind": "official",
+          "text": "The tourist office page lists the address Abbaye d'Hauterive, Chemin de l'Abbaye 19, 1725 Hauterive.",
+          "url": "https://fribourg.ch/fr/fribourg/activites-en-plein-air/boucle-hauterive-la-souche/"
+        }
+      ],
+      "remaining": []
+    }
+  },
+  {
+    "jobId": "9507e5e7-af00-4e7b-a0c1-419df2c11b9b",
+    "approvedOn": "2026-10-20",
+    "baseRecord": {
+      "id": "aef-passerelles",
+      "name": "Café AEF · Passerelles",
+      "category": "play",
+      "town": "Fribourg",
+      "route": "fribourg",
+      "format": "group",
+      "status": "check",
+      "min": null,
+      "max": null,
+      "age": "Age to be confirmed",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Published Wednesdays 15:00–17:00 · until 16.12.2026",
+      "days": [],
+      "events": [
+        {
+          "date": "2026-09-30",
+          "start": "15:00",
+          "end": "17:00"
+        },
+        {
+          "date": "2026-10-28",
+          "start": "15:00",
+          "end": "17:00"
+        },
+        {
+          "date": "2026-11-18",
+          "start": "15:00",
+          "end": "17:00"
+        },
+        {
+          "date": "2026-12-16",
+          "start": "15:00",
+          "end": "17:00"
+        }
+      ],
+      "address": "Rue de Locarno 3, Fribourg",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Éducation Familiale: FR 026 321 48 70; DE 026 322 86 33",
+          "phone": "026 321 48 70",
+          "email": "contact@educationfamiliale.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://tockify.com/educationfamiliale/detail/790/1790773200000",
+          "label": "AEF programme and published dates"
+        },
+        {
+          "url": "https://www.educationfamiliale.ch/fr/agenda",
+          "label": "AEF calendar"
+        },
+        {
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale",
+          "label": "Additional check: Autumn series"
+        }
+      ],
+      "notes": [
+        "A meeting for adults and children together. The price, the age limit and the language of the individual leader are not stated. The French card does not guarantee German.",
+        "A place in the group has not been checked.",
+        "Only dates from the published AEF programme have been added to the calendar."
+      ],
+      "checked": "2026-09-28",
+      "scheduleValidThrough": "2026-12-16",
+      "reviewAfter": "2026-10-09",
+      "research": {
+        "date": "2026-09-27",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Autumn series",
+            "kind": "official",
+            "text": "The public AEF calendar confirms four meetings on 30 September, 28 October, 18 November and 16 December 2026, 15:00–17:00, at Association Passerelles, Rue de Locarno 3.",
+            "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+          }
+        ],
+        "remaining": [
+          "The cost, age limits, registration and a German-speaking leader are not stated in the calendar. This is a joint meeting, not supervision without a parent."
+        ]
+      },
+      "practical": {
+        "scenario": "event"
+      },
+      "region": "sarine",
+      "geo": {
+        "label": "Rue de Locarno 3 1700 Fribourg",
+        "lat": 46.800140380859375,
+        "lon": 7.15151309967041,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+Locarno+3+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-20",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Autumn series",
+          "kind": "official",
+          "text": "The public AEF calendar confirms four meetings on 30 September, 28 October, 18 November and 16 December 2026, 15:00–17:00, at Association Passerelles, Rue de Locarno 3.",
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+        },
+        {
+          "field": "Autumn series",
+          "kind": "official",
+          "text": "The public AEF calendar lists three upcoming, non-cancelled sessions of the parent-child café at Association Passerelles, Rue de Locarno 3: 28 October, 18 November and 16 December 2026, each 15:00–17:00.",
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+        }
+      ],
+      "remaining": [
+        "The cost, age limits, registration and a German-speaking leader are not stated in the calendar. This is a joint meeting, not supervision without a parent.",
+        "What does it cost, if anything, and is registration needed?",
+        "Which ages of children is the café meant for, and in which language is it held?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "status": "active",
+        "schedule": "Published sessions: 28 October, 18 November and 16 December 2026, each 15:00-17:00 (see events).",
+        "events": [
+          {
+            "date": "2026-10-28",
+            "start": "15:00",
+            "end": "17:00",
+            "title": "Café Parents-Enfants à Passerelles (Fribourg)",
+            "address": "Association Passerelles,Rue de Locarno 3, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-11-18",
+            "start": "15:00",
+            "end": "17:00",
+            "title": "Café Parents-Enfants à Passerelles (Fribourg)",
+            "address": "Association Passerelles,Rue de Locarno 3, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-12-16",
+            "start": "15:00",
+            "end": "17:00",
+            "title": "Café Parents-Enfants à Passerelles (Fribourg)",
+            "address": "Association Passerelles,Rue de Locarno 3, 1700 Fribourg, Switzerland"
+          }
+        ],
+        "address": "Rue de Locarno 3, 1700 Fribourg",
+        "addressPrecision": "exact",
+        "contacts": [
+          {
+            "name": "Association pour l’Éducation Familiale (AEF)",
+            "phone": "026 321 48 70",
+            "email": "contact@educationfamiliale.ch"
+          }
+        ],
+        "intro": "A parent-child café: a coffee and a snack for conversation between adults on the theme of education."
+      },
+      "practicalPatch": {},
+      "cardId": "aef-passerelles",
+      "findings": [
+        {
+          "field": "Autumn series",
+          "kind": "official",
+          "text": "The public AEF calendar lists three upcoming, non-cancelled sessions of the parent-child café at Association Passerelles, Rue de Locarno 3: 28 October, 18 November and 16 December 2026, each 15:00–17:00.",
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+        }
+      ],
+      "remaining": [
+        "What does it cost, if anything, and is registration needed?",
+        "Which ages of children is the café meant for, and in which language is it held?"
+      ]
+    }
+  },
+  {
+    "jobId": "5279d3b3-2f7a-4978-a37f-9cb053d178ba",
+    "approvedOn": "2026-10-20",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": null,
+      "age": "Family visit; check the age for the train",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Until 11.10.2026: Mon, Wed–Thu, Sun 09–18; Fri–Sat 09–22; Tue closed",
+      "days": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Cabane du Petit Oiseau, Route du Moléson, 1618 Châtel-St-Denis",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Cabane du Petit Oiseau",
+          "phone": "021 948 77 01",
+          "email": "cabane@rathvel.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/les-paccots/buvettes-alpage/cabane-du-petit-oiseau/",
+          "label": "Mini zoo, train, season, opening hours and contact"
+        }
+      ],
+      "notes": [
+        "Mini zoo at the buvette; the small summer train runs only during the buvette's opening hours.",
+        "In winter the mini zoo is open only when the buvette is open; the page states that it reopens by 20 December at the latest, subject to snow.",
+        "A separate charge for the train and for visiting the animals is not published. Check the weather, whether the buvette is open and the cost before travelling."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "rathvel-petit-oiseau",
+      "region": "veveyse",
+      "name": "Cabane du Petit Oiseau · mini zoo",
+      "category": "nature",
+      "town": "Rathvel",
+      "parentDetails": "A child visits the animals and the train with an adult.",
+      "scheduleValidThrough": "2026-10-11",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Animals and train",
+            "kind": "official",
+            "text": "The mini zoo is open when the buvette is open; the small train runs in summer only. Summer hours are published until 11 October 2026.",
+            "url": "https://fribourg.ch/fr/les-paccots/buvettes-alpage/cabane-du-petit-oiseau/"
+          }
+        ],
+        "remaining": [
+          "The price of the train and winter availability depend on whether the buvette is open and on the weather."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "The animals and the train are outdoors",
+          "source": "https://fribourg.ch/fr/les-paccots/buvettes-alpage/cabane-du-petit-oiseau/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "The train runs in summer only, when the buvette is open; the 2026 season ends on 11 October",
+          "A separate price for the train is not published"
+        ],
+        "gallery": "https://fribourg.ch/fr/les-paccots/buvettes-alpage/cabane-du-petit-oiseau/"
+      },
+      "intro": "A buvette with a mini zoo and a seasonal small train."
+    },
+    "research": {
+      "date": "2026-10-20",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The official page publishes winter hours of 20 Dec 2026 to 31 Mar 2027, daily 08:30–18:00, and summer hours from 1 May to 11 Oct 2027: Mon 09–18, Tue closed, Wed–Thu 09–18, Fri–Sat 09–22, Sun 09–18. The small train runs in summer only; the mini zoo is open in summer and winter during the buvette's opening hours.",
+          "url": "https://fribourg.ch/fr/les-paccots/buvettes-alpage/cabane-du-petit-oiseau/"
+        }
+      ],
+      "remaining": [
+        "The price of the train and winter availability depend on whether the buvette is open and on the weather.",
+        "Are there opening hours between 12 October and 19 December 2026? Check with the buvette before travelling.",
+        "What is the price for the train and for visiting the animals?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "schedule": "20 Dec 2026–31 Mar 2027: daily 08:30–18:00 (winter hours adapt to visitor numbers and ski-station hours). 1 May–11 Oct 2027: Mon, Wed–Thu, Sun 09–18; Fri–Sat 09–22; Tue closed",
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "scheduleValidThrough": "2027-10-11"
+      },
+      "practicalPatch": {},
+      "warnings": [
+        "The train runs in summer only, when the buvette is open; summer hours are published for 1 May to 11 October 2027"
+      ],
+      "cardId": "rathvel-petit-oiseau",
+      "findings": [
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The official page publishes winter hours of 20 Dec 2026 to 31 Mar 2027, daily 08:30–18:00, and summer hours from 1 May to 11 Oct 2027: Mon 09–18, Tue closed, Wed–Thu 09–18, Fri–Sat 09–22, Sun 09–18. The small train runs in summer only; the mini zoo is open in summer and winter during the buvette's opening hours.",
+          "url": "https://fribourg.ch/fr/les-paccots/buvettes-alpage/cabane-du-petit-oiseau/"
+        }
+      ],
+      "remaining": [
+        "Are there opening hours between 12 October and 19 December 2026? Check with the buvette before travelling.",
+        "What is the price for the train and for visiting the animals?"
+      ]
+    }
+  },
+  {
+    "jobId": "a21da6b8-d5ee-41e8-b223-387c1b2edca9",
+    "approvedOn": "2026-10-20",
+    "baseRecord": {
+      "id": "rodelbahn",
+      "name": "Sommer-Rodelbahn Schwarzsee",
+      "category": "movement",
+      "town": "Schwarzsee",
+      "route": "schwarzsee",
+      "format": "self",
+      "status": "active",
+      "min": 2,
+      "max": null,
+      "age": "From 2 years; up to 7 with an accompanying person aged 16+",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Sep–Oct: Mon–Thu 13–17; Fri 13–19; Sat 10:30–19; Sun 10:30–17",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "",
+      "price": "CHF 7 / ride for an adult with a child under 7",
+      "priceKind": "visit",
+      "amount": 7,
+      "contacts": [
+        {
+          "name": "Kaisereggbahnen",
+          "phone": "026 412 10 23",
+          "email": "info@kaisereggbahnen.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://kaisereggbahnen-schwarzsee.ch/angebot/sommer-rodelbahn/",
+          "label": "Official source"
+        }
+      ],
+      "notes": [
+        "Only in dry weather. An attraction, not a group activity; the age limit does not mean that a child will enjoy the speed."
+      ],
+      "checked": "2026-09-27",
+      "scheduleValidThrough": "2026-10-31",
+      "research": {
+        "date": "2026-09-27",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Eligibility",
+            "text": "From 2 years; a child under 7 rides free with an accompanying person aged 16 or over, and the adult ride of CHF 7 is paid. Children ride alone from 7 years. Two children may not ride together.",
+            "url": "https://kaisereggbahnen-schwarzsee.ch/angebot/sommer-rodelbahn/",
+            "kind": "official"
+          }
+        ],
+        "remaining": [
+          "Before setting out, check that the weather is dry and that the attraction is operating."
+        ]
+      },
+      "region": "sense",
+      "reviewAfter": "2026-12-26"
+    },
+    "research": {
+      "date": "2026-10-20",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Eligibility",
+          "text": "From 2 years; a child under 7 rides free with an accompanying person aged 16 or over, and the adult ride of CHF 7 is paid. Children ride alone from 7 years. Two children may not ride together.",
+          "url": "https://kaisereggbahnen-schwarzsee.ch/angebot/sommer-rodelbahn/",
+          "kind": "official"
+        },
+        {
+          "field": "Opening hours",
+          "kind": "official",
+          "text": "In September and October the toboggan run and the Rodel-Träff are open Monday to Friday 13:00–17:00 and Saturday and Sunday 10:30–17:00, in dry weather only.",
+          "url": "https://kaisereggbahnen-schwarzsee.ch/angebot/sommer-rodelbahn/"
+        }
+      ],
+      "remaining": [
+        "Before setting out, check that the weather is dry and that the attraction is operating."
+      ]
+    },
+    "draft": {
+      "patch": {
+        "schedule": "Sep–Oct: Mon–Fri 13–17; Sat–Sun 10:30–17 (dry weather only)",
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "practicalPatch": {},
+      "cardId": "rodelbahn",
+      "findings": [
+        {
+          "field": "Opening hours",
+          "kind": "official",
+          "text": "In September and October the toboggan run and the Rodel-Träff are open Monday to Friday 13:00–17:00 and Saturday and Sunday 10:30–17:00, in dry weather only.",
+          "url": "https://kaisereggbahnen-schwarzsee.ch/angebot/sommer-rodelbahn/"
+        }
+      ],
+      "remaining": []
+    }
+  },
+  {
+    "jobId": "7f9d4796-ef0a-4105-97a8-3ab66a39589f",
+    "approvedOn": "2026-10-20",
+    "baseRecord": {
+      "id": "encore-jura",
+      "name": "Encore ! Des histoires ! · Jura",
+      "category": "books",
+      "town": "Fribourg",
+      "route": "fribourg",
+      "format": "event",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age to be confirmed",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "28.09 and 05.10.2026 · 15:30–17:30",
+      "days": [
+        1
+      ],
+      "events": [
+        {
+          "date": "2026-09-28",
+          "start": "15:30",
+          "end": "17:30"
+        },
+        {
+          "date": "2026-10-05",
+          "start": "15:30",
+          "end": "17:30"
+        }
+      ],
+      "address": "Route de l’Aurore 2A, Fribourg",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "LivrEchange",
+          "phone": "026 422 25 85",
+          "email": "info@livrechange.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.livrechange.ch/fr/activites-regulieres.html",
+          "label": "Official source"
+        },
+        {
+          "url": "https://www.ville-fribourg.ch/agenda/encore-des-histoires-quartier-du-jura",
+          "label": "Published dates and location"
+        },
+        {
+          "url": "https://www.livrechange.ch/fr/encore-des-histoires-informations-543.html",
+          "label": "Additional check: Dates and rain"
+        }
+      ],
+      "notes": [
+        "Public reading, not a regular group. Check the session and the weather."
+      ],
+      "checked": "2026-09-27",
+      "scheduleValidThrough": "2026-10-05",
+      "research": {
+        "date": "2026-09-27",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Dates and rain",
+            "kind": "official",
+            "text": "Only the sessions on 28 September and 5 October 2026, 15:30–17:30, remain in the detailed programme. In case of rain, they are moved to the cafeteria of the Levant swimming pool. Visitors can listen to and tell stories, sing and borrow books. Adults take part. Registration is not required. A multilingual format is announced, but the languages of each session are not stated.",
+            "url": "https://www.livrechange.ch/fr/encore-des-histoires-informations-543.html"
+          }
+        ],
+        "remaining": [
+          "The language of a specific session, the exact entrance to the alternative venue and age recommendations."
+        ]
+      },
+      "practical": {
+        "booking": {
+          "value": false,
+          "text": "Open participation without registration",
+          "source": "https://www.livrechange.ch/fr/activites-regulieres.html",
+          "checked": "2026-09-27"
+        },
+        "commitment": {
+          "value": false,
+          "text": "Individual sessions, no course to buy",
+          "source": "https://www.livrechange.ch/fr/activites-regulieres.html",
+          "checked": "2026-09-27"
+        }
+      },
+      "region": "sarine",
+      "reviewAfter": "2026-12-26",
+      "geo": {
+        "label": "Route de l'Aurore 2a 1700 Fribourg",
+        "lat": 46.81214141845703,
+        "lon": 7.150949478149414,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l+Aurore+2A+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-28",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-20",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Dates and rain",
+          "kind": "official",
+          "text": "Only the sessions on 28 September and 5 October 2026, 15:30–17:30, remain in the detailed programme. In case of rain, they are moved to the cafeteria of the Levant swimming pool. Visitors can listen to and tell stories, sing and borrow books. Adults take part. Registration is not required. A multilingual format is announced, but the languages of each session are not stated.",
+          "url": "https://www.livrechange.ch/fr/encore-des-histoires-informations-543.html"
+        },
+        {
+          "field": "address",
+          "kind": "official",
+          "text": "The organizer's regular-activities page and its detailed programme page both give the Monday venue as Route de l'Aurore 2 in the Jura district, Fribourg. The City of Fribourg agenda writes the same venue as route de l'Aurore 2A.",
+          "url": "https://www.livrechange.ch/fr/activites-regulieres.html"
+        }
+      ],
+      "remaining": [
+        "The language of a specific session, the exact entrance to the alternative venue and age recommendations.",
+        "Is the street number 2 or 2A? The organizer's pages list Route de l'Aurore 2, while the City of Fribourg agenda lists Route de l'Aurore 2A."
+      ]
+    },
+    "draft": {
+      "patch": {
+        "address": "Route de l'Aurore 2, Fribourg"
+      },
+      "practicalPatch": {},
+      "cardId": "encore-jura",
+      "findings": [
+        {
+          "field": "address",
+          "kind": "official",
+          "text": "The organizer's regular-activities page and its detailed programme page both give the Monday venue as Route de l'Aurore 2 in the Jura district, Fribourg. The City of Fribourg agenda writes the same venue as route de l'Aurore 2A.",
+          "url": "https://www.livrechange.ch/fr/activites-regulieres.html"
+        }
+      ],
+      "remaining": [
+        "Is the street number 2 or 2A? The organizer's pages list Route de l'Aurore 2, while the City of Fribourg agenda lists Route de l'Aurore 2A."
+      ]
+    }
+  },
+  {
+    "jobId": "7128ceb6-8a9b-4c33-98ed-57c4a424050f",
+    "approvedOn": "2026-10-21",
+    "baseRecord": {
+      "id": "ondena",
+      "name": "Au fil de l’Ondena · Petit Pois",
+      "category": "nature",
+      "town": "Bonnefontaine",
+      "route": "detour",
+      "format": "group",
+      "status": "check",
+      "min": 0,
+      "max": 6,
+      "age": "0–6 years",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Autumn dates are not confirmed. The last published session is 22.08.2026; the previous format was 09:30–11:30",
+      "days": [
+        6
+      ],
+      "events": [],
+      "address": "Route de Montécu 94, 1724 Bonnefontaine",
+      "price": "From CHF 50; check the family composition included in the rate",
+      "priceKind": "visit",
+      "amount": 50,
+      "contacts": [
+        {
+          "name": "Au fil de l’Ondena",
+          "phone": "",
+          "email": "aufildelondena@gmail.com"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.aufildelondena.ch/petitpois",
+          "label": "Official source"
+        },
+        {
+          "url": "https://www.aufildelondena.ch/book-online",
+          "label": "Booking and prices"
+        },
+        {
+          "url": "https://www.aufildelondena.ch/qui-sommesnous",
+          "label": "Additional check: Team"
+        }
+      ],
+      "notes": [
+        "Farm, nature, games and crafts with a parent. The last published dates end on 22.08.2026.",
+        "A detour from the direct route. Not to be confused with Haricot 4–13."
+      ],
+      "checked": "2026-09-22",
+      "research": {
+        "date": "2026-09-27",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Programme",
+            "kind": "official",
+            "text": "Parent and child aged 0–6 together: feeding and caring for the animals, a snack, a sensory story, crafts with natural materials and games. By registration only; the last visible dates end on 22 August 2026.",
+            "url": "https://www.aufildelondena.ch/petitpois"
+          },
+          {
+            "field": "Team",
+            "kind": "official",
+            "text": "The team page names three staff members; one of them is also responsible for projects. The association states experience in special education, nature and work with animals, but individual qualifications and the leader of a specific session are not disclosed.",
+            "url": "https://www.aufildelondena.ch/qui-sommesnous"
+          }
+        ],
+        "remaining": [
+          "To be confirmed: new dates, whether an adult is included in the price from CHF 50, the rain plan, the toilet and whether it is possible to stay away from the animals."
+        ]
+      },
+      "practical": {
+        "scenario": "event"
+      },
+      "region": "sarine",
+      "reviewAfter": "2026-10-22",
+      "geo": {
+        "label": "Route de Montécu 94 1724 Bonnefontaine",
+        "lat": 46.74007034301758,
+        "lon": 7.198653221130371,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Mont%C3%A9cu+94+1724+Bonnefontaine&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-21",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Team",
+          "kind": "official",
+          "text": "The team page names three staff members; one of them is also responsible for projects. The association states experience in special education, nature and work with animals, but individual qualifications and the leader of a specific session are not disclosed.",
+          "url": "https://www.aufildelondena.ch/qui-sommesnous"
+        },
+        {
+          "field": "Schedule and programme",
+          "kind": "official",
+          "text": "The official page lists Saturday sessions from 09:30 to 11:30: 19 September, 3 October and 10 October 2026, then 13 March, 20 March, 17 April, 24 April, 15 May, 22 May, 12 June and 19 June 2027 (11 dates in total). Sessions are by registration only. The programme for parents and children aged 0–6 covers feeding and caring for the animals, a snack, a sensory story, nature crafts and outdoor games.",
+          "url": "https://www.aufildelondena.ch/petitpois"
+        }
+      ],
+      "remaining": [
+        "Is an adult included in the price from CHF 50?",
+        "What is the rain plan?",
+        "Is there a visitor toilet?",
+        "Can children stay away from the animals?",
+        "Will any sessions be held between 10 October 2026 and 13 March 2027?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "schedule": "Saturdays 09:30–11:30. Published dates: 19 Sep, 3 Oct and 10 Oct 2026, then 13 and 20 Mar, 17 and 24 Apr, 15 and 22 May, 12 and 19 Jun 2027. No dates are published between 10 Oct 2026 and 13 Mar 2027.",
+        "scheduleValidThrough": "2027-06-19",
+        "days": [
+          6
+        ],
+        "notes": [
+          "Parent-child workshops for ages 0–6: feeding and caring for the farm animals, a snack, a sensory story, nature crafts and outdoor games. Published dates run to 19 June 2027, with none listed between 10 October 2026 and 13 March 2027.",
+          "A detour from the direct route. Not to be confused with Haricot 4–13."
+        ]
+      },
+      "practicalPatch": {},
+      "cardId": "ondena",
+      "findings": [
+        {
+          "field": "Schedule and programme",
+          "kind": "official",
+          "text": "The official page lists Saturday sessions from 09:30 to 11:30: 19 September, 3 October and 10 October 2026, then 13 March, 20 March, 17 April, 24 April, 15 May, 22 May, 12 June and 19 June 2027 (11 dates in total). Sessions are by registration only. The programme for parents and children aged 0–6 covers feeding and caring for the animals, a snack, a sensory story, nature crafts and outdoor games.",
+          "url": "https://www.aufildelondena.ch/petitpois"
+        }
+      ],
+      "remaining": [
+        "Is an adult included in the price from CHF 50?",
+        "What is the rain plan?",
+        "Is there a visitor toilet?",
+        "Can children stay away from the animals?",
+        "Will any sessions be held between 10 October 2026 and 13 March 2027?"
+      ]
+    }
+  },
+  {
+    "jobId": "9d58fe4c-9f8e-4bca-a24c-d0785f4b7bfd",
+    "approvedOn": "2026-10-21",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": 4,
+      "age": "From birth to the start of 1H (approximately 0–4 years)",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Mon 14:00–17:30; Wed 09:00–11:30",
+      "days": [
+        1,
+        3
+      ],
+      "events": [],
+      "address": "Rue du Château 126, 1680 Romont FR",
+      "price": "Free",
+      "priceKind": "free",
+      "amount": 0,
+      "contacts": [
+        {
+          "name": "La Maison des Pitchounes",
+          "phone": "",
+          "email": "contact@lamaisondespitchounes.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://lamaisondespitchounes.ch/",
+          "label": "Format, age, hours, free entry and address"
+        }
+      ],
+      "notes": [
+        "No booking; you can come for part of the window. This is a free-play place, not a Kita.",
+        "The ground floor is listed as accessible for a pushchair. During school holidays the organiser announces separate Wednesday sessions.",
+        "The page uses both Rue and Route du Château; the contact block at the bottom gives Rue du Château 126. For navigation, check the pin on the map."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "pitchounes-romont",
+      "region": "glane",
+      "name": "La Maison des Pitchounes · free play",
+      "category": "play",
+      "town": "Romont",
+      "parentDetails": "The child comes with a parent or another close adult; one or two specialists receive the families.",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "First visit",
+            "kind": "official",
+            "text": "A place for children from birth to 1H: no booking, free of charge and together with an adult; one or two specialists on each shift.",
+            "url": "https://lamaisondespitchounes.ch/"
+          }
+        ],
+        "remaining": [
+          "Confirm the language of reception and holiday exceptions; the website is inconsistent, giving Rue in some places and Route du Château in others."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": true,
+          "text": "Indoor free play",
+          "source": "https://lamaisondespitchounes.ch/",
+          "checked": "2026-09-28"
+        },
+        "booking": {
+          "value": false,
+          "text": "No booking",
+          "source": "https://lamaisondespitchounes.ch/",
+          "checked": "2026-09-28"
+        },
+        "observe": {
+          "value": true,
+          "text": "You can first simply stay near the child",
+          "source": "https://lamaisondespitchounes.ch/",
+          "checked": "2026-09-28"
+        },
+        "leave": {
+          "value": true,
+          "text": "Free time of stay within the reception window",
+          "source": "https://lamaisondespitchounes.ch/",
+          "checked": "2026-09-28"
+        },
+        "commitment": {
+          "value": false,
+          "text": "Free entry",
+          "source": "https://lamaisondespitchounes.ch/",
+          "checked": "2026-09-28"
+        },
+        "access": {
+          "value": true,
+          "text": "The organiser states that the ground floor is accessible with a pushchair",
+          "source": "https://lamaisondespitchounes.ch/",
+          "checked": "2026-09-28"
+        },
+        "gallery": "https://lamaisondespitchounes.ch/"
+      },
+      "intro": "Calm free play with an adult and the specialists who receive families.",
+      "geo": {
+        "label": "Rue du Château 126 1680 Romont FR",
+        "lat": 46.69329071044922,
+        "lon": 6.917413711547852,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+du+Ch%C3%A2teau+126+1680+Romont+FR&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-28",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-21",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "First visit",
+          "kind": "official",
+          "text": "A place for children from birth to 1H: no booking, free of charge and together with an adult; one or two specialists on each shift.",
+          "url": "https://lamaisondespitchounes.ch/"
+        },
+        {
+          "field": "Address",
+          "kind": "official",
+          "text": "The venue block of the official page places the free-play space at Maison St-Charles, Route du Château 126, Romont, on the first floor and accessible with a pushchair. The page footer writes the street as Rue du Château 126.",
+          "url": "https://lamaisondespitchounes.ch/"
+        }
+      ],
+      "remaining": [
+        "Confirm the language of reception and holiday exceptions; the website is inconsistent, giving Rue in some places and Route du Château in others."
+      ]
+    },
+    "draft": {
+      "patch": {
+        "address": "Route du Château 126, 1680 Romont (Maison St-Charles)",
+        "notes": [
+          "No booking; you can come for part of the window. This is a free-play place, not a Kita.",
+          "The play space is on the first floor, listed as accessible for a pushchair. During school holidays the organiser announces separate Wednesday sessions.",
+          "The website uses both Route du Château and Rue du Château for the same number 126; the venue block gives Route du Château 126 at Maison St-Charles. For navigation, check the pin on the map."
+        ]
+      },
+      "practicalPatch": {
+        "access": {
+          "value": true,
+          "text": "The organiser states that the first-floor play space is accessible with a pushchair",
+          "source": "https://lamaisondespitchounes.ch/",
+          "checked": "2026-10-21"
+        }
+      },
+      "cardId": "pitchounes-romont",
+      "findings": [
+        {
+          "field": "Address",
+          "kind": "official",
+          "text": "The venue block of the official page places the free-play space at Maison St-Charles, Route du Château 126, Romont, on the first floor and accessible with a pushchair. The page footer writes the street as Rue du Château 126.",
+          "url": "https://lamaisondespitchounes.ch/"
+        }
+      ],
+      "remaining": [
+        "Confirm the language of reception and holiday exceptions; the website is inconsistent, giving Rue in some places and Route du Château in others."
+      ]
+    }
+  },
+  {
+    "jobId": "96ab9308-8ee2-4181-97c5-5b3a57f78b71",
+    "approvedOn": "2026-10-21",
+    "baseRecord": {
+      "id": "aef-mpe",
+      "name": "Café AEF · MPE",
+      "category": "play",
+      "town": "Fribourg",
+      "route": "fribourg",
+      "format": "group",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Check the age",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Published meetings: 6, 13, 20 and 27 October; 3, 10, 17 and 24 November; 1 and 15 December 2026, on Tuesdays 09:00–11:00.",
+      "days": [
+        2
+      ],
+      "events": [
+        {
+          "date": "2026-10-06",
+          "start": "09:00",
+          "end": "11:00",
+          "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+          "address": "Maison de la Petite Enfance, Rte des Arsenaux 23A, 1700 Fribourg"
+        },
+        {
+          "date": "2026-10-13",
+          "start": "09:00",
+          "end": "11:00",
+          "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+          "address": "Maison de la Petite Enfance, Rte des Arsenaux 23A, 1700 Fribourg"
+        },
+        {
+          "date": "2026-10-20",
+          "start": "09:00",
+          "end": "11:00",
+          "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+          "address": "Maison de la Petite Enfance, Rte des Arsenaux 23A, 1700 Fribourg"
+        },
+        {
+          "date": "2026-10-27",
+          "start": "09:00",
+          "end": "11:00",
+          "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+          "address": "Maison de la Petite Enfance, Rte des Arsenaux 23A, 1700 Fribourg"
+        },
+        {
+          "date": "2026-11-03",
+          "start": "09:00",
+          "end": "11:00",
+          "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+          "address": "Maison de la Petite Enfance, Rte des Arsenaux 23A, 1700 Fribourg"
+        },
+        {
+          "date": "2026-11-10",
+          "start": "09:00",
+          "end": "11:00",
+          "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+          "address": "Maison de la Petite Enfance, Rte des Arsenaux 23A, 1700 Fribourg"
+        },
+        {
+          "date": "2026-11-17",
+          "start": "09:00",
+          "end": "11:00",
+          "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+          "address": "Maison de la Petite Enfance, Rte des Arsenaux 23A, 1700 Fribourg"
+        },
+        {
+          "date": "2026-11-24",
+          "start": "09:00",
+          "end": "11:00",
+          "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+          "address": "Maison de la Petite Enfance, Rte des Arsenaux 23A, 1700 Fribourg"
+        },
+        {
+          "date": "2026-12-01",
+          "start": "09:00",
+          "end": "11:00",
+          "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+          "address": "Maison de la Petite Enfance, Rte des Arsenaux 23A, 1700 Fribourg"
+        },
+        {
+          "date": "2026-12-15",
+          "start": "09:00",
+          "end": "11:00",
+          "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+          "address": "Maison de la Petite Enfance, Rte des Arsenaux 23A, 1700 Fribourg"
+        }
+      ],
+      "address": "Maison de la Petite Enfance, Route des Arsenaux 23A, 1700 Fribourg",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Éducation Familiale: FR 026 321 48 70; DE 026 322 86 33",
+          "phone": "026 321 48 70",
+          "email": "contact@educationfamiliale.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://tockify.com/educationfamiliale/detail/755/1790665200000",
+          "label": "AEF programme and published dates"
+        },
+        {
+          "url": "https://www.educationfamiliale.ch/fr/agenda",
+          "label": "AEF calendar"
+        },
+        {
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale",
+          "label": "Additional check: Autumn series"
+        }
+      ],
+      "notes": [
+        "A meeting for adults and children together. The price, the age limit and the language of the individual facilitator are not stated. A French-language card does not guarantee German.",
+        "A place in the group has not been checked.",
+        "Only the dates from the published AEF programme have been added to the calendar."
+      ],
+      "checked": "2026-09-28",
+      "scheduleValidThrough": "2026-12-15",
+      "reviewAfter": "2026-10-09",
+      "research": {
+        "date": "2026-10-02",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Autumn series",
+            "kind": "official",
+            "text": "The public AEF calendar confirms meetings at the MPE on Tuesdays 09:00–11:00 from 29 September to 15 December 2026, with the listed dates, except 8 December. Adults discuss parenting and interact with the children together.",
+            "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+          },
+          {
+            "field": "parentDetails",
+            "kind": "official",
+            "text": "At the meeting, adults discuss parenting over coffee and try interacting with the children here and now.",
+            "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+          }
+        ],
+        "remaining": [
+          "The cost, age limits, registration and a German-speaking facilitator are not stated in the calendar. This is a joint meeting, not childcare without a parent.",
+          "What age is the meeting intended for?",
+          "How much does it cost to take part?",
+          "Is advance registration needed?",
+          "In which languages is the meeting held?",
+          "Must an adult be present?",
+          "Are places available on the chosen date?"
+        ]
+      },
+      "practical": {
+        "scenario": "event"
+      },
+      "region": "sarine",
+      "parentDetails": "Adults discuss parenting over coffee and try interacting with the children on the spot. Must an adult be present?",
+      "geo": {
+        "label": "Route des Arsenaux 23a 1700 Fribourg",
+        "lat": 46.79762268066406,
+        "lon": 7.151127338409424,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+des+Arsenaux+23A+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-10-13",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-21",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "parentDetails",
+          "kind": "official",
+          "text": "At the meeting, adults discuss parenting over coffee and try interacting with the children here and now.",
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+        },
+        {
+          "field": "Autumn series",
+          "kind": "official",
+          "text": "The organiser's calendar lists this café at the Maison de la Petite Enfance in Fribourg on 27 October, 3, 10, 17 and 24 November, and 1 and 15 December 2026, each from 09:00 to 11:00. The description presents a coffee and snack with exchanges between adults on the theme of education.",
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+        }
+      ],
+      "remaining": [
+        "The cost, age limits, registration and a German-speaking facilitator are not stated in the calendar. This is a joint meeting, not childcare without a parent.",
+        "What age is the meeting intended for?",
+        "How much does it cost to take part?",
+        "Is advance registration needed?",
+        "In which languages is the meeting held?",
+        "Must an adult be present?",
+        "Are places available on the chosen date?",
+        "What age is the café intended for?",
+        "In which language is the café held?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "events": [
+          {
+            "date": "2026-10-27",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+            "address": "Maison de la Petite Enfance,Rte des Arsenaux 23A, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-11-03",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+            "address": "Maison de la Petite Enfance,Rte des Arsenaux 23A, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-11-10",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+            "address": "Maison de la Petite Enfance,Rte des Arsenaux 23A, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-11-17",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+            "address": "Maison de la Petite Enfance,Rte des Arsenaux 23A, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-11-24",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+            "address": "Maison de la Petite Enfance,Rte des Arsenaux 23A, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-12-01",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+            "address": "Maison de la Petite Enfance,Rte des Arsenaux 23A, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-12-15",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+            "address": "Maison de la Petite Enfance,Rte des Arsenaux 23A, 1700 Fribourg, Switzerland"
+          }
+        ],
+        "schedule": "Listed sessions run from 09:00 to 11:00 on the individual dates published in the organiser's calendar; no weekly pattern is stated.",
+        "days": [],
+        "contacts": [
+          {
+            "name": "Association pour l’Éducation Familiale",
+            "phone": "026 321 48 70",
+            "email": "contact@educationfamiliale.ch"
+          }
+        ],
+        "parentDetails": "Parent-child café: an adult comes with the child. Conditions for the adult's active participation are not published."
+      },
+      "practicalPatch": {},
+      "cardId": "aef-mpe",
+      "findings": [
+        {
+          "field": "Autumn series",
+          "kind": "official",
+          "text": "The organiser's calendar lists this café at the Maison de la Petite Enfance in Fribourg on 27 October, 3, 10, 17 and 24 November, and 1 and 15 December 2026, each from 09:00 to 11:00. The description presents a coffee and snack with exchanges between adults on the theme of education.",
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+        }
+      ],
+      "remaining": [
+        "What age is the café intended for?",
+        "How much does it cost to take part?",
+        "Is advance registration needed?",
+        "In which language is the café held?",
+        "Are places available on the chosen date?"
+      ]
+    }
+  },
+  {
+    "jobId": "6655638a-a9ca-484d-aa05-ad59237d66f9",
+    "approvedOn": "2026-10-21",
+    "baseRecord": {
+      "id": "elki-alterswil",
+      "name": "ElKi Alterswil",
+      "category": "movement",
+      "town": "Alterswil",
+      "route": "fribourg",
+      "format": "group",
+      "status": "future",
+      "min": 3,
+      "max": null,
+      "age": "From 3 years",
+      "parent": "yes",
+      "languages": [
+        "DE"
+      ],
+      "schedule": "Friday 10:00–11:00 according to the group page; 2026/27 season to be confirmed",
+      "days": [],
+      "events": [],
+      "address": "Turnhalle Alterswil, 1715 Alterswil",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [],
+      "sources": [
+        {
+          "url": "https://sv-alterswil.ch/verein/Riegen/elki",
+          "label": "Official source"
+        }
+      ],
+      "notes": [],
+      "checked": "2026-09-22",
+      "research": {
+        "date": "2026-09-27",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Schedule",
+            "kind": "official",
+            "text": "The group page gives Friday 10:00–11:00, Turnhalle Alterswil, not 09:00. Children from 3 years are invited with parents or grandparents. No separate ElKi programme for 2026/27 was found in the news items reviewed.",
+            "url": "https://sv-alterswil.ch/verein/Riegen/elki"
+          }
+        ],
+        "remaining": [
+          "Confirm the current time, the cost and whether a trial visit is possible; no official admission is stated for children under 3."
+        ]
+      },
+      "region": "sense",
+      "reviewAfter": "2026-10-22"
+    },
+    "research": {
+      "date": "2026-10-21",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Schedule",
+          "kind": "official",
+          "text": "The group page currently lists training on Fridays from 09:00 to 10:00 at MZW Alterswil, with a start date of 5 September 2025. It does not state a 2026/27 start date. An earlier note giving 10:00–11:00 is outdated.",
+          "url": "https://sv-alterswil.ch/verein/Riegen/elki"
+        }
+      ],
+      "remaining": [
+        "Confirm the current time, the cost and whether a trial visit is possible; no official admission is stated for children under 3.",
+        "Is the Friday 09:00–10:00 group running in the 2026/27 season, and is the venue the MZW or the Turnhalle in Alterswil?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "schedule": "Friday 09:00–10:00 according to the group page (MZW Alterswil); the published start date is 5 September 2025, 2026/27 season to be confirmed",
+        "days": [
+          5
+        ]
+      },
+      "practicalPatch": {},
+      "cardId": "elki-alterswil",
+      "findings": [
+        {
+          "field": "Schedule",
+          "kind": "official",
+          "text": "The group page currently lists training on Fridays from 09:00 to 10:00 at MZW Alterswil, with a start date of 5 September 2025. It does not state a 2026/27 start date. An earlier note giving 10:00–11:00 is outdated.",
+          "url": "https://sv-alterswil.ch/verein/Riegen/elki"
+        }
+      ],
+      "remaining": [
+        "Is the Friday 09:00–10:00 group running in the 2026/27 season, and is the venue the MZW or the Turnhalle in Alterswil?"
+      ]
+    }
+  },
+  {
+    "jobId": "e54b6533-fcf6-4e95-949f-d18dccfe1301",
+    "approvedOn": "2026-10-21",
+    "baseRecord": {
+      "id": "biblio-tafers",
+      "name": "Bibliothek Tafers",
+      "category": "books",
+      "town": "Tafers",
+      "route": "fribourg",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Family visit",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Mon, Tue 15:00–17:00 · Wed, Sat 09:30–11:30 · Thu 15:00–19:00. During school holidays: Thu 17:00–19:00 and Sat 09:30–11:30",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "events": [],
+      "address": "Juchstrasse 9, OS, Tafers",
+      "price": "According to the 2025/26 directory: free for children, CHF 40 / year for adults; new tariff to be confirmed",
+      "priceKind": "year",
+      "amount": 40,
+      "contacts": [
+        {
+          "name": "Bibliothek Tafers",
+          "phone": "026 494 52 55",
+          "email": "bibliothek@tafers.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://primarschule-tafers.ch/wp-content/uploads/2025/07/Schulinformation_25_26.pdf",
+          "label": "Official source"
+        },
+        {
+          "url": "https://www.fr.ch/bcu/app/bibliotheques/97",
+          "label": "Cantonal library register"
+        },
+        {
+          "url": "https://www.winmedio.net/tafers/",
+          "label": "Additional check: New schedule"
+        }
+      ],
+      "notes": [
+        "The language of the host/service is not confirmed"
+      ],
+      "checked": "2026-09-27",
+      "research": {
+        "date": "2026-09-27",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "New schedule",
+            "kind": "official",
+            "text": "In the new live catalogue of Tafers, Thursday is listed as continuous 15:00–19:00. During school holidays, Thursday 17:00–19:00 and Saturday 09:30–11:30 remain.",
+            "url": "https://www.winmedio.net/tafers/"
+          }
+        ],
+        "remaining": [
+          "The CHF 40 tariff relates to the previous 2025/26 directory; confirm the current tariff and the terms of the children's membership."
+        ]
+      },
+      "region": "sense",
+      "reviewAfter": "2026-12-26",
+      "geo": {
+        "label": "Juchstrasse 9 1712 Tafers",
+        "lat": 46.81391906738281,
+        "lon": 7.2185821533203125,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Juchstrasse+9+OS+Tafers&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-21",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The cantonal library register lists opening hours of Mon and Tue 15:00–17:00, Wed 09:30–11:30, Thu 15:00–17:00 and 18:00–19:30, and Sat 09:30–11:30. During school holidays it lists Thu 18:00–19:30 and Sat 09:30–11:30. The register says the library is open all year with adapted hours.",
+          "url": "https://www.fr.ch/bcu/app/bibliotheques/97"
+        },
+        {
+          "field": "contacts",
+          "kind": "official",
+          "text": "The cantonal library register gives the library's phone number as +41 26 494 52 55 and its e-mail address as info@bibliothek-tafers.ch.",
+          "url": "https://www.fr.ch/bcu/app/bibliotheques/97"
+        }
+      ],
+      "remaining": [
+        "The CHF 40 tariff relates to the previous 2025/26 directory; confirm the current tariff and the terms of the children's membership.",
+        "Do the hours on the library's own website differ from the cantonal register, for example on Thursday afternoons?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "schedule": "Mon, Tue 15:00–17:00 · Wed, Sat 09:30–11:30 · Thu 15:00–17:00 and 18:00–19:30. During school holidays: Thu 18:00–19:30 and Sat 09:30–11:30",
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          6
+        ],
+        "contacts": [
+          {
+            "name": "Bibliothek Tafers",
+            "phone": "026 494 52 55",
+            "email": "info@bibliothek-tafers.ch"
+          }
+        ]
+      },
+      "practicalPatch": {},
+      "cardId": "biblio-tafers",
+      "findings": [
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The cantonal library register lists opening hours of Mon and Tue 15:00–17:00, Wed 09:30–11:30, Thu 15:00–17:00 and 18:00–19:30, and Sat 09:30–11:30. During school holidays it lists Thu 18:00–19:30 and Sat 09:30–11:30. The register says the library is open all year with adapted hours.",
+          "url": "https://www.fr.ch/bcu/app/bibliotheques/97"
+        },
+        {
+          "field": "contacts",
+          "kind": "official",
+          "text": "The cantonal library register gives the library's phone number as +41 26 494 52 55 and its e-mail address as info@bibliothek-tafers.ch.",
+          "url": "https://www.fr.ch/bcu/app/bibliotheques/97"
+        }
+      ],
+      "remaining": [
+        "Do the hours on the library's own website differ from the cantonal register, for example on Thursday afternoons?"
+      ]
+    }
+  },
+  {
+    "jobId": "7eceeffa-e9cc-47dc-9566-83ee1f7fdebb",
+    "approvedOn": "2026-10-22",
+    "baseRecord": {
+      "id": "aef-centre",
+      "name": "Café AEF · Fribourg Centre",
+      "category": "play",
+      "town": "Fribourg",
+      "route": "fribourg",
+      "format": "group",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age to be confirmed",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Thursdays 09:00–11:00 · published dates from 17.09 to 17.12.2026",
+      "days": [
+        4
+      ],
+      "events": [
+        {
+          "date": "2026-10-01",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-10-08",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-10-15",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-10-22",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-10-29",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-05",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-12",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-19",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-26",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-12-03",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-12-10",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-12-17",
+          "start": "09:00",
+          "end": "11:00"
+        }
+      ],
+      "address": "Fribourg Centre – Restaurant Coop (4e étage), Avenue de la Gare 10, 1700 Fribourg",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Éducation Familiale: FR 026 321 48 70; DE 026 322 86 33",
+          "phone": "026 321 48 70",
+          "email": "contact@educationfamiliale.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://tockify.com/educationfamiliale/detail/754/1790838000000",
+          "label": "AEF programme and published dates"
+        },
+        {
+          "url": "https://www.educationfamiliale.ch/fr/agenda",
+          "label": "AEF calendar"
+        },
+        {
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale",
+          "label": "Additional check: Autumn series"
+        }
+      ],
+      "notes": [
+        "A meeting for adults and children together. The price, the age limit and the language of the individual leader are not stated. A French-language listing does not guarantee German.",
+        "Coop restaurant on the 4th floor.",
+        "Only the dates from the published AEF programme have been entered in the calendar."
+      ],
+      "checked": "2026-09-28",
+      "scheduleValidThrough": "2026-12-17",
+      "reviewAfter": "2026-10-09",
+      "research": {
+        "date": "2026-10-16",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "schedule",
+            "kind": "official",
+            "text": "The public AEF calendar lists Thursday meetings, 09:00–11:00, from 17 September to 17 December 2026 in the Coop restaurant on the 4th floor, Avenue de la Gare 10. Dates after 17 December are not published.",
+            "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+          }
+        ],
+        "remaining": [
+          "The cost, age limits, registration and a German-speaking leader are not stated in the calendar. This is a joint meeting, not supervision without a parent.",
+          "What age is the meeting intended for?",
+          "How much does participation cost?",
+          "Is advance registration required?",
+          "In what language is the meeting held, and is German available?",
+          "Must an adult stay with the child throughout the meeting?"
+        ]
+      },
+      "practical": {
+        "scenario": "event"
+      },
+      "region": "sarine",
+      "addressPrecision": "exact",
+      "parentDetails": "Parent-child café: adults attend with their children, share coffee and a snack, and talk with other adults about education while practising it together with the children.",
+      "geo": {
+        "label": "Avenue de la Gare 10 1700 Fribourg",
+        "lat": 46.80301284790039,
+        "lon": 7.152565956115723,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Avenue+de+la+Gare+10+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-10-13",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-22",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The public AEF calendar lists Thursday meetings, 09:00–11:00, from 17 September to 17 December 2026 in the Coop restaurant on the 4th floor, Avenue de la Gare 10. Dates after 17 December are not published.",
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+        },
+        {
+          "field": "events",
+          "kind": "official",
+          "text": "The official AEF calendar currently lists nine Parent-Child Café sessions, from 22 October to 17 December 2026, each 09:00–11:00 in the Coop restaurant (4th floor) at Fribourg Centre, Av. de la Gare 10, Fribourg.",
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+        }
+      ],
+      "remaining": [
+        "The cost, age limits, registration and a German-speaking leader are not stated in the calendar. This is a joint meeting, not supervision without a parent.",
+        "What age is the meeting intended for?",
+        "How much does participation cost?",
+        "Is advance registration required?",
+        "In what language is the meeting held, and is German available?",
+        "Must an adult stay with the child throughout the meeting?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "events": [
+          {
+            "date": "2026-10-22",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "Café Parents-Enfants à Fribourg Centre",
+            "address": "Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-10-29",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "Café Parents-Enfants à Fribourg Centre",
+            "address": "Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-11-05",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "Café Parents-Enfants à Fribourg Centre",
+            "address": "Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-11-12",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "Café Parents-Enfants à Fribourg Centre",
+            "address": "Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-11-19",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "Café Parents-Enfants à Fribourg Centre",
+            "address": "Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-11-26",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "Café Parents-Enfants à Fribourg Centre",
+            "address": "Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-12-03",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "Café Parents-Enfants à Fribourg Centre",
+            "address": "Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-12-10",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "Café Parents-Enfants à Fribourg Centre",
+            "address": "Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland"
+          },
+          {
+            "date": "2026-12-17",
+            "start": "09:00",
+            "end": "11:00",
+            "title": "Café Parents-Enfants à Fribourg Centre",
+            "address": "Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland"
+          }
+        ],
+        "address": "Fribourg Centre – Restaurant Coop (4e étage),Av. de la Gare 10, 1700 Fribourg, Switzerland",
+        "schedule": "Sessions from 09:00 to 11:00 on the individually published dates (see events)",
+        "parentDetails": "Parent-child café: the adult attends together with the child, and the organiser describes practising education with the children together during the session. Whether the adult must stay for the whole session is not published.",
+        "contacts": [
+          {
+            "name": "Association pour l’Éducation Familiale",
+            "phone": "026 321 48 70",
+            "email": "contact@educationfamiliale.ch"
+          }
+        ]
+      },
+      "practicalPatch": {},
+      "cardId": "aef-centre",
+      "findings": [
+        {
+          "field": "events",
+          "kind": "official",
+          "text": "The official AEF calendar currently lists nine Parent-Child Café sessions, from 22 October to 17 December 2026, each 09:00–11:00 in the Coop restaurant (4th floor) at Fribourg Centre, Av. de la Gare 10, Fribourg.",
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+        }
+      ],
+      "remaining": [
+        "What age is the meeting intended for?",
+        "How much does participation cost?",
+        "Is advance registration required?",
+        "In what language is the meeting held, and is German available?",
+        "Must an adult stay with the child throughout the meeting?"
+      ]
+    }
+  },
+  {
+    "jobId": "ab655024-daa1-426d-aa18-f0fa6892c8d6",
+    "approvedOn": "2026-10-22",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age limits are not published.",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Wed–Thu 09:00–22:00; Fri 09:00–23:00; Sat–Sun 08:30–23:00",
+      "days": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Route de l’Aérodrome 40, 1663 Epagny",
+      "price": "Price is not published.",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Café-Restaurant de l’Aérodrome",
+          "phone": "026 921 08 27",
+          "email": "restoaerodrome@outlook.com"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/la-gruyere/restaurants/cafe-restaurant-de-laerodrome/",
+          "label": "Large play area, terrace and opening hours"
+        }
+      ],
+      "notes": [
+        "You can watch the aerodrome, but the page does not promise any aircraft activity or the safety of the viewing area.",
+        "The restaurant's opening hours are published for 2026. The play area may be unavailable during a private event."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "aerodrome-epagny-play",
+      "region": "gruyere",
+      "name": "Aerodrome restaurant · play area",
+      "category": "dining",
+      "town": "Epagny",
+      "intro": "A restaurant by the aerodrome with a large play area and a terrace.",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "The aerodrome restaurant lists a large play area and a terrace.",
+            "url": "https://fribourg.ch/fr/la-gruyere/restaurants/cafe-restaurant-de-laerodrome/"
+          }
+        ],
+        "remaining": [
+          "The age of the equipment, the prices and the availability of the play area without an order are not described."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "The aerodrome restaurant lists a large play area and a terrace.",
+          "source": "https://fribourg.ch/fr/la-gruyere/restaurants/cafe-restaurant-de-laerodrome/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "The age of the equipment, the prices and the availability of the play area without an order are not described."
+        ]
+      },
+      "geo": {
+        "label": "Route de l'Aérodrome 40 1663 Epagny",
+        "lat": 46.5944709777832,
+        "lon": 7.093081474304199,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l%E2%80%99A%C3%A9rodrome+40+1663+Epagny&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-28",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-22",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "The aerodrome restaurant lists a large play area and a terrace.",
+          "url": "https://fribourg.ch/fr/la-gruyere/restaurants/cafe-restaurant-de-laerodrome/"
+        },
+        {
+          "field": "Opening hours",
+          "kind": "official",
+          "text": "The restaurant's published 2026 hours are: closed Monday and Tuesday; Wednesday–Thursday 09:00–22:00; Friday 09:00–23:00; Saturday 08:30–23:00; Sunday 08:30–22:00. These are restaurant hours, not specific play-area hours.",
+          "url": "https://fribourg.ch/fr/la-gruyere/restaurants/cafe-restaurant-de-laerodrome/"
+        }
+      ],
+      "remaining": [
+        "The age of the equipment, the prices and the availability of the play area without an order are not described."
+      ]
+    },
+    "draft": {
+      "patch": {
+        "schedule": "Wed–Thu 09:00–22:00; Fri 09:00–23:00; Sat 08:30–23:00; Sun 08:30–22:00",
+        "days": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "scheduleValidThrough": "2026-12-31"
+      },
+      "practicalPatch": {},
+      "cardId": "aerodrome-epagny-play",
+      "findings": [
+        {
+          "field": "Opening hours",
+          "kind": "official",
+          "text": "The restaurant's published 2026 hours are: closed Monday and Tuesday; Wednesday–Thursday 09:00–22:00; Friday 09:00–23:00; Saturday 08:30–23:00; Sunday 08:30–22:00. These are restaurant hours, not specific play-area hours.",
+          "url": "https://fribourg.ch/fr/la-gruyere/restaurants/cafe-restaurant-de-laerodrome/"
+        }
+      ],
+      "remaining": [
+        "The age of the equipment, the prices and the availability of the play area without an order are not described."
+      ]
+    }
+  },
+  {
+    "jobId": "f95da0c0-e975-42bb-993c-cb9ae2867cc7",
+    "approvedOn": "2026-10-22",
+    "baseRecord": {
+      "region": "see",
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Family visit; no age limits stated",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Mon, Fri 15–18 · Tue, Thu 09–11 · Wed 15–19 · Sat 09–13",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "events": [],
+      "address": "Schaalgasse 6, 3280 Murten",
+      "price": "Visiting on site is free; for borrowing to take home: adult CHF 50, first child CHF 20, each further child CHF 10 / year, according to the published rules",
+      "priceKind": "free",
+      "amount": 0,
+      "contacts": [
+        {
+          "name": "Stadtbibliothek Murten",
+          "phone": "026 670 55 24",
+          "email": "stadtbibliothek@murten-morat.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.fr.ch/de/kub/app/bibliotheques/83",
+          "label": "Cantonal library: opening hours, charges and contacts"
+        },
+        {
+          "url": "https://www.winmedio.net/murten/api/images/imageopac/193",
+          "label": "Additional check: Open visit"
+        }
+      ],
+      "notes": [
+        "There are children's books, picture books, audiobooks, Tonies and Buchstart packs. A Buchstart pack being available does not mean that a session of the same name is currently held.",
+        "During school holidays: Mon 15:00–18:00, Tue and Thu 09:00–11:00, Sat 09:00–12:00. Wednesday and Friday are not listed in the holiday schedule.",
+        "The collection includes books in German and French. The language of service has not been confirmed separately."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-12-22",
+      "id": "library-murten",
+      "name": "Stadtbibliothek Murten · family visit",
+      "category": "books",
+      "town": "Murten",
+      "parentDetails": "Independent visit to the library with an adult, with no childcare provided.",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Open visit",
+            "kind": "official",
+            "text": "The library rules expressly invite everyone to use the rooms and the terrace, to read and to drink coffee on site. The subscription applies to borrowing materials to take home, not to entry.",
+            "url": "https://www.winmedio.net/murten/api/images/imageopac/193"
+          },
+          {
+            "field": "Children's collection and borrowing",
+            "kind": "official",
+            "text": "There are children's books in German, French and English, and Buchstart and Tonie sets. The published rules give an annual borrowing charge: CHF 50 for an adult, CHF 20 for the first child, CHF 10 for each further child; up to ten items for 30 days.",
+            "url": "https://www.winmedio.net/murten/api/images/imageopac/193"
+          }
+        ],
+        "remaining": [
+          "The rules were published before 2026: check holiday exceptions and the current borrowing charge before a visit. It has not been established whether there is a separate play corner or a changing table."
+        ]
+      },
+      "geo": {
+        "label": "Schaalgasse 6 3280 Murten",
+        "lat": 46.927528381347656,
+        "lon": 7.116694927215576,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Schaalgasse+6+3280+Murten&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-22",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "price",
+          "kind": "official",
+          "text": "The cantonal library page states that using the library requires buying an annual subscription, which entitles the holder to borrow ten books per account. Prices: adult CHF 50, young person in training CHF 30, first child CHF 20, each further child of the same family CHF 10. The page does not state an entry price or say whether entering to read on site needs a subscription.",
+          "url": "https://www.fr.ch/de/kub/app/bibliotheques/83"
+        },
+        {
+          "field": "Children's collection",
+          "kind": "official",
+          "text": "The cantonal library page lists children's books and comics, audiobooks for children, Tonie boxes and Tonies for children, and Buchstart bags in the collection.",
+          "url": "https://www.fr.ch/de/kub/app/bibliotheques/83"
+        }
+      ],
+      "remaining": [
+        "The rules were published before 2026: check holiday exceptions and the current borrowing charge before a visit. It has not been established whether there is a separate play corner or a changing table.",
+        "Is a subscription needed just to enter and read on site, or only to borrow books? The cantonal page says a subscription is required for use but does not give an entry price, so ask the library before a visit without borrowing."
+      ]
+    },
+    "draft": {
+      "patch": {
+        "price": "The cantonal library page says use of the library requires an annual subscription, which entitles the holder to borrow ten books per account: adult CHF 50, young person in training CHF 30, first child CHF 20, each further child of the same family CHF 10. The page does not say what applies to a visit without borrowing.",
+        "priceKind": "unknown",
+        "amount": null
+      },
+      "practicalPatch": {},
+      "cardId": "library-murten",
+      "findings": [
+        {
+          "field": "price",
+          "kind": "official",
+          "text": "The cantonal library page states that using the library requires buying an annual subscription, which entitles the holder to borrow ten books per account. Prices: adult CHF 50, young person in training CHF 30, first child CHF 20, each further child of the same family CHF 10. The page does not state an entry price or say whether entering to read on site needs a subscription.",
+          "url": "https://www.fr.ch/de/kub/app/bibliotheques/83"
+        },
+        {
+          "field": "Children's collection",
+          "kind": "official",
+          "text": "The cantonal library page lists children's books and comics, audiobooks for children, Tonie boxes and Tonies for children, and Buchstart bags in the collection.",
+          "url": "https://www.fr.ch/de/kub/app/bibliotheques/83"
+        }
+      ],
+      "remaining": [
+        "Is a subscription needed just to enter and read on site, or only to borrow books? The cantonal page says a subscription is required for use but does not give an entry price, so ask the library before a visit without borrowing."
+      ]
+    }
+  },
+  {
+    "jobId": "7309c836-740d-4a4b-880c-d29ac6c63965",
+    "approvedOn": "2026-10-22",
+    "baseRecord": {
+      "route": "outside",
+      "format": "group",
+      "status": "active",
+      "min": 0,
+      "max": 7,
+      "age": "0–7 years",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Listed sessions at 9:30 on Thursday 29 October, Thursday 26 November and Tuesday 22 December 2026. No recurring pattern is published.",
+      "days": [
+        2,
+        4
+      ],
+      "events": [
+        {
+          "date": "2026-10-29",
+          "start": "09:30",
+          "end": "",
+          "title": "",
+          "address": ""
+        },
+        {
+          "date": "2026-11-26",
+          "start": "09:30",
+          "end": "",
+          "title": "",
+          "address": ""
+        },
+        {
+          "date": "2026-12-22",
+          "start": "09:30",
+          "end": "",
+          "title": "",
+          "address": ""
+        }
+      ],
+      "address": "Route de la Chapelle 33, 1470 Estavayer-le-Lac",
+      "price": "Free participation; no mandatory fee is stated",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Bibliothèque publique d’Estavayer",
+          "phone": "026 663 95 08",
+          "email": ""
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://estabiblio.ch/cafeparent",
+          "label": "Library: dates, age, format and participation"
+        },
+        {
+          "url": "https://estabiblio.ch/",
+          "label": "Library: address and telephone"
+        },
+        {
+          "url": "https://tockify.com/educationfamiliale/detail/778/1790667000000",
+          "label": "AEF: time, address and series"
+        }
+      ],
+      "notes": [
+        "While the adults talk with the facilitators about education and child-rearing, the children play nearby.",
+        "Participation is free; the source does not say whether registration is required or whether there is a voluntary contribution.",
+        "This is a meeting in the library, not the normal book-lending service. Dates differ by day of the week; only the published meetings are entered in the calendar."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-09",
+      "id": "aef-estavayer-cafe",
+      "region": "broye",
+      "name": "Café (grands-)parents-enfants · Estavayer",
+      "category": "play",
+      "town": "Estavayer-le-Lac",
+      "parentDetails": "The child comes with a parent or another adult.",
+      "scheduleValidThrough": "2026-12-22",
+      "intro": "A meeting for a child and an adult in a library: play alongside a conversation for parents.",
+      "practical": {
+        "scenario": "event",
+        "indoor": {
+          "value": true,
+          "text": "The meeting takes place indoors, in a public library.",
+          "source": "https://estabiblio.ch/cafeparent",
+          "checked": "2026-09-28"
+        }
+      },
+      "research": {
+        "date": "2026-10-15",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Address and contact",
+            "kind": "official",
+            "text": "The library is at Route de la Chapelle 33, Estavayer-le-Lac; telephone 026 663 95 08.",
+            "url": "https://estabiblio.ch/"
+          },
+          {
+            "field": "Dates",
+            "kind": "official",
+            "text": "The library's café page lists meetings at the library on Thursday 29 October, Thursday 26 November and Tuesday 22 December 2026, each at 09:30. No end time is given.",
+            "url": "https://estabiblio.ch/cafeparent"
+          }
+        ],
+        "remaining": [
+          "Check the language of the meeting, whether registration is required and whether free participation means a voluntary contribution is possible.",
+          "What time does each meeting end?"
+        ]
+      },
+      "geo": {
+        "label": "Route de la Chapelle 33 1470 Estavayer-le-Lac",
+        "lat": 46.848121643066406,
+        "lon": 6.853948593139648,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+la+Chapelle+33+1470+Estavayer-le-Lac&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-28",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-22",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Address and contact",
+          "kind": "official",
+          "text": "The library is at Route de la Chapelle 33, Estavayer-le-Lac; telephone 026 663 95 08.",
+          "url": "https://estabiblio.ch/"
+        },
+        {
+          "field": "Dates",
+          "kind": "official",
+          "text": "The library's café page lists meetings at the library on Thursday 29 October, Thursday 26 November and Tuesday 22 December 2026, each at 09:30. No end time is given.",
+          "url": "https://estabiblio.ch/cafeparent"
+        },
+        {
+          "field": "Age and accompaniment",
+          "kind": "official",
+          "text": "The library's café page gives the age as children from 0 to 7 accompanied by a parent, and says adults may also come without children. It does not say whether the adult takes part actively or stays in the room.",
+          "url": "https://estabiblio.ch/cafeparent"
+        }
+      ],
+      "remaining": [
+        "Check the language of the meeting, whether registration is required and whether free participation means a voluntary contribution is possible.",
+        "What time does each meeting end?",
+        "Is a voluntary contribution expected? The page only says participation is open (\"libre\") without an amount."
+      ]
+    },
+    "draft": {
+      "patch": {
+        "parentDetails": "Children aged 0 to 7 are accompanied by a parent. The page does not say whether the adult must take part actively, watch or stay in the room; adults may also come without children."
+      },
+      "practicalPatch": {},
+      "cardId": "aef-estavayer-cafe",
+      "findings": [
+        {
+          "field": "Age and accompaniment",
+          "kind": "official",
+          "text": "The library's café page gives the age as children from 0 to 7 accompanied by a parent, and says adults may also come without children. It does not say whether the adult takes part actively or stays in the room.",
+          "url": "https://estabiblio.ch/cafeparent"
+        }
+      ],
+      "remaining": [
+        "Check the language of the meeting, whether registration is required and whether free participation means a voluntary contribution is possible.",
+        "What time does each meeting end?",
+        "Is a voluntary contribution expected? The page only says participation is open (\"libre\") without an amount."
+      ]
+    }
+  },
+  {
+    "jobId": "bbeef8ad-25d2-4df3-b49f-3bf827688846",
+    "approvedOn": "2026-10-23",
+    "baseRecord": {
+      "id": "krabbel-plaffeien",
+      "name": "Krabbelgruppe Plaffeien / Oberschrot",
+      "category": "play",
+      "town": "Oberschrot",
+      "route": "local",
+      "format": "group",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Babies and young children up to about 4 years",
+      "parent": "unknown",
+      "languages": [],
+      "schedule": "Once a month on a Wednesday, 09:00–11:00, including during school holidays",
+      "days": [
+        3
+      ],
+      "events": [
+        {
+          "date": "2026-09-30",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-10-28",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-25",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-12-16",
+          "start": "09:00",
+          "end": "11:00"
+        }
+      ],
+      "address": "Primarschulhaus Oberschrot, Rishalta 30, 1716 Oberschrot",
+      "price": "Free; donations are voluntary",
+      "priceKind": "donation",
+      "amount": 0,
+      "contacts": [
+        {
+          "name": "Elternverein Plaffeien",
+          "phone": "",
+          "email": "info@elternverein-plaffeien.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/",
+          "label": "Official source"
+        }
+      ],
+      "notes": [
+        "No registration; sessions are also held during school holidays. Bring a snack for the child.",
+        "The Spielgruppe room is on the second floor (1. Stock). Visitors are asked to keep quiet in the school building."
+      ],
+      "checked": "2026-09-27",
+      "scheduleValidThrough": "2026-12-16",
+      "research": {
+        "date": "2026-10-02",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Conditions of attendance",
+            "kind": "official",
+            "text": "Visitors are asked to keep quiet in the school building so as not to disturb lessons.",
+            "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+          },
+          {
+            "field": "Schedule",
+            "kind": "official",
+            "text": "The last published session of 2026 is on 16 December. This does not mean the group stops then.",
+            "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+          },
+          {
+            "field": "Payment",
+            "kind": "official",
+            "text": "Sessions are free; a voluntary donation can be left in the donation box.",
+            "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+          },
+          {
+            "field": "Visit",
+            "kind": "official",
+            "text": "Sessions are held without registration, including during school holidays. Coffee and tea are available for adults; a snack for the child must be brought along.",
+            "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+          }
+        ],
+        "remaining": [
+          "Lift or pushchair space on the ground floor; number of families at a given session; whether conversation in Hochdeutsch is possible.",
+          "Is there a lift and space for a pushchair?",
+          "How many families come to a session?",
+          "In which languages do people talk at the sessions? Is it possible to speak standard German (Hochdeutsch)?",
+          "Will there be sessions after 16 December 2026?",
+          "Is it necessary to attend sessions regularly?",
+          "Must an adult stay with the child throughout the session?"
+        ]
+      },
+      "practical": {
+        "scenario": "event",
+        "indoor": {
+          "value": true,
+          "text": "Spielgruppe room",
+          "source": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/",
+          "checked": "2026-09-27"
+        },
+        "booking": {
+          "value": false,
+          "text": "No registration",
+          "note": "No advance registration is required.",
+          "source": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/",
+          "checked": "2026-10-02"
+        },
+        "commitment": {
+          "value": false,
+          "text": "No course fee",
+          "note": "Sessions are free; a contribution to the donation box is voluntary.",
+          "source": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/",
+          "checked": "2026-10-02"
+        },
+        "access": {
+          "value": null,
+          "text": "First floor above the lower level; ask about the lift and pushchair space",
+          "source": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/",
+          "checked": "2026-09-27"
+        },
+        "gallery": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+      },
+      "intro": "A session for parents with babies and young children. The children play with others of their age, while the adults get to know each other and share experience.",
+      "region": "sense",
+      "reviewAfter": "2026-12-26",
+      "ageUpperUncertainFrom": 4,
+      "geo": {
+        "label": "Rishalta 30 1716 Oberschrot",
+        "lat": 46.74296188354492,
+        "lon": 7.283677101135254,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+Rishalta+30+1716+Oberschrot&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-23",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Conditions of attendance",
+          "kind": "official",
+          "text": "Visitors are asked to keep quiet in the school building so as not to disturb lessons.",
+          "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+        },
+        {
+          "field": "Schedule",
+          "kind": "official",
+          "text": "The last published session of 2026 is on 16 December. This does not mean the group stops then.",
+          "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+        },
+        {
+          "field": "Payment",
+          "kind": "official",
+          "text": "Sessions are free; a voluntary donation can be left in the donation box.",
+          "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+        },
+        {
+          "field": "Visit",
+          "kind": "official",
+          "text": "Sessions are held without registration, including during school holidays. Coffee and tea are available for adults; a snack for the child must be brought along.",
+          "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+        },
+        {
+          "field": "Location",
+          "kind": "official",
+          "text": "The meeting takes place in the playgroup room of the primary school in Oberschrot, listed as \"1. Stock\". The page does not explain how floors are counted or describe a lift or pushchair route.",
+          "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+        }
+      ],
+      "remaining": [
+        "Is there a lift and space for a pushchair?",
+        "How many families come to a session?",
+        "In which languages do people talk at the sessions? Is it possible to speak standard German (Hochdeutsch)?",
+        "Will there be sessions after 16 December 2026?",
+        "Is it necessary to attend sessions regularly?",
+        "Must an adult stay with the child throughout the session?",
+        "Is there a lift or pushchair route to the playgroup room (listed as \"1. Stock\"), and how are the floors counted?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "notes": [
+          "No registration; sessions are also held during school holidays. Bring a snack for the child.",
+          "The playgroup room is in the school building on the floor the page calls \"1. Stock\"; the page does not say how floors are counted. Visitors are asked to keep quiet in the school building."
+        ]
+      },
+      "practicalPatch": {
+        "access": {
+          "value": null,
+          "text": "Playgroup room listed as \"1. Stock\" in the school building; lift and pushchair access are not stated",
+          "source": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/",
+          "checked": "2026-10-23"
+        }
+      },
+      "cardId": "krabbel-plaffeien",
+      "findings": [
+        {
+          "field": "Location",
+          "kind": "official",
+          "text": "The meeting takes place in the playgroup room of the primary school in Oberschrot, listed as \"1. Stock\". The page does not explain how floors are counted or describe a lift or pushchair route.",
+          "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+        }
+      ],
+      "remaining": [
+        "Is there a lift or pushchair route to the playgroup room (listed as \"1. Stock\"), and how are the floors counted?"
+      ]
+    }
+  },
+  {
+    "jobId": "6dc0b336-c213-4cef-a682-4aa63908bc44",
+    "approvedOn": "2026-10-23",
+    "baseRecord": {
+      "id": "pony-spass",
+      "name": "Pony Spass · Tierhappy",
+      "category": "horses",
+      "town": "Oberschrot",
+      "route": "local",
+      "format": "event",
+      "status": "future",
+      "min": 6,
+      "max": 9,
+      "age": "6–9 years",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "16 October 2026 · 13:30–16:00",
+      "days": [
+        5
+      ],
+      "events": [
+        {
+          "date": "2026-10-16",
+          "start": "13:30",
+          "end": "16:00"
+        }
+      ],
+      "address": "Ober Tschüplere 90, 1716 Oberschrot",
+      "price": "CHF 30 / session; snack included",
+      "priceKind": "visit",
+      "amount": 30,
+      "contacts": [
+        {
+          "name": "Bergahorn: booking for pony sessions",
+          "phone": "",
+          "email": "schulleitung@bergahorn-schule.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.bergahorn-schule.ch/freifaecher",
+          "label": "Bergahorn programme 2026/27"
+        },
+        {
+          "url": "https://www.tierhappy.ch/",
+          "label": "Tierhappy · organiser"
+        }
+      ],
+      "notes": [
+        "Pony care, feeding, riding or leading the pony, games. Group of 2–4 children.",
+        "This programme is for older children, not an option for children under 6. Spring dates are not yet listed.",
+        "Language to be agreed; clothing for the weather and suitable footwear."
+      ],
+      "checked": "2026-09-27",
+      "parentDetails": "Parents are allowed to stay; a joint lesson for a parent and child is not stated.",
+      "scheduleValidThrough": "2026-10-16",
+      "research": {
+        "date": "2026-09-27",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Instructor and format",
+            "kind": "official",
+            "text": "The live Bergahorn page confirms the instructor, the age group 6–9, 2–4 children, permission for parents to stay and a session on 16 October 2026. For children under 6 this is not a confirmed option.",
+            "url": "https://www.bergahorn-schule.ch/freifaecher"
+          }
+        ],
+        "remaining": [
+          "Language, available places and spring dates. A detailed biography of the instructor is available on Tierhappy."
+        ]
+      },
+      "region": "sense",
+      "reviewAfter": "2026-10-27",
+      "geo": {
+        "label": "Ober Tschüplere 90 1716 Oberschrot",
+        "lat": 46.731719970703125,
+        "lon": 7.262561798095703,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ober+Tsch%C3%BCplere+90+1716+Oberschrot&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-23",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Instructor and format",
+          "kind": "official",
+          "text": "The live Bergahorn page confirms the instructor, the age group 6–9, 2–4 children, permission for parents to stay and a session on 16 October 2026. For children under 6 this is not a confirmed option.",
+          "url": "https://www.bergahorn-schule.ch/freifaecher"
+        },
+        {
+          "field": "Schedule and fee",
+          "kind": "official",
+          "text": "The Bergahorn programme lists Pony Spass at 13:30–16:00 with one dated session, 16 October 2026, which has already passed. Further dates are only announced as \"in spring\" and are not yet published. The fee is CHF 30 per course, with a small afternoon snack included.",
+          "url": "https://www.bergahorn-schule.ch/freifaecher"
+        }
+      ],
+      "remaining": [
+        "Language, available places and spring dates. A detailed biography of the instructor is available on Tierhappy.",
+        "Which spring dates will be offered for Pony Spass?",
+        "In which language are the sessions held?",
+        "Are places still available?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "status": "check",
+        "schedule": "13:30 to 16:00 (published as 13.30-16Uhr). Listed date: 16 October 2026. Further dates in spring are not yet published.",
+        "price": "CHF 30 per course (includes a small afternoon snack)",
+        "priceKind": "course",
+        "parentDetails": "Parents may stay with the child. The published text does not say whether they take part actively, watch, or must leave.",
+        "contacts": [
+          {
+            "name": "Bergahorn Schule",
+            "phone": "",
+            "email": "schulleitung@bergahorn-schule.ch"
+          }
+        ],
+        "notes": [
+          "Pony care, feeding, riding or leading the pony, games. Group of 2–4 children.",
+          "This programme is for children aged 6–9, not an option for children under 6. The only listed date, 16 October 2026, has passed; the spring dates have not been published yet.",
+          "Wear weather-appropriate clothing and sturdy shoes. The session language is not published."
+        ]
+      },
+      "practicalPatch": {
+        "booking": {
+          "value": true,
+          "text": "Registration applies to the whole course block; registrations go to the school office.",
+          "source": "https://www.bergahorn-schule.ch/freifaecher",
+          "checked": "2026-10-23"
+        },
+        "groupSize": {
+          "value": 4,
+          "text": "2–4 children",
+          "source": "https://www.bergahorn-schule.ch/freifaecher",
+          "checked": "2026-10-23"
+        },
+        "duration": {
+          "value": 150,
+          "text": "13:30–16:00",
+          "source": "https://www.bergahorn-schule.ch/freifaecher",
+          "checked": "2026-10-23"
+        }
+      },
+      "cardId": "pony-spass",
+      "findings": [
+        {
+          "field": "Schedule and fee",
+          "kind": "official",
+          "text": "The Bergahorn programme lists Pony Spass at 13:30–16:00 with one dated session, 16 October 2026, which has already passed. Further dates are only announced as \"in spring\" and are not yet published. The fee is CHF 30 per course, with a small afternoon snack included.",
+          "url": "https://www.bergahorn-schule.ch/freifaecher"
+        }
+      ],
+      "remaining": [
+        "Which spring dates will be offered for Pony Spass?",
+        "In which language are the sessions held?",
+        "Are places still available?"
+      ]
+    }
+  },
+  {
+    "jobId": "2714ada1-af27-4844-8ad1-c9cc209e8cf3",
+    "approvedOn": "2026-10-23",
+    "baseRecord": {
+      "id": "aef-mpe",
+      "name": "Café AEF · MPE",
+      "category": "play",
+      "town": "Fribourg",
+      "route": "fribourg",
+      "format": "group",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Check the age",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Listed sessions run from 09:00 to 11:00 on the individual dates published in the organiser's calendar; no weekly pattern is stated.",
+      "days": [],
+      "events": [
+        {
+          "date": "2026-10-27",
+          "start": "09:00",
+          "end": "11:00",
+          "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+          "address": "Maison de la Petite Enfance,Rte des Arsenaux 23A, 1700 Fribourg, Switzerland"
+        },
+        {
+          "date": "2026-11-03",
+          "start": "09:00",
+          "end": "11:00",
+          "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+          "address": "Maison de la Petite Enfance,Rte des Arsenaux 23A, 1700 Fribourg, Switzerland"
+        },
+        {
+          "date": "2026-11-10",
+          "start": "09:00",
+          "end": "11:00",
+          "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+          "address": "Maison de la Petite Enfance,Rte des Arsenaux 23A, 1700 Fribourg, Switzerland"
+        },
+        {
+          "date": "2026-11-17",
+          "start": "09:00",
+          "end": "11:00",
+          "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+          "address": "Maison de la Petite Enfance,Rte des Arsenaux 23A, 1700 Fribourg, Switzerland"
+        },
+        {
+          "date": "2026-11-24",
+          "start": "09:00",
+          "end": "11:00",
+          "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+          "address": "Maison de la Petite Enfance,Rte des Arsenaux 23A, 1700 Fribourg, Switzerland"
+        },
+        {
+          "date": "2026-12-01",
+          "start": "09:00",
+          "end": "11:00",
+          "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+          "address": "Maison de la Petite Enfance,Rte des Arsenaux 23A, 1700 Fribourg, Switzerland"
+        },
+        {
+          "date": "2026-12-15",
+          "start": "09:00",
+          "end": "11:00",
+          "title": "Café Parents-Enfants à la Maison de la Petite Enfance à Fribourg",
+          "address": "Maison de la Petite Enfance,Rte des Arsenaux 23A, 1700 Fribourg, Switzerland"
+        }
+      ],
+      "address": "Maison de la Petite Enfance, Route des Arsenaux 23A, 1700 Fribourg",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Association pour l’Éducation Familiale",
+          "phone": "026 321 48 70",
+          "email": "contact@educationfamiliale.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://tockify.com/educationfamiliale/detail/755/1790665200000",
+          "label": "AEF programme and published dates"
+        },
+        {
+          "url": "https://www.educationfamiliale.ch/fr/agenda",
+          "label": "AEF calendar"
+        },
+        {
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale",
+          "label": "Additional check: Autumn series"
+        }
+      ],
+      "notes": [
+        "A meeting for adults and children together. The price, the age limit and the language of the individual facilitator are not stated. A French-language card does not guarantee German.",
+        "A place in the group has not been checked.",
+        "Only the dates from the published AEF programme have been added to the calendar."
+      ],
+      "checked": "2026-09-28",
+      "scheduleValidThrough": "2026-12-15",
+      "reviewAfter": "2026-10-09",
+      "research": {
+        "date": "2026-10-21",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "parentDetails",
+            "kind": "official",
+            "text": "At the meeting, adults discuss parenting over coffee and try interacting with the children here and now.",
+            "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+          },
+          {
+            "field": "Autumn series",
+            "kind": "official",
+            "text": "The organiser's calendar lists this café at the Maison de la Petite Enfance in Fribourg on 27 October, 3, 10, 17 and 24 November, and 1 and 15 December 2026, each from 09:00 to 11:00. The description presents a coffee and snack with exchanges between adults on the theme of education.",
+            "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+          }
+        ],
+        "remaining": [
+          "The cost, age limits, registration and a German-speaking facilitator are not stated in the calendar. This is a joint meeting, not childcare without a parent.",
+          "What age is the meeting intended for?",
+          "How much does it cost to take part?",
+          "Is advance registration needed?",
+          "In which languages is the meeting held?",
+          "Must an adult be present?",
+          "Are places available on the chosen date?",
+          "What age is the café intended for?",
+          "In which language is the café held?"
+        ]
+      },
+      "practical": {
+        "scenario": "event"
+      },
+      "region": "sarine",
+      "parentDetails": "Parent-child café: an adult comes with the child. Conditions for the adult's active participation are not published.",
+      "geo": {
+        "label": "Route des Arsenaux 23a 1700 Fribourg",
+        "lat": 46.79762268066406,
+        "lon": 7.151127338409424,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+des+Arsenaux+23A+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-10-13",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-23",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "parentDetails",
+          "kind": "official",
+          "text": "At the meeting, adults discuss parenting over coffee and try interacting with the children here and now.",
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+        },
+        {
+          "field": "Autumn series",
+          "kind": "official",
+          "text": "The organiser's calendar lists this café at the Maison de la Petite Enfance in Fribourg on 27 October, 3, 10, 17 and 24 November, and 1 and 15 December 2026, each from 09:00 to 11:00. The description presents a coffee and snack with exchanges between adults on the theme of education.",
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+        },
+        {
+          "field": "events",
+          "kind": "official",
+          "text": "As of 23 October 2026 the organiser's calendar lists seven upcoming sessions of this café, all from 09:00 to 11:00: 27 October, 3, 10, 17 and 24 November, and 1 and 15 December 2026. No session is listed for 8 December.",
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+        }
+      ],
+      "remaining": [
+        "The cost, age limits, registration and a German-speaking facilitator are not stated in the calendar. This is a joint meeting, not childcare without a parent.",
+        "What age is the meeting intended for?",
+        "How much does it cost to take part?",
+        "Is advance registration needed?",
+        "In which languages is the meeting held?",
+        "Must an adult be present?",
+        "Are places available on the chosen date?",
+        "What age is the café intended for?",
+        "In which language is the café held?",
+        "Is there a session on 8 December 2026?"
+      ]
+    },
+    "draft": {
+      "patch": {},
+      "practicalPatch": {},
+      "cardId": "aef-mpe",
+      "findings": [
+        {
+          "field": "events",
+          "kind": "official",
+          "text": "As of 23 October 2026 the organiser's calendar lists seven upcoming sessions of this café, all from 09:00 to 11:00: 27 October, 3, 10, 17 and 24 November, and 1 and 15 December 2026. No session is listed for 8 December.",
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+        }
+      ],
+      "remaining": [
+        "Is there a session on 8 December 2026?"
+      ]
+    }
+  },
+  {
+    "jobId": "da9f3c96-9a69-4300-869b-09e182a01196",
+    "approvedOn": "2026-10-23",
+    "baseRecord": {
+      "id": "pony-entdecken",
+      "name": "Pony entdecken · Tierhappy",
+      "category": "horses",
+      "town": "Oberschrot",
+      "route": "local",
+      "format": "group",
+      "status": "future",
+      "min": 4,
+      "max": 6,
+      "age": "4–6 years",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "24.09, 01.10 and 08.10.2026 · 14:00–16:00",
+      "days": [
+        4
+      ],
+      "events": [
+        {
+          "date": "2026-09-24",
+          "start": "14:00",
+          "end": "16:00"
+        },
+        {
+          "date": "2026-10-01",
+          "start": "14:00",
+          "end": "16:00"
+        },
+        {
+          "date": "2026-10-08",
+          "start": "14:00",
+          "end": "16:00"
+        }
+      ],
+      "address": "Ober Tschüplere 90, 1716 Oberschrot",
+      "price": "CHF 25 / session; booking for a block of 3 sessions",
+      "priceKind": "course",
+      "amount": 75,
+      "contacts": [
+        {
+          "name": "Bergahorn: registration for pony sessions",
+          "phone": "",
+          "email": "schulleitung@bergahorn-schule.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.bergahorn-schule.ch/freifaecher",
+          "label": "Bergahorn programme 2026/27"
+        },
+        {
+          "url": "https://www.tierhappy.ch/",
+          "label": "Tierhappy · organiser"
+        },
+        {
+          "url": "https://www.tierhappy.ch/à-propos-de-moi",
+          "label": "Course leader"
+        }
+      ],
+      "notes": [
+        "Getting to know ponies, grooming, feeding, leading and games. Riding is not promised in the description of the younger group.",
+        "2–4 children; a small snack is included. Three sessions at CHF 25: calculated block total CHF 75.",
+        "The groups are also open to children who do not attend the Bergahorn school. Participation under the age of 4 may be discussed but is not confirmed.",
+        "Agree the language of the session. Weather-appropriate clothing and suitable footwear are needed."
+      ],
+      "checked": "2026-09-27",
+      "parentDetails": "Parents are allowed to stay; a joint lesson for a parent and child is not advertised.",
+      "scheduleValidThrough": "2026-10-08",
+      "research": {
+        "date": "2026-09-27",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Course leader",
+            "kind": "official",
+            "text": "The course leader writes of a bachelor's degree in social education (Bachelor en éducation sociale, 2014), work with people with intellectual disabilities and training in animal-assisted intervention (intervention assistée par l’animal) at Ani-motion, Niederbipp, in 2017–2019. Until 2026 she worked with people with mental-health or social difficulties. This is the course leader's own biography, not an independent confirmation and not proof of experience with young children.",
+            "url": "https://www.tierhappy.ch/à-propos-de-moi"
+          }
+        ],
+        "remaining": [
+          "For children under 4, participation is possible only after separate agreement. The programme is officially intended for ages 4–6; check the language and whether a place is free."
+        ]
+      },
+      "region": "sense",
+      "reviewAfter": "2026-10-27",
+      "geo": {
+        "label": "Ober Tschüplere 90 1716 Oberschrot",
+        "lat": 46.731719970703125,
+        "lon": 7.262561798095703,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ober+Tsch%C3%BCplere+90+1716+Oberschrot&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-23",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Course leader",
+          "kind": "official",
+          "text": "The course leader writes of a bachelor's degree in social education (Bachelor en éducation sociale, 2014), work with people with intellectual disabilities and training in animal-assisted intervention (intervention assistée par l’animal) at Ani-motion, Niederbipp, in 2017–2019. Until 2026 she worked with people with mental-health or social difficulties. This is the course leader's own biography, not an independent confirmation and not proof of experience with young children.",
+          "url": "https://www.tierhappy.ch/à-propos-de-moi"
+        },
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The school programme page lists only one block for this offer, on 24 Sep, 1 Oct and 8 Oct 2026, 14:00–16:00, at CHF 25 per course. The fee is for the whole course, not per session, and registration applies to the whole block. All three dates have passed and the page lists no later block.",
+          "url": "https://www.bergahorn-schule.ch/freifaecher"
+        }
+      ],
+      "remaining": [
+        "Will this course be offered again after the dates of 24 Sep, 1 Oct and 8 Oct 2026, and can families still register?",
+        "In which language are the sessions held?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "schedule": "14:00–16:00 on the published dates 24 Sep, 1 Oct and 8 Oct 2026; no later dates are listed on the programme page",
+        "price": "CHF 25 per course, including a small snack (kleines z'Vieri)",
+        "amount": 25,
+        "days": [],
+        "notes": [
+          "Getting to know a pony: care, feeding, leading and a few games. The programme page lists 2–4 children and a small snack is included.",
+          "The programme page says the courses are open to all children and that children older or younger than the stated age may ask whether they can take part.",
+          "Weather-appropriate clothing and good shoes.",
+          "Insurance is the responsibility of the participants."
+        ]
+      },
+      "practicalPatch": {
+        "booking": {
+          "value": true,
+          "text": "Registration is required and applies to the whole course block (programme-wide statement on the school page).",
+          "source": "https://www.bergahorn-schule.ch/freifaecher",
+          "checked": "2026-10-23"
+        },
+        "commitment": {
+          "value": true,
+          "text": "The fee is charged per course (block), not per visit.",
+          "source": "https://www.bergahorn-schule.ch/freifaecher",
+          "checked": "2026-10-23"
+        },
+        "groupSize": {
+          "value": 4,
+          "text": "2–4 children.",
+          "source": "https://www.bergahorn-schule.ch/freifaecher",
+          "checked": "2026-10-23"
+        },
+        "duration": {
+          "value": 120,
+          "text": "14:00–16:00 per session.",
+          "source": "https://www.bergahorn-schule.ch/freifaecher",
+          "checked": "2026-10-23"
+        },
+        "costNote": {
+          "value": "Course fees are paid directly to the course leader. The page gives no extra costs for this offer.",
+          "text": "Course fees are paid directly to the course leader. The page gives no extra costs for this offer.",
+          "source": "https://www.bergahorn-schule.ch/freifaecher",
+          "checked": "2026-10-23"
+        }
+      },
+      "cardId": "pony-entdecken",
+      "findings": [
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The school programme page lists only one block for this offer, on 24 Sep, 1 Oct and 8 Oct 2026, 14:00–16:00, at CHF 25 per course. The fee is for the whole course, not per session, and registration applies to the whole block. All three dates have passed and the page lists no later block.",
+          "url": "https://www.bergahorn-schule.ch/freifaecher"
+        }
+      ],
+      "remaining": [
+        "Will this course be offered again after the dates of 24 Sep, 1 Oct and 8 Oct 2026, and can families still register?",
+        "In which language are the sessions held?"
+      ]
+    }
+  },
+  {
+    "jobId": "39ac8c69-4bd9-44b0-9105-9e0c778e4578",
+    "approvedOn": "2026-10-24",
+    "baseRecord": {
+      "town": "Fribourg",
+      "route": "fribourg",
+      "region": "sarine",
+      "format": "event",
+      "status": "active",
+      "min": 0,
+      "max": 5,
+      "age": "0–5 years",
+      "parent": "yes",
+      "languages": [],
+      "days": [
+        2,
+        6
+      ],
+      "price": "Free, no registration",
+      "priceKind": "free",
+      "amount": 0,
+      "contacts": [
+        {
+          "name": "Office familial · ateliers découvertes",
+          "email": "atelierdecouverte@officefamilial.ch",
+          "phone": ""
+        }
+      ],
+      "sources": [
+        {
+          "label": "Autumn 2026 programme: age, venues, dates and conditions",
+          "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf"
+        },
+        {
+          "label": "Official announcements",
+          "url": "https://www.officefamilial.ch/fr/office-familial-fribourg/actualites"
+        }
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-04",
+      "scheduleValidThrough": "2026-11-17",
+      "notes": [
+        "The programme is explicitly described as parents-enfants. The language of each session is not stated. Confirmation of available places has not been received."
+      ],
+      "research": {
+        "date": "2026-10-17",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Joint format",
+            "kind": "official",
+            "text": "The autumn programme describes the workshops as sessions for parents with children aged 0–5.",
+            "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf"
+          },
+          {
+            "field": "Time and place",
+            "kind": "official",
+            "text": "Five dates: 6 and 10 October, 20 October, 3 and 17 November. Each session lasts one hour. The venue is the Office familial on the 3rd floor, Avenue de la Gare 14.",
+            "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf"
+          },
+          {
+            "field": "Participation",
+            "kind": "official",
+            "text": "The programme states that it is free and no prior registration is needed.",
+            "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf"
+          },
+          {
+            "field": "Autumn dates on the official news page",
+            "kind": "official",
+            "text": "The Office familial news page currently lists three free autumn discovery workshops with no registration, held at Avenue de la Gare 14, Fribourg: Tuesday 20 October, Tuesday 3 November 2026 and Tuesday 17 November, each 9:30–10:30. Only the 3 November date is printed with a year.",
+            "url": "https://www.officefamilial.ch/fr/office-familial-fribourg/actualites"
+          }
+        ],
+        "remaining": [
+          "The language of the session, conditions for families from another commune, the lift and the possibility of leaving early.",
+          "Are the sessions of 6 and 10 October still on the programme? They are not on the organizer's news page.",
+          "Is 2026 the year of the 20 October and 17 November sessions? The news page prints no year.",
+          "What is the age range of each workshop, and may or must a parent stay with the child?",
+          "In which language are the sessions held?",
+          "Is there a lift to the 3rd floor, and can pushchairs be brought in?",
+          "Can families leave a session early?"
+        ]
+      },
+      "practical": {
+        "booking": {
+          "value": false,
+          "text": "Free, no prior registration",
+          "source": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf",
+          "checked": "2026-09-28"
+        },
+        "commitment": {
+          "value": false,
+          "text": "Individual sessions, no need to buy a course",
+          "source": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf",
+          "checked": "2026-09-28"
+        },
+        "indoor": {
+          "value": true,
+          "text": "Sessions take place indoors at the Office familial",
+          "source": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf",
+          "checked": "2026-09-28"
+        },
+        "duration": {
+          "value": 60,
+          "text": "One hour",
+          "source": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf",
+          "checked": "2026-09-28"
+        },
+        "access": {
+          "value": null,
+          "text": "3rd floor; check whether there is a lift and whether pushchair access is possible",
+          "source": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf",
+          "checked": "2026-09-28"
+        }
+      },
+      "id": "office-family-workshops",
+      "name": "Office familial · family workshops",
+      "category": "creative",
+      "address": "Avenue de la Gare 14, 1700 Fribourg",
+      "schedule": "6, 10, 20 October; 3 and 17 November 2026 · one hour each",
+      "intro": "Joint sessions about feelings, stories, games and movement. Topics and times are given for each date.",
+      "events": [
+        {
+          "date": "2026-10-06",
+          "start": "09:30",
+          "end": "10:30",
+          "title": "Getting to know emotions"
+        },
+        {
+          "date": "2026-10-10",
+          "start": "10:00",
+          "end": "11:00",
+          "title": "Saturday stories"
+        },
+        {
+          "date": "2026-10-20",
+          "start": "09:30",
+          "end": "10:30",
+          "title": "Games for speech development"
+        },
+        {
+          "date": "2026-11-03",
+          "start": "09:30",
+          "end": "10:30",
+          "title": "Yoga: animal movements"
+        },
+        {
+          "date": "2026-11-17",
+          "start": "09:30",
+          "end": "10:30",
+          "title": "Getting to know your body"
+        }
+      ],
+      "geo": {
+        "label": "Avenue de la Gare 14 1700 Fribourg",
+        "lat": 46.8033447265625,
+        "lon": 7.153006553649902,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Avenue+de+la+Gare+14+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Joint format",
+          "kind": "official",
+          "text": "The autumn programme describes the workshops as sessions for parents with children aged 0–5.",
+          "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf"
+        },
+        {
+          "field": "Participation",
+          "kind": "official",
+          "text": "The programme states that it is free and no prior registration is needed.",
+          "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf"
+        },
+        {
+          "field": "Autumn dates on the official news page",
+          "kind": "official",
+          "text": "The Office familial news page lists the free autumn discovery workshop \"Le yoga des animaux\" on Tuesday 3 November 2026, 9:30–10:30, at Avenue de la Gare 14, Fribourg, with no registration. A second workshop, \"Le petit enfant à la découverte de son corps\", is listed on Tuesday 17 November, 9:30–10:30, but the page prints no year for it.",
+          "url": "https://www.officefamilial.ch/fr/office-familial-fribourg/actualites"
+        }
+      ],
+      "remaining": [
+        "The language of the session, conditions for families from another commune, the lift and the possibility of leaving early.",
+        "What is the age range of each workshop, and may or must a parent stay with the child?",
+        "In which language are the sessions held?",
+        "Is there a lift to the 3rd floor, and can pushchairs be brought in?",
+        "Can families leave a session early?",
+        "Is the 17 November workshop \"Le petit enfant à la découverte de son corps\" on 17 November 2026? The news page prints no year."
+      ]
+    },
+    "draft": {
+      "patch": {
+        "schedule": "Tuesday 3 November 2026, 9:30–10:30 (autumn atelier)",
+        "days": [
+          2
+        ],
+        "events": [
+          {
+            "date": "2026-11-03",
+            "start": "09:30",
+            "end": "10:30",
+            "title": "Le yoga des animaux",
+            "address": "Avenue de la Gare 14, Fribourg"
+          }
+        ],
+        "intro": "Free autumn discovery workshop \"Le yoga des animaux\", held at the Office familial premises in Fribourg."
+      },
+      "practicalPatch": {},
+      "cardId": "office-family-workshops",
+      "findings": [
+        {
+          "field": "Autumn dates on the official news page",
+          "kind": "official",
+          "text": "The Office familial news page lists the free autumn discovery workshop \"Le yoga des animaux\" on Tuesday 3 November 2026, 9:30–10:30, at Avenue de la Gare 14, Fribourg, with no registration. A second workshop, \"Le petit enfant à la découverte de son corps\", is listed on Tuesday 17 November, 9:30–10:30, but the page prints no year for it.",
+          "url": "https://www.officefamilial.ch/fr/office-familial-fribourg/actualites"
+        }
+      ],
+      "remaining": [
+        "Is the 17 November workshop \"Le petit enfant à la découverte de son corps\" on 17 November 2026? The news page prints no year."
+      ]
+    }
+  },
+  {
+    "jobId": "f316b3ae-288e-4b49-bd96-5232aae1e8a3",
+    "approvedOn": "2026-10-24",
+    "baseRecord": {
+      "id": "herbstbasteln",
+      "name": "Herbstbasteln Weissenstein",
+      "category": "creative",
+      "town": "Rechthalten",
+      "route": "fribourg",
+      "format": "event",
+      "status": "check",
+      "min": null,
+      "max": null,
+      "age": "Age to be confirmed",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "30 September 2026 · 13:30–16:00",
+      "days": [],
+      "events": [
+        {
+          "date": "2026-09-30",
+          "start": "13:30",
+          "end": "16:00"
+        }
+      ],
+      "address": "Zentrum Weissenstein, Weissenstein 57, 1718 Rechthalten",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Secretariat",
+          "phone": "026 418 39 59",
+          "email": "sekretariat@ref-weissenstein.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.ref-weissenstein.ch/2026/09/22/einladung-herbstbasteln/",
+          "label": "Parish poster"
+        },
+        {
+          "url": "https://www.ref-weissenstein.ch/2026/09/26/einladung-herbstbasteln/",
+          "label": "Place and time"
+        }
+      ],
+      "notes": [
+        "Children, parents and grandparents are invited. The language of the event and the minimum age are not confirmed.",
+        "The registration deadline of 21.09 has passed. Ask the organiser whether late registration is possible; the price is not stated in the poster."
+      ],
+      "checked": "2026-09-27",
+      "reviewAfter": "2026-09-29",
+      "scheduleValidThrough": "2026-09-30",
+      "research": {
+        "date": "2026-09-27",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Place and time",
+            "text": "The live poster confirms 30.09.2026 13:30–16:00, Zentrum, hall on the ground floor, Weissenstein 57. The old link to the article no longer opens; the current invitation has been moved to 26 September.",
+            "url": "https://www.ref-weissenstein.ch/2026/09/26/einladung-herbstbasteln/",
+            "kind": "official"
+          }
+        ],
+        "remaining": [
+          "Late registration after the announced deadline of 21 September, age for young children, materials, price and language."
+        ]
+      },
+      "region": "sense",
+      "geo": {
+        "label": "Weissenstein 57 1718 Rechthalten",
+        "lat": 46.76859664916992,
+        "lon": 7.249922752380371,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Zentrum+Weissenstein+Weissenstein+57+1718+Rechthalten&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Date",
+          "kind": "official",
+          "text": "The parish post gives 30 September 2026 as the event date. 26 September is only the date in the post's web address, not a second event date. The page text does not state a start time, end time or place; the earlier 13:30–16:00 times could not be confirmed from the page text.",
+          "url": "https://www.ref-weissenstein.ch/2026/09/26/einladung-herbstbasteln/"
+        }
+      ],
+      "remaining": [
+        "Late registration after the announced deadline of 21 September, age for young children, materials, price and language.",
+        "Will the Herbstbasteln be held again, and at what time and place?",
+        "What is the age range, language, price and registration rule for families?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "events": [
+          {
+            "date": "2026-09-30",
+            "start": "",
+            "end": "",
+            "title": "Herbstbasteln",
+            "address": ""
+          }
+        ],
+        "schedule": "30 September 2026 (time not published in the page text)",
+        "intro": "Herbstbasteln (autumn crafts) event published on the website of the Kirchgemeinde Weissenstein (REF Weissenstein) for 30 September 2026. The post gives only the title and date; no programme details are published.",
+        "notes": [
+          "The only published date, 30 September 2026, has passed; no later session was found.",
+          "The page text gives no start or end time, place, age, language, price or registration details. Ask the organiser."
+        ]
+      },
+      "practicalPatch": {},
+      "cardId": "herbstbasteln",
+      "findings": [
+        {
+          "field": "Date",
+          "kind": "official",
+          "text": "The parish post gives 30 September 2026 as the event date. 26 September is only the date in the post's web address, not a second event date. The page text does not state a start time, end time or place; the earlier 13:30–16:00 times could not be confirmed from the page text.",
+          "url": "https://www.ref-weissenstein.ch/2026/09/26/einladung-herbstbasteln/"
+        }
+      ],
+      "remaining": [
+        "Will the Herbstbasteln be held again, and at what time and place?",
+        "What is the age range, language, price and registration rule for families?"
+      ]
+    }
+  },
+  {
+    "jobId": "a11d9234-cdde-40fd-aa0d-cebc44ef04f5",
+    "approvedOn": "2026-10-24",
+    "baseRecord": {
+      "region": "see",
+      "route": "outside",
+      "format": "event",
+      "status": "active",
+      "min": 0,
+      "max": 7,
+      "age": "Families with children aged 0–7",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "27 October and 24 November 2026, 09:30–11:00",
+      "days": [
+        2
+      ],
+      "events": [
+        {
+          "date": "2026-10-27",
+          "start": "09:30",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-24",
+          "start": "09:30",
+          "end": "11:00"
+        }
+      ],
+      "address": "Ancienne école allemande, Route de Fribourg 19, 1784 Courtepin",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Éducation Familiale · registration",
+          "phone": "026 321 48 70",
+          "email": ""
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://portail-jeunes.ch/wp-content/uploads/2026/09/2026-2_ATF_Courtepin_A4-F.pdf",
+          "label": "2026 programme: topics, dates, venue and registration"
+        },
+        {
+          "url": "https://www.educationfamiliale.ch/fr/activites-familles",
+          "label": "Organiser: format of the workshops for adults and children"
+        },
+        {
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale",
+          "label": "Topics of the next meetings"
+        }
+      ],
+      "notes": [
+        "27 October: emotions. 24 November: «Créer et jouer». The meeting on 22 September has already taken place.",
+        "Registration by email is required. If few people register, the workshop may be cancelled; the organiser promises to say so on the preceding Friday.",
+        "The programme does not state the price or the language of individual meetings."
+      ],
+      "checked": "2026-09-27",
+      "reviewAfter": "2026-10-24",
+      "id": "ateliers-familles-courtepin",
+      "name": "Ateliers Familles · family workshops",
+      "category": "play",
+      "town": "Courtepin",
+      "parentDetails": "An adult takes part together with the child in the themed meeting.",
+      "scheduleValidThrough": "2026-11-24",
+      "research": {
+        "date": "2026-09-27",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Topics of the next meetings",
+            "kind": "official",
+            "text": "The public AEF calendar lists «Émotions» on 27 October and «Créer et jouer» on 24 November, both 09:30–11:00 in the former German school, Route de Fribourg 19.",
+            "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+          }
+        ],
+        "remaining": [
+          "The team of facilitators, the language of the individual meeting and whether registration is necessary remain to be checked; the calendar does not reveal this."
+        ]
+      },
+      "geo": {
+        "label": "Route de Fribourg 19 1784 Courtepin",
+        "lat": 46.866905212402344,
+        "lon": 7.123219013214111,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ancienne+%C3%A9cole+allemande+Route+de+Fribourg+19+1784+Courtepin&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Topics of the next meetings",
+          "kind": "official",
+          "text": "The public AEF calendar lists «Émotions» on 27 October and «Créer et jouer» on 24 November, both 09:30–11:00 in the former German school, Route de Fribourg 19.",
+          "url": "https://tockify.com/api/feeds/ics/educationfamiliale"
+        },
+        {
+          "field": "intro",
+          "kind": "official",
+          "text": "The organiser presents its family workshops as themed sessions for adults and children together.",
+          "url": "https://www.educationfamiliale.ch/fr/activites-familles"
+        }
+      ],
+      "remaining": [
+        "The team of facilitators, the language of the individual meeting and whether registration is necessary remain to be checked; the calendar does not reveal this.",
+        "Is registration necessary for the Courtepin workshops, and what happens if too few people register?",
+        "Which ages are the Courtepin workshops for, what does one session cost, and in which language are they held?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "min": null,
+        "max": null,
+        "age": "Age range not published for these sessions",
+        "parentDetails": "Presented by the organiser as workshops for adults and children together. Whether the adult stays for the whole session or joins the activity is not stated in the sources checked; the programme PDF could not be read.",
+        "contacts": [
+          {
+            "name": "Association pour l’Éducation Familiale",
+            "phone": "026 321 48 70",
+            "email": "contact@educationfamiliale.ch"
+          }
+        ],
+        "intro": "Themed family workshops for adults and children, run by the Association pour l’Éducation Familiale with sessions in Courtepin.",
+        "notes": [
+          "27 October: emotions workshop. The 24 November session is listed in the dates above.",
+          "Whether registration is needed, the price, the age range and the language of these sessions are not published in the calendar or on the organiser page; families can ask the organiser."
+        ]
+      },
+      "practicalPatch": {},
+      "cardId": "ateliers-familles-courtepin",
+      "findings": [
+        {
+          "field": "intro",
+          "kind": "official",
+          "text": "The organiser presents its family workshops as themed sessions for adults and children together.",
+          "url": "https://www.educationfamiliale.ch/fr/activites-familles"
+        }
+      ],
+      "remaining": [
+        "Is registration necessary for the Courtepin workshops, and what happens if too few people register?",
+        "Which ages are the Courtepin workshops for, what does one session cost, and in which language are they held?"
+      ]
+    }
+  },
+  {
+    "jobId": "e2d4e629-3ce7-4d45-941c-6c6f176c39c7",
+    "approvedOn": "2026-10-25",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": null,
+      "age": "Family beach; the age range for the playground equipment is not stated",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Beach area; check the season for services",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Route du Port, 1568 Delley-Portalban",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Commune de Delley-Portalban",
+          "phone": "026 677 18 31",
+          "email": ""
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/",
+          "label": "Site, facilities, parking and address"
+        }
+      ],
+      "notes": [
+        "Sand and lawn, playground, WC, shower, picnic area and snack bar; little shade.",
+        "Parking: CHF 1/hour on weekdays, CHF 1.50/hour at weekends. Day rates of CHF 8 and CHF 12 are listed; check which applies. The beach entry price is not published.",
+        "Dogs and personal grills are not allowed. The snack bar and rental services are seasonal."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "plage-portalban",
+      "region": "broye",
+      "name": "Plage de Portalban · waterside site",
+      "category": "water",
+      "town": "Delley-Portalban",
+      "parentDetails": "An adult stays with the child by the water and at the playground.",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "By the water",
+            "kind": "official",
+            "text": "The beach has a playground, WC, shower, picnic area and snack bar; parking is paid and costs more at weekends.",
+            "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/"
+          }
+        ],
+        "remaining": [
+          "The entry price and the seasonal snack bar hours are not stated."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "Sandy beach in the open air",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/",
+          "checked": "2026-09-28"
+        },
+        "playArea": {
+          "value": true,
+          "text": "There is a playground",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/",
+          "checked": "2026-09-28"
+        },
+        "toilet": {
+          "value": true,
+          "text": "WC and shower at the beach",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/",
+          "checked": "2026-09-28"
+        },
+        "parking": {
+          "value": true,
+          "text": "CHF 1/hour on weekdays, CHF 1.50/hour at weekends",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/",
+          "checked": "2026-09-28"
+        },
+        "gallery": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/"
+      },
+      "intro": "A beach with a playground, picnic area and paid parking."
+    },
+    "research": {
+      "date": "2026-10-25",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "By the water",
+          "kind": "official",
+          "text": "The beach has a playground, WC, shower, picnic area and snack bar; parking is paid and costs more at weekends.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/"
+        },
+        {
+          "field": "notes",
+          "kind": "official",
+          "text": "The official page lists parking at Aux Grèves du Lac, about 2 minutes' walk away. Hourly rates are CHF 1 on weekdays and CHF 1.50 at weekends; day rates are CHF 8 on weekdays and CHF 12 at weekends.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/"
+        }
+      ],
+      "remaining": [
+        "The entry price and the seasonal snack bar hours are not stated.",
+        "Is the snack bar or the rental service open all year or only in season, and what are the hours?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "notes": [
+          "Sand and lawn, playground, WC, shower, picnic area and snack bar; little shade.",
+          "Parking at Aux Grèves du Lac, about 2 minutes' walk from the beach: CHF 1 per hour on weekdays and CHF 1.50 per hour at weekends, or a day rate of CHF 8 on weekdays and CHF 12 at weekends.",
+          "Dogs and personal or disposable grills are not allowed."
+        ]
+      },
+      "practicalPatch": {},
+      "cardId": "plage-portalban",
+      "findings": [
+        {
+          "field": "notes",
+          "kind": "official",
+          "text": "The official page lists parking at Aux Grèves du Lac, about 2 minutes' walk away. Hourly rates are CHF 1 on weekdays and CHF 1.50 at weekends; day rates are CHF 8 on weekdays and CHF 12 at weekends.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/"
+        }
+      ],
+      "remaining": [
+        "Is the snack bar or the rental service open all year or only in season, and what are the hours?"
+      ]
+    }
+  },
+  {
+    "jobId": "973be618-dcc4-480d-b7af-35e0c0ce4aa1",
+    "approvedOn": "2026-10-25",
+    "baseRecord": {
+      "region": "see",
+      "route": "outside",
+      "format": "group",
+      "status": "active",
+      "min": 0,
+      "max": 4,
+      "age": "Ages 0–4",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Monday 09:00–11:00; confirm the venue when registering",
+      "days": [
+        1
+      ],
+      "events": [
+        {
+          "date": "2026-09-28",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-10-05",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-10-12",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-10-19",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-10-26",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-02",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-09",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-16",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-23",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-30",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-12-07",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-12-14",
+          "start": "09:00",
+          "end": "11:00"
+        }
+      ],
+      "address": "Kirchgässli 2, 3210 Kerzers",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Parish secretariat",
+          "phone": "031 755 55 50",
+          "email": "sekretariat.kerzers@refkirche-kerzers.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+          "label": "Age, adult participation and registration"
+        },
+        {
+          "url": "https://www.kerzers.ch/leben-kerzers/vereine",
+          "label": "Municipal directory: address and conditions"
+        },
+        {
+          "url": "https://www.refkirche-kerzers.ch/?page=agenda&sucheDarstellung=agenda&sucheDarstellungTitel=tag.keyword.one+-+Regionales&sucheStichwort=Regionales&sucheTyp=veranstaltungen",
+          "label": "Published dates for September–December 2026"
+        }
+      ],
+      "notes": [
+        "They usually meet in the parish house, one floor above the entrance. The venue sometimes changes: the organisers ask that you contact them beforehand.",
+        "There are no meetings during the summer and Christmas school holidays. A separate festive event takes place on 5 December.",
+        "Once a month a family support specialist is present. The dates of the specific consultations are published separately.",
+        "The price and the language used in the group are not stated. Whether the room is accessible for a pushchair needs to be checked."
+      ],
+      "checked": "2026-09-27",
+      "reviewAfter": "2026-10-22",
+      "id": "krabbel-kerzers",
+      "name": "Krabbelgruppe Kerzers",
+      "category": "play",
+      "town": "Kerzers",
+      "parentDetails": "The children play beside their parents or grandparents.",
+      "scheduleValidThrough": "2026-12-14",
+      "research": {
+        "date": "2026-09-27",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Participation",
+            "kind": "official",
+            "text": "For children aged 0–4 with a parent or grandparent, Monday 09:00–11:00. Registration is preferred; changes are announced via WhatsApp. The group does not meet in the summer and Christmas holidays; the autumn Mondays 5, 12 and 19 October are listed in the published dates.",
+            "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers"
+          },
+          {
+            "field": "Support",
+            "kind": "official",
+            "text": "Once a month a member of staff from the Familienbegleitung takes part for an informal discussion of parenting questions. This is not a separate consultation guaranteed every week.",
+            "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers"
+          }
+        ],
+        "remaining": [
+          "Confirm the cost and the room number at the first contact."
+        ]
+      },
+      "practical": {
+        "scenario": "event"
+      },
+      "geo": {
+        "label": "Kirchgässli 2 3210 Kerzers",
+        "lat": 46.97609329223633,
+        "lon": 7.196778297424316,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Kirchg%C3%A4ssli+2+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-25",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Participation",
+          "kind": "official",
+          "text": "For children aged 0–4 with a parent or grandparent, Monday 09:00–11:00. Registration is preferred; changes are announced via WhatsApp. The group does not meet in the summer and Christmas holidays; the autumn Mondays 5, 12 and 19 October are listed in the published dates.",
+          "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers"
+        },
+        {
+          "field": "Support",
+          "kind": "official",
+          "text": "Once a month a member of the family support team is present in the group as a contact for parenting questions. The organiser describes this as an informal offer with the exchange within the group at its centre. The exact dates are on a separate family-support agenda (Education familiale), which has not been checked here.",
+          "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers"
+        }
+      ],
+      "remaining": [
+        "Confirm the cost and the room number at the first contact.",
+        "On which dates does the monthly family-support visit take place?",
+        "Which room in the church house does the group use, and is it accessible with a pushchair?",
+        "What does it cost, and in which language is the group run?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "notes": [
+          "No group meetings during the Kerzers summer and Christmas school holidays.",
+          "Short-notice changes are announced through a WhatsApp chat.",
+          "A separate Chlouser Krabbelgruppe takes place on Saturday 5 December 2026 at 08:00 in the hall of the church house.",
+          "Once a month a member of the family support team is present in the group as a contact for parenting questions. The offer is informal and the exchange within the group is central; the exact dates are on a separate family-support agenda."
+        ]
+      },
+      "practicalPatch": {},
+      "cardId": "krabbel-kerzers",
+      "findings": [
+        {
+          "field": "Support",
+          "kind": "official",
+          "text": "Once a month a member of the family support team is present in the group as a contact for parenting questions. The organiser describes this as an informal offer with the exchange within the group at its centre. The exact dates are on a separate family-support agenda (Education familiale), which has not been checked here.",
+          "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers"
+        }
+      ],
+      "remaining": [
+        "On which dates does the monthly family-support visit take place?",
+        "Which room in the church house does the group use, and is it accessible with a pushchair?",
+        "What does it cost, and in which language is the group run?"
+      ]
+    }
+  },
+  {
+    "jobId": "f90c9c6f-e74b-4fe7-9d47-88924b4d2ddd",
+    "approvedOn": "2026-10-25",
+    "baseRecord": {
+      "id": "laferme-murten",
+      "name": "La Ferme 1794 · bistro and playground",
+      "category": "dining",
+      "town": "Murten",
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Check the age restrictions for the equipment.",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Mon–Fri 09:00–18:30; Sat 09:00–16:00; Sun closed",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "events": [],
+      "address": "Champ Raclé 19, 3280 Murten",
+      "price": "According to the menu; check the cost of food and the conditions for using the playground.",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "La Ferme 1794",
+          "phone": "026 565 46 12",
+          "email": "bio@laferme1794.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://laferme1794.ch/",
+          "label": "The farm: bistro and children's playground"
+        },
+        {
+          "url": "https://laferme1794.ch/bio-hofladen-kontakt/",
+          "label": "Address and contacts"
+        },
+        {
+          "url": "https://laferme1794.ch/fr/restauration-cafe-bistrot/",
+          "label": "French page of the bistro: opening hours"
+        },
+        {
+          "url": "https://www.baernermamis.ch/blog/la-ferme-1794-murten",
+          "label": "Family review: playground equipment"
+        }
+      ],
+      "notes": [
+        "The farm confirms a bistro at the farm shop, its own outdoor playground and parking.",
+        "A review by Bärner Mamis describes a fenced playground with tractors and ride-on cars, a toy car wash and petrol pump, a small track and a sandpit with toy excavators. The photos in the review show tractors, a petrol pump, a car wash and a path with wooden railings. The review is dated 19 November, without a year; the current set of toys may differ.",
+        "The same review says that inside the bistro there are only a few tables and a high chair, and the terrace is open in good weather. Play is mainly outdoors; the review does not describe a covered indoor play area as a fallback.",
+        "The French page of the bistro and the German main page both give Monday from 09:00 (as of 27.09.2026).",
+        "The bistro offers coffee, tea, juices, quiche, soup, salads and sandwiches. No price list could be found on the official pages.",
+        "Check the cost of an order and the rules for access to the playground. No entrance fee is published, but free entry is not confirmed; a parent accompanies the child."
+      ],
+      "checked": "2026-09-27",
+      "reviewAfter": "2026-10-27",
+      "research": {
+        "date": "2026-09-27",
+        "outcome": "reused",
+        "findings": [],
+        "remaining": [
+          "The current set of equipment, the view from the terrace, access conditions and prices."
+        ]
+      },
+      "region": "see",
+      "geo": {
+        "label": "Champ-Raclé 19 3280 Murten",
+        "lat": 46.94189453125,
+        "lon": 7.143847465515137,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Champ+Racl%C3%A9+19+3280+Murten&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-25",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "practical.playArea",
+          "kind": "official",
+          "text": "The farm's official homepage lists a spacious car park and a children's playground for visitors. It publishes no separate playground hours, age range, admission fee or supervision rule.",
+          "url": "https://laferme1794.ch/"
+        }
+      ],
+      "remaining": [
+        "The current set of equipment, the view from the terrace, access conditions and prices.",
+        "Is the playground free to use, and is there a price list for the bistro?",
+        "Is there an age range or supervision rule for the playground?"
+      ]
+    },
+    "draft": {
+      "patch": {},
+      "practicalPatch": {},
+      "cardId": "laferme-murten",
+      "findings": [
+        {
+          "field": "practical.playArea",
+          "kind": "official",
+          "text": "The farm's official homepage lists a spacious car park and a children's playground for visitors. It publishes no separate playground hours, age range, admission fee or supervision rule.",
+          "url": "https://laferme1794.ch/"
+        }
+      ],
+      "remaining": [
+        "Is the playground free to use, and is there a price list for the bistro?",
+        "Is there an age range or supervision rule for the playground?"
+      ]
+    }
+  },
+  {
+    "jobId": "d5d5494e-b9d6-4633-b669-680e023d43e1",
+    "approvedOn": "2026-10-25",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age limits are not published",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Year-round route; walk in daylight",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Départ administration communale, 1489 Murist",
+      "price": "Free access",
+      "priceKind": "free",
+      "amount": 0,
+      "contacts": [
+        {
+          "name": "Estavayer-le-Lac Région",
+          "phone": "026 301 60 30",
+          "email": "tourisme@estavayerlelac.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/estavayer-payerne/nature/sentier-nature-de-la-moliere/",
+          "label": "Start, duration and free entry"
+        }
+      ],
+      "notes": [
+        "The starting point is information panel No. 1 by the building of the former administration.",
+        "The long version of the route reaches 15 km; for young children, choose a short section and do not rely on the \"family\" designation."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "moliere-trail",
+      "region": "broye",
+      "name": "Sentier nature de la Molière · walk",
+      "category": "nature",
+      "town": "Murist",
+      "intro": "An educational walk near Murist; with young children, choose a short section of the route.",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "The educational trail starts at the former administration building of Murist; the short version takes about two hours.",
+            "url": "https://fribourg.ch/fr/estavayer-payerne/nature/sentier-nature-de-la-moliere/"
+          }
+        ],
+        "remaining": [
+          "Pushchair access and the exact length of the short loop are not stated."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "The educational trail starts at the former administration building of Murist; the short version takes about two hours.",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/nature/sentier-nature-de-la-moliere/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "Pushchair access and the exact length of the short loop are not stated."
+        ]
+      }
+    },
+    "research": {
+      "date": "2026-10-25",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Start and duration",
+          "kind": "official",
+          "text": "The educational trail is recommended to start in front of the Murist commune administration, where sign no. 1 stands; the route takes about 2 hours and entry is free.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/nature/sentier-nature-de-la-moliere/"
+        }
+      ],
+      "remaining": [
+        "Pushchair access and the exact length of the short loop are not stated.",
+        "Whether the route is suitable for pushchairs is not stated; families may want to ask the tourist office.",
+        "The route PDFs could not be read, so the length of short sections is unknown."
+      ]
+    },
+    "draft": {
+      "patch": {
+        "address": "Start in front of the Murist commune administration, at sign no. 1 (parking on the available spaces there)",
+        "addressPrecision": "area",
+        "notes": [
+          "The recommended starting point is information panel No. 1 in front of the Murist commune administration; the walk can also start from other places.",
+          "The route takes about 2 hours."
+        ]
+      },
+      "practicalPatch": {
+        "indoor": {
+          "value": null,
+          "text": "The official page describes a signposted educational walk but does not say whether it is outdoors or indoors.",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/nature/sentier-nature-de-la-moliere/",
+          "checked": "2026-10-25"
+        }
+      },
+      "cardId": "moliere-trail",
+      "findings": [
+        {
+          "field": "Start and duration",
+          "kind": "official",
+          "text": "The educational trail is recommended to start in front of the Murist commune administration, where sign no. 1 stands; the route takes about 2 hours and entry is free.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/nature/sentier-nature-de-la-moliere/"
+        }
+      ],
+      "remaining": [
+        "Whether the route is suitable for pushchairs is not stated; families may want to ask the tourist office.",
+        "The route PDFs could not be read, so the length of short sections is unknown."
+      ]
+    }
+  },
+  {
+    "jobId": "5aaeed4b-28dd-430b-a391-3a53234cf56e",
+    "approvedOn": "2026-10-26",
+    "baseRecord": {
+      "id": "memo-rat-mission-2026-09-30",
+      "name": "MEMO · Mission rat de bibliothèque",
+      "category": "books",
+      "town": "Fribourg",
+      "region": "sarine",
+      "route": "fribourg",
+      "format": "event",
+      "status": "future",
+      "min": 5,
+      "max": null,
+      "age": "From age 5 with an adult",
+      "parent": "yes",
+      "parentDetails": "From age 5 with an adult; alone from age 8.",
+      "languages": [
+        "FR"
+      ],
+      "address": "Rue de l’Hôpital 2, Fribourg",
+      "schedule": "30 September 2026 · 16:00–17:30",
+      "days": [
+        3
+      ],
+      "events": [
+        {
+          "date": "2026-09-30",
+          "start": "16:00",
+          "end": "17:30"
+        }
+      ],
+      "scheduleValidThrough": "2026-09-30",
+      "price": "Free under the MEMO programme",
+      "priceKind": "free",
+      "amount": 0,
+      "contacts": [
+        {
+          "name": "MEMO",
+          "phone": "026 351 71 44",
+          "email": "memo@ville-fr.ch"
+        }
+      ],
+      "sources": [
+        {
+          "label": "City listings: programme, age and time",
+          "url": "https://www.ville-fribourg.ch/agenda/activite-et-vernissage-de-lalbum-le-rat-de-bibliotheque"
+        },
+        {
+          "label": "Seasonal programme: free",
+          "url": "https://www.ville-fribourg.ch/lisez-jouez-bougez"
+        }
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-09-30",
+      "intro": "Searching for clues, drawing, crafts and word games in three MEMO spaces.",
+      "notes": [
+        "This part of the programme is not suitable for children under 5: the listing gives an age of 5 and over."
+      ],
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Age and time",
+            "kind": "official",
+            "text": "Children's mission on 30 September from 16:00 to 17:30, in French, from age 5 with an adult and from age 8 alone.",
+            "url": "https://www.ville-fribourg.ch/agenda/activite-et-vernissage-de-lalbum-le-rat-de-bibliotheque"
+          },
+          {
+            "field": "Cost",
+            "kind": "official",
+            "text": "The MEMO seasonal programme describes its events as free.",
+            "url": "https://www.ville-fribourg.ch/lisez-jouez-bougez"
+          }
+        ],
+        "remaining": [
+          "Is registration required for the mission?"
+        ]
+      },
+      "practical": {
+        "indoor": {
+          "value": true,
+          "text": "The mission takes place in three MEMO spaces",
+          "source": "https://www.ville-fribourg.ch/agenda/activite-et-vernissage-de-lalbum-le-rat-de-bibliotheque",
+          "checked": "2026-09-28"
+        },
+        "duration": {
+          "value": 90,
+          "text": "16:00–17:30",
+          "source": "https://www.ville-fribourg.ch/agenda/activite-et-vernissage-de-lalbum-le-rat-de-bibliotheque",
+          "checked": "2026-09-28"
+        }
+      },
+      "geo": {
+        "label": "Rue de l'Hôpital 2 1700 Fribourg",
+        "lat": 46.805633544921875,
+        "lon": 7.154872894287109,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-26",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Age and time",
+          "kind": "official",
+          "text": "Children's mission on 30 September from 16:00 to 17:30, in French, from age 5 with an adult and from age 8 alone.",
+          "url": "https://www.ville-fribourg.ch/agenda/activite-et-vernissage-de-lalbum-le-rat-de-bibliotheque"
+        },
+        {
+          "field": "Cost",
+          "kind": "official",
+          "text": "The MEMO seasonal programme describes its events as free.",
+          "url": "https://www.ville-fribourg.ch/lisez-jouez-bougez"
+        },
+        {
+          "field": "Status",
+          "kind": "official",
+          "text": "The city listing shows only one date, Wednesday 30 September 2026, which has passed. No later date is listed.",
+          "url": "https://www.ville-fribourg.ch/agenda/activite-et-vernissage-de-lalbum-le-rat-de-bibliotheque"
+        }
+      ],
+      "remaining": [
+        "Is registration required for the mission?",
+        "Will the mission be offered again on a later date?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "status": "closed"
+      },
+      "practicalPatch": {},
+      "cardId": "memo-rat-mission-2026-09-30",
+      "findings": [
+        {
+          "field": "Status",
+          "kind": "official",
+          "text": "The city listing shows only one date, Wednesday 30 September 2026, which has passed. No later date is listed.",
+          "url": "https://www.ville-fribourg.ch/agenda/activite-et-vernissage-de-lalbum-le-rat-de-bibliotheque"
+        }
+      ],
+      "remaining": [
+        "Will the mission be offered again on a later date?"
+      ]
+    }
+  },
+  {
+    "jobId": "7d3e9bf8-ec30-4071-8f11-3568dd63f37c",
+    "approvedOn": "2026-10-26",
+    "baseRecord": {
+      "region": "sense",
+      "route": "fribourg",
+      "format": "event",
+      "status": "active",
+      "min": 3,
+      "max": null,
+      "age": "From 3 years; the upper limit in the description is 99 years",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "3 October, 7 November and 12 December 2026 · 10:00–11:00; the address changes from 7 November",
+      "days": [
+        6
+      ],
+      "events": [
+        {
+          "date": "2026-10-03",
+          "start": "10:00",
+          "end": "11:00",
+          "address": "Aloha YOGA Paradise, Hauptstrasse 20, 3186 Düdingen"
+        },
+        {
+          "date": "2026-11-07",
+          "start": "10:00",
+          "end": "11:00",
+          "address": "Warpelstrasse 9, Düdingen"
+        },
+        {
+          "date": "2026-12-12",
+          "start": "10:00",
+          "end": "11:00",
+          "address": "Warpelstrasse 9, Düdingen"
+        }
+      ],
+      "address": "Aloha YOGA Paradise, Hauptstrasse 20, 3186 Düdingen",
+      "price": "CHF 25 adult + CHF 10 child per session",
+      "priceKind": "visit",
+      "amount": 35,
+      "contacts": [],
+      "sources": [
+        {
+          "url": "https://www.suniai-yoga.ch/eltern-kind-yoga/",
+          "label": "Organiser: age, dates, address, price and registration"
+        },
+        {
+          "url": "https://www.suniai-yoga.ch/stundenplan-und-preise/",
+          "label": "Organiser: monthly frequency and cancellation terms"
+        }
+      ],
+      "notes": [
+        "Shared stories, movement, games and relaxation. Registration is required; availability of places must be confirmed.",
+        "On 3 October the session is at Hauptstrasse 20; from 7 November it is at Warpelstrasse 9. The entrance at the new address needs to be checked.",
+        "The 3 October session is before the published holiday period, 12–25 October. Dates after December are not confirmed.",
+        "The organiser is registered in Gurmels, but holds the family sessions in Düdingen. The language of the session is not stated."
+      ],
+      "checked": "2026-09-29",
+      "reviewAfter": "2026-10-12",
+      "id": "suniai-family-yoga",
+      "name": "Familien-Yoga · Suniai",
+      "category": "movement",
+      "town": "Düdingen",
+      "parentDetails": "One accompanying adult per child; a second child needs another adult.",
+      "scheduleValidThrough": "2026-12-12",
+      "research": {
+        "date": "2026-09-29",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Exact sessions",
+            "kind": "official",
+            "text": "The organiser gives 3 October, 7 November and 12 December 2026, 10:00–11:00. On 3 October the venue is Aloha YOGA Paradise, Hauptstrasse 20; from 7 November it is Warpelstrasse 9 in Düdingen.",
+            "url": "https://www.suniai-yoga.ch/eltern-kind-yoga/"
+          },
+          {
+            "field": "Age, accompaniment and price",
+            "kind": "official",
+            "text": "From three years, one child per adult; CHF 25 per adult and CHF 10 per child. Registration is required.",
+            "url": "https://www.suniai-yoga.ch/eltern-kind-yoga/"
+          }
+        ],
+        "remaining": [
+          "Availability of places and the language of each session."
+        ]
+      },
+      "practical": {
+        "scenario": "event",
+        "booking": {
+          "value": true,
+          "text": "Advance registration is required",
+          "source": "https://www.suniai-yoga.ch/eltern-kind-yoga/",
+          "checked": "2026-09-28"
+        },
+        "duration": {
+          "value": 60,
+          "text": "10:00–11:00",
+          "source": "https://www.suniai-yoga.ch/eltern-kind-yoga/",
+          "checked": "2026-09-29"
+        },
+        "indoor": {
+          "value": null,
+          "text": "On 3 October the Aloha YOGA Paradise studio; the room at the new address from 7 November is not described",
+          "source": "https://www.suniai-yoga.ch/eltern-kind-yoga/",
+          "checked": "2026-09-29"
+        },
+        "commitment": {
+          "value": false,
+          "text": "Payment for each individual session; late cancellation may result in payment",
+          "source": "https://www.suniai-yoga.ch/stundenplan-und-preise/",
+          "checked": "2026-09-28"
+        },
+        "costNote": {
+          "value": null,
+          "text": "CHF 35 per adult–child pair; for a second child the organiser requires another adult",
+          "source": "https://www.suniai-yoga.ch/eltern-kind-yoga/",
+          "checked": "2026-09-28"
+        }
+      },
+      "intro": "Family yoga with movement and games; three confirmed dates up to December 2026.",
+      "geo": {
+        "label": "Hauptstrasse 20 3186 Düdingen",
+        "lat": 46.84815216064453,
+        "lon": 7.190426826477051,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+Hauptstrasse+20+3186+D%C3%BCdingen&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-28",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-26",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Sessions and venue",
+          "kind": "official",
+          "text": "Family yoga is held monthly on Saturdays, 10:00–11:00. The dates still ahead are 7 November and 12 December 2026, and 2027 dates are to follow. The venue is Warpelstrasse 9, 3186 Düdingen.",
+          "url": "https://www.suniai-yoga.ch/eltern-kind-yoga/"
+        },
+        {
+          "field": "Age, accompaniment and price",
+          "kind": "official",
+          "text": "Published as suitable for ages 3 to 99, with one child per adult (siblings bring an additional adult). CHF 25 per adult, CHF 10 per child, CHF 5 for each further child of a family, small snack included. The page does not state the price unit.",
+          "url": "https://www.suniai-yoga.ch/eltern-kind-yoga/"
+        }
+      ],
+      "remaining": [
+        "Availability of places and the language of each session.",
+        "Is a course purchase required, or can a single visit be booked? What is the price unit?",
+        "Is the session indoors, and are parking, stroller access and a toilet available at the venue?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "address": "Warpelstrasse 9, 3186 Düdingen",
+        "addressPrecision": "exact",
+        "events": [
+          {
+            "date": "2026-11-07",
+            "start": "10:00",
+            "end": "11:00",
+            "title": "",
+            "address": ""
+          },
+          {
+            "date": "2026-12-12",
+            "start": "10:00",
+            "end": "11:00",
+            "title": "",
+            "address": ""
+          }
+        ],
+        "max": 99,
+        "age": "3 to 99 years, as published for the family yoga",
+        "parentDetails": "The adult attends together with the child and practises together with them.",
+        "schedule": "Once a month on Saturdays, 10:00 to 11:00; 2026 dates listed (3 October, 7 November, 12 December); 2027 dates to follow.",
+        "price": "CHF 25 per adult; CHF 10 per child; CHF 5 for each further child of a family; snack included.",
+        "priceKind": "unknown",
+        "amount": null,
+        "notes": [
+          "Comfortable clothing; the practice is traditionally barefoot (non-slip socks if you prefer not to be barefoot).",
+          "No prior yoga experience needed.",
+          "Registration is required so that a place can be reserved.",
+          "The sessions on 7 November and 12 December take place at Warpelstrasse 9, Düdingen."
+        ],
+        "intro": "Monthly Saturday family yoga in Düdingen with stories, movement, games and relaxation; dates are listed up to 12 December 2026."
+      },
+      "practicalPatch": {
+        "commitment": {
+          "value": null,
+          "text": "The organiser does not state whether a course purchase is required or single visits can be booked",
+          "source": "https://www.suniai-yoga.ch/stundenplan-und-preise/",
+          "checked": "2026-10-26"
+        },
+        "costNote": {
+          "value": "Cancellation up to 2 weeks before the course: the fee is credited.",
+          "text": "Cancellation up to 2 weeks before the course: the fee is credited.",
+          "source": "https://www.suniai-yoga.ch/stundenplan-und-preise/",
+          "checked": "2026-10-26"
+        },
+        "indoor": {
+          "value": null,
+          "text": "The room at the venue is not described for this session",
+          "source": "https://www.suniai-yoga.ch/eltern-kind-yoga/",
+          "checked": "2026-10-26"
+        }
+      },
+      "cardId": "suniai-family-yoga",
+      "findings": [
+        {
+          "field": "Sessions and venue",
+          "kind": "official",
+          "text": "Family yoga is held monthly on Saturdays, 10:00–11:00. The dates still ahead are 7 November and 12 December 2026, and 2027 dates are to follow. The venue is Warpelstrasse 9, 3186 Düdingen.",
+          "url": "https://www.suniai-yoga.ch/eltern-kind-yoga/"
+        },
+        {
+          "field": "Age, accompaniment and price",
+          "kind": "official",
+          "text": "Published as suitable for ages 3 to 99, with one child per adult (siblings bring an additional adult). CHF 25 per adult, CHF 10 per child, CHF 5 for each further child of a family, small snack included. The page does not state the price unit.",
+          "url": "https://www.suniai-yoga.ch/eltern-kind-yoga/"
+        }
+      ],
+      "remaining": [
+        "Is a course purchase required, or can a single visit be booked? What is the price unit?",
+        "Is the session indoors, and are parking, stroller access and a toilet available at the venue?"
+      ]
+    }
   }
 ];
 })();

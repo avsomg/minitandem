@@ -446,26 +446,14 @@
     }
   },
   {
-    "id": "aef-centre",
-    "address": "Fribourg Centre – Restaurant Coop (4e étage), Avenue de la Gare 10, 1700 Fribourg",
-    "geo": {
-      "label": "Avenue de la Gare 10 1700 Fribourg",
-      "lat": 46.80301284790039,
-      "lon": 7.152565956115723,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Avenue+de+la+Gare+10+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-10-13",
-      "precision": "address"
-    }
-  },
-  {
     "id": "aef-passerelles",
-    "address": "Rue de Locarno 3, Fribourg",
+    "address": "Rue de Locarno 3, 1700 Fribourg",
     "geo": {
       "label": "Rue de Locarno 3 1700 Fribourg",
       "lat": 46.800140380859375,
       "lon": 7.15151309967041,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+Locarno+3+Fribourg&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+Locarno+3+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-10-26",
       "precision": "address"
     }
   },
@@ -591,13 +579,13 @@
   },
   {
     "id": "encore-jura",
-    "address": "Route de l’Aurore 2A, Fribourg",
+    "address": "Route de l'Aurore 2, Fribourg",
     "geo": {
-      "label": "Route de l'Aurore 2a 1700 Fribourg",
-      "lat": 46.81214141845703,
-      "lon": 7.150949478149414,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l+Aurore+2A+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-28",
+      "label": "Route de l'Aurore 2 1700 Fribourg",
+      "lat": 46.81232452392578,
+      "lon": 7.150873184204102,
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l%27Aurore+2&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-10-26",
       "precision": "address"
     }
   },
@@ -927,13 +915,13 @@
   },
   {
     "id": "suniai-family-yoga",
-    "address": "Aloha YOGA Paradise, Hauptstrasse 20, 3186 Düdingen",
+    "address": "Warpelstrasse 9, 3186 Düdingen",
     "geo": {
-      "label": "Hauptstrasse 20 3186 Düdingen",
-      "lat": 46.84815216064453,
-      "lon": 7.190426826477051,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+Hauptstrasse+20+3186+D%C3%BCdingen&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-28",
+      "label": "Warpelstrasse 9 3186 Düdingen",
+      "lat": 46.86082077026367,
+      "lon": 7.202414035797119,
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Warpelstrasse+9+3186+D%C3%BCdingen&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-10-26",
       "precision": "address"
     }
   },
@@ -1053,18 +1041,6 @@
       "lat": 46.58216094970703,
       "lon": 7.072864055633545,
       "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Place+de+la+Gare+3+1663+Pringy&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-28",
-      "precision": "address"
-    }
-  },
-  {
-    "id": "pitchounes-romont",
-    "address": "Rue du Château 126, 1680 Romont FR",
-    "geo": {
-      "label": "Rue du Château 126 1680 Romont FR",
-      "lat": 46.69329071044922,
-      "lon": 6.917413711547852,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+du+Ch%C3%A2teau+126+1680+Romont+FR&type=locations&origins=address&limit=5&sr=4326",
       "checked": "2026-09-28",
       "precision": "address"
     }
@@ -1418,18 +1394,6 @@
     }
   },
   {
-    "id": "hauterive-souche-family",
-    "address": "Chemin de l’Abbaye 19, 1725 Posieux",
-    "geo": {
-      "label": "Chemin de l'Abbaye 19 1725 Posieux",
-      "lat": 46.76399612426758,
-      "lon": 7.117739677429199,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+de+l%E2%80%99Abbaye+19+1725+Posieux&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-28",
-      "precision": "address"
-    }
-  },
-  {
     "id": "sarrazin-lossy-play",
     "address": "Route des Sarrazins 115, 1782 Lossy",
     "geo": {
@@ -1546,18 +1510,6 @@
       "lon": 6.9449944496154785,
       "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+de+la+Cabane+9+1553+Ch%C3%A2tonnaye&type=locations&origins=address&limit=5&sr=4326",
       "checked": "2026-10-02",
-      "precision": "address"
-    }
-  },
-  {
-    "id": "memo-rat-mission-2026-09-30",
-    "address": "Rue de l’Hôpital 2, Fribourg",
-    "geo": {
-      "label": "Rue de l'Hôpital 2 1700 Fribourg",
-      "lat": 46.805633544921875,
-      "lon": 7.154872894287109,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+Fribourg&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
       "precision": "address"
     }
   },

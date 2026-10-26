@@ -257,7 +257,11 @@ test('ICS text follows the interface language',()=>{
   assert.notEqual(word(de,'ics.coursePrefix'),load().t('ics.coursePrefix'));
 });
 test('ICS export uses the venue of the selected Suniai date',()=>{
-  const s=load(),card=s.byId.get('suniai-family-yoga');
+  // Since 26 October 2026 every Suniai date is at the card's own address (the 3 October session at the studio has passed). In this
+  // stack the card is as published until then: the studio on the card, the later dates moved, each with a venue of its own.
+  const studio='Aloha YOGA Paradise, Hauptstrasse 20, 3186 Düdingen',moved='Warpelstrasse 9, Düdingen',s=load();
+  s.byId.set('suniai-family-yoga',{...s.byId.get('suniai-family-yoga'),address:studio,events:[['2026-10-03',studio],['2026-11-07',moved],['2026-12-12',moved]].map(([date,address])=>({date,start:'10:00',end:'11:00',title:'',address}))});
+  const card=s.byId.get('suniai-family-yoga');
   const text=unfold(s.EX.eventFile('suniai-family-yoga',1).text);
   assert.equal(card.events[1].date,'2026-11-07');
   assert.match(text,/DTEND;TZID=Europe\/Zurich:20261107T110000/);

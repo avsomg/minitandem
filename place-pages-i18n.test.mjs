@@ -174,8 +174,9 @@ test('French typography: no space before : ; ? ! or ») and none after «, in th
     for (const part of parts) assert.doesNotMatch(part.replace(/&#39;/g, "'"), / [:;?!»]|« /, url);
   }
   // The colon the pages add themselves (a label before a value) is set with the no-break space.
-  const S = loadStack({lang: 'fr'}), suniai = read(output, placeURL('suniai-family-yoga', 'fr'));
-  assert.ok(suniai.includes(`${S.F.dateLabel('2026-11-07')}${NBSP}: `), 'the address by date');
+  // Since 26 October 2026 every Suniai date is at the card's own address; the Schönberg meetings name their hall on each date.
+  const S = loadStack({lang: 'fr'}), schonberg = read(output, placeURL('aef-schonberg', 'fr'));
+  assert.ok(schonberg.includes(`${S.F.dateLabel('2026-12-16')}${NBSP}: `), 'the address by date');
   const beaches = read(output, placeURL('beaches', 'fr'));
   assert.ok(beaches.includes(`${S.t('card.map')}${NBSP}: Gypsera`), 'the map link of an area');
   // The same labels in German and English have a plain colon.
