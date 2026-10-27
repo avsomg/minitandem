@@ -28,7 +28,11 @@ for(const a of records){
   const dates=new Set();
   for(const e of a.events){
     if(!isDate(e.date))fail('invalid event date');
-    const key=e.date+' '+e.start;if(dates.has(key))fail('duplicate event');dates.add(key);
+    // Two sessions with one start would share a calendar UID. An archived card offers no calendar file, so there it is a warning: an
+    // approved update closed memo-rat-exhibition-2026 on 26 October 2026 with two 16:00 sessions, and the build stopped on it.
+    const key=e.date+' '+e.start;
+    if(dates.has(key)){if(['closed','excluded'].includes(a.status))warnings.push(a.id+': archived record with two sessions at '+key);else fail('duplicate event');}
+    dates.add(key);
     if(e.start&&!/^([01]\d|2[0-3]):[0-5]\d$/.test(e.start)||e.end&&!/^([01]\d|2[0-3]):[0-5]\d$/.test(e.end))fail('invalid event time');
     if(e.start&&e.end&&e.start>=e.end)fail('event end before start');
     if(a.scheduleValidThrough&&e.date>a.scheduleValidThrough)fail('event beyond published schedule');
