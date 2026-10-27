@@ -367,6 +367,13 @@ export function validateDraft(draft,card,{historical=false}={}){
   if(draft.patch.scheduleValidThrough!==undefined&&draft.patch.scheduleValidThrough!==null&&!date(draft.patch.scheduleValidThrough))throw Error('Invalid published schedule horizon');
   if(!historical&&draft.patch.scheduleValidThrough===null&&updated.events.length)throw Error('Cannot clear the published schedule horizon while dated events remain');
   if(updated.scheduleValidThrough&&updated.events.some(e=>e.date>updated.scheduleValidThrough))throw Error('Event beyond published schedule horizon');
+  // A calendar file names each session by card, date and start (exports.js), and maintain.mjs refuses two sessions with one start; an
+  // approved draft of memo-rat-exhibition-2026 with two 16:00 sessions stopped every build on 26 October 2026. Replayed journal entries
+  // keep the rule of their day.
+  if(!historical){
+    const starts=new Set();
+    for(const e of updated.events){const key=e.date+' '+e.start;if(starts.has(key))throw Error(`Two sessions start at the same time: ${key}`);starts.add(key);}
+  }
   const findingHashes=new Set((card.research?.findings||[]).map(digest));
   if(draft.supersededFindings?.some(hash=>!findingHashes.has(hash)))throw Error('Unknown superseded finding');
   for(const resolved of draft.resolvedQuestions||[]){

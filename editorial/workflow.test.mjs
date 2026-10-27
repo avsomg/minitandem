@@ -419,6 +419,14 @@ test('the controller lists composed events once each, by date then start time, b
   // Without an approved events claim the draft is left as the editor wrote it.
   assert.equal(orderDraftEvents(draft,[]),draft);
 });
+// Two sessions of one card with one start share a calendar UID; the build refused such a card on 26 October 2026, after its approval.
+test('an editor draft with two sessions on the same date and start is refused, while a replayed journal entry keeps its own rule',()=>{
+  const session=(start,end,title)=>({date:'2026-11-03',start,end,title,address:''});
+  const twice={...draft,patch:{events:[session('16:00','17:30','Mission'),session('16:00','19:30','Activity and opening')]}};
+  assert.throws(()=>validateDraft(twice,card),/Two sessions start at the same time: 2026-11-03 16:00/);
+  validateDraft({...twice,patch:{events:[session('16:00','17:30','Mission'),session('18:00','19:30','Opening')]}},card);
+  validateDraft(twice,card,{historical:true});
+});
 test('the controller refuses a composed events draft with an unapproved session and writes nothing',t=>{
   const f=composedJob(t);
   assert.throws(()=>commitResult(f.queue,{jobId:f.editor.id,token:f.editor.token,role:'editor',result:{draft:withEvents([...sessions,session('2026-11-10')])}},f),/no approved claim lists/);
