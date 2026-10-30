@@ -10,7 +10,7 @@ import {CORRECTION_FORMAT} from './project-id.mjs';
 const editorial=path.join(root,'editorial');
 const CHANNEL_STATES=new Set(['searched','limited','blocked']);
 const SCOPES=new Set(['exact-card','venue-only','uncertain']);
-const TOPICS=new Set(['identity','address','date','age','price','booking','language','reviews','ratings','photos','community','other']);
+export const TOPICS=new Set(['identity','address','date','age','price','booking','language','reviews','ratings','photos','community','other']);
 const VERDICTS=new Set(['resolved','unresolved']);
 const ADDRESS_OUTCOMES=new Set(['same-place','correction-needed']);
 const CORRECTION_STATES=new Set(['proposed','applied','rejected']);

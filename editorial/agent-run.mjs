@@ -9,6 +9,7 @@ import {here,root,today,syncQueue,commitResult,currentInputs,validateClaims,regi
 import {captureUrl,saveSnapshot,writeJsonAtomic,locateQuote,hash,validateSnapshot,publicUrl,capturedSet} from './evidence.mjs';
 import {normUrl} from './monitor.mjs';
 import {sourceRevision} from './release.mjs';
+import {newCardsUnreviewed} from './external-review.mjs';
 import {readPolicy,createClient,judgeBatch} from './typesafe.mjs';
 import {fieldDictionary,CRITICAL_FIELDS} from './field-contract.mjs';
 import {calendarEvidence} from './calendar-evidence.mjs';
@@ -404,7 +405,8 @@ export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=r
       const synced=syncImpl(queue);
       // QA builds the whole site, and the build stops while an editorial correction blocks publication. Claiming QA then only spends its
       // attempts (six QA jobs reached attention that way by 20 October 2026), so it waits, ready, until the corrections are resolved.
-      const qaWaits=(synced?.input?.pipeline?.publication?.blockedIds||[]).length>0;
+      // The same goes for a new card still waiting for its external review.
+      const qaWaits=(synced?.input?.pipeline?.publication?.blockedIds||[]).length>0||Boolean(synced?.input?.records&&newCardsUnreviewed(synced.input.records,today()));
       const priorities=new Map(),downstream=new Map(),urgent=new Map();
       for(const job of queue.list().filter(j=>(j.state==='ready'||j.state==='retry'&&j.retry_after<=queue.now())&&(!cardId||j.card_id===cardId))){
         const assigned=Object.keys(ROLE_KINDS).find(r=>ROLE_KINDS[r].includes(job.kind));

@@ -11,7 +11,7 @@
     "setup": "npm ci --prefix editorial",
     "build": "node build.mjs --public",
     "pretest": "npm run build",
-    "test": "node --test *.test.mjs editorial/*.test.mjs",
+    "test": "node --test *.test.mjs editorial/*.test.mjs ops/*.test.mjs",
     "test:browser": "node scripts/browser-checks.mjs",
     "demo": "node --disable-warning=ExperimentalWarning demo/run.mjs",
     "audit:public": "node editorial/public-audit.mjs --strict",

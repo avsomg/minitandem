@@ -84,6 +84,10 @@ An await-source payload names `resumeWhen.sources` (source ids and versions), an
 
 The cycle receipt now includes today's approved changes, open chains and their ages, and the oldest urgent work. `claimedToday` remains the budget counter. A pause file can hold `{"until":"2026-10-16T08:00:00+02:00"}`; the receipt shows its expiry, but expiry never resumes a paused cycle automatically. Empty legacy pause files remain valid and have no expiry. After updating these modules, restart the controller between batches; no manual SQL migration or attempt reset is needed.
 
+## Night run
+
+`node ops/night-run.mjs --background` runs one `agent-run --chain --limit=4` after another until 04:45 Zurich time, for a night the owner asks for. It holds the cycle's lock, so timer runs in the meantime skip cleanly, and it is not bound by `maxJobsPerDay`; claims after midnight count towards that day's cap, so that day's cycles may run no batch. It stops on an open circuit or a runtime change, and after repeated failures; a usage limit makes it wait and try again. Where it stands: `workflow-state/night/latest.json`. To stop it after the current run: `touch editorial/workflow-state/night.stop`. Stop it before editing `editorial/`, and never run a second process beside it.
+
 ## Owner release summary
 
 `node editorial/release-summary.mjs` writes `editorial/workflow-state/release-summary.md` (private, mode 600). The daily cycle generates it after the batch and reports. It lists each current approved journal entry: changed values, public source links and approval date, remaining unknowns, QA status and German/French text that needs updating. It reads public catalogue/translation layers and the queue's QA receipt, never family state or private source text. A stale or missing receipt is labelled explicitly; required QA and both public gates must match the current source and built files before the summary calls QA current.

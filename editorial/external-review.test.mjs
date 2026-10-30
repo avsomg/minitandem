@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import {externalReviewReport,assertPublicationReviewed,readExternalReviewInputs} from './external-review.mjs';
+import {externalReviewReport,assertPublicationReviewed,readExternalReviewInputs,newCardsUnreviewed} from './external-review.mjs';
 import {loadCatalog,root} from './quality.mjs';
 
 const record={id:'new-place',name:'New place',town:'Fribourg',region:'sarine',category:'play',
@@ -76,4 +76,13 @@ test('README points to generated counts instead of retaining old public totals',
   assert.match(readme,/editorial\/profile\.json/);
   assert.match(readme,/editorial\/canton-coverage\.generated\.json/);
   assert.doesNotMatch(readme,/\d+ cards in the catalogue|of \d+ cards|The build creates \d+ separate pages/);
+});
+
+test('QA waits while a new card has no complete external review, and only then',()=>{
+  const record={id:'new-card',name:'New',town:'Fribourg',status:'active',sources:[{url:'https://example.org/new'}]};
+  const inputs=baselineIds=>()=>({receipts:[],legacyRecords:[],baseline:{schema:1,cutoffOn:'2026-09-29',grandfatheredIds:baselineIds}});
+  assert.equal(newCardsUnreviewed([record],'2026-10-30',inputs([])),true);
+  assert.equal(newCardsUnreviewed([record],'2026-10-30',inputs(['new-card'])),false);
+  // Unreadable inputs say nothing about the gate: QA runs and the build answers for itself.
+  assert.equal(newCardsUnreviewed([record],'2026-10-30',()=>{throw Error('no file');}),false);
 });

@@ -92,6 +92,13 @@ export function assertPublicationReviewed(report){
   if(unreviewed.length)throw Error(`External review required before publishing new cards: ${unreviewed.map(row=>row.id).join(', ')}`);
 }
 
+// The build's gate, as a question: a new card without a complete external review stops the build, so QA has nothing to test until it has one.
+export function newCardsUnreviewed(records,date,read=readExternalReviewInputs){
+  let report;
+  try{const {receipts,legacyRecords,baseline}=read();report=externalReviewReport(records,receipts,legacyRecords,baseline,date);}catch{return false;}
+  try{assertPublicationReviewed(report);return false;}catch{return true;}
+}
+
 export function readExternalReviewInputs(){
   const read=file=>JSON.parse(fs.readFileSync(path.join(root,'editorial',file),'utf8'));
   const receiptFile=read('external-review-receipts.json');

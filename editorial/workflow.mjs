@@ -417,6 +417,8 @@ export function commitResult(queue,{jobId,token,role,result},{getInputs=currentI
       followups.push({kind,cardId:card.id,inputRevision:digest([kind,nextPayload]),priority,payload:nextPayload});
     };
     let state='done';
+    // The search contract tells the worker to return an error when no address can be established. Trying again gets the same answer, so it goes to a person, with the reason in the artifact, and writes nothing.
+    if(job.kind==='search'&&result?.error&&!result.candidate)return queue.finish(job.id,token,role,result,{state:'attention'});
     if(job.kind==='search'){
       const candidate=result.candidate;
       if(!safeId(candidate?.id)||candidate.revision===input.candidates.get(card.id)?.revision)throw Error('Candidate must have a new revision');

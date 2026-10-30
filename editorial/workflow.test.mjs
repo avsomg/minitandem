@@ -5,7 +5,8 @@ import os from 'node:os';
 import path from 'node:path';
 import vm from 'node:vm';
 import {JobQueue,digest,failureCategory,urgentJob} from './jobs.mjs';
-import {commitResult,validateClaims,validateDraft,applyDraftRecord,citationProblems,taskSpecs,registerCaptured,validateBindings,mergeResearch,today,unprocessedSpecs,assertFullReviewPermission,retireStaleReadyJobs,orderDraftEvents,resumeAwaitingSources} from './workflow.mjs';
+import {CONTRACTS} from './worker-prompt.mjs';
+import {dependencyRevision,commitResult,validateClaims,validateDraft,applyDraftRecord,citationProblems,taskSpecs,registerCaptured,validateBindings,mergeResearch,today,unprocessedSpecs,assertFullReviewPermission,retireStaleReadyJobs,orderDraftEvents,resumeAwaitingSources} from './workflow.mjs';
 import {resolveFromDispositions} from './review.mjs';
 import {snapshot} from './evidence.mjs';
 import {modelRoute,promptFor} from './agent-run.mjs';
@@ -744,4 +745,22 @@ test('changing the worker schema or locked dependencies invalidates tested sourc
     fs.writeFileSync(path.join(base,'editorial',file),'{}');
     assert.notEqual(sourceRevision(base),before,file);
   }
+});
+
+test('a search that reports no address goes to a person and writes nothing; any other result without a candidate stays a failure',t=>{
+  const f=fixture(t),payload={card,cardRevision:digest(card),dependencyRevision:dependencyRevision(input,'a')};
+  f.queue.enqueue({kind:'search',cardId:'a',inputRevision:'v',payload});
+  const job=f.queue.claim('search','search');
+  assert.throws(()=>commitResult(f.queue,{jobId:job.id,token:job.token,role:'search',result:{draft:{}}},f),/Candidate must have a new revision/);
+  commitResult(f.queue,{jobId:job.id,token:job.token,role:'search',result:{error:{code:'address-not-established',message:'No visitor address on any page.'}}},f);
+  assert.equal(f.queue.get(job.id).state,'attention');
+  assert.equal(fs.existsSync(path.join(f.outputRoot,'editorial/external-candidates/a.json')),false);
+  assert.equal(f.queue.claim('verify','verify'),null);
+});
+test('the worker contracts name the rules the validators enforce',()=>{
+  for(const kind of ['verify','verify-facts'])for(const topic of ['identity','address','community','other'])assert.match(CONTRACTS[kind],new RegExp(`exactly one of [^.]*\\b${topic}\\b`));
+  assert.match(CONTRACTS.verify,/receipt\.identityUrl is card\.sources\[0\]\.url/);
+  assert.match(CONTRACTS.search,/identityUrl is card\.sources\[0\]\.url/);
+  assert.match(CONTRACTS.search,/result url is https/);
+  assert.match(CONTRACTS.search,/result\.query is copied exactly/);
 });
