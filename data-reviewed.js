@@ -5481,6 +5481,601 @@
         "Is the session indoors, and are parking, stroller access and a toilet available at the venue?"
       ]
     }
+  },
+  {
+    "jobId": "fea4c0b4-9c08-45af-8195-57b4af14a3c3",
+    "approvedOn": "2026-10-26",
+    "baseRecord": {
+      "id": "memo-rat-exhibition-2026",
+      "name": "MEMO · Exhibition \"Le rat de bibliothèque\"",
+      "category": "books",
+      "town": "Fribourg",
+      "region": "sarine",
+      "route": "fribourg",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Family exhibition; minimum age not stated",
+      "parent": "yes",
+      "parentDetails": "Self-guided family visit, not an organised activity.",
+      "languages": [
+        "FR"
+      ],
+      "address": "Rue de l’Hôpital 2, Fribourg",
+      "schedule": "29 September – 17 October 2026 · during MEMO opening hours",
+      "days": [],
+      "events": [],
+      "scheduleValidThrough": "2026-10-17",
+      "price": "Free under the MEMO programme",
+      "priceKind": "free",
+      "amount": 0,
+      "contacts": [
+        {
+          "name": "MEMO",
+          "phone": "026 351 71 44",
+          "email": "memo@ville-fr.ch"
+        }
+      ],
+      "sources": [
+        {
+          "label": "City: exhibition, dates and creative table",
+          "url": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois"
+        },
+        {
+          "label": "MEMO programme May–September: exhibition and dates",
+          "url": "https://www.ville-fribourg.ch/sites/default/files/inline-files/MEMOPROGRAMMEMAISEPTEMBRE2026.pdf"
+        },
+        {
+          "label": "Seasonal programme: free",
+          "url": "https://www.ville-fribourg.ch/lisez-jouez-bougez"
+        },
+        {
+          "label": "MEMO: opening hours",
+          "url": "https://www.ville-fribourg.ch/de/memo"
+        }
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-17",
+      "intro": "An exhibition about the making of a local children's book set in MEMO. It can be viewed during a visit to the library.",
+      "notes": [
+        "The exhibition is open to everyone; the creative table that goes with it is intended for ages 5–12. The minimum age for viewing the exhibition is not stated.",
+        "The exhibition starting on 29 September does not mean the library is open all day: check MEMO opening hours."
+      ],
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Dates and theme",
+            "kind": "official",
+            "text": "The MEMO programme lists a family exhibition about the book \"Le rat de bibliothèque\" from 29 September to 17 October 2026.",
+            "url": "https://www.ville-fribourg.ch/sites/default/files/inline-files/MEMOPROGRAMMEMAISEPTEMBRE2026.pdf"
+          },
+          {
+            "field": "Cost",
+            "kind": "official",
+            "text": "The city page for the seasonal programme states that all events are free.",
+            "url": "https://www.ville-fribourg.ch/lisez-jouez-bougez"
+          }
+        ],
+        "remaining": [
+          "Are there activities near the exhibition that are suitable for young children?"
+        ]
+      },
+      "practical": {
+        "indoor": {
+          "value": true,
+          "text": "The exhibition is indoors at MEMO",
+          "source": "https://www.ville-fribourg.ch/sites/default/files/inline-files/MEMOPROGRAMMEMAISEPTEMBRE2026.pdf",
+          "checked": "2026-09-28"
+        }
+      },
+      "geo": {
+        "label": "Rue de l'Hôpital 2 1700 Fribourg",
+        "lat": 46.805633544921875,
+        "lon": 7.154872894287109,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-26",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Dates and theme",
+          "kind": "official",
+          "text": "The MEMO programme lists a family exhibition about the book \"Le rat de bibliothèque\" from 29 September to 17 October 2026.",
+          "url": "https://www.ville-fribourg.ch/sites/default/files/inline-files/MEMOPROGRAMMEMAISEPTEMBRE2026.pdf"
+        },
+        {
+          "field": "Cost",
+          "kind": "official",
+          "text": "The city page for the seasonal programme states that all events are free.",
+          "url": "https://www.ville-fribourg.ch/lisez-jouez-bougez"
+        },
+        {
+          "field": "Status and dates",
+          "kind": "official",
+          "text": "The city agenda entry gives the exhibition run as Tuesday 29 September to Saturday 17 October 2026, so the exhibition has ended.",
+          "url": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois"
+        }
+      ],
+      "remaining": [
+        "Are there activities near the exhibition that are suitable for young children?",
+        "Is there a new exhibition or family activity at MEMO that replaces this one?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "status": "closed",
+        "age": "All audiences (Tout public/Alle) for the exhibition; a creative table for family activities is for ages 5 to 12 and self-guided",
+        "schedule": "29 September – 17 October 2026 · listed hours 14:00–16:00 (the run has ended)",
+        "events": [
+          {
+            "date": "2026-09-30",
+            "start": "16:00",
+            "end": "17:30",
+            "title": "Mission rat de bibliothèque",
+            "address": ""
+          },
+          {
+            "date": "2026-09-30",
+            "start": "16:00",
+            "end": "19:30",
+            "title": "Activité et vernissage de l’album « Le rat de bibliothèque »",
+            "address": ""
+          },
+          {
+            "date": "2026-09-30",
+            "start": "18:00",
+            "end": "19:30",
+            "title": "Vernissage et apéritif",
+            "address": ""
+          }
+        ],
+        "intro": "An exhibition about the making of a Fribourg children's picture book, staged inside MEMO from 29 September to 17 October 2026. The exhibition has ended.",
+        "notes": [
+          "The exhibition was open to everyone; the creative table that went with it was for family activities (ages 5–12), self-guided. No minimum age for viewing the exhibition was published.",
+          "The city agenda listed hours of 14:00–16:00 for the run from 29 September to 17 October 2026."
+        ]
+      },
+      "practicalPatch": {
+        "changing": {
+          "value": true,
+          "text": "A changing table is in the first-floor toilets at MEMO.",
+          "source": "https://www.ville-fribourg.ch/de/memo",
+          "checked": "2026-10-26"
+        },
+        "toilet": {
+          "value": true,
+          "text": "Visitor toilets are on the first floor of MEMO.",
+          "source": "https://www.ville-fribourg.ch/de/memo",
+          "checked": "2026-10-26"
+        },
+        "feeding": {
+          "value": true,
+          "text": "MEMO offers a nursing cushion and a comfortable place for people who want to breastfeed.",
+          "source": "https://www.ville-fribourg.ch/de/memo",
+          "checked": "2026-10-26"
+        }
+      },
+      "cardId": "memo-rat-exhibition-2026",
+      "findings": [
+        {
+          "field": "Status and dates",
+          "kind": "official",
+          "text": "The city agenda entry gives the exhibition run as Tuesday 29 September to Saturday 17 October 2026, so the exhibition has ended.",
+          "url": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois"
+        }
+      ],
+      "remaining": [
+        "Is there a new exhibition or family activity at MEMO that replaces this one?",
+        "Are there activities near the exhibition that are suitable for young children?"
+      ]
+    }
+  },
+  {
+    "jobId": "ffd69f0f-f1af-426c-8f7a-76ea8df71f11",
+    "approvedOn": "2026-10-27",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": null,
+      "age": "Children's rate for ages 0–16",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Currently limited: Thu 14:00–19:00; Sat 09:00–12:00",
+      "days": [
+        4,
+        6
+      ],
+      "events": [],
+      "address": "Route d'Arruffens 17, 1680 Romont",
+      "price": "Child's annual card: free for residents of Glâne, otherwise CHF 15 / year; adult card CHF 30 or CHF 50, ask which applies",
+      "priceKind": "year",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Bibliothèque de la Glâne",
+          "phone": "026 651 91 79",
+          "email": "info@biblio-glane.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+          "label": "Current hours, address, directions and rates"
+        }
+      ],
+      "notes": [
+        "The website currently shows a limited timetable. Holiday and one-off changes are published separately.",
+        "The campus of the CO secondary school is a pedestrian zone. Parking: Bicubic car park; bus 479 to Arruffens.",
+        "The rate applies to borrowing books for a year, not to entry to the premises. Ask about the conditions for a visit without a card."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "library-glane-romont",
+      "region": "glane",
+      "name": "Bibliothèque de la Glâne · children's books",
+      "category": "books",
+      "town": "Romont",
+      "parentDetails": "The child visits the library with an adult.",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Temporary timetable",
+            "kind": "official",
+            "text": "The website notes a limited timetable: Thursday 14–19 and Saturday 09–12; the children's card is free for residents of the district.",
+            "url": "https://bibliotheque-glane.ch/fr/infos-pratiques"
+          }
+        ],
+        "remaining": [
+          "The regular timetable after the limited period and the conditions for a visit without a card are to be confirmed."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": true,
+          "text": "Indoor library",
+          "source": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+          "checked": "2026-09-28"
+        },
+        "parking": {
+          "value": true,
+          "text": "Bicubic car park, pedestrian campus",
+          "source": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "The website shows a limited timetable; check holiday exceptions separately"
+        ],
+        "gallery": "https://bibliotheque-glane.ch/fr/infos-pratiques"
+      },
+      "intro": "A joint visit for children's books; a card is needed for borrowing."
+    },
+    "research": {
+      "date": "2026-10-27",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Standard timetable",
+          "kind": "official",
+          "text": "The library publishes a standard timetable: Mon 10:00–15:00, Tue 13:00–15:00, Wed 10:00–18:00, Thu 13:00–19:00, Fri 10:00–18:00, Sat 09:00–12:00, closed Sunday. School-holiday hours are given in a downloadable 2026 annual calendar, and special hours or unplanned changes are announced separately.",
+          "url": "https://bibliotheque-glane.ch/fr/infos-pratiques"
+        }
+      ],
+      "remaining": [
+        "What are the conditions for a visit without a library card?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "schedule": "Mon 10:00–15:00; Tue 13:00–15:00; Wed 10:00–18:00; Thu 13:00–19:00; Fri 10:00–18:00; Sat 09:00–12:00; closed Sunday. School-holiday hours differ: see the library's annual calendar.",
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "notes": [
+          "School-holiday hours differ from the standard timetable. Special hours and unplanned changes are announced separately.",
+          "The campus of the CO secondary school is a pedestrian zone. Parking: Bicubic car park; bus 479 to Arruffens.",
+          "The rate applies to borrowing books for a year, not to entry to the premises. Ask about the conditions for a visit without a card."
+        ]
+      },
+      "practicalPatch": {},
+      "warnings": [
+        "School-holiday hours differ from the standard timetable; check the library's annual calendar and announcements for special hours and unplanned changes"
+      ],
+      "cardId": "library-glane-romont",
+      "findings": [
+        {
+          "field": "Standard timetable",
+          "kind": "official",
+          "text": "The library publishes a standard timetable: Mon 10:00–15:00, Tue 13:00–15:00, Wed 10:00–18:00, Thu 13:00–19:00, Fri 10:00–18:00, Sat 09:00–12:00, closed Sunday. School-holiday hours are given in a downloadable 2026 annual calendar, and special hours or unplanned changes are announced separately.",
+          "url": "https://bibliotheque-glane.ch/fr/infos-pratiques"
+        }
+      ],
+      "remaining": [
+        "What are the conditions for a visit without a library card?"
+      ]
+    }
+  },
+  {
+    "jobId": "27644f88-6d5a-4675-88e6-dfe7fb00967c",
+    "approvedOn": "2026-10-29",
+    "baseRecord": {
+      "region": "see",
+      "route": "outside",
+      "format": "group",
+      "status": "active",
+      "min": 0,
+      "max": 4,
+      "age": "Ages 0–4",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Monday 09:00–11:00; confirm the venue when registering",
+      "days": [
+        1
+      ],
+      "events": [
+        {
+          "date": "2026-09-28",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-10-05",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-10-12",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-10-19",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-10-26",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-02",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-09",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-16",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-23",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-11-30",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-12-07",
+          "start": "09:00",
+          "end": "11:00"
+        },
+        {
+          "date": "2026-12-14",
+          "start": "09:00",
+          "end": "11:00"
+        }
+      ],
+      "address": "Kirchgässli 2, 3210 Kerzers",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Parish secretariat",
+          "phone": "031 755 55 50",
+          "email": "sekretariat.kerzers@refkirche-kerzers.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+          "label": "Age, adult participation and registration"
+        },
+        {
+          "url": "https://www.kerzers.ch/leben-kerzers/vereine",
+          "label": "Municipal directory: address and conditions"
+        },
+        {
+          "url": "https://www.refkirche-kerzers.ch/?page=agenda&sucheDarstellung=agenda&sucheDarstellungTitel=tag.keyword.one+-+Regionales&sucheStichwort=Regionales&sucheTyp=veranstaltungen",
+          "label": "Published dates for September–December 2026"
+        }
+      ],
+      "notes": [
+        "No group meetings during the Kerzers summer and Christmas school holidays.",
+        "Short-notice changes are announced through a WhatsApp chat.",
+        "A separate Chlouser Krabbelgruppe takes place on Saturday 5 December 2026 at 08:00 in the hall of the church house.",
+        "Once a month a member of the family support team is present in the group as a contact for parenting questions. The offer is informal and the exchange within the group is central; the exact dates are on a separate family-support agenda."
+      ],
+      "checked": "2026-09-27",
+      "reviewAfter": "2026-10-22",
+      "id": "krabbel-kerzers",
+      "name": "Krabbelgruppe Kerzers",
+      "category": "play",
+      "town": "Kerzers",
+      "parentDetails": "The children play beside their parents or grandparents.",
+      "scheduleValidThrough": "2026-12-14",
+      "research": {
+        "date": "2026-10-25",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Participation",
+            "kind": "official",
+            "text": "For children aged 0–4 with a parent or grandparent, Monday 09:00–11:00. Registration is preferred; changes are announced via WhatsApp. The group does not meet in the summer and Christmas holidays; the autumn Mondays 5, 12 and 19 October are listed in the published dates.",
+            "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers"
+          },
+          {
+            "field": "Support",
+            "kind": "official",
+            "text": "Once a month a member of the family support team is present in the group as a contact for parenting questions. The organiser describes this as an informal offer with the exchange within the group at its centre. The exact dates are on a separate family-support agenda (Education familiale), which has not been checked here.",
+            "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers"
+          }
+        ],
+        "remaining": [
+          "Confirm the cost and the room number at the first contact.",
+          "On which dates does the monthly family-support visit take place?",
+          "Which room in the church house does the group use, and is it accessible with a pushchair?",
+          "What does it cost, and in which language is the group run?"
+        ]
+      },
+      "practical": {
+        "scenario": "event"
+      },
+      "geo": {
+        "label": "Kirchgässli 2 3210 Kerzers",
+        "lat": 46.97609329223633,
+        "lon": 7.196778297424316,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Kirchg%C3%A4ssli+2+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-10-29",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Support",
+          "kind": "official",
+          "text": "Once a month a member of the family support team is present in the group as a contact for parenting questions. The organiser describes this as an informal offer with the exchange within the group at its centre. The exact dates are on a separate family-support agenda (Education familiale), which has not been checked here.",
+          "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers"
+        },
+        {
+          "field": "Participation",
+          "kind": "official",
+          "text": "For children aged 0 to 4, Mondays 09:00–11:00; parents or grandparents are described as present during shared play and snack time. Registration is welcome (not stated as required), and short-notice changes come via a WhatsApp chat. No group meets in the summer and Christmas school holidays. The published upcoming dates run from 2 November to 14 December 2026.",
+          "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers"
+        }
+      ],
+      "remaining": [
+        "Confirm the cost and the room number at the first contact.",
+        "On which dates does the monthly family-support visit take place?",
+        "Which room in the church house does the group use, and is it accessible with a pushchair?",
+        "What does it cost, and in which language is the group run?",
+        "Is registration required, or only welcome?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "schedule": "Mondays, 09:00 to 11:00 (Monday mornings)",
+        "parentDetails": "Parents or grandparents are present with the children during the shared play and snack time. The page does not say whether an adult must stay for the entire session.",
+        "intro": "Playgroup in Kerzers for children aged 0 to 4, where they can play together and make friends.",
+        "notes": [
+          "No group meets during the Kerzers summer and Christmas school holidays.",
+          "Short-notice changes are announced via a WhatsApp chat.",
+          "A separate Chlouser Krabbelgruppe takes place on Saturday 5 December 2026 at 08:00 in the hall of the church house.",
+          "A family support team member is present once a month to answer parenting questions. This is informal and the exchange within the group is central."
+        ],
+        "events": [
+          {
+            "date": "2026-11-02",
+            "start": "09:00",
+            "end": "",
+            "title": "Krabbelgruppe Kerzers",
+            "address": "im Kirchgemeindehaus"
+          },
+          {
+            "date": "2026-11-09",
+            "start": "09:00",
+            "end": "",
+            "title": "Krabbelgruppe Kerzers",
+            "address": "im Kirchgemeindehaus"
+          },
+          {
+            "date": "2026-11-16",
+            "start": "09:00",
+            "end": "",
+            "title": "Krabbelgruppe Kerzers",
+            "address": "im Kirchgemeindehaus"
+          },
+          {
+            "date": "2026-11-23",
+            "start": "09:00",
+            "end": "",
+            "title": "Krabbelgruppe Kerzers",
+            "address": "im Kirchgemeindehaus"
+          },
+          {
+            "date": "2026-11-30",
+            "start": "09:00",
+            "end": "",
+            "title": "Krabbelgruppe Kerzers",
+            "address": "im Kirchgemeindehaus"
+          },
+          {
+            "date": "2026-12-05",
+            "start": "08:00",
+            "end": "",
+            "title": "Chlouser Krabbelgruppe",
+            "address": "im Saal des Kirchgemeindehauses, Kerzers"
+          },
+          {
+            "date": "2026-12-07",
+            "start": "09:00",
+            "end": "",
+            "title": "Krabbelgruppe Kerzers",
+            "address": "im Kirchgemeindehaus"
+          },
+          {
+            "date": "2026-12-14",
+            "start": "09:00",
+            "end": "",
+            "title": "Krabbelgruppe Kerzers",
+            "address": "im Kirchgemeindehaus"
+          }
+        ]
+      },
+      "practicalPatch": {},
+      "cardId": "krabbel-kerzers",
+      "findings": [
+        {
+          "field": "Participation",
+          "kind": "official",
+          "text": "For children aged 0 to 4, Mondays 09:00–11:00; parents or grandparents are described as present during shared play and snack time. Registration is welcome (not stated as required), and short-notice changes come via a WhatsApp chat. No group meets in the summer and Christmas school holidays. The published upcoming dates run from 2 November to 14 December 2026.",
+          "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers"
+        }
+      ],
+      "remaining": [
+        "Is registration required, or only welcome?",
+        "What does it cost, and in which language is the group run?",
+        "Which room in the church house does the group use, and is it accessible with a pushchair?"
+      ]
+    }
   }
 ];
 })();

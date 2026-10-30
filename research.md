@@ -1,6 +1,6 @@
 # Minitandem: catalogue with sources
 
-Catalogue updated 2026-10-26. The date of the in-depth check is shown on each card. Free places and future work are not guaranteed. All prices are in CHF; payment units are stated separately. Personal notes are not part of this file.
+Catalogue updated 2026-10-29. The date of the in-depth check is shown on each card. Free places and future work are not guaranteed. All prices are in CHF; payment units are stated separately. Personal notes are not part of this file.
 
 ## Sellenhof · open children's Wednesday
 
@@ -3785,38 +3785,35 @@ To confirm before visiting:
 - Checked: 2026-09-27
 - Address: Kirchgässli 2, 3210 Kerzers
 - Age: Ages 0–4
-- Adult: The children play beside their parents or grandparents.
+- Adult: Parents or grandparents are present with the children during the shared play and snack time. The page does not say whether an adult must stay for the entire session.
 - Language: To be confirmed
-- Schedule: Monday 09:00–11:00; confirm the venue when registering
+- Schedule: Mondays, 09:00 to 11:00 (Monday mornings)
 - Price: Price not published
 - Contact: Parish secretariat; 031 755 55 50; sekretariat.kerzers@refkirche-kerzers.ch
-- Date: 2026-09-28 09:00–11:00
-- Date: 2026-10-05 09:00–11:00
-- Date: 2026-10-12 09:00–11:00
-- Date: 2026-10-19 09:00–11:00
-- Date: 2026-10-26 09:00–11:00
-- Date: 2026-11-02 09:00–11:00
-- Date: 2026-11-09 09:00–11:00
-- Date: 2026-11-16 09:00–11:00
-- Date: 2026-11-23 09:00–11:00
-- Date: 2026-11-30 09:00–11:00
-- Date: 2026-12-07 09:00–11:00
-- Date: 2026-12-14 09:00–11:00
-- No group meetings during the Kerzers summer and Christmas school holidays.
-- Short-notice changes are announced through a WhatsApp chat.
+- Date: 2026-11-02 09:00 · Krabbelgruppe Kerzers · im Kirchgemeindehaus
+- Date: 2026-11-09 09:00 · Krabbelgruppe Kerzers · im Kirchgemeindehaus
+- Date: 2026-11-16 09:00 · Krabbelgruppe Kerzers · im Kirchgemeindehaus
+- Date: 2026-11-23 09:00 · Krabbelgruppe Kerzers · im Kirchgemeindehaus
+- Date: 2026-11-30 09:00 · Krabbelgruppe Kerzers · im Kirchgemeindehaus
+- Date: 2026-12-05 08:00 · Chlouser Krabbelgruppe · im Saal des Kirchgemeindehauses, Kerzers
+- Date: 2026-12-07 09:00 · Krabbelgruppe Kerzers · im Kirchgemeindehaus
+- Date: 2026-12-14 09:00 · Krabbelgruppe Kerzers · im Kirchgemeindehaus
+- No group meets during the Kerzers summer and Christmas school holidays.
+- Short-notice changes are announced via a WhatsApp chat.
 - A separate Chlouser Krabbelgruppe takes place on Saturday 5 December 2026 at 08:00 in the hall of the church house.
-- Once a month a member of the family support team is present in the group as a contact for parenting questions. The offer is informal and the exchange within the group is central; the exact dates are on a separate family-support agenda.
+- A family support team member is present once a month to answer parenting questions. This is informal and the exchange within the group is central.
 
-### Additional check: 2026-10-25
+### Additional check: 2026-10-29
 
-- **Participation** (Organiser source): For children aged 0–4 with a parent or grandparent, Monday 09:00–11:00. Registration is preferred; changes are announced via WhatsApp. The group does not meet in the summer and Christmas holidays; the autumn Mondays 5, 12 and 19 October are listed in the published dates. [Source](https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers)
 - **Support** (Organiser source): Once a month a member of the family support team is present in the group as a contact for parenting questions. The organiser describes this as an informal offer with the exchange within the group at its centre. The exact dates are on a separate family-support agenda (Education familiale), which has not been checked here. [Source](https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers)
+- **Participation** (Organiser source): For children aged 0 to 4, Mondays 09:00–11:00; parents or grandparents are described as present during shared play and snack time. Registration is welcome (not stated as required), and short-notice changes come via a WhatsApp chat. No group meets in the summer and Christmas school holidays. The published upcoming dates run from 2 November to 14 December 2026. [Source](https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers)
 
 To confirm before visiting:
 - Confirm the cost and the room number at the first contact.
 - On which dates does the monthly family-support visit take place?
 - Which room in the church house does the group use, and is it accessible with a pushchair?
 - What does it cost, and in which language is the group run?
+- Is registration required, or only welcome?
 
 - [Age, adult participation and registration](https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers)
 - [Municipal directory: address and conditions](https://www.kerzers.ch/leben-kerzers/vereine)
@@ -5170,19 +5167,19 @@ To confirm before visiting:
 - Age: Children's rate for ages 0–16
 - Adult: The child visits the library with an adult.
 - Language: To be confirmed
-- Schedule: Currently limited: Thu 14:00–19:00; Sat 09:00–12:00
+- Schedule: Mon 10:00–15:00; Tue 13:00–15:00; Wed 10:00–18:00; Thu 13:00–19:00; Fri 10:00–18:00; Sat 09:00–12:00; closed Sunday. School-holiday hours differ: see the library's annual calendar.
 - Price: Child's annual card: free for residents of Glâne, otherwise CHF 15 / year; adult card CHF 30 or CHF 50, ask which applies
 - Contact: Bibliothèque de la Glâne; 026 651 91 79; info@biblio-glane.ch
-- The website currently shows a limited timetable. Holiday and one-off changes are published separately.
+- School-holiday hours differ from the standard timetable. Special hours and unplanned changes are announced separately.
 - The campus of the CO secondary school is a pedestrian zone. Parking: Bicubic car park; bus 479 to Arruffens.
 - The rate applies to borrowing books for a year, not to entry to the premises. Ask about the conditions for a visit without a card.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-10-27
 
-- **Temporary timetable** (Organiser source): The website notes a limited timetable: Thursday 14–19 and Saturday 09–12; the children's card is free for residents of the district. [Source](https://bibliotheque-glane.ch/fr/infos-pratiques)
+- **Standard timetable** (Organiser source): The library publishes a standard timetable: Mon 10:00–15:00, Tue 13:00–15:00, Wed 10:00–18:00, Thu 13:00–19:00, Fri 10:00–18:00, Sat 09:00–12:00, closed Sunday. School-holiday hours are given in a downloadable 2026 annual calendar, and special hours or unplanned changes are announced separately. [Source](https://bibliotheque-glane.ch/fr/infos-pratiques)
 
 To confirm before visiting:
-- The regular timetable after the limited period and the conditions for a visit without a card are to be confirmed.
+- What are the conditions for a visit without a library card?
 
 - [Current hours, address, directions and rates](https://bibliotheque-glane.ch/fr/infos-pratiques)
 
@@ -5190,7 +5187,7 @@ To confirm before visiting:
 
 - Indoors: Indoor library [Source](https://bibliotheque-glane.ch/fr/infos-pratiques)
 - Parking: Bicubic car park, pedestrian campus [Source](https://bibliotheque-glane.ch/fr/infos-pratiques)
-- Important: The website shows a limited timetable; check holiday exceptions separately
+- Important: School-holiday hours differ from the standard timetable; check the library's annual calendar and announcements for special hours and unplanned changes
 - [Organiser's photographs](https://bibliotheque-glane.ch/fr/infos-pratiques)
 
 ## Vitromusée · children's space
@@ -9790,27 +9787,32 @@ To confirm before visiting:
 
 ## MEMO · Exhibition "Le rat de bibliothèque"
 
-- Status: Current information available
+- Status: Closed
 - Place: Fribourg
 - District: Sarine / Saane
 - Checked: 2026-09-28
 - Address: Rue de l’Hôpital 2, Fribourg
-- Age: Family exhibition; minimum age not stated
+- Age: All audiences (Tout public/Alle) for the exhibition; a creative table for family activities is for ages 5 to 12 and self-guided
 - Adult: Self-guided family visit, not an organised activity.
 - Language: FR
-- Schedule: 29 September – 17 October 2026 · during MEMO opening hours
+- Schedule: 29 September – 17 October 2026 · listed hours 14:00–16:00 (the run has ended)
 - Price: Free under the MEMO programme
 - Contact: MEMO; 026 351 71 44; memo@ville-fr.ch
-- The exhibition is open to everyone; the creative table that goes with it is intended for ages 5–12. The minimum age for viewing the exhibition is not stated.
-- The exhibition starting on 29 September does not mean the library is open all day: check MEMO opening hours.
+- Date: 2026-09-30 16:00–17:30 · Mission rat de bibliothèque
+- Date: 2026-09-30 16:00–19:30 · Activité et vernissage de l’album « Le rat de bibliothèque »
+- Date: 2026-09-30 18:00–19:30 · Vernissage et apéritif
+- The exhibition was open to everyone; the creative table that went with it was for family activities (ages 5–12), self-guided. No minimum age for viewing the exhibition was published.
+- The city agenda listed hours of 14:00–16:00 for the run from 29 September to 17 October 2026.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-10-26
 
 - **Dates and theme** (Organiser source): The MEMO programme lists a family exhibition about the book "Le rat de bibliothèque" from 29 September to 17 October 2026. [Source](https://www.ville-fribourg.ch/sites/default/files/inline-files/MEMOPROGRAMMEMAISEPTEMBRE2026.pdf)
 - **Cost** (Organiser source): The city page for the seasonal programme states that all events are free. [Source](https://www.ville-fribourg.ch/lisez-jouez-bougez)
+- **Status and dates** (Organiser source): The city agenda entry gives the exhibition run as Tuesday 29 September to Saturday 17 October 2026, so the exhibition has ended. [Source](https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois)
 
 To confirm before visiting:
 - Are there activities near the exhibition that are suitable for young children?
+- Is there a new exhibition or family activity at MEMO that replaces this one?
 
 - [City: exhibition, dates and creative table](https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois)
 - [MEMO programme May–September: exhibition and dates](https://www.ville-fribourg.ch/sites/default/files/inline-files/MEMOPROGRAMMEMAISEPTEMBRE2026.pdf)
@@ -9820,7 +9822,9 @@ To confirm before visiting:
 ### Visit conditions
 
 - Indoors: The exhibition is indoors at MEMO [Source](https://www.ville-fribourg.ch/sites/default/files/inline-files/MEMOPROGRAMMEMAISEPTEMBRE2026.pdf)
-- Coordinates of the address (not the entrance): 46.805633544921875, 7.154872894287109. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+Fribourg&type=locations&origins=address&limit=5&sr=4326)
+- Changing table: A changing table is in the first-floor toilets at MEMO. [Source](https://www.ville-fribourg.ch/de/memo)
+- Toilet: Visitor toilets are on the first floor of MEMO. [Source](https://www.ville-fribourg.ch/de/memo)
+- Feeding: MEMO offers a nursing cushion and a comfortable place for people who want to breastfeed. [Source](https://www.ville-fribourg.ch/de/memo)
 
 ## MEMO · Atelier Grands Signes
 
@@ -10093,3 +10097,114 @@ To confirm before visiting:
 - Important: After enrolment, a commitment applies until the end of the school year
 - [Organiser's photographs](https://www.artistfactory.ch/cours/eveil_musical)
 - Coordinates of the address (not the entrance): 46.813392639160156, 7.136007308959961. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+du+Mont+Carmel+5+1762+Givisiez&type=locations&origins=address&limit=5&sr=4326)
+
+## Histoires naturelles du mercredi · Natural History Museum
+
+- Status: Current information available
+- Place: Fribourg
+- District: Sarine / Saane
+- Checked: 2026-10-26
+- Address: Chemin du Musée 6, Fribourg
+- Age: Ages 4 and over
+- Adult: To be confirmed
+- Language: DE/FR
+- Schedule: 28 October, 2 December 2026 and 13 January 2027 · German stories at 14:15; French stories at 15:00; overall programme ends at 15:30
+- Price: Free
+- Contact: Natural History Museum of Fribourg; 026 305 89 00; museumfribourg@fr.ch
+- Date: 2026-10-28 14:15–15:30
+- Date: 2026-12-02 14:15–15:30
+- Date: 2027-01-13 14:15–15:30
+- German stories start at 14:15 and French stories at 15:00.
+- Free, with no booking required.
+
+### Additional check: 2026-10-26
+
+- **Session languages** (Organiser source): German storytelling starts at 14:15 and French storytelling at 15:00. [Source](https://www.fr.ch/mhnf/evenements/histoires-naturelles-du-mercredi-0)
+
+To confirm before visiting:
+- How long does each language session last?
+- Do all storytelling sessions take place indoors?
+
+- [Museum event listing: 28.10.2026](https://www.fr.ch/mhnf/evenements/histoires-naturelles-du-mercredi-0)
+- [Museum event listing: 02.12.2026](https://www.fr.ch/mhnf/evenements/histoires-naturelles-du-mercredi-1)
+- [Museum event listing: 13.01.2027](https://www.fr.ch/mhnf/evenements/histoires-naturelles-du-mercredi-2)
+
+### Visit conditions
+
+- Booking: No booking required. [Source](https://www.fr.ch/mhnf/evenements/histoires-naturelles-du-mercredi-0)
+- Coordinates of the address (not the entrance): 46.793087005615234, 7.157187461853027. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+du+Mus%C3%A9e+6+Fribourg&type=locations&origins=address&limit=5&sr=4326)
+
+## Les histoires de la Valise magique · MEMO
+
+- Status: Current information available
+- Place: Fribourg
+- District: Sarine / Saane
+- Checked: 2026-10-26
+- Address: Rue de l’Hôpital 2, Fribourg
+- Age: 3–5 years
+- Adult: To be confirmed
+- Language: FR
+- Schedule: 4 November 2026 · 14:30–15:30
+- Price: Free
+- Contact: MEMO; 026 351 71 44; memo@ville-fr.ch
+- Date: 2026-11-04 14:30–15:30
+- Spoken French and French Sign Language (LSF).
+- Booking is required through MEMO’s online registration platform.
+
+### Additional check: 2026-10-26
+
+- **Age and language** (Organiser source): The programme lists ages 3–5, French and French Sign Language. [Source](https://cdnm.heyzine.com/files/uploaded/v3/1b5babb077c83e6573328f25c4443b9921836c54.pdf)
+
+To confirm before visiting:
+- Must an adult stay and take part?
+- Are booking places still available?
+- Does the session take place indoors?
+
+- [City event listing](https://www.ville-fribourg.ch/agenda/les-histoires-de-la-valise-magique)
+- [MEMO address and contacts](https://www.ville-fribourg.ch/memo)
+- [MEMO seasonal programme](https://www.ville-fribourg.ch/pssst-ecoute-voir)
+- [MEMO programme November 2026–March 2027 (PDF)](https://cdnm.heyzine.com/files/uploaded/v3/1b5babb077c83e6573328f25c4443b9921836c54.pdf)
+
+### Visit conditions
+
+- Booking: Book through MEMO’s online registration platform. [Source](https://www.ville-fribourg.ch/pssst-ecoute-voir)
+- Duration: 60 minutes, 14:30–15:30. [Source](https://www.ville-fribourg.ch/agenda/les-histoires-de-la-valise-magique)
+- Coordinates of the address (not the entrance): 46.805633544921875, 7.154872894287109. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+Fribourg&type=locations&origins=address&limit=5&sr=4326)
+
+## Est-ce que ça joue ? / Lass uns spielen! · MEMO
+
+- Status: Current information available
+- Place: Fribourg
+- District: Sarine / Saane
+- Checked: 2026-10-26
+- Address: Rue de l’Hôpital 2, Fribourg
+- Age: From 4 years, all ages welcome
+- Adult: To be confirmed
+- Language: DE/FR
+- Schedule: 11 November 2026, 27 January and 12 March 2027 · 15:00–18:00; 13 March 2027 · 10:00–12:00 and 14:00–16:00
+- Price: Free
+- Contact: MEMO; 026 351 71 44; memo@ville-fr.ch
+- Date: 2026-11-11 15:00–18:00
+- Date: 2027-01-27 15:00–18:00
+- Date: 2027-03-12 15:00–18:00
+- Date: 2027-03-13 10:00–12:00
+- Date: 2027-03-13 14:00–16:00
+- Borrow games on site or bring your own.
+
+### Additional check: 2026-10-26
+
+- **Games** (Organiser source): Bring your own games or borrow games on site; MEMO staff can explain the rules. [Source](https://www.ville-fribourg.ch/agenda/est-ce-que-ca-joue-de-4-a-104-ans-lass-uns-spielen-von-4-bis-104-jahren)
+
+To confirm before visiting:
+- Is booking required?
+- Must an adult accompany children aged 4–6?
+- Do the games sessions take place indoors?
+
+- [City games listing](https://www.ville-fribourg.ch/agenda/est-ce-que-ca-joue-de-4-a-104-ans-lass-uns-spielen-von-4-bis-104-jahren)
+- [MEMO address and contacts](https://www.ville-fribourg.ch/memo)
+- [MEMO seasonal programme](https://www.ville-fribourg.ch/pssst-ecoute-voir)
+- [MEMO programme November 2026–March 2027 (PDF)](https://cdnm.heyzine.com/files/uploaded/v3/1b5babb077c83e6573328f25c4443b9921836c54.pdf)
+
+### Visit conditions
+
+- Coordinates of the address (not the entrance): 46.805633544921875, 7.154872894287109. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+Fribourg&type=locations&origins=address&limit=5&sr=4326)

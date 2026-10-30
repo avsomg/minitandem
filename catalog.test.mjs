@@ -258,7 +258,8 @@ test('winter MEMO programme includes confirmed dates and keeps booking availabil
     assert.match(a.notes.join(' '),/22 October/);
     assert.match(a.notes.join(' '),/availability of places is not yet known/);
   }
-  assert.equal(byId.get('memo-rat-exhibition-2026').events.length,0);
+  // The approved update of 26 October 2026 closed the exhibition and gave its opening sessions of 30 September.
+  assert.equal(byId.get('memo-rat-exhibition-2026').events.length,3);assert.equal(byId.get('memo-rat-exhibition-2026').status,'closed');
 });
 
 test('catalogue opens in a bounded batch while retaining the full result count',()=>{
@@ -471,7 +472,7 @@ test('deep review covers active cards and preserves receipts for ended events',(
   assert.equal(Object.values(counts).reduce((sum,count)=>sum+count,0),main.length);
   assert.ok(counts.enriched>=134 && counts.unresolved>=34);
   // memo-rat-mission-2026-09-30 was closed by an approved update on 26 October 2026, once its only date (30 September) had passed.
-  assert.deepEqual(ids(records.filter(a=>C.isArchive(a)&&a.research)).sort(),['alpabzug','chocolat','memo-musik-entdecken-2026-09-29','memo-rat-mission-2026-09-30','plage-chevroux']);
+  assert.deepEqual(ids(records.filter(a=>C.isArchive(a)&&a.research)).sort(),['alpabzug','chocolat','memo-musik-entdecken-2026-09-29','memo-rat-exhibition-2026','memo-rat-mission-2026-09-30','plage-chevroux']);
   for(const id of ['swim-duedingen','playgrounds-marly','elki-kerzers'])assert.deepEqual(Array.from(byId.get(id).days),[],`${id}: stale schedule must not appear as a weekday`);
   assert.equal(byId.get('playgrounds-marly').scheduleValidThrough,null);
   assert.equal(byId.get('elki-kerzers').scheduleValidThrough,null);

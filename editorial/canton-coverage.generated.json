@@ -2,7 +2,7 @@
   "checked": "2026-09-28",
   "officialSource": "https://www.fr.ch/document/580206",
   "officialYear": 2026,
-  "catalogueCards": 295,
+  "catalogueCards": 298,
   "municipalities": 119,
   "districts": {
     "broye": {
@@ -23,7 +23,7 @@
     "sarine": {
       "municipalities": 25,
       "withMappedCard": 25,
-      "catalogCards": 77
+      "catalogCards": 80
     },
     "see": {
       "municipalities": 14,
@@ -47,7 +47,7 @@
       "municipalities": 18
     },
     "creative": {
-      "cards": 10,
+      "cards": 11,
       "municipalities": 7
     },
     "dining": {
@@ -55,8 +55,8 @@
       "municipalities": 20
     },
     "events": {
-      "cards": 12,
-      "municipalities": 5
+      "cards": 13,
+      "municipalities": 6
     },
     "horses": {
       "cards": 6,
@@ -75,7 +75,7 @@
       "municipalities": 45
     },
     "play": {
-      "cards": 82,
+      "cards": 83,
       "municipalities": 55
     },
     "water": {
@@ -1471,25 +1471,28 @@
         "domino-play",
         "marionnettes-fribourg",
         "neuveville-school-play",
-        "memo-rat-mission-2026-09-30",
         "memo-rat-vernissage-2026-09-30",
-        "memo-rat-exhibition-2026",
         "memo-grands-signes-2026-11-10",
         "memo-eveil-musical-2027-02-16",
         "memo-musik-entdecken-2027-03-16",
         "devenir-famille-fribourg-2026-10-03",
-        "office-family-workshops"
+        "office-family-workshops",
+        "mhnf-histoires-naturelles-du-mercredi",
+        "memo-valise-magique-2026-11-04",
+        "memo-est-ce-que-ca-joue",
+        "memo-escargot-atelier-vernissage-2026-11-25",
+        "memo-saint-nicolas-family-day-2026-12-06"
       ],
       "categoryCounts": {
         "books": 8,
-        "creative": 3,
+        "creative": 4,
         "dining": 1,
-        "events": 0,
+        "events": 1,
         "horses": 0,
         "movement": 2,
         "music": 2,
         "nature": 1,
-        "play": 16,
+        "play": 17,
         "water": 2
       },
       "coverage": "at-least-one-card"

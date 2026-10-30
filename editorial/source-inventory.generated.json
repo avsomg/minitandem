@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-26T08:45:54.117Z",
+  "generatedAt": "2026-10-30T18:14:58.062Z",
   "sources": [
     {
       "id": "source-a9e685e2c5ed",
@@ -1910,14 +1910,17 @@
         "memo-buchstart",
         "memo-grands-signes-2026-11-10",
         "memo-eveil-musical-2027-02-16",
-        "memo-musik-entdecken-2027-03-16"
+        "memo-musik-entdecken-2027-03-16",
+        "memo-valise-magique-2026-11-04",
+        "memo-est-ce-que-ca-joue"
       ],
       "regions": [
         "sarine"
       ],
       "labels": [
         "New MEMO programme",
-        "MEMO programme November 2026 – March 2027"
+        "MEMO programme November 2026 – March 2027",
+        "MEMO seasonal programme"
       ],
       "monitoring": "not-configured"
     },
@@ -1928,14 +1931,17 @@
         "memo-buchstart",
         "memo-grands-signes-2026-11-10",
         "memo-eveil-musical-2027-02-16",
-        "memo-musik-entdecken-2027-03-16"
+        "memo-musik-entdecken-2027-03-16",
+        "memo-valise-magique-2026-11-04",
+        "memo-est-ce-que-ca-joue"
       ],
       "regions": [
         "sarine"
       ],
       "labels": [
         "Programme PDF: age and dates",
-        "PDF with the exact date and age"
+        "PDF with the exact date and age",
+        "MEMO programme November 2026–March 2027 (PDF)"
       ],
       "monitoring": "not-configured"
     },
@@ -1944,14 +1950,17 @@
       "url": "https://www.ville-fribourg.ch/memo",
       "recordIds": [
         "memo-buchstart",
-        "memo-library"
+        "memo-library",
+        "memo-valise-magique-2026-11-04",
+        "memo-est-ce-que-ca-joue"
       ],
       "regions": [
         "sarine"
       ],
       "labels": [
         "MEMO",
-        "Official source"
+        "Official source",
+        "MEMO address and contacts"
       ],
       "monitoring": "not-configured"
     },
@@ -6399,56 +6408,13 @@
       "id": "source-04946f90bc6c",
       "url": "https://www.ville-fribourg.ch/lisez-jouez-bougez",
       "recordIds": [
-        "memo-rat-vernissage-2026-09-30",
-        "memo-rat-exhibition-2026"
+        "memo-rat-vernissage-2026-09-30"
       ],
       "regions": [
         "sarine"
       ],
       "labels": [
         "Seasonal programme: free"
-      ],
-      "monitoring": "not-configured"
-    },
-    {
-      "id": "source-025be4d93232",
-      "url": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
-      "recordIds": [
-        "memo-rat-exhibition-2026"
-      ],
-      "regions": [
-        "sarine"
-      ],
-      "labels": [
-        "City: exhibition, dates and creative table"
-      ],
-      "monitoring": "not-configured"
-    },
-    {
-      "id": "source-f87d0b0f384e",
-      "url": "https://www.ville-fribourg.ch/sites/default/files/inline-files/MEMOPROGRAMMEMAISEPTEMBRE2026.pdf",
-      "recordIds": [
-        "memo-rat-exhibition-2026"
-      ],
-      "regions": [
-        "sarine"
-      ],
-      "labels": [
-        "MEMO programme May–September: exhibition and dates"
-      ],
-      "monitoring": "not-configured"
-    },
-    {
-      "id": "source-dc57f50e6212",
-      "url": "https://www.ville-fribourg.ch/de/memo",
-      "recordIds": [
-        "memo-rat-exhibition-2026"
-      ],
-      "regions": [
-        "sarine"
-      ],
-      "labels": [
-        "MEMO: opening hours"
       ],
       "monitoring": "not-configured"
     },
@@ -6577,6 +6543,76 @@
       ],
       "labels": [
         "Address and transport"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-bd1324a2da6a",
+      "url": "https://www.fr.ch/mhnf/evenements/histoires-naturelles-du-mercredi-0",
+      "recordIds": [
+        "mhnf-histoires-naturelles-du-mercredi"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Museum event listing: 28.10.2026"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-421e88b4e627",
+      "url": "https://www.fr.ch/mhnf/evenements/histoires-naturelles-du-mercredi-1",
+      "recordIds": [
+        "mhnf-histoires-naturelles-du-mercredi"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Museum event listing: 02.12.2026"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-d7ffb998a804",
+      "url": "https://www.fr.ch/mhnf/evenements/histoires-naturelles-du-mercredi-2",
+      "recordIds": [
+        "mhnf-histoires-naturelles-du-mercredi"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Museum event listing: 13.01.2027"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-4541931d6a07",
+      "url": "https://www.ville-fribourg.ch/agenda/les-histoires-de-la-valise-magique",
+      "recordIds": [
+        "memo-valise-magique-2026-11-04"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "City event listing"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-0d2677c11a67",
+      "url": "https://www.ville-fribourg.ch/agenda/est-ce-que-ca-joue-de-4-a-104-ans-lass-uns-spielen-von-4-bis-104-jahren",
+      "recordIds": [
+        "memo-est-ce-que-ca-joue"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "City games listing"
       ],
       "monitoring": "not-configured"
     }

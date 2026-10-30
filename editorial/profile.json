@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-10-26T08:45:54.117Z",
+  "generatedAt": "2026-10-30T18:14:58.062Z",
   "grain": "One published catalogue card; formats include groups, individual offers, events and self-guided visits.",
-  "total": 321,
-  "catalog": 294,
-  "archive": 27,
-  "geocodedCards": 135,
+  "total": 324,
+  "catalog": 296,
+  "archive": 28,
+  "geocodedCards": 137,
   "uniqueAddressPoints": 111,
   "byRegion": {
     "sense": 60,
-    "sarine": 76,
+    "sarine": 78,
     "see": 48,
     "veveyse": 22,
     "broye": 26,
@@ -18,30 +18,31 @@
   "byFormat": {
     "group": 80,
     "individual": 3,
-    "event": 31,
-    "self": 180
+    "event": 34,
+    "self": 179
   },
   "storedStatus": {
     "check": 99,
     "future": 8,
-    "active": 187
+    "active": 189
   },
   "checkedDates": [
     "2026-09-27",
     "2026-09-28",
     "2026-10-02",
     "2026-09-22",
-    "2026-09-29"
+    "2026-09-29",
+    "2026-10-26"
   ],
   "unknownFields": {
-    "minAge": 200,
-    "parent": 27,
+    "minAge": 199,
+    "parent": 30,
     "language": 263,
     "price": 191,
     "address": 5
   },
-  "sources": 462,
-  "explicitScheduleEnd": 73,
+  "sources": 464,
+  "explicitScheduleEnd": 75,
   "seeLocalities": [
     "Murten",
     "Kerzers",

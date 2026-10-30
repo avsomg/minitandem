@@ -1526,18 +1526,6 @@
     }
   },
   {
-    "id": "memo-rat-exhibition-2026",
-    "address": "Rue de l’Hôpital 2, Fribourg",
-    "geo": {
-      "label": "Rue de l'Hôpital 2 1700 Fribourg",
-      "lat": 46.805633544921875,
-      "lon": 7.154872894287109,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+Fribourg&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
-      "precision": "address"
-    }
-  },
-  {
     "id": "memo-grands-signes-2026-11-10",
     "address": "Rue de l’Hôpital 2, Fribourg",
     "geo": {
@@ -1617,6 +1605,42 @@
       "lat": 46.813392639160156,
       "lon": 7.136007308959961,
       "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+du+Mont+Carmel+5+1762+Givisiez&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-09-27",
+      "precision": "address"
+    }
+  },
+  {
+    "id": "mhnf-histoires-naturelles-du-mercredi",
+    "address": "Chemin du Musée 6, Fribourg",
+    "geo": {
+      "label": "Chemin du Musée 6 1700 Fribourg",
+      "lat": 46.793087005615234,
+      "lon": 7.157187461853027,
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+du+Mus%C3%A9e+6+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-09-27",
+      "precision": "address"
+    }
+  },
+  {
+    "id": "memo-valise-magique-2026-11-04",
+    "address": "Rue de l’Hôpital 2, Fribourg",
+    "geo": {
+      "label": "Rue de l'Hôpital 2 1700 Fribourg",
+      "lat": 46.805633544921875,
+      "lon": 7.154872894287109,
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-09-27",
+      "precision": "address"
+    }
+  },
+  {
+    "id": "memo-est-ce-que-ca-joue",
+    "address": "Rue de l’Hôpital 2, Fribourg",
+    "geo": {
+      "label": "Rue de l'Hôpital 2 1700 Fribourg",
+      "lat": 46.805633544921875,
+      "lon": 7.154872894287109,
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+Fribourg&type=locations&origins=address&limit=5&sr=4326",
       "checked": "2026-09-27",
       "precision": "address"
     }

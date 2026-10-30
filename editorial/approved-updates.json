@@ -10094,6 +10094,1319 @@
           }
         ]
       }
+    },
+    {
+      "jobId": "fea4c0b4-9c08-45af-8195-57b4af14a3c3",
+      "editorJobId": "e6391aca-f4e4-42c6-90e7-97737e6c99ad",
+      "approvalArtifact": "f3e5c3454462194e9c623e49951760bce16034b19f078e0ea21585c2c3114378",
+      "approval": {
+        "role": "verify",
+        "verdict": "approve",
+        "draftHash": "3c30a0533b5b95728fccfbf4f816af1755eb82dd550184961072fffbfbefc91c",
+        "checkedFields": [
+          "status",
+          "age",
+          "schedule",
+          "events",
+          "intro",
+          "notes",
+          "practical.changing",
+          "practical.toilet",
+          "practical.feeding",
+          "research.findings",
+          "research.remaining"
+        ],
+        "approvedBindings": [
+          "status",
+          "age",
+          "schedule",
+          "events",
+          "intro",
+          "notes",
+          "practical.changing",
+          "practical.toilet",
+          "practical.feeding",
+          "research.findings.0"
+        ]
+      },
+      "approvedOn": "2026-10-26",
+      "cardRevision": "c9d1e43a7f99b838b38af6d811c5a700aa671f5e69ef86ea7f4ac5eb21b31791",
+      "baseRecord": {
+        "id": "memo-rat-exhibition-2026",
+        "name": "MEMO · Exhibition \"Le rat de bibliothèque\"",
+        "category": "books",
+        "town": "Fribourg",
+        "region": "sarine",
+        "route": "fribourg",
+        "format": "self",
+        "status": "active",
+        "min": null,
+        "max": null,
+        "age": "Family exhibition; minimum age not stated",
+        "parent": "yes",
+        "parentDetails": "Self-guided family visit, not an organised activity.",
+        "languages": [
+          "FR"
+        ],
+        "address": "Rue de l’Hôpital 2, Fribourg",
+        "schedule": "29 September – 17 October 2026 · during MEMO opening hours",
+        "days": [],
+        "events": [],
+        "scheduleValidThrough": "2026-10-17",
+        "price": "Free under the MEMO programme",
+        "priceKind": "free",
+        "amount": 0,
+        "contacts": [
+          {
+            "name": "MEMO",
+            "phone": "026 351 71 44",
+            "email": "memo@ville-fr.ch"
+          }
+        ],
+        "sources": [
+          {
+            "label": "City: exhibition, dates and creative table",
+            "url": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois"
+          },
+          {
+            "label": "MEMO programme May–September: exhibition and dates",
+            "url": "https://www.ville-fribourg.ch/sites/default/files/inline-files/MEMOPROGRAMMEMAISEPTEMBRE2026.pdf"
+          },
+          {
+            "label": "Seasonal programme: free",
+            "url": "https://www.ville-fribourg.ch/lisez-jouez-bougez"
+          },
+          {
+            "label": "MEMO: opening hours",
+            "url": "https://www.ville-fribourg.ch/de/memo"
+          }
+        ],
+        "checked": "2026-09-28",
+        "reviewAfter": "2026-10-17",
+        "intro": "An exhibition about the making of a local children's book set in MEMO. It can be viewed during a visit to the library.",
+        "notes": [
+          "The exhibition is open to everyone; the creative table that goes with it is intended for ages 5–12. The minimum age for viewing the exhibition is not stated.",
+          "The exhibition starting on 29 September does not mean the library is open all day: check MEMO opening hours."
+        ],
+        "research": {
+          "date": "2026-09-28",
+          "outcome": "enriched",
+          "findings": [
+            {
+              "field": "Dates and theme",
+              "kind": "official",
+              "text": "The MEMO programme lists a family exhibition about the book \"Le rat de bibliothèque\" from 29 September to 17 October 2026.",
+              "url": "https://www.ville-fribourg.ch/sites/default/files/inline-files/MEMOPROGRAMMEMAISEPTEMBRE2026.pdf"
+            },
+            {
+              "field": "Cost",
+              "kind": "official",
+              "text": "The city page for the seasonal programme states that all events are free.",
+              "url": "https://www.ville-fribourg.ch/lisez-jouez-bougez"
+            }
+          ],
+          "remaining": [
+            "Are there activities near the exhibition that are suitable for young children?"
+          ]
+        },
+        "practical": {
+          "indoor": {
+            "value": true,
+            "text": "The exhibition is indoors at MEMO",
+            "source": "https://www.ville-fribourg.ch/sites/default/files/inline-files/MEMOPROGRAMMEMAISEPTEMBRE2026.pdf",
+            "checked": "2026-09-28"
+          }
+        },
+        "geo": {
+          "label": "Rue de l'Hôpital 2 1700 Fribourg",
+          "lat": 46.805633544921875,
+          "lon": 7.154872894287109,
+          "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+          "checked": "2026-09-27",
+          "precision": "address"
+        }
+      },
+      "appliedRecordRevision": "a1c2fe7fd434b357db1d485629be635d108dace242bb743fe0b3cd5d473ab591",
+      "research": {
+        "date": "2026-10-26",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Dates and theme",
+            "kind": "official",
+            "text": "The MEMO programme lists a family exhibition about the book \"Le rat de bibliothèque\" from 29 September to 17 October 2026.",
+            "url": "https://www.ville-fribourg.ch/sites/default/files/inline-files/MEMOPROGRAMMEMAISEPTEMBRE2026.pdf"
+          },
+          {
+            "field": "Cost",
+            "kind": "official",
+            "text": "The city page for the seasonal programme states that all events are free.",
+            "url": "https://www.ville-fribourg.ch/lisez-jouez-bougez"
+          },
+          {
+            "field": "Status and dates",
+            "kind": "official",
+            "text": "The city agenda entry gives the exhibition run as Tuesday 29 September to Saturday 17 October 2026, so the exhibition has ended.",
+            "url": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois"
+          }
+        ],
+        "remaining": [
+          "Are there activities near the exhibition that are suitable for young children?",
+          "Is there a new exhibition or family activity at MEMO that replaces this one?"
+        ]
+      },
+      "draft": {
+        "cardId": "memo-rat-exhibition-2026",
+        "patch": {
+          "status": "closed",
+          "age": "All audiences (Tout public/Alle) for the exhibition; a creative table for family activities is for ages 5 to 12 and self-guided",
+          "schedule": "29 September – 17 October 2026 · listed hours 14:00–16:00 (the run has ended)",
+          "events": [
+            {
+              "date": "2026-09-30",
+              "start": "16:00",
+              "end": "17:30",
+              "title": "Mission rat de bibliothèque",
+              "address": ""
+            },
+            {
+              "date": "2026-09-30",
+              "start": "16:00",
+              "end": "19:30",
+              "title": "Activité et vernissage de l’album « Le rat de bibliothèque »",
+              "address": ""
+            },
+            {
+              "date": "2026-09-30",
+              "start": "18:00",
+              "end": "19:30",
+              "title": "Vernissage et apéritif",
+              "address": ""
+            }
+          ],
+          "intro": "An exhibition about the making of a Fribourg children's picture book, staged inside MEMO from 29 September to 17 October 2026. The exhibition has ended.",
+          "notes": [
+            "The exhibition was open to everyone; the creative table that went with it was for family activities (ages 5–12), self-guided. No minimum age for viewing the exhibition was published.",
+            "The city agenda listed hours of 14:00–16:00 for the run from 29 September to 17 October 2026."
+          ]
+        },
+        "practicalPatch": {
+          "changing": {
+            "value": true,
+            "text": "A changing table is in the first-floor toilets at MEMO.",
+            "source": "https://www.ville-fribourg.ch/de/memo",
+            "checked": "2026-10-26"
+          },
+          "toilet": {
+            "value": true,
+            "text": "Visitor toilets are on the first floor of MEMO.",
+            "source": "https://www.ville-fribourg.ch/de/memo",
+            "checked": "2026-10-26"
+          },
+          "feeding": {
+            "value": true,
+            "text": "MEMO offers a nursing cushion and a comfortable place for people who want to breastfeed.",
+            "source": "https://www.ville-fribourg.ch/de/memo",
+            "checked": "2026-10-26"
+          }
+        },
+        "findings": [
+          {
+            "field": "Status and dates",
+            "kind": "official",
+            "text": "The city agenda entry gives the exhibition run as Tuesday 29 September to Saturday 17 October 2026, so the exhibition has ended.",
+            "url": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois"
+          }
+        ],
+        "remaining": [
+          "Is there a new exhibition or family activity at MEMO that replaces this one?",
+          "Are there activities near the exhibition that are suitable for young children?"
+        ],
+        "reviewLimitations": [
+          "The MEMO May–September 2026 programme PDF could not be captured (capture-unavailable), so the full review is incomplete.",
+          "The exhibition entry does not publish price, adult accompaniment, session language, address or registration. These stay unknown and the card's existing values for them are not confirmed."
+        ],
+        "bindings": [
+          {
+            "field": "status",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "Samedi 17 octobre 2026",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "status-e8c2078f9ae1",
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          },
+          {
+            "field": "age",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "une table avec du matériel créatif est disponible pour des activités familiales (5-12 ans), en autonomie",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "age-ebd6ed68bd55",
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          },
+          {
+            "field": "schedule",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "Horaire",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          },
+          {
+            "field": "schedule",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "14:00 – 16:00",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          },
+          {
+            "field": "schedule",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "Mardi 29 septembre 2026",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          },
+          {
+            "field": "schedule",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "Samedi 17 octobre 2026",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          },
+          {
+            "field": "events",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "16:00 – 17:30 | FR | DÈS 5 ANS",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-3bf11afb4b4a",
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          },
+          {
+            "field": "events",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "ME 30.9 | 16:00 – 19:30 | MEMO | TOUT PUBLIC",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-0d2feffdad58",
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          },
+          {
+            "field": "events",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "18:00 – 19:30 | FR | TOUT PUBLIC",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-1d12904cbd6e",
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          },
+          {
+            "field": "intro",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "« Le rat de bibliothèque » – un album jeunesse fribourgeois",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          },
+          {
+            "field": "intro",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "Cette exposition vous montre le travail sur les illustrations et l’évolution du projet du début à la fin.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          },
+          {
+            "field": "intro",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "dans les murs de MEMO",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          },
+          {
+            "field": "intro",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "Mardi 29 septembre 2026",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          },
+          {
+            "field": "intro",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "Samedi 17 octobre 2026",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          },
+          {
+            "field": "notes",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "Tout public/Alle",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          },
+          {
+            "field": "notes",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "une table avec du matériel créatif est disponible pour des activités familiales (5-12 ans), en autonomie",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          },
+          {
+            "field": "notes",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "14:00 – 16:00",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          },
+          {
+            "field": "notes",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "Mardi 29 septembre 2026",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          },
+          {
+            "field": "notes",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "Samedi 17 octobre 2026",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          },
+          {
+            "field": "practical.changing",
+            "source": "https://www.ville-fribourg.ch/de/memo",
+            "quote": "In den Toiletten im ersten Stock finden Sie einen Wickeltisch.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "practical.changing-c9e9de5ca069",
+            "snapshotId": "57b7f0f361a6374c8fc6d6eb17cd8b4e598d7393752aed35b85dff8f8e0f567f"
+          },
+          {
+            "field": "practical.toilet",
+            "source": "https://www.ville-fribourg.ch/de/memo",
+            "quote": "In den Toiletten im ersten Stock finden Sie einen Wickeltisch.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "practical.toilet-02ca8a569e08",
+            "snapshotId": "57b7f0f361a6374c8fc6d6eb17cd8b4e598d7393752aed35b85dff8f8e0f567f"
+          },
+          {
+            "field": "practical.feeding",
+            "source": "https://www.ville-fribourg.ch/de/memo",
+            "quote": "Für Personen, die stillen möchten, steht ein Stillkissen und ein bequemer Platz zur Verfügung.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "practical.feeding-0c126bb6e62a",
+            "snapshotId": "57b7f0f361a6374c8fc6d6eb17cd8b4e598d7393752aed35b85dff8f8e0f567f"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "Mardi 29 septembre 2026",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "quote": "Samedi 17 octobre 2026",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd"
+          }
+        ],
+        "snapshots": [
+          {
+            "schema": 1,
+            "project": "vmeste",
+            "id": "04fe6ad62dc773ab6510527d640efc2e0c8d43ce826301f9c7e65e65d3737ddd",
+            "url": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "finalUrl": "https://www.ville-fribourg.ch/agenda/le-rat-de-bibliotheque-un-album-jeunesse-fribourgeois",
+            "fetchedAt": "2026-10-26T15:31:43.647Z",
+            "contentType": "text/html; charset=utf-8",
+            "parser": "cheerio-visible-body-v1",
+            "textHash": "20529b703da82037fbe6fdc875c3b3938d3767fa6724dbcb6fcd150e374dfb05",
+            "rawHash": "00b599f4f93505d86095ada123d7cf011c41b87de1145ca8729eac2b66182f5c",
+            "text": "Aller au contenu principal\nNous utilisons des cookies uniquement pour analyser le trafic du site et en améliorer le contenu.\nOK\nRefuser\nde\nfr\nAutres langues\nEnglish\nEspañol\nItaliano\nPortuguês\nالعربية\nትግርኛ\nTürkçe\nSrpski\nRecherche\nVille de Fribourg\nMenu\n« Le rat de bibliothèque » – un album jeunesse fribourgeois\nMardi 29 septembre 2026\n- Samedi 17 octobre 2026\nHoraire\n14:00 – 16:00\nTout public/Alle\nImage\nMardi 29 septembre 2026\n- Samedi 17 octobre 2026\nHoraire\n14:00 – 16:00\nTout public/Alle\nMA 29.9 – SA 17.10 | FAMILLE\nVous rêviez d’une histoire mise en scène dans les murs de MEMO ? C’est ce qu’ont réalisé l’auteure Ketsia Hasler et l’illustratrice Déborah Maradan, avec la maison d’édition fribourgeoise Entreligne. Cette exposition vous montre le travail sur les illustrations et l’évolution du projet du début à la fin. En parallèle, une table avec du matériel créatif est disponible pour des activités familiales (5-12 ans), en autonomie.\nME 30.9 | 16:00 – 19:30 | MEMO | TOUT PUBLIC\nActivité et vernissage de l’album « Le rat de bibliothèque »\n16:00 – 17:30 | FR | DÈS 5 ANS\nMission rat de bibliothèque\nUne chasse au trésor un peu particulière a lieu cet après-midi-là dans les 3 espaces de MEMO… À la recherche de mots jolis, une carte de route t’aide à trouver les indices ! Dessins, bricolages et jeux de mots au programme, avec une petite récompense pour les participants·es. Dès 5 ans avec un·e adulte, dès 8 ans en autonomie.\n18:00 – 19:30 | FR | TOUT PUBLIC\nVernissage et apéritif\nProfitez d’acheter l’album « Le rat de bibliothèque » et de vous le faire dédicacer. Seuls les livres achetés sur place seront dédicacés. Une belle occasion d’écouter le début de l’histoire et de rencontrer l’auteure et l’illustratrice. Avec les Editions Entreligne.\nThème(s)\nMEMO (biblio & ludo+)\nEst-ce qu’il y a un problème avec cette page?\nEst-ce qu'il y a un problème avec cette page?\nEst-ce qu'il y a un problème avec cette page?\nComment pouvons-nous améliorer cette page?\nEmail (optionnel)\nCAPTCHA\nThis question is for testing whether or not you are a human visitor and to prevent automated spam submissions.\nMerci beaucoup pour votre aide!\nSi vous avez d’autres remarques, vous pouvez vous adresser à [email protected]\nFacebook\nInstagram\nLinkedin\n© Ville de Fribourg | Stadt Freiburg 2026\nRetour en haut de page",
+            "captureMethod": "node-pinned-https"
+          },
+          {
+            "schema": 1,
+            "project": "vmeste",
+            "id": "57b7f0f361a6374c8fc6d6eb17cd8b4e598d7393752aed35b85dff8f8e0f567f",
+            "url": "https://www.ville-fribourg.ch/de/memo",
+            "finalUrl": "https://www.ville-fribourg.ch/de/memo",
+            "fetchedAt": "2026-10-26T15:31:42.074Z",
+            "contentType": "text/html; charset=utf-8",
+            "parser": "cheerio-visible-body-v1",
+            "textHash": "8a72bc7f8fe11ceceb662938ff7e2320b03fa9cfc84871244e90ca2a3ee4963a",
+            "rawHash": "2410079cae2f0d2c6241f92bd58e7a0c9f512195de5ef38c10e0352d9f5a3bc6",
+            "text": "Direkt zum Inhalt\nWir verwenden Cookies ausschliesslich zur Analyse des Website-Traffics und zur Verbesserung der Inhalte.\nOK\nAblehnen\nde\nfr\nAndere Sprachen\nEnglish\nEspañol\nItaliano\nPortuguês\nالعربية\nትግርኛ\nTürkçe\nSrpski\nSuche\nVille de Fribourg\nMenü\nMEMO\nNeues Kulturprogramm\nDas neue Programm „Pssst, hör mal...“ ist online! Von November 2026 bis März 2027 erwarten euch rund 70 Veranstaltungen für die ganze Familie.\nZum vollständiges Programm\nKatalog und Verlängerung der Ausleihe\nMit dem MEMO-Katalog können Sie Ihr Konto einsehen, nach Büchern suchen und eine Verlängerung der Ausleihe beantragen.\nZum Katalog\nDerzeit geschlossen\nÖffnungszeiten\nHeute, Montag, 26. Oktober\nGeschlossen\nDienstag, 27. Oktober\n14:00-18:00\nVollständige Öffnungszeiten\nKontakt\nMEMO - biblio&ludo+ ♿︎\nSpitalgasse 2\n1700 Freiburg\n026 351 71 44\nmemo [at] ville-fr.ch\nAgenda\nPermanence technologique / Technologie-Sprechstunde\nTous les mardis / Jeden Dienstag\n16:30 - 17:30\nSans inscription pour les personnes francophones / Anmeldung für Deutschsprachige erforderlich\nDienstag 27. Oktober\nSoziale Kohäsion\nJugendliche\nMEMO (biblio&ludo+)\nSenioren\nQuiz de BD / mangas\nMittwoch 28. Oktober\nMEMO (biblio&ludo+)\nPlay&Pulse x MEMO\nSonntag 1. November\nMEMO (biblio&ludo+)\nAtelier d'écriture avec Elodie Glerum\nDienstag 3. November\nMEMO (biblio&ludo+)\nRêvolution - cartes postales d'aujourd'hui et pour demain / Traumkarten - Postkarten von heute für morgen\nDienstag 3. November\n- Samstag 28. November\nMEMO (biblio&ludo+)\nAlle Daten anzeigen\nMEMO\nAufträge und Aktionen von MEMO\nChallenge d'écriture\nDein Pass, mein Pass\nEin Sommer mit Tinguely\nFamilientag am Nikolaustag 2024\nGeschichten in allen Facetten\nKulturelle Aktivitäten\nLass mich träumen!\nSaatgut-Bibliothek\nVisites scolaires\nBetreffende Seiten\nKultur\nMEMO bis 2030 – Eine Vision, konkrete Massnahmen\nBild\nMEMO bleibt vom Montag, 16. bis Samstag, 21. November geschlossen, um die Klassifizierung der Sachbücher anzupassen. In diesem Bereich gibt es keine komplizierten Zahlen mehr , sondern nur noch Begriffe; so wird beispielsweise aus „641.85“ „Konditorei“ – das vereinfacht Ihre\nSuche. Die Rückgabebox bleibt während dieser Zeit zugänglich.\nVollständige Öffnungszeiten\nRückgabe ausserhalb der Öffnungszeiten?\nAusserhalb der Öffnungszeiten steht Ihnen beim Haupteingang eine Rückgabebox zur Verfügung, um Ihre ausgeliehenen Bücher zu retournieren (keine Spiele). Diese ist nachts, am Wochenende und während der Sommermonate am Montag offen. Während der Ferien, an Feiertagen und an Brückentagen bleibt sie geschlossen.\nHeute, Montag, 26. Oktober\nGeschlossen\nDienstag, 27. Oktober: von 14.00 bis 18.00 Uhr geöffnet\nReguläre Öffnungszeiten\nMontag\nGeschlossen\nDienstag\n14.00-18.00 Uhr\nMittwoch\n10.00-18.00 Uhr\nDonnerstag\n14.00-18.00 Uhr\nFreitag\n14.00-18.00 Uhr\nSamstag\n10.00-16.00 Uhr\nSonntag\nGeschlossen\nSchliessung - Vom 16.11.2026 bis 21.11.2026\nMontag\nGeschlossen\nDienstag\nGeschlossen\nMittwoch\nGeschlossen\nDonnerstag\nGeschlossen\nFreitag\nGeschlossen\nSamstag\nGeschlossen\nSonntag\nGeschlossen\nWeihnachtsferien - Vom 24.12.2026 bis 05.01.2027\nMontag\nGeschlossen\nWeihnachtsferien\nDienstag\nGeschlossen\nWeihnachtsferien\nMittwoch\nGeschlossen\nWeihnachtsferien\nDonnerstag\nGeschlossen\nWeihnachtsferien\nFreitag\nGeschlossen\nWeihnachtsferien\nSamstag\nGeschlossen\nWeihnachtsferien\nSonntag\nGeschlossen\nWeihnachtsferien\nWeihnachtsferien - Vom 24.12.2027 bis 02.01.2028\nMontag\nGeschlossen\nDienstag\nGeschlossen\nMittwoch\nGeschlossen\nDonnerstag\nGeschlossen\nFreitag\nGeschlossen\nSamstag\nGeschlossen\nSonntag\nGeschlossen\nSpezielle Öffnungszeiten\n01.11.2026\nGeschlossen\nAllerheiligen\n08.12.2026\nGeschlossen\nGeschlossen\n24.12.2026\nGeschlossen\nGeschlossen\n25.12.2026\nGeschlossen\nWeihnachtstag\n26.12.2026\nGeschlossen\nStephanstag\n01.01.2027\nGeschlossen\nNeujahrstag\n02.01.2027\nGeschlossen\nBerchtoldstag\n25.03.2027\n14.00-16.00 Uhr\nVorabend Feiertag\n26.03.2027\nGeschlossen\nKarfreitag\n27.03.2027\nGeschlossen\nGeschlossen\n01.05.2027\n10.00-12.00 Uhr\n05.05.2027\n10.00-16.00 Uhr\nVorabend Feiertag\n06.05.2027\nGeschlossen\nChristi Himmelfahrt\n17.05.2027\nGeschlossen\nPfingstmontag\n26.05.2027\n10.00-16.00 Uhr\nVorabend Feiertag\n07.12.2027\n14.00-16.00 Uhr\nVorabend Feiertag\nZum Katalog und Kundenkonto\nSUCHEN … UND FINDEN\nDas Angebot von MEMO richtet sich an alle Alterskategorien und setzt sich aus Belletristik und Sachbüchern, Bilderbüchern, Comics, Zeitschriften, Hörbüchern und DVDs zusammen. Der Aktualität des Bestandes wird grosse Beachtung geschenkt.\nOnline Katalog\nRÜCKGEBEN\nDie Rückgabe erfolgt an den Ausleihstationen mithilfe Ihrer MEMO-Karte. Die Spiele werden direkt in MEMO3 zurückgegeben. Ausserhalb der Öffnungszeiten (ausser an Feiertagen) steht Ihnen eine Rückgabebox zur Verfügung. Wir bitten Sie, dort keine Spiele zu deponieren.\nVERWALTEN SIE IHR BIBLIOTHEKSKONTO SELBST\nLoggen Sie sich im Bibliothekskatalog mit Ihrer Kundennummer und Ihrem Passwort bequem von daheim aus ein. Konsultieren Sie Ihr Konto, nehmen Sie die erste Verlängerung vor und machen Sie Reservationen.\nWIR SIND FÜR SIE DA\nBei Fragen wenden Sie sich an das Personal von MEMO. Gerne sind wir bei der Auswahl von Medien behilflich und geben Informationen und Ratschläge. Anschaffungsvorschläge sind willkommen!\nSEID VERANTWORTLICH\nDas MEMO-Team tut alles, um sicherzustellen, dass die Sammlungen in gutem Zustand sind. Die Abonnentin/der Abonnent ist jedoch für den Zustand des Dokumentes bei der Ausleihe verantwortlich. Jede Beschädigung oder jedes fehlende Teil eines Spiels müssen vor der Ausleihe oder spätestens in den zwei folgenden Tagen gemeldet werden. Die Dokumente müssen vollständig, sauber und in gutem Zustand zurückgegeben werden. Wird diese Regel nicht eingehalten, wird eine Gebühr erhoben.\nNEHMEN SIE TEIL\nBeachten Sie die verschiedenen Anlässe, die MEMO das ganze Jahr über für Gross und Klein in Zusammenarbeit mit zahlreichen kulturellen Partnern anbietet. Schlagen Sie uns Dokumente zur Anschaffung vor und schenken Sie Ihren Büchern, Spielen und Taschen ein neues Leben, indem Sie auf unsere Spendenaufrufe reagieren.\nMEMO nimmt Ihre Spenden unter folgenden Bedingungen gerne entgegen:\nBücher nicht älter als 5 Jahr alt, in perfektem Zustand und mit Inhalt, der für ein breites Publikum von Interesse ist\nSpielsachen nicht älter als 10 Jahre alt, in perfektem Zustand, sauber und vollständig\nTaschen aus dickem, festem Stoff oder Plastik, in perfektem Zustand, sauber und geeignet für den Transport von Büchern und Spielen\nWir bitten Sie, uns vorab telefonisch während der Öffnungszeiten unter 026 351 71 44 oder per E-Mail an memo [at] ville-fr [.] ch (memo[at]ville-fr[dot]ch) zu kontaktieren. Aus Gründen der Lagerkapazität behält sich MEMO das Recht vor, Spenden abzulehnen oder darüber frei zu verfügen.\nAbonnemente und Ausleihbedingungen\nSCHREIBEN SIE SICH FÜR EIN JAHR EIN\nWohnen Sie in Freiburg?\nWohnen Sie nicht in Freiburg ?\nKinder (bis 16 Jahre)\nCHF 10.-\nCHF 10.-\nIn Ausbildung, AHV/IV\nCHF 20.-\nCHF 30.-\nErwachsene\nCHF 30.-\nCHF 40.-\ndibiBE (E-Books auf Deutsch)\nCHF 30.-\nCHF 30.-\nFri-eMedia\ngratis\ngratis\n50% Ermässigung bei Vorweisung der KulturLegi/Caritas\nUm Anrecht auf die Ermässigung zu haben, muss ein Ausweis vorgelegt werden.\nDie Bibliothekskarte ist persönlich. Der Besitzer ist dafür haftbar.\nDer Ersatz einer verlorenen Karte kostet CHF 5.-\nAUSLEIHEN\nEntdecken, lernen und erfahren Sie Neues!\nmaximal 15 Medien (darunter höchstens 2 DVDs und 4 Spiele)\n28 Tage Ausleihfrist\nZwei Verlängerungen sind möglich, sofern keine Reservation für das betreffende Dokument vorliegt.\nRESERVIEREN\nEin gesuchtes Medium ist bereits ausgeliehen? Reservieren Sie es gratis!\nEs sind 3 Reservationen möglich (darunter höchstens 1 Spiel).\nSie haben anschliessend 7 Tage Zeit, um das reservierte Medium abzuholen.\nWird das reservierte Medium nicht abgeholt, muss eine Gebühr von CHF 2.- pro Medium entrichtet werden.\nVERSPÄTET?\nSie sind im Verzug mit der Rückgabe – das kommt vor!\n4 Tage vor Ablauf der Ausleihfrist erhalten Sie eine Erinnerungsmeldung.\nNach Ablauf der Ausleihfrist entstehen Mahnungen:\n1.Mahnung\nnach 3 Tagen\nkostenlos\n2.Mahnung\nnach 10 Tagen\nCHF 5.-\n3.Mahnung\nnach 17 Tagen\nCHF 10.-\n4. Mahnung\nnach 24 Tagen\nCHF 15.-\nRechnung\nnach 34 Tagen\nNeupreis +Gebühren\nAb CHF 16.- geschuldeten Gebühren wird das Konto gesperrt.\nAb der 4. Mahnung wird das Dossier dem Finanzamt der Stadt übermittelt.\nEIN VERLOREN GEGANGENES MEDIUM?\nEin Medium ist verloren gegangen oder versehentlich beschädigt worden. Auch das kommt vor!\nLeichte Beschädigungen : CHF 5.-\nVerlust eines Spielsteins oder einer Spielanleitung: CHF 5.-\nKosten bei Verlust eines Mediums : Neupreis + CHF 5.- Beteiligung an Ausstattungskosten\nKulturelle Aktivitäten\nMEMO bietet in Zusammenarbeit mit zahlreichen kulturellen Akteuren Workshops und Veranstaltungen für Gross und Klein an. Für Schulklassen werden Führungen und spezielle Veranstaltungen angeboten.\nErfahren Sie mehr über alle Aktivitäten von MEMO, indem Sie hier klicken.\nUm sich für die Veranstaltungen anzumelden: hier klicken.\nMöchten Sie gerne eine Aktivität anbieten? Kontaktieren Sie uns per E-Mail an memo [at] ville-fr [.] ch (memo[at]ville-fr[dot]ch) und wir werden unser Bestes tun, um Ihre Anfrage zu beantworten.\nSchulbesuche\nMEMO steht Schülerinnen und Schülern der Klassen 1H bis 8H der Stadt Freiburg zur Verfügung. Wir bieten Ihnen Medienausleihe, Entdeckungsbesuche, Besuche mit einer Geschichte und Besuche mit einer von MEMO vorgeschlagenen thematischen Animation an.\nAlle Informationen und Anmeldungen finden Sie auf dieser Seite.\nDienstleistungen\nMEMO bietet zahlreiche kostenlose Dienstleistungen an, auch ohne Abonnementkarte. Diese sind während der Öffnungszeiten von MEMO verfügbar:\nArbeitsplätze\nIn jedem Raum stehen Ihnen Tische und Stühle zur Verfügung, an denen Sie allein oder mit anderen arbeiten können.\nDein Pass, mein Pass\nIhr seid Abonnentinnen und Abonnenten von MEMO und wollt weiter Euren Kulturhunger stillen? Bei uns könnt ihr nicht nur Eure Lieblingsbücher oder -spiele ausleihen, sondern auch mit einem Pass nach Hause gehen, der Euch einen Eintritt im Motta-Schwimmbad, im Kino Korso oder im Theater Equilibre-Nuithonie! Für mehr Informationen : hier klicken.\nKaffee-Ecke\nSie möchten einen Tee oder Kaffee geniessen, während Sie in einer Zeitschrift blättern, Schach spielen oder einen Comic lesen? MEMO hat sich für Nachhaltigkeit entschieden und arbeitet mit der Kaffeerösterei Esperanza in Vuadens zusammen. Der angebotene Kaffee ist zu 100 % fair gehandelt und biologisch angebaut. Tee und Kaffee werden zu einem freien Preis angeboten, empfohlen werden CHF 1.-.\nOrt zum Entspannen und Spielen\nMEMO hat alle seine Räume so gestaltet, dass Sie dort eine gute Zeit verbringen oder spielen können. Für Kleinkinder in einem dafür eingerichteten Raum, für ältere Kinder mit angepassten Tischen, für Teenager oder Erwachsene an einem großen Tisch, in der Cafeteria oder in bequemen Sesseln.\nSaatgut-Bibliothek\nDie Stiftung L'Estampille hat das Möbel für die Saatgut-bibliothek bei MEMO entworfen. Samen und Tütchen stehen zur Verfügung, damit Sie Samen tauschen können. Zu diesem Anlass wurden auch Fachbücher angeschafft! Bei Fragen oder wenn Sie ehrenamtlich mithelfen möchten, kontaktieren Sie uns bitte memo [at] ville [.] fr [.] ch (per E-Mail).\nStillkissen und Wickeltisch\nFür Personen, die stillen möchten, steht ein Stillkissen und ein bequemer Platz zur Verfügung. In den Toiletten im ersten Stock finden Sie einen Wickeltisch.\nTaschentausch\nSie haben sich mit Büchern und Spielen eingedeckt und brauchen eine Tasche, um sie zu transportieren? In der Nähe der Ausleihstationen werden gebrauchte Taschen zur Verfügung gestellt. Spenden Sie Ihre eigenen unter folgenden Bedingungen :\nTaschen aus dickem, festem Stoff oder Plastik\nsauber und in gutem Zustand\ngeeignet für den Transport von Büchern und Spielen\nTechnologie-Sprechstunde\nMEMO beherbergt jeden Dienstag von 16:30 bis 17:30 Uhr die Technologie-Sprechstunde des Roten Kreuzes Freiburg zu den Temen Smartphones, Tablets und Computer. Ohne Anmeldung. Für weitere Informationen und alle Daten : hier klicken.\nVideospiele\nSpielen Sie allein oder mit Freunden an der Switch, die in MEMO installiert ist! Es stehen zahlreiche Spiele zur Verfügung und es werden regelmässig Veranstaltungen mit dem Freiburger Verein noetic organisiert. Der Videospielbereich steht zu folgenden Zeiten zur Verfügung:\nDienstag: 16:00 - 17:00 Uhr, Selbstständig\nDonnerstag, Freitag: 16:00 - 17:00 Uhr, mit der Anwesenheit von noetic\nMittwoch: 14:00 - 16:00 Uhr, mit der Anwesenheit von noetic\nWifi\nDamit alle freien Zugang zu Informationen haben, bietet MEMO kostenloses W-LAN an.\nReglement\n211.1\nBenützungsreglement für die Bibliothek\nKultur\nMEMO (biblio&ludo+)\nDas Reglement wird derzeit aktualiesiert.\nÜber MEMO\nMEMO ist weit mehr als eine Bibliothek und Ludothek. Sie ist eine zweisprachige kulturelle Institution, die sich für und mit ihrem Publikum weiterentwickelt. MEMO ist ein lebendiger Ort des Lernens und der Begegnung im Herzen der Freiburger Kultur.\nAufträge und Aktionen von MEMO ansehen.\nMEMO\nAufträge und Aktionen von MEMO\nChallenge d'écriture\nDein Pass, mein Pass\nEin Sommer mit Tinguely\nFamilientag am Nikolaustag 2024\nGeschichten in allen Facetten\nKulturelle Aktivitäten\nLass mich träumen!\nSaatgut-Bibliothek\nVisites scolaires\nBetreffende Seiten\nKultur\nMEMO bis 2030 – Eine Vision, konkrete Massnahmen\nNews\n21.04.2026\nMEMO feiert den 5. Geburtstag\nAm Mittwoch, 6. Mai von 14 bis 18 Uhr lädt MEMO die Bevölkerung ein, das fünfjährige Bestehen der Kultureinrichtung gemeinsam zu feiern.\nMEMO (biblio&ludo+)\n27.05.2025\nEin Festtag zum 100. Geburtstag von Jean Tinguely\nAm 15. Juni feiert Freiburg den 100. Geburtstag von Jean Tinguely mit einer festlichen Parade. Künstlerinnen und Künstler, Musikerinnen und Musiker, mechanische Kunstwerke sowie eine Delegation aus Basel werden ab 10 Uhr durch die Stadt ziehen. Dieser Tag für die Bevölkerung steht ganz im Zeichen der Kreativität.\nMEMO (biblio&ludo+)\nKultur\nTinguely100\n25.09.2024\nMEMO bis 2030 – Eine Vision, konkrete Massnahmen\nDie Stadt Freiburg hat MEMO mit einem Leitbild ausgestattet, der Ziele und konkrete Massnahmen für die Zukunft der Einrichtung enthält, wobei der erste Meilenstein das Jahr 2030 ist. Diese Roadmap veranschaulicht die strategische Entwicklung der Institution in den kommenden sechs Jahren. Sie ist das Ergebnis eines partizipativen Vorgehens, mit dem möglichst gut auf die Bedürfnisse des Publikums eingegangen werden kann. Auf regelmässig geäusserten Wunsch hin wird MEMO ab dem 12. Oktober jeden Samstag bis um 16 Uhr geöffnet sein. Die Bevölkerung ist eingeladen, am 8. Oktober anlässlich eines geselligen Aperitifs mehr über das Leitbild zu erfahren.\nMEMO (biblio&ludo+)\n10.11.2023\nEin Videospiel-Vormittag in MEMO zum Vergnügen und Nachdenken\nAnlässlich des weltweiten Tages des Videospiels widmet MEMO den Vormittag des 18. Novembers diesem Thema. Die Kulturinstitution organisiert gemeinsam mit Vereinen der Branche, Gamer:innen und Entwickler:innen öffentliche Spiele-Ateliers und zwei Diskussionsrunden – die eine zur Rolle von Heldinnen in Spielen und die andere zu Berufen in der Videospielbranche.\nMEMO (biblio&ludo+)\nAlle News anzeigen\nPolitische Diskussionen\n19.01.2026\nPostulat n° 227 (2021-2026) - \"Pour la gratuité de l’emprunt des livres et des jeux à MEMO\"\nMEMO (biblio&ludo+)\nÜbermittelt\n14.09.2022\nQuestion n° 95 (2021-2026) - \"Désherbage\" des classiques littéraires opéré par la bibliothèque publique de la Ville\nMEMO (biblio&ludo+)\nErledigt\n23.02.2021\nPostulat n° 128 - Rapport final du Conseil communal\nMEMO (biblio&ludo+)\n26.05.2020\nPostulat n° 94 - Rapport final du Conseil communal\nMEMO (biblio&ludo+)\nAlle Diskussionen anzeigen\nWebform\nGibt es mit dieser Seite ein Problem?\nGibt es mit dieser Seite ein Problem?\nWie können wir diese Seite verbessern?\nEmail (optional)\nCAPTCHA\nDiese Sicherheitsfrage überprüft, ob Sie ein menschlicher Besucher sind und verhindert automatisches Spamming.\nVielen Dank für Ihre Hilfe!\nFalls Sie weitere Bemerkungen haben, bitte wenden Sie sich an [email protected]\nFacebook\nInstagram\nLinkedin\n© Ville de Fribourg | Stadt Freiburg 2026\nZurück zum Seitenanfang",
+            "captureMethod": "node-pinned-https"
+          }
+        ]
+      }
+    },
+    {
+      "jobId": "ffd69f0f-f1af-426c-8f7a-76ea8df71f11",
+      "editorJobId": "10db43be-1fa7-4784-b1bc-31d15b5da6ff",
+      "approvalArtifact": "b54f8249cf324c1c321992aade9bbe456e5e49969828fbc7cf7532a5c0333cda",
+      "approval": {
+        "role": "verify",
+        "verdict": "approve",
+        "draftHash": "c26095af1fc6acb4a3a5d6ca7e67a1e357bb0452cb161dd9c152349c3e8f65b3",
+        "checkedFields": [
+          "schedule",
+          "days",
+          "notes",
+          "practical.warnings",
+          "research.findings",
+          "research.remaining"
+        ],
+        "approvedBindings": [
+          "schedule",
+          "days",
+          "notes",
+          "practical.warnings",
+          "research.findings.0"
+        ]
+      },
+      "approvedOn": "2026-10-27",
+      "cardRevision": "32e5198b574e61831f6c702256471bb883939b487fe9654b9903df19e6fbe78f",
+      "baseRecord": {
+        "route": "outside",
+        "format": "self",
+        "status": "active",
+        "min": 0,
+        "max": null,
+        "age": "Children's rate for ages 0–16",
+        "parent": "yes",
+        "languages": [],
+        "schedule": "Currently limited: Thu 14:00–19:00; Sat 09:00–12:00",
+        "days": [
+          4,
+          6
+        ],
+        "events": [],
+        "address": "Route d'Arruffens 17, 1680 Romont",
+        "price": "Child's annual card: free for residents of Glâne, otherwise CHF 15 / year; adult card CHF 30 or CHF 50, ask which applies",
+        "priceKind": "year",
+        "amount": null,
+        "contacts": [
+          {
+            "name": "Bibliothèque de la Glâne",
+            "phone": "026 651 91 79",
+            "email": "info@biblio-glane.ch"
+          }
+        ],
+        "sources": [
+          {
+            "url": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+            "label": "Current hours, address, directions and rates"
+          }
+        ],
+        "notes": [
+          "The website currently shows a limited timetable. Holiday and one-off changes are published separately.",
+          "The campus of the CO secondary school is a pedestrian zone. Parking: Bicubic car park; bus 479 to Arruffens.",
+          "The rate applies to borrowing books for a year, not to entry to the premises. Ask about the conditions for a visit without a card."
+        ],
+        "checked": "2026-09-28",
+        "reviewAfter": "2026-10-28",
+        "id": "library-glane-romont",
+        "region": "glane",
+        "name": "Bibliothèque de la Glâne · children's books",
+        "category": "books",
+        "town": "Romont",
+        "parentDetails": "The child visits the library with an adult.",
+        "research": {
+          "date": "2026-09-28",
+          "outcome": "enriched",
+          "findings": [
+            {
+              "field": "Temporary timetable",
+              "kind": "official",
+              "text": "The website notes a limited timetable: Thursday 14–19 and Saturday 09–12; the children's card is free for residents of the district.",
+              "url": "https://bibliotheque-glane.ch/fr/infos-pratiques"
+            }
+          ],
+          "remaining": [
+            "The regular timetable after the limited period and the conditions for a visit without a card are to be confirmed."
+          ]
+        },
+        "practical": {
+          "scenario": "visit",
+          "indoor": {
+            "value": true,
+            "text": "Indoor library",
+            "source": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+            "checked": "2026-09-28"
+          },
+          "parking": {
+            "value": true,
+            "text": "Bicubic car park, pedestrian campus",
+            "source": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+            "checked": "2026-09-28"
+          },
+          "warnings": [
+            "The website shows a limited timetable; check holiday exceptions separately"
+          ],
+          "gallery": "https://bibliotheque-glane.ch/fr/infos-pratiques"
+        },
+        "intro": "A joint visit for children's books; a card is needed for borrowing."
+      },
+      "appliedRecordRevision": "7543a87bc053d1a222d40e3c643b1ddb032f782a80b7506b92856361f52d6d16",
+      "research": {
+        "date": "2026-10-27",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Standard timetable",
+            "kind": "official",
+            "text": "The library publishes a standard timetable: Mon 10:00–15:00, Tue 13:00–15:00, Wed 10:00–18:00, Thu 13:00–19:00, Fri 10:00–18:00, Sat 09:00–12:00, closed Sunday. School-holiday hours are given in a downloadable 2026 annual calendar, and special hours or unplanned changes are announced separately.",
+            "url": "https://bibliotheque-glane.ch/fr/infos-pratiques"
+          }
+        ],
+        "remaining": [
+          "What are the conditions for a visit without a library card?"
+        ]
+      },
+      "draft": {
+        "cardId": "library-glane-romont",
+        "patch": {
+          "schedule": "Mon 10:00–15:00; Tue 13:00–15:00; Wed 10:00–18:00; Thu 13:00–19:00; Fri 10:00–18:00; Sat 09:00–12:00; closed Sunday. School-holiday hours differ: see the library's annual calendar.",
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "notes": [
+            "School-holiday hours differ from the standard timetable. Special hours and unplanned changes are announced separately.",
+            "The campus of the CO secondary school is a pedestrian zone. Parking: Bicubic car park; bus 479 to Arruffens.",
+            "The rate applies to borrowing books for a year, not to entry to the premises. Ask about the conditions for a visit without a card."
+          ]
+        },
+        "practicalPatch": {},
+        "warnings": [
+          "School-holiday hours differ from the standard timetable; check the library's annual calendar and announcements for special hours and unplanned changes"
+        ],
+        "findings": [
+          {
+            "field": "Standard timetable",
+            "kind": "official",
+            "text": "The library publishes a standard timetable: Mon 10:00–15:00, Tue 13:00–15:00, Wed 10:00–18:00, Thu 13:00–19:00, Fri 10:00–18:00, Sat 09:00–12:00, closed Sunday. School-holiday hours are given in a downloadable 2026 annual calendar, and special hours or unplanned changes are announced separately.",
+            "url": "https://bibliotheque-glane.ch/fr/infos-pratiques"
+          }
+        ],
+        "remaining": [
+          "What are the conditions for a visit without a library card?"
+        ],
+        "resolvedQuestions": [
+          {
+            "question": "The regular timetable after the limited period and the conditions for a visit without a card are to be confirmed.",
+            "source": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+            "reason": "The official page now publishes the standard timetable; the question about a visit without a card is re-asked separately."
+          }
+        ],
+        "supersededFindings": [
+          "b7f4df7625871e1ff582d1600d284281e3644a1dfcce08a126e82c6191c2bace"
+        ],
+        "bindings": [
+          {
+            "field": "schedule",
+            "source": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+            "quote": "Lundi\nOuvert : 10h00-15h00\nMardi\nOuvert : 13h00-15h00\nMercredi\nOuvert : 10h00-18h00\nJeudi\nOuvert : 13:00-19:00\nVendredi\nOuvert : 10h00-18h00\nSamedi\nOuvert : 9:00-12:00\nDimanche\nFermé",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "62b12d542d5ca49fff496f235a3293b9533e42197ca489c5ee24b8b46378198f"
+          },
+          {
+            "field": "schedule",
+            "source": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+            "quote": "Horaires durant les vacances scolaires\nLe calendrier annuel 2026 est téléchargeable ci-dessous.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "62b12d542d5ca49fff496f235a3293b9533e42197ca489c5ee24b8b46378198f"
+          },
+          {
+            "field": "days",
+            "source": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+            "quote": "Lundi\nOuvert : 10h00-15h00\nMardi\nOuvert : 13h00-15h00\nMercredi\nOuvert : 10h00-18h00\nJeudi\nOuvert : 13:00-19:00\nVendredi\nOuvert : 10h00-18h00\nSamedi\nOuvert : 9:00-12:00\nDimanche\nFermé",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "62b12d542d5ca49fff496f235a3293b9533e42197ca489c5ee24b8b46378198f"
+          },
+          {
+            "field": "notes",
+            "source": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+            "quote": "Horaires durant les vacances scolaires\nLe calendrier annuel 2026 est téléchargeable ci-dessous.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "62b12d542d5ca49fff496f235a3293b9533e42197ca489c5ee24b8b46378198f"
+          },
+          {
+            "field": "notes",
+            "source": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+            "quote": "Pour les horaires spéciaux et autres modifications d'horaire non planifiées, ils vous seront communiqués par les réseaux sociaux, la fiche-délai et ci-contre.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "62b12d542d5ca49fff496f235a3293b9533e42197ca489c5ee24b8b46378198f"
+          },
+          {
+            "field": "notes",
+            "source": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+            "quote": "Le campus du CO est une zone piétonne.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "62b12d542d5ca49fff496f235a3293b9533e42197ca489c5ee24b8b46378198f"
+          },
+          {
+            "field": "notes",
+            "source": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+            "quote": "Parking du Bicubic prioritairement",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "62b12d542d5ca49fff496f235a3293b9533e42197ca489c5ee24b8b46378198f"
+          },
+          {
+            "field": "notes",
+            "source": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+            "quote": "la ligne de bus TPF 479 vous emmène à l'arrêt \"Arruffens\".",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "62b12d542d5ca49fff496f235a3293b9533e42197ca489c5ee24b8b46378198f"
+          },
+          {
+            "field": "practical.warnings",
+            "source": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+            "quote": "Horaires durant les vacances scolaires\nLe calendrier annuel 2026 est téléchargeable ci-dessous.\nPour les horaires spéciaux et autres modifications d'horaire non planifiées, ils vous seront communiqués par les réseaux sociaux, la fiche-délai et ci-contre.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "62b12d542d5ca49fff496f235a3293b9533e42197ca489c5ee24b8b46378198f"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+            "quote": "Lundi\nOuvert : 10h00-15h00\nMardi\nOuvert : 13h00-15h00\nMercredi\nOuvert : 10h00-18h00\nJeudi\nOuvert : 13:00-19:00\nVendredi\nOuvert : 10h00-18h00\nSamedi\nOuvert : 9:00-12:00\nDimanche\nFermé",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "62b12d542d5ca49fff496f235a3293b9533e42197ca489c5ee24b8b46378198f"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+            "quote": "Horaires durant les vacances scolaires\nLe calendrier annuel 2026 est téléchargeable ci-dessous.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "62b12d542d5ca49fff496f235a3293b9533e42197ca489c5ee24b8b46378198f"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+            "quote": "Pour les horaires spéciaux et autres modifications d'horaire non planifiées, ils vous seront communiqués par les réseaux sociaux, la fiche-délai et ci-contre.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "62b12d542d5ca49fff496f235a3293b9533e42197ca489c5ee24b8b46378198f"
+          }
+        ],
+        "snapshots": [
+          {
+            "schema": 1,
+            "project": "vmeste",
+            "id": "62b12d542d5ca49fff496f235a3293b9533e42197ca489c5ee24b8b46378198f",
+            "url": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+            "finalUrl": "https://bibliotheque-glane.ch/fr/infos-pratiques",
+            "fetchedAt": "2026-10-27T09:32:08.326Z",
+            "contentType": "text/html; charset=iso-8859-1",
+            "parser": "cheerio-visible-body-v1",
+            "textHash": "51f9ccac7a4d6ced06da659d9cae79c8bbe27bc04bf5b56eabdb97c7aaaf19d2",
+            "rawHash": "08802bda743dc7ff240b3cf982e07adf3ca4998c711e4e929ebef5c0bf0b9215",
+            "text": "Accueil\nCatalogue\nInfos pratiques\nÉvénements\nLudothèque\nAccueil\nCatalogue\nInfos pratiques\nÉvénements\nLudothèque\nInfos pratiques\nNos horaires\nHORAIRE STANDARD\nLundi\nOuvert : 10h00-15h00\nMardi\nOuvert : 13h00-15h00\nMercredi\nOuvert : 10h00-18h00\nJeudi\nOuvert : 13:00-19:00\nVendredi\nOuvert : 10h00-18h00\nSamedi\nOuvert : 9:00-12:00\nDimanche\nFermé\nHoraires durant les vacances scolaires\nLe calendrier annuel 2026 est téléchargeable ci-dessous.\nPour les horaires spéciaux et autres modifications d'horaire non planifiées, ils vous seront communiqués par les réseaux sociaux, la fiche-délai et ci-contre.\nMerci de votre attention.\nCalendrier 2026 à télécharger\nLocalisation\nLa bibliothèque de la Glâne fait partie du campus du Cycle d'Orientation de la Glâne, Epicentre et Bicubic.\nLa bibliothèque de la Glâne a été créée dans l'ancienne halle de gymnastique du Cycle d'Orientation de la Glâne.\nAdresse complète et carte\nBibliothèque de la Glâne\nRoute d'Arruffens 17\n1680 Romont\ninfo@biblio-glane.ch\n+41 26 651 91 79\nVoir sur la carte\nAccès en vélo, en voiture et/ou à pied\nLe campus du CO est une zone piétonne.\nSi vous venez à vélo : un parking à vélos situé devant la bibliothèque et ludothèque est à votre disposition..\nSi vous souhaitez venir en voiture à la bibliothèque de la Glâne :\n1. Parking du Bicubic prioritairement et trajet à pied en passant le long du CO ou par Arruffens.\n2. Personnes à mobilité réduite ou visiteurs lourdement chargés : accès autorisé au parking du personnel du CO, par la route du Pré de la Grange. SOUS RÉSERVE D'UNE PLACE DISPONIBLE. Ouverture de la barrière sur demande (interphone).\nPlan de localisation\nVenir en transports publics\nSur la zone de Romont ou depuis la gare, la ligne de bus TPF 479 vous emmène à l'arrêt \"Arruffens\".\nEn venant depuis Vuisternens-devant-Romont, Mézières, les lignes de bus TPF 454 ou 455 vous emmènent à l'arrêt \"CO de la Glâne\".\nNos tarifs\nNos forfaits sont valables durant un an.\nTélécharger les frais et conditions de rappel\nTarifs des abonnements\nAbonné glânois\nAbonné externe\nForfait enfant (0 à 16 ans)\nGratuit\n15.-\nForfait jeune (16 ans à 25 ans)\n15.-\n20.-\nForfait AVS-AI\n15.-\n20.-\nForfait adulte (26 ans et plus)\n30.-\n50.-\nForfait classe\nGratuit\n40.-\nLecteur occasionnel\n3.- par livre emprunté\n3.- par livre emprunté\nTarifs des abonnements\nForfait enfant (0 à 16 ans)\nAbonné glânois\nGratuit\nAbonné externe\n15.-\nForfait jeune (16 ans à 25 ans)\nAbonné glânois\n15.-\nAbonné externe\n20.-\nForfait AVS-AI\nAbonné glânois\n15.-\nAbonné externe\n20.-\nForfait adulte (26 ans et plus)\nAbonné glânois\n30.-\nAbonné externe\n50.-\nForfait classe\nAbonné glânois\nGratuit\nAbonné externe\n40.-\nLecteur occasionnel\nAbonné glânois\n3.- par livre emprunté\nAbonné externe\n3.- par livre emprunté\nDons de livres\nPour d'éventuels dons de livres à la bibliothèque, merci de lire nos conditions ci-après.\nInfos & Conditions\nRèglement et\nconditions de prêt\nVous trouverez ici tout ce qu'il y a à savoir pour les lecteurs de la bibliothèque, toute notre équipe se fera un plaisir de répondre à vos éventuelles questions.\nLe règlement a été validé par l'assemblée des communes, sa version signée sera disponible sous peu.\nTélécharger le règlement\nBibliothèque de la Glâne\nRoute d'Arruffens 17\n1680 Romont\nVoir sur la carte\nContactez-nous\ninfo@biblio-glane.ch\n+41 26 651 91 79\nMenu\nAccueil\nCatalogue\nInfos pratiques\nÉvénements\nLudothèque\nPolitique de confidentialité\n© 2022 réalisé par Slash communication",
+            "captureMethod": "node-pinned-https"
+          }
+        ]
+      }
+    },
+    {
+      "jobId": "27644f88-6d5a-4675-88e6-dfe7fb00967c",
+      "editorJobId": "675e36c9-8409-4c5a-b46f-45ea696018bc",
+      "approvalArtifact": "ca52d6ad564b894a8e5bedb400aefc15b932827c31603034642f5e2fd9d4ee64",
+      "approval": {
+        "role": "verify",
+        "verdict": "approve",
+        "draftHash": "277df776d3dcd82b80d4680f7ecb0d77e38122d2089aa62037983caad9b8bfe3",
+        "checkedFields": [
+          "schedule",
+          "parentDetails",
+          "intro",
+          "notes",
+          "events",
+          "research.findings",
+          "research.remaining"
+        ],
+        "approvedBindings": [
+          "schedule",
+          "parentDetails",
+          "intro",
+          "notes",
+          "events",
+          "research.findings.0"
+        ]
+      },
+      "approvedOn": "2026-10-29",
+      "cardRevision": "65d0b3b894c301cc97415f6e9ad9b0bc6cc4216d7eb916e98a832aff37eace74",
+      "baseRecord": {
+        "region": "see",
+        "route": "outside",
+        "format": "group",
+        "status": "active",
+        "min": 0,
+        "max": 4,
+        "age": "Ages 0–4",
+        "parent": "yes",
+        "languages": [],
+        "schedule": "Monday 09:00–11:00; confirm the venue when registering",
+        "days": [
+          1
+        ],
+        "events": [
+          {
+            "date": "2026-09-28",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-10-05",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-10-12",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-10-19",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-10-26",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-11-02",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-11-09",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-11-16",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-11-23",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-11-30",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-12-07",
+            "start": "09:00",
+            "end": "11:00"
+          },
+          {
+            "date": "2026-12-14",
+            "start": "09:00",
+            "end": "11:00"
+          }
+        ],
+        "address": "Kirchgässli 2, 3210 Kerzers",
+        "price": "Price not published",
+        "priceKind": "unknown",
+        "amount": null,
+        "contacts": [
+          {
+            "name": "Parish secretariat",
+            "phone": "031 755 55 50",
+            "email": "sekretariat.kerzers@refkirche-kerzers.ch"
+          }
+        ],
+        "sources": [
+          {
+            "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+            "label": "Age, adult participation and registration"
+          },
+          {
+            "url": "https://www.kerzers.ch/leben-kerzers/vereine",
+            "label": "Municipal directory: address and conditions"
+          },
+          {
+            "url": "https://www.refkirche-kerzers.ch/?page=agenda&sucheDarstellung=agenda&sucheDarstellungTitel=tag.keyword.one+-+Regionales&sucheStichwort=Regionales&sucheTyp=veranstaltungen",
+            "label": "Published dates for September–December 2026"
+          }
+        ],
+        "notes": [
+          "No group meetings during the Kerzers summer and Christmas school holidays.",
+          "Short-notice changes are announced through a WhatsApp chat.",
+          "A separate Chlouser Krabbelgruppe takes place on Saturday 5 December 2026 at 08:00 in the hall of the church house.",
+          "Once a month a member of the family support team is present in the group as a contact for parenting questions. The offer is informal and the exchange within the group is central; the exact dates are on a separate family-support agenda."
+        ],
+        "checked": "2026-09-27",
+        "reviewAfter": "2026-10-22",
+        "id": "krabbel-kerzers",
+        "name": "Krabbelgruppe Kerzers",
+        "category": "play",
+        "town": "Kerzers",
+        "parentDetails": "The children play beside their parents or grandparents.",
+        "scheduleValidThrough": "2026-12-14",
+        "research": {
+          "date": "2026-10-25",
+          "outcome": "rechecked",
+          "findings": [
+            {
+              "field": "Participation",
+              "kind": "official",
+              "text": "For children aged 0–4 with a parent or grandparent, Monday 09:00–11:00. Registration is preferred; changes are announced via WhatsApp. The group does not meet in the summer and Christmas holidays; the autumn Mondays 5, 12 and 19 October are listed in the published dates.",
+              "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers"
+            },
+            {
+              "field": "Support",
+              "kind": "official",
+              "text": "Once a month a member of the family support team is present in the group as a contact for parenting questions. The organiser describes this as an informal offer with the exchange within the group at its centre. The exact dates are on a separate family-support agenda (Education familiale), which has not been checked here.",
+              "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers"
+            }
+          ],
+          "remaining": [
+            "Confirm the cost and the room number at the first contact.",
+            "On which dates does the monthly family-support visit take place?",
+            "Which room in the church house does the group use, and is it accessible with a pushchair?",
+            "What does it cost, and in which language is the group run?"
+          ]
+        },
+        "practical": {
+          "scenario": "event"
+        },
+        "geo": {
+          "label": "Kirchgässli 2 3210 Kerzers",
+          "lat": 46.97609329223633,
+          "lon": 7.196778297424316,
+          "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Kirchg%C3%A4ssli+2+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326",
+          "checked": "2026-09-27",
+          "precision": "address"
+        }
+      },
+      "appliedRecordRevision": "3aff27a4e88ff9203221e3721d7a55a13c009aaa5496132b72629bf6b85f61e6",
+      "research": {
+        "date": "2026-10-29",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Support",
+            "kind": "official",
+            "text": "Once a month a member of the family support team is present in the group as a contact for parenting questions. The organiser describes this as an informal offer with the exchange within the group at its centre. The exact dates are on a separate family-support agenda (Education familiale), which has not been checked here.",
+            "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers"
+          },
+          {
+            "field": "Participation",
+            "kind": "official",
+            "text": "For children aged 0 to 4, Mondays 09:00–11:00; parents or grandparents are described as present during shared play and snack time. Registration is welcome (not stated as required), and short-notice changes come via a WhatsApp chat. No group meets in the summer and Christmas school holidays. The published upcoming dates run from 2 November to 14 December 2026.",
+            "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers"
+          }
+        ],
+        "remaining": [
+          "Confirm the cost and the room number at the first contact.",
+          "On which dates does the monthly family-support visit take place?",
+          "Which room in the church house does the group use, and is it accessible with a pushchair?",
+          "What does it cost, and in which language is the group run?",
+          "Is registration required, or only welcome?"
+        ]
+      },
+      "draft": {
+        "cardId": "krabbel-kerzers",
+        "patch": {
+          "schedule": "Mondays, 09:00 to 11:00 (Monday mornings)",
+          "parentDetails": "Parents or grandparents are present with the children during the shared play and snack time. The page does not say whether an adult must stay for the entire session.",
+          "intro": "Playgroup in Kerzers for children aged 0 to 4, where they can play together and make friends.",
+          "notes": [
+            "No group meets during the Kerzers summer and Christmas school holidays.",
+            "Short-notice changes are announced via a WhatsApp chat.",
+            "A separate Chlouser Krabbelgruppe takes place on Saturday 5 December 2026 at 08:00 in the hall of the church house.",
+            "A family support team member is present once a month to answer parenting questions. This is informal and the exchange within the group is central."
+          ],
+          "events": [
+            {
+              "date": "2026-11-02",
+              "start": "09:00",
+              "end": "",
+              "title": "Krabbelgruppe Kerzers",
+              "address": "im Kirchgemeindehaus"
+            },
+            {
+              "date": "2026-11-09",
+              "start": "09:00",
+              "end": "",
+              "title": "Krabbelgruppe Kerzers",
+              "address": "im Kirchgemeindehaus"
+            },
+            {
+              "date": "2026-11-16",
+              "start": "09:00",
+              "end": "",
+              "title": "Krabbelgruppe Kerzers",
+              "address": "im Kirchgemeindehaus"
+            },
+            {
+              "date": "2026-11-23",
+              "start": "09:00",
+              "end": "",
+              "title": "Krabbelgruppe Kerzers",
+              "address": "im Kirchgemeindehaus"
+            },
+            {
+              "date": "2026-11-30",
+              "start": "09:00",
+              "end": "",
+              "title": "Krabbelgruppe Kerzers",
+              "address": "im Kirchgemeindehaus"
+            },
+            {
+              "date": "2026-12-05",
+              "start": "08:00",
+              "end": "",
+              "title": "Chlouser Krabbelgruppe",
+              "address": "im Saal des Kirchgemeindehauses, Kerzers"
+            },
+            {
+              "date": "2026-12-07",
+              "start": "09:00",
+              "end": "",
+              "title": "Krabbelgruppe Kerzers",
+              "address": "im Kirchgemeindehaus"
+            },
+            {
+              "date": "2026-12-14",
+              "start": "09:00",
+              "end": "",
+              "title": "Krabbelgruppe Kerzers",
+              "address": "im Kirchgemeindehaus"
+            }
+          ]
+        },
+        "practicalPatch": {},
+        "findings": [
+          {
+            "field": "Participation",
+            "kind": "official",
+            "text": "For children aged 0 to 4, Mondays 09:00–11:00; parents or grandparents are described as present during shared play and snack time. Registration is welcome (not stated as required), and short-notice changes come via a WhatsApp chat. No group meets in the summer and Christmas school holidays. The published upcoming dates run from 2 November to 14 December 2026.",
+            "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers"
+          }
+        ],
+        "supersededFindings": [
+          "9063a27f807d4a4dad19d6e08ba55302c737b0718f16a68903a99e3c786a337b"
+        ],
+        "remaining": [
+          "Is registration required, or only welcome?",
+          "What does it cost, and in which language is the group run?",
+          "Which room in the church house does the group use, and is it accessible with a pushchair?"
+        ],
+        "reviewLimitations": [
+          "The municipal directory page https://www.kerzers.ch/leben-kerzers/vereine, which the card lists as a source for address and conditions, could not be captured (capture-unavailable), so the full review is incomplete. The organiser's group page, agenda and event page were inspected independently.",
+          "Price, payment model, session language, registration requirement and visitor facilities are not published on the inspected organiser pages and stay unknown."
+        ],
+        "bindings": [
+          {
+            "field": "schedule",
+            "source": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+            "quote": "Wir treffen uns am Montagmorgen zwischen 09.00 und 11.00 Uhr.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "schedule-7b40c92ef105",
+            "snapshotId": "90a4b8d44d55b4149cc2a1bf12d51b074602640eca03385326f53d5ddfedca7a"
+          },
+          {
+            "field": "parentDetails",
+            "source": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+            "quote": "Beim gemeinsamen Spielen und Znüniessen, werden unter den Eltern oder Grosseltern neue Kontakte geknüpft.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "90a4b8d44d55b4149cc2a1bf12d51b074602640eca03385326f53d5ddfedca7a"
+          },
+          {
+            "field": "intro",
+            "source": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+            "quote": "Unsere Kinder sind zwischen 0 und 4 Jahre alt. Sie haben die Möglichkeit, miteinander zu spielen und Freunde zu finden.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "90a4b8d44d55b4149cc2a1bf12d51b074602640eca03385326f53d5ddfedca7a"
+          },
+          {
+            "field": "notes",
+            "source": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+            "quote": "Während den Sommer- und Weihnacht-Schulferien Kerzers findet keine Krabbelgruppe statt.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "notes-c2005f57ce81",
+            "snapshotId": "90a4b8d44d55b4149cc2a1bf12d51b074602640eca03385326f53d5ddfedca7a"
+          },
+          {
+            "field": "notes",
+            "source": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+            "quote": "Kurzfristige Änderungen via WhatsApp Chat.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "notes-ef7e81c723b3",
+            "snapshotId": "90a4b8d44d55b4149cc2a1bf12d51b074602640eca03385326f53d5ddfedca7a"
+          },
+          {
+            "field": "notes",
+            "source": "https://www.refkirche-kerzers.ch/?page=agenda&sucheDarstellung=agenda&sucheDarstellungTitel=tag.keyword.one+-+Regionales&sucheStichwort=Regionales&sucheTyp=veranstaltungen",
+            "quote": "Sa. 05.12.2026 08.00 Chlouser Krabbelgruppe, im Saal des Kirchgemeindehauses, Kerzers",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "0b946b7f93e78536fc11b281c133c01e670a4b9b5e820b6ed87a4c2178d26d01"
+          },
+          {
+            "field": "notes",
+            "source": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+            "quote": "Jemand aus dem Team der Familienbegleitung ist einmal im Monat anwesend und stellt sich in der Krabbelgruppe als Ansprechpersonen für Erziehungsfragen zur Verfügung. Dieses Angebot ist informell und der Austausch in der Gruppe zentral.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "90a4b8d44d55b4149cc2a1bf12d51b074602640eca03385326f53d5ddfedca7a"
+          },
+          {
+            "field": "events",
+            "source": "https://www.refkirche-kerzers.ch/?page=agenda&sucheDarstellung=agenda&sucheDarstellungTitel=tag.keyword.one+-+Regionales&sucheStichwort=Regionales&sucheTyp=veranstaltungen",
+            "quote": "02.11.2026 09.00 Krabbelgruppe Kerzers, im Kirchgemeindehaus",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-7a477a9a77e4",
+            "snapshotId": "0b946b7f93e78536fc11b281c133c01e670a4b9b5e820b6ed87a4c2178d26d01"
+          },
+          {
+            "field": "events",
+            "source": "https://www.refkirche-kerzers.ch/?page=agenda&sucheDarstellung=agenda&sucheDarstellungTitel=tag.keyword.one+-+Regionales&sucheStichwort=Regionales&sucheTyp=veranstaltungen",
+            "quote": "09.11.2026 09.00 Krabbelgruppe Kerzers, im Kirchgemeindehaus",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-0e5b4498c7f2",
+            "snapshotId": "0b946b7f93e78536fc11b281c133c01e670a4b9b5e820b6ed87a4c2178d26d01"
+          },
+          {
+            "field": "events",
+            "source": "https://www.refkirche-kerzers.ch/?page=agenda&sucheDarstellung=agenda&sucheDarstellungTitel=tag.keyword.one+-+Regionales&sucheStichwort=Regionales&sucheTyp=veranstaltungen",
+            "quote": "16.11.2026 09.00 Krabbelgruppe Kerzers, im Kirchgemeindehaus",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-e87961995a79",
+            "snapshotId": "0b946b7f93e78536fc11b281c133c01e670a4b9b5e820b6ed87a4c2178d26d01"
+          },
+          {
+            "field": "events",
+            "source": "https://www.refkirche-kerzers.ch/?page=agenda&sucheDarstellung=agenda&sucheDarstellungTitel=tag.keyword.one+-+Regionales&sucheStichwort=Regionales&sucheTyp=veranstaltungen",
+            "quote": "23.11.2026 09.00 Krabbelgruppe Kerzers, im Kirchgemeindehaus",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-ce129fc3c863",
+            "snapshotId": "0b946b7f93e78536fc11b281c133c01e670a4b9b5e820b6ed87a4c2178d26d01"
+          },
+          {
+            "field": "events",
+            "source": "https://www.refkirche-kerzers.ch/?page=agenda&sucheDarstellung=agenda&sucheDarstellungTitel=tag.keyword.one+-+Regionales&sucheStichwort=Regionales&sucheTyp=veranstaltungen",
+            "quote": "30.11.2026 09.00 Krabbelgruppe Kerzers, im Kirchgemeindehaus",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-b77e4239743c",
+            "snapshotId": "0b946b7f93e78536fc11b281c133c01e670a4b9b5e820b6ed87a4c2178d26d01"
+          },
+          {
+            "field": "events",
+            "source": "https://www.refkirche-kerzers.ch/?page=agenda&sucheDarstellung=agenda&sucheDarstellungTitel=tag.keyword.one+-+Regionales&sucheStichwort=Regionales&sucheTyp=veranstaltungen",
+            "quote": "05.12.2026 08.00 Chlouser Krabbelgruppe, im Saal des Kirchgemeindehauses, Kerzers",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-473663231858",
+            "snapshotId": "0b946b7f93e78536fc11b281c133c01e670a4b9b5e820b6ed87a4c2178d26d01"
+          },
+          {
+            "field": "events",
+            "source": "https://www.refkirche-kerzers.ch/?page=agenda&sucheDarstellung=agenda&sucheDarstellungTitel=tag.keyword.one+-+Regionales&sucheStichwort=Regionales&sucheTyp=veranstaltungen",
+            "quote": "07.12.2026 09.00 Krabbelgruppe Kerzers, im Kirchgemeindehaus",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-0c83e7db9680",
+            "snapshotId": "0b946b7f93e78536fc11b281c133c01e670a4b9b5e820b6ed87a4c2178d26d01"
+          },
+          {
+            "field": "events",
+            "source": "https://www.refkirche-kerzers.ch/?page=agenda&sucheDarstellung=agenda&sucheDarstellungTitel=tag.keyword.one+-+Regionales&sucheStichwort=Regionales&sucheTyp=veranstaltungen",
+            "quote": "14.12.2026 09.00 Krabbelgruppe Kerzers, im Kirchgemeindehaus",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": "events-5d72d55b0de1",
+            "snapshotId": "0b946b7f93e78536fc11b281c133c01e670a4b9b5e820b6ed87a4c2178d26d01"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+            "quote": "Unsere Kinder sind zwischen 0 und 4 Jahre alt.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "90a4b8d44d55b4149cc2a1bf12d51b074602640eca03385326f53d5ddfedca7a"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+            "quote": "Wir treffen uns am Montagmorgen zwischen 09.00 und 11.00 Uhr.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "90a4b8d44d55b4149cc2a1bf12d51b074602640eca03385326f53d5ddfedca7a"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+            "quote": "Beim gemeinsamen Spielen und Znüniessen, werden unter den Eltern oder Grosseltern neue Kontakte geknüpft.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "90a4b8d44d55b4149cc2a1bf12d51b074602640eca03385326f53d5ddfedca7a"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+            "quote": "Anmeldung erwünscht bei:",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "90a4b8d44d55b4149cc2a1bf12d51b074602640eca03385326f53d5ddfedca7a"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+            "quote": "Kurzfristige Änderungen via WhatsApp Chat.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "90a4b8d44d55b4149cc2a1bf12d51b074602640eca03385326f53d5ddfedca7a"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+            "quote": "Während den Sommer- und Weihnacht-Schulferien Kerzers findet keine Krabbelgruppe statt.",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "90a4b8d44d55b4149cc2a1bf12d51b074602640eca03385326f53d5ddfedca7a"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+            "quote": "02.11.2026 Krabbelgruppe Kerzers",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "90a4b8d44d55b4149cc2a1bf12d51b074602640eca03385326f53d5ddfedca7a"
+          },
+          {
+            "field": "research.findings.0",
+            "source": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+            "quote": "14.12.2026 Krabbelgruppe Kerzers",
+            "kind": "official",
+            "scope": "exact-card",
+            "claimKey": null,
+            "snapshotId": "90a4b8d44d55b4149cc2a1bf12d51b074602640eca03385326f53d5ddfedca7a"
+          }
+        ],
+        "snapshots": [
+          {
+            "schema": 1,
+            "project": "vmeste",
+            "id": "90a4b8d44d55b4149cc2a1bf12d51b074602640eca03385326f53d5ddfedca7a",
+            "url": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+            "finalUrl": "https://www.refkirche-kerzers.ch/krabbelgruppe-kerzers",
+            "fetchedAt": "2026-10-29T21:31:24.954Z",
+            "contentType": "text/html; charset=UTF-8",
+            "parser": "cheerio-visible-body-v1",
+            "textHash": "0e6d280e2832dfddf2cfe44ec5b5655b53b4bea2164d29e73166d6939ef3a851",
+            "rawHash": "cec894d704f06043e38421464d2614d89021b00106b82713a77d6d899e459458",
+            "text": "Losung: Bibeltext zum TagSamuel sprach zu Saul: Du aber steh jetzt still, dass ich dir kundtue, was Gott gesagt hat.1.Samuel 9,27\nJesus sprach zu Simon und Andreas: Kommt, folgt mir nach; ich will euch zu Menschenfischern machen!Markus 1,17\nAgenda\nMonat\nJahr\nTaufen\nSuche\nAuswahlsuche\nSitemap\nKontakte\nWer ist für was zuständig\nPfarrpersonen\nKirchenmusik\nSigristenteam\nReligionsunterricht\nKirchgemeinderat und Behörden BE und FR\nSekretariat und Finanzverwaltung\nRaumreservation\nReglemente & Verordnungen\nKirchliches Leben\nKinder und Jugend\nKinderangebot\nKrabbelgruppe\nMFM Zyklus-Show für Mädchen von 10-12 Jahren\nRoundabout Kids für Girls\nRoundabout Youth für junge Frauen\nKerzerslauf Kinderhütedienst\nErwachsene\nGemeinsame Zeit schenken\nKirchgemeinde-Versammlung\nGästezimmer Pfarrhaus\nPfarrhaus-Café\nSingpuls\nSingen in der roten Stunde\nWunderstunde Bibel und Theologie\nSenioren\nBesuchsdienst Kerzers\nGottesdienste im Alters- und Pflegeheim Kerzers\nPfarrhaus-Café\nSeniorennachmittage\nSeniorenreise\nSingen im Alters- und Pflegeheim Kerzers\nSpielnachmittag-Kerzers\nSeelsorge\nAllgemein\nMorgenfeier\nTrauercafé\nGottesdienste & Kirche im Lebenskreis\nGottesdienste und Liturgische Feiern\nGottesdienste\nKinderangebot\nGottesdienst-Taxi\nKirchenkaffee\nLektorengruppe\nGottesdienste Kerzers ONLINE\nAbendfeier\nMorgenfeier\nKirche im Lebenskreis\nKircheneintritt\nGeburt\nTaufe\nKonfirmation\nHochzeit\nTodesfall\nBekanntmachung\nTrauercafé\nKirchlicher Unterricht\nUnterricht\nUnterricht Primarstufe\nUnterricht Orientierungsschule\nKUW Berner Dörfer\nKonfirmation\nLinks\nPartner\nRef Kirchen Bern-Jura-Solothurn\nKant. Kirche Freiburg\nKirchlicher Bezirk Bern-Mittelland Nord\nEvang. ref. Kirche Schweiz\nEGW Kerzers\nKath. Pfarrei Murten\nParoisse réformée française Berne\nAlters- und Pflegeheime im Seebezirk\nBetagtenzentrum Laupen\nBerner Beratungsstelle Ehe-Partnerschaft-Familie Ref. Kirchen\nreformiert.\nKirchgemeinden\nCordast\nFerenbalm\nFrauenkappelen\nLaupen\nMeyriez\nMühleberg\nMünchenwiler\nMurten\nNeuenegg\nPfarrverein Kirchenregion\nLosung: Bibeltext zum TagSamuel sprach zu Saul: Du aber steh jetzt still, dass ich dir kundtue, was Gott gesagt hat.1.Samuel 9,27\nJesus sprach zu Simon und Andreas: Kommt, folgt mir nach; ich will euch zu Menschenfischern machen!Markus 1,17\nAgenda\nMonat\nJahr\nTaufen\nSuche\nAuswahlsuche\nSitemap\nKontakte\nWer ist für was zuständig\nPfarrpersonen\nKirchenmusik\nSigristenteam\nReligionsunterricht\nKirchgemeinderat und Behörden BE und FR\nSekretariat und Finanzverwaltung\nRaumreservation\nReglemente & Verordnungen\nKirchliches Leben\nKinder und Jugend\nKinderangebot\nKrabbelgruppe\nMFM Zyklus-Show für Mädchen von 10-12 Jahren\nRoundabout Kids für Girls\nRoundabout Youth für junge Frauen\nKerzerslauf Kinderhütedienst\nErwachsene\nGemeinsame Zeit schenken\nKirchgemeinde-Versammlung\nGästezimmer Pfarrhaus\nPfarrhaus-Café\nSingpuls\nSingen in der roten Stunde\nWunderstunde Bibel und Theologie\nSenioren\nBesuchsdienst Kerzers\nGottesdienste im Alters- und Pflegeheim Kerzers\nPfarrhaus-Café\nSeniorennachmittage\nSeniorenreise\nSingen im Alters- und Pflegeheim Kerzers\nSpielnachmittag-Kerzers\nSeelsorge\nAllgemein\nMorgenfeier\nTrauercafé\nGottesdienste & Kirche im Lebenskreis\nGottesdienste und Liturgische Feiern\nGottesdienste\nKinderangebot\nGottesdienst-Taxi\nKirchenkaffee\nLektorengruppe\nGottesdienste Kerzers ONLINE\nAbendfeier\nMorgenfeier\nKirche im Lebenskreis\nKircheneintritt\nGeburt\nTaufe\nKonfirmation\nHochzeit\nTodesfall\nBekanntmachung\nTrauercafé\nKirchlicher Unterricht\nUnterricht\nUnterricht Primarstufe\nUnterricht Orientierungsschule\nKUW Berner Dörfer\nKonfirmation\nLinks\nPartner\nRef Kirchen Bern-Jura-Solothurn\nKant. Kirche Freiburg\nKirchlicher Bezirk Bern-Mittelland Nord\nEvang. ref. Kirche Schweiz\nEGW Kerzers\nKath. Pfarrei Murten\nParoisse réformée française Berne\nAlters- und Pflegeheime im Seebezirk\nBetagtenzentrum Laupen\nBerner Beratungsstelle Ehe-Partnerschaft-Familie Ref. Kirchen\nreformiert.\nKirchgemeinden\nCordast\nFerenbalm\nFrauenkappelen\nLaupen\nMeyriez\nMühleberg\nMünchenwiler\nMurten\nNeuenegg\nPfarrverein Kirchenregion\nHome Kirchliches Leben Krabbelgruppe\nÄhnlich\nKerzerslauf Kinderhüted...\nFarbenspiel-family\nKinderangebot\nKinder Jugendliche...\nSekretariat Kerzers\n031 755 55 50\nVerantwortlich für diese Seite\nKrabbelgruppe Kerzers\nWir treffen uns am Montagmorgen zwischen 09.00 und 11.00 Uhr.\nKurzfristige Änderungen via WhatsApp Chat.\nUnsere Kinder sind zwischen 0 und 4 Jahre alt. Sie haben die Möglichkeit, miteinander zu spielen und Freunde zu finden.\nBeim gemeinsamen Spielen und Znüniessen, werden unter den Eltern oder Grosseltern neue Kontakte geknüpft.\nWährend den Sommer- und Weihnacht-Schulferien Kerzers findet keine Krabbelgruppe statt.\nAnmeldung erwünscht bei:\nCo-Leiterin Krabbelgruppe\nAline Daeppen\n079 224 17 36\noder\nCo-Leiterin Krabbelgruppe\nJasmin Hadorn\n079 254 83 99\nCo-Leiterin Krabbelgruppe\nEva Jotti\n079 285 85 05\nDie neuen Co-Leiterinnen Krabbelgruppe Kerzers\nWir freuen uns auf euch!\nEltern-Kinder-Café / Sprechstunde\nJemand aus dem Team der Familienbegleitung ist einmal im Monat anwesend und stellt sich in der Krabbelgruppe als Ansprechpersonen für Erziehungsfragen zur Verfügung.\nDieses Angebot ist informell und der Austausch in der Gruppe zentral.\nDie genauen Daten finden Sie auf der Agenda Eltern-Kinder-Cafés:\n» Agenda Sprechstunde in Kerzers Education familiale\n» Education familiale Freiburg Aktivitäten Familien\nNächste Termine:\n02.11.2026 Krabbelgruppe Kerzers\n09.11.2026 Krabbelgruppe Kerzers\n16.11.2026 Krabbelgruppe Kerzers\n23.11.2026 Krabbelgruppe Kerzers\n30.11.2026 Krabbelgruppe Kerzers\n05.12.2026 Chlouser Krabbelgruppe\n07.12.2026 Krabbelgruppe Kerzers\n14.12.2026 Krabbelgruppe Kerzers\nBereitgestellt: 15.04.2025 Besuche: 15 heute, 131 Monat\nDatenschutz | aktualisiert mit kirchenweb.ch",
+            "captureMethod": "node-pinned-https"
+          },
+          {
+            "schema": 1,
+            "project": "vmeste",
+            "id": "0b946b7f93e78536fc11b281c133c01e670a4b9b5e820b6ed87a4c2178d26d01",
+            "url": "https://www.refkirche-kerzers.ch/?page=agenda&sucheDarstellung=agenda&sucheDarstellungTitel=tag.keyword.one+-+Regionales&sucheStichwort=Regionales&sucheTyp=veranstaltungen",
+            "finalUrl": "https://www.refkirche-kerzers.ch/?page=agenda&sucheDarstellung=agenda&sucheDarstellungTitel=tag.keyword.one+-+Regionales&sucheStichwort=Regionales&sucheTyp=veranstaltungen",
+            "fetchedAt": "2026-10-29T21:31:26.688Z",
+            "contentType": "text/html; charset=UTF-8",
+            "parser": "cheerio-visible-body-v1",
+            "textHash": "04a2d3f81f8063a3da7e034b4d67d62f77085cd333899e14bbe43501360e279f",
+            "rawHash": "abd88c38bd9ff7272b92cabcf3f41541745a331f4bd18725ffa6b91b900312fd",
+            "text": "Losung: Bibeltext zum TagSamuel sprach zu Saul: Du aber steh jetzt still, dass ich dir kundtue, was Gott gesagt hat.1.Samuel 9,27\nJesus sprach zu Simon und Andreas: Kommt, folgt mir nach; ich will euch zu Menschenfischern machen!Markus 1,17\nAgenda\nMonat\nJahr\nTaufen\nSuche\nAuswahlsuche\nSitemap\nKontakte\nWer ist für was zuständig\nPfarrpersonen\nKirchenmusik\nSigristenteam\nReligionsunterricht\nKirchgemeinderat und Behörden BE und FR\nSekretariat und Finanzverwaltung\nRaumreservation\nReglemente & Verordnungen\nKirchliches Leben\nKinder und Jugend\nKinderangebot\nKrabbelgruppe\nMFM Zyklus-Show für Mädchen von 10-12 Jahren\nRoundabout Kids für Girls\nRoundabout Youth für junge Frauen\nKerzerslauf Kinderhütedienst\nErwachsene\nGemeinsame Zeit schenken\nKirchgemeinde-Versammlung\nGästezimmer Pfarrhaus\nPfarrhaus-Café\nSingpuls\nSingen in der roten Stunde\nWunderstunde Bibel und Theologie\nSenioren\nBesuchsdienst Kerzers\nGottesdienste im Alters- und Pflegeheim Kerzers\nPfarrhaus-Café\nSeniorennachmittage\nSeniorenreise\nSingen im Alters- und Pflegeheim Kerzers\nSpielnachmittag-Kerzers\nSeelsorge\nAllgemein\nMorgenfeier\nTrauercafé\nGottesdienste & Kirche im Lebenskreis\nGottesdienste und Liturgische Feiern\nGottesdienste\nKinderangebot\nGottesdienst-Taxi\nKirchenkaffee\nLektorengruppe\nGottesdienste Kerzers ONLINE\nAbendfeier\nMorgenfeier\nKirche im Lebenskreis\nKircheneintritt\nGeburt\nTaufe\nKonfirmation\nHochzeit\nTodesfall\nBekanntmachung\nTrauercafé\nKirchlicher Unterricht\nUnterricht\nUnterricht Primarstufe\nUnterricht Orientierungsschule\nKUW Berner Dörfer\nKonfirmation\nLinks\nPartner\nRef Kirchen Bern-Jura-Solothurn\nKant. Kirche Freiburg\nKirchlicher Bezirk Bern-Mittelland Nord\nEvang. ref. Kirche Schweiz\nEGW Kerzers\nKath. Pfarrei Murten\nParoisse réformée française Berne\nAlters- und Pflegeheime im Seebezirk\nBetagtenzentrum Laupen\nBerner Beratungsstelle Ehe-Partnerschaft-Familie Ref. Kirchen\nreformiert.\nKirchgemeinden\nCordast\nFerenbalm\nFrauenkappelen\nLaupen\nMeyriez\nMühleberg\nMünchenwiler\nMurten\nNeuenegg\nPfarrverein Kirchenregion\nLosung: Bibeltext zum TagSamuel sprach zu Saul: Du aber steh jetzt still, dass ich dir kundtue, was Gott gesagt hat.1.Samuel 9,27\nJesus sprach zu Simon und Andreas: Kommt, folgt mir nach; ich will euch zu Menschenfischern machen!Markus 1,17\nAgenda\nMonat\nJahr\nTaufen\nSuche\nAuswahlsuche\nSitemap\nKontakte\nWer ist für was zuständig\nPfarrpersonen\nKirchenmusik\nSigristenteam\nReligionsunterricht\nKirchgemeinderat und Behörden BE und FR\nSekretariat und Finanzverwaltung\nRaumreservation\nReglemente & Verordnungen\nKirchliches Leben\nKinder und Jugend\nKinderangebot\nKrabbelgruppe\nMFM Zyklus-Show für Mädchen von 10-12 Jahren\nRoundabout Kids für Girls\nRoundabout Youth für junge Frauen\nKerzerslauf Kinderhütedienst\nErwachsene\nGemeinsame Zeit schenken\nKirchgemeinde-Versammlung\nGästezimmer Pfarrhaus\nPfarrhaus-Café\nSingpuls\nSingen in der roten Stunde\nWunderstunde Bibel und Theologie\nSenioren\nBesuchsdienst Kerzers\nGottesdienste im Alters- und Pflegeheim Kerzers\nPfarrhaus-Café\nSeniorennachmittage\nSeniorenreise\nSingen im Alters- und Pflegeheim Kerzers\nSpielnachmittag-Kerzers\nSeelsorge\nAllgemein\nMorgenfeier\nTrauercafé\nGottesdienste & Kirche im Lebenskreis\nGottesdienste und Liturgische Feiern\nGottesdienste\nKinderangebot\nGottesdienst-Taxi\nKirchenkaffee\nLektorengruppe\nGottesdienste Kerzers ONLINE\nAbendfeier\nMorgenfeier\nKirche im Lebenskreis\nKircheneintritt\nGeburt\nTaufe\nKonfirmation\nHochzeit\nTodesfall\nBekanntmachung\nTrauercafé\nKirchlicher Unterricht\nUnterricht\nUnterricht Primarstufe\nUnterricht Orientierungsschule\nKUW Berner Dörfer\nKonfirmation\nLinks\nPartner\nRef Kirchen Bern-Jura-Solothurn\nKant. Kirche Freiburg\nKirchlicher Bezirk Bern-Mittelland Nord\nEvang. ref. Kirche Schweiz\nEGW Kerzers\nKath. Pfarrei Murten\nParoisse réformée française Berne\nAlters- und Pflegeheime im Seebezirk\nBetagtenzentrum Laupen\nBerner Beratungsstelle Ehe-Partnerschaft-Familie Ref. Kirchen\nreformiert.\nKirchgemeinden\nCordast\nFerenbalm\nFrauenkappelen\nLaupen\nMeyriez\nMühleberg\nMünchenwiler\nMurten\nNeuenegg\nPfarrverein Kirchenregion\nHome Agenda\n2026\naktuelle Woche\nOktober\nNovember\nDezember\nJanuar 2027\nFebruar 2027\nMärz 2027\nApril 2027\nMai 2027\nJuni 2027\nJuli 2027\nAugust 2027\nSeptember 2027\nVeranstaltungen für\nErwachsene\nFamilien\nFrauen\nJugend\nJunge Erwachsene\nKinder\nKleinkinder\nKUW\nSenioren\nStichworte\nAltersnachmittag\nBeerdigung\nFreiwilligenarbeit\nGottesdienst\nGruppen\nKinderangebot\nKinderbetreuung\nKirchgemeindeversammlung\nKonfirmation\nKonzert\nKUW - Unterricht\nMusikalisches\nOekumene\nÖffentlichkeitsarbeit\nPfarramt\nRäume\nRegionales\nSeelsorge\nAgenda\n2026\n2027\n2028\nArchiv\nKirchenkalender\nZeitraum\nOktober\nNovember\nDezember\nJanuar 2027\nFebruar 2027\nMärz 2027\nApril 2027\nMai 2027\nJuni 2027\nJuli 2027\nAugust 2027\nSeptember 2027\n|\nVeranstaltungen für ...\nErwachsene\nFamilien\nFrauen\nJugend\nJunge Erwachsene\nKinder\nKleinkinder\nKUW\nSenioren\n|\nStichworte\nAltersnachmittag\nBeerdigung\nFreiwilligenarbeit\nGottesdienst\nGruppen\nKinderangebot\nKinderbetreuung\nKirchgemeindeversammlung\nKonfirmation\nKonzert\nKUW - Unterricht\nMusikalisches\nOekumene\nÖffentlichkeitsarbeit\nPfarramt\nRäume\nRegionales\nSeelsorge\n|\nJahre\n2026\n2027\n2028\nArchiv\nKirchenkalender\ntag.keyword.one - Regionales\nMo.\n02.11.2026\n09.00\nKrabbelgruppe Kerzers, im Kirchgemeindehaus\nMo.\n09.11.2026\n09.00\nKrabbelgruppe Kerzers, im Kirchgemeindehaus\nMo.\n16.11.2026\n09.00\nKrabbelgruppe Kerzers, im Kirchgemeindehaus\nMo.\n23.11.2026\n09.00\nKrabbelgruppe Kerzers, im Kirchgemeindehaus\nSo.\n29.11.2026\n17.00\nAdventskonzert \"Unter dem Sternenhimmel\", in der Kirche, Kerzers\nMo.\n30.11.2026\n09.00\nKrabbelgruppe Kerzers, im Kirchgemeindehaus\nSa.\n05.12.2026\n08.00\nChlouser Krabbelgruppe, im Saal des Kirchgemeindehauses, Kerzers\nMo.\n07.12.2026\n09.00\nKrabbelgruppe Kerzers, im Kirchgemeindehaus\nMo.\n14.12.2026\n09.00\nKrabbelgruppe Kerzers, im Kirchgemeindehaus\nSo.\n05.09.2027\n10.00\nKirchenfest der Region Laupen in Ferenbalm, Kirche, Neuenegg\nSo.\n28.11.2027\n17.00\nAdventskonzert zum Auftakt der Turmbeleuchtung, in der Kirche, Kerzers\nDatenschutz | aktualisiert mit kirchenweb.ch",
+            "captureMethod": "node-pinned-https"
+          }
+        ]
+      }
     }
   ]
 }
