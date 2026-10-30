@@ -698,6 +698,22 @@ test('main: hostIgnore from source-watch.json is validated before any request',a
 // The run-wide outage fuse: more than a share of the sources fetched in one run unavailable means the check broke (a network down), not the market.
 const grid=count=>Array.from({length:count},(_,index)=>({...krabbel,id:`s${index}`,url:`https://site${index}.example/page`,recordIds:[`card-${index}`]}));
 const unreachable=ids=>async url=>{if(ids.some(id=>url.startsWith(`https://site${id}.example/`)))throw Error('network offline');return reply(notice());};
+// Eight sources with an HTTP error or a challenge page tripped the fuse every morning from 21 October 2026, and their tasks never reached the editors.
+test('a source that answers with an error is no outage: the fuse stays off with a working network, and in a real outage its task is still issued',async()=>{
+  const failing=(gone,offline)=>async url=>{
+    if(gone.some(id=>url.startsWith(`https://site${id}.example/`)))return new Response('gone',{status:404});
+    return unreachable(offline)(url);
+  };
+  const state={schema:1,sources:{},queue:[]};
+  const answered=await runMonitor({sources:grid(10),state,now:at(14),outageFuse:20,fetchImpl:failing([0,1,2,3],[])});
+  assert.deepEqual({tripped:answered.outageFuse.tripped,failed:answered.outageFuse.failed,share:answered.outageFuse.share},{tripped:false,failed:0,share:0});
+  assert.equal(state.sources.s0.error,'HTTP 404');assert.equal(state.sources.s0.errorCount,1);
+  const down={schema:1,sources:{},queue:[]};
+  const report=await runMonitor({sources:grid(10),state:down,now:at(14),outageFuse:20,fetchImpl:failing([0],[1,2,3,4])});
+  assert.equal(report.outageFuse.tripped,true);assert.deepEqual(report.outageFuse.sources.map(row=>row.sourceId),['s1','s2','s3','s4']);
+  assert.deepEqual(down.sources.s1,{});assert.equal(down.sources.s0.error,'HTTP 404');
+  assert.equal(report.results.find(row=>row.id==='s0').withheld,undefined);assert.equal(report.results.find(row=>row.id==='s1').withheld,'outage-fuse');
+});
 test('the outage fuse withholds every source-unavailable task of a run in which too many sources failed, and puts those sources back',async()=>{
   const sources=grid(10),state={schema:1,sources:{},queue:[]};
   // Source s9 answers, but without the page content: a parser failure, which is not an outage and is still issued.
@@ -726,14 +742,14 @@ test('a failure rate of exactly the limit, or a run smaller than the minimum, st
   const off={schema:1,sources:{},queue:[]};
   assert.equal((await runMonitor({sources:grid(4),state:off,now:at(14),fetchImpl:unreachable([0,1,2,3])})).outageFuse.tripped,false);assert.equal(off.queue.length,4);
 });
-test('a source that answers 304 or is not due is not counted as fetched, and a first 404 is counted but raises no task',async()=>{
+test('a source that answers 304 or is not due is not counted as fetched; a first 404 raises no task and no alarm, and a 503 counts for the fuse',async()=>{
   const sources=grid(5),state={schema:1,sources:{},queue:[]};
   await runMonitor({sources,state,now:at(14),fetchImpl:unreachable([])});
-  const fetchImpl=async url=>url.startsWith('https://site0.')?reply('missing',404):reply(null,304);
-  const report=await runMonitor({sources,state,ids:new Set(['s0','s1']),force:true,now:at(15),outageFuse:100,fetchImpl});
-  assert.deepEqual([report.outageFuse.fetched,report.outageFuse.failed,report.outageFuse.tripped],[2,1,false]);
+  const answering=status=>async url=>url.startsWith('https://site0.')?reply('no page',status):reply(null,304);
+  const report=await runMonitor({sources,state,ids:new Set(['s0','s1']),force:true,now:at(15),outageFuse:20,fetchImpl:answering(404)});
+  assert.deepEqual([report.outageFuse.fetched,report.outageFuse.failed,report.outageFuse.tripped],[2,0,false]);
   assert.equal(state.sources.s0.errorCount,1);assert.equal(state.queue.length,0);
-  const tripped=await runMonitor({sources,state,ids:new Set(['s0','s1']),force:true,now:at(16),outageFuse:20,fetchImpl});
+  const tripped=await runMonitor({sources,state,ids:new Set(['s0','s1']),force:true,now:at(16),outageFuse:20,fetchImpl:answering(503)});
   assert.equal(tripped.outageFuse.tripped,true);assert.equal(state.sources.s0.errorCount,1);assert.equal(state.queue.length,0);
 });
 test('the outage fuse puts an established source back whole, validators included, so the next request asks about the page it knew',async()=>{

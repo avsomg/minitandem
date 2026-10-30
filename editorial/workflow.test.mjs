@@ -209,7 +209,7 @@ test('a card added after the review baseline is searched and verified ahead of r
   const quality={queue:[{id:'a',priority:20,stale:false,sourceIssues:[],critical:[]},{id:'b',priority:200,stale:false,sourceIssues:[],critical:[]}]};
   const data=stage=>({...input,records:[card,old],receiptBaseline:{schema:1,cutoffOn:'2026-09-29',ids:['b']},pipeline:{rows:[row('a',stage),row('b',stage)]}});
   const priorityOf=(stage,id)=>taskSpecs(data(stage),{quality}).find(spec=>spec.cardId===id&&spec.kind===stage).priority;
-  assert.equal(priorityOf('search','a'),450);assert.equal(priorityOf('verify','a'),510);
+  assert.equal(priorityOf('search','a'),480);assert.equal(priorityOf('verify','a'),540);
   assert.equal(priorityOf('search','b'),200,'a card of the baseline keeps its quality priority');
   // Once the new card has its receipt it is an ordinary card.
   const reviewed={...data('search'),receipts:[{id:'a'}]};

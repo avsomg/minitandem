@@ -37,6 +37,8 @@ export function plan(state,policy,now,claimedToday){
   const role=daily?null:policy.leadRoles[(state.roleTurn||0)%policy.leadRoles.length];
   const minutes=n=>n*60000,steps=[];
   if(daily)for(const name of ['monitor','review','discover-events','canton-audit'])steps.push({label:name,args:[`editorial/${name}.mjs`],timeoutMs:minutes(15)});
+  // A monitor pass that failed (the fuse: no network at 07:30, just after the Mac woke) runs again with the next run, not a day later.
+  if(!daily&&state.monitorRetryOn===today)steps.push({label:'monitor',args:['editorial/monitor.mjs'],timeoutMs:minutes(15)});
   if(daily)steps.push({label:'work-packets',args:['editorial/work-packets.mjs','--no-semantic'],timeoutMs:minutes(10)});
   steps.push({label:'sync',args:['editorial/workflow.mjs','sync'],timeoutMs:minutes(10)});
   if(limit>0)steps.push({label:'batch',needsSync:true,timeoutMs:minutes(45),
@@ -195,7 +197,8 @@ export function runCycle({base=here,home=os.homedir(),now=new Date(),run=runNode
     // The number the owner reads is the day's total after this run; the cap was planned from the count before it.
     record.claimedBeforeRun=record.claimedToday;record.claimedToday=queueMarks(queueFile,new Date(record.finishedAt)).claimedToday;
     writeJson(stateFile,{...state,runs:(state.runs||0)+1,lastRunAt:record.startedAt,lastEventId:record.changes?.lastEventId??marks.lastEventId,
-      roleTurn:(state.roleTurn||0)+(planned.daily?0:1),lastDailyOn:planned.daily?planned.today:state.lastDailyOn});
+      roleTurn:(state.roleTurn||0)+(planned.daily?0:1),lastDailyOn:planned.daily?planned.today:state.lastDailyOn,
+      monitorRetryOn:record.failedSteps.includes('monitor')?planned.today:null});
     return finish();
   }finally{release?.();}
 }

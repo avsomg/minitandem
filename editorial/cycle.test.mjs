@@ -42,6 +42,10 @@ test('daily maintenance runs once per local day and other runs rotate the leadin
   assert.deepEqual(later.steps[1].args,['editorial/agent-run.mjs','--role=search','--chain','--limit=4']);
   assert.equal(plan({lastDailyOn:'2026-10-13',roleTurn:3},policy,at(15),0).role,'verify');
   assert.equal(plan({lastDailyOn:'2026-10-13'},policy,at(7,'2026-10-14'),0).daily,true);
+  // A monitor pass that failed in the morning runs again with the next run of that day, and only of that day.
+  assert.ok(labels(plan({lastDailyOn:'2026-10-13',monitorRetryOn:'2026-10-13'},policy,at(11),0).steps).includes('monitor'));
+  assert.ok(!labels(plan({lastDailyOn:'2026-10-13',monitorRetryOn:null},policy,at(11),0).steps).includes('monitor'));
+  assert.ok(!labels(plan({lastDailyOn:'2026-10-13',monitorRetryOn:'2026-10-12'},policy,at(11),0).steps).includes('monitor'));
 });
 test('the daily job cap shrinks and then removes the model batch, never the bookkeeping',()=>{
   assert.equal(plan({lastDailyOn:'2026-10-13'},policy,at(19),22).steps.find(step=>step.label==='batch').args.at(-1),'--limit=2');

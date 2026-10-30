@@ -47,8 +47,8 @@ export function taskSpecs(input,{quality=null,monitor=null,date=today()}={}){
       priority:500+(priority.get(id)||0),payload:{card,cardRevision,corrections,staleApprovedUpdates,date}});
   };
   // A card added after the external review baseline cannot be published before its own review (assertPublicationReviewed), and an
-  // unreviewed card stops every build, so its search and verification go ahead of routine rechecks, at the priority of a report to the
-  // editors. Until 26 October 2026 a new card waited behind every other search.
+  // unreviewed card stops every build, so its search and verification go ahead of routine rechecks and of reports to the editors (450),
+  // which are checks of published cards. Until 26 October 2026 a new card waited behind every other search.
   const baselineIds=new Set(input.receiptBaseline?.ids||[]);
   for(const row of input.pipeline.rows){
     const card=byId.get(row.id),cardRevision=digest(card),candidate=input.candidates.get(row.id);
@@ -59,7 +59,7 @@ export function taskSpecs(input,{quality=null,monitor=null,date=today()}={}){
       const payload={card,cardRevision,candidate:candidate||null,receipt:receipt||null,
         dispute:dispute||null,decision:decision||null,date,dependencyRevision:dependencyRevision(input,row.id)};
       jobs.push({kind,cardId:row.id,inputRevision:digest([kind,cardRevision,candidate,receipt,dispute,decision]),
-        priority:(newCard?450:priority.get(row.id)||0)+(kind==='search'?0:60),payload});
+        priority:(newCard?480:priority.get(row.id)||0)+(kind==='search'?0:60),payload});
     }
     if(row.editorialStatus==='required'||staleIds.has(row.id))addEditorial(row.id);
   }

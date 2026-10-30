@@ -132,9 +132,9 @@ export function rebaseline(state,ids,note,now=new Date().toISOString()){
  * `rebaselineParser:{note}` moves v1 HTML baselines to parser v2: content-changed only where v1 itself sees a change, the alarm
  * keys become a baseline, high redirect classes are issued once. `spreadDays` moves the last attempt back by spreadOffset() days.
  * A run-wide outage fuse covers source-unavailable the way `alarmFuse` covers alarms: when more than `outageFuse` percent of the sources
- * fetched in one run (at least `outageMin` of them) are unavailable, the check broke, not the market (a network down on this Mac). No
- * source-unavailable task is issued, and the failed sources are put back as they were before the run (validators included: a failed
- * fetch never stored new ones), so they are due again next time.
+ * fetched in one run (at least `outageMin` of them) get no answer or a server error, the check broke, not the market (a network down on this
+ * Mac). No source-unavailable task is issued for them, and they are put back as they were before the run (validators included: a failed
+ * fetch never stored new ones), so they are due again next time. A source that answered with a 403, a 404 or a challenge page is judged on its own.
  * `hostIgnore` (see hostRules) applies to the compared text and the alarm lines; when the stored text, with the same rules applied,
  * equals the new text, the hash moves without a task (noted in baselineHistory). A v1 baseline stays on v1 outside the parser pass.
  */
@@ -310,12 +310,17 @@ export async function runMonitor({sources,state,fetchImpl=fetch,now=new Date().t
       const row=results.find(result=>result.id===item.source.id);if(row)row.withheld='alarm-fuse';
     }
   }else for(const item of pending)issue(state.queue,item.source,item.kind,now,{url:item.source.url,finalUrl:item.finalUrl,parser:ALARM_PARSER,lines:item.lines,...(item.siteWide?{siteWide:item.siteWide}:{})});
-  const share=fetched?Math.round(unavailable.length/fetched*1000)/10:0;
-  const outage={tripped:fetched>=outageMin&&unavailable.length*100>fetched*outageFuse,limit:outageFuse,min:outageMin,fetched,failed:unavailable.length,share};
+  // Only a fetch with no answer, or a server error (a proxy or a host in trouble), speaks for an outage. A 403, a 404 or a challenge page is an
+  // answer: the network works and that source is the problem. Such sources tripped the fuse every morning from 21 October 2026, so their
+  // tasks never reached the editors.
+  const noAnswer=unavailable.filter(item=>!item.entry.httpStatus||item.entry.httpStatus>=500);
+  const share=fetched?Math.round(noAnswer.length/fetched*1000)/10:0;
+  const outage={tripped:fetched>=outageMin&&noAnswer.length*100>fetched*outageFuse,limit:outageFuse,min:outageMin,fetched,failed:noAnswer.length,share};
   if(outage.tripped){
-    outage.sources=unavailable.map(({source,entry})=>({sourceId:source.id,error:entry.error,httpStatus:entry.httpStatus}));
-    for(const item of unavailable){state.sources[item.source.id]=item.prior;item.row.withheld='outage-fuse';}
-  }else for(const item of unavailable)if(item.open)issue(state.queue,item.source,'source-unavailable',now,item.details);
+    outage.sources=noAnswer.map(({source,entry})=>({sourceId:source.id,error:entry.error,httpStatus:entry.httpStatus}));
+    for(const item of noAnswer){state.sources[item.source.id]=item.prior;item.row.withheld='outage-fuse';}
+  }
+  for(const item of unavailable)if(item.open&&!(outage.tripped&&noAnswer.includes(item)))issue(state.queue,item.source,'source-unavailable',now,item.details);
   state.lastRun=now;
   return {state,results,openTasks:state.queue.filter(q=>q.status==='open').length,fuse,outageFuse:outage,siteWide};
 }
@@ -384,6 +389,6 @@ async function cli(){
   const out=await main(process.argv.slice(2));
   console.log(JSON.stringify(out,null,2));
   if(out.fuse?.tripped){console.error(`alarm fuse: ${out.fuse.count} alarm tasks exceed --alarm-fuse=${out.fuse.limit}; none were issued (listed under "fuse"); those sources stay due and are read again at the next run, so raise the limit or fix the cause and run again.`);process.exitCode=2;}
-  if(out.outageFuse?.tripped){console.error(`outage fuse: ${out.outageFuse.failed} of ${out.outageFuse.fetched} fetched sources were unavailable (${out.outageFuse.share} %, limit --outage-fuse=${out.outageFuse.limit} %); no source-unavailable task was issued and those sources stay due (listed under "outageFuse").`);process.exitCode=2;}
+  if(out.outageFuse?.tripped){console.error(`outage fuse: ${out.outageFuse.failed} of ${out.outageFuse.fetched} fetched sources gave no answer or a server error (${out.outageFuse.share} %, limit --outage-fuse=${out.outageFuse.limit} %); no source-unavailable task was issued and those sources stay due (listed under "outageFuse").`);process.exitCode=2;}
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))cli().catch(error=>{console.error(error);process.exitCode=1;});
