@@ -399,13 +399,13 @@
   },
   {
     "id": "lire-marly",
-    "address": "Route de Fribourg 15, Centre La Jonction, Marly",
+    "address": "Route de Fribourg 15, Centre commercial La Jonction (1er étage), Marly",
     "geo": {
       "label": "Route de Fribourg 15 1723 Marly",
       "lat": 46.78019714355469,
       "lon": 7.150331974029541,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Fribourg+15+Marly&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Fribourg+15&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-10-31",
       "precision": "address"
     }
   },
@@ -446,6 +446,18 @@
     }
   },
   {
+    "id": "aef-schonberg",
+    "address": "Centre d'animation socioculturelle du Schönberg, Salle polyvalente, Rte Mon-Repos 9, 1700 Fribourg",
+    "geo": {
+      "label": "Route Mon-Repos 9 1700 Fribourg",
+      "lat": 46.8084831237793,
+      "lon": 7.1737518310546875,
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+Mon-Repos+9+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-10-31",
+      "precision": "address"
+    }
+  },
+  {
     "id": "aef-passerelles",
     "address": "Rue de Locarno 3, 1700 Fribourg",
     "geo": {
@@ -459,13 +471,13 @@
   },
   {
     "id": "aef-vignettaz",
-    "address": "École primaire de la Vignettaz, Route de la Gruyère 9, 1700 Fribourg",
+    "address": "École primaire de la Vignettaz, salle rythmique/musique,Rte de la Gruyère 9, 1700 Fribourg",
     "geo": {
       "label": "Route de la Gruyère 9 1700 Fribourg",
       "lat": 46.79817581176758,
       "lon": 7.143957138061523,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+la+Gruy%C3%A8re+9+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-28",
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+de+la+Gruy%C3%A8re+9+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-10-31",
       "precision": "address"
     }
   },
@@ -518,6 +530,18 @@
     }
   },
   {
+    "id": "minimove-schonberg",
+    "address": "Hall of the Schönberg primary school, Route de la Heitera 17, Fribourg",
+    "geo": {
+      "label": "Route de la Heitera 17 1700 Fribourg",
+      "lat": 46.81013488769531,
+      "lon": 7.174888610839844,
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+la+Heitera+17&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-10-31",
+      "precision": "address"
+    }
+  },
+  {
     "id": "conservatoire",
     "address": "Conservatoire Fribourg, Route Louis-Braille 8, 1763 Granges-Paccot, room B1.10",
     "geo": {
@@ -555,13 +579,13 @@
   },
   {
     "id": "museum",
-    "address": "Chemin du Musée 6, Fribourg",
+    "address": "Chemin du Musée 6, 1700 Fribourg",
     "geo": {
       "label": "Chemin du Musée 6 1700 Fribourg",
       "lat": 46.793087005615234,
       "lon": 7.157187461853027,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+du+Mus%C3%A9e+6+Fribourg&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+du+Mus%C3%A9e+6+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-10-31",
       "precision": "address"
     }
   },
@@ -598,6 +622,18 @@
       "lon": 7.249922752380371,
       "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Zentrum+Weissenstein+Weissenstein+57+1718+Rechthalten&type=locations&origins=address&limit=5&sr=4326",
       "checked": "2026-09-27",
+      "precision": "address"
+    }
+  },
+  {
+    "id": "candles-plaffeien",
+    "address": "By the Jugendraum, Seeliweg 5, Plaffeien; confirm the location together with the date",
+    "geo": {
+      "label": "Seeliweg 5 1716 Plaffeien",
+      "lat": 46.74283981323242,
+      "lon": 7.288978576660156,
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Seeliweg+5&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-10-31",
       "precision": "address"
     }
   },
@@ -639,13 +675,13 @@
   },
   {
     "id": "memo-library",
-    "address": "Rue de l’Hôpital 2, Fribourg",
+    "address": "Rue de l’Hôpital 2, 1700 Fribourg",
     "geo": {
       "label": "Rue de l'Hôpital 2 1700 Fribourg",
       "lat": 46.805633544921875,
       "lon": 7.154872894287109,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+Fribourg&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-10-31",
       "precision": "address"
     }
   },
@@ -1478,18 +1514,6 @@
     }
   },
   {
-    "id": "arconciel-arche-play",
-    "address": "Place de l’Arche 1, 1732 Arconciel",
-    "geo": {
-      "label": "Place de l'Arche 1 1732 Arconciel",
-      "lat": 46.74541473388672,
-      "lon": 7.123512268066406,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Place+de+l%E2%80%99Arche+1+1732+Arconciel&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-28",
-      "precision": "address"
-    }
-  },
-  {
     "id": "st-silvester-spielgruppe",
     "address": "Untergeschoss Schulhaus, Schulweg 4, 1736 St. Silvester",
     "geo": {
@@ -1551,18 +1575,6 @@
   },
   {
     "id": "memo-musik-entdecken-2027-03-16",
-    "address": "Rue de l’Hôpital 2, Fribourg",
-    "geo": {
-      "label": "Rue de l'Hôpital 2 1700 Fribourg",
-      "lat": 46.805633544921875,
-      "lon": 7.154872894287109,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+Fribourg&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
-      "precision": "address"
-    }
-  },
-  {
-    "id": "devenir-famille-fribourg-2026-10-03",
     "address": "Rue de l’Hôpital 2, Fribourg",
     "geo": {
       "label": "Rue de l'Hôpital 2 1700 Fribourg",
@@ -1642,6 +1654,18 @@
       "lon": 7.154872894287109,
       "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+Fribourg&type=locations&origins=address&limit=5&sr=4326",
       "checked": "2026-09-27",
+      "precision": "address"
+    }
+  },
+  {
+    "id": "memo-saint-nicolas-family-day-2026-12-06",
+    "address": "Bourg quarter and L’Atelier, Place Notre-Dame 16; MEMO, Rue de l’Hôpital 2, Fribourg",
+    "geo": {
+      "label": "Rue de l'Hôpital 2 1700 Fribourg",
+      "lat": 46.805633544921875,
+      "lon": 7.154872894287109,
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-10-31",
       "precision": "address"
     }
   }

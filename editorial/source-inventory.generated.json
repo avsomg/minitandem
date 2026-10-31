@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-30T18:14:58.062Z",
+  "generatedAt": "2026-10-31T06:57:24.410Z",
   "sources": [
     {
       "id": "source-a9e685e2c5ed",
@@ -243,6 +243,20 @@
       ],
       "labels": [
         "Municipal pool page"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-90de2554bfe9",
+      "url": "https://portal.schwimmschule.ch/?cHash=d1e57c66666329f3519f28b1583cb33a&tx_eddaylight_readobjects%5Baction%5D=index&tx_eddaylight_readobjects%5Bcontroller%5D=ReadObjects&tx_eddaylight_readobjects%5BpageId%5D=1&tx_eddaylight_readobjects%5BsortOrder%5D=location.name_de_CH%7Ctrue%7C45",
+      "recordIds": [
+        "swim-duedingen"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Additional check: schedule"
       ],
       "monitoring": "not-configured"
     },
@@ -1489,6 +1503,20 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-566182689a1e",
+      "url": "https://www.marly.ch/brm/ne-pour-lire",
+      "recordIds": [
+        "lire-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-b9a29c8773b9",
       "url": "https://www.haragati.com/",
       "recordIds": [
@@ -1933,7 +1961,8 @@
         "memo-eveil-musical-2027-02-16",
         "memo-musik-entdecken-2027-03-16",
         "memo-valise-magique-2026-11-04",
-        "memo-est-ce-que-ca-joue"
+        "memo-est-ce-que-ca-joue",
+        "memo-saint-nicolas-family-day-2026-12-06"
       ],
       "regions": [
         "sarine"
@@ -1941,7 +1970,8 @@
       "labels": [
         "Programme PDF: age and dates",
         "PDF with the exact date and age",
-        "MEMO programme November 2026–March 2027 (PDF)"
+        "MEMO programme November 2026–March 2027 (PDF)",
+        "MEMO November 2026–March 2027 programme"
       ],
       "monitoring": "not-configured"
     },
@@ -1952,7 +1982,8 @@
         "memo-buchstart",
         "memo-library",
         "memo-valise-magique-2026-11-04",
-        "memo-est-ce-que-ca-joue"
+        "memo-est-ce-que-ca-joue",
+        "memo-saint-nicolas-family-day-2026-12-06"
       ],
       "regions": [
         "sarine"
@@ -1960,7 +1991,8 @@
       "labels": [
         "MEMO",
         "Official source",
-        "MEMO address and contacts"
+        "MEMO address and contacts",
+        "MEMO contact and location"
       ],
       "monitoring": "not-configured"
     },
@@ -2126,29 +2158,13 @@
       "id": "source-b272cc26c9d7",
       "url": "https://www.ref-weissenstein.ch/2026/09/26/einladung-herbstbasteln/",
       "recordIds": [
-        "herbstbasteln",
-        "erntedank"
+        "herbstbasteln"
       ],
       "regions": [
         "sense"
       ],
       "labels": [
-        "Place and time",
-        "Venue"
-      ],
-      "monitoring": "not-configured"
-    },
-    {
-      "id": "source-2eda85249c33",
-      "url": "https://www.ref-weissenstein.ch/",
-      "recordIds": [
-        "erntedank"
-      ],
-      "regions": [
-        "sense"
-      ],
-      "labels": [
-        "Official source"
+        "Place and time"
       ],
       "monitoring": "not-configured"
     },
@@ -2919,6 +2935,20 @@
       ],
       "labels": [
         "Holidays"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-13de8ed73dc7",
+      "url": "https://ludo-murten.ch/de/spielregeln",
+      "recordIds": [
+        "ludothek-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Additional check: price"
       ],
       "monitoring": "not-configured"
     },
@@ -6419,34 +6449,6 @@
       "monitoring": "not-configured"
     },
     {
-      "id": "source-e0f261bd4f5a",
-      "url": "https://www.ville-fribourg.ch/agenda/devenir-famille-familie-werden-0",
-      "recordIds": [
-        "devenir-famille-fribourg-2026-10-03"
-      ],
-      "regions": [
-        "sarine"
-      ],
-      "labels": [
-        "City events listing: date, admission and format"
-      ],
-      "monitoring": "not-configured"
-    },
-    {
-      "id": "source-c1de7ae5773d",
-      "url": "https://www.devenir-famille.ch/",
-      "recordIds": [
-        "devenir-famille-fribourg-2026-10-03"
-      ],
-      "regions": [
-        "sarine"
-      ],
-      "labels": [
-        "Organiser: conditions of participation"
-      ],
-      "monitoring": "not-configured"
-    },
-    {
       "id": "source-e6f769ef1898",
       "url": "https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf",
       "recordIds": [
@@ -6613,6 +6615,34 @@
       ],
       "labels": [
         "City games listing"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-50e66c3fd6cd",
+      "url": "https://www.ville-fribourg.ch/agenda/journee-des-familles-de-la-saint-nicolas-familientag-am-nikolaustag-1",
+      "recordIds": [
+        "memo-saint-nicolas-family-day-2026-12-06"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "City calendar: 2026 family day"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-8b4cbad369ad",
+      "url": "https://st-nicolas.ch/fr/programme/",
+      "recordIds": [
+        "memo-saint-nicolas-family-day-2026-12-06"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Price and registration"
       ],
       "monitoring": "not-configured"
     }

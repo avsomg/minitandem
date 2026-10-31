@@ -19,7 +19,7 @@ test('canton boundary and municipality audit stay aligned with the live catalogu
   assert.equal(report.municipalitiesList.find(m=>m.name==='Massonnens').categoryCounts.dining,1);
   assert.deepEqual(Object.fromEntries(Object.entries(report.districts).map(([key,d])=>[key,d.municipalities])),
     {broye:17,glane:14,gruyere:25,sarine:25,see:14,sense:15,veveyse:9});
-  assert.deepEqual(report.unmatched.map(a=>a.id).sort(),['candles-giffers','conservatoire','erntedank','rabel-giffers']);
+  assert.deepEqual(report.unmatched.map(a=>a.id).sort(),['candles-giffers','conservatoire','rabel-giffers']);
   assert.equal(records.find(a=>a.id==='plage-chevroux').status,'excluded');
   assert.ok(!active.some(a=>/häxewääg/i.test(a.name)));
   assert.ok(!active.some(a=>/gypsera/i.test(a.name)&&a.category==='play'));

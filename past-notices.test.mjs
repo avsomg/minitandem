@@ -131,7 +131,7 @@ test('the real cards: which are affected on 17 October 2026, in all three langua
     const shown=lang==='en'?{card:a=>a}:CI.overlay(S.records,files[lang],S.window.MinitandemViews.PRACTICAL_ORDER);
     affected[lang]=plain(S.records.filter(a=>S.P.current(shown.card(a),today)!==shown.card(a)).map(a=>a.id).sort());
   }
-  assert.deepEqual(affected.en,['encore-schonberg','ile','krabbel-ursen','sentier-botanique-vully']);
+  assert.deepEqual(affected.en,['ile','krabbel-ursen','sentier-botanique-vully']);
   assert.deepEqual(affected.de,affected.en,'German');assert.deepEqual(affected.fr,affected.en,'French');
   const closureWords={en:/Closed 3–10 October 2026/,de:/Geschlossen 3–10 Oktober 2026/,fr:/Fermé 3–10 octobre 2026/};
   const nextMeeting={en:/next published meeting/,de:/nächste veröffentlichte Treffen/,fr:/prochaine rencontre publiée/};

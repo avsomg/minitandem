@@ -160,7 +160,7 @@ test('search finds a card by the shown language and by the English',()=>{
   assert.ok(word,'a French-only word');
   state.f.query=word;
   assert.ok(list().some(a=>a.id==='aef-attalens'),'found by '+word);
-  state.f.query='shared meeting';
+  state.f.query='parenting topics';
   assert.ok(list().some(a=>a.id==='aef-attalens'),'and by its English text');
   // Without the French texts the French word finds nothing of this card.
   plainStack.state.f.query=word;

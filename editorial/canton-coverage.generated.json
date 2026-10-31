@@ -2,7 +2,7 @@
   "checked": "2026-09-28",
   "officialSource": "https://www.fr.ch/document/580206",
   "officialYear": 2026,
-  "catalogueCards": 298,
+  "catalogueCards": 296,
   "municipalities": 119,
   "districts": {
     "broye": {
@@ -23,7 +23,7 @@
     "sarine": {
       "municipalities": 25,
       "withMappedCard": 25,
-      "catalogCards": 80
+      "catalogCards": 79
     },
     "see": {
       "municipalities": 14,
@@ -33,7 +33,7 @@
     "sense": {
       "municipalities": 15,
       "withMappedCard": 15,
-      "catalogCards": 60
+      "catalogCards": 59
     },
     "veveyse": {
       "municipalities": 9,
@@ -55,7 +55,7 @@
       "municipalities": 20
     },
     "events": {
-      "cards": 13,
+      "cards": 12,
       "municipalities": 6
     },
     "horses": {
@@ -75,7 +75,7 @@
       "municipalities": 45
     },
     "play": {
-      "cards": 83,
+      "cards": 82,
       "municipalities": 55
     },
     "water": {
@@ -1475,7 +1475,6 @@
         "memo-grands-signes-2026-11-10",
         "memo-eveil-musical-2027-02-16",
         "memo-musik-entdecken-2027-03-16",
-        "devenir-famille-fribourg-2026-10-03",
         "office-family-workshops",
         "mhnf-histoires-naturelles-du-mercredi",
         "memo-valise-magique-2026-11-04",
@@ -1492,7 +1491,7 @@
         "movement": 2,
         "music": 2,
         "nature": 1,
-        "play": 17,
+        "play": 16,
         "water": 2
       },
       "coverage": "at-least-one-card"
@@ -2764,11 +2763,6 @@
       "id": "conservatoire",
       "town": "Fribourg / Granges-Paccot",
       "region": "sarine"
-    },
-    {
-      "id": "erntedank",
-      "town": "Weissenstein",
-      "region": "sense"
     },
     {
       "id": "rabel-giffers",

@@ -152,7 +152,8 @@ test('blocking closures and old tariffs appear before generic unknowns',()=>{
   const tariff=P.warnings(byId.get('elki-kerzers'),'2026-09-27');
   assert.match(tariff[0].text,/2025\/26/);
   assert.ok(codes(tariff).indexOf('languageUnconfirmed')>0);
-  assert.ok(codes(P.warnings(byId.get('museum'),'2030-01-01')).includes('datesPassed'));
+  // Since the approved update of 30 October 2026 the card states the end of its programme, which comes before the dates check.
+  assert.ok(codes(P.warnings(byId.get('museum'),'2030-01-01')).includes('scheduleExpired'));
   assert.ok(!codes(P.warnings(byId.get('museum'),'2026-09-27')).includes('datesPassed'));
 });
 
@@ -273,7 +274,8 @@ test('map publishes only unique exact-address matches, never arbitrary first sea
   // Since 26 October 2026 Suniai is at Warpelstrasse 9: the Hauptstrasse 20 point of the earlier address is not carried over.
   assert.equal(byId.get('suniai-family-yoga').geo.label,'Warpelstrasse 9 3186 Düdingen');
   assert.equal(byId.get('schlittschuh-gurmels').geo,undefined,'no exact Sportweg 21 registry match');
-  assert.equal(byId.get('arconciel-arche-play').geo.label,"Place de l'Arche 1 1732 Arconciel");
+  // Since 31 October 2026 the source gives the square, not a house number, so no exact point is published.
+  assert.equal(byId.get('arconciel-arche-play').geo,undefined,'an area is not an exact entrance');
   assert.equal(byId.get('nuvilly-batailles-play').geo,undefined,'a street name is not an exact entrance');
 });
 
@@ -295,8 +297,8 @@ test('new programmes have sourced exact dates and retain unknown local language 
   assert.match(a.practical.commitment.text,/31 May/);assert.equal(a.practical.groupSize.value,6);
   assert.ok(a.research.findings.length>=4);
   const workshop=byId.get('office-family-workshops'),books=byId.get('office-family-books');
-  // Two since 24 October 2026: the organiser's page lists one workshop with a year (3 November), so the approved update keeps that one.
-  assert.equal(workshop.events.length+books.events.length,2);assert.equal(workshop.max,5);assert.equal(books.max,4);
+  // Three since 30 October 2026: the organiser's page now lists a second workshop with a year (1 December).
+  assert.equal(workshop.events.length+books.events.length,3);assert.equal(workshop.max,5);assert.equal(books.max,4);
   assert.ok(workshop.events.every(e=>e.title));assert.equal(workshop.practical.booking.value,false);
   assert.ok(workshop.research.findings.length>=3);assert.ok(books.research.findings.length>=3);
 });

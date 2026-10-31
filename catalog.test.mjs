@@ -203,7 +203,8 @@ test('new Fribourg cafes keep date-specific times and uncertain eligibility',()=
   const vignettaz=byId.get('aef-vignettaz');
   const jura=byId.get('aef-jura');
   assert.deepEqual(Array.from(vignettaz.events,event=>[event.date,event.start,event.end]),[
-    ['2026-10-07','15:00','17:00'],['2026-11-07','09:00','11:00']
+    // The approved update of 30 October 2026 keeps the one date the calendar still publishes.
+    ['2026-11-07','09:00','11:00']
   ]);
   assert.deepEqual(Array.from(jura.events,event=>event.date),['2026-10-10','2026-10-31']);
   for(const record of [vignettaz,jura]){
@@ -220,7 +221,8 @@ test('AEF Farvagny and Attalens separate ordinary cafes from the themed workshop
   const workshop=byId.get('aef-attalens-alimentation');
   assert.deepEqual(Array.from(farvagny.events,event=>[event.date,event.start,event.end]),[['2026-10-03','09:30','11:00']]);
   assert.deepEqual(Array.from(attalens.events,event=>event.date),[
-    '2026-10-07','2026-11-04','2026-11-11','2026-11-25','2026-12-02','2026-12-16'
+    // The approved update of 30 October 2026 no longer lists 7 October.
+    '2026-11-04','2026-11-11','2026-11-25','2026-12-02','2026-12-16'
   ]);
   assert.deepEqual(Array.from(workshop.events,event=>event.date),['2026-10-28']);
   assert.equal(farvagny.region,'sarine');
@@ -243,7 +245,8 @@ test('new MEMO events distinguish toddler access from older-child activities',()
   assert.equal(C.ageFit(parents,AGE),null);
   assert.ok(!ids(list()).includes(mission.id));
   assert.ok(ids(list()).includes(vernissage.id));
-  assert.ok(ids(list()).includes(parents.id));
+  // Closed by an approved update on 31 October 2026, once its only date (3 October) had passed.
+  assert.ok(!ids(list()).includes(parents.id));
   state.f.includeUnknownAge=false;
   assert.ok(!ids(list()).includes(parents.id));
 });
@@ -472,8 +475,10 @@ test('deep review covers active cards and preserves receipts for ended events',(
   assert.equal(Object.values(counts).reduce((sum,count)=>sum+count,0),main.length);
   assert.ok(counts.enriched>=134 && counts.unresolved>=34);
   // memo-rat-mission-2026-09-30 was closed by an approved update on 26 October 2026, once its only date (30 September) had passed.
-  assert.deepEqual(ids(records.filter(a=>C.isArchive(a)&&a.research)).sort(),['alpabzug','chocolat','memo-musik-entdecken-2026-09-29','memo-rat-exhibition-2026','memo-rat-mission-2026-09-30','plage-chevroux']);
-  for(const id of ['swim-duedingen','playgrounds-marly','elki-kerzers'])assert.deepEqual(Array.from(byId.get(id).days),[],`${id}: stale schedule must not appear as a weekday`);
+  assert.deepEqual(ids(records.filter(a=>C.isArchive(a)&&a.research)).sort(),['alpabzug','chocolat','devenir-famille-fribourg-2026-10-03','erntedank','memo-musik-entdecken-2026-09-29','memo-rat-exhibition-2026','memo-rat-mission-2026-09-30','plage-chevroux']);
+  // swim-duedingen has published Saturdays again since the approved update of 31 October 2026.
+  assert.deepEqual(Array.from(byId.get('swim-duedingen').days),[6]);
+  for(const id of ['playgrounds-marly','elki-kerzers'])assert.deepEqual(Array.from(byId.get(id).days),[],`${id}: stale schedule must not appear as a weekday`);
   assert.equal(byId.get('playgrounds-marly').scheduleValidThrough,null);
   assert.equal(byId.get('elki-kerzers').scheduleValidThrough,null);
 });
@@ -489,7 +494,8 @@ test('all four expanded districts have sourced cards and participate in normal f
     assert.equal(cards.length,count,region);
     // Since 14 October 2026 the catalogue lists organisation contacts only, so a card may have none; its sources lead to the organiser.
     for(const a of cards){
-      assert.ok(a.sources.length && a.notes.length>=2 && a.address,a.id);
+      // At least one note since 31 October 2026: the approved update of boulogne-forest-play keeps only what its sources confirm.
+      assert.ok(a.sources.length && a.notes.length && a.address,a.id);
       assert.ok(a.research?.findings.length && a.research.remaining.length,a.id);
       assert.ok(a.intro && a.practical?.scenario,a.id);
       assert.ok(Object.values(a.practical).some(value=>value?.source && a.sources.some(s=>s.url===value.source)),a.id);
@@ -511,11 +517,11 @@ test('all four expanded districts have sourced cards and participate in normal f
 test('canton follow-up preserves uncertainty and filters across every district',()=>{
   const {records,list,state,byId}=load();
   const followup=records.filter(a=>a.research?.findings.some(f=>FOLLOWUP_FIELDS.includes(f.field)));
-  // 107 since 25 October 2026: an approved update replaced the follow-up finding of moliere-trail with a newer one ('Start and duration').
-  assert.equal(followup.length,107);
+  // 106 since 31 October 2026: an approved update replaced the follow-up finding of arconciel-arche-play with a newer one.
+  assert.equal(followup.length,106);
   assert.deepEqual([...new Set(followup.map(a=>a.region))].sort(),['broye','glane','gruyere','sarine','see','sense','veveyse']);
   for(const a of followup){
-    assert.ok(a.address&&a.sources.length&&a.notes.length>=2,a.id); // a card may have no contact since 14 October 2026
+    assert.ok(a.address&&a.sources.length&&a.notes.length,a.id); // a card may have no contact since 14 October 2026, and one note since 31 October
     if(a.id==='trip-trap-marly')assert.deepEqual(Array.from(a.languages),['DE/FR']);
     else assert.equal(a.languages.length,0,a.id);
     if(a.min!==null)assert.ok(a.age && a.sources.length,a.id);
@@ -596,7 +602,9 @@ test('corrected schedules and price units reach real app data',()=>{
   assert.match(byId.get('library-murten').price,/annual subscription/);
   assert.equal(byId.get('swim-courtepin-babies').amount,324);
   assert.match(byId.get('swim-courtepin-babies').price,/adult entry included/);
-  assert.equal(byId.get('candles-giffers').amount,null,'price per weight cannot be a flat admission price');
+  // Since the approved update of 31 October 2026 the amount is the published CHF 3.50 per 100 g; the kind stays unknown, so it is no admission price.
+  assert.equal(byId.get('candles-giffers').priceKind,'unknown','price per weight cannot be a flat admission price');
+  assert.match(byId.get('candles-giffers').price,/per 100 g/);
   assert.equal(byId.get('christmas-plaffeien').events.length,7);
   assert.ok(byId.get('christmas-plaffeien').events.every(e=>e.date==='2026-12-12'));
   assert.equal(byId.get('kinderfeier').parent,'yes');
