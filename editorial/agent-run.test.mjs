@@ -153,6 +153,18 @@ test('QA waits, ready and with its attempts, while an editorial correction block
   // Asked for QA alone, the batch claims nothing rather than a build that is known to stop.
   assert.deepEqual((await run('qa',false)).results,[]);assert.equal(qa().state,'ready');assert.equal(qa().attempt,0);
 });
+test('a held run leaves QA ready with its attempts and does the other work; the same run without the hold claims QA',async t=>{
+  const {queue,directory}=leaseFixture(t),order=[];
+  queue.enqueue({kind:'qa',cardId:'catalogue',inputRevision:'qa',priority:1000});
+  const qa=()=>queue.list().find(job=>job.kind==='qa');
+  const run=holdQa=>runJobs({queue,role:'search',chain:true,holdQa,limit:1,syncImpl:()=>({input:{pipeline:{publication:{blockedIds:[]}}}}),prepareImpl:async job=>job,reportFile:path.join(directory,'report.json'),
+    worker:async job=>{order.push(job.kind);return {result:{},usage:{}};},commitImpl:(queue,{jobId,token,role})=>queue.finish(jobId,token,role,{})});
+  queue.enqueue({kind:'search',cardId:'other',inputRevision:'search',priority:10});
+  await run(true);
+  assert.deepEqual(order,['search']);assert.equal(qa().state,'ready');assert.equal(qa().attempt,0);
+  await run(false).catch(()=>{});
+  assert.notEqual(qa().attempt,0);
+});
 test('a job that failed through a fixed controller defect gets one replacement of its editor job, with its history kept',t=>{
   const {queue}=leaseFixture(t),sled={id:'sled',name:'Sled run'},getInputs=()=>({records:[sled]});
   const fail=(job,error)=>queue.db.prepare("UPDATE jobs SET state='attention',attempt=3,error=? WHERE id=?").run(error,job.id);

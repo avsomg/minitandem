@@ -368,7 +368,7 @@ export function recordRejectedOutput(queue,job,role,workerOutput,error,outputRoo
   });queue.flush(outputRoot);
   return hash;
 }
-export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=runModel,cardId=null,pilot=false,fullReview=false,sources=[],preflight,preflightRetryMs=60000,sleep,
+export async function runJobs({role=null,limit=4,chain=false,holdQa=false,queue=null,worker=runModel,cardId=null,pilot=false,fullReview=false,sources=[],preflight,preflightRetryMs=60000,sleep,
   monotonic=()=>performance.now(),syncImpl=syncQueue,prepareImpl=prepareEvidence,commitImpl=commitResult,reportFile=path.join(here,'workflow-report.json'),leaseOptions={}}={}){
   assertRuntimeCurrent(loadedRuntimeRevision);
   sources=normalizePilotSources(sources,{pilot});
@@ -405,8 +405,9 @@ export async function runJobs({role=null,limit=4,chain=false,queue=null,worker=r
       const synced=syncImpl(queue);
       // QA builds the whole site, and the build stops while an editorial correction blocks publication. Claiming QA then only spends its
       // attempts (six QA jobs reached attention that way by 20 October 2026), so it waits, ready, until the corrections are resolved.
-      // The same goes for a new card still waiting for its external review.
-      const qaWaits=(synced?.input?.pipeline?.publication?.blockedIds||[]).length>0||Boolean(synced?.input?.records&&newCardsUnreviewed(synced.input.records,today()));
+      // The same goes for a new card still waiting for its external review, and for a night run (--hold-qa): its fresh approvals are not
+      // translated or geocoded yet, so QA could only fail (eight QA jobs reached attention that way on 31 October 2026). Release runs QA itself.
+      const qaWaits=holdQa||(synced?.input?.pipeline?.publication?.blockedIds||[]).length>0||Boolean(synced?.input?.records&&newCardsUnreviewed(synced.input.records,today()));
       const priorities=new Map(),downstream=new Map(),urgent=new Map();
       for(const job of queue.list().filter(j=>(j.state==='ready'||j.state==='retry'&&j.retry_after<=queue.now())&&(!cardId||j.card_id===cardId))){
         const assigned=Object.keys(ROLE_KINDS).find(r=>ROLE_KINDS[r].includes(job.kind));
@@ -598,7 +599,7 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
     }finally{queue.close();}
   }else{
     if(process.argv.includes('--full-review')&&!process.argv.includes('--pilot'))throw Error('Explicit full-review pilot requires --pilot and --card');
-    console.log(JSON.stringify(await runJobs({role,limit,chain:process.argv.includes('--chain'),cardId,pilot:process.argv.includes('--pilot'),fullReview:process.argv.includes('--full-review'),
+    console.log(JSON.stringify(await runJobs({role,limit,chain:process.argv.includes('--chain'),holdQa:process.argv.includes('--hold-qa'),cardId,pilot:process.argv.includes('--pilot'),fullReview:process.argv.includes('--full-review'),
       sources:process.argv.filter(x=>x.startsWith('--source=')).map(x=>x.slice(9))}),null,2));
   }
 }

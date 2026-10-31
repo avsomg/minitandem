@@ -3,6 +3,7 @@
 //
 // It holds the cycle's own lock, so a timer run in the meantime records "another cycle is still running" and exits cleanly; never editorial/cycle.pause.
 // It changes no limit, attempt, priority or circuit, and it publishes nothing. Before each run it looks at the clock, the stop file and the circuit.
+// QA is held for the whole run (--hold-qa): it stays queued with its attempts, and the release that follows runs it on the translated site.
 //
 //   node ops/night-run.mjs --background      start it detached from this terminal; the log is workflow-state/night/run.log
 //   node ops/night-run.mjs                   run here
@@ -21,7 +22,7 @@ const MINUTE=60000;
 export const RULES={
   provider:{waitMinutes:40,max:8},  // a usage limit or a login: nothing is claimed while the probe fails. 40 minutes keeps failures below 3 per hour (the circuit)
   failed:{waitMinutes:10,max:3},    // crash, or every job of the run failed: attempts were spent, so this stops early
-  idle:{waitMinutes:15,max:4},      // nothing could be claimed: chains may be waiting for a retry
+  idle:{waitMinutes:15,max:12},     // nothing could be claimed: chains may be waiting for a retry, which can take two hours
   soft:{waitMinutes:0,max:3},       // a lost lease or the 30-minute budget of one run
 };
 
@@ -54,7 +55,7 @@ const childEnv=()=>{
 };
 function runAgent(root,args){
   const started=Date.now();
-  const run=spawnSync(process.execPath,['--no-warnings','editorial/agent-run.mjs','--chain','--limit=4',...args],{cwd:root,timeout:45*MINUTE,encoding:'utf8',maxBuffer:64_000_000,env:childEnv()});
+  const run=spawnSync(process.execPath,['--no-warnings','editorial/agent-run.mjs','--chain','--limit=4','--hold-qa',...args],{cwd:root,timeout:45*MINUTE,encoding:'utf8',maxBuffer:64_000_000,env:childEnv()});
   let output=null;try{output=JSON.parse(run.stdout);}catch{}
   return {code:run.error?null:run.status,output,seconds:Math.round((Date.now()-started)/1000),error:run.error?String(run.error.message):(run.status?(run.stderr||'').slice(-600):null)};
 }
