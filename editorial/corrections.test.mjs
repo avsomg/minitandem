@@ -26,13 +26,13 @@ test('all thirteen October 2 corrections match the compiled catalogue, not just 
     assert.equal(correction.appliedOn,'2026-10-02');
     validateCorrection(correction,byId.get(correction.id));
     const card=byId.get(correction.id);
-    assert.equal(card.research.date,'2026-10-02',correction.id);
+    assert.ok(card.research.date>='2026-10-02',correction.id); // a later approved review may have moved the date on
     assert.ok(card.research.remaining.length,correction.id+' must retain its remaining uncertainties');
   }
 });
 
 test('new-season gym schedules agree with day filters and visit conditions',()=>{
-  for(const [id,day,start] of [['bewegungsinsel',1,'07.09.2026'],['elki-giffers',3,'09.09.2026'],['elki-heitenried',3,'9 September 2026']]){
+  for(const [id,day,start] of [['bewegungsinsel',1,'07.09.2026'],['elki-giffers',3,'09.09.2026'],['elki-heitenried',3,'season and holiday dates not published']]){
     const card=byId.get(id);
     assert.deepEqual(Array.from(card.days),[day]);
     assert.ok(card.schedule.includes(start));
@@ -43,8 +43,9 @@ test('new-season gym schedules agree with day filters and visit conditions',()=>
   assert.equal(remaufens.practical.duration.value,60);
   assert.doesNotMatch(JSON.stringify(remaufens),/15:30–16:45/);
   assert.equal(byId.get('bewegungsinsel').min,null);
-  assert.equal(byId.get('elki-heitenried').min,3);
-  assert.equal(byId.get('elki-heitenried').practical.indoor.checked,'2026-10-02');
+  // The approved review of 1 November 2026: the offer page gives the age only as about 3 years and no single venue, so both stay unknown.
+  assert.equal(byId.get('elki-heitenried').min,null);
+  assert.equal(byId.get('elki-heitenried').practical.indoor.value,null);
   assert.equal(remaufens.min,null);
   assert.equal(remaufens.priceKind,'unknown');
 });

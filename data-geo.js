@@ -507,13 +507,13 @@
   },
   {
     "id": "aef-attalens-alimentation",
-    "address": "Rue de l’Eglise 26, 1616 Attalens",
+    "address": "Salle AES, Bâtiment \"Aviateur\" de l'école d'Attalens, Rue de l'Eglise 26, 1616 Attalens",
     "geo": {
       "label": "Rue de l'Eglise 26 1616 Attalens",
       "lat": 46.51081085205078,
       "lon": 6.850430488586426,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99Eglise+26+1616+Attalens&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-28",
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%27Eglise+26+1616+Attalens&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-11-01",
       "precision": "address"
     }
   },
@@ -627,13 +627,13 @@
   },
   {
     "id": "candles-plaffeien",
-    "address": "By the Jugendraum, Seeliweg 5, Plaffeien; confirm the location together with the date",
+    "address": "neben Jugendraum, Seeliweg 5, Plaffeien",
     "geo": {
       "label": "Seeliweg 5 1716 Plaffeien",
       "lat": 46.74283981323242,
       "lon": 7.288978576660156,
       "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Seeliweg+5&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-10-31",
+      "checked": "2026-11-01",
       "precision": "address"
     }
   },
@@ -897,18 +897,6 @@
       "lat": 46.92229080200195,
       "lon": 7.10813045501709,
       "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=HFR+Meyriez-Murten+Chemin+du+Village+24+3280+Meyriez&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
-      "precision": "address"
-    }
-  },
-  {
-    "id": "familienkonzert-kerzers-2026",
-    "address": "Reformed Church, Kirchgässli 1, 3210 Kerzers",
-    "geo": {
-      "label": "Kirchgässli 1 3210 Kerzers",
-      "lat": 46.976234436035156,
-      "lon": 7.196247577667236,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Kirchg%C3%A4ssli+1+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326",
       "checked": "2026-09-27",
       "precision": "address"
     }

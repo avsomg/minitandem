@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-31T06:57:24.410Z",
+  "generatedAt": "2026-11-01T08:18:32.104Z",
   "grain": "One published catalogue card; formats include groups, individual offers, events and self-guided visits.",
   "total": 325,
   "catalog": 295,
   "archive": 30,
-  "geocodedCards": 139,
-  "uniqueAddressPoints": 113,
+  "geocodedCards": 138,
+  "uniqueAddressPoints": 112,
   "byRegion": {
     "sense": 59,
     "sarine": 78,
@@ -22,9 +22,9 @@
     "self": 179
   },
   "storedStatus": {
-    "check": 97,
-    "future": 9,
-    "active": 189
+    "active": 191,
+    "check": 91,
+    "future": 13
   },
   "checkedDates": [
     "2026-09-27",
@@ -34,17 +34,18 @@
     "2026-09-29",
     "2026-10-30",
     "2026-10-31",
+    "2026-11-01",
     "2026-10-26"
   ],
   "unknownFields": {
-    "minAge": 199,
+    "minAge": 205,
     "parent": 31,
-    "language": 262,
-    "price": 192,
+    "language": 263,
+    "price": 189,
     "address": 5
   },
-  "sources": 466,
-  "explicitScheduleEnd": 77,
+  "sources": 477,
+  "explicitScheduleEnd": 79,
   "seeLocalities": [
     "Murten",
     "Kerzers",

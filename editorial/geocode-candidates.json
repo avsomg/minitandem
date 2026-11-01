@@ -6267,5 +6267,110 @@
     "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+des+Batailles+1485+Nuvilly%3B+entry+point+to+be+confirmed&type=locations&origins=address&limit=5&sr=4326",
     "checked": "2026-10-31",
     "results": []
+  },
+  "Salle AES, Bâtiment \"Aviateur\" de l'école d'Attalens, Rue de l'Eglise 26, 1616 Attalens": {
+    "query": "Rue de l'Eglise 26 1616 Attalens",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%27Eglise+26+1616+Attalens&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-01",
+    "results": [
+      {
+        "label": "Rue de l'Eglise 26 1616 Attalens",
+        "lat": 46.51081085205078,
+        "lon": 6.850430488586426
+      }
+    ]
+  },
+  "neben Jugendraum, Seeliweg 5, Plaffeien": {
+    "query": "Seeliweg 5",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Seeliweg+5&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-01",
+    "results": [
+      {
+        "label": "Seeliweg 5 1716 Plaffeien",
+        "lat": 46.74283981323242,
+        "lon": 7.288978576660156
+      },
+      {
+        "label": "Walenseeliweg 5 8806 Bäch SZ",
+        "lat": 47.20524978637695,
+        "lon": 8.741320610046387
+      }
+    ]
+  },
+  "Bergstation der Sesselbahn, Riggisalp (start of the trail)": {
+    "query": "Bergstation der Sesselbahn Riggisalp start of the trail",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Bergstation+der+Sesselbahn+Riggisalp+start+of+the+trail&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-01",
+    "results": []
+  },
+  "in der Kirche, 3210 Kerzers": {
+    "query": "in der Kirche 3210 Kerzers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=in+der+Kirche+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-01",
+    "results": []
+  },
+  "Salle de Lully": {
+    "query": "Salle de Lully",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Salle+de+Lully&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-01",
+    "results": [
+      {
+        "label": "Route de Lully 64a 1470 Lully FR",
+        "lat": 46.837867736816406,
+        "lon": 6.846583843231201
+      },
+      {
+        "label": "Route de Lully 64b 1470 Lully FR",
+        "lat": 46.837738037109375,
+        "lon": 6.845954418182373
+      },
+      {
+        "label": "Route de Lully 66a 1470 Lully FR",
+        "lat": 46.83740234375,
+        "lon": 6.8460893630981445
+      },
+      {
+        "label": "Route de Lully 66 1470 Lully FR",
+        "lat": 46.837276458740234,
+        "lon": 6.846334457397461
+      },
+      {
+        "label": "Route de Lully 66n 1470 Lully FR",
+        "lat": 46.8373908996582,
+        "lon": 6.8459858894348145
+      }
+    ]
+  },
+  "Address to be confirmed": {
+    "query": "Address to be confirmed",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Address+to+be+confirmed&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-01",
+    "results": [
+      {
+        "label": "Route de l'Etraz 1b 1184 Luins",
+        "lat": 46.442604064941406,
+        "lon": 6.272318363189697
+      },
+      {
+        "label": "Route de l'Etraz 1b 1169 Yens",
+        "lat": 46.518672943115234,
+        "lon": 6.431204319000244
+      },
+      {
+        "label": "Chemin de l'Etraz 1 1350 Orbe",
+        "lat": 46.72140121459961,
+        "lon": 6.539785385131836
+      },
+      {
+        "label": "Vieille Route de l'Etraz 1b 1175 Lavigny",
+        "lat": 46.49708938598633,
+        "lon": 6.3997883796691895
+      },
+      {
+        "label": "Route de l'Etraz 2b 1304 Senarclens",
+        "lat": 46.60054397583008,
+        "lon": 6.487885475158691
+      }
+    ]
   }
 }

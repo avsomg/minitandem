@@ -261,8 +261,8 @@ test('winter MEMO programme includes confirmed dates and keeps booking availabil
     assert.match(a.notes.join(' '),/22 October/);
     assert.match(a.notes.join(' '),/availability of places is not yet known/);
   }
-  // The approved update of 26 October 2026 closed the exhibition and gave its opening sessions of 30 September.
-  assert.equal(byId.get('memo-rat-exhibition-2026').events.length,3);assert.equal(byId.get('memo-rat-exhibition-2026').status,'closed');
+  // The approved update of 26 October 2026 closed the exhibition and gave its opening sessions of 30 September; two remain since 31 October.
+  assert.equal(byId.get('memo-rat-exhibition-2026').events.length,2);assert.equal(byId.get('memo-rat-exhibition-2026').status,'closed');
 });
 
 test('catalogue opens in a bounded batch while retaining the full result count',()=>{
@@ -473,7 +473,7 @@ test('deep review covers active cards and preserves receipts for ended events',(
   }
   const counts=Object.fromEntries(['enriched','rechecked','unresolved','reused'].map(outcome=>[outcome,main.filter(a=>a.research.outcome===outcome).length]));
   assert.equal(Object.values(counts).reduce((sum,count)=>sum+count,0),main.length);
-  assert.ok(counts.enriched>=134 && counts.unresolved>=34);
+  assert.ok(counts.enriched+counts.rechecked>=134 && counts.unresolved>=34); // a new full review turns an enriched card into a rechecked one
   // memo-rat-mission-2026-09-30 was closed by an approved update on 26 October 2026, once its only date (30 September) had passed.
   assert.deepEqual(ids(records.filter(a=>C.isArchive(a)&&a.research)).sort(),['alpabzug','chocolat','devenir-famille-fribourg-2026-10-03','erntedank','memo-musik-entdecken-2026-09-29','memo-rat-exhibition-2026','memo-rat-mission-2026-09-30','plage-chevroux']);
   // swim-duedingen has published Saturdays again since the approved update of 31 October 2026.
@@ -517,8 +517,8 @@ test('all four expanded districts have sourced cards and participate in normal f
 test('canton follow-up preserves uncertainty and filters across every district',()=>{
   const {records,list,state,byId}=load();
   const followup=records.filter(a=>a.research?.findings.some(f=>FOLLOWUP_FIELDS.includes(f.field)));
-  // 106 since 31 October 2026: an approved update replaced the follow-up finding of arconciel-arche-play with a newer one.
-  assert.equal(followup.length,106);
+  // 105 since 1 November 2026: approved updates replaced follow-up findings with newer ones, arconciel-arche-play among them.
+  assert.equal(followup.length,105);
   assert.deepEqual([...new Set(followup.map(a=>a.region))].sort(),['broye','glane','gruyere','sarine','see','sense','veveyse']);
   for(const a of followup){
     assert.ok(a.address&&a.sources.length&&a.notes.length,a.id); // a card may have no contact since 14 October 2026, and one note since 31 October
@@ -548,7 +548,7 @@ test('See follow-up cards use normal filters and do not revive obsolete schedule
     assert.ok(a.research?.findings.length,id);
     assert.ok(a.sources.length,id);
     assert.ok(a.address,id);
-    assert.equal(a.parent,id==='jeux-apav-vully-2026'?'unknown':'yes',id);
+    assert.equal(a.parent,['jeux-apav-vully-2026','familybloom-mini-move'].includes(id)?'unknown':'yes',id); // Mini move: adult role not published, approved update of 31 October
   }
   state.f.place='d:see';
   assert.ok(added.filter(id=>id!=='suniai-family-yoga').every(id=>ids(list()).includes(id)));
@@ -575,14 +575,15 @@ test('See follow-up cards use normal filters and do not revive obsolete schedule
 test('uncertain sources do not become current eligibility or invented calendar dates',()=>{
   const {C,byId}=load();
   const yoga=byId.get('haragati');
-  assert.equal(yoga.research.outcome,'unresolved');
+  assert.equal(yoga.research.outcome,'rechecked');
+  assert.equal(yoga.status,'check');
   assert.equal(yoga.min,4);
   assert.equal(C.ageFit(yoga,AGE),false);
   assert.equal(yoga.parent,'yes');
   assert.deepEqual(Array.from(yoga.days),[],'suspended hours are not treated as a current weekly event');
   assert.match(yoga.schedule,/November 2026/);
-  assert.equal(byId.get('candles-plaffeien').events.length,0);
-  assert.match(byId.get('candles-plaffeien').schedule,/exact dates to be confirmed \(the dates and weekdays on the website do not match\)/);
+  assert.equal(byId.get('candles-plaffeien').events.length,2); // the organiser published the dates, approved update of 31 October
+  assert.match(byId.get('candles-plaffeien').schedule,/14 and Sunday 15 November 2026/);
   assert.equal(byId.get('fyfauter').status,'check');
   assert.equal(byId.get('psymolo').research.findings.length,1);
   assert.equal(byId.get('psymolo').status,'check');

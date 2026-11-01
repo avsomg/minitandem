@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-31T06:57:24.410Z",
+  "generatedAt": "2026-11-01T08:18:32.104Z",
   "sources": [
     {
       "id": "source-a9e685e2c5ed",
@@ -1461,6 +1461,20 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-5e4a6320080e",
+      "url": "https://www.playgrounds.ch/",
+      "recordIds": [
+        "playgrounds-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-8c0acd541bc4",
       "url": "https://cristinadanse.ch/danse-parent-enfant/",
       "recordIds": [
@@ -1559,6 +1573,20 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-d4c5b376c272",
+      "url": "https://haragati.com/acro-yoga/",
+      "recordIds": [
+        "haragati"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Age"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-737497cea801",
       "url": "https://maison-petite-enfance.ch/infos",
       "recordIds": [
@@ -1576,13 +1604,15 @@
       "id": "source-30a86ce37e6b",
       "url": "https://maison-petite-enfance.ch/",
       "recordIds": [
-        "mpe"
+        "mpe",
+        "aef-mpe"
       ],
       "regions": [
         "sarine"
       ],
       "labels": [
-        "Adult participation"
+        "Adult participation",
+        "Additional check: venue"
       ],
       "monitoring": "not-configured"
     },
@@ -1674,6 +1704,34 @@
       ],
       "labels": [
         "AEF programme and published dates"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-63d575c2f575",
+      "url": "https://fribourg-centre.com/le-centre/services/",
+      "recordIds": [
+        "aef-centre"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: practical.playArea"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-83bdbf7a908d",
+      "url": "https://fribourg-centre.com/le-centre/cafes-parents-enfants/",
+      "recordIds": [
+        "aef-centre"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: schedule"
       ],
       "monitoring": "not-configured"
     },
@@ -2306,6 +2364,20 @@
       ],
       "labels": [
         "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-6502795b9915",
+      "url": "https://ludothek-plaffeien.ch/reglement",
+      "recordIds": [
+        "ludo-plaffeien"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Additional check: Price"
       ],
       "monitoring": "not-configured"
     },
@@ -3657,6 +3729,20 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-0414729ab7cb",
+      "url": "https://www.schwimmbad-murten.ch/de/baby-badeplausch-mit-eltern",
+      "recordIds": [
+        "baby-bade-murten"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Additional check: status"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-63b1cd101dcd",
       "url": "https://www.gurmels.ch/freizeitaktivitaeten/28364",
       "recordIds": [
@@ -4216,6 +4302,20 @@
       ],
       "labels": [
         "Age, six play areas, entry and lift fare"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-7d6cbfcab888",
+      "url": "https://www.fribourg.ch/fr/la-gruyere/activites-en-plein-air/la-saison-dalpage-vounetz/",
+      "recordIds": [
+        "saison-alpage-charmey"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Additional check: price"
       ],
       "monitoring": "not-configured"
     },
@@ -4931,6 +5031,20 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-a21cdf949188",
+      "url": "https://www.cresuz.ch/culture-loisirs/sport",
+      "recordIds": [
+        "cresuz-village-play"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Additional check: Playground location"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-afad00d87772",
       "url": "https://www.bas-intyamon.ch/vie-locale-et-tourisme/places-de-loisirs",
       "recordIds": [
@@ -4941,6 +5055,34 @@
       ],
       "labels": [
         "Commune listing: address and public access"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-03f712adee30",
+      "url": "https://grandvillard.ch/vie-locale/sport-et-loisirs",
+      "recordIds": [
+        "saudillet-grandvillard"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Additional check: Park facilities"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-2f1d249886f6",
+      "url": "https://www.laberra.ch/fr/activites-details/places-de-jeux",
+      "recordIds": [
+        "le-brand-la-roche"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Additional check: practical.playArea"
       ],
       "monitoring": "not-configured"
     },
@@ -5631,6 +5773,20 @@
       ],
       "labels": [
         "Commune: name of the forest group and contact details in the listing"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-8e287e816885",
+      "url": "https://www.chlaetter-fuechs.ch/preisliste/",
+      "recordIds": [
+        "bruenisried-forest-playgroup"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Additional check: schedule"
       ],
       "monitoring": "not-configured"
     },

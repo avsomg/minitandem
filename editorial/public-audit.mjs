@@ -87,8 +87,10 @@ export function groupOf(relative){
   return 'editorial';
 }
 // Mentions of the reference age inside cards whose own min or max is 2.5: data.js (one JSON object per line), the generated research.md (one section
-// per card) and the German and French card texts data-de.js and data-fr.js (one card per line, "id":{...}).
-// A card that publishes 2.5 as its age bound may say so; the same words on another card would be a leak.
+// per card), the German and French card texts data-de.js and data-fr.js (one card per line, "id":{...}), and the approved updates of such a card in
+// data-reviewed.js and approved-updates.json. A card that publishes 2.5 as its age bound may say so; the same words on another card would be a leak.
+// The owner decided on 1 November 2026 that the updates count as the card, and that draft.snapshots[].text in approved-updates.json is exempt on every
+// card: it is the saved text of an organiser's page, not our wording. So the audit no longer sees this age inside a snapshot.
 function publishedBoundCards(root){
   const names=new Set(),ids=new Set(),lines=[];
   let text='';
@@ -111,6 +113,17 @@ function publishedBoundMentions(root,rel,text){
   if(/^data-(?:de|fr)\.js$/.test(rel)){
     const {ids}=publishedBoundCards(root);
     return text.split('\n').filter(line=>ids.has((line.match(/^"([^"]+)":\{/)||[])[1])).reduce((n,line)=>n+count(line),0);
+  }
+  // Counted on the same JSON the file holds, so a string with a line break counts as it does in the file. A file that does not parse exempts nothing.
+  if(rel==='data-reviewed.js'||rel==='editorial/approved-updates.json'){
+    const {ids}=publishedBoundCards(root);
+    let updates;
+    try{updates=rel==='data-reviewed.js'?JSON.parse(text.slice(text.search(/\[/),text.lastIndexOf(']')+1)):JSON.parse(text).updates;}catch{return 0;}
+    return updates.reduce((n,update)=>{
+      if(ids.has(update.baseRecord?.id))return n+count(JSON.stringify(update));
+      if(rel==='data-reviewed.js')return n;
+      return n+(update.draft?.snapshots||[]).reduce((m,snapshot)=>m+count(JSON.stringify(snapshot.text??'')),0);
+    },0);
   }
   return 0;
 }
