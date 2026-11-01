@@ -763,4 +763,10 @@ test('the worker contracts name the rules the validators enforce',()=>{
   assert.match(CONTRACTS.search,/identityUrl is card\.sources\[0\]\.url/);
   assert.match(CONTRACTS.search,/result url is https/);
   assert.match(CONTRACTS.search,/result\.query is copied exactly/);
+  // 33 approvals of full reviews failed on 31 October and 1 November without checkedCoverage, 13 cards cited bundle IDs the controller does not keep.
+  assert.match(CONTRACTS['review-patch'],/checkedCoverage:\[strings\]/);
+  assert.match(CONTRACTS['review-patch'],/list every fullReviewFields entry in checkedCoverage and review\.coverage in approvedBindings/);
+  const full=kind=>promptFor({id:'j',kind,input_revision:'r',payload:{card:{id:'a'},primaryReviewStatus:'complete',draft:{cardId:'a',patch:{},snapshots:[]}}});
+  assert.match(full('integrate'),/snapshotIds come from preparedEvidence[^.]*never from bundle\.snapshots/);
+  assert.match(full('review-patch'),/"fullReviewFields"/);
 });
