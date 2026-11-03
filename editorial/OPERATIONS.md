@@ -147,6 +147,13 @@ enqueues one replacement of the editor job, which names the old row. A changed
 card, another failure, a failure under the corrected rule and a chain that was
 recovered once already are refused; those stay with a person.
 
+Two more were found on 1 November 2026 and use the same command. The reviewer's
+format did not list `checkedCoverage` (`Patch review omits full-card coverage
+approval`, `--defect=review-checked-coverage`). The editor cited `bundle.snapshots`
+IDs in `reviewCoverage`, which `captureDraft` does not keep (`Full review uses
+missing or stale evidence`, `--defect=coverage-snapshot-ids`). Both were prompt gaps:
+the gates did not change. The owner asked for these rows to be returned.
+
 ## Booking shadow experiment
 
 Stage 5 has a separate script, `editorial/experiments/booking-route.mjs`. It reads only the card list and saved sources passed to it. It proposes `practical.booking`, fixed EN/DE/FR phrases and the existing planning admission/warning keys. It never applies a patch. Notes, intro, parent details and findings with opposite or ambiguous registration wording block approval. A venue-only quote, missing quote or unsupported claim stays unknown even if the checker approves it.

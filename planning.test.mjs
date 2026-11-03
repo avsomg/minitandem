@@ -251,10 +251,10 @@ test('map publishes only unique exact-address matches, never arbitrary first sea
   assert.equal(located.length,JSON.parse(fs.readFileSync(file('editorial/profile.json'),'utf8')).geocodedCards);
   for(const a of located){assert.equal(a.geo.precision,'address');assert.ok(a.geo.label);assert.match(a.geo.source,/^https:\/\/api3\.geo\.admin\.ch\//);assert.ok(Number.isFinite(a.geo.lat)&&Number.isFinite(a.geo.lon));}
   assert.equal(byId.get('elki-plaffeien').geo,undefined);
+  assert.equal(byId.get('elki-kerzers').geo,undefined); // address to be confirmed since the full review of 1 November 2026
   assert.equal(byId.get('swim-buissonnets').geo.label,'Route de Villars-les-Joncs 3 1700 Fribourg');
   assert.equal(byId.get('conservatoire').geo.label,'Route Louis-Braille 8 1763 Granges-Paccot');
   for(const [id,label] of [
-    ['elki-kerzers','Fräschelsgasse 11 3210 Kerzers'],
     ['enney-sarine-play','Prâ des Frassettes 185 1667 Enney'],
     ['thusy-pont-la-ville','Impasse de Thusy 89 1649 Pont-la-Ville'],
     ['hauteville-otavela-play','Route de la Bahy 1 1648 Hauteville'],

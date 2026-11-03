@@ -2,7 +2,7 @@
   "checked": "2026-09-28",
   "officialSource": "https://www.fr.ch/document/580206",
   "officialYear": 2026,
-  "catalogueCards": 296,
+  "catalogueCards": 295,
   "municipalities": 119,
   "districts": {
     "broye": {
@@ -23,7 +23,7 @@
     "sarine": {
       "municipalities": 25,
       "withMappedCard": 25,
-      "catalogCards": 79
+      "catalogCards": 78
     },
     "see": {
       "municipalities": 14,
@@ -47,7 +47,7 @@
       "municipalities": 18
     },
     "creative": {
-      "cards": 11,
+      "cards": 10,
       "municipalities": 7
     },
     "dining": {
@@ -1479,12 +1479,11 @@
         "mhnf-histoires-naturelles-du-mercredi",
         "memo-valise-magique-2026-11-04",
         "memo-est-ce-que-ca-joue",
-        "memo-escargot-atelier-vernissage-2026-11-25",
         "memo-saint-nicolas-family-day-2026-12-06"
       ],
       "categoryCounts": {
         "books": 8,
-        "creative": 4,
+        "creative": 3,
         "dining": 1,
         "events": 1,
         "horses": 0,

@@ -149,6 +149,11 @@ test('venue address grouping tolerates typography and an added postcode, not a d
     assert.throws(()=>venueGroups(pair(address),group),/spans addresses/);
   assert.throws(()=>venueGroups([{id:'a',address:"Rue de l'Hôpital 2, 1700 Fribourg"},
     {id:'b',address:"Rue de l'Hôpital 2, 1752 Fribourg"}],group),/spans addresses/);
+  // An unknown address is not a different place, but it does not hide one: known addresses in the group must still agree.
+  assert.equal(venueGroups(pair('Visit address not published'),group).get('b'),'memo');
+  assert.equal(venueGroups([{id:'a',address:'Visit address not published'},{id:'b',address:'Visit address not published'}],group).get('a'),'memo');
+  const three={schema:1,groups:[{id:'memo',label:'MEMO',cardIds:['a','b','c']}]};
+  assert.throws(()=>venueGroups([...pair('Spitalgasse 2, Freiburg'),{id:'c',address:'Visit address not published'}],three),/spans addresses/);
 });
 
 test('a pending correction blocks release independently of a refreshed candidate or incomplete protocol',()=>{

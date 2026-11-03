@@ -196,6 +196,16 @@ test('a job that failed through a fixed controller defect gets one replacement o
   const named=queue.enqueue({kind:'editorial',cardId:'sled',inputRevision:'editorial-2',payload:{card:sled,cardRevision:digest(sled)}});
   fail(named,'Invalid practical patch: costNote: checked needs a YYYY-MM-DD date');
   assert.throws(()=>recoverDefectJob(queue,named.id,'practical-checked','No.',{getInputs}),/this defect/);
+  // The two defects of 1 November 2026: each accepts its own failure on its own kind of job, and nothing else.
+  const coverage=queue.enqueue({kind:'review-patch',cardId:'sled',inputRevision:'review-4',payload:{editorJobId:editor.id}});
+  fail(coverage,'Patch review omits changed fields');
+  assert.throws(()=>recoverDefectJob(queue,coverage.id,'review-checked-coverage','No.',{getInputs}),/this defect/);
+  fail(coverage,'Patch review omits full-card coverage approval');
+  assert.throws(()=>recoverDefectJob(queue,coverage.id,'coverage-snapshot-ids','Wrong defect.',{getInputs}),/this defect/);
+  assert.equal(recoverDefectJob(queue,coverage.id,'review-checked-coverage','The format now lists it.',{getInputs}).kind,'integrate');
+  const ids=queue.enqueue({kind:'integrate',cardId:'sled',inputRevision:'draft-2',priority:700,payload:{card:sled,cardRevision:digest(sled)}});
+  fail(ids,'Full review uses missing or stale evidence');
+  assert.equal(recoverDefectJob(queue,ids.id,'coverage-snapshot-ids','The prompt now names preparedEvidence.',{getInputs}).kind,'integrate');
 });
 test('capture resolves each quote in its own controller snapshot, including derived calendar evidence',async()=>{
   const bundle={project:'vmeste',cardId:card.id,claims:[claim('priceKind','free','admission is free'),claim('events',[{date:'2026-10-03',start:'09:30'}],'2026-10-03 starts at 09:30')]};

@@ -208,7 +208,8 @@ test('editorial queue measures missing facts without inventing owners or new ver
 });
 test('freshness queue prioritizes imminent meetings and the whole 0–6 audience without a family route',()=>{
   const report=JSON.parse(execFileSync(process.execPath,[path.join(root,'maintain.mjs'),'--date=2026-09-28'],{encoding:'utf8'}));
-  assert.deepEqual(report.due,[]);
+  // elki-kerzers: its last published season ended on 25 March 2026 (full review of 1 November 2026), so it is due for another look.
+  assert.deepEqual(report.due.map(row=>[row.id,row.reasons]),[['elki-kerzers',['season-ended']]]);
   const byId=new Map(report.needsConfirmation.map(row=>[row.id,row]));
   // aef-mpe and aef-passerelles were confirmed active by approved updates (2 and 20 October 2026) and no longer wait here.
   for(const id of ['aef-mpe','aef-passerelles'])assert.equal(byId.has(id),false,id);

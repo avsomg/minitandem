@@ -769,4 +769,6 @@ test('the worker contracts name the rules the validators enforce',()=>{
   const full=kind=>promptFor({id:'j',kind,input_revision:'r',payload:{card:{id:'a'},primaryReviewStatus:'complete',draft:{cardId:'a',patch:{},snapshots:[]}}});
   assert.match(full('integrate'),/snapshotIds come from preparedEvidence[^.]*never from bundle\.snapshots/);
   assert.match(full('review-patch'),/"fullReviewFields"/);
+  // 1 November 2026: three second full reviews on the same day left patch.checked out because the card already showed the date.
+  assert.match(full('integrate'),/always carries patch\.checked, also when the card already shows that date/);
 });

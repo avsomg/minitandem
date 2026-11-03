@@ -363,13 +363,13 @@
   },
   {
     "id": "playgrounds-marly",
-    "address": "Rte des Écoles 34, petite halle, Marly",
+    "address": "Rte des Ecoles 34, 1723 Marly",
     "geo": {
       "label": "Route des Ecoles 34 1723 Marly",
       "lat": 46.7824821472168,
       "lon": 7.14572286605835,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+des+%C3%89coles+34+petite+halle+Marly&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+des+Ecoles+34+1723+Marly&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-11-03",
       "precision": "address"
     }
   },
@@ -567,13 +567,13 @@
   },
   {
     "id": "jolimont",
-    "address": "Rue des Écoles 15, Fribourg",
+    "address": "Piscine du CO de Jolimont, Rue des Ecoles 15, 1700 Fribourg",
     "geo": {
       "label": "Rue des Ecoles 15 1700 Fribourg",
       "lat": 46.80409622192383,
       "lon": 7.148730278015137,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+des+%C3%89coles+15+Fribourg&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+des+Ecoles+15+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-11-03",
       "precision": "address"
     }
   },
@@ -622,6 +622,18 @@
       "lon": 7.249922752380371,
       "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Zentrum+Weissenstein+Weissenstein+57+1718+Rechthalten&type=locations&origins=address&limit=5&sr=4326",
       "checked": "2026-09-27",
+      "precision": "address"
+    }
+  },
+  {
+    "id": "rabel-giffers",
+    "address": "Parkplatz der Nydegger AG, Obertswilstrasse 86, 1735 Giffers",
+    "geo": {
+      "label": "Obertswilstrasse 86 1735 Giffers",
+      "lat": 46.76761245727539,
+      "lon": 7.212735176086426,
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Obertswilstrasse+86+1735+Giffers&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-11-03",
       "precision": "address"
     }
   },
@@ -723,13 +735,13 @@
   },
   {
     "id": "krabbeltreff-meyriez",
-    "address": "Chemin du Village 6, 3280 Meyriez",
+    "address": "Kirchgemeindehaus Meyriez, Chemin du Village 6, 3280 Meyriez",
     "geo": {
       "label": "Chemin du Village 6 3280 Meyriez",
       "lat": 46.92420196533203,
       "lon": 7.107992649078369,
       "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+du+Village+6+3280+Meyriez&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
+      "checked": "2026-11-03",
       "precision": "address"
     }
   },
@@ -742,18 +754,6 @@
       "lon": 7.196778297424316,
       "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Kirchg%C3%A4ssli+2+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326",
       "checked": "2026-09-27",
-      "precision": "address"
-    }
-  },
-  {
-    "id": "elki-kerzers",
-    "address": "Seelandhalle, Fräschelsgasse 11, 3210 Kerzers",
-    "geo": {
-      "label": "Fräschelsgasse 11 3210 Kerzers",
-      "lat": 46.97758483886719,
-      "lon": 7.195822715759277,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Seelandhalle+Fr%C3%A4schelsgasse+11+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-10-02",
       "precision": "address"
     }
   },
@@ -898,6 +898,18 @@
       "lon": 7.10813045501709,
       "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=HFR+Meyriez-Murten+Chemin+du+Village+24+3280+Meyriez&type=locations&origins=address&limit=5&sr=4326",
       "checked": "2026-09-27",
+      "precision": "address"
+    }
+  },
+  {
+    "id": "spielkafi-kerzers-2026",
+    "address": "Kinder- und Jugendhaus Kerzers, Vordere Gasse 5",
+    "geo": {
+      "label": "Vordere Gasse 5 3210 Kerzers",
+      "lat": 46.97492980957031,
+      "lon": 7.198701858520508,
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Vordere+Gasse+5&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-11-03",
       "precision": "address"
     }
   },
@@ -1502,18 +1514,6 @@
     }
   },
   {
-    "id": "st-silvester-spielgruppe",
-    "address": "Untergeschoss Schulhaus, Schulweg 4, 1736 St. Silvester",
-    "geo": {
-      "label": "Schulweg 4 1736 St. Silvester",
-      "lat": 46.74167251586914,
-      "lon": 7.2214179039001465,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Untergeschoss+Schulhaus+Schulweg+4+1736+St.+Silvester&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-28",
-      "precision": "address"
-    }
-  },
-  {
     "id": "chatonnaye-forest-cabin",
     "address": "Chemin de la Cabane 9, 1553 Châtonnaye",
     "geo": {
@@ -1611,13 +1611,13 @@
   },
   {
     "id": "mhnf-histoires-naturelles-du-mercredi",
-    "address": "Chemin du Musée 6, Fribourg",
+    "address": "Chemin du Musée 6, 1700 Fribourg",
     "geo": {
       "label": "Chemin du Musée 6 1700 Fribourg",
       "lat": 46.793087005615234,
       "lon": 7.157187461853027,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+du+Mus%C3%A9e+6+Fribourg&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+du+Mus%C3%A9e+6+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-10-31",
       "precision": "address"
     }
   },

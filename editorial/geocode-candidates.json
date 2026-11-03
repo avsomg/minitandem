@@ -6372,5 +6372,160 @@
         "lon": 6.487885475158691
       }
     ]
+  },
+  "Visit address not published": {
+    "query": "Visit address not published",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Visit+address+not+published&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-03",
+    "results": []
+  },
+  "MZW Alterswil": {
+    "query": "MZW Alterswil",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=MZW+Alterswil&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-03",
+    "results": [
+      {
+        "label": "Moos 31b 4942 Walterswil BE",
+        "lat": 47.10634994506836,
+        "lon": 7.776313781738281
+      },
+      {
+        "label": "Moos 31d 4942 Walterswil BE",
+        "lat": 47.10654067993164,
+        "lon": 7.776024341583252
+      },
+      {
+        "label": "Moos 31a 4942 Walterswil BE",
+        "lat": 47.10639953613281,
+        "lon": 7.776493072509766
+      },
+      {
+        "label": "Moos 31 4942 Walterswil BE",
+        "lat": 47.10643768310547,
+        "lon": 7.776057720184326
+      },
+      {
+        "label": "Moos 43 4942 Walterswil BE",
+        "lat": 47.10435104370117,
+        "lon": 7.775209903717041
+      }
+    ]
+  },
+  "Rte des Ecoles 34, 1723 Marly": {
+    "query": "Rte des Ecoles 34 1723 Marly",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+des+Ecoles+34+1723+Marly&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-03",
+    "results": [
+      {
+        "label": "Route des Ecoles 34 1723 Marly",
+        "lat": 46.7824821472168,
+        "lon": 7.14572286605835
+      }
+    ]
+  },
+  "Piscine du CO de Jolimont, Rue des Ecoles 15, 1700 Fribourg": {
+    "query": "Rue des Ecoles 15 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+des+Ecoles+15+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-03",
+    "results": [
+      {
+        "label": "Rue des Ecoles 15 1700 Fribourg",
+        "lat": 46.80409622192383,
+        "lon": 7.148730278015137
+      }
+    ]
+  },
+  "Parkplatz der Nydegger AG, Obertswilstrasse 86, 1735 Giffers": {
+    "query": "Obertswilstrasse 86 1735 Giffers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Obertswilstrasse+86+1735+Giffers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-03",
+    "results": [
+      {
+        "label": "Obertswilstrasse 86 1735 Giffers",
+        "lat": 46.76761245727539,
+        "lon": 7.212735176086426
+      }
+    ]
+  },
+  "Dorfplatz Plaffeien": {
+    "query": "Dorfplatz Plaffeien",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Dorfplatz+Plaffeien&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-03",
+    "results": [
+      {
+        "label": "Rüttistrasse # 1716 Plaffeien",
+        "lat": 46.72721862792969,
+        "lon": 7.2858171463012695
+      },
+      {
+        "label": "Bexenried 1c 1716 Plaffeien",
+        "lat": 46.734840393066406,
+        "lon": 7.294751167297363
+      },
+      {
+        "label": "Alt Rufenenweg 1o 1716 Plaffeien",
+        "lat": 46.73332214355469,
+        "lon": 7.294061660766602
+      },
+      {
+        "label": "Rainweg 1e 1716 Plaffeien",
+        "lat": 46.72892379760742,
+        "lon": 7.294198513031006
+      },
+      {
+        "label": "Chromenstrasse 1 1716 Plaffeien",
+        "lat": 46.737979888916016,
+        "lon": 7.291813373565674
+      }
+    ]
+  },
+  "Kirchgemeindehaus Meyriez, Chemin du Village 6, 3280 Meyriez": {
+    "query": "Chemin du Village 6 3280 Meyriez",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+du+Village+6+3280+Meyriez&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-03",
+    "results": [
+      {
+        "label": "Chemin du Village 6 3280 Meyriez",
+        "lat": 46.92420196533203,
+        "lon": 7.107992649078369
+      },
+      {
+        "label": "Chemin du Village 6a 3280 Meyriez",
+        "lat": 46.924034118652344,
+        "lon": 7.108067989349365
+      }
+    ]
+  },
+  "Kinder- und Jugendhaus Kerzers, Vordere Gasse 5": {
+    "query": "Vordere Gasse 5",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Vordere+Gasse+5&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-03",
+    "results": [
+      {
+        "label": "Vordere Gasse 5 7012 Felsberg",
+        "lat": 46.845603942871094,
+        "lon": 9.478174209594727
+      },
+      {
+        "label": "Vordere Gasse 5 3132 Riggisberg",
+        "lat": 46.809242248535156,
+        "lon": 7.476288795471191
+      },
+      {
+        "label": "Vordere Gasse 5 3210 Kerzers",
+        "lat": 46.97492980957031,
+        "lon": 7.198701858520508
+      },
+      {
+        "label": "Vordere Gasse 5 4628 Wolfwil",
+        "lat": 47.26830291748047,
+        "lon": 7.791725158691406
+      },
+      {
+        "label": "Vordere Gasse 5 5453 Remetschwil",
+        "lat": 47.41065979003906,
+        "lon": 8.3155517578125
+      }
+    ]
   }
 }

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T08:18:32.104Z",
+  "generatedAt": "2026-11-03T13:27:15.593Z",
   "sources": [
     {
       "id": "source-a9e685e2c5ed",
@@ -2712,6 +2712,20 @@
       ],
       "labels": [
         "Cancellation"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-4f7fc9cb5f7a",
+      "url": "https://www.sss-schwarzsee.ch/",
+      "recordIds": [
+        "snowli-daily"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Additional check: Season"
       ],
       "monitoring": "not-configured"
     },

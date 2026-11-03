@@ -517,6 +517,10 @@ export const CONTRACT_DEFECTS={
   'correction-confirmation':{error:/^Correction not resolved by draft: (?!every required field is unchanged)/,kinds:['review-patch']},
   // worker-prompt.mjs: the editor is now told the practical fact format, checked date included.
   'practical-checked':{error:/^Invalid practical patch$/,kinds:['editorial','integrate']},
+  // Found on 1 November 2026. worker-prompt.mjs: the reviewer's format now lists checkedCoverage; it was asked for only in the editor's part.
+  'review-checked-coverage':{error:/^Patch review omits full-card coverage approval$/,kinds:['review-patch']},
+  // worker-prompt.mjs: the editor is now told to cite preparedEvidence; captureDraft drops the bundle IDs it cited, so they read as missing.
+  'coverage-snapshot-ids':{error:/^Full review uses missing or stale evidence$/,kinds:['editorial','integrate']},
 };
 export function recoverDefectJob(queue,id,defect,note,{getInputs=currentInputs}={}){
   if(!note?.trim())throw Error('Defect recovery needs an investigation note');

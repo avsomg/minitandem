@@ -147,7 +147,7 @@ test('corrected gym and Piccolo days participate in the real catalogue filters',
 test('Giffers lantern procession keeps the confirmed 2026 meeting point and weather caveat',()=>{
   const {byId}=load();
   const procession=byId.get('rabel-giffers');
-  assert.equal(procession.address,'Parkplatz Nydegger AG, Obertswilstrasse 86, 1735 Giffers');
+  assert.equal(procession.address,'Parkplatz der Nydegger AG, Obertswilstrasse 86, 1735 Giffers');
   assert.deepEqual(Array.from(procession.events,e=>({date:e.date,start:e.start})),[
     {date:'2026-11-07',start:'18:00'}
   ]);
@@ -176,7 +176,8 @@ test('new AEF cafes keep exact dated sessions, and an unknown age is never a mat
 test('Estavayer reading workshop has dated bookable sessions for ages 0 to 4',()=>{
   const {list,state,byId}=load({age:AGE});
   const workshop=byId.get('ne-pour-lire-estavayer');
-  assert.deepEqual(Array.from(workshop.events,e=>e.date),['2026-10-05','2026-11-11','2026-12-10']);
+  // The approved review of 1 November 2026 dropped the past session of 5 October.
+  assert.deepEqual(Array.from(workshop.events,e=>e.date),['2026-11-11','2026-12-10']);
   assert.equal(workshop.practical.booking.value,true);
   assert.equal(workshop.max,4);
   assert.equal(workshop.priceKind,'unknown');
@@ -480,7 +481,9 @@ test('deep review covers active cards and preserves receipts for ended events',(
   assert.deepEqual(Array.from(byId.get('swim-duedingen').days),[6]);
   for(const id of ['playgrounds-marly','elki-kerzers'])assert.deepEqual(Array.from(byId.get(id).days),[],`${id}: stale schedule must not appear as a weekday`);
   assert.equal(byId.get('playgrounds-marly').scheduleValidThrough,null);
-  assert.equal(byId.get('elki-kerzers').scheduleValidThrough,null);
+  // The full review of 1 November 2026 found only last season's course (to 25 March 2026): no weekday, the card stays check and is due again.
+  assert.equal(byId.get('elki-kerzers').scheduleValidThrough,'2026-03-25');
+  assert.equal(byId.get('elki-kerzers').status,'check');
 });
 
 test('all four expanded districts have sourced cards and participate in normal filters',()=>{
@@ -510,7 +513,7 @@ test('all four expanded districts have sourced cards and participate in normal f
   assert.match(byId.get('epicentre-pataugeoire-romont').price,/child under 6 free/);
   assert.equal(byId.get('fsg-domdidier-parent').status,'check');
   assert.equal(byId.get('fsg-domdidier-parent').min,3);
-  assert.match(byId.get('fsg-domdidier-parent').schedule,/group is full/);
+  assert.match(byId.get('fsg-domdidier-parent').schedule,/group is (?:currently )?full/);
   assert.match(byId.get('fsg-chatel-parent-remaufens').practical.trial.text,/Three trial sessions/);
 });
 
@@ -611,7 +614,8 @@ test('corrected schedules and price units reach real app data',()=>{
   assert.equal(byId.get('kinderfeier').parent,'yes');
   assert.ok(byId.get('kinderfeier').events.every(e=>e.date.startsWith('2026-')),'different 2027 venues stay in source-linked details, not misleading ICS locations');
   assert.equal(byId.get('familienkonzert-kerzers-2026').events[0].end,'17:00');
-  assert.equal(byId.get('spielkafi-kerzers-2026').events[0].date,'2026-10-25');
+  // Since the approved update of 1 November 2026 the card lists all three published 2026 dates.
+  assert.deepEqual(Array.from(byId.get('spielkafi-kerzers-2026').events,e=>e.date),['2026-09-20','2026-10-25','2026-11-22']);
 });
 
 test('source-linked details escape text, refuse unsafe links and preserve unknowns',()=>{

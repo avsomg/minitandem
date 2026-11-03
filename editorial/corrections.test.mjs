@@ -73,7 +73,7 @@ test('address fixes retain programme and access uncertainty',()=>{
   assert.ok(conservatoire.sources.some(s=>s.url==='https://www.fr.ch/document/595626'));
   const kerzers=byId.get('elki-kerzers');
   assert.deepEqual(Array.from(kerzers.days),[]);
-  assert.match(kerzers.price,/2025\/26.*to be confirmed/);
+  assert.equal(kerzers.price,'Price to be confirmed'); // the full review of 1 November 2026 found no fee for the new season
   assert.match(byId.get('chatonnaye-forest-cabin').schedule,/free access.*not confirmed/);
   assert.match(byId.get('hauteville-otavela-play').schedule,/not stated/);
   assert.equal(byId.get('montsalvens-lakeside-walk').status,'check');

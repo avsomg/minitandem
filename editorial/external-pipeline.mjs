@@ -6,6 +6,7 @@ import {createHash} from 'node:crypto';
 import {loadCatalog,root} from './quality.mjs';
 import {CHANNELS,externalReviewReport,readExternalReviewInputs} from './external-review.mjs';
 import {CORRECTION_FORMAT} from './project-id.mjs';
+import {FULL_REVIEW_UNKNOWN_TEXT} from './field-contract.mjs';
 
 const editorial=path.join(root,'editorial');
 const CHANNEL_STATES=new Set(['searched','limited','blocked']);
@@ -58,11 +59,13 @@ export function venueGroups(records,registry){
       const record=byId.get(id);
       if(!record||cardGroup.has(id))throw Error(`Invalid or repeated venue card: ${id}`);
       cardGroup.set(id,group.id);
+      // A full review that found no published address leaves the group as it was: unknown is not a different place (snowli-daily, 1 November 2026).
+      if(FULL_REVIEW_UNKNOWN_TEXT.address.includes(record.address))continue;
       const signature=venueAddressSignature(record.address);
       addresses.add(signature.address);
       if(signature.postalCode)postalCodes.add(signature.postalCode);
     }
-    if(addresses.size!==1||addresses.has('')||postalCodes.size>1)throw Error(`Venue group spans addresses: ${group.id}`);
+    if(addresses.size>1||addresses.has('')||postalCodes.size>1)throw Error(`Venue group spans addresses: ${group.id}`);
   }
   return cardGroup;
 }
