@@ -119,6 +119,12 @@ test('facts re-checks wait only for double backlog unless urgent; discovery wait
   queue.enqueue(spec('facts','alarm','v1',400));
   assert.equal(queue.claim('search','w',{backpressure:1}).card_id,'alarm');
 });
+test('waiting QA rows are no backlog: held QA does not stop fact checks',t=>{
+  const {queue}=fixture(t);
+  for(const card of ['q1','q2','q3'])queue.enqueue(spec('qa',card));
+  queue.enqueue(spec('facts','soft','v1',85));
+  assert.equal(queue.claim('search','w',{backpressure:1}).card_id,'soft');
+});
 test('artifacts and outbox survive reopening; followups are ready immediately',t=>{
   const {queue,directory,file}=fixture(t);queue.enqueue(spec());const job=queue.claim('search','one');
   const result=queue.finish(job.id,job.token,'search',{found:true},{writes:[{file:'editorial/external-candidates/card.json',data:{found:true}}],

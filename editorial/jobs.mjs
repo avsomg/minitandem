@@ -169,7 +169,9 @@ export class JobQueue{
       if(!['qa','release'].includes(role)&&this.circuit()?.open)return null;
       const allowed=ROLE_KINDS[role].filter(kind=>!kinds||kinds.includes(kind));if(!allowed.length)return null;
       const placeholders=allowed.map(()=>'?').join(',');
-      const backlog=this.db.prepare("SELECT count(*) AS n FROM jobs WHERE state IN ('ready','leased','retry') AND kind IN ('verify','verify-facts','review-patch','editorial','integrate','qa')").get().n;
+      // QA is not counted: one release QA supersedes every waiting row, and a night run holds them all (--hold-qa). Counted, 50 held rows
+      // blocked every fact check on 4 November 2026 and the run stopped with nothing to claim.
+      const backlog=this.db.prepare("SELECT count(*) AS n FROM jobs WHERE state IN ('ready','leased','retry') AND kind IN ('verify','verify-facts','review-patch','editorial','integrate')").get().n;
       const candidates=this.db.prepare(`SELECT * FROM jobs WHERE kind IN (${placeholders}) AND
         (state='ready' OR state='retry' AND retry_after<=?) AND
         (?=0 OR priority>=120 OR kind='facts' AND ?=0) AND (? IS NULL OR card_id=?) AND NOT EXISTS(

@@ -8,8 +8,16 @@ import {PROJECT_ID,CORRECTION_FORMAT} from './project-id.mjs';
 
 const hash=file=>createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 const excluded=new Set(['node_modules','.git','.publish','.vercel','server-state','.DS_Store','.env']);
-const databaseState=queue=>digest(['metadata','jobs','artifacts','outbox','events','releases','captured_evidence'].map(table=>
-  [table,queue.db.prepare(`SELECT * FROM ${table} ORDER BY ${table==='metadata'?'key':table==='artifacts'?'hash':table==='releases'?'revision':'id'}`).all()]));
+// Row by row: since 1 November 2026 the queue is over 1 GB, and one JSON string of all of it exceeds the string limit (RangeError).
+const databaseState=queue=>{
+  const state=createHash('sha256');
+  for(const table of ['metadata','jobs','artifacts','outbox','events','releases','captured_evidence']){
+    state.update(table+'\n');
+    for(const row of queue.db.prepare(`SELECT * FROM ${table} ORDER BY ${table==='metadata'?'key':table==='artifacts'?'hash':table==='releases'?'revision':'id'}`).iterate())
+      state.update(JSON.stringify(row)+'\n');
+  }
+  return state.digest('hex');
+};
 export function backupFiles(base){
   const files={};
   const walk=(directory,relative='')=>{
