@@ -257,9 +257,10 @@ test('map publishes only unique exact-address matches, never arbitrary first sea
   for(const [id,label] of [
     ['enney-sarine-play','Prâ des Frassettes 185 1667 Enney'],
     ['thusy-pont-la-ville','Impasse de Thusy 89 1649 Pont-la-Ville'],
-    ['hauteville-otavela-play','Route de la Bahy 1 1648 Hauteville'],
     ['chatonnaye-forest-cabin','Chemin de la Cabane 9 1553 Châtonnaye']
   ])assert.equal(byId.get(id).geo.label,label,id);
+  // No confirmed visit address since the full reviews of 3 November 2026, so no point on the map.
+  for(const id of ['hauteville-otavela-play','familybloom-mini-move'])assert.equal(byId.get(id).geo,undefined,id);
   assert.equal(byId.get('familybloom-yoga').geo.label,'Steindleren 1a 3210 Kerzers');
   assert.equal(byId.get('aef-villars').geo.label,'Route de Villars-Vert 26 1752 Villars-sur-Glâne');
   assert.equal(byId.get('aef-estavayer-cafe').geo.label,'Route de la Chapelle 33 1470 Estavayer-le-Lac');

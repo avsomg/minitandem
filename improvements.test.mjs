@@ -209,13 +209,15 @@ test('editorial queue measures missing facts without inventing owners or new ver
 test('freshness queue prioritizes imminent meetings and the whole 0–6 audience without a family route',()=>{
   const report=JSON.parse(execFileSync(process.execPath,[path.join(root,'maintain.mjs'),'--date=2026-09-28'],{encoding:'utf8'}));
   // elki-kerzers: its last published season ended on 25 March 2026 (full review of 1 November 2026), so it is due for another look.
-  assert.deepEqual(report.due.map(row=>[row.id,row.reasons]),[['elki-kerzers',['season-ended']]]);
+  // ludo-events: the full review of 3 November 2026 found only the 2024 events on the source page, the last on 23 November 2024.
+  assert.deepEqual(report.due.map(row=>[row.id,row.reasons]),[['ludo-events',['season-ended','listed-events-ended']],['elki-kerzers',['season-ended']]]);
   const byId=new Map(report.needsConfirmation.map(row=>[row.id,row]));
-  // aef-mpe and aef-passerelles were confirmed active by approved updates (2 and 20 October 2026) and no longer wait here.
-  for(const id of ['aef-mpe','aef-passerelles'])assert.equal(byId.has(id),false,id);
-  // herbstbasteln still waits for confirmation, and its meeting of 30 September is two days after the report date.
-  assert.equal(byId.get('herbstbasteln').nextEvent,'2026-09-30');
-  assert.equal(byId.get('herbstbasteln').priority,'now');
+  // aef-mpe and aef-passerelles were confirmed active by approved updates (2 and 20 October 2026), and herbstbasteln was closed
+  // by the approved update of 3 November 2026 once its only date had passed; none of them waits here.
+  for(const id of ['aef-mpe','aef-passerelles','herbstbasteln'])assert.equal(byId.has(id),false,id);
+  // aef-farvagny still waits for confirmation, and its meeting of 3 October is five days after the report date.
+  assert.equal(byId.get('aef-farvagny').nextEvent,'2026-10-03');
+  assert.equal(byId.get('aef-farvagny').priority,'now');
   assert.deepEqual(report.targetAge,{min:0,max:6});
   assert.equal(byId.get('krabbel-giffers').priority,'review');
   assert.equal(byId.get('krabbel-giffers').ageFit,'confirmed');

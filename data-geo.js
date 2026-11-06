@@ -495,13 +495,13 @@
   },
   {
     "id": "aef-attalens",
-    "address": "Rue de l’Eglise 26, 1616 Attalens",
+    "address": "Salle AES, Bâtiment \"Aviateur\" de l'école d'Attalens, Rue de l'Eglise 26, 1616 Attalens",
     "geo": {
       "label": "Rue de l'Eglise 26 1616 Attalens",
       "lat": 46.51081085205078,
       "lon": 6.850430488586426,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99Eglise+26+1616+Attalens&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-28",
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%27Eglise+26+1616+Attalens&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-11-01",
       "precision": "address"
     }
   },
@@ -610,18 +610,6 @@
       "lon": 7.150873184204102,
       "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l%27Aurore+2&type=locations&origins=address&limit=5&sr=4326",
       "checked": "2026-10-26",
-      "precision": "address"
-    }
-  },
-  {
-    "id": "herbstbasteln",
-    "address": "Zentrum Weissenstein, Weissenstein 57, 1718 Rechthalten",
-    "geo": {
-      "label": "Weissenstein 57 1718 Rechthalten",
-      "lat": 46.76859664916992,
-      "lon": 7.249922752380371,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Zentrum+Weissenstein+Weissenstein+57+1718+Rechthalten&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
       "precision": "address"
     }
   },
@@ -867,13 +855,13 @@
   },
   {
     "id": "ateliers-familles-courtepin",
-    "address": "Ancienne école allemande, Route de Fribourg 19, 1784 Courtepin",
+    "address": "Ancienne École allemande, Rte de Fribourg 19, 1784 Courtepin",
     "geo": {
       "label": "Route de Fribourg 19 1784 Courtepin",
       "lat": 46.866905212402344,
       "lon": 7.123219013214111,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ancienne+%C3%A9cole+allemande+Route+de+Fribourg+19+1784+Courtepin&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+de+Fribourg+19+1784+Courtepin&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-11-06",
       "precision": "address"
     }
   },
@@ -915,18 +903,6 @@
   },
   {
     "id": "familybloom-yoga",
-    "address": "Steindleren 1a, 3210 Kerzers",
-    "geo": {
-      "label": "Steindleren 1a 3210 Kerzers",
-      "lat": 46.977752685546875,
-      "lon": 7.190988063812256,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Steindleren+1a+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-28",
-      "precision": "address"
-    }
-  },
-  {
-    "id": "familybloom-mini-move",
     "address": "Steindleren 1a, 3210 Kerzers",
     "geo": {
       "label": "Steindleren 1a 3210 Kerzers",
@@ -1502,18 +1478,6 @@
     }
   },
   {
-    "id": "hauteville-otavela-play",
-    "address": "Salle OTAVELA, Rte de la Bahy 1, 1648 Hauteville",
-    "geo": {
-      "label": "Route de la Bahy 1 1648 Hauteville",
-      "lat": 46.67079544067383,
-      "lon": 7.109845161437988,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Salle+OTAVELA+Rte+de+la+Bahy+1+1648+Hauteville&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-10-02",
-      "precision": "address"
-    }
-  },
-  {
     "id": "chatonnaye-forest-cabin",
     "address": "Chemin de la Cabane 9, 1553 Châtonnaye",
     "geo": {
@@ -1623,13 +1587,13 @@
   },
   {
     "id": "memo-valise-magique-2026-11-04",
-    "address": "Rue de l’Hôpital 2, Fribourg",
+    "address": "Rue de l’Hôpital 2, 1700 Fribourg",
     "geo": {
       "label": "Rue de l'Hôpital 2 1700 Fribourg",
       "lat": 46.805633544921875,
       "lon": 7.154872894287109,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+Fribourg&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-10-31",
       "precision": "address"
     }
   },

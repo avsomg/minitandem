@@ -6527,5 +6527,55 @@
         "lon": 8.3155517578125
       }
     ]
+  },
+  "Ancienne École allemande, Rte de Fribourg 19, 1784 Courtepin": {
+    "query": "Rte de Fribourg 19 1784 Courtepin",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+de+Fribourg+19+1784+Courtepin&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-06",
+    "results": [
+      {
+        "label": "Route de Fribourg 19 1784 Courtepin",
+        "lat": 46.866905212402344,
+        "lon": 7.123219013214111
+      }
+    ]
+  },
+  "Parking near the obelisk, Meyriez (start of the forest walk)": {
+    "query": "Parking near the obelisk Meyriez start of the forest walk",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Parking+near+the+obelisk+Meyriez+start+of+the+forest+walk&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-06",
+    "results": []
+  },
+  "1632 Riaz": {
+    "query": "1632 Riaz",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=1632+Riaz&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-06",
+    "results": [
+      {
+        "label": "Ruelle des Evêques-Duding 1 1632 Riaz",
+        "lat": 46.64435577392578,
+        "lon": 7.054741382598877
+      },
+      {
+        "label": "Route Champ-Jordan 1 1632 Riaz",
+        "lat": 46.64023971557617,
+        "lon": 7.053563594818115
+      },
+      {
+        "label": "Ruelle Maxime-Clerc 1 1632 Riaz",
+        "lat": 46.64170837402344,
+        "lon": 7.062643527984619
+      },
+      {
+        "label": "Route de Corbières 1 1632 Riaz",
+        "lat": 46.6402473449707,
+        "lon": 7.062627792358398
+      },
+      {
+        "label": "Rue de Saletta 1 1632 Riaz",
+        "lat": 46.6407356262207,
+        "lon": 7.062196254730225
+      }
+    ]
   }
 }

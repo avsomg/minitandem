@@ -32,7 +32,8 @@ test('all thirteen October 2 corrections match the compiled catalogue, not just 
 });
 
 test('new-season gym schedules agree with day filters and visit conditions',()=>{
-  for(const [id,day,start] of [['bewegungsinsel',1,'07.09.2026'],['elki-giffers',3,'09.09.2026'],['elki-heitenried',3,'season and holiday dates not published']]){
+  // bewegungsinsel: the full review of 3 November 2026 writes the start date out.
+  for(const [id,day,start] of [['bewegungsinsel',1,'7 September 2026'],['elki-giffers',3,'09.09.2026'],['elki-heitenried',3,'season and holiday dates not published']]){
     const card=byId.get(id);
     assert.deepEqual(Array.from(card.days),[day]);
     assert.ok(card.schedule.includes(start));
@@ -75,7 +76,7 @@ test('address fixes retain programme and access uncertainty',()=>{
   assert.deepEqual(Array.from(kerzers.days),[]);
   assert.equal(kerzers.price,'Price to be confirmed'); // the full review of 1 November 2026 found no fee for the new season
   assert.match(byId.get('chatonnaye-forest-cabin').schedule,/free access.*not confirmed/);
-  assert.match(byId.get('hauteville-otavela-play').schedule,/not stated/);
+  assert.match(byId.get('hauteville-otavela-play').schedule,/not (?:stated|published)/); // 'Schedule not published' since the full review of 3 November 2026
   assert.equal(byId.get('montsalvens-lakeside-walk').status,'check');
   assert.match(byId.get('montsalvens-lakeside-walk').notes.join(' '),/left bank.*detour/);
   assert.match(byId.get('montsalvens-lakeside-walk').practical.warnings[0],/left bank.*detour/);

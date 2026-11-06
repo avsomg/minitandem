@@ -135,7 +135,8 @@ test('the shown language reaches the list row, the card page, the week view, the
     const page=V.detail(card);
     for(const key of ['intro','schedule','notes[0]','research.remaining[0]','sources[0].label'])assert.ok(page.includes(esc(strings[key])),`${lang} card page: ${key}`);
     assert.ok(!page.includes(esc(card.intro)),lang+': the English intro is not shown');
-    assert.ok(page.includes(encodeURIComponent(card.address)),lang+': directions use the address as published');
+    // The link sits in an HTML attribute, so an apostrophe in the address (aef-attalens since 3 November 2026) appears escaped.
+    assert.ok(page.includes(esc(encodeURIComponent(card.address))),lang+': directions use the address as published');
     state.view='week';
     // A card with a dated session in the test week shows its translated name there.
     const days=C.week(list(),state.f),html=V.week(days),session=days.flatMap(d=>d.sessions).map(s=>s.a).find(a=>shown.translated(a)&&shown.card(a).name!==a.name);

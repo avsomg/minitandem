@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T13:27:15.593Z",
+  "generatedAt": "2026-11-06T22:04:19.083Z",
   "sources": [
     {
       "id": "source-a9e685e2c5ed",
@@ -444,6 +444,20 @@
       ],
       "labels": [
         "Official source"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-3bd5db8efd9b",
+      "url": "https://tsvrechthalten.ch/impressum/",
+      "recordIds": [
+        "elki-rechthalten"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Additional check: Contacts"
       ],
       "monitoring": "not-configured"
     },
@@ -1862,6 +1876,23 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-1865db4d9fc8",
+      "url": "https://www.educationfamiliale.ch/fr/activites-familles",
+      "recordIds": [
+        "creer-aef",
+        "ateliers-familles-courtepin"
+      ],
+      "regions": [
+        "sarine",
+        "see"
+      ],
+      "labels": [
+        "Additional check: Workshop listing",
+        "Organiser: format of the workshops for adults and children"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-6cff5fd5a841",
       "url": "https://www.livrechange.ch/fr/activites-regulieres.html",
       "recordIds": [
@@ -2195,34 +2226,6 @@
       "labels": [
         "With a parent",
         "Date and start"
-      ],
-      "monitoring": "not-configured"
-    },
-    {
-      "id": "source-380321188ec8",
-      "url": "https://www.ref-weissenstein.ch/2026/09/22/einladung-herbstbasteln/",
-      "recordIds": [
-        "herbstbasteln"
-      ],
-      "regions": [
-        "sense"
-      ],
-      "labels": [
-        "Parish poster"
-      ],
-      "monitoring": "not-configured"
-    },
-    {
-      "id": "source-b272cc26c9d7",
-      "url": "https://www.ref-weissenstein.ch/2026/09/26/einladung-herbstbasteln/",
-      "recordIds": [
-        "herbstbasteln"
-      ],
-      "regions": [
-        "sense"
-      ],
-      "labels": [
-        "Place and time"
       ],
       "monitoring": "not-configured"
     },
@@ -3291,8 +3294,8 @@
       "monitoring": "not-configured"
     },
     {
-      "id": "source-1865db4d9fc8",
-      "url": "https://www.educationfamiliale.ch/fr/activites-familles",
+      "id": "source-fe379a18c5e5",
+      "url": "https://portail-jeunes.ch/ateliers-familles/",
       "recordIds": [
         "ateliers-familles-courtepin"
       ],
@@ -3300,7 +3303,7 @@
         "see"
       ],
       "labels": [
-        "Organiser: format of the workshops for adults and children"
+        "Additional check: age"
       ],
       "monitoring": "not-configured"
     },
@@ -4761,6 +4764,20 @@
         "Directory of playgrounds, data from 2020",
         "Tourist list of picnic sites, 22.06.2020",
         "Tourist list of picnic places, 22.06.2020"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-59638890772d",
+      "url": "https://www.chateau-gruyeres.ch/en/information/",
+      "recordIds": [
+        "clos-cerfs-gruyeres"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Additional check: Availability and format"
       ],
       "monitoring": "not-configured"
     },

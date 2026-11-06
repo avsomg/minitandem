@@ -1,6 +1,6 @@
 # Minitandem: catalogue with sources
 
-Catalogue updated 2026-11-01. The date of the in-depth check is shown on each card. Free places and future work are not guaranteed. All prices are in CHF; payment units are stated separately. Personal notes are not part of this file.
+Catalogue updated 2026-11-04. The date of the in-depth check is shown on each card. Free places and future work are not guaranteed. All prices are in CHF; payment units are stated separately. Personal notes are not part of this file.
 
 ## Sellenhof · open children's Wednesday
 
@@ -657,27 +657,31 @@ To confirm before visiting:
 - Status: Needs confirmation
 - Place: Giffers
 - District: Sense / Singine
-- Checked: 2026-10-02
-- Address: Sporthalle Giffers, 1735 Giffers
-- Age: Age to be confirmed
-- Adult: Together with an adult
-- Language: DE
-- Schedule: Mon 09:00–10:15, 2026/27 season; starts 07.09.2026
+- Checked: 2026-11-03
+- Address: Visit address not published (descriptive area, exact entrances not established)
+- Age: Toddlers (Kleinkinder); no exact age range published
+- Adult: Children attend accompanied by an adult; the page does not say whether the adult joins the activity or only stays nearby.
+- Language: To be confirmed
+- Schedule: Mondays, 09:00–10:15; starts 7 September 2026; no end date or holiday schedule published
 - Price: CHF 80 / year
 
-### Additional check: 2026-10-02
+### Additional check: 2026-11-03
 
-- **Format** (Organiser source): After a shared start, the child chooses the apparatus and how long to play on it; an adult takes part. At the end everyone gathers together again. Led by two group leaders; registration is required. 2026/27 season: Monday 09:00–10:15, starts 7 September 2026, Sporthalle Giffers, CHF 80 per year. [Source](https://www.svgt.ch/sportarten/bewegungsinsel)
+- **Format** (Organiser source): After a shared start and warm-up, the gym hall becomes a play and movement area; each child chooses what to play on and for how long, and a shared closing ends the session. Children attend accompanied by an adult. Registration is required. Mondays 09:00–10:15, starting 7 September 2026, at Sporthalle Giffers; annual fee CHF 80. [Source](https://www.svgt.ch/sportarten/bewegungsinsel)
+- **Price** (Organiser source): The official page lists an annual fee of CHF 80 and says registration is required. It publishes no end date for the season. [Source](https://www.svgt.ch/sportarten/bewegungsinsel)
 
 To confirm before visiting:
 - Lower age limit, availability of places, holiday breaks, trial visit and exact entrance. A quiet atmosphere is not guaranteed.
+- What language are the sessions held in?
+- Does the adult join the activities or only stay nearby?
+- Until when does the season run, and are there holiday breaks?
 
 - [Official source](https://www.svgt.ch/sportarten/bewegungsinsel)
 
 ### Visit conditions
 
 - Booking: Registration required; start published as 07.09.2026 [Source](https://www.svgt.ch/sportarten/bewegungsinsel)
-- Leader: The 2026/27 season page names two group leaders [Source](https://www.svgt.ch/sportarten/bewegungsinsel)
+- Leader: The official page names two group leaders; no qualifications are stated [Source](https://www.svgt.ch/sportarten/bewegungsinsel)
 - Duration: 75 minutes according to the published schedule [Source](https://www.svgt.ch/sportarten/bewegungsinsel)
 - Indoors: Sporthalle Giffers [Source](https://www.svgt.ch/sportarten/bewegungsinsel)
 - Important: Ask about availability of places, trial visit and holiday breaks
@@ -687,7 +691,7 @@ To confirm before visiting:
 - Status: Needs confirmation
 - Place: Rechthalten
 - District: Sense / Singine
-- Checked: 2026-11-01
+- Checked: 2026-11-03
 - Address: Visit address not published (descriptive area, exact entrances not established)
 - Age: Age to be confirmed
 - Adult: Conditions for adult participation not published
@@ -696,10 +700,13 @@ To confirm before visiting:
 - Price: Price not published
 - The page is older than the current season. Check admission for young children, address, fee and whether the group is still current.
 
-### Additional check: 2026-11-01
+### Additional check: 2026-11-03
 
 - **Schedule** (Historical information): The page, updated on 24 March 2024, still gives Wednesday 09:00–10:00 and a contact person. It has no age, price or new seasonal programme. [Source](https://tsvrechthalten.ch/turnen/)
 - **Schedule** (Organiser source): The club page lists the Eltern-Kind-Turnen training time as Wednesday 9:00–10:00. [Source](https://tsvrechthalten.ch/turnen/)
+- **Schedule** (Organiser source): On 3 November 2026 the club page still lists Eltern-Kind-Turnen with a Wednesday 9:00–10:00 training time. The page carries a 2024-03-24 date and publishes no season, age, price, hall address or registration information. [Source](https://tsvrechthalten.ch/turnen/)
+- **Contacts** (Organiser source): The club's imprint says that questions about a specific section go to the contact details on that section's page, so families should use the contact listed on the Turnen page for this group. [Source](https://tsvrechthalten.ch/impressum/)
+- **Schedule** (Organiser source): Rechecked on 3 November 2026: the club's Turnen page lists the Eltern-Kind-Turnen training time as Wednesday 9:00–10:00. [Source](https://tsvrechthalten.ch/turnen/)
 
 To confirm before visiting:
 - Without direct confirmation the group cannot be considered active in the 2026/27 season. Confirm the age, hall and fee.
@@ -709,6 +716,7 @@ To confirm before visiting:
 - Is registration needed?
 
 - [Official source](https://tsvrechthalten.ch/turnen/)
+- [Additional check: Contacts](https://tsvrechthalten.ch/impressum/)
 
 ### Visit conditions
 
@@ -1706,7 +1714,7 @@ To confirm before visiting:
 - A place in the group has not been checked.
 - Only the dates from the published AEF programme have been added to the calendar.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-03
 
 - **Adult** (Organiser source): At the meeting, adults discuss parenting over coffee and try interacting with the children here and now. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
 - **Autumn series** (Organiser source): The organiser's calendar lists this café at the Maison de la Petite Enfance in Fribourg on 27 October, 3, 10, 17 and 24 November, and 1 and 15 December 2026, each from 09:00 to 11:00. The description presents a coffee and snack with exchanges between adults on the theme of education. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
@@ -1714,6 +1722,7 @@ To confirm before visiting:
 - **status** (Organiser source): The organiser's calendar, read on 31 October 2026, lists a session of the Parents-Children café at the Maison de la Petite Enfance in Fribourg on 3 November 2026. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
 - **venue** (Organiser source): The Maison de la Petite Enfance, which hosts this café, describes its own open-access format for children aged 0 to 4 completed, accompanied by an adult. This is the venue's general offer; the café's own age range is not stated there. [Source](https://maison-petite-enfance.ch/)
 - **venue** (Organiser source): The Maison de la Petite Enfance in Fribourg, which hosts this café, publishes its own general open-access hours for its play space: Monday, Tuesday, Thursday and Friday 14:00–18:00, Wednesday 08:30–11:30, without appointment. These are the venue's general hours, not the café's session times. [Source](https://maison-petite-enfance.ch/)
+- **Address** (Organiser source): The Maison de la Petite Enfance, the venue that hosts this café, publishes its visitor address as Route des Arsenaux 23A, 1700 Fribourg. [Source](https://maison-petite-enfance.ch/)
 
 To confirm before visiting:
 - The cost, age limits, registration and a German-speaking facilitator are not stated in the calendar. This is a joint meeting, not childcare without a parent.
@@ -1811,12 +1820,13 @@ To confirm before visiting:
 - Coop restaurant on the 4th floor.
 - Only the dates from the published AEF programme have been entered in the calendar.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-03
 
 - **Published dates** (Organiser source): The official AEF calendar currently lists seven upcoming Parent-Child Café sessions at Fribourg Centre, from 5 November to 17 December 2026, each 09:00–11:00 in the Coop restaurant (4th floor), Av. de la Gare 10, Fribourg. None is marked as cancelled. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
 - **Play area** (Organiser source): The Fribourg Centre venue page places the parent-child café in the Coop restaurant on level 4, and the centre's services page lists a children's corner in the Coop restaurant on level 4. Visitor toilets are listed on levels 2 and -1. [Source](https://fribourg-centre.com/le-centre/services/)
 - **Schedule** (Organiser source): The Fribourg Centre page says the parent-child café takes place every Thursday morning from 09:00 to 11:00 in the Coop restaurant on level 4. The organizer's calendar currently lists dated sessions from 5 November to 17 December 2026; earlier sessions have passed and nothing after 17 December is published. [Source](https://fribourg-centre.com/le-centre/cafes-parents-enfants/)
 - **Schedule** (Organiser source): The Fribourg Centre page describes the parent-child café as a weekly meeting every Thursday morning from 09:00 to 11:00, where the children play together while the adults talk and exchange information. [Source](https://fribourg-centre.com/le-centre/cafes-parents-enfants/)
+- **research.findings** (Organiser source): On 3 November 2026 the Fribourg Centre page for the parent-child café still describes a meeting in the Coop restaurant on level 4, with the children playing together while adults talk and exchange information, every Thursday morning from 09:00 to 11:00. The page links to the Education Familiale agenda. It gives no age range, price or registration information. [Source](https://fribourg-centre.com/le-centre/cafes-parents-enfants/)
 
 To confirm before visiting:
 - The cost, age limits, registration and a German-speaking leader are not stated in the calendar. This is a joint meeting, not supervision without a parent.
@@ -1826,6 +1836,7 @@ To confirm before visiting:
 - In what language is the meeting held, and is German available?
 - Must an adult stay with the child throughout the meeting?
 - Is there a baby changing table, a breastfeeding space and a stroller-friendly route to the café?
+- Are there sessions after 17 December 2026?
 
 - [AEF programme and published dates](https://tockify.com/educationfamiliale/detail/754/1790838000000)
 - [AEF calendar](https://www.educationfamiliale.ch/fr/agenda)
@@ -1892,10 +1903,11 @@ To confirm before visiting:
 - Date: 2026-11-07 09:00–11:00 · Café Parents-Enfants à la Vignettaz · École primaire de la Vignettaz, salle rythmique/musique,Rte de la Gruyère 9, 1700 Fribourg
 - Adults share a coffee and a snack and talk about education; the meeting is held in the rhythm/music room of the Vignettaz primary school.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-03
 
 - **Date and place** (Organiser source): The AEF calendar lists the next meeting on 7 November 2026, 09:00–11:00, in the rhythm/music room of the Vignettaz primary school, Route de la Gruyère 9, Fribourg. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
 - **Description** (Organiser source): The organiser's calendar describes the meeting as a coffee and a snack for conversations between adults on the theme of education, and says the group will practise education with the children here and now. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
+- **Date and status** (Organiser source): The organiser's calendar, read again on 3 November 2026, still lists the meeting on 7 November 2026 from 09:00 to 11:00 and does not mark it as cancelled. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
 
 To confirm before visiting:
 - What is the age range, cost, registration requirement and session language? The calendar entry does not say.
@@ -1930,17 +1942,20 @@ To confirm before visiting:
 - The minimum age, cost, whether registration is needed and the host's language are not stated.
 - The meeting takes place in building C. Do not confuse it with the Encore ! readings elsewhere in the Jura district.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-03
 
 - **Dates and place** (Organiser source): AEF publishes meetings on 10 and 31 October 2026, 14:00–16:00, in building C of the Jura school at Avenue du Général-Guisan 59. [Source](https://tockify.com/educationfamiliale/detail/783/1791633600000)
 - **Meeting format** (Organiser source): Over coffee and a snack, adults discuss parenting. The meeting includes putting it into practice together with the children. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
 - **Dates and place** (Organiser source): The organiser's calendar lists the parent-child café at the Jura kindergarten, building C, on 10 and 31 October 2026, both 14:00–16:00. The 31 October meeting is not marked as cancelled. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
 - **Meeting format** (Organiser source): The organiser's calendar entry says that, together with the children, the group practises parenting here and now. It does not state an age range, price, registration rule or session language. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
+- **Meeting format** (Organiser source): The organiser's calendar describes a coffee-and-snack meeting for exchanges between adults on parenting, and refers to an information flyer. It lists meetings on 10 and 31 October 2026 from 14:00 to 16:00, neither marked as cancelled. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
 
 To confirm before visiting:
 - Confirm the age, cost, registration, language and the entrance to building C.
 - What age is the meeting intended for, how much does it cost to take part, is registration needed, what language is it held in and where is the entrance to building C?
 - Does the adult have to take an active part?
+- Are further meetings planned after 31 October 2026?
+- What age is the meeting intended for, how much does it cost, is registration needed, and what language is it held in?
 
 - [AEF calendar: both dates](https://tockify.com/api/feeds/ics/educationfamiliale)
 - [AEF: meeting at Jura](https://tockify.com/educationfamiliale/detail/783/1791633600000)
@@ -1994,7 +2009,7 @@ To confirm before visiting:
 - Place: Attalens
 - District: Veveyse
 - Checked: 2026-09-28
-- Address: Rue de l’Eglise 26, 1616 Attalens
+- Address: Salle AES, Bâtiment "Aviateur" de l'école d'Attalens, Rue de l'Eglise 26, 1616 Attalens
 - Age: Age to be confirmed
 - Adult: Described as a parent-child café: adults practise education together with their children at the session. Attendance conditions beyond this are not published in the sources reviewed.
 - Language: To be confirmed
@@ -2008,11 +2023,12 @@ To confirm before visiting:
 - Date: 2026-12-16 09:00–11:00 · Café Parents-Enfants à Attalens · Salle AES, Bâtiment "Aviateur" de l'école d'Attalens,Rue de l'Eglise 26, 1616 Attalens, Switzerland
 - Parking: the school car park is reserved for teachers; visitors can park towards the Hôtel de Ville.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-03
 
 - **Address and parking** (Organiser source): Salle AES in the Aviateur building, Rue de l’Eglise 26. AEF warns that the school car park is reserved for teachers and suggests parking at the Hôtel de Ville. [Source](https://tockify.com/educationfamiliale/detail/751/1791356400000/2)
 - **Published dates** (Organiser source): The organiser's calendar currently lists five parent-child café sessions, from 4 November to 16 December 2026, each 09:00–11:00, in the Salle AES at Rue de l'Eglise 26, Attalens. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
 - **Published dates** (Organiser source): As of 31 October 2026 the organiser's calendar lists the café on 4, 11 and 25 November and 2 and 16 December 2026, each 09:00–11:00. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
+- **Format** (Organiser source): The organiser's calendar describes the café as a coffee and a snack for adults to exchange on education, with the education practised together with the children on the spot. Age, price, registration and language are not stated in the calendar entries. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
 
 To confirm before visiting:
 - Confirm the age, price, registration and language.
@@ -2027,11 +2043,11 @@ To confirm before visiting:
 ### Visit conditions
 
 - Indoors: The meeting takes place in the AES hall of the Aviateur school building. [Source](https://tockify.com/educationfamiliale/detail/751/1791356400000/2)
-- Coordinates of the address (not the entrance): 46.51081085205078, 6.850430488586426. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99Eglise+26+1616+Attalens&type=locations&origins=address&limit=5&sr=4326)
+- Coordinates of the address (not the entrance): 46.51081085205078, 6.850430488586426. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%27Eglise+26+1616+Attalens&type=locations&origins=address&limit=5&sr=4326)
 
 ## Atelier Alimentation · Attalens
 
-- Status: Current information available
+- Status: Needs confirmation
 - Place: Attalens
 - District: Veveyse
 - Checked: 2026-09-28
@@ -2045,10 +2061,11 @@ To confirm before visiting:
 - Date: 2026-10-28 09:00–11:00 · Atelier Alimentation à Attalens · Salle AES, Bâtiment "Aviateur" de l'école d'Attalens, Rue de l'Eglise 26, 1616 Attalens
 - Parking at the school is reserved for teachers; you can park towards the Hôtel de Ville.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-03
 
 - **Separate programme** (Organiser source): On 28 October 2026, 09:00–11:00, a meeting titled Atelier Alimentation à Attalens is published for the same venue. [Source](https://tockify.com/educationfamiliale/detail/751/1793174400000/3)
 - **Session and venue** (Organiser source): The organiser's calendar lists one meeting for this card, on 28 October 2026 from 09:00 to 11:00, in the AES room of the Attalens school building at Rue de l'Eglise 26. No later date was found, and this date has already passed. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
+- **Session dates** (Organiser source): The organiser's calendar currently lists only one session for this card: 28 October 2026, 09:00 to 11:00. That date has already passed and no later session is listed, so families should ask whether a new date is planned. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
 
 To confirm before visiting:
 - Confirm the format of the themed workshop, age, price, registration and language.
@@ -2074,27 +2091,30 @@ To confirm before visiting:
 - Age: Check the age
 - Adult: Together with an adult
 - Language: To be confirmed
-- Schedule: 25 November and 9 December 2026 (start time to be confirmed)
+- Schedule: Dates and times to be confirmed in the organiser's agenda
 - Price: Price not published
-- Contact: Éducation Familiale: FR 026 321 48 70; DE 026 322 86 33; 026 321 48 70; contact@educationfamiliale.ch
-- No registration. Price and minimum age unknown; check whether the activity is suitable for young children.
+- Contact: Association pour l’Éducation Familiale; 026 321 48 70; contact@educationfamiliale.ch
+- Dates, times, price and minimum age are not given on the organiser's activities page. Check the organiser's agenda before going, and ask whether the activity suits young children.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-03
 
-- **Next dates** (Organiser source): The organiser calendar lists the "Créer et jouer" family workshop at the Espace AEF (Maison des Associations), Bd de Pérolles 40, Fribourg, without registration. It shows sessions on 25 November and 9 December 2026. Local start times are not stated in the calendar. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
+- **Workshop listing** (Organiser source): The organiser's family activities page lists "Créer et jouer avec du matériel de recyclage" among its thematic family workshops for adults and children. That page gives no age range, price, language or session times for this workshop. [Source](https://www.educationfamiliale.ch/fr/activites-familles)
+- **Workshop listing** (Organiser source): The organiser's family activities page lists the workshop "Créer et jouer avec du matériel de recyclage" among its thematic workshops for adults and children, and links to its agenda for dates. [Source](https://www.educationfamiliale.ch/fr/activites-familles)
 
 To confirm before visiting:
 - The price and the suitability of the materials for young children are not stated.
-- What time do the sessions on 25 November and 9 December 2026 start and end?
 - What is the price, and from what age are children welcome?
 - Does the adult take part in the activity or only accompany the child?
+- Are there upcoming dates for this workshop, and what are the start and end times? Families should check the organiser's agenda.
+- Is advance registration needed?
 
 - [Official source](https://tockify.com/educationfamiliale/detail/777/1790407800000)
 - [Next dates](https://tockify.com/api/feeds/ics/educationfamiliale)
+- [Additional check: Workshop listing](https://www.educationfamiliale.ch/fr/activites-familles)
 
 ### Visit conditions
 
-- Booking: No registration needed. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
+- Booking: Whether registration is needed is not confirmed. [Source](https://www.educationfamiliale.ch/fr/activites-familles)
 - Coordinates of the address (not the entrance): 46.79724884033203, 7.1547064781188965. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+Boulevard+de+P%C3%A9rolles+40+Fribourg&type=locations&origins=address&limit=5&sr=4326)
 
 ## LivrEchange · Jouons ensemble
@@ -2605,13 +2625,13 @@ To confirm before visiting:
 
 ## Herbstbasteln Weissenstein
 
-- Status: Needs confirmation
+- Status: Closed
 - Place: Rechthalten
 - District: Sense / Singine
 - Checked: 2026-09-27
 - Address: Zentrum Weissenstein, Weissenstein 57, 1718 Rechthalten
 - Age: Age to be confirmed
-- Adult: Together with an adult
+- Adult: To be confirmed
 - Language: To be confirmed
 - Schedule: 30 September 2026 (time not published in the page text)
 - Price: Price not published
@@ -2620,21 +2640,23 @@ To confirm before visiting:
 - The only published date, 30 September 2026, has passed; no later session was found.
 - The page text gives no start or end time, place, age, language, price or registration details. Ask the organiser.
 
-### Additional check: 2026-10-24
+### Additional check: 2026-11-03
 
 - **Date** (Organiser source): The parish post gives 30 September 2026 as the event date. 26 September is only the date in the post's web address, not a second event date. The page text does not state a start time, end time or place; the earlier 13:30–16:00 times could not be confirmed from the page text. [Source](https://www.ref-weissenstein.ch/2026/09/26/einladung-herbstbasteln/)
+- **days** (Organiser source): The parish page lists the Herbstbasteln on Wednesday, 30 September 2026. It names no other date, and no start time, end time or place. [Source](https://www.ref-weissenstein.ch/2026/09/26/einladung-herbstbasteln/)
+- **status** (Organiser source): The parish page lists the Herbstbasteln only for 30 September 2026. That date has passed and no later date is published. The page does not say the event was cancelled. [Source](https://www.ref-weissenstein.ch/2026/09/26/einladung-herbstbasteln/)
 
 To confirm before visiting:
 - Late registration after the announced deadline of 21 September, age for young children, materials, price and language.
 - Will the Herbstbasteln be held again, and at what time and place?
 - What is the age range, language, price and registration rule for families?
+- Is an adult welcome to stay with the child, and do adults take part in the crafting?
 
 - [Parish poster](https://www.ref-weissenstein.ch/2026/09/22/einladung-herbstbasteln/)
 - [Place and time](https://www.ref-weissenstein.ch/2026/09/26/einladung-herbstbasteln/)
 
 ### Visit conditions
 
-- Coordinates of the address (not the entrance): 46.76859664916992, 7.249922752380371. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Zentrum+Weissenstein+Weissenstein+57+1718+Rechthalten&type=locations&origins=address&limit=5&sr=4326)
 
 ## Family church service · harvest festival (Erntedank)
 
@@ -2812,7 +2834,7 @@ To confirm before visiting:
 - Place: Plaffeien
 - District: Sense / Singine
 - Checked: 2026-09-27
-- Address: neben Jugendraum, Seeliweg 5, Plaffeien (descriptive area, exact entrances not established)
+- Address: neben Jugendraum, Seeliweg 5, Plaffeien
 - Age: Age to be confirmed
 - Adult: To be confirmed
 - Language: To be confirmed
@@ -2821,24 +2843,28 @@ To confirm before visiting:
 - Contact: Elternverein Plaffeien und Umgebung; info@elternverein-plaffeien.ch
 - Date: 2026-11-14 13:00–17:00 · Kerzenziehen · neben Jugendraum, Seeliweg 5, Plaffeien
 - Date: 2026-11-15 13:00–17:00 · Kerzenziehen · neben Jugendraum, Seeliweg 5, Plaffeien
-- Food and drink are provided during the candle-making.
+- Food and drinks are provided during the event.
+- New this year: a café corner with candle decorating, candle pouring into glasses, tins or moulds, scented candles and beeswax wraps.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-03
 
 - **Annual programme** (Organiser source): The annual PDF confirms only November 2026, without specific dates. [Source](https://elternverein-plaffeien.ch/wp-content/uploads/2026/01/Jahresprogramm_2026_V2.pdf)
 - **Dates** (Organiser source): The organiser's page now lists the 2026 candle-making on Saturday 14 and Sunday 15 November 2026, 13:00–17:00, next to the Jugendraum at Seeliweg 5 in Plaffeien. The weekdays match the 2026 calendar. [Source](https://elternverein-plaffeien.ch/aktivitaeten/kerzenziehen/)
+- **Dates and hours** (Organiser source): The organiser lists the candle-making on Saturday 14 and Sunday 15 November 2026, 13:00–17:00 on both days, next to the youth room at Seeliweg 5 in Plaffeien. The page does not give an age range, price, registration rule or session language. [Source](https://elternverein-plaffeien.ch/aktivitaeten/kerzenziehen/)
 
 To confirm before visiting:
 - Confirm the dates, the price per candle, the age, adult participation and the language.
 - What does it cost, and is there a charge for the food and drink?
 - What ages is the event meant for, and may or must adults stay with their children?
 - Is registration needed, and what language is used?
+- Is there a charge for the candles, food and drink, and what are the prices?
 
 - [Official source](https://elternverein-plaffeien.ch/aktivitaeten/kerzenziehen/)
 - [Annual programme](https://elternverein-plaffeien.ch/wp-content/uploads/2026/01/Jahresprogramm_2026_V2.pdf)
 
 ### Visit conditions
 
+- Duration: 4 hours per day (13:00–17:00) [Source](https://elternverein-plaffeien.ch/aktivitaeten/kerzenziehen/)
 - Coordinates of the address (not the entrance): 46.74283981323242, 7.288978576660156. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Seeliweg+5&type=locations&origins=address&limit=5&sr=4326)
 
 ## Santiklousumzug
@@ -2883,19 +2909,22 @@ To confirm before visiting:
 - Place: Plaffeien
 - District: Sense / Singine
 - Checked: 2026-09-22
-- Address: To be confirmed
+- Address: To be confirmed (descriptive area, exact entrances not established)
 - Age: Age to be confirmed
 - Adult: To be confirmed
 - Language: To be confirmed
 - Schedule: Schedule to be confirmed
 - Price: Price not published
-- Contact: Elternverein Plaffeien und Umgebung; ludothek@elternverein-plaffeien.ch
+- Contact: Elternverein Plaffeien und Umgebung; info@elternverein-plaffeien.ch
+- Date: 2024-03-23 time to be confirmed · Frühlingserwachen
+- Date: 2024-11-23 time to be confirmed · Wintereinläuten
 - The language of the host or service is not confirmed.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-03
 
 - **Old poster** (Historical information): The current page describes a trial of outdoor toys in spring, board games in November and a games stand at the Christmas market. The exact dates of Frühlingserwachen and Wintereinläuten are still from 2024. [Source](https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/)
 - **Published dates** (Organiser source): On 31 October 2026 the official events page still lists only two dated toy library events, both in 2024: Frühlingserwachen on 23 March 2024 and Wintereinläuten on 23 November 2024. No later date, time, age range, price or address is published, and it also mentions a games stand at the Plaffeien Christmas market. [Source](https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/)
+- **Published dates** (Organiser source): The official events page describes a spring event where outdoor games and vehicles can be tried by children, a November event to get to know board games, and a games stand at the Plaffeien Christmas market (no date given for the stand). [Source](https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/)
 
 To confirm before visiting:
 - New dates, age, parent participation and price; the toy library's regular opening hours are listed as a separate activity.
@@ -4019,10 +4048,11 @@ To confirm before visiting:
 - Small snacks are offered for children and adults.
 - An optional WhatsApp group shares regular news about upcoming family events.
 
-### Additional check: 2026-11-01
+### Additional check: 2026-11-03
 
 - **Format** (Organiser source): On song or story days, the play room and café are open 09:00–11:00. Songs with a music educator take place 10:00–10:45, and stories with a social educator 10:00–10:30. There is a small snack. Families are invited without registration. [Source](https://www.kirche-murten.ch/krabbelgruppe)
 - **Schedule** (Organiser source): The Familien-Café is open on Wednesdays from 09:00 to 11:00 except during school holidays, alternating between Murten and Meyriez. Families are invited to simply come along. [Source](https://www.kirche-murten.ch/krabbelgruppe)
+- **Dates** (Organiser source): The church's event listing shows the Murten Familien-Café on Wednesday 11 November (Singe mit de Chliine), 18 November (Gschichte Chischte) and 25 November 2026 (Singe mit de Chliine), each 09:00–11:00. [Source](https://www.kirche-murten.ch/veranstaltung/12101)
 
 To confirm before visiting:
 - Cost, and whether children can only play and skip the shared part, to be confirmed. The meeting is not in Murten every Wednesday: some dates take place in Meyriez.
@@ -4030,6 +4060,7 @@ To confirm before visiting:
 - In which language are the sessions held?
 - Is there a stroller-accessible entrance, a changing table or a toilet for visitors?
 - At what time do the meetings on 2 and 9 December start and end?
+- Where do the November sessions in Murten take place (room and address)? The published address belongs to the 30 September session.
 
 - [Family meetings: programme and dates](https://www.kirche-murten.ch/krabbelgruppe)
 - [Meeting on 30 September: address and time](https://www.kirche-murten.ch/veranstaltung/12101)
@@ -4054,18 +4085,17 @@ To confirm before visiting:
 - Age: Families with babies and toddlers; no numeric age range published
 - Adult: Parents attend with their children. The organizer describes time for parents to talk and make contacts; conditions for active participation are not published.
 - Language: To be confirmed
-- Schedule: 9–11 am (Krabbeltreff in Meyriez)
+- Schedule: Once a month, 9:00–11:00 a.m.; individual dates are listed separately on the programme page.
 - Price: Price not published
 - Contact: Kirchgemeinde Murten Sekretariat; 026 672 37 00; sekretariat@kirche-murten.ch
-- Date: 2026-12-16 09:00–11:00 · Krabbeltreff Meyriez · Kirchgemeindehaus Meyriez, Chemin du Village 6, 3280 Meyriez
+- Date: 2026-12-16 time to be confirmed · Krabbeltreff Meyriez
 - Held once a month in Meyriez.
-- Not held during school holidays; the family café alternates between Murten and Meyriez.
-- A snack (Znüni) is offered.
-- An optional WhatsApp group shares news about upcoming family events.
+- No registration needed; a snack (Znüni) is offered.
+- The page also has a WhatsApp group sign-up for general family news; this sign-up is separate from attending the meeting.
 
-### Additional check: 2026-11-01
+### Additional check: 2026-11-03
 
-- **Format** (Organiser source): The Krabbeltreff in Meyriez runs 9–11 am, once a month on Wednesdays, without registration. The next listed date is 16 December 2026 at the Meyriez parish house. [Source](https://www.kirche-murten.ch/krabbelgruppe)
+- **Dates** (Organiser source): The programme page lists the Krabbeltreff Meyriez on 16 December 2026 without a start time or address for that date. The monthly meeting is described as running 9–11 am. [Source](https://www.kirche-murten.ch/krabbelgruppe)
 
 To confirm before visiting:
 - The price, the conditions for young children and the language of the leader have not been confirmed by the organiser.
@@ -4073,6 +4103,7 @@ To confirm before visiting:
 - Is there an upper or lower age limit?
 - Which language is used at the meeting?
 - Will further dates after 16 December 2026 be published?
+- What are the start time and venue on 16 December 2026?
 
 - [Family meetings: programme and dates](https://www.kirche-murten.ch/krabbelgruppe)
 - [Meeting of 23 September: address and time](https://www.kirche-murten.ch/veranstaltung/12103)
@@ -4477,15 +4508,20 @@ To confirm before visiting:
 - Old clothes and shoes are recommended because of the wax; there is a coffee area on site.
 - The short municipal notice gives an end time of 10:00 on 21 November, but the detailed notice says 16:00. The hours shown here are from the detailed notice; confirm before visiting.
 
-### Additional check: 2026-09-27
+### Additional check: 2026-11-04
 
 - **Entrance and clothing** (Organiser source): The organiser's detailed notice gives 18 and 20 November 14:00–18:00, 21 November 10:00–16:00. The entrance to the Zivilschutzanlage is below the red area. Recommended from 5 years, younger children only with an adult; old clothes and shoes because of the wax. [Source](https://www.ried.ch/de/veranstaltungen/dokumente/php4AFqfN_Kerzenziehen_2026.pdf)
+- **Schedule** (Organiser source): The municipal notice for the candle-making event lists the venue as the Zivilschutzanlage Ried, Schulhausgässli 1, and gives an overall window from 18 November 2026 at 14:00 to 21 November 2026 at 10:00. This differs from the 16:00 end on 21 November shown in the hours here, so families should confirm the Saturday finishing time before visiting. [Source](https://www.ried.ch/de/veranstaltungen/detail/detail.php?i=376)
 
 To confirm before visiting:
 - A safe way for young children to take part, pushchair access and language; the short municipal notice differs from the PDF on the end time on Saturday.
+- What time does the candle making finish on Saturday 21 November (10:00 or 16:00)?
 
 - [Organiser's notice: dates, age and price](https://www.ried.ch/de/veranstaltungen/dokumente/php4AFqfN_Kerzenziehen_2026.pdf)
 - [Municipal notice](https://www.ried.ch/de/veranstaltungen/detail/detail.php?i=376)
+
+### Visit conditions
+
 
 ## Schatzsuche durch Murten · family treasure hunt
 
@@ -4547,36 +4583,42 @@ To confirm before visiting:
 - Place: Courtepin
 - District: See / Lac
 - Checked: 2026-09-27
-- Address: Ancienne école allemande, Route de Fribourg 19, 1784 Courtepin
-- Age: Age range not published for these sessions
+- Address: Ancienne École allemande, Rte de Fribourg 19, 1784 Courtepin
+- Age: Families with children aged 0 to 7, in thematic workshops in Courtepin
 - Adult: Presented by the organiser as workshops for adults and children together. Whether the adult stays for the whole session or joins the activity is not stated in the sources checked; the programme PDF could not be read.
 - Language: To be confirmed
 - Schedule: 27 October and 24 November 2026, 09:30–11:00
 - Price: Price not published
 - Contact: Association pour l’Éducation Familiale; 026 321 48 70; contact@educationfamiliale.ch
-- Date: 2026-10-27 09:30–11:00
-- Date: 2026-11-24 09:30–11:00
-- 27 October: emotions workshop. The 24 November session is listed in the dates above.
-- Whether registration is needed, the price, the age range and the language of these sessions are not published in the calendar or on the organiser page; families can ask the organiser.
+- Date: 2026-10-27 09:30–11:00 · Emotions workshop
+- Date: 2026-11-24 09:30–11:00 · Create and play workshop
+- 27 October: emotions workshop. The 24 November session is a create-and-play workshop.
+- Whether registration is needed, the price and the language of these sessions are not published in the calendar or on the portal page; families can ask the organiser.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-03
 
 - **Topics of the next meetings** (Organiser source): The public AEF calendar lists «Émotions» on 27 October and «Créer et jouer» on 24 November, both 09:30–11:00 in the former German school, Route de Fribourg 19. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
 - **About** (Organiser source): The organiser presents its family workshops as themed sessions for adults and children together. [Source](https://www.educationfamiliale.ch/fr/activites-familles)
 - **Workshop format and themes** (Organiser source): The organiser's activities page describes its family workshops as themed sessions for adults and children, and lists a theme of creating and playing with recycled material among them. [Source](https://www.educationfamiliale.ch/fr/activites-familles)
+- **Age** (Organiser source): The Courtepin family workshops are published for families with children aged 0 to 7. [Source](https://portail-jeunes.ch/ateliers-familles/)
+- **Next Courtepin meeting** (Organiser source): The organiser's public calendar lists a "Créer et jouer" workshop in Courtepin on 24 November 2026 at the former German school, Rte de Fribourg 19. [Source](https://tockify.com/api/feeds/ics/educationfamiliale)
 
 To confirm before visiting:
 - The team of facilitators, the language of the individual meeting and whether registration is necessary remain to be checked; the calendar does not reveal this.
 - Is registration necessary for the Courtepin workshops, and what happens if too few people register?
 - Which ages are the Courtepin workshops for, what does one session cost, and in which language are they held?
+- What does one session cost, and in which language are the workshops held?
+- Does the adult stay with the child for the whole session, and does the adult take part in the activity?
+- Is registration necessary for the Courtepin workshops?
 
 - [2026 programme: topics, dates, venue and registration](https://portail-jeunes.ch/wp-content/uploads/2026/09/2026-2_ATF_Courtepin_A4-F.pdf)
 - [Organiser: format of the workshops for adults and children](https://www.educationfamiliale.ch/fr/activites-familles)
 - [Topics of the next meetings](https://tockify.com/api/feeds/ics/educationfamiliale)
+- [Additional check: age](https://portail-jeunes.ch/ateliers-familles/)
 
 ### Visit conditions
 
-- Coordinates of the address (not the entrance): 46.866905212402344, 7.123219013214111. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ancienne+%C3%A9cole+allemande+Route+de+Fribourg+19+1784+Courtepin&type=locations&origins=address&limit=5&sr=4326)
+- Coordinates of the address (not the entrance): 46.866905212402344, 7.123219013214111. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+de+Fribourg+19+1784+Courtepin&type=locations&origins=address&limit=5&sr=4326)
 
 ## Ludothèque Pinocchio · game lending
 
@@ -4812,9 +4854,10 @@ To confirm before visiting:
 - Date: 2026-12-12 16:00–17:00 · Familienkonzert mit Christof Fankhauser · in der Kirche, 3210 Kerzers
 - The organiser's event page names the church in Kerzers but gives no street address, so the exact entrance is not confirmed.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-03
 
 - **Programme and venue** (Organiser source): The concert takes place on Saturday 12 December 2026, 16:00–17:00, in the church in Kerzers. Religion classes 1H to 6H and the KUW children take part; this is not an audience age range. [Source](https://www.refkirche-kerzers.ch/veranstaltung/57758)
+- **Programme and venue** (Organiser source): As of 3 November 2026 the parish's event page still lists the family concert on Saturday 12 December 2026, 16:00–17:00, in the church in Kerzers. No cancellation notice appears, and the page gives no admission price, age range, language or registration information. [Source](https://www.refkirche-kerzers.ch/veranstaltung/57758)
 
 To confirm before visiting:
 - Tickets or donation collection, language, age recommendation for the audience and whether it is possible to step out with a child.
@@ -4873,22 +4916,23 @@ To confirm before visiting:
 - Status: Needs confirmation
 - Place: Kerzers
 - District: See / Lac
-- Checked: 2026-09-28
-- Address: Steindleren 1a, 3210 Kerzers
+- Checked: 2026-11-03
+- Address: Address to be confirmed (descriptive area, exact entrances not established)
 - Age: 2–5 years
-- Adult: Whether an adult stays or takes part with the child is not published.
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Dates and enrolment to be confirmed
+- Schedule: Schedule to be confirmed
 - Price: CHF 20 per session according to the price page
-- Contact: Family Bloom; 026 525 24 94; info@familybloom.ch
 - Mini move for ages 2 to 5 appears in the organiser's price table at CHF 20.
 - The organiser's current course list does not show Mini move, and no schedule, venue or adult-participation details were found. Whether it takes place needs confirmation.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-03
 
 - **Price** (Organiser source): The price table gives CHF 20 per Mini Move session. [Source](https://familybloom.ch/de/ueber-uns/unsere-tarife)
 - **Price** (Organiser source): Mini move for ages 2 to 5 appears in the organiser's price table at CHF 20. [Source](https://familybloom.ch/de/ueber-uns/unsere-tarife)
 - **Course** (Organiser source): The organiser's current course list does not show Mini move; its entries end with Family Yoga for parents and children from age 2. [Source](https://familybloom.ch/de/unsere-kurse/andere-kurse)
+- **Course** (Organiser source): On 3 November 2026 the organiser's list of other courses still ends with Family Yoga for parents and children from age 2 and shows no Mini move entry. [Source](https://familybloom.ch/de/unsere-kurse/andere-kurse)
+- **Venue** (Organiser source): The organiser's FAQ gives the practice location as Steindleren 1a, 3210 Kerzers, but does not say that Mini move is held there. [Source](https://www.familybloom.ch/de/ueber-uns/faq)
 
 To confirm before visiting:
 - The course's own page is unavailable; whether it takes place, adult participation, the date, the venue and the language are to be confirmed.
@@ -4897,6 +4941,7 @@ To confirm before visiting:
 - Does an adult stay or take part with the child?
 - Which language is used in the group?
 - Is registration required, and is a subscription or block purchase needed?
+- Is Mini move held at the Kerzers practice address?
 
 - [Current course list: Mini Move](https://familybloom.ch/de/unsere-kurse/andere-kurse)
 - [Mini Move price list](https://familybloom.ch/de/ueber-uns/unsere-tarife)
@@ -4907,7 +4952,6 @@ To confirm before visiting:
 - Indoors: Not published whether the activity is held indoors [Source](https://familybloom.ch/de/ueber-uns/unsere-tarife)
 - Cost calculation: CHF 20 in the price table, but the direct course page is unavailable [Source](https://familybloom.ch/de/ueber-uns/unsere-tarife)
 - Important: The course's own page is unavailable; before registering, confirm that the group is running
-- Coordinates of the address (not the entrance): 46.977752685546875, 7.190988063812256. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Steindleren+1a+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326)
 
 ## STIMM-Family · Studio Musicale
 
@@ -5058,12 +5102,13 @@ To confirm before visiting:
 - The last course was led by one instructor. The groups were divided by age and the sessions lasted 30 minutes. The languages on the previous poster were German and French.
 - The new course, the cost of the entry ticket, the instructor and the languages of the next course are not confirmed.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-03
 
 - **Previous course** (Historical information): Poster for January–March 2026: joint swimming for ages 4 months–5 years, CHF 216 for 12 sessions, entry not included, German and French. [Source](https://www.schwimmbad-murten.ch/images/uploaded/Babyschwimmen%2026.1-Copy-1.pdf)
 - **Pool** (Organiser source): Operator's address Lausannestrasse 2, Murten, telephone 026 672 36 36. [Source](https://www.schwimmbad-murten.ch/de/imprint)
 - **status** (Organiser source): The pool's offer page says the current baby courses are fully booked, new courses start again in January 2027, and registration opens on 21.12.2026. [Source](https://www.schwimmbad-murten.ch/de/baby-badeplausch-mit-eltern)
 - **status** (Organiser source): On 2026-10-31 the pool's offer page says all current courses are fully booked, new courses start again in January 2027, and registration opens on 21.12.2026. The page gives no age range, price, schedule or language for the new courses. [Source](https://www.schwimmbad-murten.ch/de/baby-badeplausch-mit-eltern)
+- **status** (Organiser source): On 2026-11-03 the pool's offer page still says the current courses are fully booked, new courses start again in January 2027, and registration opens on 21.12.2026. The page gives no age range, price, schedule, language or session length for the new courses. [Source](https://www.schwimmbad-murten.ch/de/baby-badeplausch-mit-eltern)
 
 To confirm before visiting:
 - New course, price, age and language; the previous schedule cannot be considered current.
@@ -5087,34 +5132,43 @@ To confirm before visiting:
 
 ## Schlittschuh Arena Gurmels
 
-- Status: Needs confirmation
+- Status: Current information available
 - Place: Gurmels
 - District: See / Lac
-- Checked: 2026-09-28
+- Checked: 2026-11-03
 - Address: Sportweg 21, 3212 Gurmels
-- Age: Family skating; no lower age limit published
-- Adult: Independent family visit; check the conditions for accompanying children.
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Season and opening hours for 2026/27 to be confirmed
-- Price: Price not published
+- Schedule: Winter opening hours from 4 October to March: Saturday 14:00–16:00 and Sunday 14:00–16:00; public holidays have their own hours.
+- Price: Entry prices: adults CHF 7; children (ages 4–16) CHF 5; apprentices, students and IV CHF 6.
 - Contact: Schlittschuh Arena Gurmels; info@ecofun.ch
-- Site of 450 m² behind the Mehrzweckhalle Tribüne, surface of plastic panels, no ice.
-- The operator's website was unavailable when checked. The season, price, skate hire and suitability for young children are not confirmed; call before travelling.
+- Plastic-surface rink of 450 m² behind the Tribüne multipurpose hall.
+- Pucks and hockey sticks are available free of charge.
+- Public holidays have their own opening hours, which are not listed on the website.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-03
 
 - **Venue** (Organiser source): The municipality describes 450 m² of synthetic surface at Sportweg 21 and publishes the operator's contact. [Source](https://www.gurmels.ch/freizeitaktivitaeten/28364)
+- **Schedule** (Organiser source): The operator publishes winter opening hours from 4 October to March: Saturday and Sunday 14:00–16:00. Public holidays have specific hours that are not listed. [Source](https://www.schlittschuh-arena-gurmels.ch/)
+- **Price** (Organiser source): The operator's admission tariff lists adults CHF 7, apprentices/students/IV CHF 6 and children (ages 4–16) CHF 5. Skate hire is CHF 6 and pucks and hockey sticks are free. [Source](https://www.schlittschuh-arena-gurmels.ch/)
 
 To confirm before visiting:
-- The operator's website is unavailable. Confirm the opening of the 2026/27 season, hours, price, hire and suitability for young children.
+- Is there a minimum or maximum age for public skating, and is it suitable for very young children?
+- May an adult skate with or stay beside a child on the rink, and under what conditions?
+- Is the rink indoors or outdoors?
+- Does public skating need advance booking?
+- In which language are sessions or instructions given?
+- What are the opening hours on public holidays, and what is the exact last day of the winter season?
 
 - [Municipality: address, layout of the site and contacts](https://www.gurmels.ch/freizeitaktivitaeten/28364)
 - [Operator's website: opening and tariff](https://www.schlittschuh-arena-gurmels.ch/)
 
 ### Visit conditions
 
-- Indoors: Outdoor site with a synthetic surface [Source](https://www.gurmels.ch/freizeitaktivitaeten/28364)
-- Important: Opening of the 2026/27 season not confirmed; the operator's website is unavailable
+- Indoors: Not published [Source](https://www.gurmels.ch/freizeitaktivitaeten/28364)
+- Cost calculation: Skate hire CHF 6; rink hire outside regular opening hours CHF 20 per person (minimum 10 people, up to 2 hours). [Source](https://www.schlittschuh-arena-gurmels.ch/)
+- Important: Public holidays have their own opening hours that are not published on the website; ask the operator before visiting on a holiday.
 
 ## Parent–child gymnastics · Misery
 
@@ -5185,22 +5239,23 @@ To confirm before visiting:
 - Checked: 2026-11-01
 - Address: Route de la Chapelle 33, 1470 Estavayer-le-Lac
 - Age: 0–4 years
-- Adult: Toddlers attend with a parent or grandparent. The published text does not describe whether the adult joins the activity actively or only watches.
+- Adult: Parents attend with their toddler. The workshop aims to encourage parents and grandparents to tell stories and read books together with the child.
 - Language: To be confirmed
 - Schedule: Next meetings: Wednesday 11 November 2026 and Thursday 10 December 2026, 9:30 to 11:00
 - Price: Price not published
 - Contact: Bibliothèque publique, Estavayer-le-Lac; 026 / 663 95 08
-- Date: 2026-11-11 09:30–11:00
-- Date: 2026-12-10 09:30–11:00
+- Date: 2026-11-11 09:30–11:00 · Né pour lire: discovery workshop for toddlers (0 to 4)
+- Date: 2026-12-10 09:30–11:00 · Né pour lire: discovery workshop for toddlers (0 to 4)
 - Two sessions are published separately: Wednesday 11 November and Thursday 10 December 2026, 9:30–11:00.
 - The library publishes age 0–4 for toddlers with their parents or grandparents; it does not describe how actively the adult takes part.
 - Booking is through the form on the library page, where a date is chosen.
 
-### Additional check: 2026-11-01
+### Additional check: 2026-11-03
 
 - **Address and contact** (Organiser source): The library is at Route de la Chapelle 33, Estavayer-le-Lac; telephone 026 663 95 08. [Source](https://estabiblio.ch/)
 - **Dates and booking** (Organiser source): The library page lists two upcoming meetings, Wednesday 11 November 2026 and Thursday 10 December 2026, 9:30–11:00, with a registration form where a date is chosen. [Source](https://estabiblio.ch/nepourlire)
 - **Dates and weekdays** (Organiser source): The library page lists two upcoming meetings: Wednesday 11 November 2026 and Thursday 10 December 2026, both 9:30–11:00. [Source](https://estabiblio.ch/nepourlire)
+- **Programme aim** (Organiser source): The Né pour lire workshops aim to encourage parents and grandparents to talk with their young children, tell them stories and discover books with them. [Source](https://estabiblio.ch/nepourlire)
 
 To confirm before visiting:
 - Check availability of places, cost and language of the specific session.
@@ -5314,15 +5369,18 @@ To confirm before visiting:
 - This free format is open to everyone; regular play at the ludothèque outside Piccolo is for members.
 - The Saturday hours of the ludothèque are not part of Fritime Piccolo. Check dates and school holidays against the organiser's programme; the host's language is not published.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-03
 
 - **Conditions** (Organiser source): Free themed games for ages 2–6 with an adult on Thursdays, 09:30–11:00. The Saturday hours of the regular ludothèque are not part of this programme. [Source](https://ludothequegruyere.ch/fritime-piccolo/)
 - **Conditions** (Organiser source): Sessions are listed every Thursday from 9:30 to 11:00 for children aged 2 to 6, who must be accompanied by a parent or responsible adult. The page does not say whether the adult joins in the play, and it does not state a registration rule or whether the sessions are indoors. [Source](https://ludothequegruyere.ch/fritime-piccolo/)
+- **Practical** (Organiser source): The programme page says parking is available nearby the Ludothèque de la Gruyère in Bulle, and describes the sessions as free activities for children and their parents. It does not say whether the parking is paid. [Source](https://ludothequegruyere.ch/fritime-piccolo/)
 
 To confirm before visiting:
 - Check the dates of specific Thursdays, holiday breaks and the language used.
 - Is registration needed, or can families simply drop in?
 - Do the sessions take place indoors?
+- Is the parking near the Ludothèque free or paid?
+- What dates does the quarterly programme list for specific Thursdays, and when does the season end?
 
 - [Age, days, free format and location](https://ludothequegruyere.ch/fritime-piccolo/)
 - [Exception for visitors without a subscription](https://ludothequegruyere.ch/jouer-a-la-ludo/)
@@ -5333,6 +5391,8 @@ To confirm before visiting:
 - Course payment: Attendance is free [Source](https://ludothequegruyere.ch/fritime-piccolo/)
 - Duration: 09:30–11:00 [Source](https://ludothequegruyere.ch/fritime-piccolo/)
 - Indoors: The page does not say whether the sessions are indoors [Source](https://ludothequegruyere.ch/fritime-piccolo/)
+- Parking: Parking is available nearby; the page does not say whether it is on site or paid [Source](https://ludothequegruyere.ch/fritime-piccolo/)
+- Cost calculation: Published as free for children and their parents; no further tariff details are stated for this offer. [Source](https://ludothequegruyere.ch/fritime-piccolo/)
 - [Organiser's photographs](https://ludothequegruyere.ch/fritime-piccolo/)
 - Coordinates of the address (not the entrance): 46.61845397949219, 7.058451175689697. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+du+March%C3%A9+10+1630+Bulle&type=locations&origins=address&limit=5&sr=4326)
 
@@ -5748,18 +5808,25 @@ To confirm before visiting:
 - Schedule: Tuesdays 11:00-12:00 (training). The 2026-27 season started on Tuesday 8 September 2026; the season end and holiday breaks are not published.
 - Price: CHF 110 for the 2026/27 season
 - Check with the group leader before registering.
+- Family reduction across the society: when two children of one family are members, the higher fee is paid in full and the next at 50%.
+- The published start date for the 2026-27 season is Tuesday 8 September 2026.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-03
 
 - **Course** (Organiser source): Gymnastics with a parent from 2.5 years on Tuesdays 11–12 in the hall in Lully; the season began on 8 September 2026. [Source](https://www.fsgestavayer.ch/?page_id=34)
 - **Fee** (Organiser source): An annual fee of CHF 110 for parents with children is stated for the 2026/27 season. [Source](https://www.fsgestavayer.ch/?page_id=53)
 - **Fee** (Organiser source): The annual membership fee includes the association and section cost shares and the CAS-FSG insurance premium. The whole fee is due from the third training. [Source](https://www.fsgestavayer.ch/?page_id=53)
+- **Family reduction** (Organiser source): The society's 2026-27 fee page says that when two children of one family are members, the higher fee is paid in full and the next one at 50%. This rule applies to the whole society, not only this group. [Source](https://www.fsgestavayer.ch/?page_id=53)
+- **Registration** (Organiser source): The registration page asks families not to register unless a place has already been agreed with the group leader. [Source](https://www.fsgestavayer.ch/?page_id=53)
 
 To confirm before visiting:
 - Confirm the entrance address, available places, a trial class and the language of the group leader.
 - Is the class held indoors, and what is the entrance address of the hall in Lully?
 - What language is the class held in, and what is the parent's role during the session?
 - Is a trial visit possible, and can a child join after the season has started?
+- What is the parent's role during the session: staying nearby, watching or joining in?
+- What language is the class held in?
+- Is the group currently running and open to new families?
 
 - [Age, class and contact](https://www.fsgestavayer.ch/?page_id=34)
 - [2026/27 fee and registration](https://www.fsgestavayer.ch/?page_id=53)
@@ -7015,11 +7082,11 @@ To confirm before visiting:
 
 ## Clos aux Cerfs · playground and picnic
 
-- Status: Needs confirmation
+- Status: Current information available
 - Place: Gruyères
 - District: Gruyère / Greyerz
 - Checked: 2026-09-28
-- Address: Place du Clos aux Cerfs, 1663 Gruyères
+- Address: Place du Clos aux Cerfs, 1663 Gruyères (descriptive area, exact entrances not established)
 - Age: Age limits are not published
 - Adult: Together with an adult
 - Language: To be confirmed
@@ -7029,18 +7096,25 @@ To confirm before visiting:
 - The old description lists swings, a slide, a small house and a small climbing element.
 - The information dates from 2020. Before travelling, look for more recent information and do not count on all the listed equipment being there.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-03
 
 - **Availability and format** (Organiser source): The 2020 tourist PDF describes a playground, tables and a deer park by the castle. [Source](https://fribourg.ch/wp-content/uploads/2022/01/Places-de-pique-nique.pdf)
+- **Availability and format** (Organiser source): The castle's information page lists a playground and picnic area called Clos-aux-Cerfs near the castle. It gives no hours, age range or price for it. [Source](https://www.chateau-gruyeres.ch/en/information/)
+- **Availability and format** (Organiser source): The castle's information page says a playground and picnic area (Clos-aux-Cerfs) is available near the castle. It also says picnics are forbidden inside the castle grounds, so the picnic area is outside them. [Source](https://www.chateau-gruyeres.ch/en/information/)
 
 To confirm before visiting:
 - The current state of the equipment and the access hours have not been checked.
+- What are the opening hours and current equipment at the playground?
+- Is there an age range, and is entry free?
+- Where exactly is the visitor entrance, and are toilets, a changing table, parking and stroller access available at the playground itself?
 
 - [Directory of playgrounds, data from 2020](https://fribourg.ch/wp-content/uploads/2022/01/Places-de-pique-nique.pdf)
+- [Additional check: Availability and format](https://www.chateau-gruyeres.ch/en/information/)
 
 ### Visit conditions
 
 - Indoors: The 2020 tourist PDF describes a playground, tables and a deer park by the castle. [Source](https://fribourg.ch/wp-content/uploads/2022/01/Places-de-pique-nique.pdf)
+- Play area: The castle's information page lists a playground and picnic area (Clos-aux-Cerfs) near the castle. [Source](https://www.chateau-gruyeres.ch/en/information/)
 - Important: The current state of the equipment and the access hours have not been checked.
 
 ## Musée du papier peint · puzzles for children
@@ -7338,18 +7412,24 @@ To confirm before visiting:
 - This is a playground on the campsite grounds, not a confirmed public park.
 - Before travelling with a child, check whether day guests are admitted.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-03
 
 - **Availability and format** (Organiser source): A children's playground is described on the grounds of the year-round campsite on the south shore of Schwarzsee. [Source](https://fribourg.ch/fr/schwarzsee/campings/camping-seeweid/)
+- **About** (Organiser source): The official regional listing places Camping Seeweid on the south shore of Lac Noir, with a buvette, a kiosk and a barbecue area by the lake, and names a children's playground among its facilities. [Source](https://fribourg.ch/fr/schwarzsee/campings/camping-seeweid/)
 
 To confirm before visiting:
 - Access to the playground without staying at the campsite and the cost are not published.
+- Is the playground open to day visitors who are not staying at the campsite, and at what times?
+- What is the admission price for the playground, if any? The campsite price list could not be opened.
+- Is there a published age range for the playground?
+- Are parking, a toilet or a changing table available for playground visitors?
 
 - [Playground, address and campsite opening arrangements](https://fribourg.ch/fr/schwarzsee/campings/camping-seeweid/)
 
 ### Visit conditions
 
 - Indoors: A children's playground is described on the grounds of the year-round campsite on the south shore of Schwarzsee. [Source](https://fribourg.ch/fr/schwarzsee/campings/camping-seeweid/)
+- Play area: The official listing names a children's playground among the campsite's facilities. [Source](https://fribourg.ch/fr/schwarzsee/campings/camping-seeweid/)
 - Important: Access to the playground without staying at the campsite and the cost are not published.
 - Coordinates of the address (not the entrance): 46.66140365600586, 7.27467679977417. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Seeweid+105+1716+Schwarzsee&type=locations&origins=address&limit=5&sr=4326)
 
@@ -7545,29 +7625,33 @@ To confirm before visiting:
 - Status: Needs confirmation
 - Place: Greng
 - District: See / Lac
-- Checked: 2026-09-28
-- Address: Départ parking de l’obélisque, 3280 Meyriez
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Checked: 2026-11-03
+- Address: Parking near the obelisk, Meyriez (start of the forest walk) (descriptive area, exact entrances not established)
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Natural shore; check the condition of the path and whether swimming is possible
+- Schedule: Schedule not published
 - Price: Price not published
-- Contact: Region Murtensee; 026 670 51 12; info@regionmurtensee.ch
-- The walking route starts at the obelisk car park in Meyriez; the address of the shore itself is not given.
-- For young children, the forest path and the water's edge may require carrying and constant supervision.
+- Contact: Region Murtensee / Région Lac de Morat; +41 26 670 51 12; info@regionmurtensee.ch
+- The walk to the bathing beaches starts at the car park near the obelisk in Meyriez and takes five to ten minutes through the forest; the address of the shore itself is not given.
+- Opening times, prices, age limits and facilities are not published on the official page.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-03
 
 - **Availability and format** (Organiser source): The tourist page lists small beaches at Grengspitz, 5–10 minutes' walk through the forest. [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plages-a-la-pointe-de-greng/)
+- **Access** (Organiser source): The official tourist page says the Grengspitz bathing beaches are five to ten minutes on foot through the forest from the car park near the obelisk in Meyriez. [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plages-a-la-pointe-de-greng/)
 
 To confirm before visiting:
 - The exact facilities, the safety of access to the water and the legal conditions for using this stretch of shore are not confirmed.
+- Are there opening times or a season for the beaches, and is swimming currently possible?
+- What are the age limits, if any, and may adults stay with children?
+- Are there toilets, a changing table or a stroller-friendly path, and is parking free?
 
 - [Access to the shore from Meyriez](https://fribourg.ch/fr/regionlacdemorat/plages/plages-a-la-pointe-de-greng/)
 
 ### Visit conditions
 
-- Indoors: The tourist page lists small beaches at Grengspitz, 5–10 minutes' walk through the forest. [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plages-a-la-pointe-de-greng/)
+- Indoors: Not published [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plages-a-la-pointe-de-greng/)
 - Important: The exact facilities, the safety of access to the water and the legal conditions for using this stretch of shore are not confirmed.
 
 ## Neuveville · playground by the school
@@ -7647,10 +7731,11 @@ To confirm before visiting:
 - The description and equipment are based on a document from 2020; a current check is needed before a visit.
 - The existence of the site is also confirmed by the current tourist page; the equipment details are taken from the 2020 list.
 
-### Additional check: 2026-11-01
+### Additional check: 2026-11-03
 
 - **Availability and format** (Organiser source): Tourist list of 22.06.2020: Wooden playground, tables and two fireplaces in the Bouleyres forest; about 250 m from the forest entrance. [Source](https://fribourg.ch/wp-content/uploads/2022/01/Places-de-pique-nique.pdf)
 - **Availability and format** (Organiser source): The current tourist page for the Bouleyres forest, east of Bulle, lists a play area called "4 Sapins", a cabin, shelters and picnic places among the forest's facilities. It gives no age range, hours, price or exact entrance for the play area. [Source](https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/a-la-decouverte-de-la-foret-de-bouleyres/)
+- **Access to the forest** (Organiser source): The tourist page for the Bouleyres forest says the forest can be reached by public transport (nearest stop: Bulle, Stade) and by car. This describes the forest as a whole; it does not give an entrance, parking or a route to the play area. [Source](https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/a-la-decouverte-de-la-foret-de-bouleyres/)
 
 To confirm before visiting:
 - Confirm the condition of the playground, the availability of water and the rules for using the fireplaces.
@@ -7751,11 +7836,12 @@ To confirm before visiting:
 - The commune describes a large shaded public park with children's play equipment, a rustic shelter with a grill, a fountain and picnic tables.
 - The commune has set up a user charter for the site, and anyone can reserve part of the picnic area under the conditions the commune lists.
 
-### Additional check: 2026-11-01
+### Additional check: 2026-11-03
 
 - **Availability and format** (Organiser source): Tourist list of 22.06.2020: Public playground and sports area with WC, fireplace and pushchair access. [Source](https://fribourg.ch/wp-content/uploads/2022/01/Places-de-pique-nique.pdf)
 - **Park facilities** (Organiser source): The commune of Grandvillard describes the Saudillet as a large shaded public park equipped with children's play equipment, a rustic shelter with a grill, a fountain and picnic tables. Anyone can reserve part of the picnic area under the commune's conditions, and the commune has a user charter for the site. The page gives no opening hours, age range or visitor address for the park. [Source](https://grandvillard.ch/vie-locale/sport-et-loisirs)
 - **Park facilities** (Organiser source): The commune lists the Saudillet as a large shaded public park equipped with children's play equipment, a rustic shelter with a grill, a fountain and picnic tables. The picnic tables are provided free of charge; no fee is published for the play area. [Source](https://grandvillard.ch/vie-locale/sport-et-loisirs)
+- **Park facilities** (Organiser source): The commune's page for the Saudillet play area lists children's play equipment, a rustic shelter with a grill, a fountain and picnic tables at the park. [Source](https://grandvillard.ch/vie-locale/sport-et-loisirs)
 
 To confirm before visiting:
 - Confirm the condition of the area, the current rules for booking the shelter and the WC opening hours.
@@ -7764,13 +7850,15 @@ To confirm before visiting:
 - What are the conditions and cost for reserving part of the picnic area?
 - Which entrance should visitors use?
 - Is there a published age range or rule on adult presence in the user charter?
+- Is there a published age range or rule on adult presence for children at the park?
+- Is there a visitor toilet, changing table or parking at the park, and is the route stroller-accessible?
 
 - [Tourist list of picnic sites, 22.06.2020](https://fribourg.ch/wp-content/uploads/2022/01/Places-de-pique-nique.pdf)
 - [Additional check: Park facilities](https://grandvillard.ch/vie-locale/sport-et-loisirs)
 
 ### Visit conditions
 
-- Indoors: Tourist list of 22.06.2020: Public playground and sports area with WC, fireplace and pushchair access. [Source](https://fribourg.ch/wp-content/uploads/2022/01/Places-de-pique-nique.pdf)
+- Indoors: The commune describes the Saudillet as a large shaded public park, so the play area is outdoors. [Source](https://grandvillard.ch/vie-locale/sport-et-loisirs)
 - Play area: The commune says the park is equipped with children's play equipment. [Source](https://grandvillard.ch/vie-locale/sport-et-loisirs)
 - Cost calculation: Picnic tables are free of charge according to the commune; no fee is published for the play area and no all-in family cost can be computed. [Source](https://grandvillard.ch/vie-locale/sport-et-loisirs)
 - Important: Confirm the condition of the area, the current rules for booking the shelter and the WC opening hours.
@@ -7811,21 +7899,22 @@ To confirm before visiting:
 - Place: La Roche
 - District: Gruyère / Greyerz
 - Checked: 2026-09-28
-- Address: Le Brand, pied des remontées de La Berra, 1634 La Roche
+- Address: Le Brand, pied des remontées de La Berra, 1634 La Roche (descriptive area, exact entrances not established)
 - Age: Age limits are not published
 - Adult: Together with an adult
 - Language: To be confirmed
 - Schedule: Information from a 2020 tourist list; check the current opening arrangements and access before travelling
 - Price: Price not published
-- Contact: La Gruyère Tourisme; 026 919 85 00; info@la-gruyere.ch
+- Contact: SRM La Berra SA; 026 413 21 52; info@laberra.ch
 - Woodland play area and picnic zone at the foot of the La Berra lift.
 - The description and equipment are based on a 2020 document; a current check is needed before a visit.
 
-### Additional check: 2026-11-01
+### Additional check: 2026-11-03
 
 - **Availability and format** (Organiser source): Tourist list of 22.06.2020: Woodland play area and picnic zone at the foot of the La Berra lift. [Source](https://fribourg.ch/wp-content/uploads/2022/01/Places-de-pique-nique.pdf)
 - **Play area** (Organiser source): The official La Berra page says the terrace of Restaurant Le Brand is a place to get some fresh air, with a play area to keep young children busy. [Source](https://www.laberra.ch/fr/activites-details/places-de-jeux)
 - **Related play areas** (Organiser source): The official La Berra page describes a play space at the top of the chairlift: a large wooden square with many play installations. In a separate passage it describes a play area on the terrace of Restaurant Le Brand. [Source](https://www.laberra.ch/fr/activites-details/places-de-jeux)
+- **addressPrecision** (Organiser source): The official La Berra page places a large wooden play space with many play installations at the top of the télémixte. It gives only this approximate location, not a visitor entrance address. [Source](https://www.laberra.ch/fr/activites-details/places-de-jeux)
 
 To confirm before visiting:
 - Confirm the condition of the play area and the walk: the tourist list describes 15–20 minutes from the car park.
@@ -7877,7 +7966,7 @@ To confirm before visiting:
 
 ## Chapelle de Thusy · lakeshore
 
-- Status: Needs confirmation
+- Status: Current information available
 - Place: Pont-la-Ville
 - District: Gruyère / Greyerz
 - Checked: 2026-10-02
@@ -7890,17 +7979,20 @@ To confirm before visiting:
 - Contact: La Gruyère Tourisme; +41 (0)26 919 85 00; info@la-gruyere.ch
 - Grilling space and a shaded corner are listed at the site; a public toilet is listed too.
 
-### Additional check: 2026-11-01
+### Additional check: 2026-11-03
 
 - **Address and facilities** (Organiser source): The current tourist page for Chapelle de Thusy gives the address Imp. de Thusy 89, 1649 Pont-la-Ville, a lakeside picnic area, shade, a grill and public WCs. [Source](https://fribourg.ch/fr/la-gruyere/places-de-pique-nique/chapelle-thusy/)
 - **Shower** (Historical information): A shower is mentioned in the list of 22.06.2020, but it is not confirmed by the current page. A separate children's playground is not listed. [Source](https://fribourg.ch/wp-content/uploads/2022/01/Places-de-pique-nique.pdf)
 - **Facilities** (Organiser source): The current tourist page describes the picnic site around the Chapelle de Thusy on the lakeshore, with a grilling spot, a shaded corner and a public toilet. It gives no age range, price, opening hours or registration information. [Source](https://fribourg.ch/fr/la-gruyere/places-de-pique-nique/chapelle-thusy/)
+- **Picnic place and facilities** (Organiser source): The current official page lists the picnic place at Chapelle de Thusy with a full street address (Imp. de Thusy 89, 1649 Pont-la-Ville), a grilling spot, a shaded corner and a public toilet. It does not publish age limits, price, opening hours or registration rules. [Source](https://fribourg.ch/fr/la-gruyere/places-de-pique-nique/chapelle-thusy/)
 
 To confirm before visiting:
 - Safety of entering the water, whether the facilities work on the date of the visit, and whether a shower is available need to be checked.
 - Is there an entry fee, and are there opening hours or a season for the picnic site?
 - Is there parking at the site?
 - Is the site recommended for particular ages, and is access to the water safe?
+- Is there a changing table, a feeding space or a children's play area at the site?
+- Is the site outdoors only? The earlier indoor/outdoor value rests on a 2020 list that could not be re-read.
 
 - [Tourist list of picnic sites, 22.06.2020](https://fribourg.ch/wp-content/uploads/2022/01/Places-de-pique-nique.pdf)
 - [Current tourist page: address and facilities](https://fribourg.ch/fr/la-gruyere/places-de-pique-nique/chapelle-thusy/)
@@ -8964,32 +9056,36 @@ To confirm before visiting:
 
 ## Au Cœur des Monts · children's ski rental
 
-- Status: Needs confirmation
+- Status: For later; see age and conditions
 - Place: Riaz
 - District: Gruyère / Greyerz
 - Checked: 2026-09-28
-- Address: Au Cœur des Monts, 1632 Riaz
+- Address: 1632 Riaz (descriptive area, exact entrances not established)
 - Age: Age limits are not published
 - Adult: Together with an adult
 - Language: To be confirmed
-- Schedule: Winter season 01.12.2026–31.03.2027; Wed 13:30–16:00, Sat–Sun 10:00–17:00 when the trails are open
+- Schedule: Wednesday 13:30–16:00; Saturday–Sunday 10:00–17:00 (season 1 Dec 2026 to 31 Mar 2027)
 - Price: Price not published
 - Contact: Au Cœur des Monts; aucoeurdesmonts@gmail.com
-- As of 28 September the season had not yet started. The stated hours do not mean the site is open when there is no snow.
-- For young children, first check the shoe size and whether equipment is rented to children of that age. This is not a confirmed ski school.
+- Opening depends on snow conditions.
+- During school holidays, open on weekdays 10:00–17:00 if the cross-country ski trails are open.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-03
 
 - **Availability and format** (Organiser source): The tourism page confirms cross-country ski rental for adults and children. It publishes the 2026/27 winter hours only for when there is enough snow. [Source](https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/centre-de-location-et-dinitiation-ski-de-fond/)
+- **Season and hours** (Organiser source): The rental season is published as 1 Dec 2026 to 31 Mar 2027, with hours on Wednesday afternoon and on weekends. Opening depends on snow conditions, so it is not yet open as of early November. [Source](https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/centre-de-location-et-dinitiation-ski-de-fond/)
 
 To confirm before visiting:
 - The minimum age, children's equipment sizes, the cost and whether lessons for young children are offered are not published.
+- What is the minimum age for children's equipment, and which sizes are available?
+- What does the rental cost, and is booking needed?
+- Does the organizer offer lessons for young children?
 
 - [Tourism: children's rental, season and indicative hours](https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/centre-de-location-et-dinitiation-ski-de-fond/)
 
 ### Visit conditions
 
-- Indoors: The tourism page confirms cross-country ski rental for adults and children. It publishes the 2026/27 winter hours only for when there is enough snow. [Source](https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/centre-de-location-et-dinitiation-ski-de-fond/)
+- Indoors: The tourism page does not say whether the activity is indoors or outdoors. [Source](https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/centre-de-location-et-dinitiation-ski-de-fond/)
 - Important: The minimum age, children's equipment sizes, the cost and whether lessons for young children are offered are not published.
 
 ## Centre sportif de Sâles · playground
@@ -9100,26 +9196,31 @@ To confirm before visiting:
 
 ## La kotze dou éron · forest games by the stream
 
-- Status: Needs confirmation
+- Status: Current information available
 - Place: Pont
 - District: Veveyse
-- Checked: 2026-09-28
-- Address: Pont, 1699 Le Flon; check the exact start
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Checked: 2026-11-03
+- Address: Visit address not published (descriptive area, exact entrances not established)
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Self-guided walk in daylight
+- Schedule: Schedule not published
 - Price: Price not published
-- Contact: Commune Le Flon; 021 907 12 11; commune@leflon.ch
-- Do not use the "Accès" section on the tourism page: it leads to a different trail in Chapelle.
-- Continuous supervision is needed by the stream; age and pushchair access are not stated.
+- Contact: Commune Le Flon; +41 (0)21 907 12 11; commune@leflon.ch
+- The tourism page's car directions lead to Chapelle-sur-Oron, not to this trail in Pont, so they should not be used to find the start.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-03
 
 - **Availability and format** (Organiser source): The commune confirms a trail in Pont with a forest sofa, games by the stream, tables and natural materials. [Source](https://leflon.ch/vie-locale/sport)
+- **Availability and format** (Organiser source): The commune describes a volunteer-made forest path in Pont, made passable all year with wood chips; kindergarten classes use the forest sofa all year, and families are often met there on Sundays. [Source](https://leflon.ch/vie-locale/sport)
+- **Access** (Organiser source): The tourism page's car directions lead to Chapelle-sur-Oron rather than to the trail in Pont, so the start of the Pont trail is not confirmed. [Source](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/heron/)
 
 To confirm before visiting:
 - The exact entry point and the length of the local part of the trail are not confirmed. The tourism page mixes it up with the directions to Chapelle (Glâne).
+- Where exactly does the trail start in Pont, and where can visitors park?
+- Is there a recommended age range, and may or must an adult stay with young children?
+- Are there opening hours or seasonal closures, and is entry free?
+- Is the path suitable for pushchairs?
 
 - [Commune: Pont trail and children's stops](https://leflon.ch/vie-locale/sport)
 - [Tourism: description and incorrect directions](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/heron/)
@@ -9127,6 +9228,7 @@ To confirm before visiting:
 ### Visit conditions
 
 - Indoors: The commune confirms a trail in Pont with a forest sofa, games by the stream, tables and natural materials. [Source](https://leflon.ch/vie-locale/sport)
+- Parking: The commune says parking spaces were built for the trail; their exact location is not published. [Source](https://leflon.ch/vie-locale/sport)
 - Important: The exact entry point and the length of the local part of the trail are not confirmed. The tourism page mixes it up with the directions to Chapelle (Glâne).
 
 ## Bouloz · playground in the Esserts forest
@@ -9204,10 +9306,11 @@ To confirm before visiting:
 - Contact: Garderie « Les P’tits Pruneaux »; +41 26 677 19 22
 - Places are by registration only, so that groups of children stay stable.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-03
 
 - **Availability and format** (Organiser source): The commune page confirms a garderie from two years, a new address from 2026/27 and registration; the tariff sheet applies from 1 August 2026. [Source](https://www.vallon.ch/fr/services/sante-et-social/enfants)
 - **Availability and format** (Organiser source): The commune page says the garderie is open every weekday morning in one of two formulas, takes children from two years fully completed, and places children by registration only. [Source](https://www.vallon.ch/fr/services/sante-et-social/enfants)
+- **Address** (Organiser source): The commune page gives Impasse de la Fava 1, 1566 Saint-Aubin as the garderie address from the 2026-2027 school year. [Source](https://www.vallon.ch/fr/services/sante-et-social/enfants)
 
 To confirm before visiting:
 - Afternoon days, free places, pedagogical qualifications and the procedure for gentle settling-in are not published.
@@ -9499,24 +9602,29 @@ To confirm before visiting:
 - Status: Needs confirmation
 - Place: Hauteville
 - District: Gruyère / Greyerz
-- Checked: 2026-10-02
-- Address: Salle OTAVELA, Rte de la Bahy 1, 1648 Hauteville
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Checked: 2026-11-03
+- Address: Visit address not published (descriptive area, exact entrances not established)
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: The public opening hours of the playground outside events are not stated
+- Schedule: Schedule not published
 - Price: Price not published
-- Contact: Commune d’Hauteville; 026 915 92 00; info@hauteville.ch
+- Contact: Commune d'Hauteville; 026 915 92 00
 - The hall rental price is not a charge for free play outdoors.
 - Before making a special trip, check whether the site is closed because of an event.
 
-### Additional check: 2026-10-02
+### Additional check: 2026-11-03
 
 - **Playground** (Organiser source): The commune describes the playground, the sports area and the car park as outdoor facilities of OTAVELA. [Source](https://www.hauteville.ch/culture-et-loisirs/salle-communale-otavela)
-- **Hall address** (Organiser source): The Bulle de Culture venue listing gives Rte de la Bahy 1, 1648 Hauteville. This is the address of OTAVELA, not the administrative address of the commune. [Source](https://www.bulledeculture.ch/description-des-salles/salle-otavela)
+- **Location** (Organiser source): The commune page describes the OTAVELA hall as lying below the cantonal road, next to the school. [Source](https://www.hauteville.ch/culture-et-loisirs/salle-communale-otavela)
+- **Facilities** (Organiser source): The commune page lists a children's playground among the outdoor facilities, plus 80 paved parking spaces nearby and toilets on the lower floor reachable by lift. [Source](https://www.hauteville.ch/culture-et-loisirs/salle-communale-otavela)
+- **Outdoor areas** (Organiser source): Besides the children's playground, the commune lists a large paved square and a paved sports court for ball games among the outdoor areas of the OTAVELA hall. [Source](https://www.hauteville.ch/culture-et-loisirs/salle-communale-otavela)
 
 To confirm before visiting:
 - Free access to the playground without renting the hall, opening hours and the suitability of the equipment for young children are not published.
+- What age is the playground meant for, and may parents stay with their children?
+- What is the street address of the playground entrance?
+- Is the playground open to the public when the hall is not rented, and during which hours?
 
 - [Commune: playground, sports ground and car park](https://www.hauteville.ch/culture-et-loisirs/salle-communale-otavela)
 - [Regional venue listing: OTAVELA address and playground](https://www.bulledeculture.ch/description-des-salles/salle-otavela)
@@ -9524,8 +9632,10 @@ To confirm before visiting:
 ### Visit conditions
 
 - Indoors: The commune lists the playground and the large car park as outdoor facilities of the OTAVELA hall. [Source](https://www.hauteville.ch/culture-et-loisirs/salle-communale-otavela)
+- Parking: 80 paved parking spaces nearby; whether parking is free is not stated. [Source](https://www.hauteville.ch/culture-et-loisirs/salle-communale-otavela)
+- Toilet: Toilets in the hall on the lower floor, reachable by lift; it is not stated whether they are open during playground use. [Source](https://www.hauteville.ch/culture-et-loisirs/salle-communale-otavela)
+- Play area: The commune lists a children's playground among the outdoor facilities of the hall. [Source](https://www.hauteville.ch/culture-et-loisirs/salle-communale-otavela)
 - Important: Whether the playground is open without renting the hall, its hours and the children's equipment are not stated.
-- Coordinates of the address (not the entrance): 46.67079544067383, 7.109845161437988. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Salle+OTAVELA+Rte+de+la+Bahy+1+1648+Hauteville&type=locations&origins=address&limit=5&sr=4326)
 
 ## La Montagnetta · shore and picnic
 
@@ -9789,18 +9899,25 @@ To confirm before visiting:
 - Check the rules with the commune before making a separate trip.
 - The administration address, Route d’Arconciel 3, should not be taken as the entrance to the playground.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-03
 
 - **Availability and format** (Organiser source): The regional association describes a playground, a shaded picnic area and play modules by the school. [Source](https://par-chez-nous.ch/places/ecole-de-treyvaux/)
+- **Facilities** (Organiser source): The regional association's page describes a park with a basketball court, a shaded picnic area and play modules suited to children, and lists parking among its facilities. [Source](https://par-chez-nous.ch/places/ecole-de-treyvaux/)
 
 To confirm before visiting:
 - There is no explicit confirmation that families from outside the school may use the school playground outside school hours.
+- Can families from outside the school use the park outside school hours?
+- What are the opening hours and the visitor entrance to the park?
+- Is there an age range for the play modules?
+- Are there a visitor toilet, a changing table and a stroller-friendly route?
 
 - [Sarine regional association: playground, picnic and sport](https://par-chez-nous.ch/places/ecole-de-treyvaux/)
 
 ### Visit conditions
 
 - Indoors: The regional association describes a playground, a shaded picnic area and play modules by the school. [Source](https://par-chez-nous.ch/places/ecole-de-treyvaux/)
+- Parking: Parking is listed among the facilities on the park's page. Number of spaces and whether it is paid are not stated. [Source](https://par-chez-nous.ch/places/ecole-de-treyvaux/)
+- Play area: The park page describes play modules suited to children and lists a play space among its facilities. [Source](https://par-chez-nous.ch/places/ecole-de-treyvaux/)
 - Important: There is no explicit confirmation that families from outside the school may use the school playground outside school hours.
 
 ## Parc de l’école d’Onnens
@@ -9839,29 +9956,36 @@ To confirm before visiting:
 - Status: Needs confirmation
 - Place: Prez-vers-Noréaz
 - District: Sarine / Saane
-- Checked: 2026-09-28
-- Address: École de Prez-vers-Noréaz, 1746 Prez-vers-Noréaz; entrance to be confirmed
-- Age: Age limits are not published.
-- Adult: Together with an adult
+- Checked: 2026-11-03
+- Address: Visit address not published (descriptive area, exact entrances not established)
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Access for outside families is not confirmed.
+- Schedule: Schedule not published
 - Price: Price is not published.
 - Contact: Commune de Prez; commune@prez.ch
 - Check access before travelling: the existence of a playground does not mean it is open to everyone.
 - Route de Fribourg 19 is the address of the commune, not a confirmed entrance address.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-03
 
 - **Availability and format** (Organiser source): The regional association describes play modules, open space, a picnic area and a sports ground by the school. [Source](https://par-chez-nous.ch/places/ecole-de-prez-vers-noreaz/)
+- **Facilities** (Organiser source): The regional association listing describes an open-air school playground with play modules for children and a multi-purpose court for basketball, football or table tennis. It shows the word Parking only in a nearby-services block, so visitor parking at the playground is not confirmed. [Source](https://par-chez-nous.ch/places/ecole-de-prez-vers-noreaz/)
 
 To confirm before visiting:
 - The rules of public access outside lessons, the age of the equipment and the exact entrance are not stated.
+- Is the playground open to outside families outside school hours, and at what times?
+- Which age group is the equipment suitable for, and may adults stay with children?
+- Is use free, and where is the visitor entrance?
+- Is there visitor parking at the playground, and what does it cost?
 
 - [Sarine regional association: school playground and sport](https://par-chez-nous.ch/places/ecole-de-prez-vers-noreaz/)
 
 ### Visit conditions
 
-- Indoors: The regional association describes play modules, open space, a picnic area and a sports ground by the school. [Source](https://par-chez-nous.ch/places/ecole-de-prez-vers-noreaz/)
+- Indoors: The listing describes the school grounds as a place for play and physical activity in the open air. [Source](https://par-chez-nous.ch/places/ecole-de-prez-vers-noreaz/)
+- Parking: Not published [Source](https://par-chez-nous.ch/places/ecole-de-prez-vers-noreaz/)
+- Play area: The listing describes a play area with various modules for children. [Source](https://par-chez-nous.ch/places/ecole-de-prez-vers-noreaz/)
 - Important: The rules of public access outside lessons, the age of the equipment and the exact entrance are not stated.
 
 ## Place de l’Arche · small playground
@@ -9939,24 +10063,29 @@ To confirm before visiting:
 - Place: Châtel-sur-Montsalvens
 - District: Gruyère / Greyerz
 - Checked: 2026-10-02
-- Address: Châtel-sur-Montsalvens, 1653; starting point opposite Restaurant La Tour
+- Address: Châtel-sur-Montsalvens, 1653; starting point opposite Restaurant La Tour (descriptive area, exact entrances not established)
 - Age: Age limits are not published
 - Adult: Together with an adult
 - Language: To be confirmed
 - Schedule: The section on the left bank is closed; a detour has been arranged. Check the route before setting out
 - Price: Price not published
-- Contact: La Gruyère Tourisme; 026 919 85 00
-- The tourism page announces the closure of the section on the left bank and a detour; do not plan the full loop by the usual route.
-- The full lake loop is not considered a walk suitable for young children.
-- The old list from 2020 does not confirm the current state of the table and fireplace; constant supervision is needed near the water.
+- Contact: La Gruyère Tourisme; +41 (0)26 919 85 00; info@la-gruyere.ch
+- A section on the left bank of Lake Montsalvens is closed, and a detour is in place. Check conditions before you go.
+- The path can be slippery in wet weather.
 
-### Additional check: 2026-10-02
+### Additional check: 2026-11-03
 
 - **Path closure** (Organiser source): The official Tour du lac de Montsalvens page reports the closure of the section on the left bank and an organised detour. This does not confirm that the full loop can be used with a pushchair. [Source](https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/tour-du-lac-de-montsalvens/)
 - **Access from Châtel** (Historical information): The old list of picnic places describes the walking access from the Châtel-sur-Montsalvens side. It does not confirm the current state of the path, table and fireplace. [Source](https://fribourg.ch/wp-content/uploads/2021/11/places-de-pique-nique-en-gruyere.pdf)
+- **Route** (Organiser source): The official route page describes a loop walk of about 9 km, listed at about 3 hours, that starts at the entrance to Charmey. The page does not name Châtel-sur-Montsalvens as the start; it lists it only as a nearest public-transport stop. [Source](https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/tour-du-lac-de-montsalvens/)
 
 To confirm before visiting:
 - The state of the detour, a safe short section for young children and suitability for a pushchair need to be checked.
+- Where exactly does the loop start, at the entrance to Charmey or at Châtel-sur-Montsalvens opposite Restaurant La Tour?
+- Is there visitor parking at the start, and are there toilets or picnic facilities along the route?
+- Is any part of the route suitable for a pushchair or for very young children?
+- Is there an end date for the left-bank closure and the detour?
+- Is there a minimum age or a recommended age for the walk?
 
 - [Tourism: family route and stop](https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/tour-du-lac-de-montsalvens/)
 - [Tourism: access to the shore and picnic area from the Châtel side](https://fribourg.ch/wp-content/uploads/2021/11/places-de-pique-nique-en-gruyere.pdf)
@@ -10169,33 +10298,36 @@ To confirm before visiting:
 
 ## Pierrafortscha · glacial erratic boulder
 
-- Status: Needs confirmation
+- Status: Current information available
 - Place: Pierrafortscha
 - District: Sarine / Saane
-- Checked: 2026-09-28
-- Address: Sentier de la Pierre, 1723 Pierrafortscha; approach to be confirmed
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Checked: 2026-11-03
+- Address: Visit address not published (descriptive area, exact entrances not established)
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Self-guided walk; short approach not confirmed
+- Schedule: Schedule not published
 - Price: Price not published
-- Contact: Fribourg Tourisme; 026 350 11 11; info@fribourgtourisme.ch
-- The full tourist loop (9 km, 2 h 30 min, medium difficulty) is not recommended for young children.
-- This is not a ready route: check the start before planning a short self-guided walk.
+- Contact: Fribourg Tourisme et Région; +41 (0)26 350 11 11; info@fribourgtourisme.ch
+- The boulder is a stop on a 9 km loop walk from Marly (2 h 30 min, medium difficulty); the route page says the walk is reachable by public transport.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-03
 
 - **Availability and format** (Organiser source): The tourist office includes the Pierrafortscha glacial boulder in a published 9-kilometre walk; the regional association describes the surrounding rural area. [Source](https://fribourg.ch/fr/fribourg/randonnees-pedestres/sentier-autour-de-marly-et-pierrafortscha/)
+- **Route** (Organiser source): The Fribourg Region route page lists the Pierrafortscha granite boulder as a natural curiosity on a 9 km loop walk from Marly (2 h 30 min, medium difficulty). [Source](https://fribourg.ch/fr/fribourg/randonnees-pedestres/sentier-autour-de-marly-et-pierrafortscha/)
 
 To confirm before visiting:
 - The short approach to the boulder, parking, pushchair access and the safety of the section for young children are not confirmed.
+- Is there a short approach to the boulder with a visitor address, and where can families park nearby?
+- Is the route suitable for pushchairs and young children?
+- Are there opening hours, fees or visit rules at the boulder itself?
 
 - [Tourism: boulder, route, length and GPX](https://fribourg.ch/fr/fribourg/randonnees-pedestres/sentier-autour-de-marly-et-pierrafortscha/)
 - [Regional association: rural area and picnic](https://par-chez-nous.ch/places/campagne-de-pierrafortscha/)
 
 ### Visit conditions
 
-- Indoors: The tourist office includes the Pierrafortscha glacial boulder in a published 9-kilometre walk; the regional association describes the surrounding rural area. [Source](https://fribourg.ch/fr/fribourg/randonnees-pedestres/sentier-autour-de-marly-et-pierrafortscha/)
+- Indoors: The loop walk that includes the boulder is described as an outdoor activity. [Source](https://fribourg.ch/fr/fribourg/randonnees-pedestres/sentier-autour-de-marly-et-pierrafortscha/)
 - Important: The short approach to the boulder, parking, pushchair access and the safety of the section for young children are not confirmed.
 
 ## Gérine · forest corridor near Villarsel
@@ -10203,20 +10335,20 @@ To confirm before visiting:
 - Status: Needs confirmation
 - Place: Villarsel-sur-Marly
 - District: Sarine / Saane
-- Checked: 2026-09-28
-- Address: Bank of the Gérine, Villarsel-sur-Marly; entry point to be confirmed
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Checked: 2026-11-03
+- Address: Visit address not published (descriptive area, exact entrances not established)
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Walk on foot; the accessible section is not confirmed
+- Schedule: Schedule not published
 - Price: Price not published
-- Contact: Association régionale de la Sarine
 - The Marly, Gérine stops do not confirm a start point in Villarsel.
 - Continuous supervision is required by the river. The mention of bathing at the spring does not mean the place is safe for young children.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-03
 
 - **Availability and format** (Organiser source): The regional association places the Gérine forest corridor in Marly, Pierrafortscha and Villarsel-sur-Marly and describes walking routes and picnic spots. [Source](https://par-chez-nous.ch/places/gerine/)
+- **Facilities** (Organiser source): The regional association's page lists a fire place with grill and parking for the Gérine, and gives the bus stop Marly, Gérine as access. [Source](https://par-chez-nous.ch/places/gerine/)
 
 To confirm before visiting:
 - The entrance to the section in Villarsel-sur-Marly itself is not confirmed, and there is no information on a suitable length for young children or on pushchair access.
@@ -10226,6 +10358,7 @@ To confirm before visiting:
 ### Visit conditions
 
 - Indoors: The regional association places the Gérine forest corridor in Marly, Pierrafortscha and Villarsel-sur-Marly and describes walking routes and picnic spots. [Source](https://par-chez-nous.ch/places/gerine/)
+- Parking: Parking is listed among the place's facilities; fees and capacity are not stated. [Source](https://par-chez-nous.ch/places/gerine/)
 - Important: The entrance to the section in Villarsel-sur-Marly itself is not confirmed, and there is no information on a suitable length for young children or on pushchair access.
 
 ## Nuvilly · playground on Chemin des Batailles
@@ -10583,13 +10716,14 @@ To confirm before visiting:
 - Date: 2026-12-01 09:30–10:30 · RITUELS ET PETITES HISTOIRES DU SOIR · Avenue de la Gare 14, Fribourg
 - The programme is explicitly described as parents-enfants. The language of each session is not stated. Confirmation of available places has not been received.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-03
 
 - **Joint format** (Organiser source): The autumn programme describes the workshops as sessions for parents with children aged 0–5. [Source](https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf)
 - **Participation** (Organiser source): The programme states that it is free and no prior registration is needed. [Source](https://www.officefamilial.ch/assets/uploads/files/30244-programme-automne-2026.pdf)
 - **Autumn dates on the official news page** (Organiser source): The Office familial news page lists the free autumn discovery workshop "Le yoga des animaux" on Tuesday 3 November 2026, 9:30–10:30, at Avenue de la Gare 14, Fribourg, with no registration. A second workshop, "Le petit enfant à la découverte de son corps", is listed on Tuesday 17 November, 9:30–10:30, but the page prints no year for it. [Source](https://www.officefamilial.ch/fr/office-familial-fribourg/actualites)
 - **Winter workshop on the official news page** (Organiser source): The Office familial news page lists a free winter workshop, "RITUELS ET PETITES HISTOIRES DU SOIR", on Tuesday 1 December 2026, 9:30–10:30, at Avenue de la Gare 14, Fribourg, without registration. [Source](https://www.officefamilial.ch/fr/office-familial-fribourg/actualites)
 - **17 November workshop** (Organiser source): The Office familial news page, checked on 31 October 2026, lists a third free autumn workshop, "Le petit enfant à la découverte de son corps", on Tuesday 17 November, 9:30–10:30, at Avenue de la Gare 14, Fribourg, without registration. The page prints no year for this date, so it is not added to the dated sessions. [Source](https://www.officefamilial.ch/fr/office-familial-fribourg/actualites)
+- **Winter workshop on the official news page** (Organiser source): On 3 November 2026 the Office familial news page still lists the free winter workshop "RITUELS ET PETITES HISTOIRES DU SOIR" on Tuesday 1 December 2026, 9:30–10:30, at the organiser's premises at Avenue de la Gare 14, Fribourg, described as free and without registration. [Source](https://www.officefamilial.ch/fr/office-familial-fribourg/actualites)
 
 To confirm before visiting:
 - The language of the session, conditions for families from another commune, the lift and the possibility of leaving early.
@@ -10740,21 +10874,23 @@ To confirm before visiting:
 - Place: Fribourg
 - District: Sarine / Saane
 - Checked: 2026-10-26
-- Address: Rue de l’Hôpital 2, Fribourg
+- Address: Rue de l’Hôpital 2, 1700 Fribourg
 - Age: 3–5 years
 - Adult: To be confirmed
 - Language: FR
 - Schedule: 4 November 2026 · 14:30–15:30
 - Price: Price for this session is not published.
 - Contact: MEMO; 026 351 71 44; memo@ville-fr.ch
-- Date: 2026-11-04 14:30–15:30
+- Date: 2026-11-04 14:30–15:30 · Les histoires de la Valise magique
 - Spoken French and French Sign Language (LSF).
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-04
 
 - **Age and language** (Organiser source): The programme lists ages 3–5, French and French Sign Language. [Source](https://cdnm.heyzine.com/files/uploaded/v3/1b5babb077c83e6573328f25c4443b9921836c54.pdf)
 - **practical** (Organiser source): The MEMO venue page lists a changing table in the first-floor toilets, a cushion and comfortable space for breastfeeding, and a room arranged for toddlers. [Source](https://www.ville-fribourg.ch/memo)
 - **Booking** (Organiser source): The MEMO programme page says its animations are free and sometimes need registration, but it does not name this session. The city listing only links to ticketing. [Source](https://www.ville-fribourg.ch/pssst-ecoute-voir)
+- **Published dates** (Organiser source): The city listing shows one session on Wednesday 4 November 2026, 14:30–15:30, at MEMO, for ages 3–5. [Source](https://www.ville-fribourg.ch/agenda/les-histoires-de-la-valise-magique)
+- **Address** (Organiser source): The MEMO page gives the venue address as Rue de l’Hôpital 2, 1700 Fribourg. [Source](https://www.ville-fribourg.ch/memo)
 
 To confirm before visiting:
 - Must an adult stay and take part?
@@ -10777,7 +10913,7 @@ To confirm before visiting:
 - Toilet: Visitor toilets are on the first floor at MEMO. [Source](https://www.ville-fribourg.ch/memo)
 - Feeding: MEMO offers a cushion and a comfortable space for breastfeeding. [Source](https://www.ville-fribourg.ch/memo)
 - Play area: MEMO has a room arranged for toddlers. [Source](https://www.ville-fribourg.ch/memo)
-- Coordinates of the address (not the entrance): 46.805633544921875, 7.154872894287109. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+Fribourg&type=locations&origins=address&limit=5&sr=4326)
+- Coordinates of the address (not the entrance): 46.805633544921875, 7.154872894287109. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326)
 
 ## Est-ce que ça joue ? / Lass uns spielen! · MEMO
 
