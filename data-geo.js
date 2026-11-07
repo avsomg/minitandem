@@ -14,18 +14,6 @@
     }
   },
   {
-    "id": "sellenhof-group",
-    "address": "Sellenhof, Seeliweg 21, 1716 Plaffeien",
-    "geo": {
-      "label": "Seeliweg 21 1716 Plaffeien",
-      "lat": 46.743980407714844,
-      "lon": 7.289436340332031,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Sellenhof+Seeliweg+21+1716+Plaffeien&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
-      "precision": "address"
-    }
-  },
-  {
     "id": "sellenhof-private",
     "address": "Sellenhof, Seeliweg 21, 1716 Plaffeien",
     "geo": {
@@ -213,18 +201,6 @@
       "lat": 46.805931091308594,
       "lon": 7.138740062713623,
       "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Avenue+Jean-Paul+II+11+1752+Villars-sur-Gl%C3%A2ne&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
-      "precision": "address"
-    }
-  },
-  {
-    "id": "laferme-murten",
-    "address": "Champ Raclé 19, 3280 Murten",
-    "geo": {
-      "label": "Champ-Raclé 19 3280 Murten",
-      "lat": 46.94189453125,
-      "lon": 7.143847465515137,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Champ+Racl%C3%A9+19+3280+Murten&type=locations&origins=address&limit=5&sr=4326",
       "checked": "2026-09-27",
       "precision": "address"
     }

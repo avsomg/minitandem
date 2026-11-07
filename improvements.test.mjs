@@ -208,9 +208,9 @@ test('editorial queue measures missing facts without inventing owners or new ver
 });
 test('freshness queue prioritizes imminent meetings and the whole 0–6 audience without a family route',()=>{
   const report=JSON.parse(execFileSync(process.execPath,[path.join(root,'maintain.mjs'),'--date=2026-09-28'],{encoding:'utf8'}));
-  // elki-kerzers: its last published season ended on 25 March 2026 (full review of 1 November 2026), so it is due for another look.
   // ludo-events: the full review of 3 November 2026 found only the 2024 events on the source page, the last on 23 November 2024.
-  assert.deepEqual(report.due.map(row=>[row.id,row.reasons]),[['ludo-events',['season-ended','listed-events-ended']],['elki-kerzers',['season-ended']]]);
+  // elki-kerzers left this list with its full review of 7 November 2026, which publishes no season end.
+  assert.deepEqual(report.due.map(row=>[row.id,row.reasons]),[['ludo-events',['season-ended','listed-events-ended']]]);
   const byId=new Map(report.needsConfirmation.map(row=>[row.id,row]));
   // aef-mpe and aef-passerelles were confirmed active by approved updates (2 and 20 October 2026), and herbstbasteln was closed
   // by the approved update of 3 November 2026 once its only date had passed; none of them waits here.
@@ -259,7 +259,7 @@ test('calendar files carry the Minitandem names, fold lines safely and never use
   assert.equal(event.name,'suniai-family-yoga-2026-11-07.ics');
   assert.match(event.text,/PRODID:-\/\/Minitandem\/\/Family Activities\/\/EN\r\n/);
   assert.match(unfold(event.text),/UID:suniai-family-yoga-20261107-10:00@minitandem\.local/);
-  assert.match(unfold(event.text),/DTSTART;TZID=Europe\/Zurich:20261107T100000/);assert.match(unfold(event.text),/DTEND;TZID=Europe\/Zurich:20261107T110000/);
+  assert.match(unfold(event.text),/DTSTART;TZID=Europe\/Zurich:20261107T100000/);assert.match(unfold(event.text),/DTEND;TZID=Europe\/Zurich:20261107T111500/); // 11:15 since the approved update of 7 November 2026
   assert.equal(EX.eventFile(a.id,999),null);assert.equal(EX.eventFile('missing',0),null);
   for(const file of [planFile,event]){
     assert.ok(file.text.startsWith('BEGIN:VCALENDAR\r\n')&&file.text.endsWith('END:VCALENDAR\r\n'));

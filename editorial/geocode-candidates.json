@@ -6577,5 +6577,37 @@
         "lon": 7.062196254730225
       }
     ]
+  },
+  "Sporthalle Giffers, Giffers": {
+    "query": "Giffers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Giffers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-07",
+    "results": [
+      {
+        "label": "Giffersflüe 1 1735 Giffers",
+        "lat": 46.75439453125,
+        "lon": 7.2216925621032715
+      },
+      {
+        "label": "Spichermatte 1a 1735 Giffers",
+        "lat": 46.764137268066406,
+        "lon": 7.209717273712158
+      },
+      {
+        "label": "Obertswilstrasse 1e 1735 Giffers",
+        "lat": 46.762516021728516,
+        "lon": 7.20851993560791
+      },
+      {
+        "label": "Harzerweg 1 1735 Giffers",
+        "lat": 46.761478424072266,
+        "lon": 7.208832263946533
+      },
+      {
+        "label": "Obertswilstrasse 1 1735 Giffers",
+        "lat": 46.76263427734375,
+        "lon": 7.208434581756592
+      }
+    ]
   }
 }

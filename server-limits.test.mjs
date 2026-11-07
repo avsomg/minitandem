@@ -101,7 +101,8 @@ test('each route has the limit its data needs: a heavy but real profile fits, a 
   const visits=Object.fromEntries(ids.slice(0,50).map((id,index)=>['v-'+index,{activity:id,date:'2026-11-01',time:'10:00',booking:'confirmed',reply:'x'.repeat(500),bring:'x'.repeat(200),observations:'x'.repeat(1000)}]));
   const profile={version:1,favorites:ids,notes,statuses:{},visits,tracked,age:2.5,origin:'Plaffeien'};
   const size=Buffer.byteLength(JSON.stringify({revision:0,profile}));
-  assert.ok(size>250*1024&&size<400*1024,'the example is large and still under the limit: '+size);
+  // The example grows with the catalogue (about 401 KB on 7 November 2026); the profile route accepts 512 KB.
+  assert.ok(size>250*1024&&size<512*1024,'the example is large and still under the limit: '+size);
   const saved=await call(base,'/api/v1/family',keys[2],'PUT',{revision:0,profile});
   assert.equal(saved.status,200);assert.equal(Object.keys(saved.data.profile.tracked).length,ids.length);
   // A correction: a few hundred bytes are normal; 20 KB is not.

@@ -204,8 +204,8 @@ test('new Fribourg cafes keep date-specific times and uncertain eligibility',()=
   const vignettaz=byId.get('aef-vignettaz');
   const jura=byId.get('aef-jura');
   assert.deepEqual(Array.from(vignettaz.events,event=>[event.date,event.start,event.end]),[
-    // The approved update of 30 October 2026 keeps the one date the calendar still publishes.
-    ['2026-11-07','09:00','11:00']
+    // The approved update of 6 November 2026 keeps both dates the calendar lists, the earlier one at other hours.
+    ['2026-10-07','15:00','17:00'],['2026-11-07','09:00','11:00']
   ]);
   assert.deepEqual(Array.from(jura.events,event=>event.date),['2026-10-10','2026-10-31']);
   for(const record of [vignettaz,jura]){
@@ -222,8 +222,8 @@ test('AEF Farvagny and Attalens separate ordinary cafes from the themed workshop
   const workshop=byId.get('aef-attalens-alimentation');
   assert.deepEqual(Array.from(farvagny.events,event=>[event.date,event.start,event.end]),[['2026-10-03','09:30','11:00']]);
   assert.deepEqual(Array.from(attalens.events,event=>event.date),[
-    // The approved update of 30 October 2026 no longer lists 7 October.
-    '2026-11-04','2026-11-11','2026-11-25','2026-12-02','2026-12-16'
+    // The approved update of 7 November 2026 lists the coming dates only; 4 November has passed.
+    '2026-11-11','2026-11-25','2026-12-02','2026-12-16'
   ]);
   assert.deepEqual(Array.from(workshop.events,event=>event.date),['2026-10-28']);
   assert.equal(farvagny.region,'sarine');
@@ -310,10 +310,12 @@ test('unknown ages, languages and admission fees remain unknown for original din
 test('district and parent filters compose with dining, obsolete routes are ignored',()=>{
   const {list,state}=load({filters:{categories:['dining'],parentMatch:true}});
   assert.equal(state.f.parentMatch,true);
+  // fein-sein-schwarzsee and laferme-murten: adult conditions not published since their full reviews of 7 November 2026.
   state.f.place='d:sense';
-  assert.ok(ids(list()).includes('fein-sein-schwarzsee'));
+  assert.ok(ids(list()).includes('seepark-schiffenen'));
+  assert.ok(!ids(list()).includes('fein-sein-schwarzsee'));
   state.f.place='d:see';
-  assert.deepEqual(ids(list()).sort(),['beachhouse-muntelier','clubcafe-kerzers','jardin-muntelier','kafi8-kerzers','laferme-murten']);
+  assert.deepEqual(ids(list()).sort(),['beachhouse-muntelier','clubcafe-kerzers','jardin-muntelier','kafi8-kerzers']);
   // The old route filter is gone: a saved session that still has it is not a filter.
   const obsolete=load({filters:{routes:['schwarzsee']}});
   assert.equal(obsolete.list().length,COUNTS.catalog);
@@ -428,8 +430,9 @@ test('visitor research notes keep their caveats in the catalogue',()=>{
 test('follow-up preserves dated caveats, closures and price units',()=>{
   const {byId}=load();
   assert.match(byId.get('kafi8-kerzers').schedule,/closed 5–18 October 2026/);
-  assert.match(byId.get('laferme-murten').schedule,/Mon–Fri 09:00–18:30/);
-  assert.doesNotMatch(byId.get('laferme-murten').schedule,/confirm/i);
+  // The full review of 7 November 2026 found the farm's general hours but none for the playground itself.
+  assert.equal(byId.get('laferme-murten').schedule,'Schedule not published');
+  assert.match(byId.get('laferme-murten').notes.join(' '),/general opening hours/);
   assert.match(byId.get('seepark-schiffenen').schedule,/09:30–22:00/);
   assert.match(byId.get('leset-villars').price,/spring 2026/);
   assert.match(byId.get('beachhouse-muntelier').price,/Summer menu 2026/);
@@ -474,8 +477,8 @@ test('deep review covers active cards and preserves receipts for ended events',(
   }
   const counts=Object.fromEntries(['enriched','rechecked','unresolved','reused'].map(outcome=>[outcome,main.filter(a=>a.research.outcome===outcome).length]));
   assert.equal(Object.values(counts).reduce((sum,count)=>sum+count,0),main.length);
-  // A new full review turns an enriched card into a rechecked one; the full reviews approved on 3 November 2026 resolved ten unresolved cards.
-  assert.ok(counts.enriched+counts.rechecked>=134 && counts.unresolved>=27);
+  // A new full review turns an enriched card into a rechecked one; the full reviews approved on 3 and 7 November 2026 resolved eleven unresolved cards.
+  assert.ok(counts.enriched+counts.rechecked>=134 && counts.unresolved>=26);
   // memo-rat-mission-2026-09-30 and herbstbasteln were closed by approved updates on 26 October and 3 November 2026, once their only
   // date (30 September) had passed.
   assert.deepEqual(ids(records.filter(a=>C.isArchive(a)&&a.research)).sort(),['alpabzug','chocolat','devenir-famille-fribourg-2026-10-03','erntedank','herbstbasteln','memo-musik-entdecken-2026-09-29','memo-rat-exhibition-2026','memo-rat-mission-2026-09-30','plage-chevroux']);
@@ -483,8 +486,9 @@ test('deep review covers active cards and preserves receipts for ended events',(
   assert.deepEqual(Array.from(byId.get('swim-duedingen').days),[6]);
   for(const id of ['playgrounds-marly','elki-kerzers'])assert.deepEqual(Array.from(byId.get(id).days),[],`${id}: stale schedule must not appear as a weekday`);
   assert.equal(byId.get('playgrounds-marly').scheduleValidThrough,null);
-  // The full review of 1 November 2026 found only last season's course (to 25 March 2026): no weekday, the card stays check and is due again.
-  assert.equal(byId.get('elki-kerzers').scheduleValidThrough,'2026-03-25');
+  // Only last season's course is published (to 25 March 2026): no weekday, and the card stays check. Since the full review of
+  // 7 November 2026 that past end date is no longer kept as the horizon of a schedule that is still to be confirmed.
+  assert.equal(byId.get('elki-kerzers').scheduleValidThrough,null);
   assert.equal(byId.get('elki-kerzers').status,'check');
 });
 
@@ -572,8 +576,8 @@ test('See follow-up cards use normal filters and do not revive obsolete schedule
   store.personal.age=null;state.f.days.add(6);
   assert.ok(ids(list()).includes('suniai-family-yoga'));
   for(const id of ['familybloom-yoga','kibim-murten','baby-bade-murten','gym-parents-misery'])assert.ok(!ids(list()).includes(id),id);
-  // Two since 26 October 2026: the 3 October session has passed and the approved update keeps only 7 November and 12 December.
-  assert.equal(byId.get('suniai-family-yoga').events.length,2);
+  // Eight since the approved update of 7 November 2026: the organiser now lists the dates up to 19 June 2027, two Pyjama-Yoga sessions among them.
+  assert.equal(byId.get('suniai-family-yoga').events.length,8);
   assert.equal(byId.get('jeux-apav-vully-2026').events[0].start,'');
   assert.equal(byId.get('familybloom-yoga').amount,null);
   for(const id of ['stimm-family','baby-bade-murten','gym-parents-misery'])assert.equal(byId.get(id).min,null,`${id}: historical age must remain unconfirmed`);

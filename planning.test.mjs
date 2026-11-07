@@ -178,9 +178,9 @@ test('planning returns codes or card text only, never interface wording',()=>{
   assert.deepEqual(Array.from(P.matchReasons(mpe,9,false,false,null)),['ageToConfirm']);
   assert.deepEqual(Array.from(P.matchReasons(mpe,null,false,false,null)),[]);
   const workshops=shared.byId.get('office-family-workshops');
-  // Its one published date since the approved update of 24 October 2026; the day after has none.
-  assert.ok(P.matchReasons(workshops,null,false,false,'2026-11-03').includes('publishedDate'));
-  assert.ok(!P.matchReasons(workshops,null,false,false,'2026-11-04').includes('publishedDate'));
+  // Its one published date since the approved update of 7 November 2026; the day after has none.
+  assert.ok(P.matchReasons(workshops,null,false,false,'2026-12-01').includes('publishedDate'));
+  assert.ok(!P.matchReasons(workshops,null,false,false,'2026-12-02').includes('publishedDate'));
 });
 
 test('the uncertain upper age counts only as a number: missing and null mean no bound, 0 and a positive value are bounds',()=>{
@@ -298,8 +298,8 @@ test('new programmes have sourced exact dates and retain unknown local language 
   assert.match(a.practical.commitment.text,/31 May/);assert.equal(a.practical.groupSize.value,6);
   assert.ok(a.research.findings.length>=4);
   const workshop=byId.get('office-family-workshops'),books=byId.get('office-family-books');
-  // Three since 30 October 2026: the organiser's page now lists a second workshop with a year (1 December).
-  assert.equal(workshop.events.length+books.events.length,3);assert.equal(workshop.max,5);assert.equal(books.max,4);
+  // Two since 7 November 2026: the workshop of 3 November has passed, and the organiser's page keeps the one of 1 December.
+  assert.equal(workshop.events.length+books.events.length,2);assert.equal(workshop.max,5);assert.equal(books.max,4);
   assert.ok(workshop.events.every(e=>e.title));assert.equal(workshop.practical.booking.value,false);
   assert.ok(workshop.research.findings.length>=3);assert.ok(books.research.findings.length>=3);
 });

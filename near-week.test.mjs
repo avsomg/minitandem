@@ -95,7 +95,8 @@ test('the real catalogue: every town on a published card has an entry in data-to
 test('rows show the distance only once a point is set, and say when it is approximate or unknown',()=>{
   const {C,V,state,byId,t}=loadStack();
   const exact=C.activities.find(a=>!C.isArchive(a)&&a.geo&&!a.events.some(e=>e.address&&e.address!==a.address));
-  const approximate=C.activities.find(a=>!C.isArchive(a)&&!a.geo&&C.townCentre(a.town));
+  // In another town, so the distance is at least a kilometre (since 7 November 2026 an approximate card also sits in Plaffeien).
+  const approximate=C.activities.find(a=>!C.isArchive(a)&&!a.geo&&C.townCentre(a.town)&&a.town!==exact.town);
   assert.ok(!V.row(exact).includes('r-dist'),'no point, no distance');
   state.near={kind:'geo',...exact.geo};
   assert.match(V.row(exact),/<span class="r-dist">≈ 0\.1 km<\/span>/);
