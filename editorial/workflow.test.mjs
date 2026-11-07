@@ -771,4 +771,10 @@ test('the worker contracts name the rules the validators enforce',()=>{
   assert.match(full('review-patch'),/"fullReviewFields"/);
   // 1 November 2026: three second full reviews on the same day left patch.checked out because the card already showed the date.
   assert.match(full('integrate'),/always carries patch\.checked, also when the card already shows that date/);
+  // The owner's decision of 7 November 2026: a full review had erased a farm bistro's hours as "not the playground's" (laferme-murten).
+  for(const kind of ['facts','verify-facts','integrate','review-patch']){
+    assert.match(full(kind),/When the card is the venue itself[^.]*opening hours and visitor address are the card's schedule, days and address, with exact-card scope/,kind);
+    assert.match(full(kind),/never supplies a play area's age limits, prices or admission rules, and it does not apply to a class, course or event held at a venue/,kind);
+    assert.doesNotMatch(full(kind),/general opening hours into play-area/,kind);
+  }
 });
