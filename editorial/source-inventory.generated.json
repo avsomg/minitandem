@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T07:17:11.412Z",
+  "generatedAt": "2026-11-07T18:34:07.188Z",
   "sources": [
     {
       "id": "source-a9e685e2c5ed",
@@ -2465,6 +2465,20 @@
       ],
       "labels": [
         "Cantonal library register"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-5ccbfb2cf820",
+      "url": "https://www.marly.ch/brm",
+      "recordIds": [
+        "biblio-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Address and entrance"
       ],
       "monitoring": "not-configured"
     },
@@ -5818,6 +5832,20 @@
       ],
       "labels": [
         "Additional check: schedule"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-0044681df9ce",
+      "url": "https://www.chlaetter-fuechs.ch/",
+      "recordIds": [
+        "bruenisried-forest-playgroup"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Additional check: status"
       ],
       "monitoring": "not-configured"
     },

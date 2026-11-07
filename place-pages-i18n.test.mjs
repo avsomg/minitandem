@@ -231,3 +231,16 @@ test('a page built from one card alone matches it against its own translation; u
   assert.equal(placePage(mpe, regions, DATE), read(output, placeURL('mpe', 'en')));
   assert.throws(() => placePage(mpe, regions, DATE, 'it'), /No such page language/);
 });
+
+test('a call link drops the trunk zero that "+41 (0)26" and "(+41) 026" keep in print, in the app and on the place pages', () => {
+  // Placeholder numbers only: the public scan allows no real number outside the catalogue files.
+  const {V} = loadStack(), dialled = V.phoneHref('026 123 45 67');
+  assert.match(dialled, /^tel:\+4126\d{7}$/);
+  for (const phone of ['+41 (0)26 123 45 67', '(+41) 026 123 45 67', '+41 26 123 45 67'])
+    assert.equal(V.phoneHref(phone), dialled, phone);
+  const riggli = records.find(a => a.id === 'riggli'), own = V.phoneHref(riggli.contacts[0].phone);
+  assert.match(riggli.contacts[0].phone, /\(0\)/);
+  assert.match(own, /^tel:\+41[1-9]\d{8}$/);
+  const page = placePage(riggli, regions, DATE);
+  assert.ok(page.includes(`href="${own}"`) && !page.includes('tel:+410'), 'place page call link');
+});

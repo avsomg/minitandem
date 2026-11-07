@@ -6609,5 +6609,107 @@
         "lon": 7.208434581756592
       }
     ]
+  },
+  "Spielgruppenlokal, Kirchweg 30, 3. Stock, Giffers": {
+    "query": "Kirchweg 30",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Kirchweg+30&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-07",
+    "results": [
+      {
+        "label": "Kirchweg 30 3926 Embd",
+        "lat": 46.21508026123047,
+        "lon": 7.828399658203125
+      },
+      {
+        "label": "Kirchweg 30 2557 Studen BE",
+        "lat": 47.115821838378906,
+        "lon": 7.297109127044678
+      },
+      {
+        "label": "Kirchweg 30 3324 Hindelbank",
+        "lat": 47.043670654296875,
+        "lon": 7.539216041564941
+      },
+      {
+        "label": "Kirchweg 30 3366 Bettenhausen",
+        "lat": 47.174259185791016,
+        "lon": 7.714737892150879
+      },
+      {
+        "label": "Kirchweg 30 1735 Giffers",
+        "lat": 46.7603874206543,
+        "lon": 7.212440490722656
+      }
+    ]
+  },
+  "Route de Fribourg 15, 1723 Marly (1st floor, centre commercial La Jonction)": {
+    "query": "Route de Fribourg 15 1723 Marly 1st floor",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Fribourg+15+1723+Marly+1st+floor&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-07",
+    "results": [
+      {
+        "label": "Route de Fribourg 15 1723 Marly",
+        "lat": 46.78019714355469,
+        "lon": 7.150331974029541
+      },
+      {
+        "label": "Route de Fribourg 15c 1723 Marly",
+        "lat": 46.78028869628906,
+        "lon": 7.150893211364746
+      },
+      {
+        "label": "Route de Fribourg 15e 1723 Marly",
+        "lat": 46.78007125854492,
+        "lon": 7.150586128234863
+      },
+      {
+        "label": "Route de Fribourg 15b 1723 Marly",
+        "lat": 46.780330657958984,
+        "lon": 7.150815486907959
+      },
+      {
+        "label": "Route de Fribourg 15d 1723 Marly",
+        "lat": 46.78015899658203,
+        "lon": 7.149719715118408
+      }
+    ]
+  },
+  "Skischulbüro (ski school office, meeting point)": {
+    "query": "Skischulbüro ski school office meeting point",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Skischulb%C3%BCro+ski+school+office+meeting+point&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-07",
+    "results": []
+  },
+  "1678 Siviriez": {
+    "query": "1678 Siviriez",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=1678+Siviriez&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-07",
+    "results": [
+      {
+        "label": "Drognens 1h 1678 Siviriez",
+        "lat": 46.66981506347656,
+        "lon": 6.896860599517822
+      },
+      {
+        "label": "Impasse de la Vieille-Cure 1 1678 Siviriez",
+        "lat": 46.65816116333008,
+        "lon": 6.883271217346191
+      },
+      {
+        "label": "Drognens 1a 1678 Siviriez",
+        "lat": 46.67053985595703,
+        "lon": 6.89700984954834
+      },
+      {
+        "label": "Les Sapalès 1a 1678 Siviriez",
+        "lat": 46.647315979003906,
+        "lon": 6.864090442657471
+      },
+      {
+        "label": "Pré Mottey 1n 1678 Siviriez",
+        "lat": 46.6652717590332,
+        "lon": 6.8693928718566895
+      }
+    ]
   }
 }

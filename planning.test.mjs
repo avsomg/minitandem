@@ -292,8 +292,10 @@ test('a generated map point is not applied after its visitor address changes',()
 
 test('new programmes have sourced exact dates and retain unknown local language and timetable',()=>{
   const {byId}=shared,a=byId.get('artist-factory-parent');
-  assert.equal(a.amount,162);assert.equal(a.min,1.5);assert.equal(a.max,4);assert.equal(a.events.length,0);assert.equal(a.languages.length,0);
-  assert.equal(a.status,'active');assert.deepEqual(Array.from(a.days),[3]);assert.match(a.schedule,/10:00–10:45/);
+  // The review of 7 November 2026 read only the course page: no weekday or time, and CHF 147 without the separate CHF 15 fee.
+  // An editors' report of the same day asks for the school's timetable and the fee.
+  assert.equal(a.amount,147);assert.equal(a.min,1.5);assert.equal(a.max,4);assert.equal(a.events.length,0);assert.equal(a.languages.length,0);
+  assert.equal(a.status,'active');assert.deepEqual(Array.from(a.days),[]);assert.match(a.schedule,/45 minutes/);
   assert.equal(a.practical.trial.value,true);assert.equal(a.practical.commitment.value,true);
   assert.match(a.practical.commitment.text,/31 May/);assert.equal(a.practical.groupSize.value,6);
   assert.ok(a.research.findings.length>=4);

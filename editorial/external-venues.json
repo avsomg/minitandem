@@ -14,7 +14,7 @@
     {
       "id": "snowcenter",
       "label": "Snowcenter Gypsera",
-      "cardIds": ["snowli", "snowli-daily", "snowli-weekly", "ski-private"]
+      "cardIds": ["snowli", "snowli-daily", "ski-private"]
     },
     {
       "id": "estabiblio",

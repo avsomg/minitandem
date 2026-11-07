@@ -80,7 +80,7 @@ test('address fixes retain programme and access uncertainty',()=>{
   assert.equal(byId.get('montsalvens-lakeside-walk').status,'check');
   assert.match(byId.get('montsalvens-lakeside-walk').notes.join(' '),/left bank.*detour/);
   assert.match(byId.get('montsalvens-lakeside-walk').practical.warnings[0],/left bank.*detour/);
-  assert.equal(byId.get('montsalvens-lakeside-walk').practical.indoor.checked,'2026-10-02');
+  assert.equal(byId.get('montsalvens-lakeside-walk').practical.indoor.checked,'2026-11-07'); // re-checked by the approved update of 7 November 2026
 });
 
 test('Kerzers concert uses its own event source and retains its published end time',()=>{

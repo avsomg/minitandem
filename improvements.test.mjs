@@ -219,8 +219,10 @@ test('freshness queue prioritizes imminent meetings and the whole 0–6 audience
   assert.equal(byId.get('aef-farvagny').nextEvent,'2026-10-03');
   assert.equal(byId.get('aef-farvagny').priority,'now');
   assert.deepEqual(report.targetAge,{min:0,max:6});
-  assert.equal(byId.get('krabbel-giffers').priority,'review');
-  assert.equal(byId.get('krabbel-giffers').ageFit,'confirmed');
+  // krabbel-giffers was confirmed active by the full review of 7 November 2026 and no longer waits here.
+  assert.equal(byId.has('krabbel-giffers'),false);
+  assert.equal(byId.get('snowli').priority,'review');
+  assert.equal(byId.get('snowli').ageFit,'confirmed');
   assert.equal(byId.get('swim-duedingen').priority,'review');
   assert.equal(byId.get('swim-duedingen').ageFit,'confirmed');
   assert.ok(report.needsConfirmation.every(row=>row.priority!=='family'));

@@ -111,13 +111,13 @@
   },
   {
     "id": "krabbel-giffers",
-    "address": "Spielgruppenlokal, Kirchweg 30, 3. Stock, 1735 Giffers",
+    "address": "Spielgruppenlokal, Kirchweg 30, 3. Stock, Giffers",
     "geo": {
       "label": "Kirchweg 30 1735 Giffers",
       "lat": 46.7603874206543,
       "lon": 7.212440490722656,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Spielgruppenlokal+Kirchweg+30+3.+Stock+1735+Giffers&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Kirchweg+30&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-11-07",
       "precision": "address"
     }
   },
@@ -566,18 +566,6 @@
     }
   },
   {
-    "id": "ondena",
-    "address": "Route de Montécu 94, 1724 Bonnefontaine",
-    "geo": {
-      "label": "Route de Montécu 94 1724 Bonnefontaine",
-      "lat": 46.74007034301758,
-      "lon": 7.198653221130371,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Mont%C3%A9cu+94+1724+Bonnefontaine&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
-      "precision": "address"
-    }
-  },
-  {
     "id": "encore-jura",
     "address": "Route de l'Aurore 2, Fribourg",
     "geo": {
@@ -627,13 +615,13 @@
   },
   {
     "id": "biblio-marly",
-    "address": "Route de Fribourg 15, Marly",
+    "address": "Route de Fribourg 15, 1723 Marly (1st floor, centre commercial La Jonction)",
     "geo": {
       "label": "Route de Fribourg 15 1723 Marly",
       "lat": 46.78019714355469,
       "lon": 7.150331974029541,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Fribourg+15+Marly&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Fribourg+15+1723+Marly+1st+floor&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-11-07",
       "precision": "address"
     }
   },

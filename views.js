@@ -71,7 +71,8 @@
     const tick = size => ICON.tick(size);
     const keyed = (prefix, value) => t(prefix + '.' + (value === '' || value === undefined ? 'none' : value));
     const link = (url, label, cls = '') => /^https:\/\//i.test(url) ? `<a class="${cls}" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${label}</a>` : '';
-    const phoneHref = phone => 'tel:' + phone.replace(/[^+\d]/g, '').replace(/^0(?=\d{9}$)/, '+41');
+    // '+41 (0)26 …' and '(+41) 026 …' keep the trunk zero in print; the dialled number drops it.
+    const phoneHref = phone => 'tel:' + phone.replace(/[^+\d]/g, '').replace(/^0(?=\d{9}$)/, '+41').replace(/^\+410(?=\d{9}$)/, '+41');
     const statusClass = {active: 'good', check: 'check', future: 'later', closed: 'gone', excluded: 'gone'};
     const hashFor = (id, view = state().view) => {
       const p = new URLSearchParams({view});

@@ -347,19 +347,22 @@ test('new preschool options preserve confirmed age, language and parent uncertai
   const {C,list,state,byId}=load({age:AGE});
   const trip=byId.get('trip-trap-marly'),dance=byId.get('zumba-mini-bulle');
   assert.equal(C.ageFit(trip,AGE),true);
-  assert.equal(trip.parent,'no');
+  // 'unknown' since the approved update of 7 November 2026: the current pages publish no conditions for adult participation.
+  assert.equal(trip.parent,'unknown');
   assert.deepEqual(Array.from(trip.languages),['DE/FR']);
   assert.equal(trip.amount,490);
   assert.match(trip.price,/semester/);
   assert.equal(trip.practical.booking.value,true);
   assert.equal(trip.practical.commitment.value,true);
-  assert.equal(trip.practical.groupSize.value,10);
+  // 'about 6 to 10 children' is no published maximum (approved update of 7 November 2026).
+  assert.equal(trip.practical.groupSize.value,null);assert.match(trip.practical.groupSize.text,/6 to 10/);
   assert.equal(trip.practical.trial,undefined);
   assert.equal(dance.parent,'unknown');
   assert.equal(C.ageFit(dance,AGE),true);
   assert.equal(dance.days.length,0,'ambiguous weekly planning must not become calendar dates');
   assert.equal(dance.practical.booking.value,true);
-  assert.equal(dance.practical.commitment.value,false);
+  // The full review of 7 November 2026 found no Zumba Mini rate on the tariff page, so the single-class option is not confirmed.
+  assert.equal(dance.practical.commitment.value,null);
   assert.equal(dance.practical.trial,undefined);
   state.f.place='d:sarine';state.f.categories.add('play');state.f.languages.add('DE/FR');state.f.includeUnknownAge=false;
   assert.ok(ids(list()).includes(trip.id));
@@ -430,8 +433,10 @@ test('visitor research notes keep their caveats in the catalogue',()=>{
 test('follow-up preserves dated caveats, closures and price units',()=>{
   const {byId}=load();
   assert.match(byId.get('kafi8-kerzers').schedule,/closed 5–18 October 2026/);
-  // The full review of 7 November 2026 found the farm's general hours but none for the playground itself.
-  assert.equal(byId.get('laferme-murten').schedule,'Schedule not published');
+  // The card is the farm shop and bistro itself, so since the editorial rule and the re-check of 7 November 2026 the farm's own hours
+  // are the card's; the note still says that the playground has no hours of its own.
+  assert.match(byId.get('laferme-murten').schedule,/09:00 – 18:30/);
+  assert.deepEqual(Array.from(byId.get('laferme-murten').days),[1,2,3,4,5,6]);
   assert.match(byId.get('laferme-murten').notes.join(' '),/general opening hours/);
   assert.match(byId.get('seepark-schiffenen').schedule,/09:30–22:00/);
   assert.match(byId.get('leset-villars').price,/spring 2026/);
@@ -477,8 +482,8 @@ test('deep review covers active cards and preserves receipts for ended events',(
   }
   const counts=Object.fromEntries(['enriched','rechecked','unresolved','reused'].map(outcome=>[outcome,main.filter(a=>a.research.outcome===outcome).length]));
   assert.equal(Object.values(counts).reduce((sum,count)=>sum+count,0),main.length);
-  // A new full review turns an enriched card into a rechecked one; the full reviews approved on 3 and 7 November 2026 resolved eleven unresolved cards.
-  assert.ok(counts.enriched+counts.rechecked>=134 && counts.unresolved>=26);
+  // A new full review turns an enriched card into a rechecked one; the full reviews approved on 3 and 7 November 2026 resolved twelve unresolved cards.
+  assert.ok(counts.enriched+counts.rechecked>=134 && counts.unresolved>=25);
   // memo-rat-mission-2026-09-30 and herbstbasteln were closed by approved updates on 26 October and 3 November 2026, once their only
   // date (30 September) had passed.
   assert.deepEqual(ids(records.filter(a=>C.isArchive(a)&&a.research)).sort(),['alpabzug','chocolat','devenir-famille-fribourg-2026-10-03','erntedank','herbstbasteln','memo-musik-entdecken-2026-09-29','memo-rat-exhibition-2026','memo-rat-mission-2026-09-30','plage-chevroux']);

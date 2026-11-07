@@ -151,7 +151,9 @@ test('venue identities are explicit and all offerings survive unrelated search f
   assert.equal(venues.length,3);assert.equal(new Set(venues.map(v=>v.id)).size,3);
   for(const venue of venues){
     assert.match(venue.source,/^https:/);assert.ok(venue.members.every(id=>byId.has(id)));
-    assert.ok(venue.members.every(id=>byId.get(id).contacts[0]?.phone===byId.get(venue.members[0]).contacts[0]?.phone),venue.id+': one venue, one phone');
+    // The same number may be printed differently (with '(+41)' and the trunk zero on sellenhof-group since 7 November 2026); the dialled number is one.
+    const dial=id=>s.V.phoneHref(byId.get(id).contacts[0]?.phone||'');
+    assert.ok(venue.members.every(id=>dial(id)===dial(venue.members[0])),venue.id+': one venue, one phone');
     assert.ok(venue.members.every(id=>s.C.venueFor(byId.get(id)).id===venue.id));
   }
   state.view='venue';state.venueId='sellenhof';state.f.query='no match';state.f.categories.add('books');state.f.place='d:see';
