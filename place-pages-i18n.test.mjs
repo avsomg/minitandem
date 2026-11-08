@@ -215,12 +215,13 @@ test('a card whose English changed since it was translated is shown in English w
 });
 
 test('notices that are over are hidden on German and French pages as in the app, by the date the page is built on', () => {
+  // L’île aux trésors: closed on Saturday 7 November 2026, since its approved update of that day.
   const ile = records.find(a => a.id === 'ile');
   for (const lang of ['de', 'fr']) {
     const cards = languageLayer(lang).cards(records), warning = cards.shown(ile).practical.warnings[0];
     assert.ok(warning && warning !== ile.practical.warnings[0], lang + ': the closure notice is translated');
-    assert.ok(placePage(ile, regions, '2026-10-10', lang, cards).includes(esc(warning)), lang + ': on the last day of the closure');
-    const later = placePage(ile, regions, '2026-10-17', lang, cards);
+    assert.ok(placePage(ile, regions, '2026-11-07', lang, cards).includes(esc(warning)), lang + ': on the day of the closure');
+    const later = placePage(ile, regions, '2026-11-08', lang, cards);
     assert.ok(!later.includes(esc(warning)) && !later.includes('visit-warnings'), lang + ': gone afterwards, and with it the empty list');
   }
 });

@@ -1,6 +1,6 @@
 # Minitandem: catalogue with sources
 
-Catalogue updated 2026-11-07. The date of the in-depth check is shown on each card. Free places and future work are not guaranteed. All prices are in CHF; payment units are stated separately. Personal notes are not part of this file.
+Catalogue updated 2026-11-08. The date of the in-depth check is shown on each card. Free places and future work are not guaranteed. All prices are in CHF; payment units are stated separately. Personal notes are not part of this file.
 
 ## Sellenhof · open children's Wednesday
 
@@ -873,26 +873,29 @@ To confirm before visiting:
 - Age: Age restrictions for the playground to be confirmed.
 - Adult: Together with an adult
 - Language: To be confirmed
-- Schedule: Mon–Fri 09:30–22:00; Sat 09:30–23:00; Sun 09:30–21:00
+- Schedule: Restaurant opening hours: Monday–Friday 09:30–22:00, Saturday 09:30–23:00, Sunday 09:30–21:00. No separate play-area hours are published.
 - Price: Menu on the website: salad CHF 9.90; spaghetti CHF 24.90; date of the prices to be confirmed.
-- Contact: Restaurant Seepark; info@restaurantseepark.ch
-- The operator confirms a children's playground in the garden and the possibility of watching from the terrace. The Food4family family guide lists swings, climbing structures, rockers, a slide and a tunnel pipe. Inside, books and drawing materials are provided on request. The review date is not given, so the current set of equipment may differ.
-- Food4family describes the playground as within sight of the terrace and separate from car traffic. It also mentions children's seats, warming of children's food, a changing table in the women's toilet and space for a pushchair by the table. This is the guide's undated description. It is not a safety check on site and not a promise of a view from every table.
-- The restaurant announces year-round opening with no weekly closing day and a hot kitchen during the day. The exact end of order-taking is not stated.
-- In the published menu: green salad CHF 9.90, spaghetti with pesto CHF 24.90, chicken breast with side dish CHF 29.90. The menu is undated and contains a summer section. It is a guide from the website, not a confirmed bill for the day of the visit.
-- Mini-golf is open during restaurant hours. Its rate, admission for children and any playground fee could not be found. Free access is not promised.
-- For a visit with young children, questions remain about suitable swings and the height of the structures, fencing and the path to the water. Ask for a table near the playground. A parent accompanies the child.
+- Contact: Restaurant Seepark Schiffenen; info@restaurantseepark.ch
+- The minigolf course is open with the same hours as the restaurant, according to the published menu page (undated).
 
-### Additional check: 2026-09-27
+### Additional check: 2026-11-07
 
+- **Schedule** (Organiser source): The restaurant publishes opening hours of Monday–Friday 09:30–22:00, Saturday 09:30–23:00 and Sunday 09:30–21:00. No separate hours for a play area are published. [Source](https://restaurantseepark.ch/index.php?menuid=78)
 
 To confirm before visiting:
 - Current equipment, the view from the tables and the path to the water.
+- Is there a children's playground in the garden, and what are its age limits and admission rules?
+- Is parking, a visitor toilet or a changing table available for visitors?
+- Are there admission or usage costs for the minigolf or any play area? Current menu prices are not dated.
+- May a parent stay with the child, and are there conditions?
 
 - [Restaurant: garden play area and contacts](https://restaurantseepark.ch/index.php?menuid=1)
 - [Official opening hours](https://restaurantseepark.ch/index.php?menuid=78)
 - [Published menu, undated](https://restaurantseepark.ch/index.php?menuid=28)
 - [Food4family: equipment, review and facilities; review undated](https://www.food4family.ch/restaurantsuche/fribourg/seepark/)
+
+### Visit conditions
+
 - Coordinates of the address (not the entrance): 46.880489349365234, 7.1919779777526855. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Schiffenen+17+3186+D%C3%BCdingen&type=locations&origins=address&limit=5&sr=4326)
 
 ## Landgasthof Garmiswil · restaurant with a playground
@@ -936,9 +939,9 @@ To confirm before visiting:
 - Age: Check age restrictions and whether the corner is there
 - Adult: Together with an adult
 - Language: To be confirmed
-- Schedule: Mon 08:00–17:00; Tue–Thu 08:00–14:00; Fri 08:00–22:00; Sat 08:00–14:00; Sun usually closed
+- Schedule: Mon 08:00-17:00; Tue-Thu 08:00-14:00; Fri 08:00-22:00; Sat 08:00-14:00; Sun closed. These are the café's hours; no separate play-corner hours are published.
 - Price: By the menu: coffee CHF 4.30; cappuccino CHF 4.80
-- Contact: Bistro11; 026 493 31 86
+- Contact: Bistro11 - cafe & bar; 026 493 31 86
 - Photos in a Bärner Mamis article show a wooden toy coffee machine, cups and toy food on a small table. This is a compact corner for pretend play, not a hall with slides and not a separate play room. The article gives 18 May without a year. The café has not yet confirmed the current equipment.
 - Before making a special trip, check whether this table with toys is still there and whether you can sit next to it. Telephone: 026 493 31 86. The article gives no age rules for the equipment.
 - The hours are from the café's website. On the first Sunday of the month there is a brunch by reservation; the exact date and hours are not confirmed.
@@ -946,16 +949,26 @@ To confirm before visiting:
 - The café has only two parking spaces in the yellow zone. The website lists alternatives at Hauptstrasse, PC Profi and Migros. Their cost and restrictions have not been established.
 - A family visit with an accompanying adult. Separate supervision is not stated. The small size of the corner does not guarantee quiet.
 
-### Additional check: 2026-09-27
+### Additional check: 2026-11-07
 
+- **Schedule** (Organiser source): The café's official page lists opening hours of Mon 08:00-17:00, Tue-Thu 08:00-14:00, Fri 08:00-22:00, Sat 08:00-14:00 and Sun closed, at Hauptstrasse 11, 3186 Düdingen. No separate hours are published for the play corner. [Source](https://www.bistro11.ch/Ueber-uns/)
+- **Parking** (Organiser source): The café has only two parking spaces next to it (yellow zone). Whether they are time-limited or paid is not stated. [Source](https://www.bistro11.ch/Ueber-uns/)
 
 To confirm before visiting:
 - Whether the table with toys is still there and whether one can sit next to it.
+- Is the play corner still there, and what ages is it meant for?
+- Is the play corner free to use, and do families need to order something?
+- Are there a changing table, a visitor toilet and a breastfeeding space?
+- Are the two café parking spaces time-limited or paid?
 
 - [Café: current opening hours and address](https://www.bistro11.ch/Ueber-uns/)
 - [Café: menu](https://www.bistro11.ch/Essen-Trinken/)
 - [Menu with prices](https://www.bistro11.ch/.cm4all/uproc.php/0/Bistro%2011%20Karten%20Neu.pdf?_=1a0396db7a4&cdp=a)
 - [Bärner Mamis: description of the small play corner](https://www.baernermamis.ch/blog/bistro-11-duedingen)
+
+### Visit conditions
+
+- Parking: Two parking spaces at the café (yellow zone). [Source](https://www.bistro11.ch/Ueber-uns/)
 - Coordinates of the address (not the entrance): 46.847347259521484, 7.190854549407959. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Hauptstrasse+11+3186+D%C3%BCdingen&type=locations&origins=address&limit=5&sr=4326)
 
 ## Coop Restaurant Fribourg · children's area
@@ -1209,28 +1222,26 @@ To confirm before visiting:
 
 ## Kafi8 · café with a play room
 
-- Status: Needs confirmation
+- Status: Current information available
 - Place: Kerzers
 - District: See / Lac
-- Checked: 2026-09-27
+- Checked: 2026-11-07
 - Address: Kreuzgasse 8, 3210 Kerzers
-- Age: Check the room's age restrictions
-- Adult: Together with an adult
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Tue–Wed 08:00–11:00; closed 5–18 October 2026
-- Price: The menu is under review; check prices and conditions for play
-- Contact: Kafi8; info@kafi8.ch
-- The Bärner Mamis family review describes a whole room with a toy kitchen, books, a wooden house and a table for drawing and building. According to the review, the café has about ten tables and two areas with soft seating. The date is given as 27 July without a year. The café website shows Mini-Kafi-8.
-- On Restaurant Guru, a copy of a Google review says the play room is directly connected to the dining area. On 27.09.2026 the review was shown as "8 months ago"; its original date is not known. A connection to the dining area does not mean the whole room can be seen from every table.
-- A copy of a Google review dated 28.02.2024 on Wanderlog also describes the play room and a friendly welcome for children. This is a separate visit experience, not a guarantee of the current atmosphere or quietness.
-- Closed for the autumn holidays, 5–18 October 2026. The café also usually closes during other school holidays. Check each period on the Events & Ferien page.
-- The home page announces only Tuesday and Wednesday, 08:00–11:00; evening hours in older reviews do not match this. The menu is under review and current prices are not published.
-- A non-commercial café. The visit is with a parent, not handing the child over to a carer.
-- Not yet known: the charge for play, whether an order is required, and whether a table near the entrance to the play room is available. Online directories show outdated hours and a "temporarily closed" label. Check the hours with Kafi8 directly: by telephone during opening hours or by email at info@kafi8.ch.
+- Schedule: Tue–Wed 08:00–11:00; usually closed during Kerzers school holidays
+- Price: Price not published
+- Contact: Kafi 8; info@kafi8.ch
+- The café says it is mostly closed during Kerzers school holidays; check its Events & Ferien page for current closing periods.
+- A Tavolata lunch for people who prefer to eat together is held on the 1st and 3rd Tuesday of each month from early November, with a 12:00–13:30 slot.
+- The café website shows a Mini-Kafi-8 with the caption "together with our children"; it does not describe the play room, its age range, rules or any charge.
+- Questions can be sent to info@kafi8.ch.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-07
 
 - **Good to know** (Organiser source): The café says it usually stays closed during Kerzers school holidays. The autumn-holiday closure listed for 5–18 October 2026 has already ended. [Source](https://www.kafi8.ch/about-4)
+- **status** (Organiser source): The café's homepage lists opening hours of Tuesday and Wednesday, 08:00–11:00, and announces a new Tavolata lunch from early November. [Source](https://www.kafi8.ch/)
 
 To confirm before visiting:
 - Current prices, access and a suitable table. An online directory shows the café as temporarily closed; the current hours are from the café's own website.
@@ -1238,6 +1249,8 @@ To confirm before visiting:
 - What age range is the play room for, and does an adult need to stay with the child?
 - Is there a charge for the play room, and is an order or booking needed?
 - Are there parking, a stroller-accessible entrance, a changing table, a toilet and a breastfeeding space for visitors?
+- Is the play room currently open to visitors, and does it have its own hours?
+- Is there a charge for the play room or café menu, and is an order or booking needed?
 
 - [Café: new hours, address and Mini-Kafi-8](https://www.kafi8.ch/)
 - [Holidays and special opening days](https://www.kafi8.ch/about-4)
@@ -1289,9 +1302,9 @@ To confirm before visiting:
 - Age: Age restrictions for the playground to be confirmed
 - Adult: Together with an adult
 - Language: To be confirmed
-- Schedule: Mon–Wed 09:00–16:00; Thu–Fri 09:00–00:00; Sat–Sun 10:00–00:00
+- Schedule: Restaurant opening hours: Monday to Wednesday 09:00–16:00; Thursday and Friday 09:00–24:00; Saturday and Sunday 10:00–24:00. The play area has no separate hours published.
 - Price: According to the 2026 menu: coffee CHF 4; hot chocolate CHF 4; food extra
-- Contact: Restaurant Le Jardin; 026 672 30 13; info@sseb.ch
+- Contact: Restaurant Le Jardin; 026 672 30 13
 - The tourist office describes the playground and the mini zoo, but its page has an old website address and a different closing time on Wednesday; confirm with the restaurant that the children's facilities are currently open.
 - Food4family describes a playground right next to the tables on the rear terrace, away from car traffic; toys are provided inside on request. The review has no date: this is useful information about the earlier arrangement, not confirmation of the situation in 2026.
 - Google Maps has three specific reviews of the playground; on 27.09.2026 one was shown as 2 years old and two as 7 years old. The mention of animals is also old; these reviews give no recent confirmation of the mini zoo.
@@ -1300,11 +1313,17 @@ To confirm before visiting:
 - The hours are taken from the current website restaurant-jardin.ch. For a visit with a meal, the restaurant recommends reserving a table; for the near term, call 026 672 30 13.
 - Before the trip, check whether the playground is open and whether toys are provided inside; ask for a table by the play area. Age restrictions for the equipment and the access conditions are not known. Children visit with an accompanying adult. This is a restaurant visit, separate from Muntelier's public beach.
 
-### Additional check: 2026-09-27
+### Additional check: 2026-11-07
 
+- **Schedule** (Organiser source): The restaurant's own website currently publishes opening hours of Monday to Wednesday 09:00–16:00, Thursday and Friday 09:00–24:00, and Saturday and Sunday 10:00–24:00. No separate hours for a play area are published. [Source](https://www.restaurant-jardin.ch/restaurant)
 
 To confirm before visiting:
 - Current operation of the children's facilities, seasonality, equipment.
+- Is the playground (and mini zoo) currently open, and are there any age limits or access conditions for it?
+- Is there an admission price for the playground, or is it free for restaurant guests?
+- Are parking, a changing table, a visitor toilet and a breastfeeding space available for visitors?
+- Is the playground outdoors, and is the route stroller-accessible?
+- Current Wednesday closing time: the regional tourism listing differs from the restaurant's own hours.
 
 - [Restaurant: current contacts and opening hours](https://www.restaurant-jardin.ch/restaurant)
 - [Current menu page](https://www.restaurant-jardin.ch/menuekarten/spezialitaeten)
@@ -1312,6 +1331,9 @@ To confirm before visiting:
 - [Tourist office: playground and mini zoo](https://www.j3l.ch/fr/P4727/a-faire/boire-manger/restaurants/restaurant-le-jardin)
 - [Food4family: playground by the tables and toys inside; undated](https://www.food4family.ch/restaurantsuche/freiburg/lejardin/)
 - [Google Maps: reviews of the playground, viewed 27.09.2026](https://www.google.com/maps/place/Restaurant+Le+Jardin/@46.9349631,7.1263368,17z/data=!3m1!4b1!4m6!3m5!1s0x478e12e76e67a60f:0xc850bd4e288b5fd9!8m2!3d46.9349631!4d7.1263368!16s%2Fg%2F11f29_bh23)
+
+### Visit conditions
+
 - Coordinates of the address (not the entrance): 46.934844970703125, 7.126447677612305. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Fabrikstrasse+37+3286+Muntelier&type=locations&origins=address&limit=5&sr=4326)
 
 ## Beach House · restaurant with a sandpit
@@ -2219,27 +2241,36 @@ To confirm before visiting:
 - Place: Fribourg
 - District: Sarine / Saane
 - Checked: 2026-09-27
-- Address: Nouveau Monde, Ancienne Gare 3, Fribourg
+- Address: Nouveau Monde, Esplanade de l'Ancienne Gare 3, Fribourg
 - Age: Various ages
 - Adult: Together with an adult
 - Language: To be confirmed
-- Schedule: Mon, Wed 09:00–18:00; Sat 14:00–18:00 · closed 3–10 October
+- Schedule: Season 31.08 to 23.12.2026: Monday 9:00-18:00, Wednesday 9:00-18:00 and Saturday 14:00-18:00. Saturday 7 November 2026 is closed.
 - Price: Voluntary donation
-- Period 31.08–23.12.2026. Closed 03–10.10.
+- Contact: Association L'île aux trésors; ahoy@ile-aux-tresors.ch
+- Season 31.08–23.12.2026. Closed on Saturday 7 November 2026.
 - An open play space under adult responsibility, not a regular group and not a German course.
 
-### Additional check: 2026-09-27
+### Additional check: 2026-11-07
 
-- **Visit** (Organiser source): A staff member helps with understanding the games, but the parent supervises the child. Tables and chairs are available; drinks and food are served by Nouveau Monde. The games are freely accessible, and there is a donation box to support the space. Closed 3–10 October 2026; Sunday openings have not been announced yet. [Source](https://www.ile-aux-tresors.ch/pages/aire-de-jeu)
+- **Visit** (Organiser source): One person is present to guide visitors and explain the game rules, but children stay under their parents' responsibility and supervision. Tables and chairs are available, and Nouveau Monde staff serve drinks and snacks. Games and toys are freely accessible, with a donation box on site. The play area is open Monday and Wednesday 9:00–18:00 and Saturday 14:00–18:00 from 31 August to 23 December 2026, and is closed on Saturday 7 November. [Source](https://www.ile-aux-tresors.ch/pages/aire-de-jeu)
 
 To confirm before visiting:
 - There is no exact age guidance for specific toys; noise and crowding depend on the visit.
+- What ages is the play area intended for?
+- Is there a visitor toilet, a changing table or a place to feed a baby?
+- Is the play area stroller-accessible, and is there parking?
 
 - [Official source](https://www.ile-aux-tresors.ch/pages/aire-de-jeu)
 
 ### Visit conditions
 
-- Important: Closed 3–10 October 2026
+- Booking: No registration is mentioned; games and toys are freely accessible. [Source](https://www.ile-aux-tresors.ch/pages/aire-de-jeu)
+- Course payment: No course or subscription has to be bought; access is free, with an optional donation box. [Source](https://www.ile-aux-tresors.ch/pages/aire-de-jeu)
+- Play area: A play area with many games and toys. [Source](https://www.ile-aux-tresors.ch/pages/aire-de-jeu)
+- Cost calculation: Games and toys are in free access, and a donation box is on site to support the space. Nouveau Monde staff serve drinks and snacks. [Source](https://www.ile-aux-tresors.ch/pages/aire-de-jeu)
+- Important: Closed on Saturday 7 November 2026
+- Coordinates of the address (not the entrance): 46.80216598510742, 7.150356769561768. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Esplanade+de+l%27Ancienne+Gare+3&type=locations&origins=address&limit=5&sr=4326)
 
 ## MiniMove Fribourg Jura
 
@@ -2690,11 +2721,12 @@ To confirm before visiting:
 - Date: 2026-11-22 10:00
 - Date: 2026-12-24 15:00
 
-### Additional check: 2026-11-01
+### Additional check: 2026-11-08
 
 - **With a parent** (Organiser source): The 2026/27 programme is aimed at children from playgroup (Spielgruppe) age to primary class 3 (3. Klasse). Parents, siblings, grandparents and godparents are expressly invited. Stories, songs, prayer and crafts; this is a religious gathering. [Source](https://www.pfarrei-tafers.ch/fileadmin/tafers/dokumente/PDF_Tafers/Flyer_Kinder___Familien_202627__13_.pdf)
 - **Next meetings** (Organiser source): 22 November 10:00 and 24 December 15:00 in the parish church; 28 February 2027 10:00 and 24 April 17:00 in the Pfarreizentrum opposite the OS; 27 June 10:00 at Grotte Maggenberg. [Source](https://www.pfarrei-tafers.ch/fileadmin/tafers/dokumente/PDF_Tafers/Flyer_Kinder___Familien_202627__13_.pdf)
 - **Next meeting** (Organiser source): The parish page currently announces the next Kinderfeier for Sunday, 22 November 2026 at 10:00 in the parish church of Tafers. The page does not publish an end time or later dates. [Source](https://www.pfarrei-tafers.ch/dabei-sein/kinder-und-familien/kinderfeier)
+- **Next meeting** (Organiser source): As checked on 8 November 2026, the parish page announces the next Kinderfeier for Sunday, 22 November 2026 at 10:00 in the Pfarrkirche Tafers. This confirms the 22 November session already listed on the card; the 24 December session is neither confirmed nor contradicted by this page. [Source](https://www.pfarrei-tafers.ch/dabei-sein/kinder-und-familien/kinderfeier)
 
 To confirm before visiting:
 - The numerical minimum age, the language of each meeting, the price and registration are not stated.
@@ -3208,29 +3240,38 @@ To confirm before visiting:
 - Status: Current information available
 - Place: Marly
 - District: Sarine / Saane
-- Checked: 2026-09-27
-- Address: Chemin des Epinettes 2, 1723 Marly
-- Age: Family visit
-- Adult: Together with an adult
+- Checked: 2026-11-08
+- Address: route du Chevalier 8, 1st floor of the former kindergarten building, Marly
+- Age: From 0 to 99 years, as published for the lending service
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
 - Schedule: Wednesday 13:30–16:00 · Saturday 09:30–12:00
 - Price: Hire CHF 2–5 per game, or annual subscription from CHF 30 per year; no separate entry fee is stated
-- Contact: Toy library; info@ludotheque-marly.ch
-- There are toys for different stages of development, including toddlers. Hire is arranged on site.
-- The website asks people to make contact mainly by phone, as emails are sometimes not delivered. Check school holiday opening and whether extended play on site is possible.
+- Contact: Ludothèque de Marly; info@ludotheque-marly.ch
+- Closed for three weeks during the summer holidays.
+- The rental terms ask borrowers to supervise their children to prevent accidents.
+- Games are borrowed for a loan period of four weeks.
+- The toy library asks people to phone rather than email, because of email delivery problems.
 
-### Additional check: 2026-09-27
+### Additional check: 2026-11-08
 
 - **Hire** (Organiser source): A game is lent for 4 weeks for CHF 2–5. Annual subscriptions: 1 game CHF 30; 2 games CHF 40; 3 games CHF 45; 4–8 games CHF 50. There are sensorimotor toys, imitation games and construction sets. Registration is done on site. [Source](https://marly-ludo.ch/a-propos-de/)
 - **Contact** (Organiser source): Because of problems with email delivery, the website asks people to phone. Outside opening hours, you can leave a voice message or send an SMS. The toy library closes for 3 weeks in summer. [Source](https://marly-ludo.ch/contact/)
+- **Address** (Organiser source): From 4 November 2026 the toy library is at route du Chevalier 8, on the first floor of the former kindergarten building. It is open Wednesdays 13:30–16:00 and Saturdays 09:30–12:00. [Source](https://marly-ludo.ch/)
 
 To confirm before visiting:
 - It is not confirmed that there is space for extended play with young children. It is primarily a hire service.
+- May a parent stay with a child during a visit, and is there space to play on site? Families should ask the toy library.
+- Is advance registration needed for a visit? Families should ask the toy library.
 
 - [Address and opening hours](https://marly-ludo.ch/contact/)
 - [Hire and prices](https://marly-ludo.ch/)
 - [Hire](https://marly-ludo.ch/a-propos-de/)
-- Coordinates of the address (not the entrance): 46.77554702758789, 7.158994674682617. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+des+Epinettes+2+1723+Marly&type=locations&origins=address&limit=5&sr=4326)
+
+### Visit conditions
+
+- Cost calculation: Late returns incur reminder fees. [Source](https://marly-ludo.ch/)
+- Coordinates of the address (not the entrance): 46.77534866333008, 7.15955924987793. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=route+du+Chevalier+8&type=locations&origins=address&limit=5&sr=4326)
 
 ## MEMO · library
 
@@ -3246,12 +3287,14 @@ To confirm before visiting:
 - Price: Visiting is free; borrowing to take home: children's membership CHF 10 / year, adult from another commune CHF 40 / year
 - Contact: MEMO; 026 351 71 44; memo@ville-fr.ch
 - Closed Monday 16 to Saturday 21 November 2026.
+- Closed for the year-end break from 24 December 2026 to 5 January 2027.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-07
 
 - **Schedule** (Organiser source): MEMO is closed 16–21 November 2026 inclusive. [Source](https://www.ville-fribourg.ch/memo)
 - **With a toddler** (Organiser source): Services at MEMO are free even without a subscription card. A room is arranged for the youngest children, a cushion and a comfortable space are available for breastfeeding, and a changing table is in the first-floor toilets. Tea and coffee are pay-what-you-want, suggested CHF 1. [Source](https://www.ville-fribourg.ch/memo)
 - **Borrowing** (Organiser source): Annual subscription for young people up to 16 is CHF 10; for adults who do not live in Fribourg it is CHF 40. Loans: up to 15 documents for 28 days, including up to 4 games and 2 Tonies. Games are returned directly to MEMO3, not through the return box at the entrance. [Source](https://www.ville-fribourg.ch/memo)
+- **Schedule** (Organiser source): MEMO is closed for the year-end break from 24 December 2026 to 5 January 2027. [Source](https://www.ville-fribourg.ch/memo)
 
 To confirm before visiting:
 - Pushchair access to the required area and to the changing table is to be checked. Visiting is free of charge, and staff do not supervise children.
@@ -3335,30 +3378,34 @@ To confirm before visiting:
 - Status: Current information available
 - Place: Marly
 - District: Sarine / Saane
-- Checked: 2026-11-01
+- Checked: 2026-11-07
 - Address: Visit address not published (descriptive area, exact entrances not established)
 - Age: Age not published
 - Adult: Conditions for adult participation not published
 - Language: To be confirmed
 - Schedule: Schedule to be checked.
 - Price: Price not published.
-- Contact: Administration communale; +41 26 435 50 50; commune@marly.ch
 - These are not organised meetings. The exact locations and the condition of the equipment are not confirmed.
+- Benches and, at some sites, tables are provided so families can picnic together.
 
-### Additional check: 2026-11-01
+### Additional check: 2026-11-07
 
 - **Playgrounds** (Organiser source): The commune's current list names seven playgrounds: Bel-Air, Village, Montiver, Châtelet, Cité, Grand-Pré and Route des Écoles. Sandpits are listed at Montiver, Châtelet, Grand-Pré and Route des Écoles. A playground called Château d’Eau is not on this list. [Source](https://www.marly.ch/places-de-jeux)
 - **Playground sites** (Organiser source): The commune page says its playgrounds have benches and sometimes picnic tables for parents. It names each site by place or school name only and gives no street address, age range, hours or price. [Source](https://www.marly.ch/places-de-jeux)
+- **Playground equipment** (Organiser source): The commune page says its playground equipment is adapted to different age groups and mentions swings, slides and climbing structures, but it publishes no age range. It also states a count of 6 playgrounds while listing seven sites. [Source](https://www.marly.ch/places-de-jeux)
+- **Play areas and facilities** (Organiser source): The commune of Marly says it provides play areas for children across the municipality, with benches for parents and sometimes tables for family picnics. [Source](https://www.marly.ch/places-de-jeux)
 
 To confirm before visiting:
 - For the chosen playground, check which ages the equipment suits, its condition, fencing, toilets and pushchair access.
 - Which street address or entrance does each playground have, and which ages does its equipment suit?
 - Are there toilets, parking or pushchair access at the playground you plan to visit?
+- The commune page says 6 playgrounds but lists seven sites. How many playgrounds are there?
 
 - [Playgrounds of the commune of Marly](https://www.marly.ch/places-de-jeux)
 
 ### Visit conditions
 
+- Play area: The commune provides designated children's play areas across Marly. [Source](https://www.marly.ch/places-de-jeux)
 
 ## Hostellerie am Schwarzsee swimming pool
 
@@ -3658,12 +3705,12 @@ To confirm before visiting:
 - Place: Schwarzsee
 - District: Sense / Singine
 - Checked: 2026-11-07
-- Address: Skischulbüro (ski school office, meeting point) (descriptive area, exact entrances not established)
+- Address: Skischulbüro (ski school office, meeting point), Schwarzsee (descriptive area, exact entrances not established)
 - Age: 4 to about 7 years
 - Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Lesson times 10:00–11:40 or 14:00–15:40
-- Price: CHF 320 / 4 days of 100 minutes
+- Schedule: Monday to Thursday, two lessons in a row (100 minutes) per day, 10:00–11:40 or 14:00–15:40
+- Price: CHF 320.- for the whole four-day Snowli-Weekly course (Monday to Thursday); included extras not published
 - Contact: snowcenter.ch Ski- und Snowboardschule; 026 412 00 18
 - Four days, two lessons in a row (100 minutes) per day.
 - At least 5 participants per instructor is published; no maximum group size is given.
@@ -3679,12 +3726,15 @@ To confirm before visiting:
 - **Format** (Organiser source): Weekly: from 4 to about 7 years, minimum five children, four days Mon–Thu of 100 minutes, CHF 320. [Source](https://www.sss-schwarzsee.ch/kurse/kinder-1/first-experience/)
 - **Cancellation** (Organiser source): The school's rules provide for 24 hours' notice of cancellation; an administrative fee of 20% is possible. In case of illness or injury, a medical certificate is required for a refund. [Source](https://www.sss-schwarzsee.ch/kurse/agb/)
 - **Course details** (Organiser source): The course page lists Snowli-Weekly as a beginner weekly course for children aged 4 to about 7, Monday to Thursday, with lessons at 10:00–11:40 or 14:00–15:40, meeting at the ski school office, for CHF 320. The page gives no season dates. [Source](https://www.sss-schwarzsee.ch/kurse/kinder-1/first-experience/)
+- **Meeting point** (Organiser source): The course page names the ski school office as the meeting point for the Snowli-Weekly. It gives no street address for the office; the contact block lists the school as 1716 Schwarzsee. [Source](https://www.sss-schwarzsee.ch/kurse/kinder-1/first-experience/)
+- **Registration** (Organiser source): Registration for the Snowli-Weekly closes on Thursday for the following week. The school recommends registering two weeks ahead for the Christmas, New Year and sports weeks. [Source](https://www.sss-schwarzsee.ch/kurse/kinder-1/first-experience/)
 
 To confirm before visiting:
 - Confirm the 2026/27 season, tickets and rental, the instructor's language, parent presence and the terms of a trial lesson.
 - Is a parent allowed to stay during the lesson?
 - In which language is the course taught?
 - Which dates does the winter season run, and is the course offered in 2026/27?
+- Where exactly is the ski school office (meeting point) located in Schwarzsee?
 
 - [Ski courses and prices](https://www.sss-schwarzsee.ch/kurse/kinder-1/first-experience/)
 - [School and teaching languages](https://www.swiss-ski-school.ch/de/schulen/schweizer-skischule-schwarzsee-snowcenter-ch-gmbh/)
@@ -3742,24 +3792,37 @@ To confirm before visiting:
 - Status: Needs confirmation
 - Place: Schwarzsee
 - District: Sense / Singine
-- Checked: 2026-09-27
-- Address: Lager 121, Schwarzsee
+- Checked: 2026-11-07
+- Address: Lager 121, 1716 Schwarzsee
 - Age: Age to be confirmed.
-- Adult: Together with an adult
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: September: Mon–Sat 13:00–18:00, Sun 11:00–18:00; October: Wed–Sun 13:00–17:00; depends on the weather
-- Price: Adult CHF 6; child CHF 4, 2025 rate
-- Contact: Minigolf; 026 412 13 15
+- Schedule: Venue opening hours by season. May, June and September: Monday to Saturday 13:00-18:00, Sunday and public holidays 11:00-18:00. July and August: Monday to Saturday 13:00-21:00, Sunday and public holidays 11:00-21:00. October: Monday to Saturday 13:00-17:00, Sunday and public holidays 13:00-17:00.
+- Price: Per person: adults CHF 6, children CHF 4.
+- Contact: Minigolfanlage Schwarzsee; +41 (0)26 412 13 15
+- The last putter handout is half an hour before the till closes.
+- In bad weather, hours are reduced or the facilities are fully closed.
+- Sunday and public holiday opening from 11:00 applies in fair weather only, and not in October.
+- Payment by Twint or credit card is possible.
 
-### Additional check: 2026-09-27
+### Additional check: 2026-11-07
 
-- **Schedule and payment** (Organiser source): Operator's website: in September Mon–Sat 13:00–18:00, Sun and public holidays 11:00–18:00; in October Wed–Sun 13:00–17:00. In rain the hours are shortened or the course closes. Twint and cards are accepted. [Source](https://minigolf-tennis.clubdesk.com/gruppen)
+- **Schedule** (Organiser source): The operator's page lists October hours as Monday to Saturday 13:00-17:00 and Sunday and public holidays 13:00-17:00, not Wednesday to Sunday. No hours are published for November to April. [Source](https://minigolf-tennis.clubdesk.com/gruppen)
+- **Price** (Organiser source): The official tourism page lists per-person rates of CHF 6 for adults and CHF 4 for children, and group rates for 10 or more people of CHF 5 for adults and CHF 3 for children. The latest season start it shows is 3 May 2025. [Source](https://fribourg.ch/fr/schwarzsee/activites-en-plein-air/mini-golf-schwarzsee/)
 
 To confirm before visiting:
 - The rates of CHF 6 for adults and CHF 4 for children are from the 2025 season. The 2026 prices and whether there are clubs suitable for young children are to be confirmed.
+- Will the minigolf open in 2026 or 2027, and when does the season start? The latest published season start is 3 May 2025.
+- What is the age range for the course, and may an adult stay with young children while they play?
+- Are there putters suitable for young children, and are parking, a toilet or a changing table available?
+- Is the minigolf open in November, and when does the next season start?
 
 - [Official source](https://fribourg.ch/fr/schwarzsee/activites-en-plein-air/mini-golf-schwarzsee/)
 - [Schedule and payment](https://minigolf-tennis.clubdesk.com/gruppen)
+
+### Visit conditions
+
+- Cost calculation: Group rates for groups of 10 or more people: adults CHF 5, children CHF 3. [Source](https://fribourg.ch/fr/schwarzsee/activites-en-plein-air/mini-golf-schwarzsee/)
 
 ## Alpabzug Plaffeien–Schwarzsee
 
@@ -4364,25 +4427,37 @@ To confirm before visiting:
 - Status: Current information available
 - Place: Courtepin
 - District: See / Lac
-- Checked: 2026-09-27
-- Address: Route de l’École 21, 1784 Courtepin
-- Age: Public library; no age limits are stated
-- Adult: A child visits the library with an adult; the library does not provide supervision.
+- Checked: 2026-11-08
+- Address: Route de l’École 17, 1784 Courtepin (Pavillon E, basement)
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Thursday 17:00–19:00 for the public
+- Schedule: Public opening: Thursday 17:00–19:00. Closed during school holidays.
 - Price: Price not published
-- Contact: Bibliothèque de Courtepin; 026 684 85 20; biblio.1784@gmail.com
-- The library mainly serves the school. Separate public hours are published for Thursdays; school hours are not for family visits.
+- Contact: Bibliothèque communale et scolaire de Courtepin; 026 684 85 20; biblio.1784@gmail.com
+- Families whose child does not attend school in Courtepin can take out a library subscription; the cost is not published.
+- Closed during school holidays.
+- The library is mainly intended for pupils and teachers, according to the cantonal directory.
 
-### Additional check: 2026-09-27
+### Additional check: 2026-11-08
 
 - **Public visit** (Organiser source): The cantonal directory separates school hours from public visiting hours: Thursday 17:00–19:00. Reading areas and accessibility are listed, but there are no details of a route with a pushchair. [Source](https://www.fr.ch/bcu/app/bibliotheques/31)
+- **Address and public opening** (Organiser source): The library's own page on the school website places it in Pavillon E, basement, at Route de l’École 17, 1784 Courtepin. Public opening is Thursday 17:00–19:00, and the library is closed during school holidays. [Source](https://ecole-courtepin.ch/bibliotheque-communale-et-scolaire/)
+- **Who the library is for** (Organiser source): The library's own page says the library is available to children and young people, with books for school levels 1H to 8H, and that a child not attending school in Courtepin can take out a library subscription. No age range, adult-accompaniment rule or subscription cost is published. [Source](https://ecole-courtepin.ch/bibliotheque-communale-et-scolaire/)
 
 To confirm before visiting:
 - Holiday hours for the public are described ambiguously; the fee and the availability of books for young children should be confirmed.
+- What does a library subscription cost for a child who does not attend school in Courtepin, and are there conditions for a public visit?
+- Can a child visit during the Thursday public opening with an adult, and is any registration needed?
+- Until when are the Thursday public hours valid, and which school-holiday dates apply?
+- Are books for young children available?
 
 - [Cantonal directory: public opening hours and address](https://www.fr.ch/bcu/app/bibliotheques/31)
-- Coordinates of the address (not the entrance): 46.86516189575195, 7.128386974334717. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l%E2%80%99%C3%89cole+21+1784+Courtepin&type=locations&origins=address&limit=5&sr=4326)
+- [Additional check: Address and public opening](https://ecole-courtepin.ch/bibliotheque-communale-et-scolaire/)
+
+### Visit conditions
+
+- Coordinates of the address (not the entrance): 46.86458206176758, 7.127752780914307. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l%E2%80%99%C3%89cole+17+1784+Courtepin+Pavillon+E&type=locations&origins=address&limit=5&sr=4326)
 
 ## Bibliothek Kerzers · family visit
 
@@ -4414,26 +4489,36 @@ To confirm before visiting:
 - Status: Current information available
 - Place: Mont-Vully
 - District: See / Lac
-- Checked: 2026-09-27
-- Address: Route Principale 69, 1786 Sugiez
-- Age: Public library with children's books; no age limits are stated
-- Adult: Self-guided family visit with an adult.
+- Checked: 2026-11-08
+- Address: Rte principale 69, 1786 Sugiez (Nant)
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Mon 17:00–19:30 · Tue and Thu 15:00–17:00
-- Price: Price not published
-- Contact: Bibliothèque du Vully; 026 673 10 10; info@palet-roulant.ch
-- The collection includes books and comics for children, teenagers and adults. The membership terms need to be checked.
-- The page lists both regular opening hours and visits by appointment. It is better to phone before the first visit. During school holidays only Monday is open.
+- Schedule: Monday 17:00–19:30, Tuesday 15:00–17:00 and Thursday 15:00–17:00; during school holidays open only on Mondays (except public holidays)
+- Price: Annual membership required to borrow books: Family CHF 40, Child CHF 12, Adult CHF 20, Support CHF 50 per year
+- Contact: Le Palet Roulant; +41 26 673 10 10; info@palet-roulant.ch
+- Date: 2026-11-21 14:00–15:00 · Story afternoon
+- Borrowing books requires registration and payment of the annual membership fee.
 
-### Additional check: 2026-09-27
+### Additional check: 2026-11-08
 
-- **Holidays** (Organiser source): During school holidays it is open on Mondays only. The directory also offers a visit by arrangement: 026 305 23 86. [Source](https://www.fr.ch/bcu/app/bibliotheques/84)
+- **Holidays** (Organiser source): The library is open Monday 17:00–19:30, Tuesday 15:00–17:00 and Thursday 15:00–17:00. During school holidays it is open only on Mondays, except public holidays. [Source](https://www.palet-roulant.ch/fr/services/emprunt-et-reservation)
+- **Events** (Organiser source): A storytelling afternoon is announced at the library for Saturday 21 November 2026, 14:00–15:00. The announcement says children in school levels 3H to 5H are welcome; no registration is mentioned on the news list. [Source](https://www.palet-roulant.ch/fr/actualites)
+- **Price** (Organiser source): Borrowing books requires an annual membership: Family CHF 40, Child CHF 12, Adult CHF 20, Support CHF 50. A fine of CHF 2.00 per reader per week applies to late returns. [Source](https://www.palet-roulant.ch/fr/services/emprunt-et-reservation)
+- **Directory** (Organiser source): The cantonal directory describes the library as a public lending library open to everyone, with novels, non-fiction and comics for children, young people and adults. [Source](https://www.fr.ch/bcu/app/bibliotheques/84)
 
 To confirm before visiting:
-- The fee, whether an appointment is needed and the conditions for visiting with young children are not published in the available directory.
+- Is an appointment needed for a visit, and can parents stay with young children in the library?
+- Does a visit or the storytelling afternoon require a membership, and is registration needed for the afternoon?
 
 - [Cantonal directory: opening hours and address](https://www.fr.ch/bcu/app/bibliotheques/84)
-- Coordinates of the address (not the entrance): 46.95671844482422, 7.106398582458496. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+Principale+69+1786+Sugiez&type=locations&origins=address&limit=5&sr=4326)
+- [Additional check: Holidays](https://www.palet-roulant.ch/fr/services/emprunt-et-reservation)
+- [Additional check: Events](https://www.palet-roulant.ch/fr/actualites)
+
+### Visit conditions
+
+- Cost calculation: Annual membership is required to borrow books. The checked pages do not describe a charge for visits or story afternoons. [Source](https://www.palet-roulant.ch/fr/services/emprunt-et-reservation)
+- Coordinates of the address (not the entrance): 46.95671844482422, 7.106398582458496. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+principale+69+1786+Sugiez+Nant&type=locations&origins=address&limit=5&sr=4326)
 
 ## Ludothek Murten · game lending
 
@@ -4585,29 +4670,35 @@ To confirm before visiting:
 - Status: Current information available
 - Place: Cressier
 - District: See / Lac
-- Checked: 2026-09-27
-- Address: Route de l’École 21, 1785 Cressier
-- Age: Public library with children's books; age limits not specified
-- Adult: Self-guided visit by a child with an adult.
+- Checked: 2026-11-08
+- Address: Route de l'Ecole 21, 1785 Cressier
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
 - Schedule: Wednesday 13:30–18:00 for all visitors
 - Price: Price not published
-- Contact: Le Cheval Savant; cressier.bibliotheque@outlook.com
+- Contact: Bibliothèque Le Cheval Savant; cressier.bibliotheque@outlook.com
 - The library is in the primary school building. It is open to all visitors on Wednesdays 13:30–18:00.
 - On Wednesday 08:00–11:35 the library is open to schoolchildren; this is not a free family visiting time. It is worth checking for public holiday and school holiday exceptions before visiting.
 - A programme of separate children's events is mentioned, but no dates are published in the available sources.
 
-### Additional check: 2026-09-27
+### Additional check: 2026-11-08
 
-- **Format** (Organiser source): The regional youth service describes the space as mainly for children of various ages, with public hours on Wednesday 13:30–18:00. It mentions French and German. [Source](https://portail-jeunes.ch/cheval-savant/)
+- **Schedule** (Organiser source): The library is open to the public on Wednesdays from 13:30 to 18:00. The Wednesday morning slot (08:00–11:35) is for school pupils, and the school page lists Monday, Tuesday, Thursday and Friday as closed. [Source](https://psmurten.ch/fr/bibliotheque/)
 
 To confirm before visiting:
-- The price, school holiday exceptions and the specific language of service need to be confirmed.
+- Is there an admission fee or tariff for visiting the library?
+- What ages is the library set up for, and may children visit without an adult?
+- Which language are the children's activities held in, and where can families find their dates and times (the activity calendar was not inspected)?
+- Are there changes to the Wednesday hours during public or school holidays?
 
 - [Cantonal directory: visitor hours](https://www.fr.ch/bcu/app/bibliotheques/35)
 - [Regional portal: hours and format](https://portail-jeunes.ch/cheval-savant/)
 - [School: hours for all visitors](https://psmurten.ch/fr/bibliotheque/)
-- Coordinates of the address (not the entrance): 46.89741516113281, 7.138935089111328. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l%E2%80%99%C3%89cole+21+1785+Cressier&type=locations&origins=address&limit=5&sr=4326)
+
+### Visit conditions
+
+- Coordinates of the address (not the entrance): 46.89741516113281, 7.138935089111328. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l%27Ecole+21+1785+Cressier&type=locations&origins=address&limit=5&sr=4326)
 
 ## Kerzenziehen Ried · candle making
 
@@ -4747,26 +4838,36 @@ To confirm before visiting:
 - Status: Current information available
 - Place: Courtepin
 - District: See / Lac
-- Checked: 2026-09-27
+- Checked: 2026-11-07
 - Address: Route de Fribourg 19, 1784 Courtepin
-- Age: Games for children and adults; age limits are not stated
-- Adult: An adult can come with a child and choose games for family use.
+- Age: No age limit to play
+- Adult: Adults are welcome in the ludothèque. The page does not publish conditions for an adult staying with a child during a visit.
 - Language: To be confirmed
 - Schedule: Wed 13:30–15:30 · Sat 09:00–11:00
-- Price: Price not published
-- Contact: Ludothèque Pinocchio; info@ludo-pinocchio.ch
-- More than 1000 games to borrow. The website invites children and adults; the option to play on site is not described.
-- The ludothèque's page does not state the price or holiday exceptions.
+- Price: Annual subscription: Duplo CHF 50 (2 games), Quarto CHF 60 (4 games), Sixto CHF 70 (6 games)
+- Contact: Ludothèque Pinocchio Courtepin; info@ludo-pinocchio.ch
+- Late returns are charged CHF 3 per week.
+- Games are lent for 4 weeks; the loan is extended if the ludothèque is closed.
 
-### Additional check: 2026-09-27
+### Additional check: 2026-11-07
 
 - **Contact and format** (Organiser source): The address is Route de Fribourg 19; opening hours are Wednesday 13:30–15:30 and Saturday 09:00–11:00, and the telephone is answered during opening hours. The website invites children and adults to choose games to borrow. [Source](https://www.ludo-pinocchio.ch/index.php/fr-fr/)
+- **Price** (Organiser source): Annual subscriptions cost CHF 50 (2 games), CHF 60 (4 games) or CHF 70 (6 games). Games can also be borrowed without a subscription for CHF 3 to 12 per game. [Source](https://www.ludo-pinocchio.ch/index.php/fr-fr/tarifs-et-reglement)
+- **Age** (Organiser source): The homepage says adults are welcome and that there is no age to play; no numeric age range is published. [Source](https://www.ludo-pinocchio.ch/index.php/fr-fr/)
 
 To confirm before visiting:
-- The price, the holiday schedule and the option to stay and play with a child on the premises are not confirmed.
+- Is a visit possible without advance registration, and can families stay and play on site?
+- Are there changes to the opening hours during school holidays?
+- Are parking, a visitor toilet, a changing table and stroller access available at the ludothèque?
 
 - [Ludothèque: collection, address, hours and family format](https://www.ludo-pinocchio.ch/index.php/fr-fr/)
 - [Municipal directory of associations](https://courtepin.ch/societes-locales/)
+- [Additional check: price](https://www.ludo-pinocchio.ch/index.php/fr-fr/tarifs-et-reglement)
+
+### Visit conditions
+
+- Course payment: Games can be borrowed without a subscription. [Source](https://www.ludo-pinocchio.ch/index.php/fr-fr/tarifs-et-reglement)
+- Cost calculation: Borrowing without a subscription costs CHF 3 to 12 per game. [Source](https://www.ludo-pinocchio.ch/index.php/fr-fr/tarifs-et-reglement)
 - Coordinates of the address (not the entrance): 46.866905212402344, 7.123219013214111. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Fribourg+19+1784+Courtepin&type=locations&origins=address&limit=5&sr=4326)
 
 ## First Flow · swimming with a parent
@@ -4876,51 +4977,73 @@ To confirm before visiting:
 
 ## Badeplatz Muntelier · beach and playground
 
-- Status: Current information available
+- Status: Needs confirmation
 - Place: Muntelier
 - District: See / Lac
-- Checked: 2026-09-27
-- Address: Badeplatz Muntelier, 3286 Muntelier
-- Age: Family visit; no minimum age is stated
-- Adult: The child comes to the public beach with an adult.
+- Checked: 2026-11-07
+- Address: Visit address not published (descriptive area, exact entrances not established)
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Public place; seasonal opening hours are not published
+- Schedule: Schedule not published
 - Price: Price not published
+- Contact: Region Murtensee / Région Lac de Morat; +41 (0)26 670 51 12; info@regionmurtensee.ch
 - The regional tourism page lists a playground, a lawn, a shower, a toilet and two barbecue pits.
 - Cost, lifeguard supervision of swimmers and seasonal restrictions are not stated in the source.
 
-### Additional check: 2026-09-27
+### Additional check: 2026-11-07
 
 - **Facilities** (Organiser source): A shower, toilet, lawn, playground and two barbecue spots are confirmed. This is a public beach with simple facilities. [Source](https://fribourg.ch/de/regionmurtensee/outdoor-aktivitaeten/badeplatz-muntelier/)
+- **Facilities** (Organiser source): The regional tourism page describes the beach as a public bathing beach with a shower, toilet, two fire pits, lawn, hard court and children's playground. The regional tourism office is the listed contact. [Source](https://fribourg.ch/de/regionmurtensee/outdoor-aktivitaeten/badeplatz-muntelier/)
+- **Facilities** (Organiser source): The regional tourism page describes a public beach with simple infrastructure: a shower, toilet, two fire pits, a sunbathing lawn, a hard court and a children's playground, with a view of the Vully. It publishes no opening hours, age range, supervision rules, visitor address or fee for the beach. [Source](https://fribourg.ch/de/regionmurtensee/outdoor-aktivitaeten/badeplatz-muntelier/)
 
 To confirm before visiting:
 - A lifeguard, a safe shallow entry, the season for the toilets and any fee are not stated.
+- What are the opening season and hours, and is the beach supervised by a lifeguard?
+- Is there an entrance fee or parking charge?
+- Where exactly is the visitor entrance or parking for the beach?
+- Is there a minimum age or any rule for adult supervision of children?
 
 - [Regional tourism: public beach and facilities](https://fribourg.ch/de/regionmurtensee/outdoor-aktivitaeten/badeplatz-muntelier/)
+
+### Visit conditions
+
+- Toilet: A toilet is listed among the beach's facilities. [Source](https://fribourg.ch/de/regionmurtensee/outdoor-aktivitaeten/badeplatz-muntelier/)
+- Play area: A children's playground is listed at the beach. [Source](https://fribourg.ch/de/regionmurtensee/outdoor-aktivitaeten/badeplatz-muntelier/)
 
 ## Plage de Praz · beach and playground
 
 - Status: Current information available
 - Place: Mont-Vully
 - District: See / Lac
-- Checked: 2026-09-27
-- Address: Below the Bel-Air restaurant, Praz, Mont-Vully
-- Age: Family visit; no age limit stated
-- Adult: An adult accompanies the child at the water and on the playground.
+- Checked: 2026-11-08
+- Address: Below the Bel-Air restaurant, Praz, Mont-Vully (descriptive area, exact entrances not established)
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Public place; opening hours not published
+- Schedule: Schedule not published
 - Price: Price not published
+- Contact: Commune de Mont-Vully; +41 26 673 90 40; info@mont-vully.ch
 - The municipal page describes a beach and a children's playground in Praz.
 - The exact entry point, cost and seasonal conditions are not published on the page; check access before travelling.
 
-### Additional check: 2026-09-27
+### Additional check: 2026-11-08
 
 - **Location** (Organiser source): The municipality lists a beach and a children's playground below the Bel-Air restaurant in Praz; this is a public place, and no children's pool is described. [Source](https://mont-vully.ch/culture-loisirs/plages-places-de-jeux-pour-enfants)
+- **Hours** (Organiser source): The only opening hours on the municipal page belong to the municipal administration office; no hours, season, age range or price are published for the Praz beach and play area. [Source](https://mont-vully.ch/culture-loisirs/plages-places-de-jeux-pour-enfants)
+- **Status** (Organiser source): The municipality's page on beaches and children's playgrounds lists a beach with a playground below the Bel-Air restaurant in Praz as an existing public place. It gives no season, hours, age range or price. [Source](https://mont-vully.ch/culture-loisirs/plages-places-de-jeux-pour-enfants)
 
 To confirm before visiting:
 - Entry point, toilet, depth, lifeguard and seasonal restrictions have not been established.
+- Is the beach open all year, or only in summer?
+- What is the entry point, and are there toilets?
+- Is there a fee, and is there an age guideline or adult supervision rule?
 
 - [Municipality of Mont-Vully: beach and playground](https://mont-vully.ch/culture-loisirs/plages-places-de-jeux-pour-enfants)
+
+### Visit conditions
+
+- Play area: The municipal page describes a beach with a play area. [Source](https://mont-vully.ch/culture-loisirs/plages-places-de-jeux-pour-enfants)
 
 ## Spielkafi · game day for ages 6+
 
@@ -6032,7 +6155,7 @@ To confirm before visiting:
 
 ## Village lacustre · prehistoric settlement
 
-- Status: Current information available
+- Status: For later; see age and conditions
 - Place: Gletterens
 - District: Broye
 - Checked: 2026-09-28
@@ -6040,26 +6163,31 @@ To confirm before visiting:
 - Age: Family visit; check the age for the workshops
 - Adult: Young children explore the settlement with an adult.
 - Language: To be confirmed
-- Schedule: 04.05–26.10.2026 daily 09–17
+- Schedule: Daily 09:00 to 17:00, 4 May to 26 October 2027 (published season)
 - Price: Adult CHF 8; child ticket CHF 4 (age limit not stated)
-- Reconstructed houses and crafts. Activities without registration are announced for Sundays in September and October.
-- Additional workshops and demonstrations may cost extra. The entry conditions and price for young children are still to be confirmed.
-- The season ends on 26 October. Winter visits are not guaranteed.
+- Group visits require a reservation, also outside opening hours and seasons.
+- Animations on the listed days (afternoons of the school summer holidays and Sundays in September and October) run without reservation.
+- An audio guide is available in French.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-07
 
-- **Season and ticket** (Organiser source): The settlement is open daily 09–17 until 26 October 2026. Adult ticket CHF 8, child ticket CHF 4. [Source](https://fribourg.ch/fr/estavayer-payerne/patrimoine-et-terroir/village-lacustre-de-gletterens/)
+- **Season, hours and ticket** (Organiser source): The published season is 4 May to 26 October 2027, Monday to Sunday 09:00–17:00. Entry is CHF 8 for adults and CHF 4 for children; the page gives no age range for the child rate. [Source](https://fribourg.ch/fr/estavayer-payerne/patrimoine-et-terroir/village-lacustre-de-gletterens/)
 
 To confirm before visiting:
 - Confirm the minimum age for the paid ticket and the price/admission for specific workshops.
+- Is there a minimum age for the child ticket, and are children under that age admitted free?
+- Is a booking needed for individual family visits outside the group and animation days?
+- Are a changing table, visitor toilet, stroller access and a breastfeeding space available on site?
+- What do the workshops and guided visits cost, if anything, on top of entry?
 
 - [Season, tariff, address and format](https://fribourg.ch/fr/estavayer-payerne/patrimoine-et-terroir/village-lacustre-de-gletterens/)
 
 ### Visit conditions
 
-- Indoors: Reconstructed settlement in the open air [Source](https://fribourg.ch/fr/estavayer-payerne/patrimoine-et-terroir/village-lacustre-de-gletterens/)
+- Indoors: The page does not say whether the visit is indoors or outdoors. [Source](https://fribourg.ch/fr/estavayer-payerne/patrimoine-et-terroir/village-lacustre-de-gletterens/)
+- Parking: Visitor parking in front of the shop (100 metres away) and in the meadow next to the tennis court. The page does not say whether it is free. [Source](https://fribourg.ch/fr/estavayer-payerne/patrimoine-et-terroir/village-lacustre-de-gletterens/)
 - Cost calculation: Adult CHF 8, child ticket CHF 4. The minimum age for the paid ticket is not stated. [Source](https://fribourg.ch/fr/estavayer-payerne/patrimoine-et-terroir/village-lacustre-de-gletterens/)
-- Important: The season ends on 26 October 2026. Workshops may cost extra.
+- Important: The published season runs from 4 May to 26 October 2027.
 - [Organiser's photographs](https://fribourg.ch/fr/estavayer-payerne/patrimoine-et-terroir/village-lacustre-de-gletterens/)
 - Coordinates of the address (not the entrance): 46.89500045776367, 6.9367899894714355. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Place+du+Tilleul+1+1544+Gletterens&type=locations&origins=address&limit=5&sr=4326)
 
@@ -6837,32 +6965,43 @@ To confirm before visiting:
 
 ## Plage de Font · quiet beach
 
-- Status: Current information available
+- Status: Needs confirmation
 - Place: Font
 - District: Broye
-- Checked: 2026-09-28
+- Checked: 2026-11-08
 - Address: Vers le Lac, 1473 Font
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Natural beach; the season of services is not stated
+- Schedule: Schedule not published
 - Price: Price not published
-- Contact: Commune d’Estavayer; 026 664 80 00; commune@estavayer.ch
-- There is no toilet, shower or café here; there are few parking spaces.
-- Dogs are allowed on a lead, barbecues are prohibited. No children's playground is mentioned.
+- Contact: Administration communale d'Estavayer-le-Lac; +41 26 664 80 00; commune@estavayer.ch
+- The beach has no toilets, showers or food service.
+- Parking spaces are limited.
+- Walking or cycling access is recommended.
+- Dogs are allowed on a lead.
+- Barbecues (grills) are not allowed.
+- A wildlife observatory is nearby.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): A sandy, shaded beach near the Grande Cariçaie observation point. [Source](https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-font/)
+- **Facilities and rules** (Organiser source): The official beach page says the beach has no toilets, showers or food service, has a limited number of parking spaces, admits dogs on a lead and prohibits grills. [Source](https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-font/)
 
 To confirm before visiting:
 - Age limits and the entry price are not published.
+- Are there opening hours or a season for services at the beach?
+- Is entry free, and are there any parking charges?
+- Are there minimum or maximum ages, and are adults expected to stay with children?
+- Is the route from the parking area suitable for strollers?
 
 - [Beach, address and conditions](https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-font/)
 
 ### Visit conditions
 
-- Indoors: A sandy, shaded beach near the Grande Cariçaie observation point. [Source](https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-font/)
+- Indoors: Not published [Source](https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-font/)
+- Parking: Limited number of parking spaces; whether parking is paid is not stated. [Source](https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-font/)
+- Toilet: The beach has no toilets, showers or food service. [Source](https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-font/)
 - Important: Age limits and the entry price are not published.
 
 ## Plage de Gletterens · sandy shore
@@ -6878,50 +7017,64 @@ To confirm before visiting:
 - Schedule: Open beach; the season for services is not stated
 - Price: Price not published
 - Contact: Estavayer-le-Lac Région; 026 301 60 30; tourisme@estavayerlelac.ch
-- Parking at Route des Grèves or Pré de Riva: CHF 1/hour or CHF 8/day; from Pré de Riva it is about seven minutes on foot.
-- There is no playground, bar or rental. Dogs and barbecues are not allowed.
+- Dogs and other animals are not admitted to the beach.
+- Bicycles are not allowed on the beach.
+- Disposable and reusable barbecue grills are not allowed.
+- There is no shop on site; a Volg shop is about a 5-minute walk from the beach.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-07
 
 - **Availability and format** (Organiser source): Sandy beach with a WC and a shower; there is no children's playground or restaurant. [Source](https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-gletterens/)
+- **Facilities** (Organiser source): The official listing states that the beach has a toilet and a shower, and that there is no children's play area. [Source](https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-gletterens/)
 
 To confirm before visiting:
 - The entry price and age restrictions are not stated.
+- Is there an entry fee for the beach?
+- When is the beach open, and in which season are services available?
+- Is there a minimum or recommended age for children?
+- Is there a stroller-friendly route to the beach, a changing table or a breastfeeding space?
+- Is the beach reachable by stroller given the gravel path?
 
 - [Facilities, directions and address](https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-gletterens/)
 
 ### Visit conditions
 
 - Indoors: Sandy beach with a WC and a shower; there is no children's playground or restaurant. [Source](https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-gletterens/)
+- Parking: Parking at Route des Grèves or Pré de Riva (about a 7-minute walk); parking is paid. [Source](https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-gletterens/)
+- Toilet: A toilet is available at the beach. [Source](https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-gletterens/)
+- Play area: There is no children's play area at the beach. [Source](https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-gletterens/)
+- Cost calculation: Parking is paid: CHF 1 per hour or CHF 8 per day (Route des Grèves or Pré de Riva). This is a parking tariff, not a beach entry fee. [Source](https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-gletterens/)
 - Important: The entry price and age restrictions are not stated.
 
 ## Plage des Lacustres · calm shore
 
-- Status: Current information available
+- Status: Needs confirmation
 - Place: Estavayer-le-Lac
 - District: Broye
-- Checked: 2026-09-28
-- Address: Route des Lacustres 22, 1470 Estavayer-le-Lac
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Checked: 2026-11-07
+- Address: Rte des Lacustres 22, 1470 Estavayer-le-Lac
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Open beach; services depend on the season
+- Schedule: Schedule not published
 - Price: Price not published
-- Contact: Commune d’Estavayer; 026 664 80 00; commune@estavayer.ch
+- Contact: Administration communale; +41 26 664 80 00; commune@estavayer.ch
 - Also called the old beach (Ancienne Plage). The lawn has little shade.
 - A jetty eases access to swimming. The on-site list names a shower, a bar and a restaurant, but no children's play area.
 - Dogs are allowed on the lawn and must be kept on a lead. Dogs are not allowed to swim at the beach.
 - Barbecue grills are not allowed.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-07
 
 - **Availability and format** (Organiser source): The beach, also called the old beach, has a lawn with little shade and a jetty that eases access to swimming. The page lists a shower, a bar and a restaurant on site. [Source](https://fribourg.ch/fr/estavayer-payerne/plages/plage-des-lacustres/)
+- **Parking** (Organiser source): Parking is listed at the Restaurant des Lacustres, with a few more spaces along Route des Lacustres and spaces by the football ground about 5 minutes on foot. Whether parking is paid is not stated. [Source](https://fribourg.ch/fr/estavayer-payerne/plages/plage-des-lacustres/)
 
 To confirm before visiting:
 - Is there an entry price, and when are the bar and restaurant open?
 - How easy is the jetty for getting young children into the water?
 - Is the place outdoors or indoors, and is there a visitor toilet?
 - Can adults stay with children, and is there a minimum age?
+- What are the season and opening days of the beach, and is there an entry price?
 
 - [Beach type, address and facilities](https://fribourg.ch/fr/estavayer-payerne/plages/plage-des-lacustres/)
 
@@ -6930,7 +7083,7 @@ To confirm before visiting:
 - Indoors: The page does not say whether the activity is outdoors or indoors. It describes a lawn beach with a shower, a bar and a restaurant. [Source](https://fribourg.ch/fr/estavayer-payerne/plages/plage-des-lacustres/)
 - Parking: Parking at the Restaurant des Lacustres, a few spaces along Route des Lacustres, and a car park about 5 minutes' walk away. Whether parking is paid is not stated. [Source](https://fribourg.ch/fr/estavayer-payerne/plages/plage-des-lacustres/)
 - Important: Entry price, opening times of the bar and restaurant, and how easy the jetty is for young children are not stated.
-- Coordinates of the address (not the entrance): 46.84632110595703, 6.835505485534668. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+des+Lacustres+22+1470+Estavayer-le-Lac&type=locations&origins=address&limit=5&sr=4326)
+- Coordinates of the address (not the entrance): 46.84632110595703, 6.835505485534668. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+des+Lacustres+22+1470+Estavayer-le-Lac&type=locations&origins=address&limit=5&sr=4326)
 
 ## Plage de Forel · shore and picnic
 
@@ -7008,24 +7161,32 @@ To confirm before visiting:
 - Language: To be confirmed
 - Schedule: Year-round route; walk in daylight
 - Price: Free access
-- Contact: Estavayer-le-Lac Région; 026 301 60 30; tourisme@estavayerlelac.ch
+- Contact: Administration communale; +41 26 664 80 00; commune@estavayer.ch
 - The recommended starting point is information panel No. 1 in front of the Murist commune administration; the walk can also start from other places.
 - The route takes about 2 hours.
 
-### Additional check: 2026-10-25
+### Additional check: 2026-11-07
 
 - **Start and duration** (Organiser source): The educational trail is recommended to start in front of the Murist commune administration, where sign no. 1 stands; the route takes about 2 hours and entry is free. [Source](https://fribourg.ch/fr/estavayer-payerne/nature/sentier-nature-de-la-moliere/)
+- **Practical information** (Organiser source): The official trail page gives the walking time for the route as about 2 hours, free entry and validity all year. It recommends parking on the available spaces in front of the Murist commune administration, where sign no. 1 stands. The page lists the commune administration as contact. [Source](https://fribourg.ch/fr/estavayer-payerne/nature/sentier-nature-de-la-moliere/)
 
 To confirm before visiting:
 - Pushchair access and the exact length of the short loop are not stated.
 - Whether the route is suitable for pushchairs is not stated; families may want to ask the tourist office.
 - The route PDFs could not be read, so the length of short sections is unknown.
+- Is the route suitable for pushchairs, and how long are the shorter sections? The route PDFs could not be read.
+- What ages is the trail meant for, and in which language are the panels written?
+- Are there toilets along the route, and are the parking spaces free?
+- Does the trail have set opening hours or are there seasonal restrictions beyond the page's all-year validity?
 
 - [Start, duration and free entry](https://fribourg.ch/fr/estavayer-payerne/nature/sentier-nature-de-la-moliere/)
 
 ### Visit conditions
 
+- Course payment: Entry is free, so no course, block or subscription has to be bought. [Source](https://fribourg.ch/fr/estavayer-payerne/nature/sentier-nature-de-la-moliere/)
+- Duration: The walk takes about 2 hours for the whole route. [Source](https://fribourg.ch/fr/estavayer-payerne/nature/sentier-nature-de-la-moliere/)
 - Indoors: The official page describes a signposted educational walk but does not say whether it is outdoors or indoors. [Source](https://fribourg.ch/fr/estavayer-payerne/nature/sentier-nature-de-la-moliere/)
+- Parking: The official page advises parking on the available spaces in front of the Murist commune administration, at the recommended start. It does not say whether this parking is free or paid. [Source](https://fribourg.ch/fr/estavayer-payerne/nature/sentier-nature-de-la-moliere/)
 - Important: Pushchair access and the exact length of the short loop are not stated.
 
 ## Fun4All Sévaz · children's play zone
@@ -7187,32 +7348,38 @@ To confirm before visiting:
 
 ## Plage de Gumefens · lakeshore
 
-- Status: Current information available
+- Status: Needs confirmation
 - Place: Gumefens
 - District: Gruyère / Greyerz
-- Checked: 2026-09-28
-- Address: Près du Camping du Lac, 1643 Gumefens
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Checked: 2026-11-08
+- Address: Visit address not published (descriptive area, exact entrances not established)
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Natural shore; check summer conditions
+- Schedule: Schedule not published
 - Price: Price not published
-- Contact: La Gruyère Tourisme; 026 919 85 00; info@la-gruyere.ch
+- Contact: La Gruyère Tourisme; +41 (0)26 919 85 00; info@la-gruyere.ch
 - This is a self-guided family visit, not a swimming class.
 - No children's playground is stated on the tourism page; the campsite's own facilities are separate.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): The tourism page describes a beach near Camping du Lac with easy access to the water and parking nearby. [Source](https://fribourg.ch/fr/la-gruyere/plages/plage-a-gumefens/)
+- **Location and access** (Organiser source): The official tourism page places the beach near Camping du Lac in Gumefens and mentions easy access to the water and nearby parking. [Source](https://fribourg.ch/fr/la-gruyere/plages/plage-a-gumefens/)
+- **Access and contact** (Organiser source): The regional tourism listing places the beach near Camping du Lac in Gumefens and mentions easy access to the water and nearby parking. The contact shown is the tourist office La Gruyère Tourisme in Bulle, not a beach operator. [Source](https://fribourg.ch/fr/la-gruyere/plages/plage-a-gumefens/)
 
 To confirm before visiting:
 - Toilets, shade, price, water depth near the shore and suitability for young children are not described.
+- Are there opening hours or a swimming season, and is the beach open at this time of year?
+- Is there a toilet, and is the route from the parking to the shore suitable for strollers?
+- Is access free, and is an adult required to stay with children?
 
 - [Shore, access and parking](https://fribourg.ch/fr/la-gruyere/plages/plage-a-gumefens/)
 
 ### Visit conditions
 
-- Indoors: The tourism page describes a beach near Camping du Lac with easy access to the water and parking nearby. [Source](https://fribourg.ch/fr/la-gruyere/plages/plage-a-gumefens/)
+- Indoors: Not published [Source](https://fribourg.ch/fr/la-gruyere/plages/plage-a-gumefens/)
+- Parking: The tourism page mentions nearby parking; whether it is paid is not stated. [Source](https://fribourg.ch/fr/la-gruyere/plages/plage-a-gumefens/)
 - Important: Toilets, shade, price, water depth near the shore and suitability for young children are not described.
 
 ## La Pointe à Morlon · beach
@@ -7231,12 +7398,16 @@ To confirm before visiting:
 - A playground for young children is not mentioned; the buvette and the volleyball court are nearby, not necessarily on the beach.
 - The buvette's opening hours and conditions do not necessarily apply to the shore.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): Public beach with shaded areas and a buvette nearby. [Source](https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/)
+- **Availability and format** (Organiser source): The official regional listing describes a public beach with a buvette, a beach volleyball court nearby and shaded spots. It publishes no opening hours, prices, age limits or visitor address. [Source](https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/)
 
 To confirm before visiting:
 - Facilities, water depth and buvette opening hours are not published.
+- What are the opening hours and the season of the beach and the buvette?
+- Is there a visitor address, parking and a toilet at the beach?
+- Is access free, and are there charges for parking or equipment rental?
 
 - [Public beach, shade and buvette](https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/)
 
@@ -7319,29 +7490,34 @@ To confirm before visiting:
 - Status: Current information available
 - Place: Remaufens
 - District: Veveyse
-- Checked: 2026-09-28
-- Address: Route Villageoise, 1617 Remaufens
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Checked: 2026-11-08
+- Address: Rte Villageoise, 1617 Remaufens
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Open playground; opening hours are not published
+- Schedule: Schedule not published
 - Price: Price not published
-- Contact: Les Paccots Tourisme; 021 948 84 56; info@les-paccots.ch
 - The playground is in the centre of the village, above Impasse de Souvy and Impasse des Noisetiers.
 - According to the tourism page, access is on foot; access for visitors with reduced mobility is not provided.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): A playground with drinking water, tables, a grill and parking for about 20 cars. [Source](https://fribourg.ch/fr/les-paccots/places-de-pique-nique/place-de-jeux-du-montilier-remaufens/)
+- **Facilities** (Organiser source): The official page lists a play area, 3 tables with 20 places, a barbecue area, a fire pit, bins, drinking water and nearby parking with 20 spaces. Access is on foot and is not suitable for people with reduced mobility. [Source](https://fribourg.ch/fr/les-paccots/places-de-pique-nique/place-de-jeux-du-montilier-remaufens/)
 
 To confirm before visiting:
 - The age range for the play equipment and the cost of parking are not stated.
+- What ages is the play equipment suitable for?
+- Are there opening hours, and is an adult expected to stay with children?
+- Is the nearby parking free, and is the play area indoors or outdoors?
 
 - [Playground, equipment and access](https://fribourg.ch/fr/les-paccots/places-de-pique-nique/place-de-jeux-du-montilier-remaufens/)
 
 ### Visit conditions
 
-- Indoors: A playground with drinking water, tables, a grill and parking for about 20 cars. [Source](https://fribourg.ch/fr/les-paccots/places-de-pique-nique/place-de-jeux-du-montilier-remaufens/)
+- Indoors: Not published [Source](https://fribourg.ch/fr/les-paccots/places-de-pique-nique/place-de-jeux-du-montilier-remaufens/)
+- Parking: Nearby parking with 20 spaces; whether it is free or paid is not stated. [Source](https://fribourg.ch/fr/les-paccots/places-de-pique-nique/place-de-jeux-du-montilier-remaufens/)
+- Play area: A play area is listed among the features of the place. [Source](https://fribourg.ch/fr/les-paccots/places-de-pique-nique/place-de-jeux-du-montilier-remaufens/)
 - Important: The age range for the play equipment and the cost of parking are not stated.
 
 ## Zone récréative des Paccots · partly open
@@ -7412,7 +7588,7 @@ To confirm before visiting:
 - Checked: 2026-09-28
 - Address: Derrière-les-Jardins, 1700 Fribourg
 - Age: Age limits are not published
-- Adult: Together with an adult
+- Adult: To be confirmed
 - Language: To be confirmed
 - Schedule: Open playground; opening hours are not published
 - Price: Price not published
@@ -7420,18 +7596,21 @@ To confirm before visiting:
 - The Sarine is nearby; an adult should keep in mind how close the water is.
 - The official description mentions benches, but not a toilet.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-07
 
 - **Availability and format** (Organiser source): A playground in the Auge with a small house, a slide, swings, spring rockers and a sports area. [Source](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-derriere-les-jardins-auge/)
+- **Equipment and location** (Organiser source): The official page describes a playground in the old town, near the Sarine, with a slide, a hut and a climbing tree. It publishes no opening days, age range or adult-presence rule. [Source](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-derriere-les-jardins-auge/)
 
 To confirm before visiting:
 - The age range for the play equipment and whether there is a fence are not stated.
+- Are there opening hours or days for this playground, and is it open all year?
+- Is an adult expected to stay with the child, and is there a toilet, parking or a changing table nearby?
 
 - [Equipment and location](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-derriere-les-jardins-auge/)
 
 ### Visit conditions
 
-- Indoors: A playground in the Auge with a small house, a slide, swings, spring rockers and a sports area. [Source](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-derriere-les-jardins-auge/)
+- Indoors: The official page does not say whether the playground is indoors or outdoors. [Source](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-derriere-les-jardins-auge/)
 - Important: The age range for the play equipment and whether there is a fence are not stated.
 
 ## Grand-Places · playground in the centre
@@ -7439,60 +7618,71 @@ To confirm before visiting:
 - Status: Current information available
 - Place: Fribourg
 - District: Sarine / Saane
-- Checked: 2026-09-28
-- Address: Grand-Places, 1700 Fribourg
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Checked: 2026-11-08
+- Address: Grand-Places, 1700 Fribourg (descriptive area, exact entrances not established)
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Open playground; opening hours are not published
+- Schedule: Schedule not published
 - Price: Price is not published
-- Contact: Fribourg Tourisme; 026 350 11 11; info@fribourgtourisme.ch
 - Suitable as a short stop in the centre, but it is not an organised activity.
 - Toilets and shade are not described.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): Central playground with a slide, swings, spring rockers and benches. [Source](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-grand-places/)
+- **Equipment** (Organiser source): The official listing describes a playground in the centre of Fribourg with a slide, swings, benches and spring-mounted play equipment. [Source](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-grand-places/)
+- **Availability** (Organiser source): A city notice of 22 June 2026 on PFAS soil checks mentions a further investigation at a Grand-Places location. The notice does not name this playground. [Source](https://www.ville-fribourg.ch/actualites/mesures-preventives-de-protection-sur-des-places-de-jeux-polluees)
+- **Further information** (Organiser source): The official listing page points to a city playground inventory as an external link. The listing itself gives no age range, opening hours or price. [Source](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-grand-places/)
 
 To confirm before visiting:
 - The age range for the play equipment, its condition and opening hours are not published.
+- Is there an age range, and are there opening hours, for this playground? Families should check with the city of Fribourg.
+- Is the Grand-Places playground the location the city is still investigating for soil pollution, and is it open for use? Families should check with the city of Fribourg.
+- Does the city playground inventory linked from the listing give an age range or opening information for this playground?
 
 - [Equipment and location](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-grand-places/)
+- [Additional check: Availability](https://www.ville-fribourg.ch/actualites/mesures-preventives-de-protection-sur-des-places-de-jeux-polluees)
 
 ### Visit conditions
 
-- Indoors: Central playground with a slide, swings, spring rockers and benches. [Source](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-grand-places/)
+- Indoors: Not published [Source](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-grand-places/)
+- Play area: Designated public playground [Source](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-grand-places/)
 - Important: The age range for the play equipment, its condition and opening hours are not published.
 
 ## Domino · playground in Pérolles
 
-- Status: Current information available
+- Status: Needs confirmation
 - Place: Fribourg
 - District: Sarine / Saane
-- Checked: 2026-09-28
-- Address: Place de jeux Domino, 1700 Fribourg
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Checked: 2026-11-07
+- Address: Place de jeux Domino, 1700 Fribourg (descriptive area, exact entrances not established)
+- Age: Play equipment published for ages 0 to 99; no separate age rule stated
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Open playground; opening hours are not published
+- Schedule: Schedule not published
 - Price: Price is not published
-- Contact: Fribourg Tourisme; 026 350 11 11; info@fribourgtourisme.ch
 - Bus stop: J.-Vogt, lines 1 and 3.
 - There are tables and benches; toilets and pushchair access are not described.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-07
 
 - **Availability and format** (Organiser source): A playground in the Pérolles park with a sandpit, little houses, slides and swings. [Source](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-domino-semiramis/)
+- **Age** (Organiser source): The City of Fribourg describes the renovated play area in the Parc du Domino as having equipment for ages 0 to 99. [Source](https://www.ville-fribourg.ch/places-jeux/parc-du-domino)
+- **Equipment** (Organiser source): Besides the play area, the Parc du Domino has a carousel for people with reduced mobility, hammocks, ping-pong tables, a giant chess game, a water play feature, a large lawn and basketball and pétanque courts. [Source](https://www.ville-fribourg.ch/places-jeux/parc-du-domino)
+- **Equipment** (Organiser source): The regional tourism listing names 2 double swings, 3 slides and a sandpit at the Domino playground. [Source](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-domino-semiramis/)
 
 To confirm before visiting:
-- The street number, opening hours and the age range of the structures are not stated.
+- Does the play area have opening hours, and is an adult expected to stay with the child?
+- Is there a visitor toilet nearby, and can the play area be reached with a pushchair?
 
 - [Play equipment and bus stop](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-domino-semiramis/)
+- [Additional check: Age](https://www.ville-fribourg.ch/places-jeux/parc-du-domino)
 
 ### Visit conditions
 
-- Indoors: A playground in the Pérolles park with a sandpit, little houses, slides and swings. [Source](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-domino-semiramis/)
-- Important: The street number, opening hours and the age range of the structures are not stated.
+- Indoors: Not published [Source](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-domino-semiramis/)
+- Important: The street number and opening hours are not published.
 
 ## Musée suisse de la Marionnette · puppets
 
@@ -7534,32 +7724,39 @@ To confirm before visiting:
 
 ## Plage de Nant · playground by the lake
 
-- Status: Current information available
+- Status: Needs confirmation
 - Place: Nant
 - District: See / Lac
-- Checked: 2026-09-28
-- Address: Plage de Nant, 1786 Nant
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Checked: 2026-11-08
+- Address: Visit address not published (descriptive area, exact entrances not established)
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Public beach; services are seasonal
+- Schedule: Schedule not published
 - Price: Price not published
-- Contact: Vully Tourisme; 026 673 18 72; info@levully.ch
-- The football and volleyball pitches are not an area for young children.
-- Check on site the seasonal availability of the shoreline facilities and access to the water.
+- Contact: Vully Tourisme; +41 26 673 18 72; info@levully.ch
+- The official page also lists a small barbecue spot, a football pitch and a beach volleyball court next to the playground.
+- The official page publishes no opening hours, age limits, admission price or visitor entrance address for the beach.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): Public beach below the Nant school with a children's playground and a barbecue area. [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-nant/)
+- **Facilities** (Organiser source): The official tourism page describes the public beach below the school as having a playground, a small barbecue spot, a football pitch, a beach volleyball court and a view over Morat. It publishes no hours, age limits, price or visitor address. [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-nant/)
+- **Facilities** (Organiser source): The official tourism page describes a public beach below the school with a playground, a small grill spot, a football pitch, a beach volleyball court and a view over Morat. It lists no opening hours, season, age limits or admission price, so families should confirm availability before visiting. [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-nant/)
 
 To confirm before visiting:
 - Toilet, shade, parking fee and buvette opening hours are not stated.
+- What are the opening hours and season for the beach and playground?
+- Is there a recommended age or an adult-presence rule for the playground?
+- Is access free, and where exactly is the visitor entrance?
+- Are there toilets and parking near the beach?
 
 - [Beach, playground and contact](https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-nant/)
 
 ### Visit conditions
 
-- Indoors: Public beach below the Nant school with a children's playground and a barbecue area. [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-nant/)
+- Indoors: Not published [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-nant/)
+- Play area: The official page describes a playground at this public beach. [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-nant/)
 - Important: Toilet, shade, parking fee and buvette opening hours are not stated.
 
 ## Camping Seeweid · playground by the lake
@@ -7670,92 +7867,111 @@ To confirm before visiting:
 - Status: Current information available
 - Place: Murten
 - District: See / Lac
-- Checked: 2026-09-28
+- Checked: 2026-11-08
 - Address: Lausannestrasse 2, 3280 Murten
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Mon 14:00–21:00; Tue 06:00–21:00; Wed–Fri 09:30–21:00; Sat–Sun 09:30–18:00
+- Schedule: Monday 14:00-21:00; Tuesday 06:00-21:00; Wednesday to Friday 09:30-21:00; Saturday and Sunday 09:30-18:00 (1 Jan to 31 Dec 2026). No separate family or children swimming times are published.
 - Price: Adults CHF 8; students, apprentices, AVS/AI CHF 7; children aged 6–15 CHF 5. The regional page does not state the unit or period, and lists no price for children under 6.
-- Contact: Schwimmbad Murten; 026 672 36 36
+- Contact: Piscine couverte, piscine et plage Morat; +41 26 672 36 36
 - This is an ordinary family visit without an instructor, separate from the Baby Bade-Plausch and First Flow courses.
 - The beach, outdoor area and café are seasonal; the opening hours of the indoor pool do not guarantee that they are open.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): The indoor pool in Murten is open all year round; the tourist page describes a warm play pool. [Source](https://fribourg.ch/fr/regionlacdemorat/piscines/piscine-couverte-piscine-et-plage-morat/)
 - **Price** (Organiser source): The regional page lists adults CHF 8, students, apprentices and AVS/AI holders CHF 7, and children aged 6–15 CHF 5. It gives no unit or period and no price for children under 6, so a six-year-old falls in the 6–15 child rate. [Source](https://fribourg.ch/fr/regionlacdemorat/piscines/piscine-couverte-piscine-et-plage-morat/)
+- **Schedule** (Organiser source): The regional page lists the pool's opening hours for every day of the week from 1 Jan to 31 Dec 2026, and a children's play area in the summer outdoor space. No separate family swimming hours or play-area rules are published. [Source](https://fribourg.ch/fr/regionlacdemorat/piscines/piscine-couverte-piscine-et-plage-morat/)
 
 To confirm before visiting:
 - The depth of the play pool and the ticket for a child under six are not stated.
 - Is the admission price per visit or per period, and what does a child under 6 pay?
+- Is the play pool indoors, and are there age limits or rules for adults staying with children?
 
 - [Pool, family area, address, hours and tariff](https://fribourg.ch/fr/regionlacdemorat/piscines/piscine-couverte-piscine-et-plage-morat/)
 
 ### Visit conditions
 
-- Indoors: The indoor pool in Murten is open all year round; the tourist page describes a warm play pool. [Source](https://fribourg.ch/fr/regionlacdemorat/piscines/piscine-couverte-piscine-et-plage-morat/)
+- Indoors: Not published [Source](https://fribourg.ch/fr/regionlacdemorat/piscines/piscine-couverte-piscine-et-plage-morat/)
+- Play area: The pool lists a children's play area in its summer outdoor space; no hours or age rules are published for it. [Source](https://fribourg.ch/fr/regionlacdemorat/piscines/piscine-couverte-piscine-et-plage-morat/)
 - Important: The depth of the play pool and the ticket for a child under six are not stated.
 - Coordinates of the address (not the entrance): 46.926544189453125, 7.110995769500732. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lausannestrasse+2+3280+Murten&type=locations&origins=address&limit=5&sr=4326)
 
 ## Pflück dis Glück · pick-your-own farm
 
-- Status: Current information available
+- Status: Needs confirmation
 - Place: Kerzers
 - District: See / Lac
-- Checked: 2026-09-28
+- Checked: 2026-11-08
 - Address: Moosacker 1, 3210 Kerzers
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
 - Schedule: Daily 08:00–21:00 according to the 2026/27 calendar; picking depends on the season
-- Price: Payment for what is picked, by weight or quantity; prices are not given
+- Price: Price not published
 - Contact: Pflück dis Glück; 031 755 84 47; info@hurni-gemuese.ch
-- Strawberries are listed from May to October, paid by weight or quantity; this is not a free petting zoo.
-- For young children, an adult must help with picking and follow the farm rules.
+- The farm shop (Märithuus) is described as open year-round.
+- The organiser describes picking as running over the summer half-year.
+- Strawberries are described as growing from May to October.
+- Accepted payment: cash, TWINT and credit card (card payment at the flower shop).
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): Families can pick seasonal produce, and children are offered the chance to see hens and eggs. [Source](https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/pflueck-dis-glueck/)
+- **Opening hours and season** (Organiser source): The organiser lists the farm shop and self-picking garden as open Monday to Sunday, 08:00–21:00, but describes picking as running over the summer half-year. The regional listing gives the hours period as 1 June 2026 to 31 May 2027, so whether picking is open in November is not confirmed. [Source](https://www.hurni-gemuese.ch/selbstpflueckgarten/)
+- **Payment** (Organiser source): The organiser lists cash, TWINT and credit card as payment options; credit card is accepted at the flower shop. No price figures are published on this page. [Source](https://www.hurni-gemuese.ch/selbstpflueckgarten/)
 
 To confirm before visiting:
 - What is available for picking on a specific date, the cost and the rules for contact with animals need to be checked.
+- Is picking currently open in the winter months, and which produce can be picked on a given date?
+- What is the age range, and may or must an adult stay with the child?
+- Is there a charge or tariff in CHF for visiting, and is the picking area outdoors?
+- Do families need to register in advance?
 
 - [Picking, hens, opening hours and payment](https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/pflueck-dis-glueck/)
+- [Additional check: Opening hours and season](https://www.hurni-gemuese.ch/selbstpflueckgarten/)
 
 ### Visit conditions
 
-- Indoors: Families can pick seasonal produce, and children are offered the chance to see hens and eggs. [Source](https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/pflueck-dis-glueck/)
+- Indoors: Not published [Source](https://www.hurni-gemuese.ch/selbstpflueckgarten/)
+- Cost calculation: The regional listing says prices are calculated by quantity or weight; no CHF tariff is quoted in the sources checked. [Source](https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/pflueck-dis-glueck/)
 - Important: What is available for picking on a specific date, the cost and the rules for contact with animals need to be checked.
 
 ## Plage de Môtier · beach with shower
 
-- Status: Current information available
+- Status: Needs confirmation
 - Place: Môtier
 - District: See / Lac
-- Checked: 2026-09-28
-- Address: Près du débarcadère, 1787 Môtier
-- Age: Age limits are not published.
-- Adult: Together with an adult
+- Checked: 2026-11-08
+- Address: Visit address not published (descriptive area, exact entrances not established)
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Public beach; the buvette operates seasonally.
+- Schedule: Schedule not published
 - Price: Price not published.
-- Contact: Vully Tourisme; 026 673 18 72; info@levully.ch
+- Contact: Vully Tourisme; +41 26 673 18 72; info@levully.ch
 - No children's playground is mentioned.
 - A landing stage is nearby: with young children, check that the way to the water is safe and kept apart from the boat area.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): Public beach near the landing stage; there is a shower, a toilet and a small buvette. [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-motier/)
+- **Facilities** (Organiser source): The official regional tourism page describes a public beach next to the landing stage with a small snack bar, showers and toilets. It publishes no opening hours, age range, price or visitor address for the beach. [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-motier/)
 
 To confirm before visiting:
 - Entry price, water depth and pushchair access are not stated.
+- What are the opening hours and season of the beach and its snack bar?
+- Is entry free, and is there any charge for the beach?
+- What is the exact access point for visitors, and is there parking nearby?
+- Is the way to the water suitable for strollers?
 
 - [Beach, shower and toilet](https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-motier/)
 
 ### Visit conditions
 
-- Indoors: Public beach near the landing stage; there is a shower, a toilet and a small buvette. [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-motier/)
+- Indoors: Not published [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-motier/)
+- Toilet: The beach page lists toilets. [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-motier/)
 - Important: Entry price, water depth and pushchair access are not stated.
 
 ## Plage de Sugiez · shore and picnic
@@ -7763,29 +7979,37 @@ To confirm before visiting:
 - Status: Current information available
 - Place: Sugiez
 - District: See / Lac
-- Checked: 2026-09-28
-- Address: Près du camping, 1786 Sugiez
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Checked: 2026-11-08
+- Address: Visit address not published (descriptive area, exact entrances not established)
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Public beach; ask about seasonal services
+- Schedule: Schedule not published
 - Price: Price not published
-- Contact: Vully Tourisme; 026 673 18 72; info@levully.ch
+- Contact: Vully Tourisme; +41 26 673 18 72; info@levully.ch
 - No playground is mentioned at the beach.
 - Campsite services and access to them do not automatically apply to the public beach.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): A public beach near the campsite, with tables, a grill, a shower and a toilet. [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-sugiez/)
+- **Facilities** (Organiser source): The tourism page describes a public beach next to the campsite with a grill place, tables and benches, a shower and toilets. It publishes no opening hours, age rules, tariff or visitor address for the beach. [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-sugiez/)
+- **Facilities and view** (Organiser source): The tourism page describes a public beach next to the campsite with a grill place, tables and benches, a shower, toilets and a view of Murten. It does not say whether the beach is indoors or outdoors. [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-sugiez/)
 
 To confirm before visiting:
 - The entry price, the water depth and whether the facilities operate out of season are not stated.
+- What are the opening hours or season for the beach and its facilities?
+- Is entry free, and is there any charge for parking or facilities?
+- What is the exact visitor access point for the beach?
+- Are there any rules about adults staying with children at the beach?
+- Is the beach area open all year, or only in the warm season?
 
 - [Public beach and facilities](https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-sugiez/)
 
 ### Visit conditions
 
-- Indoors: A public beach near the campsite, with tables, a grill, a shower and a toilet. [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-sugiez/)
+- Indoors: Not published [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-sugiez/)
+- Toilet: Toilets are listed among the beach facilities. [Source](https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-sugiez/)
 - Important: The entry price, the water depth and whether the facilities operate out of season are not stated.
 
 ## Grengspitz · forest route to the water
@@ -7838,18 +8062,27 @@ To confirm before visiting:
 - A school playground may have rules of use during school hours; the tourism page does not give them.
 - There is a river nearby; an adult must accompany the child.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-07
 
 - **Availability and format** (Organiser source): By the school on the bank of the Sarine there is a slide, swings, spring riders and tables. [Source](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-ecole-de-la-neuveville/)
+- **Equipment and age guidance** (Organiser source): The City of Fribourg describes the playground as next to the Neuveville school courtyard, with classic equipment for young children. The neighbouring green space and basketball court offer activities especially for older children. No age range is published. [Source](https://www.ville-fribourg.ch/places-jeux/ecole-de-la-neuveville)
+- **Getting there** (Organiser source): The City of Fribourg lists the nearest bus stop as Neuveville Court-Chemin / Eglise St-Jean and gives the ground surface as paving slabs / cobblestones. It does not say whether the route is suitable for strollers. [Source](https://www.ville-fribourg.ch/places-jeux/ecole-de-la-neuveville)
 
 To confirm before visiting:
 - Access rules outside school hours and the age range of the equipment are not published.
+- Is the playground open to the public during school hours, and are there rules of use? Families can check with the city or the school.
+- Is there a recommended age range for the equipment, or any rule about adult supervision?
+- Is there a fee or any registration requirement? None is published.
+- Is an adult required or expected to stay with the child, and is there a recommended age range for the equipment? Neither is published.
+- Are there opening hours or rules of use, for example during school hours? Families can check with the city or the school.
+- Is there a route suitable for strollers, a toilet, a changing table or parking? None is listed on the official pages.
 
 - [Playground and equipment](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-ecole-de-la-neuveville/)
+- [Additional check: Equipment and age guidance](https://www.ville-fribourg.ch/places-jeux/ecole-de-la-neuveville)
 
 ### Visit conditions
 
-- Indoors: By the school on the bank of the Sarine there is a slide, swings, spring riders and tables. [Source](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-ecole-de-la-neuveville/)
+- Indoors: The sources describe a playground by the Sarine next to the school, but do not say explicitly whether it is outdoors or indoors. [Source](https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-ecole-de-la-neuveville/)
 - Important: Access rules outside school hours and the age range of the equipment are not published.
 
 ## Place de l’Urquier · playground by the forest
@@ -8192,29 +8425,36 @@ To confirm before visiting:
 - Status: Current information available
 - Place: Siviriez
 - District: Glâne
-- Checked: 2026-09-28
+- Checked: 2026-11-08
 - Address: Route de Romont 4, 1678 Siviriez
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Tue–Fri 08:00–00:00; Sat 08:30–00:00; Mon and Sun closed
+- Schedule: Tuesday to Friday 09:00–14:30 and 17:00–23:30; Saturday 09:00–23:30; closed Sunday and Monday. The play area has no separate hours published.
 - Price: Price not published
-- Contact: Auberge du Lion d’Or; 026 656 13 31; info@siviriez-liondor.ch
+- Contact: Auberge du Lion d'Or; 026 656 13 31; info@siviriez-liondor.ch
 - There is a playground on the premises, but its location relative to the tables and access without placing an order are not described.
 - The hours given are the opening hours of the establishment, not guaranteed kitchen or playground hours.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
-- **Availability and format** (Organiser source): The 2026 tourism page confirms a playground at the restaurant and the opening hours. [Source](https://fribourg.ch/fr/romontregion/restaurants/auberge-du-lion-dor-siviriez/)
+- **Schedule and play area** (Organiser source): The inn's own website lists opening hours of Tuesday to Friday 09:00–14:30 and 17:00–23:30 and Saturday 09:00–23:30, closed Sunday and Monday. The regional tourism page says the inn has a play area for families. [Source](https://www.siviriez-liondor.ch/)
 
 To confirm before visiting:
 - The menu, prices, the age range for the play equipment and kitchen hours are not stated on the tourism page.
+- Is the play area indoors or outdoors?
+- What ages is the play area meant for, and do adults need to supervise?
+- Is the play area free to use, or tied to a purchase at the restaurant?
+- Does the play area have its own opening hours?
 
 - [Tourism: playground, address and hours 2026](https://fribourg.ch/fr/romontregion/restaurants/auberge-du-lion-dor-siviriez/)
+- [Additional check: Schedule and play area](https://www.siviriez-liondor.ch/)
 
 ### Visit conditions
 
-- Indoors: The 2026 tourism page confirms a playground at the restaurant and the opening hours. [Source](https://fribourg.ch/fr/romontregion/restaurants/auberge-du-lion-dor-siviriez/)
+- Indoors: Not published [Source](https://fribourg.ch/fr/romontregion/restaurants/auberge-du-lion-dor-siviriez/)
+- Parking: Private car parking is listed; whether it is paid is not stated. [Source](https://fribourg.ch/fr/romontregion/restaurants/auberge-du-lion-dor-siviriez/)
+- Play area: The inn has a play area for families. [Source](https://fribourg.ch/fr/romontregion/restaurants/auberge-du-lion-dor-siviriez/)
 - Important: The menu, prices, the age range for the play equipment and kitchen hours are not stated on the tourism page.
 - Coordinates of the address (not the entrance): 46.65826416015625, 6.877288341522217. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Romont+4+1678+Siviriez&type=locations&origins=address&limit=5&sr=4326)
 
@@ -8353,32 +8593,38 @@ To confirm before visiting:
 
 ## Moléson-Village · playground
 
-- Status: Current information available
+- Status: Needs confirmation
 - Place: Moléson-sur-Gruyères
 - District: Gruyère / Greyerz
 - Checked: 2026-09-28
 - Address: Place de l’Aigle 6, 1663 Moléson-sur-Gruyères
 - Age: Age limits are not published
-- Adult: Together with an adult
+- Adult: To be confirmed
 - Language: To be confirmed
-- Schedule: Outdoor playground; summer attractions follow a separate calendar
+- Schedule: Schedule not published
 - Price: Price not published
-- Contact: Moléson Tourisme; 026 921 85 00; info@moleson.ch
-- The playground and the paid or seasonal attractions are separate offers; the free programme of 4 July – 23 August 2026 has ended.
-- High-altitude village; weather conditions may limit a visit.
+- Contact: Office du Tourisme de Moléson; +41 (0) 26 921 85 00; info@moleson.ch
+- From 4 July to 23 August the park activities were free for children every evening from 18:00 to 20:30; the page does not say whether this covers the playground.
+- Opening of the park activities depends on weather conditions.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
-- **Availability and format** (Organiser source): The tourist page confirms a playground in Moléson-Village next to the amusement park. [Source](https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/parc-de-loisirs-moleson/)
+- **Availability and format** (Organiser source): The official tourism page says a playground is also available in the village of Moléson. [Source](https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/parc-de-loisirs-moleson/)
+- **Weather** (Organiser source): The official tourism page says the opening of the park activities depends on weather conditions. [Source](https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/parc-de-loisirs-moleson/)
 
 To confirm before visiting:
 - The playground's age range and access rules are not stated; the published free evening programme ended on 23 August 2026.
+- Is the playground open now, and what are its opening days and hours?
+- Is the playground outdoors, and where exactly is its entrance?
+- Are adults expected to stay with children at the playground?
+- Is the playground free to use, and is there parking nearby?
 
 - [Village playground and separate summer attractions](https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/parc-de-loisirs-moleson/)
 
 ### Visit conditions
 
-- Indoors: The tourist page confirms a playground in Moléson-Village next to the amusement park. [Source](https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/parc-de-loisirs-moleson/)
+- Indoors: Not published [Source](https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/parc-de-loisirs-moleson/)
+- Play area: The official tourism page says a playground is also available in the village. [Source](https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/parc-de-loisirs-moleson/)
 - Important: The playground's age range and access rules are not stated; the published free evening programme ended on 23 August 2026.
 - Coordinates of the address (not the entrance): 46.562713623046875, 7.0357770919799805. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Place+de+l%E2%80%99Aigle+6+1663+Mol%C3%A9son-sur-Gruy%C3%A8res&type=locations&origins=address&limit=5&sr=4326)
 
@@ -8387,25 +8633,27 @@ To confirm before visiting:
 - Status: Current information available
 - Place: Romont
 - District: Glâne
-- Checked: 2026-09-28
-- Address: Forêt de Boulogne, Route de Bossens, 1680 Romont
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Checked: 2026-11-07
+- Address: Visit address not published (descriptive area, exact entrances not established)
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Forest playground; opening hours not stated
+- Schedule: Schedule not published
 - Price: Price not published
-- Contact: Romont Région; 026 651 90 55; info@romontregion.ch
 - About 3 km, roughly 45 minutes on foot from the old town of Romont.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-07
 
 - **Availability and format** (Organiser source): The tourist office confirms the playground and picnic areas in the Boulogne forest. [Source](https://fribourg.ch/fr/romontregion/nature/foret-de-boulogne/)
 - **Features** (Organiser source): The official Fribourg Région page for the Boulogne forest mentions a children's play area, picnic facilities and a wetland area, and gives the distance from the old town of Romont as about 3 km, roughly 45 minutes on foot. [Source](https://fribourg.ch/fr/romontregion/nature/foret-de-boulogne/)
+- **Location and access** (Organiser source): The official Fribourg Région page places the Boulogne forest play area in Romont, about 3 km and roughly 45 minutes on foot from the old town. It publishes no opening hours, age range, price, visitor street address or adult-attendance rule for the play area. [Source](https://fribourg.ch/fr/romontregion/nature/foret-de-boulogne/)
 
 To confirm before visiting:
 - A separate exact address for the playground, its equipment and the condition of the path after rain are not published.
 - Is there a published age range, or opening hours, for the play area?
 - Is there a visitor street address for the play area, and is there parking, a toilet or a stroller-friendly route?
+- Is there a visitor street address or entrance for the play area?
+- Are there opening days or hours, an age range or any admission rule for the play area?
 
 - [Playground and picnic in the Boulogne forest](https://fribourg.ch/fr/romontregion/nature/foret-de-boulogne/)
 
@@ -8417,7 +8665,7 @@ To confirm before visiting:
 
 ## Chutes de Chavannettes · short walk
 
-- Status: Current information available
+- Status: Needs confirmation
 - Place: Rue
 - District: Glâne
 - Checked: 2026-09-28
@@ -8427,16 +8675,21 @@ To confirm before visiting:
 - Language: To be confirmed
 - Schedule: Nature walk; if the water level is high, check access.
 - Price: Price is not published
-- Contact: Romont Région; 026 651 90 55; info@romontregion.ch
-- This is a walk by the river, not a beach or an equipped bathing area.
-- Access from the left bank is prohibited because of rocks; driving to the waterfall is prohibited.
+- Contact: Office du Tourisme de Romont et sa région; +41 26 651 90 55; info@romontregion.ch
+- The falls are closed to the public until further notice for safety works. Access is prohibited until further notice.
+- Vehicles are not allowed. Access to the falls is on foot or by bike from the town of Rue.
+- There is no access from the left bank (cliffs).
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-07
 
 - **Availability and format** (Organiser source): A tourist route leads from Rue to the Broye waterfall; about 20 minutes' walk for the descent is stated. [Source](https://fribourg.ch/fr/romontregion/randonnees-pedestres/chutes-de-chavannettes/)
+- **Availability and format** (Organiser source): The tourist office route page states that the falls are closed to the public until further notice because of safety works, and that access is prohibited until further notice. No reopening date is given. [Source](https://fribourg.ch/fr/romontregion/randonnees-pedestres/chutes-de-chavannettes/)
 
 To confirm before visiting:
 - Suitability for pushchairs is not confirmed; the safety of the approach to the water depends on conditions.
+- When will the falls reopen to the public after the safety works?
+- What are the access hours, the exact start point address and is the route suitable for pushchairs? The official page does not say.
+- Is there an entry fee, and may children go with an adult? The official page does not say.
 
 - [Route to the waterfall and access safety](https://fribourg.ch/fr/romontregion/randonnees-pedestres/chutes-de-chavannettes/)
 
@@ -8482,9 +8735,9 @@ To confirm before visiting:
 - Place: Fruence
 - District: Veveyse
 - Checked: 2026-09-28
-- Address: Ancienne école de Fruence, 1618 Châtel-St-Denis
+- Address: Ancienne école de Fruence, 1618 Châtel-St-Denis (descriptive area, exact entrances not established)
 - Age: Age limits are not published
-- Adult: Together with an adult
+- Adult: To be confirmed
 - Language: To be confirmed
 - Schedule: Public playground; opening hours are not published
 - Price: Price is not published
@@ -8492,49 +8745,58 @@ To confirm before visiting:
 - The former school building is being renovated. The playground is listed nearby, but the works may change the route to it.
 - The municipality separately mentions a BoxUp box with sports equipment. Access to it may require an app.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): The municipality lists the playground directly by the former school of Fruence and the bus stop. [Source](https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/realisations-en-cours-et-projets/ancienne-ecole-de-fruence)
+- **Availability and format** (Organiser source): The municipality says a bus stop and a play area are immediately next to the former school in the hamlet of Fruence. [Source](https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/realisations-en-cours-et-projets/ancienne-ecole-de-fruence)
+- **BoxUp equipment** (Organiser source): The municipality has set up a BoxUp box with sports and leisure equipment in free access at the Fruence play area. Using it requires downloading a smartphone app and creating an account with an identity card; the equipment can be used for up to 3 hours at a time. [Source](https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/culture-sport-et-loisirs/loisirs)
 
 To confirm before visiting:
-- The equipment, the exact access arrangements and the rules for using BoxUp are not described.
+- What are the opening hours, entrance address, age range and rules for the play area? Families should check with the municipality.
+- Is the play area outdoors? The municipal pages inspected do not say.
+- May or must an adult stay with the child? The municipal pages inspected do not say.
 
 - [Municipality: playground by the former school](https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/realisations-en-cours-et-projets/ancienne-ecole-de-fruence)
 - [Municipality: play area and BoxUp](https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/culture-sport-et-loisirs/loisirs)
 
 ### Visit conditions
 
-- Indoors: The municipality lists the playground directly by the former school of Fruence and the bus stop. [Source](https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/realisations-en-cours-et-projets/ancienne-ecole-de-fruence)
-- Important: The equipment, the exact access arrangements and the rules for using BoxUp are not described.
+- Indoors: Not published whether the play area is indoors or outdoors. [Source](https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/realisations-en-cours-et-projets/ancienne-ecole-de-fruence)
+- Important: BoxUp sports equipment at the Fruence play area is used through a smartphone app. An account needs an identity card, and the equipment can be used for 3 hours at most.
 
 ## Traîna Manchou · trail about trees
 
 - Status: Current information available
 - Place: Semsales
 - District: Veveyse
-- Checked: 2026-09-28
-- Address: Route du Niremont, parking de la chapelle, 1623 Semsales
-- Age: Age limits are not published.
-- Adult: Together with an adult
+- Checked: 2026-11-08
+- Address: Parking en direction de la chapelle du Niremont, Semsales
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Open trail. Check the season and the condition of the surface.
+- Schedule: Schedule not published
 - Price: Price not published.
-- Contact: Les Paccots Tourisme; 021 948 84 56; info@les-paccots.ch
+- Contact: Les Paccots – La Veveyse Tourisme; +41 (0)21 948 84 56; info@les-paccots.ch
 - The route takes about an hour. The start cannot be reached by public transport.
-- The parking by the chapel is small, about 10 spaces. In winter and after rain, check the condition of the trail.
+- Nearby parking has 10 places.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): The tourism page describes a trail with wooden huts that explain how trees are structured, and places for a picnic. [Source](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-traina-manchou-semsales/)
+- **Duration, parking and access** (Organiser source): The official page lists the trail as a family educational tree trail of about one hour, with nearby parking for 10 places. It says the start is not reachable by public transport. [Source](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-traina-manchou-semsales/)
 
 To confirm before visiting:
 - With a wood-chip surface and a 189 m climb, it is not certain that the trail is passable with a pushchair. The price is not stated.
+- Is there a recommended minimum age, and is the wood-chip path suitable for a pushchair?
+- Is the trail free of charge, and is it open all year?
+- Is the trail in good condition in winter and after rain?
 
 - [Family educational trail, approach and parking](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-traina-manchou-semsales/)
 
 ### Visit conditions
 
 - Indoors: The tourism page describes a trail with wooden huts that explain how trees are structured, and places for a picnic. [Source](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-traina-manchou-semsales/)
+- Parking: Nearby parking with 10 places. Whether it is free is not stated. [Source](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-traina-manchou-semsales/)
 - Important: With a wood-chip surface and a 189 m climb, it is not certain that the trail is passable with a pushchair. The price is not stated.
 
 ## Cugy forest play area · picnic
@@ -8573,28 +8835,33 @@ To confirm before visiting:
 - Place: Montagny-les-Monts
 - District: Broye
 - Checked: 2026-09-28
-- Address: Parking sous l’église, 1774 Montagny-les-Monts
+- Address: Parking below the church, Montagny-les-Monts (descriptive area, exact entrances not established)
 - Age: Age limits are not published
 - Adult: Together with an adult
 - Language: To be confirmed
 - Schedule: Open route in suitable weather
 - Price: Price not published
-- Contact: Estavayer-le-Lac Région; 026 301 60 30; tourisme@estavayerlelac.ch
+- Contact: Estavayer-le-Lac Région; +41 26 301 60 30; tourisme@estavayerlelac.ch
 - Young children can see the dragon at the start without walking the whole six-kilometre loop.
 - The tower has stairs; constant supervision is needed near water and on slopes. The cost of a visit is not published.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): The tourism page describes the Les Arbognes family loop: 6 km, about 1 h 50 min, start below the church; the dragon and the tower are a few tens of metres from the start. [Source](https://fribourg.ch/fr/estavayer-payerne/randonnees-pedestres/les-arbognes/)
+- **Start point and parking** (Organiser source): The hike starts at the parking below the church in Montagny-les-Monts, and the tourism page lists parking spaces at the start of the hike. No street address or postcode is published, and the page does not say whether parking is paid. [Source](https://fribourg.ch/fr/estavayer-payerne/randonnees-pedestres/les-arbognes/)
 
 To confirm before visiting:
 - Whether the full loop is passable with a pushchair, and the condition of the approach to the tower, are not confirmed.
+- Are there any age limits, a price, opening times or a season for this walk? The tourism page publishes none.
+- Is the full loop passable with a pushchair, and what is the approach to the tower like?
+- Is parking at the start free or paid?
 
 - [Tourism: start, dragon, 6 km, elevation gain and transport](https://fribourg.ch/fr/estavayer-payerne/randonnees-pedestres/les-arbognes/)
 
 ### Visit conditions
 
 - Indoors: The tourism page describes the Les Arbognes family loop: 6 km, about 1 h 50 min, start below the church; the dragon and the tower are a few tens of metres from the start. [Source](https://fribourg.ch/fr/estavayer-payerne/randonnees-pedestres/les-arbognes/)
+- Parking: Parking spaces are available at the start of the hike; the page does not say whether parking is paid. [Source](https://fribourg.ch/fr/estavayer-payerne/randonnees-pedestres/les-arbognes/)
 - Important: Whether the full loop is passable with a pushchair, and the condition of the approach to the tower, are not confirmed.
 
 ## La Maternelle d’Ursy · preschool group
@@ -8711,34 +8978,42 @@ To confirm before visiting:
 - Status: Current information available
 - Place: Bossonnens
 - District: Veveyse
-- Checked: 2026-09-28
-- Address: Vestiges de Bossonnens, 1615 Bossonnens
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Checked: 2026-11-08
+- Address: Visit address not published (descriptive area, exact entrances not established)
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Self-guided walk in daylight
+- Schedule: Schedule not published
 - Price: Price not published
-- Contact: Les Paccots Tourisme; 021 948 84 56; info@les-paccots.ch
-- The safety rules at board no. 3 are mandatory; the historic ruins require supervision of young children.
+- Contact: Les Paccots - La Veveyse Tourisme; +41 (0)21 948 84 56; info@les-paccots.ch
+- The panel numbering is not a required route, but the safety recommendations on panel no. 3 are mandatory.
 - Nearby parking is stated, but its exact address is not given.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): The tourist office describes a 3 km walk of about an hour with 11 information boards and the note "accessible with a pushchair". [Source](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/les-vestiges-de-bossonnens-sentier-didactique/)
+- **Trail panels** (Organiser source): The trail has eleven information panels. The panel numbering is not a required route, but the safety recommendations on panel no. 3 are mandatory. [Source](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/les-vestiges-de-bossonnens-sentier-didactique/)
+- **Route properties** (Organiser source): The tourism page lists the route as fairly easy, with a listed duration of 1 hour, a distance of 3 km and a climb of 69 m. [Source](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/les-vestiges-de-bossonnens-sentier-didactique/)
 
 To confirm before visiting:
 - The exact starting point and the actual condition of the surface after rain are not published.
+- What ages is the trail intended for, and may children walk it with or without an adult?
+- Is the trail free, and are there fixed opening times or a season?
+- What language are the information panels in?
+- Where exactly is the trailhead?
 
 - [Tourism: family trail, distance and pushchair](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/les-vestiges-de-bossonnens-sentier-didactique/)
 
 ### Visit conditions
 
-- Indoors: The tourist office describes a 3 km walk of about an hour with 11 information boards and the note "accessible with a pushchair". [Source](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/les-vestiges-de-bossonnens-sentier-didactique/)
+- Indoors: Not published [Source](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/les-vestiges-de-bossonnens-sentier-didactique/)
+- Parking: Parking nearby; whether it is paid is not stated. [Source](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/les-vestiges-de-bossonnens-sentier-didactique/)
+- Pushchair access: The tourism page labels the trail as accessible with a pushchair. [Source](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/les-vestiges-de-bossonnens-sentier-didactique/)
 - Important: The exact starting point and the actual condition of the surface after rain are not published.
 
 ## Au pays des Légendes · short loop
 
-- Status: Current information available
+- Status: Needs confirmation
 - Place: Echarlens
 - District: Gruyère / Greyerz
 - Checked: 2026-09-28
@@ -8749,23 +9024,27 @@ To confirm before visiting:
 - Schedule: Open forest trail, in suitable weather.
 - Price: Price not published.
 - Contact: Société de Développement du Lac de La Gruyère; +41 (0)26 915 08 00; tourisme@gruyere-nature.ch
-- With young children, choose the short loop rather than the six-kilometre option; the time will depend on stops.
-- The route follows forest trails and sturdy footwear is recommended; age limits and the entry price are not published.
+- Good walking shoes are recommended.
+- The short loop of about 3 km starts from Echarlens or Vuippens.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-07
 
 - **Availability and format** (Organiser source): The tourist office describes more than 20 illustrated legends and a short loop of about 3 km from Echarlens; the full route is about 6 km. [Source](https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/au-pays-des-legendes-de-la-gruyere/)
 - **Route options** (Organiser source): The tourist office lists three route options: a long route of about 6 km, a loop of about 3 km from Echarlens or Vuippens, and a second loop of about 3 km from Vuippens. It recommends good shoes. [Source](https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/au-pays-des-legendes-de-la-gruyere/)
+- **Duration and difficulty** (Organiser source): The tourist office rates the full 6 km route as easy with a stated duration of 2 hours. It says walking times are approximate and gives no separate duration for the 3 km loop. [Source](https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/au-pays-des-legendes-de-la-gruyere/)
 
 To confirm before visiting:
 - The exact start address, the condition of the trail and pushchair access are not confirmed.
 - Is an adult expected to accompany young children, and is there a recommended minimum age? The tourist office page does not say.
+- Is the trail open all year, and what is its current condition? The tourist office page gives no opening days or hours and links a separate trail-status page.
+- Is the short loop suitable for pushchairs? The page does not say.
+- Is there an entry price, a recommended age or parking at the start? The page does not say.
 
 - [Tourism: illustrated legends, route options and map](https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/au-pays-des-legendes-de-la-gruyere/)
 
 ### Visit conditions
 
-- Indoors: The tourist office describes more than 20 illustrated legends and a short loop of about 3 km from Echarlens; the full route is about 6 km. [Source](https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/au-pays-des-legendes-de-la-gruyere/)
+- Indoors: The walk follows paths and forest trails outdoors. [Source](https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/au-pays-des-legendes-de-la-gruyere/)
 - Important: The exact start address, the condition of the trail and pushchair access are not confirmed.
 
 ## Auried · nature trail and wildlife watching
@@ -8834,59 +9113,70 @@ To confirm before visiting:
 - Status: Current information available
 - Place: Wünnewil-Flamatt
 - District: Sense / Singine
-- Checked: 2026-09-28
-- Address: Waldrand Staffelsholz, 3184 Wünnewil
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Checked: 2026-11-08
+- Address: Visit address not published (descriptive area, exact entrances not established)
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Open place in the forest; daytime visit
+- Schedule: Schedule not published
 - Price: Price not published
-- Contact: Schwarzsee-Senseland Tourismus; 026 412 13 13; info@schwarzsee-tourismus.ch
-- You can reach it from Wünnewil on foot or by bicycle; check the exact forest entrance on the map on the tourism page.
-- A fire only under adult supervision; this is a picnic place, not an equipped children's playground.
+- The tourism page says the fireplace suits families and smaller groups, and can be reached from Wünnewil on foot or by bicycle.
+- The page names the forest Schaffelsholz; the card title spells it Staffelsholz.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): The tourist office describes this place at the forest edge as specifically suitable for families with children; firewood and a grill are provided. [Source](https://fribourg.ch/de/schwarzsee/picknickplaetze/feuerstelle-wunnewil-staffelsholz/)
+- **Availability and format** (Organiser source): The tourism page describes a small fireplace at the forest edge, suited to families and smaller groups and reachable from Wünnewil on foot or by bicycle. Firewood and a grate are available. [Source](https://fribourg.ch/de/schwarzsee/picknickplaetze/feuerstelle-wunnewil-staffelsholz/)
+- **Facilities** (Organiser source): The official tourism page lists firewood and a grill rack at the fireplace. It publishes no opening hours, fee, age range or visit address. [Source](https://fribourg.ch/de/schwarzsee/picknickplaetze/feuerstelle-wunnewil-staffelsholz/)
 
 To confirm before visiting:
 - The distance from the car park, the availability of a toilet and play equipment are not published.
+- What are the opening times, any fee, and the exact access point for the fireplace? The page publishes none of these.
+- May an adult stay with the child, and is there a toilet or play equipment nearby? The page does not say.
+- Is the fireplace outdoors only, and are there any opening times or fees? The page does not say.
 
 - [Tourism: family fireplace, firewood and grill](https://fribourg.ch/de/schwarzsee/picknickplaetze/feuerstelle-wunnewil-staffelsholz/)
 
 ### Visit conditions
 
-- Indoors: The tourist office describes this place at the forest edge as specifically suitable for families with children; firewood and a grill are provided. [Source](https://fribourg.ch/de/schwarzsee/picknickplaetze/feuerstelle-wunnewil-staffelsholz/)
+- Indoors: Not published [Source](https://fribourg.ch/de/schwarzsee/picknickplaetze/feuerstelle-wunnewil-staffelsholz/)
 - Important: The distance from the car park, the availability of a toilet and play equipment are not published.
 
 ## À tire d’ailes · play trail
 
-- Status: Current information available
+- Status: Needs confirmation
 - Place: La Verrerie
 - District: Veveyse
-- Checked: 2026-09-28
+- Checked: 2026-11-08
 - Address: Chemin de Montborget 56, 1611 La Verrerie
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Age: Age not published
+- Adult: Presented as a family trail for the whole family; the page sets no conditions on adult participation or watching.
 - Language: To be confirmed
-- Schedule: Open trail; check its condition for the season
+- Schedule: Schedule not published
 - Price: Price not published
-- About 20 minutes on foot from the Champ-de-l’Eglise bus stop; about 45 minutes from La Verrerie station.
-- The tourist office page states explicitly that the path is not suitable for people with reduced mobility; for young children, a baby carrier is better.
+- Each year from 1 December to 31 January the trail has a winter advent-calendar theme, with a small cabin opened each day.
+- By train, the trail is about a 45-minute walk from La Verrerie station; by bus (TPF 455 or 496) it is about 20 minutes on foot from the stop.
+- The tourist office page states that the trail is not accessible to people with reduced mobility.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): The tourist office describes a 2-kilometre forest loop, about an hour long, with bird-themed play structures and a picnic area. [Source](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-a-tire-dailes-le-cret/)
+- **Trail features and access** (Organiser source): The tourist office page describes a 2 km family loop trail through the forest with interactive panels, giant play and observation installations, a picnic area, and parking at the trailhead shared with the peat bog. [Source](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-a-tire-dailes-le-cret/)
 
 To confirm before visiting:
-- Suitability for pushchairs is not stated; the announcement of Christmas decorations refers to winter 2025/26 and does not confirm the 2026/27 season.
+- Is the route suitable for pushchairs?
+- What are the opening hours, and is the trail open all year?
+- Is access free or is there an admission price?
+- Is there a visitor toilet or changing table at the trailhead?
 
 - [Tourism: interactive trail, address, access and length](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-a-tire-dailes-le-cret/)
 
 ### Visit conditions
 
 - Indoors: The tourist office describes a 2-kilometre forest loop, about an hour long, with bird-themed play structures and a picnic area. [Source](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-a-tire-dailes-le-cret/)
-- Important: Suitability for pushchairs is not stated; the announcement of Christmas decorations refers to winter 2025/26 and does not confirm the 2026/27 season.
+- Parking: Parking spaces are available at the trailhead shared with the peat bog; the page does not say whether parking is free or paid. [Source](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-a-tire-dailes-le-cret/)
+- Play area: Giant play installations are placed along the trail; no separate play area, hours or age limits are published. [Source](https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-a-tire-dailes-le-cret/)
+- Important: The tourist office page states that the trail is not accessible to people with reduced mobility.
 
 ## Hauterive–La Souche · family game
 
@@ -9194,11 +9484,12 @@ To confirm before visiting:
 - The cabin is due for renovation in 2028.
 - Hiring the cabin costs CHF 100.00 per day for residents and CHF 200.00 per day for others; this is not the price of access to the playground.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-07
 
 - **Availability and format** (Organiser source): The commune confirms a children's playground next to the forest hut and a large car park. [Source](https://villorsonnens.ch/location-salles/)
 - **status** (Organiser source): The commune page says the forest cabin is closed in winter, from 15 October to 15 April, so it is out of season on 31 October 2026. The page does not say whether the playground itself is closed. [Source](https://villorsonnens.ch/location-salles/)
 - **Price** (Organiser source): The commune publishes the forest hut rental fee per day as CHF 100.00 for residents of Villorsonnens and CHF 200.00 for people from outside. This is a hut rental fee, not a playground charge. [Source](https://villorsonnens.ch/location-salles/)
+- **Good to know** (Organiser source): The commune page states that no hire of the forest cabin is granted to a minor. This concerns the person renting the cabin, not children visiting; the page gives no age range for the playground. [Source](https://villorsonnens.ch/location-salles/)
 
 To confirm before visiting:
 - It is not stated whether the playground can be used without renting the hut; the winter ban applies to the hut, and the rules for the playground are not defined.
@@ -9225,28 +9516,34 @@ To confirm before visiting:
 - Place: Sorens
 - District: Gruyère / Greyerz
 - Checked: 2026-09-28
-- Address: Camping de la Forêt, 1642 Sorens
+- Address: Camping de la Forêt, 1642 Sorens (descriptive area, exact entrances not established)
 - Age: Age limits are not published
 - Adult: Together with an adult
 - Language: To be confirmed
 - Schedule: Self-guided walk in daylight
 - Price: Price not published
-- Contact: La Gruyère Tourisme; 026 919 85 00; info@la-gruyere.ch
-- The start is near the campsite (stop: Sorens, Camping). The walk takes about 45 minutes at an ordinary pace; with young children it takes longer.
-- Self-guided route without booking. Age restrictions and entry fee are not published.
+- Contact: La Gruyère Tourisme; +41 (0)26 919 85 00; info@la-gruyere.ch
+- Picnic area along the route.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): The tourism page confirms a 3 km forest loop with wooden sculptures, a picnic area and the note "accessible with a pushchair". [Source](https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/chemin-des-sculptures/)
+- **Route and facilities** (Organiser source): The official trail page lists the loop as stroller accessible and mentions a picnic area along the route. [Source](https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/chemin-des-sculptures/)
 
 To confirm before visiting:
 - The condition of the surface after rain, the exact car park and whether there is a toilet along the route are not stated.
+- Is the trail open all year, and is there a season or closing period?
+- Is there an entry fee or is the walk free?
+- Is there an age recommendation for children?
+- Where exactly is the car park, and is there a visitor toilet near the start?
+- The official PDF leaflet could not be read, so details only in it remain unchecked.
 
 - [Tourism: 3 km, 45 minutes, sculptures, pushchair and stop](https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/chemin-des-sculptures/)
 
 ### Visit conditions
 
 - Indoors: The tourism page confirms a 3 km forest loop with wooden sculptures, a picnic area and the note "accessible with a pushchair". [Source](https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/chemin-des-sculptures/)
+- Pushchair access: The official trail page lists the route as stroller accessible. [Source](https://fribourg.ch/fr/la-gruyere/randonnees-pedestres/chemin-des-sculptures/)
 - Important: The condition of the surface after rain, the exact car park and whether there is a toilet along the route are not stated.
 
 ## Au Cœur des Monts · children's ski rental
@@ -9257,7 +9554,7 @@ To confirm before visiting:
 - Checked: 2026-09-28
 - Address: 1632 Riaz (descriptive area, exact entrances not established)
 - Age: Age limits are not published
-- Adult: Together with an adult
+- Adult: To be confirmed
 - Language: To be confirmed
 - Schedule: Wednesday 13:30–16:00; Saturday–Sunday 10:00–17:00 (season 1 Dec 2026 to 31 Mar 2027)
 - Price: Price not published
@@ -9265,16 +9562,20 @@ To confirm before visiting:
 - Opening depends on snow conditions.
 - During school holidays, open on weekdays 10:00–17:00 if the cross-country ski trails are open.
 
-### Additional check: 2026-11-03
+### Additional check: 2026-11-07
 
 - **Availability and format** (Organiser source): The tourism page confirms cross-country ski rental for adults and children. It publishes the 2026/27 winter hours only for when there is enough snow. [Source](https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/centre-de-location-et-dinitiation-ski-de-fond/)
 - **Season and hours** (Organiser source): The rental season is published as 1 Dec 2026 to 31 Mar 2027, with hours on Wednesday afternoon and on weekends. Opening depends on snow conditions, so it is not yet open as of early November. [Source](https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/centre-de-location-et-dinitiation-ski-de-fond/)
+- **School-holiday hours** (Organiser source): The tourism page says the centre is also open on weekdays from 10:00 to 17:00 during school holidays, but only if the cross-country trails are open. [Source](https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/centre-de-location-et-dinitiation-ski-de-fond/)
 
 To confirm before visiting:
 - The minimum age, children's equipment sizes, the cost and whether lessons for young children are offered are not published.
 - What is the minimum age for children's equipment, and which sizes are available?
 - What does the rental cost, and is booking needed?
 - Does the organizer offer lessons for young children?
+- What does the rental cost?
+- Is booking needed?
+- Can an adult stay with a child during the rental or an introduction?
 
 - [Tourism: children's rental, season and indicative hours](https://fribourg.ch/fr/la-gruyere/activites-en-plein-air/centre-de-location-et-dinitiation-ski-de-fond/)
 
@@ -9325,16 +9626,24 @@ To confirm before visiting:
 - Language: To be confirmed
 - Schedule: Open walking loop in daylight
 - Price: Price is not published
-- Contact: Commune de Corminboeuf; 026 475 26 46; commune@corminboeuf.ch
-- About 1 hour 20 minutes at an adult's pace; the full loop may be too long for young children.
-- Watch the animals from a distance and do not enter private land; the route is not a petting farm.
+- Contact: Administration communale (Corminboeuf); +41 26 475 26 46; commune@corminboeuf.ch
+- Listed difficulty: fairly easy (Assez facile).
+- Accessible by public transport, according to the route page.
+- The route page lists a walking time of 1 hour 20 minutes.
+- The route page gives the loop as 5.7 km in the description and 5 km in the route details.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-07
 
 - **Availability and format** (Organiser source): The tourist office describes the route as family-friendly and about 5 km long; it passes a botanical trail, a meadow with deer, bees and horses. [Source](https://fribourg.ch/fr/fribourg/randonnees-pedestres/randonnee-corminboeuf-faune-et-flore/)
+- **Route details** (Organiser source): The tourist office route page presents this loop as a family hike, lists it as fairly easy with a walking time of 1 hour 20 minutes, and says it is reachable by public transport and by car. [Source](https://fribourg.ch/fr/fribourg/randonnees-pedestres/randonnee-corminboeuf-faune-et-flore/)
 
 To confirm before visiting:
 - The official page gives 5.7 km in the description and 5 km in the route details; the exact start point and pushchair access are not confirmed.
+- Where does the loop start, and is there a parking place or bus stop near it?
+- Is the route suitable for pushchairs?
+- Are there toilets or a changing table along the route?
+- Is the walk open all year, and is any registration or fee needed?
+- Is the walk outdoors only? The page does not say so explicitly.
 
 - [Tourism: family loop, animals, length and GPX](https://fribourg.ch/fr/fribourg/randonnees-pedestres/randonnee-corminboeuf-faune-et-flore/)
 
@@ -9434,29 +9743,33 @@ To confirm before visiting:
 - Status: Current information available
 - Place: Bouloz
 - District: Veveyse
-- Checked: 2026-09-28
-- Address: Chemin des Bruyères, 1699 Bouloz
-- Age: Age limits are not published
-- Adult: Together with an adult
+- Checked: 2026-11-07
+- Address: Forêt des Esserts, at the end of Ch. des Bruyères, Bouloz (descriptive area, exact entrances not established)
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Open municipal playground; opening hours are not stated
+- Schedule: Schedule not published
 - Price: Price is not published
 - Contact: Commune Le Flon; 021 907 12 11; commune@leflon.ch
-- This is unstructured play with an adult; the municipal page does not state a schedule or conditions of entry.
-- The address indicates the access street, not a confirmed house number.
+- The commune page lists this playground only by name and approximate location; it gives no opening hours or entry conditions.
+- The page places it at the end of Chemin des Bruyères, in the Esserts forest, without a street number or visitor entrance.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-07
 
-- **Availability and format** (Organiser source): The commune of Le Flon lists a playground in Bouloz at the end of Chemin des Bruyères, by the Esserts forest. [Source](https://leflon.ch/vie-locale/sport)
+- **Availability and location** (Organiser source): The commune of Le Flon page on sport and leisure lists a playground at Bouloz, located at the end of Chemin des Bruyères in the Esserts forest. The page gives no hours, age range, price or facilities for it. [Source](https://leflon.ch/vie-locale/sport)
+- **Location and contact** (Organiser source): The commune of Le Flon sport page lists the Bouloz playground at the end of Ch. des Bruyères, in the Esserts forest, with no street number. The commune office phone and e-mail are given on the same page. The page gives no age range, hours, price or facilities for this playground. [Source](https://leflon.ch/vie-locale/sport)
 
 To confirm before visiting:
-- Equipment, age, toilet and parking are not described.
+- Is there an age range or any rule on adult supervision at this playground?
+- Are there a toilet, parking or a stroller-friendly path nearby?
+- What is the exact access point for visitors?
 
 - [Commune: Bouloz playground in the Esserts forest](https://leflon.ch/vie-locale/sport)
 
 ### Visit conditions
 
-- Indoors: The commune of Le Flon lists a playground in Bouloz at the end of Chemin des Bruyères, by the Esserts forest. [Source](https://leflon.ch/vie-locale/sport)
+- Indoors: Not published [Source](https://leflon.ch/vie-locale/sport)
+- Play area: The commune page lists a playground (Place de jeux) at Bouloz. [Source](https://leflon.ch/vie-locale/sport)
 - Important: Equipment, age, toilet and parking are not described.
 
 ## Les Montets · forest fitness trail
@@ -9472,21 +9785,25 @@ To confirm before visiting:
 - Schedule: Walk in daylight
 - Price: Price is not published
 - Contact: Commune Les Montets; 026 665 18 08; admin@les-montets.ch
-- With young children, this is a forest walk, not a run through the fitness stations.
 - Before the trip, check the entrance on the published municipal map.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
-- **Availability and format** (Organiser source): The commune describes a forest fitness trail (parcours vita) crossing the Petite Glâne; part of the route can be walked without doing the exercises. [Source](https://les-montets.ch/sports-loisirs-culture/sports)
+- **Availability and format** (Organiser source): The commune presents the forest trail across the Petite Glâne as a place to get fresh air, relax, walk or exercise outdoors. Access is shown on an attached plan or by visiting the site. [Source](https://les-montets.ch/sports-loisirs-culture/sports)
 
 To confirm before visiting:
 - Length, starting point, surface, pushchair access and the condition of the footbridge are not stated.
+- What age guidance, if any, applies to the trail?
+- When is the trail open?
+- Where exactly does the trail start, and is there parking?
+- Is the trail free to use?
+- Is the route suitable for pushchairs, and what is the surface like?
 
 - [Commune: forest route across the Petite Glâne](https://les-montets.ch/sports-loisirs-culture/sports)
 
 ### Visit conditions
 
-- Indoors: The commune describes a forest fitness trail (parcours vita) crossing the Petite Glâne; part of the route can be walked without doing the exercises. [Source](https://les-montets.ch/sports-loisirs-culture/sports)
+- Indoors: The trail runs through the forest, so it is outdoors. [Source](https://les-montets.ch/sports-loisirs-culture/sports)
 - Important: Length, starting point, surface, pushchair access and the condition of the footbridge are not stated.
 
 ## Les P’tits Pruneaux · garderie
@@ -9608,22 +9925,26 @@ To confirm before visiting:
 - Place: Surpierre
 - District: Broye
 - Checked: 2026-09-28
-- Address: Place de pique-nique Surpierre; ask for the exact access route.
+- Address: Place de pique-nique Surpierre; ask for the exact access route. (descriptive area, exact entrances not established)
 - Age: Age limits are not published.
 - Adult: Together with an adult
 - Language: To be confirmed
 - Schedule: An open place in daylight.
 - Price: The price is not published.
-- Contact: Commune de Surpierre; 026 668 10 20; secretariat@surpierre-fr.ch
+- Contact: Administration communale de Surpierre; +41 26 668 10 20; secretariat@surpierre-fr.ch
 - This is a picnic and a short walk with a parent, not a confirmed playground for children.
 - Check the current cantonal restrictions before lighting a fire.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): The tourism page confirms a forest spot with a table and a fireplace, no booking required. [Source](https://fribourg.ch/fr/estavayer-payerne/places-de-pique-nique/place-de-pique-nique-surpierre/)
+- **Place description** (Organiser source): The official tourism listing describes a picnic table and a fireplace at the edge of the forest in Surpierre. It names the place only at village level, so the exact entrance is not published. [Source](https://fribourg.ch/fr/estavayer-payerne/places-de-pique-nique/place-de-pique-nique-surpierre/)
 
 To confirm before visiting:
 - The exact entrance, play equipment, toilet and fire restrictions are not stated.
+- Is a reservation needed? The tourism listing says none, but the commune's leisure page mentions a parish-run reservation for a picnic place called Bois des Meules; families should ask the commune whether it is the same site.
+- Where exactly is the entrance and access route?
+- Are there opening times, a price, parking, a toilet or fire restrictions?
 
 - [Tourism: table and fireplace by the forest, no booking](https://fribourg.ch/fr/estavayer-payerne/places-de-pique-nique/place-de-pique-nique-surpierre/)
 
@@ -9787,7 +10108,7 @@ To confirm before visiting:
 - Place: Botterens
 - District: Gruyère / Greyerz
 - Checked: 2026-09-28
-- Address: Centre of Botterens, 1652 Botterens; confirm the exact entrance.
+- Address: Centre of Botterens, 1652 Botterens; confirm the exact entrance. (descriptive area, exact entrances not established)
 - Age: Age limits are not published.
 - Adult: Together with an adult
 - Language: To be confirmed
@@ -9797,12 +10118,17 @@ To confirm before visiting:
 - The sports elements are not necessarily designed for young children; choose according to the child's abilities.
 - The contractor does not give the exact address. The address it lists is the client's and should not be taken as the entrance to the playground.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-07
 
 - **Availability and format** (Organiser source): The contractor confirms the playground was handed over in July 2023. The sponsor describes play houses, a slide, multisport equipment and a picnic table. [Source](https://www.realsport.ch/fr/references/botterens-espace-ludique)
+- **Equipment and location** (Organiser source): The sponsor's release describes a play and meeting area in the centre of the village of Botterens, with play equipment for children of all ages: cabins, a slide, a multi-sport pitch and a picnic table. It does not give opening hours, an age range, prices or an exact entrance. [Source](https://www.mobiliere.ch/agences-generales/bulle/botterens-soutien-de-la-mobiliere-en-faveur-de-la-place-de-jeux)
 
 To confirm before visiting:
 - The exact opening hours, the age range for the play houses and the condition of the equipment in 2026 are not published.
+- What are the opening hours of the playground?
+- Is there an age range for the play equipment, and is it suitable for the youngest children?
+- Where exactly is the entrance, and is there parking nearby?
+- Is there a toilet or changing table at the playground?
 
 - [Contractor: construction and handover of the playground in 2023](https://www.realsport.ch/fr/references/botterens-espace-ludique)
 - [Sponsor: play equipment and a location in the village centre](https://www.mobiliere.ch/agences-generales/bulle/botterens-soutien-de-la-mobiliere-en-faveur-de-la-place-de-jeux)
@@ -9810,6 +10136,7 @@ To confirm before visiting:
 ### Visit conditions
 
 - Indoors: The contractor confirms the playground was handed over in July 2023. The sponsor describes play houses, a slide, multisport equipment and a picnic table. [Source](https://www.realsport.ch/fr/references/botterens-espace-ludique)
+- Play area: The sponsor describes a new space with play equipment for children of all ages. [Source](https://www.mobiliere.ch/agences-generales/bulle/botterens-soutien-de-la-mobiliere-en-faveur-de-la-place-de-jeux)
 - Important: The exact opening hours, the age range for the play houses and the condition of the equipment in 2026 are not published.
 
 ## OTAVELA Hauteville · playground by the hall
@@ -9853,33 +10180,39 @@ To confirm before visiting:
 
 ## La Montagnetta · shore and picnic
 
-- Status: Current information available
+- Status: Needs confirmation
 - Place: Corbières
 - District: Gruyère / Greyerz
-- Checked: 2026-09-28
-- Address: Below the church of Corbières, 1647 Corbières
-- Age: Age limits are not published.
-- Adult: Together with an adult
+- Checked: 2026-11-07
+- Address: Visit address not published (descriptive area, exact entrances not established)
+- Age: Age not published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Lakeshore visits in summer, in suitable weather.
+- Schedule: Schedule not published
 - Price: Price not published.
-- Contact: Commune de Corbières
-- An adult must be close by at all times at the water. An equipped picnic area does not mean a supervised beach.
-- The exact access route and parking should be checked on site.
+- The commune page describes picnic tables and grill spots on the beach below the church; it does not describe a supervised beach.
+- The lake shores cannot be reached by vehicle: visitors walk from the bus stops or the village car park.
+- Public toilets on the beach are available in the summer season only, and a recycling point is on the beach.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-07
 
 - **Availability and format** (Organiser source): The commune lists access to Lake La Montagnetta below the church, with tables and grill areas. [Source](https://corbieres.ch/lac-et-montagne/)
+- **Toilets** (Organiser source): The commune lists public toilets on the lakeside beaches below the Montagnetta and Planches districts in the summer season, and a recycling point on the Montagnetta beach. [Source](https://corbieres.ch/lac-et-montagne/)
+- **Access** (Organiser source): The commune says the lake shores cannot be reached by vehicle; visitors walk from the bus stops or the municipal car park. [Source](https://corbieres.ch/lac-et-montagne/)
 
 To confirm before visiting:
-- Lifeguard, water depth near the shore, toilet, season and suitability of the water entry for small children are not published.
+- Is there a lifeguard, and how deep is the water near the shore? Is the water entry suitable for small children?
+- What are the beach's opening season and any fee?
+- Where exactly is the footpath entrance to the beach, and are there any age or adult-supervision rules?
 
 - [Commune: shore, picnic tables and grill](https://corbieres.ch/lac-et-montagne/)
 
 ### Visit conditions
 
-- Indoors: The commune lists access to Lake La Montagnetta below the church, with tables and grill areas. [Source](https://corbieres.ch/lac-et-montagne/)
-- Important: Lifeguard, water depth near the shore, toilet, season and suitability of the water entry for small children are not published.
+- Indoors: Not published [Source](https://corbieres.ch/lac-et-montagne/)
+- Toilet: Public toilets are available on the lakeside beaches in the summer season; no hours are published. [Source](https://corbieres.ch/lac-et-montagne/)
+- Important: The lake shores cannot be reached by vehicle: visitors walk from the bus stops or the village car park.
+- Important: Public toilets on the beach are available in the summer season only.
 
 ## Sentier des Sorcières · forest loop
 
@@ -9887,9 +10220,9 @@ To confirm before visiting:
 - Place: Vuadens
 - District: Gruyère / Greyerz
 - Checked: 2026-09-28
-- Address: Ô Colombettes, 1628 Vuadens; start approximately 50 m below
+- Address: Ô Colombettes, 1628 Vuadens; start approximately 50 m below (descriptive area, exact entrances not established)
 - Age: Age limits are not published
-- Adult: Together with an adult
+- Adult: The official trail page asks for supervision of young children and of walkers inexperienced in mountain hiking; no organised adult-participation rule is published.
 - Language: To be confirmed
 - Schedule: Self-guided walk in daylight
 - Price: Price not published
@@ -9897,19 +10230,26 @@ To confirm before visiting:
 - For young children the whole loop may be too long; you can walk a short section and turn back.
 - Do not use the Vuadens school playground as an alternative: municipal rules restrict it during school hours.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): The commune describes a themed loop of about 6 km with parking at Ô Colombettes and a start approximately 50 m below. [Source](https://www.vuadens.ch/generalites/tourisme-et-loisirs/)
+- **Route and walking time** (Organiser source): The official trail site describes a 4.5 km loop with a walking time of about 2 hours. [Source](https://www.sentierdessorcieres.org/parcours)
 
 To confirm before visiting:
 - Pushchair access, surface condition and suitability of the full loop for different ages have not been established.
+- Is there an entrance fee or any opening restriction for the trail, and is it open at the moment?
+- Is the route suitable for pushchairs?
+- What is the exact length of the loop: 4.5 km on the official trail site or about 6 km on the commune page?
 
 - [Commune: 6 km, parking and start](https://www.vuadens.ch/generalites/tourisme-et-loisirs/)
 - [Commune: route maintenance costs](https://www.vuadens.ch/wp-content/uploads/2025/05/2.-Commune-Rapport-de-gestion-2024.pdf)
+- [Additional check: Route and walking time](https://www.sentierdessorcieres.org/parcours)
 
 ### Visit conditions
 
-- Indoors: The commune describes a themed loop of about 6 km with parking at Ô Colombettes and a start approximately 50 m below. [Source](https://www.vuadens.ch/generalites/tourisme-et-loisirs/)
+- Duration: Walking time is about 2 hours (approximate). [Source](https://www.sentierdessorcieres.org/parcours)
+- Indoors: The trail is a walking loop outdoors, through the hills above Vuadens. [Source](https://www.sentierdessorcieres.org/)
+- Parking: Visitors can park at Ô Colombettes; no parking fee is stated. [Source](https://www.vuadens.ch/generalites/tourisme-et-loisirs/)
 - Important: Pushchair access, surface condition and suitability of the full loop for different ages have not been established.
 
 ## Montagne de Lussy · forest loop of 3 km
@@ -9984,28 +10324,39 @@ To confirm before visiting:
 - Place: Autigny
 - District: Sarine / Saane
 - Checked: 2026-09-28
-- Address: Parc d’Autigny, 1742 Autigny; entrance to be confirmed
+- Address: Parc d’Autigny, 1742 Autigny; entrance to be confirmed (descriptive area, exact entrances not established)
 - Age: Age limits are not published.
 - Adult: Together with an adult
 - Language: To be confirmed
 - Schedule: Open park; opening hours are not published.
 - Price: Price not published.
 - Contact: Commune d’Autigny; commune@autigny.ch
-- The park is by the river Glâne; constant supervision is required near the water.
-- The zip line may not be suitable for young children; there is an ordinary play area.
+- Covered picnic shelter and fire place with grill are listed.
+- Water point and WC are listed.
+- Nearest bus stop: Autigny, église.
+- The listing publishes no opening hours, age limits or prices; it names the commune as contact (commune@autigny.ch).
+- The listed postal address is the commune office, not a published park entrance.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-07
 
 - **Availability and format** (Organiser source): The regional association confirms a playground, a zip line, a covered picnic area, WC and pushchair access. [Source](https://par-chez-nous.ch/places/parc-dautigny/)
+- **Facilities** (Organiser source): The regional venue listing for the park shows a play area, covered picnic shelter, fire place with grill, water point, WC, parking, and stroller and wheelchair access. The nearest bus stop is Autigny, église. [Source](https://par-chez-nous.ch/places/parc-dautigny/)
 
 To confirm before visiting:
 - The exact entrance, the age of the equipment and the condition of the playground after bad weather are not stated.
+- What are the park's opening hours, and does it have any age limits or an entrance fee?
+- Where exactly is the visitor entrance to the park?
+- Is the park open all year, and is the play area suitable for the youngest children?
 
 - [Sarine regional association: play, picnic, WC and access](https://par-chez-nous.ch/places/parc-dautigny/)
 
 ### Visit conditions
 
-- Indoors: The regional association confirms a playground, a zip line, a covered picnic area, WC and pushchair access. [Source](https://par-chez-nous.ch/places/parc-dautigny/)
+- Indoors: The venue description presents the park as an outdoor visit. [Source](https://par-chez-nous.ch/places/parc-dautigny/)
+- Parking: Parking is listed for the park. Whether it is free or paid is not published. [Source](https://par-chez-nous.ch/places/parc-dautigny/)
+- Pushchair access: The listing mentions access for wheelchairs and strollers. [Source](https://par-chez-nous.ch/places/parc-dautigny/)
+- Toilet: A WC is listed among the park facilities. Its opening hours are not published. [Source](https://par-chez-nous.ch/places/parc-dautigny/)
+- Play area: A play area is listed. Its age limits and admission rules are not published. [Source](https://par-chez-nous.ch/places/parc-dautigny/)
 - Important: The exact entrance, the age of the equipment and the condition of the playground after bad weather are not stated.
 
 ## Les Simon · renewed playground
@@ -10055,12 +10406,16 @@ To confirm before visiting:
 - The current page shows the mini-golf as temporarily closed; do not plan a trip for it.
 - Parking and Chénens station are listed as ways to get there.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-07
 
 - **Availability and format** (Organiser source): The regional association lists a children's playground, a picnic area and pushchair access near Chénens station. [Source](https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/)
+- **About** (Visitor experience): The regional listing names a football pitch, outdoor fitness equipment, a beach-volleyball court and a minigolf at the park. [Source](https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/)
 
 To confirm before visiting:
 - Facilities for young children, the exact entrance and the hours of open access are not published.
+- What are the park's opening hours and which entrance should families use?
+- Is there an admission price, and are there age limits for the play area or minigolf?
+- When will the minigolf reopen?
 
 - [Sarine regional association: playground, access and closed mini-golf](https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/)
 
@@ -10071,32 +10426,37 @@ To confirm before visiting:
 
 ## Place de jeux de Ferpicloz
 
-- Status: Current information available
+- Status: Needs confirmation
 - Place: Ferpicloz
 - District: Sarine / Saane
-- Checked: 2026-09-28
-- Address: Centre Ferpicloz, 1724 Ferpicloz; check the entrance
-- Age: Age limits are not published.
-- Adult: Together with an adult
+- Checked: 2026-11-08
+- Address: Visit address not published (descriptive area, exact entrances not established)
+- Age: Equipment adapted to different ages; no age range published
+- Adult: Conditions for adult participation not published
 - Language: To be confirmed
-- Schedule: Open playground; opening hours are not published.
+- Schedule: Schedule not published
 - Price: Price is not published.
 - Contact: Commune de Ferpicloz; administration@ferpicloz.ch
-- The zip line should not be considered suitable for young children without checking on site.
-- The page lists parking and the Le Mouret, Village stop.
+- The regional listing shows a Parking label without details, and names the bus stop Le Mouret, Village.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): The regional association confirms a central playground with modules for different ages and a zip line; pushchair access is marked. [Source](https://par-chez-nous.ch/places/place-de-jeux-de-ferpicloz/)
+- **Facilities and access** (Organiser source): The regional listing describes an open-air play area, lists a play space and marks pushchair and reduced-mobility access. [Source](https://par-chez-nous.ch/places/place-de-jeux-de-ferpicloz/)
+- **Contact** (Organiser source): The regional listing gives an e-mail address of the Ferpicloz commune office as the contact for the play area. [Source](https://par-chez-nous.ch/places/place-de-jeux-de-ferpicloz/)
 
 To confirm before visiting:
 - The exact entrance, the age for each module and the opening hours are not stated.
+- Is an adult expected to stay with the children, and is there an age guide for each module?
+- What are the opening hours and the visitor entrance address?
 
 - [Sarine regional association: play modules and access](https://par-chez-nous.ch/places/place-de-jeux-de-ferpicloz/)
 
 ### Visit conditions
 
-- Indoors: The regional association confirms a central playground with modules for different ages and a zip line; pushchair access is marked. [Source](https://par-chez-nous.ch/places/place-de-jeux-de-ferpicloz/)
+- Indoors: The regional listing describes the play area as an open-air space. [Source](https://par-chez-nous.ch/places/place-de-jeux-de-ferpicloz/)
+- Pushchair access: The listing marks pushchair and reduced-mobility access; no route details are given. [Source](https://par-chez-nous.ch/places/place-de-jeux-de-ferpicloz/)
+- Play area: The listing names a play area with several play modules. [Source](https://par-chez-nous.ch/places/place-de-jeux-de-ferpicloz/)
 - Important: The exact entrance, the age for each module and the opening hours are not stated.
 
 ## Parc de la grande école de Treyvaux
@@ -10105,9 +10465,9 @@ To confirm before visiting:
 - Place: Treyvaux
 - District: Sarine / Saane
 - Checked: 2026-09-28
-- Address: Grande école, 1733 Treyvaux; entrance to be confirmed
+- Address: Grande école, 1733 Treyvaux; entrance to be confirmed (descriptive area, exact entrances not established)
 - Age: Age limits are not published
-- Adult: Together with an adult
+- Adult: To be confirmed
 - Language: To be confirmed
 - Schedule: Free access outside lesson times is not confirmed
 - Price: Price not published
@@ -10115,10 +10475,10 @@ To confirm before visiting:
 - Check the rules with the commune before making a separate trip.
 - The administration address, Route d’Arconciel 3, should not be taken as the entrance to the playground.
 
-### Additional check: 2026-11-03
+### Additional check: 2026-11-07
 
 - **Availability and format** (Organiser source): The regional association describes a playground, a shaded picnic area and play modules by the school. [Source](https://par-chez-nous.ch/places/ecole-de-treyvaux/)
-- **Facilities** (Organiser source): The regional association's page describes a park with a basketball court, a shaded picnic area and play modules suited to children, and lists parking among its facilities. [Source](https://par-chez-nous.ch/places/ecole-de-treyvaux/)
+- **Facilities and access** (Organiser source): The regional directory lists the park with a basketball court, a shaded picnic area and play modules for children. It names the Treyvaux, village bus stop under access and lists 'Parking' in the access section without saying whether it is for visitors or where it is. It publishes no opening hours, age range, price or booking rules. [Source](https://par-chez-nous.ch/places/ecole-de-treyvaux/)
 
 To confirm before visiting:
 - There is no explicit confirmation that families from outside the school may use the school playground outside school hours.
@@ -10126,45 +10486,55 @@ To confirm before visiting:
 - What are the opening hours and the visitor entrance to the park?
 - Is there an age range for the play modules?
 - Are there a visitor toilet, a changing table and a stroller-friendly route?
+- Which entrance do visitors use, and is the park open to families from outside the school outside school hours?
+- Is the parking listed for visitors, and where is it?
+- May an adult stay with the child, and are there any conditions?
 
 - [Sarine regional association: playground, picnic and sport](https://par-chez-nous.ch/places/ecole-de-treyvaux/)
 
 ### Visit conditions
 
 - Indoors: The regional association describes a playground, a shaded picnic area and play modules by the school. [Source](https://par-chez-nous.ch/places/ecole-de-treyvaux/)
-- Parking: Parking is listed among the facilities on the park's page. Number of spaces and whether it is paid are not stated. [Source](https://par-chez-nous.ch/places/ecole-de-treyvaux/)
+- Parking: The park page lists 'Parking' in its access section without saying whether it is for visitors or where it is. Spaces and cost are not stated. [Source](https://par-chez-nous.ch/places/ecole-de-treyvaux/)
 - Play area: The park page describes play modules suited to children and lists a play space among its facilities. [Source](https://par-chez-nous.ch/places/ecole-de-treyvaux/)
 - Important: There is no explicit confirmation that families from outside the school may use the school playground outside school hours.
 
 ## Parc de l’école d’Onnens
 
-- Status: Current information available
+- Status: Needs confirmation
 - Place: Onnens
 - District: Sarine / Saane
 - Checked: 2026-09-28
-- Address: École d’Onnens, 1756 Onnens; entrance to be confirmed
+- Address: École d’Onnens, 1756 Onnens; entrance to be confirmed (descriptive area, exact entrances not established)
 - Age: Age limits are not published.
-- Adult: Together with an adult
+- Adult: To be confirmed
 - Language: To be confirmed
 - Schedule: Public access hours are not stated.
 - Price: Price not published.
 - Contact: Commune de La Brillaz; commune@labrillaz.ch
-- During school hours, schoolchildren may have priority. Check the rules on site before visiting.
-- Bus stop Onnens FR, Eglise. Parking is listed by the regional association.
+- Bus stop listed nearby: Onnens FR, Eglise.
 
-### Additional check: 2026-09-28
+### Additional check: 2026-11-08
 
 - **Availability and format** (Organiser source): The regional association describes an intergenerational park with equipment for young children and pushchair access. The commune reported a renovation in 2025. [Source](https://par-chez-nous.ch/places/ecole-donnens/)
+- **Facilities and access** (Organiser source): The regional listing shows a play area, stroller and reduced-mobility access, and parking. It publishes no opening hours, age range, price or visitor entrance. [Source](https://par-chez-nous.ch/places/ecole-donnens/)
 
 To confirm before visiting:
 - It is not published whether access is restricted during school lessons, or where the exact entrance is.
+- What are the opening hours, and is access limited during school lessons?
+- Is there an admission price or an age limit for the play equipment?
+- Is there a visitor toilet or changing table at the park?
+- Is the playground currently open, given the renovation being studied by the commune?
 
 - [Sarine regional association: playground for young children and access](https://par-chez-nous.ch/places/ecole-donnens/)
 - [Commune: playground renovation in 2025](https://labrillaz.ch/wp-content/uploads/2026/04/Rapport_gestion_2025_approuve_CC_23.03.2026_correctif.pdf)
 
 ### Visit conditions
 
-- Indoors: The regional association describes an intergenerational park with equipment for young children and pushchair access. The commune reported a renovation in 2025. [Source](https://par-chez-nous.ch/places/ecole-donnens/)
+- Indoors: The park is described as an open-air space for play, exercise and relaxation. [Source](https://par-chez-nous.ch/places/ecole-donnens/)
+- Parking: Parking is listed as an access feature; spaces, location and cost are not stated. [Source](https://par-chez-nous.ch/places/ecole-donnens/)
+- Pushchair access: The regional listing states stroller and reduced-mobility access; the route is not described. [Source](https://par-chez-nous.ch/places/ecole-donnens/)
+- Play area: The regional listing includes a play area. [Source](https://par-chez-nous.ch/places/ecole-donnens/)
 - Important: It is not published whether access is restricted during school lessons, or where the exact entrance is.
 
 ## Parc de l’école de Prez-vers-Noréaz
@@ -10211,7 +10581,7 @@ To confirm before visiting:
 - Place: Arconciel
 - District: Sarine / Saane
 - Checked: 2026-09-28
-- Address: Place de l'Arche, Arconciel (descriptive area, exact entrances not established)
+- Address: Place de l'Arche, Arconciel
 - Age: Age limits are not published
 - Adult: Together with an adult
 - Language: To be confirmed
@@ -10221,9 +10591,9 @@ To confirm before visiting:
 - Small format: suitable as a short stop, not as a large play centre.
 - Bus stop Arconciel, Village; parking is listed on the venue page.
 
-### Additional check: 2026-10-31
+### Additional check: 2026-11-07
 
-- **Location and contact** (Organiser source): The regional listing places the Place de l'Arche playground in Arconciel at area level; no house number is given for the playground itself. The contact shown is the commune of Bois d'Amont, named in the listing header together with Arconciel. Parking, wheelchair and pushchair access and a play space are listed. [Source](https://par-chez-nous.ch/places/place-de-larche/)
+- **Location** (Organiser source): The regional listing describes Place de l'Arche as a round square in the centre of Arconciel with a small playground, and names the bus stop Arconciel, Village. It gives no house number for the playground, and no age range, hours or fees. [Source](https://par-chez-nous.ch/places/place-de-larche/)
 
 To confirm before visiting:
 - Play equipment, age and hours are not detailed.
@@ -11026,23 +11396,24 @@ To confirm before visiting:
 - Adult: An accompanying adult (parent, grandparent or similar) attends with the young child and shares the lesson with them; the page does not say whether the adult must stay for the whole session.
 - Language: To be confirmed
 - Schedule: Weekly group lessons of 45 minutes; the weekday and time are not shown on the course page.
-- Price: CHF 147 per billing cycle, 45-minute weekly parent–child class
+- Price: CHF 147 per billing cycle (billed every two months) for the 45-minute weekly parent–child class, plus a school fee of CHF 15 per pupil per cycle
 - Contact: Artist Factory · administration; +41 26 525 09 02; info@artistfactory.ch
 - Siblings under 18 months are welcome and take part in the class free of charge.
 
 ### Additional check: 2026-11-07
 
 - **Age and group** (Organiser source): The programme is for ages 18 months to 4 years, 45 minutes weekly, 4–6 children. An adult takes part together with the child. [Source](https://www.artistfactory.ch/cours/eveil_musical)
-- **Price** (Organiser source): CHF 147 plus CHF 15 for each two-month cycle. The school year consists of four cycles. At an unchanged price, CHF 648 per year. [Source](https://www.artistfactory.ch/cours/tarifs)
 - **Trial lesson and commitment** (Organiser source): The school offers a free trial lesson without obligation. After enrolment, the course runs until the end of the school year and renews automatically. Cancellation requires a letter by post by 31 May. [Source](https://www.artistfactory.ch/infos/faq)
 - **Schedule and group** (Organiser source): The parent–child class is a weekly 45-minute group lesson for 4 to 6 children. The course page does not show the weekday or time. [Source](https://www.artistfactory.ch/cours/eveil_musical)
 - **Price** (Organiser source): The parent–child class costs CHF 147 per billing cycle, and a school fee of CHF 15 per student per cycle is charged separately. A school year has four two-month billing cycles. [Source](https://www.artistfactory.ch/cours/tarifs)
+- **Price** (Organiser source): The parent–child class costs CHF 147 per two-month billing cycle. A separate school fee of CHF 15 per pupil per cycle is also listed, and the FAQ says the course price does not include it, so both are charged each cycle. Whether any further total applies is not stated. [Source](https://www.artistfactory.ch/cours/tarifs)
 
 To confirm before visiting:
-- Is there currently a place in the Wednesday group, who leads it and in which language?
 - How exactly does the free trial lesson work for an adult–child pair? Is it possible to start in the middle of a cycle, and how is the first invoice recalculated?
 - Which weekday and time does the parent–child group meet at the Givisiez academy, and is a place currently available?
 - Is there visitor parking at the academy itself, and is the entrance accessible with a stroller?
+- Which weekday and time does the parent–child class meet, and is a place currently available?
+- Who leads the parent–child class and in which language is it taught?
 
 - [Parent–child programme](https://www.artistfactory.ch/cours/eveil_musical)
 - [2026 timetable, Fribourg branch](https://www.artistfactory.ch/doc/AF_horaires_15.pdf)

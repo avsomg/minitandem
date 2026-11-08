@@ -131,36 +131,36 @@ test('the real cards: which are affected on 17 October 2026, in all three langua
     const shown=lang==='en'?{card:a=>a}:CI.overlay(S.records,files[lang],S.window.MinitandemViews.PRACTICAL_ORDER);
     affected[lang]=plain(S.records.filter(a=>S.P.current(shown.card(a),today)!==shown.card(a)).map(a=>a.id).sort());
   }
-  assert.deepEqual(affected.en,['ile','krabbel-ursen','sentier-botanique-vully']);
+  // L’île aux trésors left this list with its approved update of 7 November 2026: the closure of 3–10 October gave way to one on 7 November.
+  assert.deepEqual(affected.en,['krabbel-ursen','sentier-botanique-vully']);
   assert.deepEqual(affected.de,affected.en,'German');assert.deepEqual(affected.fr,affected.en,'French');
-  const closureWords={en:/Closed 3–10 October 2026/,de:/Geschlossen 3–10 Oktober 2026/,fr:/Fermé 3–10 octobre 2026/};
+  const closureAhead={en:/^Closed on Saturday 7 November 2026$/,de:/7\. November 2026/,fr:/7 novembre 2026/};
   const nextMeeting={en:/next published meeting/,de:/nächste veröffentlichte Treffen/,fr:/prochaine rencontre publiée/};
   for(const lang of ['en','de','fr']){
     const S=loadStack({today,lang}),CI=S.window.MinitandemCatalogueI18n;
     const shown=lang==='en'?null:CI.overlay(S.records,files[lang],S.window.MinitandemViews.PRACTICAL_ORDER);
     const V=shown?S.window.MinitandemViews.create({t:S.t,C:S.C,P:S.P,X:S.X,F:S.F,store:S.store,state:()=>S.state,shown:shown.card,inEnglish:a=>!shown.translated(a)}):S.V;
     const ile=V.detail(S.byId.get('ile')),krabbel=V.detail(S.byId.get('krabbel-ursen'));
-    assert.ok(!closureWords[lang].test(ile),lang+': no "Closed 3–10 October 2026" on the card of L’île aux trésors');
-    assert.ok(/class="warns"/.test(ile),lang+': its other warnings stay');
-    assert.match(ile,lang==='en'?/closed 3–10 October</:lang==='de'?/geschlossen 3\.–10\. Oktober</:/fermé 3–10 octobre</,lang+': the closure in its schedule has no year, so it stays');
+    // A closure that has not ended yet stays: L’île aux trésors is closed on 7 November 2026.
+    const warning=(shown?shown.card(S.byId.get('ile')):S.byId.get('ile')).practical.warnings[0];
+    assert.match(warning,closureAhead[lang],lang+': the closure ahead, in this language');
+    assert.ok(ile.includes(V.esc(warning))&&/class="warns"/.test(ile),lang+': an open closure stays on the card of L’île aux trésors');
     assert.ok(!nextMeeting[lang].test(krabbel),lang+': no "next published meeting 15 October" on the card of Krabbelgruppe Ursen');
     assert.ok(krabbel.includes(shown?shown.card(S.byId.get('krabbel-ursen')).research.findings[0].text.split('. ')[0]:S.byId.get('krabbel-ursen').research.findings[0].text.split('. ')[0]),lang+': the rest of that finding stays');
-    // A closure that has not ended yet stays: the café in Kerzers is closed until 18 October.
-    const kafi=S.byId.get('kafi8-kerzers'),text=(shown?shown.card(kafi):kafi).schedule;
-    assert.match(text,/18/);assert.ok(V.detail(kafi).includes(V.esc(text)),lang+': an open closure stays');
   }
 });
 
 test('the plain page of a card follows the same rule, by the date it is built on',()=>{
-  const {byId,window:W}=loadStack({today:'2026-10-10'}),ile=byId.get('ile'),regions=W.CATALOG_REGIONS;
-  assert.ok(placePage(ile,regions,'2026-10-10').includes('Closed 3–10 October 2026'),'on the last day of the closure');
-  const later=placePage(ile,regions,'2026-10-17');
-  assert.ok(!later.includes('Closed 3–10 October 2026')&&!later.includes('visit-warnings'),'the plaque is gone, and with it the empty list');
-  assert.ok(later.includes('Mon, Wed 09:00–18:00; Sat 14:00–18:00'),'the schedule keeps its hours');
-  assert.ok(later.includes('closed 3–10 October</dd>'),'a closure written without a year stays: it may be a yearly one');
+  // L’île aux trésors announces a closure on Saturday 7 November 2026 since its approved update of that day. A closure written without
+  // a year, which may be a yearly one, is pinned in the first test of this file.
+  const {byId,window:W}=loadStack({today:'2026-11-07'}),ile=byId.get('ile'),regions=W.CATALOG_REGIONS;
+  assert.ok(placePage(ile,regions,'2026-11-07').includes('Closed on Saturday 7 November 2026'),'on the day of the closure');
+  const later=placePage(ile,regions,'2026-11-08');
+  assert.ok(!later.includes('Closed on Saturday 7 November 2026')&&!later.includes('visit-warnings'),'the plaque is gone, and with it the empty list');
+  assert.ok(later.includes('Monday 9:00-18:00, Wednesday 9:00-18:00 and Saturday 14:00-18:00'),'the schedule keeps its hours');
   const vully=placePage(byId.get('sentier-botanique-vully'),regions,'2026-10-17');
   assert.ok(!vully.includes('unavailability due to works')&&vully.includes('Check for new restrictions before the trip.'),'a note keeps its other sentence');
-  assert.equal(ile.practical.warnings[0],'Closed 3–10 October 2026','the data are not changed');
+  assert.equal(ile.practical.warnings[0],'Closed on Saturday 7 November 2026','the data are not changed');
 });
 
 test('the files the visitor downloads follow the same rule: no obsolete closure or "next meeting" in the calendar entry, the catalogue or the address list',()=>{

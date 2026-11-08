@@ -206,9 +206,11 @@ test('a finding headed by the name of a card field shows the interface label for
   const {V:fallback}=translated('de',{cards:[card],data:{}});
   assert.match(fallback.detail(card),new RegExp(`<span class="ff" lang="de">${D.de['fact.parent']}</span>`));
   // The real cards: no heading on a card page in any language, and none in research.md, is the name of a field.
+  // 'Anlässe' is no longer a sign of one: since 8 November 2026 library-vully heads a finding with the plain word 'Events', which German
+  // renders so; the field name 'events' itself is mapped above, and the English heading decides.
   for(const lang of ['en',...LANGS]){
     const {V:view,records:all}=lang==='en'?{V:loadStack().V,records}:translated(lang);
-    for(const a of all)for(const heading of heads(view.detail(a)))assert.ok(!V.fieldLabel(heading)&&!/^(?:Angaben zu[mr] (?:Elternteil|Begleitung)|Anlässe)$/.test(heading),`${lang} ${a.id}: ${heading}`);
+    for(const a of all)for(const heading of heads(view.detail(a)))assert.ok(!V.fieldLabel(heading)&&!/^Angaben zu[mr] (?:Elternteil|Begleitung)$/.test(heading),`${lang} ${a.id}: ${heading}`);
   }
   const research=fs.readFileSync(path.join(root,'research.md'),'utf8');
   for(const [,heading] of research.matchAll(/^- \*\*(.+?)\*\* \(/gm))assert.equal(V.fieldLabel(heading),'',heading);

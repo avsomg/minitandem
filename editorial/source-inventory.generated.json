@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T18:34:07.188Z",
+  "generatedAt": "2026-11-08T04:17:58.765Z",
   "sources": [
     {
       "id": "source-a9e685e2c5ed",
@@ -2986,6 +2986,20 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-a36af4ff3856",
+      "url": "https://ecole-courtepin.ch/bibliotheque-communale-et-scolaire/",
+      "recordIds": [
+        "library-courtepin"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Additional check: Address and public opening"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-ceb2dd380bdc",
       "url": "https://www.fr.ch/de/kub/app/bibliotheques/79",
       "recordIds": [
@@ -3010,6 +3024,34 @@
       ],
       "labels": [
         "Cantonal directory: opening hours and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-6c91106196e4",
+      "url": "https://www.palet-roulant.ch/fr/services/emprunt-et-reservation",
+      "recordIds": [
+        "library-vully"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Additional check: Holidays"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-9ef5186e11e5",
+      "url": "https://www.palet-roulant.ch/fr/actualites",
+      "recordIds": [
+        "library-vully"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Additional check: Events"
       ],
       "monitoring": "not-configured"
     },
@@ -3346,6 +3388,20 @@
       ],
       "labels": [
         "Municipal directory of associations"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-8b1b1521cd86",
+      "url": "https://www.ludo-pinocchio.ch/index.php/fr-fr/tarifs-et-reglement",
+      "recordIds": [
+        "ludo-pinocchio-courtepin"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Additional check: price"
       ],
       "monitoring": "not-configured"
     },
@@ -4894,6 +4950,20 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-97adf4f7d868",
+      "url": "https://www.ville-fribourg.ch/actualites/mesures-preventives-de-protection-sur-des-places-de-jeux-polluees",
+      "recordIds": [
+        "grand-places-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Availability"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-42df2a2338af",
       "url": "https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-domino-semiramis/",
       "recordIds": [
@@ -4904,6 +4974,20 @@
       ],
       "labels": [
         "Play equipment and bus stop"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-f14f82c0b9b4",
+      "url": "https://www.ville-fribourg.ch/places-jeux/parc-du-domino",
+      "recordIds": [
+        "domino-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Age"
       ],
       "monitoring": "not-configured"
     },
@@ -5006,6 +5090,20 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-d30ceb065c75",
+      "url": "https://www.hurni-gemuese.ch/selbstpflueckgarten/",
+      "recordIds": [
+        "pflueck-kerzers"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Additional check: Opening hours and season"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-c86b5f376257",
       "url": "https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-motier/",
       "recordIds": [
@@ -5058,6 +5156,20 @@
       ],
       "labels": [
         "Playground and equipment"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-5b9a8a23bda4",
+      "url": "https://www.ville-fribourg.ch/places-jeux/ecole-de-la-neuveville",
+      "recordIds": [
+        "neuveville-school-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Equipment and age guidance"
       ],
       "monitoring": "not-configured"
     },
@@ -5156,6 +5268,20 @@
       ],
       "labels": [
         "Tourism: playground, address and hours 2026"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-a7597d20b5e1",
+      "url": "https://www.siviriez-liondor.ch/",
+      "recordIds": [
+        "lion-or-siviriez"
+      ],
+      "regions": [
+        "glane"
+      ],
+      "labels": [
+        "Additional check: Schedule and play area"
       ],
       "monitoring": "not-configured"
     },
@@ -6240,6 +6366,20 @@
       ],
       "labels": [
         "Commune: route maintenance costs"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-1b8876be144b",
+      "url": "https://www.sentierdessorcieres.org/parcours",
+      "recordIds": [
+        "vuadens-witches-trail"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Additional check: Route and walking time"
       ],
       "monitoring": "not-configured"
     },

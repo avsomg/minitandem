@@ -6711,5 +6711,240 @@
         "lon": 6.8693928718566895
       }
     ]
+  },
+  "Nouveau Monde, Esplanade de l'Ancienne Gare 3, Fribourg": {
+    "query": "Esplanade de l'Ancienne Gare 3",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Esplanade+de+l%27Ancienne+Gare+3&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-08",
+    "results": [
+      {
+        "label": "Esplanade de l'Ancienne-Gare 3 1700 Fribourg",
+        "lat": 46.80216598510742,
+        "lon": 7.150356769561768
+      },
+      {
+        "label": "Esplanade de l'Ancienne-Gare 3b 1700 Fribourg",
+        "lat": 46.80252456665039,
+        "lon": 7.150609970092773
+      },
+      {
+        "label": "Esplanade de l'Ancienne-Gare 3a 1700 Fribourg",
+        "lat": 46.802459716796875,
+        "lon": 7.150640487670898
+      }
+    ]
+  },
+  "route du Chevalier 8, 1st floor of the former kindergarten building, Marly": {
+    "query": "route du Chevalier 8",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=route+du+Chevalier+8&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-08",
+    "results": [
+      {
+        "label": "Route du Chevalier 8 1723 Marly",
+        "lat": 46.77534866333008,
+        "lon": 7.15955924987793
+      }
+    ]
+  },
+  "Skischulbüro (ski school office, meeting point), Schwarzsee": {
+    "query": "Skischulbüro ski school office meeting point Schwarzsee",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Skischulb%C3%BCro+ski+school+office+meeting+point+Schwarzsee&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-08",
+    "results": []
+  },
+  "Lager 121, 1716 Schwarzsee": {
+    "query": "Lager 121 1716 Schwarzsee",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Lager+121+1716+Schwarzsee&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-08",
+    "results": [
+      {
+        "label": "Schwarzseestrasse 121 1716 Schwarzsee",
+        "lat": 46.681007385253906,
+        "lon": 7.294220924377441
+      },
+      {
+        "label": "Seestrasse 121 1716 Schwarzsee",
+        "lat": 46.66337585449219,
+        "lon": 7.27445125579834
+      },
+      {
+        "label": "Schwarzseestrasse 121a 1716 Schwarzsee",
+        "lat": 46.68111801147461,
+        "lon": 7.294310092926025
+      },
+      {
+        "label": "Seestrasse 121o 1716 Schwarzsee",
+        "lat": 46.662803649902344,
+        "lon": 7.273545742034912
+      },
+      {
+        "label": "Seestrasse 121p 1716 Schwarzsee",
+        "lat": 46.66259002685547,
+        "lon": 7.2738494873046875
+      }
+    ]
+  },
+  "Route de l’École 17, 1784 Courtepin (Pavillon E, basement)": {
+    "query": "Route de l’École 17 1784 Courtepin Pavillon E",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l%E2%80%99%C3%89cole+17+1784+Courtepin+Pavillon+E&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-08",
+    "results": [
+      {
+        "label": "Route de l'Ecole 17 1784 Courtepin",
+        "lat": 46.86458206176758,
+        "lon": 7.127752780914307
+      },
+      {
+        "label": "Route de l'Ecole 8 1784 Courtepin",
+        "lat": 46.86333084106445,
+        "lon": 7.127034664154053
+      },
+      {
+        "label": "Route de l'Ecole 10 1784 Courtepin",
+        "lat": 46.863468170166016,
+        "lon": 7.127231121063232
+      },
+      {
+        "label": "Route de l'Ecole 10a 1784 Courtepin",
+        "lat": 46.863548278808594,
+        "lon": 7.127209186553955
+      },
+      {
+        "label": "Route de l'Ecole 15a 1784 Courtepin",
+        "lat": 46.8646240234375,
+        "lon": 7.127193927764893
+      }
+    ]
+  },
+  "Rte principale 69, 1786 Sugiez (Nant)": {
+    "query": "Rte principale 69 1786 Sugiez Nant",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+principale+69+1786+Sugiez+Nant&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-08",
+    "results": [
+      {
+        "label": "Route Principale 69 1786 Sugiez",
+        "lat": 46.95671844482422,
+        "lon": 7.106398582458496
+      },
+      {
+        "label": "Route Principale 69e 1786 Sugiez",
+        "lat": 46.95647048950195,
+        "lon": 7.106431484222412
+      },
+      {
+        "label": "Route Principale 69a 1786 Sugiez",
+        "lat": 46.95652389526367,
+        "lon": 7.106480121612549
+      },
+      {
+        "label": "Route Principale 8 1786 Sugiez",
+        "lat": 46.9621696472168,
+        "lon": 7.112988471984863
+      },
+      {
+        "label": "Route Principale 10 1786 Sugiez",
+        "lat": 46.961875915527344,
+        "lon": 7.112529754638672
+      }
+    ]
+  },
+  "Route de l'Ecole 21, 1785 Cressier": {
+    "query": "Route de l'Ecole 21 1785 Cressier",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l%27Ecole+21+1785+Cressier&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-08",
+    "results": [
+      {
+        "label": "Route de l'Ecole 21 1785 Cressier FR",
+        "lat": 46.89741516113281,
+        "lon": 7.138935089111328
+      },
+      {
+        "label": "Route de l'Ecole 21a 1785 Cressier FR",
+        "lat": 46.897361755371094,
+        "lon": 7.138581275939941
+      }
+    ]
+  },
+  "Rte des Lacustres 22, 1470 Estavayer-le-Lac": {
+    "query": "Rte des Lacustres 22 1470 Estavayer-le-Lac",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+des+Lacustres+22+1470+Estavayer-le-Lac&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-08",
+    "results": [
+      {
+        "label": "Route des Lacustres 22 1470 Estavayer-le-Lac",
+        "lat": 46.84632110595703,
+        "lon": 6.835505485534668
+      },
+      {
+        "label": "Route des Lacustres 22c 1470 Estavayer-le-Lac",
+        "lat": 46.846710205078125,
+        "lon": 6.837331771850586
+      },
+      {
+        "label": "Route des Lacustres 22g 1470 Estavayer-le-Lac",
+        "lat": 46.8466682434082,
+        "lon": 6.837400436401367
+      },
+      {
+        "label": "Route des Lacustres 22d 1470 Estavayer-le-Lac",
+        "lat": 46.84636688232422,
+        "lon": 6.835782527923584
+      },
+      {
+        "label": "Route des Lacustres 22a 1470 Estavayer-le-Lac",
+        "lat": 46.8459587097168,
+        "lon": 6.834923267364502
+      }
+    ]
+  },
+  "Rte Villageoise, 1617 Remaufens": {
+    "query": "Rte Villageoise 1617 Remaufens",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+Villageoise+1617+Remaufens&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-08",
+    "results": [
+      {
+        "label": "Route Villageoise 1 1617 Remaufens",
+        "lat": 46.52637481689453,
+        "lon": 6.881410598754883
+      },
+      {
+        "label": "Route Villageoise 3 1617 Remaufens",
+        "lat": 46.526371002197266,
+        "lon": 6.880746841430664
+      },
+      {
+        "label": "Route Villageoise 3b 1617 Remaufens",
+        "lat": 46.5262451171875,
+        "lon": 6.880646705627441
+      },
+      {
+        "label": "Route Villageoise 3a 1617 Remaufens",
+        "lat": 46.52642822265625,
+        "lon": 6.880690097808838
+      },
+      {
+        "label": "Route Villageoise 7 1617 Remaufens",
+        "lat": 46.52638626098633,
+        "lon": 6.880359172821045
+      }
+    ]
+  },
+  "Parking en direction de la chapelle du Niremont, Semsales": {
+    "query": "Parking en direction de la chapelle du Niremont Semsales",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Parking+en+direction+de+la+chapelle+du+Niremont+Semsales&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-08",
+    "results": []
+  },
+  "Parking below the church, Montagny-les-Monts": {
+    "query": "Parking below the church Montagny-les-Monts",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Parking+below+the+church+Montagny-les-Monts&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-08",
+    "results": []
+  },
+  "Forêt des Esserts, at the end of Ch. des Bruyères, Bouloz": {
+    "query": "Forêt des Esserts at the end of Ch. des Bruyères",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=For%C3%AAt+des+Esserts+at+the+end+of+Ch.+des+Bruy%C3%A8res&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-08",
+    "results": []
   }
 }

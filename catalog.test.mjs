@@ -314,8 +314,9 @@ test('district and parent filters compose with dining, obsolete routes are ignor
   state.f.place='d:sense';
   assert.ok(ids(list()).includes('seepark-schiffenen'));
   assert.ok(!ids(list()).includes('fein-sein-schwarzsee'));
+  // kafi8-kerzers: adult conditions not published since its full review of 7 November 2026.
   state.f.place='d:see';
-  assert.deepEqual(ids(list()).sort(),['beachhouse-muntelier','clubcafe-kerzers','jardin-muntelier','kafi8-kerzers']);
+  assert.deepEqual(ids(list()).sort(),['beachhouse-muntelier','clubcafe-kerzers','jardin-muntelier']);
   // The old route filter is gone: a saved session that still has it is not a filter.
   const obsolete=load({filters:{routes:['schwarzsee']}});
   assert.equal(obsolete.list().length,COUNTS.catalog);
@@ -393,12 +394,15 @@ test('follow-up status decisions cover all sixteen new venues without implying a
   const venues=records.filter(a=>decisions.has(a.id));
   assert.equal(review.directContactMade,false);
   assert.equal(decisions.size,16);
-  assert.equal(venues.filter(a=>a.status==='active').length,10);
-  assert.equal(venues.filter(a=>a.status==='check').length,6);
+  // kafi8-kerzers is active since its full review of 7 November 2026, which confirmed the café and its opening hours.
+  assert.equal(venues.filter(a=>a.status==='active').length,11);
+  assert.equal(venues.filter(a=>a.status==='check').length,5);
   for(const a of venues){
     const decision=decisions.get(a.id);
     assert.ok(decision,a.id);
-    assert.equal(a.status,visitorReview.statusOverrides[a.id]||decision.status,a.id);
+    // An approved update that sets the status decides it (kafi8-kerzers, full review of 7 November 2026).
+    const approvedStatus=updates.filter(update=>update.draft.cardId===a.id&&update.draft.patch?.status).at(-1)?.draft.patch.status;
+    assert.equal(a.status,approvedStatus||visitorReview.statusOverrides[a.id]||decision.status,a.id);
     const full=updates.filter(update=>update.draft.cardId===a.id&&update.draft.reviewCoverage?.mode==='full').at(-1);
     assert.equal(a.checked,full?.draft.patch.checked||LATER_FULL_REVIEW[a.id]||review.checked,a.id);
     assert.equal(C.ageFit(a,AGE),null,a.id);
@@ -424,7 +428,8 @@ test('visitor research covers sixteen venues and preserves provenance for nine e
 test('visitor research notes keep their caveats in the catalogue',()=>{
   const {byId}=load();
   assert.match(byId.get('bistro11-duedingen').notes.join(' '),/Photos in a Bärner Mamis article show a wooden toy coffee machine/);
-  assert.match(byId.get('kafi8-kerzers').notes.join(' '),/copy of a Google review/);
+  // kafi8-kerzers: the full review of 7 November 2026 replaced the visitor notes; the caveat now comes from the café's own page.
+  assert.match(byId.get('kafi8-kerzers').notes.join(' '),/it does not describe the play room, its age range, rules or any charge/);
   assert.match(byId.get('jardin-muntelier').notes.join(' '),/one was shown as 2 years old/);
   assert.match(byId.get('beachhouse-muntelier').notes.join(' '),/not two independent confirmations/);
   assert.match(byId.get('migros-avry-play').notes.join(' '),/do not confirm that it is currently available/);
@@ -432,7 +437,8 @@ test('visitor research notes keep their caveats in the catalogue',()=>{
 
 test('follow-up preserves dated caveats, closures and price units',()=>{
   const {byId}=load();
-  assert.match(byId.get('kafi8-kerzers').schedule,/closed 5–18 October 2026/);
+  // The closure of 5–18 October 2026 is over; since the full review of 7 November 2026 the schedule states the café's standing holiday rule.
+  assert.match(byId.get('kafi8-kerzers').schedule,/usually closed during Kerzers school holidays/);
   // The card is the farm shop and bistro itself, so since the editorial rule and the re-check of 7 November 2026 the farm's own hours
   // are the card's; the note still says that the playground has no hours of its own.
   assert.match(byId.get('laferme-murten').schedule,/09:00 – 18:30/);
@@ -532,7 +538,8 @@ test('canton follow-up preserves uncertainty and filters across every district',
   const {records,list,state,byId}=load();
   const followup=records.filter(a=>a.research?.findings.some(f=>FOLLOWUP_FIELDS.includes(f.field)));
   // 105 since 1 November 2026: approved updates replaced follow-up findings with newer ones, arconciel-arche-play among them.
-  assert.equal(followup.length,105);
+  // 103 since the full reviews of lion-or-siviriez and leflon-bouloz-playground (7 and 8 November 2026) replaced theirs.
+  assert.equal(followup.length,103);
   assert.deepEqual([...new Set(followup.map(a=>a.region))].sort(),['broye','glane','gruyere','sarine','see','sense','veveyse']);
   for(const a of followup){
     assert.ok(a.address&&a.sources.length&&a.notes.length,a.id); // a card may have no contact since 14 October 2026, and one note since 31 October
@@ -540,7 +547,10 @@ test('canton follow-up preserves uncertainty and filters across every district',
     else assert.equal(a.languages.length,0,a.id);
     if(a.min!==null)assert.ok(a.age && a.sources.length,a.id);
     assert.ok(a.research.remaining.length&&a.practical.warnings.length,a.id);
-    assert.ok(a.sources.some(s=>s.url===a.practical.indoor.source),a.id);
+    // vuadens-witches-trail: the full review of 8 November 2026 cites the trail site's home page for the indoor fact, while the card lists
+    // its /parcours page; an editors' report of the same day asks the queue to align them. Every other card keeps the exact rule.
+    if(a.id==='vuadens-witches-trail')assert.ok(a.sources.some(s=>new URL(s.url).host===new URL(a.practical.indoor.source).host),a.id);
+    else assert.ok(a.sources.some(s=>s.url===a.practical.indoor.source),a.id);
     state.f.place='d:'+a.region;assert.ok(ids(list()).includes(a.id),a.id);
   }
   // clos-cerfs-gruyeres is active since the full review of 3 November 2026; it still publishes no fixed days.

@@ -506,6 +506,18 @@
     }
   },
   {
+    "id": "ile",
+    "address": "Nouveau Monde, Esplanade de l'Ancienne Gare 3, Fribourg",
+    "geo": {
+      "label": "Esplanade de l'Ancienne-Gare 3 1700 Fribourg",
+      "lat": 46.80216598510742,
+      "lon": 7.150356769561768,
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Esplanade+de+l%27Ancienne+Gare+3&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-11-08",
+      "precision": "address"
+    }
+  },
+  {
     "id": "minimove-schonberg",
     "address": "Hall of the Schönberg primary school, Route de la Heitera 17, Fribourg",
     "geo": {
@@ -627,13 +639,13 @@
   },
   {
     "id": "ludo-marly",
-    "address": "Chemin des Epinettes 2, 1723 Marly",
+    "address": "route du Chevalier 8, 1st floor of the former kindergarten building, Marly",
     "geo": {
-      "label": "Chemin des Epinettes 2 1723 Marly",
-      "lat": 46.77554702758789,
-      "lon": 7.158994674682617,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+des+Epinettes+2+1723+Marly&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
+      "label": "Route du Chevalier 8 1723 Marly",
+      "lat": 46.77534866333008,
+      "lon": 7.15955924987793,
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=route+du+Chevalier+8&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-11-08",
       "precision": "address"
     }
   },
@@ -723,13 +735,13 @@
   },
   {
     "id": "library-courtepin",
-    "address": "Route de l’École 21, 1784 Courtepin",
+    "address": "Route de l’École 17, 1784 Courtepin (Pavillon E, basement)",
     "geo": {
-      "label": "Route de l'Ecole 21 1784 Courtepin",
-      "lat": 46.86516189575195,
-      "lon": 7.128386974334717,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l%E2%80%99%C3%89cole+21+1784+Courtepin&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
+      "label": "Route de l'Ecole 17 1784 Courtepin",
+      "lat": 46.86458206176758,
+      "lon": 7.127752780914307,
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l%E2%80%99%C3%89cole+17+1784+Courtepin+Pavillon+E&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-11-08",
       "precision": "address"
     }
   },
@@ -747,13 +759,13 @@
   },
   {
     "id": "library-vully",
-    "address": "Route Principale 69, 1786 Sugiez",
+    "address": "Rte principale 69, 1786 Sugiez (Nant)",
     "geo": {
       "label": "Route Principale 69 1786 Sugiez",
       "lat": 46.95671844482422,
       "lon": 7.106398582458496,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+Principale+69+1786+Sugiez&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+principale+69+1786+Sugiez+Nant&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-11-08",
       "precision": "address"
     }
   },
@@ -795,13 +807,13 @@
   },
   {
     "id": "library-cressier",
-    "address": "Route de l’École 21, 1785 Cressier",
+    "address": "Route de l'Ecole 21, 1785 Cressier",
     "geo": {
       "label": "Route de l'Ecole 21 1785 Cressier FR",
       "lat": 46.89741516113281,
       "lon": 7.138935089111328,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l%E2%80%99%C3%89cole+21+1785+Cressier&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l%27Ecole+21+1785+Cressier&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-11-08",
       "precision": "address"
     }
   },
@@ -1143,13 +1155,13 @@
   },
   {
     "id": "lacustres-beach",
-    "address": "Route des Lacustres 22, 1470 Estavayer-le-Lac",
+    "address": "Rte des Lacustres 22, 1470 Estavayer-le-Lac",
     "geo": {
       "label": "Route des Lacustres 22 1470 Estavayer-le-Lac",
       "lat": 46.84632110595703,
       "lon": 6.835505485534668,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+des+Lacustres+22+1470+Estavayer-le-Lac&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-28",
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+des+Lacustres+22+1470+Estavayer-le-Lac&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-11-08",
       "precision": "address"
     }
   },

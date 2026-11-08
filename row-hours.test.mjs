@@ -30,10 +30,11 @@ function over(cards){
 }
 
 test('a schedule that goes on with more days or times is only ever shown with a marker: Piscine de Morat and the Epagny restaurant, three languages',()=>{
+  // The pool's hours are written out in full since its full review of 8 November 2026 ('Monday 14:00-21:00; Tuesday …').
   const expected={
-    en:{pool:'Mon 14:00–21:00 + more times',restaurant:'Wed–Thu 09:00–22:00 + more times'},
-    de:{pool:'Mo 14:00–21:00 + weitere Zeiten',restaurant:'Mi–Do 09:00–22:00 + weitere Zeiten'},
-    fr:{pool:'lun. 14:00–21:00 + autres horaires',restaurant:'mer.–jeu. 09:00–22:00 + autres horaires'}};
+    en:{pool:'Monday 14:00-21:00 + more times',restaurant:'Wed–Thu 09:00–22:00 + more times'},
+    de:{pool:'Montag 14:00-21:00 + weitere Zeiten',restaurant:'Mi–Do 09:00–22:00 + weitere Zeiten'},
+    fr:{pool:'Lundi 14:00-21:00 + autres horaires',restaurant:'mer.–jeu. 09:00–22:00 + autres horaires'}};
   for(const lang of ['en','de','fr']){
     const {V,byId,t}=real(lang);
     assert.equal(t('time.more'),expected[lang].pool.slice(expected[lang].pool.indexOf('+')));
