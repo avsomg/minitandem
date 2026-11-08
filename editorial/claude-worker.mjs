@@ -254,5 +254,13 @@ export async function runClaudeWorker(job,policy,{route,promptImpl,evidenceFiles
     if(!resultEvent.structured_output||JSON.stringify(resultEvent.structured_output).length>2000000)throw Error('Missing or oversized Claude structured output');
     return {result:decodeWorkerOutput(claudeEnvelope(resultEvent.structured_output,job),job),usage};
   }catch(error){error.usage=usage;throw error;}
-  finally{fs.rmSync(directory,{recursive:true,force:true});}
+  finally{fs.rmSync(directory,{recursive:true,force:true});fs.rmSync(cliProjectFolder(directory),{recursive:true,force:true});}
+}
+// --no-session-persistence keeps no transcript, but the CLI still stores large tool results (fetched PDFs) in
+// ~/.claude/projects/<folder>; 343 such folders (1.3 GB) piled up by 8 Nov 2026. The folder name is the working
+// directory with every character other than a letter or digit replaced by '-'.
+export function cliProjectFolder(directory,home=os.homedir()){
+  const name=directory.replace(/[^a-zA-Z0-9]/g,'-');
+  if(!/-minitandem-claude-worker-[a-zA-Z0-9]+$/.test(name))throw Error('Not a Claude worker folder: '+directory);
+  return path.join(home,'.claude','projects',name);
 }

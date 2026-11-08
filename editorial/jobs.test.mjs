@@ -132,6 +132,7 @@ test('artifacts and outbox survive reopening; followups are ready immediately',t
   const reopened=new JobQueue(file);try{
     assert.ok(reopened.claim('verify','two'));assert.equal(reopened.summary().pendingWrites,2);
     reopened.flush(directory);assert.equal(reopened.summary().pendingWrites,0);
+    assert.equal(reopened.db.prepare('SELECT count(*) AS count FROM outbox').get().count,0,'delivered writes are not kept');
     const artifact=JSON.parse(fs.readFileSync(path.join(directory,'editorial/agent-artifacts',result.artifact+'.json'),'utf8'));
     assert.equal(digest(artifact),result.artifact);assert.equal(artifact.role,'search');
     assert.deepEqual(JSON.parse(fs.readFileSync(path.join(directory,'editorial/external-candidates/card.json'),'utf8')),{found:true});

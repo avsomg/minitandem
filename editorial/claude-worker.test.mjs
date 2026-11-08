@@ -6,7 +6,7 @@ import path from 'node:path';
 import {EventEmitter} from 'node:events';
 import {JobQueue,failureCategory} from './jobs.mjs';
 import {runClaude,modelRoute,runModel,gatedRoles,assertWorkerPolicy,modelPreflight} from './agent-run.mjs';
-import {claudeEnvironment,claudeSettings,requireClaudeSubscription,claudeUsage,claudeLoginProbe,assertClaudeReady,failureDetail,workerRoot,requireClaudeCli,wrapText,readableEvidence,claudeSchema,claudeEnvelope} from './claude-worker.mjs';
+import {cliProjectFolder,claudeEnvironment,claudeSettings,requireClaudeSubscription,claudeUsage,claudeLoginProbe,assertClaudeReady,failureDetail,workerRoot,requireClaudeCli,wrapText,readableEvidence,claudeSchema,claudeEnvelope} from './claude-worker.mjs';
 import {snapshot,locateQuote,normalizeQuote} from './evidence.mjs';
 const job={id:'migration-contract-job',kind:'verify-facts',input_revision:'migration-contract-revision',payload:{bundle:{claims:[],snapshots:[]}}};
 const policy={workerProvider:'claude',roles:{verify:{model:'retained-codex-model',claudeModel:'sonnet',effort:'low',criticalEffort:'medium'}},maxToolCallsPerJob:3};
@@ -188,4 +188,9 @@ test('a non-fact result travels as an object and is encoded by code, never hand-
     child.stdin.end=prompt=>{seen={prompt,schema:JSON.parse(args[args.indexOf('--json-schema')+1])};end();};return child;
   }});
   assert.deepEqual(out.result,tricky);assert.match(seen.prompt,/OUTPUT IN THIS WORKER/);assert.deepEqual(seen.schema.properties.result,{type:'object'});
+});
+test('the CLI folder of a finished worker is found by the CLI naming rule and nothing else',()=>{
+  assert.equal(cliProjectFolder('/private/var/folders/qq/0cfgr3x5021_4qc5ql6kqyn40000gn/T/minitandem-claude-worker-4ATzCX','/Users/me'),
+    '/Users/me/.claude/projects/-private-var-folders-qq-0cfgr3x5021-4qc5ql6kqyn40000gn-T-minitandem-claude-worker-4ATzCX');
+  assert.throws(()=>cliProjectFolder('/Users/me/Documents/minitandem','/Users/me'),/Not a Claude worker folder/);
 });

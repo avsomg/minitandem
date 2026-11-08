@@ -269,7 +269,8 @@ export class JobQueue{
         const temp=file+'.tmp-'+randomUUID();
         try{fs.writeFileSync(temp,JSON.stringify(JSON.parse(item.data),null,2)+'\n',{mode:0o600});fs.renameSync(temp,file);}
         finally{fs.rmSync(temp,{force:true});}
-        this.db.prepare('UPDATE outbox SET delivered=1 WHERE id=?').run(item.id);
+        // A delivered row is never read again; keeping it stored a full copy of approved-updates.json per write (2 GB by 8 Nov 2026).
+        this.db.prepare('DELETE FROM outbox WHERE id=?').run(item.id);
       }
       return writes.length;
     });
