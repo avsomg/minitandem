@@ -13,7 +13,8 @@
 # Environment (sshd passes none of it from the client; the defaults are the production paths, a test sets its own):
 #   WATCH_DIR                  default /var/lib/minitandem-watch (owned by the login user; cycle-watch.sh reads it)
 #   DROP_BACKUP_DIR            default $HOME/editorial-backups
-#   DROP_KEEP                  archives to keep, default 14
+#   DROP_KEEP                  archives to keep, default 2: the new one and the one before (the owner's decision of 15 November 2026;
+#                              with 14 kept, 14 copies of about 174 MB no longer left room in the total budget for the next one)
 #   DROP_MAX_BACKUP_BYTES      default 2147483648
 #   DROP_MAX_HEARTBEAT_BYTES   default 16384
 #   DROP_TOTAL_BACKUP_BYTES    default 2147483648 (stored files plus the incoming archive)
@@ -26,7 +27,7 @@ umask 077
 
 WATCH_DIR=${WATCH_DIR:-/var/lib/minitandem-watch}
 BACKUP_DIR=${DROP_BACKUP_DIR:-${HOME:?HOME is not set}/editorial-backups}
-KEEP=${DROP_KEEP:-14}
+KEEP=${DROP_KEEP:-2}
 MAX_BACKUP=${DROP_MAX_BACKUP_BYTES:-2147483648}
 MAX_HEARTBEAT=${DROP_MAX_HEARTBEAT_BYTES:-16384}
 TOTAL_BACKUP=${DROP_TOTAL_BACKUP_BYTES:-2147483648}

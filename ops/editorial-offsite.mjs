@@ -2,7 +2,7 @@
 //   1. node editorial/backup.mjs create --to=<staging>/<date>   (queue + editorial files, no family data; refuses while a job is leased)
 //   2. node editorial/backup.mjs verify <staging>/<date>
 //   3. tar -czf <staging>/editorial-<date>.tar.gz, then the unpacked folder is removed
-//   4. sha256, then the archive is streamed to `ssh ... backup <date> <sha256>` (ops/drop.sh checks the sum, keeps the newest 14)
+//   4. sha256, then the archive is streamed to `ssh ... backup <date> <sha256>` (ops/drop.sh checks the sum, keeps the newest 2)
 //   5. the local archive is removed. The Mac keeps nothing: its disk is nearly full and the server holds the copies.
 // On any failure the script says which step failed, exits 1 and leaves nothing in the staging folder.
 // `--dry-run` does steps 1 to 4 up to the checksum and keeps the archive (it prints path, size and sha256); nothing leaves the Mac.

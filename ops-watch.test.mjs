@@ -125,7 +125,7 @@ for(const shell of SHELLS){
     assert.deepEqual(box.list(box.backups),[]);
   });
 
-  test(`drop.sh (${shell}) keeps the newest 14 archives, touches no other file and never overwrites a different archive`,t=>{
+  test(`drop.sh (${shell}) keeps the new archive and the one before, touches no other file and never overwrites a different archive`,t=>{
     const box=dropSandbox(t);
     fs.mkdirSync(box.backups,{recursive:true});
     for(let day=1;day<=16;day++)fs.writeFileSync(path.join(box.backups,`editorial-2026-09-${String(day).padStart(2,'0')}.tar.gz`),'old');
@@ -133,11 +133,8 @@ for(const shell of SHELLS){
     const data=archive('new');
     assert.equal(box.run(`backup ${D0} ${sha(data)}`,data,{},shell).status,0);
     const names=box.list(box.backups);
-    assert.equal(names.filter(name=>name.startsWith('editorial-')).length,14);
-    assert.ok(names.includes(`editorial-${D0}.tar.gz`));
-    assert.ok(names.includes('editorial-2026-09-16.tar.gz'),'the newest old one is kept');
-    assert.ok(!names.includes('editorial-2026-09-01.tar.gz')&&!names.includes('editorial-2026-09-03.tar.gz'),'the oldest are gone');
-    assert.ok(names.includes('editorial-2026-09-04.tar.gz'));
+    assert.deepEqual(names.filter(name=>name.startsWith('editorial-')).sort(),['editorial-2026-09-16.tar.gz',`editorial-${D0}.tar.gz`]);
+    assert.ok(!names.includes('editorial-2026-09-01.tar.gz')&&!names.includes('editorial-2026-09-15.tar.gz'),'the older ones are gone');
     assert.ok(names.includes('notes.txt'),'files that are not archives are left alone');
     // a different archive for the same day is refused and the first one stays
     const other=archive('different');
