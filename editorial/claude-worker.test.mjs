@@ -190,7 +190,8 @@ test('a non-fact result travels as an object and is encoded by code, never hand-
   assert.deepEqual(out.result,tricky);assert.match(seen.prompt,/OUTPUT IN THIS WORKER/);assert.deepEqual(seen.schema.properties.result,{type:'object'});
 });
 test('the CLI folder of a finished worker is found by the CLI naming rule and nothing else',()=>{
-  assert.equal(cliProjectFolder('/private/var/folders/qq/0cfgr3x5021_4qc5ql6kqyn40000gn/T/minitandem-claude-worker-4ATzCX','/Users/me'),
-    '/Users/me/.claude/projects/-private-var-folders-qq-0cfgr3x5021-4qc5ql6kqyn40000gn-T-minitandem-claude-worker-4ATzCX');
-  assert.throws(()=>cliProjectFolder('/Users/me/Documents/minitandem','/Users/me'),/Not a Claude worker folder/);
+  // Neutral paths only: the public scan refuses a real home or temporary folder of a computer.
+  assert.equal(cliProjectFolder('/private/var/folders/x/y_z0/T/minitandem-claude-worker-4ATzCX','/home-folder'),
+    '/home-folder/.claude/projects/-private-var-folders-x-y-z0-T-minitandem-claude-worker-4ATzCX');
+  assert.throws(()=>cliProjectFolder('/home-folder/Documents/minitandem','/home-folder'),/Not a Claude worker folder/);
 });
