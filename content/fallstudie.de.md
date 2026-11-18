@@ -63,7 +63,7 @@ Stand 18. November 2026.
 - alle 7 Bezirke des Kantons
 - 492 Quellen. Die Grundprüfung aller Einträge lief vom 22. September bis 2. Oktober; 209 Einträge wurden nach dem
   17. Oktober erneut geprüft (Nachprüfung oder strenge Kette).
-- 1070 automatische Tests. Auf GitHub laufen sie bei jedem Push; 8 davon werden dort übersprungen.
+- 1052 automatische Tests. Auf GitHub laufen sie bei jedem Push; 8 davon werden dort übersprungen.
 - bewusst «unbekannt» gelassen: die Sprache bei 270 Einträgen, der Preis bei 190, das Mindestalter bei 206
 
 ### Pipeline in den ersten Wochen, 2. bis 17. Oktober 2026

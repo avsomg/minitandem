@@ -60,7 +60,7 @@ As of 18 November 2026.
 - all 7 districts of the canton
 - 492 sources. The initial check of all entries ran from 22 September to 2 October; 209 entries were checked
   again after 17 October (recheck or strict chain).
-- 1,070 automated tests. On GitHub they run on every push; 8 of them are skipped there.
+- 1,052 automated tests. On GitHub they run on every push; 8 of them are skipped there.
 - deliberately left “unknown”: the language for 270 entries, the price for 190, the minimum age for 206
 
 ### Pipeline in the first weeks, 2 to 17 October 2026
