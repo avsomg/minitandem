@@ -7,7 +7,7 @@ import {execFileSync} from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import {generatePublicPages,site} from './public-pages.mjs';
 import {generateCaseStudy} from './case-study.mjs';
-import {generateLegalPages} from './legal-pages.mjs';
+import {generateLegalPages,generateNotFoundPage} from './legal-pages.mjs';
 import {generateDaycareGuides} from './daycare-guides.mjs';
 import {SCRIPTS,LAZY_SCRIPTS,STATIC,ASSETS,GENERATED,BUILD_INFO} from './ui-files.mjs';
 import {preparePublicOutput} from './public-output.mjs';
@@ -106,5 +106,6 @@ for (const file of ASSETS) fs.copyFileSync(path.join(root,'assets',file),path.jo
 const publicPages=generatePublicPages(records,context.window.CATALOG_REGIONS,output,new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Zurich'}));
 generateCaseStudy(root,output);
 generateLegalPages(root,output);
+generateNotFoundPage(output);
 const daycareGuides=generateDaycareGuides(root,output);
 console.log(JSON.stringify({output,revision,records:records.length,publicationGates,approvalCrossCheck,translations,publicPages,daycareGuides,files:fs.readdirSync(output)},null,2));

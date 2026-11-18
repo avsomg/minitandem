@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import test from 'node:test';
-import {generateLegalPages,LEGAL_URLS,LEGAL_LABELS,legalURL,legalDescription} from './legal-pages.mjs';
+import {generateLegalPages,LEGAL_URLS,LEGAL_LABELS,legalURL,legalDescription,projectURL,notFoundPage} from './legal-pages.mjs';
 import {loadStack} from './test-support.mjs';
 import {SITE_ORIGIN} from './site.mjs';
 const root=path.dirname(new URL(import.meta.url).pathname);
@@ -45,6 +45,35 @@ test('built app, project pages, directory and every card link to existing legal 
     for(const kind of ['impressum','datenschutz'])assert.ok(footer.includes(`href="${legalURL(kind,lang)}"`),file+' '+kind);
   }
   assert.match(read('app.js'),/node\.dataset\.legal.*I\.lang\(\)/);
+});
+
+test('the home page and every plain page but the case study itself link the case study from the footer, French to the English one, with the dictionaries\' labels',()=>{
+  const pages=['.publish/impressum/index.html','.publish/impressum/fr/index.html','.publish/impressum/en/index.html','.publish/datenschutz/index.html','.publish/places/index.html','.publish/places/de/index.html','.publish/places/fr/index.html'];
+  for(const folder of fs.readdirSync(path.join(root,'.publish/daycare'),{withFileTypes:true}).filter(entry=>entry.isDirectory()))
+    for(const file of [`.publish/daycare/${folder.name}/index.html`,`.publish/daycare/${folder.name}/de/index.html`,`.publish/daycare/${folder.name}/fr/index.html`])if(fs.existsSync(path.join(root,file)))pages.push(file);
+  assert.ok(pages.length>10);
+  for(const file of pages){
+    const html=read(file),lang=html.match(/<html lang="(de|fr|en)">/)[1],footer=html.match(/<footer\b[^>]*>(.*?)<\/footer>/s)[1];
+    assert.ok(footer.includes(`href="${projectURL(lang)}"`)&&footer.includes(LEGAL_LABELS[lang].project),file);
+    assert.equal(footer.includes('hreflang="en"'),lang!=='de',file);
+  }
+  for(const file of ['.publish/projekt/index.html','.publish/projekt/en/index.html'])assert.doesNotMatch(read(file).match(/<footer\b[^>]*>(.*?)<\/footer>/s)[1],/projekt/,file);
+  assert.deepEqual([projectURL('de'),projectURL('fr'),projectURL('en')],['/projekt/','/projekt/en/','/projekt/en/']);
+  for(const lang of ['de','fr','en'])assert.equal(loadStack({lang}).t('foot.project'),LEGAL_LABELS[lang].project,lang);
+  // The home page: one link in its footer, pointed to the interface language by app.js.
+  assert.match(read('index.html'),/<a class="linkbtn" href="\/projekt\/en\/" hreflang="en" data-project data-i18n="foot.project">/);
+  assert.match(read('app.js'),/\[data-project\][\s\S]{0,120}I\.lang\(\) === 'de' \? '\/projekt\/' : '\/projekt\/en\/'/);
+});
+
+test('an address that does not exist gets one script-free page in the three languages, not indexed, with absolute links back to the app and the case study',()=>{
+  const html=notFoundPage();
+  assert.equal(read('.publish/404.html'),html);
+  assert.match(html,/<meta name="robots" content="noindex">/);
+  assert.doesNotMatch(html,/<script|<style|\sstyle=|\son[a-z]+=|\p{Script=Cyrillic}/iu);
+  assert.doesNotMatch(html,/(?:href|src)="(?!\/|https:\/\/|#content")/,'every link is absolute or the skip link: the page is served at any path');
+  for(const heading of ['Seite nicht gefunden','Page introuvable','Page not found'])assert.ok(html.includes(heading),heading);
+  assert.ok(html.includes('<section lang="fr">')&&html.includes('<section lang="en">'));
+  for(const href of ['/','/projekt/','/projekt/en/'])assert.ok(html.includes(`href="${href}"`),href);
 });
 
 test('legal footer labels match the dictionaries and French notice typography uses no-break spaces',()=>{

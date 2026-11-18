@@ -88,6 +88,10 @@
 				respond `\{"error":"Not found"\}` 404
 			}
 
+			# Addresses people guess for the case study: the English spelling and a German folder that does not exist (server.mjs CASE_ALIASES).
+			@caseAlias path /project /project/ /projekt/de /projekt/de/
+			redir @caseAlias /projekt/ 301
+
 			# A folder is served by its index.html. Without the trailing slash the browser is sent to the slashed path first, so the page's
 			# relative links resolve. The target is the folder's own cleaned path from the file matcher, never a path taken from the request
 			# (//host would be read as another site).
@@ -145,9 +149,16 @@
 				}
 			}
 
-			header Content-Type "application/json; charset=utf-8"
+			# Any other address gets the site's page for it (404.html, built by legal-pages.mjs) with status 404, as the service answers it
+			# (server.mjs notFound). Dot paths above and the editor paths keep their short refusals.
+			header Content-Type "text/html; charset=utf-8"
 			header Cache-Control no-store
-			respond `\{"error":"Not found"\}` 404
+			header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://wmts.geo.admin.ch; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'"
+			rewrite * /404.html
+			file_server {
+				status 404
+				disable_canonical_uris
+			}
 		}
 	}
 }

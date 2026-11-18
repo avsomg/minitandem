@@ -6946,5 +6946,92 @@
     "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=For%C3%AAt+des+Esserts+at+the+end+of+Ch.+des+Bruy%C3%A8res&type=locations&origins=address&limit=5&sr=4326",
     "checked": "2026-11-08",
     "results": []
+  },
+  "Bahnhof Kerzers": {
+    "query": "Bahnhof Kerzers",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Bahnhof+Kerzers&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-18",
+    "results": [
+      {
+        "label": "Bahnhofplatz 1 3210 Kerzers",
+        "lat": 46.975040435791016,
+        "lon": 7.192885875701904
+      },
+      {
+        "label": "Bahnhofplatz 1l 3210 Kerzers",
+        "lat": 46.97550582885742,
+        "lon": 7.192715644836426
+      },
+      {
+        "label": "Bahnhofstrasse 1 3210 Kerzers",
+        "lat": 46.97475051879883,
+        "lon": 7.194144248962402
+      },
+      {
+        "label": "Bahnhofplatz 1m 3210 Kerzers",
+        "lat": 46.97562026977539,
+        "lon": 7.191685199737549
+      },
+      {
+        "label": "Bahnhofplatz 1d 3210 Kerzers",
+        "lat": 46.97572326660156,
+        "lon": 7.191981792449951
+      }
+    ]
+  },
+  "Rue de l'Eglise 12, 1684 Mézières": {
+    "query": "Rue de l'Eglise 12 1684 Mézières",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%27Eglise+12+1684+M%C3%A9zi%C3%A8res&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-18",
+    "results": [
+      {
+        "label": "Route de l'Eglise 12 1684 Mézières FR",
+        "lat": 46.679386138916016,
+        "lon": 6.926646709442139
+      },
+      {
+        "label": "Route de l'Eglise 1 1684 Mézières FR",
+        "lat": 46.678199768066406,
+        "lon": 6.925571918487549
+      },
+      {
+        "label": "Route de l'Eglise 2 1684 Mézières FR",
+        "lat": 46.678192138671875,
+        "lon": 6.925886154174805
+      },
+      {
+        "label": "Route de l'Eglise 3 1684 Mézières FR",
+        "lat": 46.67863845825195,
+        "lon": 6.925678730010986
+      },
+      {
+        "label": "Route de l'Eglise 4 1684 Mézières FR",
+        "lat": 46.67853927612305,
+        "lon": 6.926070690155029
+      }
+    ]
+  },
+  "Sageboden 60, 1737 Plasselb": {
+    "query": "Sageboden 60 1737 Plasselb",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Sageboden+60+1737+Plasselb&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-18",
+    "results": [
+      {
+        "label": "Sageboden 60 1737 Plasselb",
+        "lat": 46.72935104370117,
+        "lon": 7.248095989227295
+      },
+      {
+        "label": "Sageboden 60a 1737 Plasselb",
+        "lat": 46.72945022583008,
+        "lon": 7.24816370010376
+      }
+    ]
+  },
+  "Vuadens - La Pinte des Colombettes (trail start and finish)": {
+    "query": "Vuadens - La Pinte des Colombettes trail start and finish",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Vuadens+-+La+Pinte+des+Colombettes+trail+start+and+finish&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-18",
+    "results": []
   }
 }

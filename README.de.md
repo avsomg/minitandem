@@ -6,6 +6,8 @@ English version: [README.md](README.md)
 
 Minitandem ist ein Verzeichnis von Aktivitäten für Familien mit Kindern von 0 bis 6 Jahren im Kanton Freiburg (Schweiz). Es besteht aus einer statischen Web-App (Oberfläche auf Englisch, Deutsch und Französisch; die Katalogtexte werden auf Englisch geschrieben und auf Deutsch und Französisch aus geprüften Übersetzungen gezeigt) und einer redaktionellen Pipeline, die den Katalog laufend überprüft: Modell-Worker mit engen Befugnissen recherchieren und verifizieren Fakten, und nur ein deterministischer Controller mit einer SQLite-Queue darf schreiben.
 
+Gebaut von Alex Shamrai, der nicht selbst programmiert: KI-Agenten (Claude Code und Codex) haben den Code nach seinen Anforderungen geschrieben. Er gibt die Spezifikationen frei, liest die Testberichte und entscheidet, was live geht. Fallstudie: https://minitandem.ch/projekt/
+
 ## In einer Minute
 
 - **Das Produkt:** eine einfache Webseite ohne Framework. Von anderen Servern lädt sie nur die Kartenkacheln des Geoportals des Bundes (`wmts.geo.admin.ch`); Google Maps öffnet sich erst, wenn man eine Wegbeschreibung aufruft. Besucherinnen und Besucher filtern Einträge (im Code `card`) nach Alter, Ort und Kategorie. Favoriten, Notizen und Besuchspläne bleiben im eigenen Browser; der Familienabgleich ist standardmässig ausgeschaltet und der Server nimmt dabei keine Familiendaten an.

@@ -113,6 +113,11 @@
     for (const [attr, target] of [['i18nLabel', 'aria-label'], ['i18nPlaceholder', 'placeholder'], ['i18nTitle', 'title']])
       for (const node of $$(`[data-${attr.replace(/[A-Z]/g, c => '-' + c.toLowerCase())}]`)) node.setAttribute(target, t(node.dataset[attr]));
     for (const node of $$('[data-legal]')) node.href = '/' + node.dataset.legal + '/' + (I.lang() === 'de' ? '' : I.lang() + '/');
+    // The case study is in German and English: French opens the English page, and its label says so.
+    for (const node of $$('[data-project]')) {
+      node.href = I.lang() === 'de' ? '/projekt/' : '/projekt/en/';
+      if (I.lang() === 'de') node.removeAttribute('hreflang'); else node.setAttribute('hreflang', 'en');
+    }
     for (const node of $$('[data-places]')) node.href = I.plainPage(I.lang());
     document.title = t('meta.title');
     $('meta[name="description"]')?.setAttribute('content', t('meta.description'));

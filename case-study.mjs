@@ -10,14 +10,21 @@ import {legalLinks} from './legal-pages.mjs';
 const REPOSITORY = 'https://github.com/avsomg/minitandem';
 const PAGES = {
   de: {source: 'fallstudie.de.md', dir: 'projekt', url: '/projekt/', prefix: '../', skip: 'Zum Inhalt'},
-  en: {source: 'fallstudie.en.md', dir: 'projekt/en', url: '/projekt/en/', prefix: '../../', skip: 'Skip to the content'},
+  en: {source: 'fallstudie.en.md', dir: 'projekt/en', url: '/projekt/en/', prefix: '../../', skip: 'Skip to content'},
 };
 const SWITCH = {de: 'Deutsch', en: 'English'};
+// The link preview, made by scripts/og-image.mjs; the home page carries the same tags (index.html).
+export const OG_IMAGE = `<meta property="og:image" content="${SITE_ORIGIN}/assets/og-minitandem.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">`
+  + `<meta property="og:image:alt" content="Minitandem, gebaut und betrieben mit KI-Agenten, von Alex Shamrai"><meta name="twitter:card" content="summary_large_image">`;
+// English quotes from the demo on the German page: marked as English for screen readers (WCAG 3.1.2). The text itself is unchanged.
+const ENGLISH_QUOTES = {de: ['children aged 2 to 4 years', 'Registration is not needed']};
 const BUTTONS = {'Zur App': '/', 'Open the app': '/', 'Code auf GitHub': REPOSITORY, 'Code on GitHub': REPOSITORY};
 
 export const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
-function inline(text) {
-  return esc(text)
+function inline(text, lang) {
+  let html = esc(text);
+  for (const quote of ENGLISH_QUOTES[lang] || []) html = html.split(`«${quote}»`).join(`«<span lang="en">${quote}</span>»`);
+  return html
     .replace(/\[`docs\/architektur\.md`\]/g, `<a href="${REPOSITORY}/blob/main/docs/architektur.md"><code>docs/architektur.md</code></a>`)
     .replace(/`([^`]+)`/g, '<code>$1</code>')
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
@@ -43,7 +50,7 @@ function diagram(text) {
 // A short hyphenated word in the title ("Web-App") stays on one line; tags are left alone.
 const keepTogether = html => html.split(/(<[^>]+>)/).map((part, i) => i % 2 ? part : part.replace(/(?<![\p{L}-])\p{L}{2,7}-\p{L}{2,7}(?![\p{L}-])/gu, '<span class="nb">$&</span>')).join('');
 
-export function caseStudyBody(markdown) {
+export function caseStudyBody(markdown, lang) {
   const html = [];
   for (const block of markdown.trim().split(/\n\s*\n/)) {
     const lines = block.split('\n'), first = lines[0];
@@ -51,7 +58,7 @@ export function caseStudyBody(markdown) {
     if (/^\[(Knöpfe|Buttons):\]/.test(first)) { html.push(buttons(lines.join(' '))); continue; }
     if (/^\[(Schema|Diagram)\b/.test(first)) { html.push(diagram(lines.map(line => line.trim()).join(' '))); continue; }
     const heading = first.match(/^(#{1,3}) (.+)$/);
-    if (heading && lines.length === 1) { const level = heading[1].length, text = inline(heading[2]); html.push(`<h${level}>${level === 1 ? keepTogether(text) : text}</h${level}>`); continue; }
+    if (heading && lines.length === 1) { const level = heading[1].length, text = inline(heading[2], lang); html.push(`<h${level}>${level === 1 ? keepTogether(text) : text}</h${level}>`); continue; }
     const list = /^- /.test(first) ? 'ul' : /^\d+\. /.test(first) ? 'ol' : null;
     if (list) {
       // An item may continue on indented lines.
@@ -60,11 +67,11 @@ export function caseStudyBody(markdown) {
         if (/^(- |\d+\. )/.test(line)) items.push(line.replace(/^(- |\d+\. )/, ''));
         else items[items.length - 1] += ' ' + line.trim();
       }
-      html.push(`<${list}>${items.map(item => `<li>${inline(item)}</li>`).join('')}</${list}>`);
+      html.push(`<${list}>${items.map(item => `<li>${inline(item, lang)}</li>`).join('')}</${list}>`);
       continue;
     }
     if (/^\[/.test(first)) throw Error(`Unknown layout note: ${first}`);
-    html.push(`<p>${inline(lines.map(line => line.trim()).join(' '))}</p>`);
+    html.push(`<p>${inline(lines.map(line => line.trim()).join(' '), lang)}</p>`);
   }
   return html.join('');
 }
@@ -78,11 +85,12 @@ function page(lang, markdown) {
   return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="light">`
     + `<title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="robots" content="index, follow">`
     + `<link rel="canonical" href="${SITE_ORIGIN}${own.url}">${alternates}`
-    + `<meta property="og:site_name" content="Minitandem"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${SITE_ORIGIN}${own.url}"><meta property="og:type" content="article"><meta name="theme-color" content="#ffffff">`
+    + `<meta property="og:site_name" content="Minitandem"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${SITE_ORIGIN}${own.url}"><meta property="og:type" content="article">`
+    + `${OG_IMAGE}<meta name="theme-color" content="#ffffff">`
     + `<link rel="icon" href="${own.prefix}assets/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="${own.prefix}assets/apple-touch-icon.png"><link rel="stylesheet" href="${own.prefix}styles.css"></head>`
     + `<body class="public-page case-page"><a class="skip" href="#content">${esc(own.skip)}</a><div class="topwrap"><header class="wrap top"><a class="mark" href="/" aria-label="Minitandem">Mini<span>tandem</span></a>`
     + `<a class="ghost" href="${PAGES[other].url}" hreflang="${other}" lang="${other}">${SWITCH[other]}</a></header></div>`
-    + `<main id="content" class="public-content case">${caseStudyBody(markdown)}</main><footer class="public-footer"><p>${legalLinks(lang)}</p></footer></body></html>\n`;
+    + `<main id="content" class="public-content case">${caseStudyBody(markdown, lang)}</main><footer class="public-footer"><p>${legalLinks(lang)}</p></footer></body></html>\n`;
 }
 
 export const CASE_STUDY_URLS = Object.values(PAGES).map(p => p.url);

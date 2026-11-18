@@ -4,6 +4,7 @@
 !manifest.webmanifest
 !sw.js
 !robots.txt
+!boot.js
 !research.md
 !build-info.json
 !sitemap.xml

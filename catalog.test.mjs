@@ -1086,7 +1086,10 @@ test('archive, saved, shared and venue views select their own cards',()=>{
 test('every local script referenced by the page is allowed into Vercel deployment',()=>{
   const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
   const allowed=new Set(fs.readFileSync(path.join(root,'.vercelignore'),'utf8').split(/\r?\n/).filter(l=>l.startsWith('!')).map(l=>l.slice(1)));
-  const scripts=Array.from(html.matchAll(/<script\b[^>]*src="([^"]+)"/g),m=>m[1]);
+  // The page names boot.js, which loads the others in its own order (since 18 November 2026).
+  const boot=fs.readFileSync(path.join(root,'boot.js'),'utf8');
+  const scripts=[...Array.from(html.matchAll(/<script\b[^>]*src="([^"]+)"/g),m=>m[1]),...JSON.parse(boot.match(/const files = (\[[^\]]+\]);/)[1].replace(/'/g,'"'))];
+  assert.ok(scripts.includes('boot.js'));
   assert.ok(scripts.includes('data-reviewed.js'));
   for(const script of scripts){
     assert.ok(allowed.has(script),`${script} is excluded from deployment`);

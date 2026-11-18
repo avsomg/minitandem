@@ -5,10 +5,13 @@ import {SITE_ORIGIN} from './site.mjs';
 import {caseStudyBody, esc} from './case-study.mjs';
 
 export const LEGAL_LABELS = {
-  de: {impressum: 'Impressum', datenschutz: 'Datenschutz', skip: 'Zum Inhalt', app: 'Zur App', language: 'Sprache'},
-  fr: {impressum: 'Mentions légales', datenschutz: 'Protection des données', skip: 'Aller au contenu', app: 'Ouvrir l’application', language: 'Langue'},
-  en: {impressum: 'Legal notice', datenschutz: 'Privacy', skip: 'Skip to the content', app: 'Open the app', language: 'Language'},
+  de: {impressum: 'Impressum', datenschutz: 'Datenschutz', skip: 'Zum Inhalt', app: 'Zur App', language: 'Sprache', project: 'Über das Projekt'},
+  fr: {impressum: 'Mentions légales', datenschutz: 'Protection des données', skip: 'Aller au contenu', app: 'Ouvrir l’application', language: 'Langue', project: 'À propos du projet (en anglais)'},
+  en: {impressum: 'Legal notice', datenschutz: 'Privacy', skip: 'Skip to content', app: 'Open the app', language: 'Language', project: 'About this project'},
 };
+// The case study is in German and English; a French page links the English one and says so in its label.
+export const projectURL = lang => lang === 'de' ? '/projekt/' : '/projekt/en/';
+export const projectLink = lang => `<a href="${projectURL(lang)}"${lang === 'de' ? '' : ' hreflang="en"'}>${LEGAL_LABELS[lang].project}</a>`;
 // How each language names itself in the language switch of a plain page (the notices, and the place pages).
 export const LANGUAGE_NAMES = {de: 'Deutsch', fr: 'Français', en: 'English'};
 export const legalURL = (kind, lang) => `/${kind}/${lang === 'de' ? '' : lang + '/'}`;
@@ -35,6 +38,26 @@ export function legalDescription(markdown) {
   }
   throw Error('No paragraph under the second heading for the description');
 }
+// The page for an address that does not exist (docker/site.caddy and server.mjs answer it with status 404). It is served at whatever path was
+// asked, so its links and the stylesheet are absolute. One page in the three languages: the address says nothing about the visitor's language.
+export function notFoundPage() {
+  const parts = [
+    ['de', 'Seite nicht gefunden', 'Diese Adresse gibt es auf Minitandem nicht.'],
+    ['fr', 'Page introuvable', 'Cette adresse n’existe pas sur Minitandem.'],
+    ['en', 'Page not found', 'This address does not exist on Minitandem.'],
+  ];
+  const body = parts.map(([lang, heading, text], index) => {
+    const own = lang === 'de' ? '' : ` lang="${lang}"`, level = index ? 2 : 1;
+    return `<section${own}><h${level}>${heading}</h${level}><p>${text}</p><p><a href="/">${LEGAL_LABELS[lang].app}</a> · ${projectLink(lang)}</p></section>`;
+  }).join('');
+  const head = `<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="light">`
+    + `<title>Seite nicht gefunden · Page introuvable · Page not found · Minitandem</title><meta name="robots" content="noindex"><meta name="theme-color" content="#ffffff">`
+    + `<link rel="stylesheet" href="/styles.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">`;
+  return `<!doctype html><html lang="de"><head>${head}</head><body class="public-page case-page"><a class="skip" href="#content">${LEGAL_LABELS.de.skip}</a><div class="topwrap"><header class="wrap top"><a class="mark" href="/">Mini<span>tandem</span></a></header></div><main id="content" class="public-content case">${body}</main><footer class="public-footer"><p>${legalLinks('de')}</p></footer></body></html>\n`;
+}
+export function generateNotFoundPage(output) {
+  fs.writeFileSync(path.join(output, '404.html'), notFoundPage());
+}
 export function generateLegalPages(root, output) {
   for (const [lang, labels] of Object.entries(LEGAL_LABELS)) for (const kind of ['impressum', 'datenschutz']) {
     const url = legalURL(kind, lang);
@@ -49,7 +72,7 @@ export function generateLegalPages(root, output) {
       + `<meta property="og:site_name" content="Minitandem"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${SITE_ORIGIN}${url}"><meta property="og:type" content="website"><meta name="theme-color" content="#ffffff">`
       + `<link rel="stylesheet" href="/styles.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">`;
     const switcher = Object.keys(LEGAL_LABELS).map(code => `<a href="${legalURL(kind, code)}" hreflang="${code}" lang="${code}"${code === lang ? ' aria-current="page"' : ''}>${LANGUAGE_NAMES[code]}</a>`).join('');
-    const html = `<!doctype html><html lang="${lang}"><head>${head}</head><body class="public-page case-page"><a class="skip" href="#content">${labels.skip}</a><div class="topwrap"><header class="wrap top"><a class="mark" href="/">Mini<span>tandem</span></a><nav class="langnav" aria-label="${labels.language}">${switcher}</nav></header></div><main id="content" class="public-content case">${body}</main><footer class="public-footer"><p><a href="/">${labels.app}</a> · ${legalLinks(lang)}</p></footer></body></html>\n`;
+    const html = `<!doctype html><html lang="${lang}"><head>${head}</head><body class="public-page case-page"><a class="skip" href="#content">${labels.skip}</a><div class="topwrap"><header class="wrap top"><a class="mark" href="/">Mini<span>tandem</span></a><nav class="langnav" aria-label="${labels.language}">${switcher}</nav></header></div><main id="content" class="public-content case">${body}</main><footer class="public-footer"><p><a href="/">${labels.app}</a> · ${legalLinks(lang)} · ${projectLink(lang)}</p></footer></body></html>\n`;
     fs.mkdirSync(path.join(output, url), {recursive: true});
     fs.writeFileSync(path.join(output, url, 'index.html'), html);
   }

@@ -7,7 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {SITE_ORIGIN} from './site.mjs';
 import {esc} from './case-study.mjs';
-import {LEGAL_LABELS, LANGUAGE_NAMES, legalLinks, firstSentences} from './legal-pages.mjs';
+import {LEGAL_LABELS, LANGUAGE_NAMES, legalLinks, projectLink, firstSentences} from './legal-pages.mjs';
 import {PAGE_LANGS, ROOT_LANG, PAGE_TEXT, languageLayer} from './place-languages.mjs';
 
 // The guides in the order of the tab's list (childcare.js GUIDE_KEYS), and the address of one in a language.
@@ -95,7 +95,7 @@ function page(slug, lang, texts) {
     + `<meta name="twitter:card" content="summary"><meta name="twitter:title" content="${esc(pageTitle)}"><meta name="twitter:description" content="${esc(description)}"><meta name="theme-color" content="#ffffff">`
     + `<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"><link rel="stylesheet" href="/styles.css"></head>`
     + `<body class="public-page case-page"><a class="skip" href="#content">${esc(labels.skip)}</a><div class="topwrap"><header class="wrap top"><a class="mark" href="/" aria-label="Minitandem">Mini<span>tandem</span></a>${switcher}</header></div>`
-    + `<main id="content" class="public-content case">${body}</main><footer class="public-footer"><p><a href="/">${esc(labels.app)}</a> · ${legalLinks(lang)}</p></footer></body></html>\n`;
+    + `<main id="content" class="public-content case">${body}</main><footer class="public-footer"><p><a href="/">${esc(labels.app)}</a> · ${legalLinks(lang)} · ${projectLink(lang)}</p></footer></body></html>\n`;
 }
 
 // Writes every guide in every language; a missing text stops the build. Returns the number of pages.

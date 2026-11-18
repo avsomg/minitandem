@@ -38,7 +38,7 @@ test('offline shell contains only published files and installable icons',async()
 test('the shell is exactly the page, its styles, manifest, every script and the map files; the card texts of a language are not in it',async()=>{
   const {handlers,stored}=worker();
   let work;handlers.install({waitUntil:promise=>{work=promise;}});await work;
-  const expected=new Set(['/','/index.html','/styles.css','/manifest.webmanifest',...SCRIPTS.map(f=>'/'+f),'/assets/favicon.svg','/assets/icon-512.png','/assets/apple-touch-icon.png',...LAZY_ASSETS.map(f=>'/assets/'+f)]);
+  const expected=new Set(['/','/index.html','/styles.css','/manifest.webmanifest','/boot.js',...SCRIPTS.map(f=>'/'+f),'/assets/favicon.svg','/assets/icon-512.png','/assets/apple-touch-icon.png',...LAZY_ASSETS.map(f=>'/assets/'+f)]);
   assert.deepEqual([...stored.keys()].sort(),[...expected].sort());
 });
 

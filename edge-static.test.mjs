@@ -143,13 +143,12 @@ test('every type of the service\'s table is a type of the route, and the route h
 test('the refusals of the route are the ones the service gives, with the same status, type, cache rule and body',{skip:skipUnbuilt},async t=>{
   const {base}=await listen(t);
   const answers=[...staticBlock.matchAll(/respond `([^`]*)` (\d{3})/g)].map(match=>({body:match[1].replace(/\\([{}])/g,'$1'),status:Number(match[2])}));
-  assert.equal(answers.length,5);
+  assert.equal(answers.length,4);
   const sent=[
     ['Origin not allowed',()=>fetch(base+'/',{headers:{Origin:'https://other.example'}})],
     ['Preflight not allowed',()=>fetch(base+'/',{method:'OPTIONS'})],
     ['Method not allowed',()=>fetch(base+'/',{method:'POST'})],
-    ['Not found (dot path)',()=>fetch(base+'/.vercelignore')],
-    ['Not found',()=>fetch(base+'/missing')]
+    ['Not found (dot path)',()=>fetch(base+'/.vercelignore')]
   ];
   for(const [index,[name,send]] of sent.entries()){
     const response=await send(),text=await response.text();
@@ -159,7 +158,23 @@ test('the refusals of the route are the ones the service gives, with the same st
     assert.equal(response.headers.get('cache-control'),'no-store',name);
   }
   // The route sets these two on its own refusals as well (the lines before each respond).
-  assert.equal((staticBlock.match(/header Content-Type "application\/json; charset=utf-8"\n\s+header Cache-Control no-store\n\s+respond/g)||[]).length,5);
+  assert.equal((staticBlock.match(/header Content-Type "application\/json; charset=utf-8"\n\s+header Cache-Control no-store\n\s+respond/g)||[]).length,4);
+  // Any other address gets the site's 404 page with status 404, from both: the page of the build, as HTML, not stored, inside the same policy.
+  const page=fs.readFileSync(path.join(publish,'404.html'),'utf8'),csp=caddyHeaders('x.html')['content-security-policy'];
+  assert.match(staticBlock,new RegExp('header Content-Type "text/html; charset=utf-8"\\n\\s+header Cache-Control no-store\\n\\s+header Content-Security-Policy "'+csp.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'"\\n\\s+rewrite \\* /404\\.html\\n\\s+file_server \\{\\n\\s+status 404\\n'));
+  for(const route of ['/missing','/places/does-not-exist/','/sw.js/','/assets/','/healthz/extra']){
+    const response=await fetch(base+route),text=await response.text();
+    assert.equal(response.status,404,route);assert.equal(text,page,route);
+    assert.equal(response.headers.get('content-type'),'text/html; charset=utf-8',route);
+    assert.equal(response.headers.get('cache-control'),'no-store',route);
+    assert.equal(response.headers.get('content-security-policy'),csp,route);
+  }
+  // Addresses guessed for the case study lead to it, from both.
+  assert.match(staticBlock,/@caseAlias path \/project \/project\/ \/projekt\/de \/projekt\/de\/\n\s+redir @caseAlias \/projekt\/ 301/);
+  for(const route of ['/project','/project/','/projekt/de','/projekt/de/']){
+    const moved=await fetch(base+route,{redirect:'manual'});
+    assert.equal(moved.status,301,route);assert.equal(moved.headers.get('location'),'/projekt/',route);
+  }
   // Only the site's own origin is allowed for a file, as for the service in production; the route names the same one.
   assert.match(routes,new RegExp('@siteOrigin header Origin '+SITE_ORIGIN.replace(/[.]/g,'\\.')));
   assert.match(routes,new RegExp('not header Origin '+SITE_ORIGIN.replace(/[.]/g,'\\.')));

@@ -589,13 +589,14 @@ Das Archiv enthält den privaten redaktionellen Zustand (Warteschlange, Belege, 
 
 *Alte Sperre auf dem Mac beim ersten Lauf nach der Umstellung.* Frühere Versionen legten Verzeichnisse an (`editorial/workflow-state/cycle/lock/` mit `owner.json`, und `<Zwischenordner>/.lock/` mit `pid`). Die neue Version liest sie weiter: Ein Verzeichnis mit lebendem Besitzer, jünger als drei Stunden (die Grenze der alten Version), lässt den Lauf überspringen und bleibt unberührt, damit ein Lauf der alten Version nicht gestört wird. Ist der Besitzer nicht mehr da, ist das Verzeichnis älter als drei Stunden oder hat es keinen lesbaren Besitzer und ist älter als eine Minute, wird es entfernt und der Lauf geht normal weiter. Meist gibt es gar kein altes Verzeichnis, weil die alte Version es am Ende jedes Laufs löscht. Die neue Sperre liegt unter anderem Namen (`cycle.lock`, `.offsite.lock`); niemand muss etwas von Hand löschen. Meldet ein Lauf dauernd «still running», prüft man mit `cat editorial/workflow-state/cycle/cycle.lock` und `ps -p <pid>`, ob der Prozess wirklich läuft; läuft er nicht, räumt der nächste Lauf von selbst auf.
 
-**Wächter: `ops/cycle-watch.sh`.** Ein systemd-Timer startet ihn alle 30 Minuten (`ops/systemd/minitandem-cycle-watch.service` und `.timer`). Er läuft als root wie `minitandem-health.service` (das Relay-Passwort ist nur für root lesbar) und nutzt dieselben Mail-Einstellungen (`HEALTH_MAIL_TO`, `HEALTH_MAIL_FROM`, `sendmail -t`). Er macht drei Prüfungen, jede mit eigenem gemerktem Zustand, und schickt **eine** Mail pro Zustandswechsel (Problem beginnt, Problem endet). Der Betreff beginnt mit «Minitandem editorial:».
+**Wächter: `ops/cycle-watch.sh`.** Ein systemd-Timer startet ihn alle 30 Minuten (`ops/systemd/minitandem-cycle-watch.service` und `.timer`). Er läuft als root wie `minitandem-health.service` (das Relay-Passwort ist nur für root lesbar) und nutzt dieselben Mail-Einstellungen (`HEALTH_MAIL_TO`, `HEALTH_MAIL_FROM`, `sendmail -t`). Er macht vier Prüfungen, jede mit eigenem gemerktem Zustand, und schickt **eine** Mail pro Zustandswechsel (Problem beginnt, Problem endet). Der Betreff beginnt mit «Minitandem editorial:».
 
 | Betreff (nach dem Vorspann) | Wann | Was tun |
 | --- | --- | --- |
 | `cycle silent` / `cycle is running again` | kein Heartbeat seit mehr als `WATCH_SILENT_HOURS` (10) Stunden | Mac an und wach? `launchctl list \| grep minitandem`, `tail ~/Library/Logs/minitandem-editorial-cycle.log` |
 | `cycle failed` / `cycle works again` | der letzte Heartbeat sagt `ok:false` (und nicht `paused`): Exit-Code ungleich 0 (`exit`), Exit-Code 0 ohne Quittung dieses Laufs (`no-receipt`) oder der Zyklus meldet selbst, dass er den Eigentümer braucht (`needs-owner`; dieselbe Bedingung wie das Banner auf dem Mac: fehlgeschlagener Schritt, Auftrag mit «attention», Circuit-Breaker, Claude-Login nicht verfügbar, Stapel abgebrochen); die Mail nennt in der Zeile `Reason:` den Grund, dazu Exit-Code und Schritte | `node editorial/cycle.mjs --status`, Log wie oben; bei `no-receipt` steht im Log `cycle-run: the cycle exited with 0 but left no receipt of run …` |
 | `off-site copy missing` / `off-site copy is back` | kein Archiv seit mehr als `WATCH_BACKUP_HOURS` (36) Stunden | `tail ~/Library/Logs/minitandem-editorial-offsite.log` |
+| `cycle paused past its date` / `cycle pause is over` | der letzte Heartbeat ist eine Pause, deren `until` vorbei ist (`pauseExpired:true`); eine Pause ohne `until` wird nicht beurteilt | `cat editorial/cycle.pause`; die Datei löschen, sobald ihr Grund erledigt ist |
 
 Das Alter einer Datei ist ihr Alter auf dem Server, eine falsche Uhr auf dem Mac kann ein Schweigen also nicht verdecken. Eine Datei, die noch nie ankam, zählt ab dem ersten Lauf des Wächters; wird er vor dem Mac eingerichtet, bleibt er bis zum Ablauf der Frist still. Ein Heartbeat mit `paused:true` oder `skipped` gilt als lebendig und lässt den Zustand «failed» unverändert. Eine Mail, die nicht rausging, wird nicht als gesendet gemerkt; der nächste Lauf versucht es noch einmal. Exit-Code: 0 alles in Ordnung, 1 ein Problem ist offen (`SuccessExitStatus=0 1`), 2 eine Mail liess sich nicht senden.
 
@@ -617,7 +618,7 @@ sudo systemctl daemon-reload && sudo systemctl enable --now minitandem-cycle-wat
 sudo systemctl start minitandem-cycle-watch.service && journalctl -u minitandem-cycle-watch -n 3
 ```
 
-Die letzte Zeile muss `cycle-watch: silent=ok failed=ok backup=ok` ausgeben. Die Adresse steht wie beim Gesundheitstest nur auf dem Server, nicht im Repository.
+Die letzte Zeile muss `cycle-watch: silent=ok failed=ok backup=ok pause=ok` ausgeben. Die Adresse steht wie beim Gesundheitstest nur auf dem Server, nicht im Repository.
 
 **Einrichten, Mac:**
 
@@ -664,7 +665,7 @@ node editorial/backup.mjs restore ~/restore/JJJJ-MM-TT --to="$HOME/restore/arbei
 
 **Pausieren und abschalten.**
 
-- Zyklus pausieren: `touch editorial/cycle.pause`. Der Zyklus tut nichts, die Heartbeats sagen `paused:true`, es kommt weder «silent» noch «failed». Aufheben: Datei löschen. Eine vergessene Pause wird nicht gemeldet.
+- Zyklus pausieren: `touch editorial/cycle.pause`. Der Zyklus tut nichts, die Heartbeats sagen `paused:true`, es kommt weder «silent» noch «failed». Aufheben: Datei löschen. Die Pause endet nie von selbst. Nennt sie ein `until`, das vorbei ist, schickt der Wächter einmal «cycle paused past its date» (seit 18. November 2026: am 8. November blieb eine Pause zehn Tage lang unbemerkt liegen); eine Pause ohne `until` meldet er nicht.
 - Tägliche Kopie anhalten: `launchctl bootout gui/$(id -u)/ch.minitandem.editorial-offsite` (wieder starten mit `bootstrap`). Nach 36 Stunden kommt «off-site copy missing».
 - Wächter anhalten: `sudo systemctl stop minitandem-cycle-watch.timer` (starten mit `start`); die gemerkten Zustände bleiben erhalten.
 - Jeden Zugriff des Macs sperren: die Zeile mit `minitandem-drop` aus `~/.ssh/authorized_keys` löschen.

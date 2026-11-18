@@ -6,6 +6,8 @@ Deutsche Fassung: [README.de.md](README.de.md)
 
 Minitandem is a directory of activities for families with children aged 0 to 6 in canton Fribourg, Switzerland. It is a static web app (interface in English, German and French; the catalogue text is written in English and shown in German and French from checked translations) plus an editorial pipeline that keeps the catalogue checked: bounded model workers research and verify facts, and a deterministic controller with a SQLite queue is the only part allowed to write.
 
+Built by Alex Shamrai, who does not program himself: AI coding agents (Claude Code and Codex) wrote the code from his requirements. He approves the specifications, reads the test reports and decides what goes live. Case study: https://minitandem.ch/projekt/en/
+
 ## In one minute
 
 - **The product:** a plain web page with no framework. Its only requests to other sites are the map tiles of the federal geoportal (`wmts.geo.admin.ch`); Google Maps opens only when a visitor asks for directions. Visitors filter cards by age, place and category. Their favourites, notes and visit plans stay in their own browser; family sync is switched off by default, and the server accepts no family data while it is off.

@@ -32,8 +32,14 @@ test('the page is English by default, light only, and named Minitandem',()=>{
 });
 test('index.html loads exactly the scripts in ui-files.mjs, in that order, without inline code or outside hosts',()=>{
   const index=read('index.html');
-  const loaded=[...index.matchAll(/<script src="([^"]+)"[^>]*><\/script>/g)].map(m=>m[1]);
-  assert.deepEqual(loaded,SCRIPTS);
+  // One deferred loader after the stylesheet; it starts the scripts in the listed order and keeps it (async=false).
+  const loaded=[...index.matchAll(/<script src="([^"]+)"[^>]*><\/script>/g)].map(m=>m[0]);
+  assert.deepEqual(loaded,['<script src="boot.js" defer></script>']);
+  assert.ok(index.indexOf('<link rel="stylesheet" href="styles.css">')<index.indexOf('<script src="boot.js"'),'the loader comes after the stylesheet');
+  const boot=read('boot.js'),listed=JSON.parse(boot.match(/const files = (\[[^\]]+\]);/)[1].replace(/'/g,'"'));
+  assert.deepEqual(listed,SCRIPTS);
+  assert.match(boot,/script\.async = false;/);assert.doesNotMatch(boot,/innerHTML|eval\(|new Function|https?:/);
+  assert.ok(STATIC.includes('boot.js'));
   assert.ok(!/<script(?![^>]*\ssrc=)[^>]*>/.test(index),'no inline script (the policy only allows own files)');
   assert.ok(!/\son[a-z]+="/.test(index),'no inline event handlers');
   assert.ok(!/<link[^>]+href="https?:/.test(index.replace(/rel="canonical"[^>]*/g,'')),'no external stylesheet or font');

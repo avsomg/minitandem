@@ -468,6 +468,7 @@
   'weekly.7': 'dimanche',
   'foot.impressum': 'Mentions légales',
   'foot.privacy': 'Protection des données',
+  'foot.project': 'À propos du projet (en anglais)',
   'foot.about': 'À propos des données',
   'foot.data': 'Vos données et sauvegarde',
   'foot.places': 'Toutes les activités en pages simples',

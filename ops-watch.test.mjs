@@ -598,6 +598,27 @@ for(const shell of SHELLS)test(`cycle-watch (${shell}) sends one mail when the l
   assert.equal(box.run(NOW+7500).status,0);assert.equal(subjects(box).length,count,'nor does a skipped run from a healthy state');
 });
 
+for(const shell of SHELLS)test(`cycle-watch (${shell}) sends one mail when the cycle is still paused after the end its pause names, and one when that is over; a pause still in its time and a pause without an end stay quiet`,t=>{
+  const box=watchSandbox(t,shell);
+  const pause=(until,expired)=>JSON.stringify(buildHeartbeat({exit:0,runId:RUN,startedMs:Date.now()-1000,record:{runId:RUN,startedAt:new Date().toISOString(),skipped:'paused by editorial/cycle.pause',pause:{until,expired}}}))+'\n';
+  box.put('backup.json','{"at":"x","name":"editorial-2026-10-15.tar.gz","bytes":10}\n',H,NOW);
+  box.put('heartbeat.json',pause('2026-11-08T20:00:00+01:00',false),H,NOW);
+  const quiet=box.run(NOW);assert.equal(quiet.status,0);assert.deepEqual(subjects(box),[],'a pause still in its time');
+  assert.match(quiet.stdout,/cycle-watch: silent=ok failed=ok backup=ok pause=ok/);
+  box.put('heartbeat.json',pause(null,false),H,NOW+60);
+  assert.equal(box.run(NOW+60).status,0);assert.deepEqual(subjects(box),[],'a pause without an end is not judged');
+  box.put('heartbeat.json',pause('2026-11-08T20:00:00+01:00',true),H,NOW+120);
+  const open=box.run(NOW+120);assert.equal(open.status,1);assert.match(open.stdout,/pause=problem/);
+  assert.deepEqual(subjects(box),['Minitandem editorial: cycle paused past its date']);
+  assert.match(box.mail.mails()[0],/until: 2026-11-08T20:00:00\+01:00/);assert.match(box.mail.mails()[0],/does not end by itself/);
+  assert.equal(box.run(NOW+1800).status,1);assert.equal(subjects(box).length,1,'still paused: no second mail');
+  // the expired pause is no failure: the failed state stays as it was
+  assert.equal(fs.existsSync(path.join(box.state,'failed')),false);
+  box.put('heartbeat.json',beat(),H,NOW+3600);
+  assert.equal(box.run(NOW+3600).status,0);
+  assert.deepEqual(subjects(box),['Minitandem editorial: cycle paused past its date','Minitandem editorial: cycle pause is over']);
+});
+
 for(const shell of SHELLS)test(`cycle-watch (${shell}) names the reason when a cycle exits with 0 but left no receipt of its own run, and treats it like any other failure`,t=>{
   const box=watchSandbox(t,shell);
   box.put('backup.json','{"at":"x","name":"editorial-2026-10-15.tar.gz","bytes":10}\n',H,NOW);

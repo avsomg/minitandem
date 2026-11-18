@@ -1,5 +1,5 @@
 #!/bin/sh
-# Watches the editorial cycle on the owner's Mac from this server and sends one e-mail whenever one of three states changes
+# Watches the editorial cycle on the owner's Mac from this server and sends one e-mail whenever one of four states changes
 # (a problem begins, a problem ends). Run it from a systemd timer every 30 minutes (ops/systemd/minitandem-cycle-watch.*, docs/betrieb.md).
 # The mail goes through any sendmail-compatible program, like ops/healthcheck.sh; the same HEALTH_MAIL_* settings apply.
 #
@@ -8,13 +8,14 @@
 #   $WATCH_DIR/backup.json      {"at","name","bytes"} after every stored daily archive (ops/editorial-offsite.mjs)
 # The age of a file is the age of the file itself on this server, so a wrong clock on the Mac cannot hide a silence.
 #
-# The three checks, each with its own remembered state in $WATCH_STATE_DIR:
+# The four checks, each with its own remembered state in $WATCH_STATE_DIR:
 #   silent  no heartbeat for more than WATCH_SILENT_HOURS (cycle silent / cycle is running again)
 #   failed  the last heartbeat says ok:false and not paused (cycle failed / cycle works again). Its "reason" is named in the mail:
 #             exit        the cycle exited with a non-zero code
 #             no-receipt  the cycle exited with 0 but left no receipt of that very run (a run id from ops/cycle-run.mjs), so nothing is known about its work
 #             needs-owner the cycle finished and itself says it needs the owner
 #   backup  no archive for more than WATCH_BACKUP_HOURS (off-site copy missing / off-site copy is back)
+#   pause   the last heartbeat is a pause whose until has passed (cycle paused past its date / cycle pause is over); a pause without until is not judged
 # A file that does not exist yet counts from the watcher's first run, so installing the watcher before the Mac sends anything stays quiet
 # until the period has passed. A pause (paused:true) and a skipped run (skipped:"another cycle is still running") count as alive and leave the
 # failed state as it was: neither is work that succeeded, neither is a failure.
@@ -146,7 +147,22 @@ On the Mac: tail ~/Library/Logs/minitandem-editorial-offsite.log." \
   "off-site copy is back" \
   "A daily copy of the private editorial state has reached this server again. $bk_seen"
 
-echo "cycle-watch: silent=$(state_of silent) failed=$(state_of failed) backup=$(state_of backup)"
+# ---- 4. pause past its date (judged on the last heartbeat; a silent Mac leaves this state as it was)
+# A pause names the moment it should end, but the cycle does not resume by itself: the file has to be removed. Once that moment has passed,
+# the pause is forgotten work, not a decision, and the owner hears of it once.
+if [ -f "$HEARTBEAT" ]; then
+  if printf '%s' "$hb" | grep -q '"pauseExpired":true'; then pause=problem; else pause=ok; fi
+  until_text=$(field pauseUntil "$hb")
+  change pause "$pause" \
+    "cycle paused past its date" \
+    "The editorial cycle on the Mac is paused by editorial/cycle.pause, and the end the pause names has passed (until: ${until_text:-not readable}).
+A pause does not end by itself: the cycle skips every run until the file is removed. Heartbeat received: $(fmt "$last_hb").
+On the Mac: cat editorial/cycle.pause, then remove the file once its reason is settled." \
+    "cycle pause is over" \
+    "The editorial cycle on the Mac is no longer paused past its date (heartbeat received $(fmt "$last_hb"))."
+fi
+
+echo "cycle-watch: silent=$(state_of silent) failed=$(state_of failed) backup=$(state_of backup) pause=$(state_of pause)"
 [ "$mail_failed" -eq 0 ] || exit 2
-if [ "$(state_of silent)" = ok ] && [ "$(state_of failed)" = ok ] && [ "$(state_of backup)" = ok ]; then exit 0; fi
+if [ "$(state_of silent)" = ok ] && [ "$(state_of failed)" = ok ] && [ "$(state_of backup)" = ok ] && [ "$(state_of pause)" = ok ]; then exit 0; fi
 exit 1

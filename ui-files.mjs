@@ -7,7 +7,8 @@ export const SCRIPTS=['features.js','strings-en.js','strings-de.js','strings-fr.
 // and the places of the Daycare tab with their German or French texts (scripts/compile-childcare.mjs), the first time the tab is opened.
 export const LAZY_SCRIPTS=['data-de.js','data-fr.js','data-childcare.js','data-childcare-de.js','data-childcare-fr.js'];
 // vercel.json is not here: it belongs to the Vercel release stage (unused for Minitandem) and carries an older, weaker policy than the service and Caddy send. It stays in the repository, not in the build.
-export const STATIC=['index.html','styles.css','manifest.webmanifest','sw.js','robots.txt'];
+// boot.js is the one script index.html names: it loads SCRIPTS after the stylesheet (see the file).
+export const STATIC=['index.html','styles.css','manifest.webmanifest','sw.js','robots.txt','boot.js'];
 // assets/lucide.min.js and LUCIDE-LICENSE are used only by the editorial admin panel on the owner's Mac. They are not here, so they are not in the build;
 // server.mjs serves the script to the panel alone, at /admin-icons.js.
 // PHOSPHOR-LICENSE: the licence of the category icons, whose path data is inlined in category-icons.js.

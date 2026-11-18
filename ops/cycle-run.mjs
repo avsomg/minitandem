@@ -49,6 +49,9 @@ export function buildHeartbeat({exit,record=null,startedMs,now=new Date(),runId=
     ok:reason===null,
     reason,
     paused:Boolean(skipped&&/^paused/.test(skipped)),
+    // A pause names until when it should end, but does not end by itself (editorial/cycle.mjs): the watcher reports one whose date has passed.
+    pauseUntil:mine?.pause?.until?clean(mine.pause.until,40):null,
+    pauseExpired:Boolean(mine?.pause?.expired),
     skipped,
     runId:runId?clean(runId,64):null,
     startedAt:new Date(startedMs).toISOString(),

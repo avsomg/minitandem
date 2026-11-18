@@ -14,36 +14,15 @@
   <meta property="og:description" content="Activities for families with children aged 0–6 in canton Fribourg: age, schedule, price, address and sources.">
   <meta property="og:url" content="https://minitandem.ch/">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="https://minitandem.ch/assets/og-minitandem.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Minitandem, gebaut und betrieben mit KI-Agenten, von Alex Shamrai">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="stylesheet" href="styles.css">
-  <script src="features.js" defer></script>
-  <script src="strings-en.js" defer></script>
-  <script src="strings-de.js" defer></script>
-  <script src="strings-fr.js" defer></script>
-  <script src="i18n.js" defer></script>
-  <script src="data.js" defer></script>
-  <script src="data-reviewed.js" defer></script>
-  <script src="data-practical.js" defer></script>
-  <script src="regions.js" defer></script>
-  <script src="data-geo.js" defer></script>
-  <script src="data-towns.js" defer></script>
-  <script src="planning.js" defer></script>
-  <script src="exchange.js" defer></script>
-  <script src="storage-migration.js" defer></script>
-  <script src="catalogue.js" defer></script>
-  <script src="catalogue-i18n.js" defer></script>
-  <script src="childcare.js" defer></script>
-  <script src="format.js" defer></script>
-  <script src="store.js" defer></script>
-  <script src="sync.js" defer></script>
-  <script src="exports.js" defer></script>
-  <script src="category-icons.js" defer></script>
-  <script src="views.js" defer></script>
-  <script src="childcare-views.js" defer></script>
-  <script src="toast.js" defer></script>
-  <script src="map.js" defer></script>
-  <script src="app.js" defer></script>
+  <script src="boot.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#results" data-i18n="a11y.skip"></a>
@@ -133,7 +112,7 @@
 
     <footer class="foot">
       <p class="legend"><span class="st"><i class="dot good"></i><span data-i18n="status.active.long">Information current</span></span><span class="st"><i class="dot check"></i><span data-i18n="status.check.long">Check details before you go</span></span><span class="st"><i class="dot later"></i><span data-i18n="status.future.long">For older children</span></span></p>
-      <p class="foot-links"><button type="button" class="linkbtn" id="openAbout" data-i18n="foot.about">About the data</button><button type="button" class="linkbtn" id="openData" data-i18n="foot.data">Your data and backup</button><a class="linkbtn" href="places/" data-places data-i18n="foot.places">All activities as simple pages</a><a class="linkbtn" href="research.md" download data-i18n="foot.catalogue">Catalogue with sources</a><a class="linkbtn" href="/impressum/" data-legal="impressum" data-i18n="foot.impressum">Impressum</a><a class="linkbtn" href="/datenschutz/" data-legal="datenschutz" data-i18n="foot.privacy">Datenschutz</a></p>
+      <p class="foot-links"><button type="button" class="linkbtn" id="openAbout" data-i18n="foot.about">About the data</button><button type="button" class="linkbtn" id="openData" data-i18n="foot.data">Your data and backup</button><a class="linkbtn" href="places/" data-places data-i18n="foot.places">All activities as simple pages</a><a class="linkbtn" href="research.md" download data-i18n="foot.catalogue">Catalogue with sources</a><a class="linkbtn" href="/impressum/" data-legal="impressum" data-i18n="foot.impressum">Impressum</a><a class="linkbtn" href="/datenschutz/" data-legal="datenschutz" data-i18n="foot.privacy">Datenschutz</a><a class="linkbtn" href="/projekt/en/" hreflang="en" data-project data-i18n="foot.project">About this project</a></p>
       <p data-i18n="foot.note">Information from public sources; it does not confirm a booking or a free place. Check the details with the organiser before you go. Your notes and plans stay in this browser.</p>
     </footer>
   </main>

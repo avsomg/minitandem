@@ -468,6 +468,7 @@
   'weekly.7': 'Sundays',
   'foot.impressum': 'Legal notice',
   'foot.privacy': 'Privacy',
+  'foot.project': 'About this project',
   'foot.about': 'About the data',
   'foot.data': 'Your data and backup',
   'foot.places': 'All activities as simple pages',

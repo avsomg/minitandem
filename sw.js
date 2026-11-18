@@ -1,6 +1,6 @@
-const CACHE = 'minitandem-shell-2026-10-21-daycare-2';
+const CACHE = 'minitandem-shell-2026-11-18-boot';
 const SHELL = [
-  '/', '/index.html', '/styles.css', '/manifest.webmanifest',
+  '/', '/index.html', '/styles.css', '/manifest.webmanifest', '/boot.js',
   '/features.js', '/strings-en.js', '/strings-de.js', '/strings-fr.js', '/i18n.js',
   '/data.js', '/data-reviewed.js', '/data-practical.js', '/regions.js', '/data-geo.js', '/data-towns.js',
   '/planning.js', '/exchange.js', '/storage-migration.js', '/catalogue.js', '/catalogue-i18n.js', '/childcare.js', '/format.js', '/store.js', '/sync.js', '/exports.js', '/category-icons.js', '/views.js', '/childcare-views.js',

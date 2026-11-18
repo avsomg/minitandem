@@ -543,13 +543,13 @@
   },
   {
     "id": "memo-buchstart",
-    "address": "Rue de l’Hôpital 2, Fribourg",
+    "address": "Rue de l’Hôpital 2, 1700 Fribourg",
     "geo": {
       "label": "Rue de l'Hôpital 2 1700 Fribourg",
       "lat": 46.805633544921875,
       "lon": 7.154872894287109,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+Fribourg&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-10-31",
       "precision": "address"
     }
   },
@@ -1402,6 +1402,18 @@
       "lon": 7.1116557121276855,
       "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Place+de+l%E2%80%99%C3%89cole+1%E2%80%937+1796+Courgevaux&type=locations&origins=address&limit=5&sr=4326",
       "checked": "2026-09-28",
+      "precision": "address"
+    }
+  },
+  {
+    "id": "plasselb-tennisbuvette-play",
+    "address": "Sageboden 60, 1737 Plasselb",
+    "geo": {
+      "label": "Sageboden 60 1737 Plasselb",
+      "lat": 46.72935104370117,
+      "lon": 7.248095989227295,
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Sageboden+60+1737+Plasselb&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-11-18",
       "precision": "address"
     }
   },

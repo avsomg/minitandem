@@ -108,23 +108,34 @@ function corrections(){
   if(!fs.existsSync(correctionDir))return [];
   return fs.readdirSync(correctionDir).filter(name=>/^[a-f0-9]{20}\.json$/.test(name)).map(name=>JSON.parse(fs.readFileSync(path.join(correctionDir,name),'utf8'))).sort((a,b)=>b.importedAt.localeCompare(a.importedAt));
 }
+const FILE_POLICY="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://wmts.geo.admin.ch; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'";
+// Addresses people guess for the case study, sent to it as Caddy does (docker/site.caddy @caseAlias).
+const CASE_ALIASES=new Set(['/project','/project/','/projekt/de','/projekt/de/']);
+// An address that is not a public file gets the site's 404 page, as Caddy answers it; without a built page, the short refusal.
+async function notFound(req,res){
+  let page;
+  try{page=await fs.promises.readFile(path.join(root,'.publish','404.html'));}catch{return json(res,404,{error:'Not found'});}
+  res.writeHead(404,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':FILE_POLICY});
+  res.end(req.method==='HEAD'?undefined:page);
+}
 async function staticFile(req,res,pathname){
   if(pathname.split('/').some(segment=>segment.startsWith('.')||segment==='..'))return json(res,404,{error:'Not found'});
+  if(CASE_ALIASES.has(pathname)){res.writeHead(301,{Location:'/projekt/'});return res.end();}
   // The editor panel: its page, script and style, and the icon library it loads. The library lives in assets/ but is not part of the
   // public build (ui-files.mjs), so it is served at a path of its own, which Caddy refuses with the others.
   const panel={'/admin':['editorial','admin.html'],'/admin.js':['editorial','admin.js'],'/admin.css':['editorial','admin.css'],'/admin-icons.js':['assets','lucide.min.js']}[pathname];
   const editorial=Boolean(panel);
   let file=editorial?path.join(root,...panel):path.join(root,'.publish',pathname==='/'?'index.html':pathname.slice(1));
   const base=editorial?path.join(root,panel[0]):path.join(root,'.publish');
-  if(!path.resolve(file).startsWith(path.resolve(base)+path.sep)||!fs.existsSync(file))return json(res,404,{error:'Not found'});
+  if(!path.resolve(file).startsWith(path.resolve(base)+path.sep)||!fs.existsSync(file))return editorial?json(res,404,{error:'Not found'}):notFound(req,res);
   // A folder is served by its index.html, as static hosts do (/places/, /places/<id>/). Without the trailing slash the browser
   // is sent to the slashed path first, so the page's relative links resolve; the target is rebuilt from segments, never //host.
   if(!editorial&&fs.statSync(file).isDirectory()){
     if(!pathname.endsWith('/')){res.writeHead(301,{Location:'/'+pathname.split('/').filter(Boolean).join('/')+'/'});return res.end();}
     file=path.join(file,'index.html');
   }
-  if(!fs.existsSync(file)||!fs.statSync(file).isFile())return json(res,404,{error:'Not found'});
-  const headers={'Content-Type':mime[path.extname(file)]||'application/octet-stream','Cache-Control':pathname==='/admin'||pathname==='/admin.js'||pathname==='/admin-icons.js'?'no-store':'public, max-age=0, must-revalidate','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://wmts.geo.admin.ch; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'"};
+  if(!fs.existsSync(file)||!fs.statSync(file).isFile())return editorial?json(res,404,{error:'Not found'}):notFound(req,res);
+  const headers={'Content-Type':mime[path.extname(file)]||'application/octet-stream','Cache-Control':pathname==='/admin'||pathname==='/admin.js'||pathname==='/admin-icons.js'?'no-store':'public, max-age=0, must-revalidate','Content-Security-Policy':FILE_POLICY};
   if(req.method==='HEAD'){res.writeHead(200,headers);return res.end();}
   // The file is opened before the status line goes out: one that vanished or cannot be read is answered as such, not as a broken 200.
   // An error after the first byte can only cut the connection (see fail).
