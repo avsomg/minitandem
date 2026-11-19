@@ -410,7 +410,7 @@ account default : relay
 
    Das Passwort steht in `/etc/minitandem-smtp-password` (`chmod 600`, Eigentümer root). Es ist nicht das Passwort des Kundenkontos, sondern ein eigenes Passwort für Mailprogramme, das im Infomaniak-Kundenkonto beim Postfach erzeugt wird («Generate a password to use in an email client»). Der Eigentümer erzeugt es und legt es selbst auf den Server; es steht in keinem Chat und in keinem Repository. Wird der Server kompromittiert, muss nur dieses Passwort widerrufen werden.
 3. Zustellweg prüfen: `printf 'To: EMPFAENGER\nSubject: Test\n\nHallo\n' | sendmail -t`. `EMPFAENGER` ist die private Adresse des Eigentümers. Schlägt es fehl, `journalctl -t msmtp` lesen. Erreichbarkeit des Relays: `openssl s_client -starttls smtp -connect mail.infomaniak.com:587`.
-4. Das Skript `ops/healthcheck.sh` fragt `https://minitandem.ch/healthz` ab und schickt **eine** Mail, wenn der Zustand wechselt (wird unerreichbar, ist wieder erreichbar). Es ruft `sendmail -t` auf.
+4. Das Skript `ops/healthcheck.sh` fragt `https://minitandem.ch/healthz` ab und schickt **eine** Mail, wenn der Zustand wechselt (wird unerreichbar, ist wieder erreichbar). Es ruft `sendmail -t` auf. Eine fehlgeschlagene Abfrage wird nach 20 Sekunden einmal wiederholt (`HEALTH_RETRY_SECONDS`); erst wenn auch sie scheitert, gilt die Seite als unerreichbar. Grund: Der Caddy-Container beendet sich alle sechs Tage selbst, damit das Zugriffsprotokoll nie sieben Tage erreicht (`docker/access-log-entrypoint.sh`), und Docker startet ihn innerhalb einer Sekunde neu. Am 19. November 2026 fiel der Timer genau in diese Sekunde und meldete einen Ausfall, der schon vorbei war.
 5. systemd-Dienst und Timer, alle fünf Minuten:
 
 ```

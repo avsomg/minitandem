@@ -237,24 +237,31 @@ test('ops/healthcheck.sh mails once when the service goes down and once when it 
   const folder=tmp(t,'minitandem-health-script-'),mailbox=path.join(folder,'mail.txt');
   const sendmail=path.join(folder,'fake-sendmail');
   fs.writeFileSync(sendmail,`#!/bin/sh\ncat >> '${mailbox}'\necho '--- end of mail ---' >> '${mailbox}'\n`,{mode:0o755});
-  let healthy=true;
-  const server=http.createServer((request,response)=>{if(healthy){response.writeHead(200,{'Content-Type':'application/json'});response.end('{"status":"ok","records":1}');}else{response.writeHead(503);response.end('down');}});
+  let healthy=true,failNext=0,requests=0;
+  const server=http.createServer((request,response)=>{requests++;
+    if(healthy&&failNext<=0){response.writeHead(200,{'Content-Type':'application/json'});response.end('{"status":"ok","records":1}');}
+    else{failNext--;response.writeHead(503);response.end('down');}});
   await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
   t.after(()=>server.close());
   // Asynchronous on purpose: this process also runs the fake service, and a blocking call would stop it from answering.
-  const check=()=>new Promise(resolve=>{
+  const check=(retrySeconds='0')=>new Promise(resolve=>{
     const child=spawn('sh',[path.join(root,'ops','healthcheck.sh')],{stdio:'ignore',env:{...process.env,HEALTH_MAIL_TO:'owner@example.org',HEALTH_MAIL_FROM:'monitor@example.org',
-      HEALTH_URL:`http://127.0.0.1:${server.address().port}/healthz`,HEALTH_STATE:path.join(folder,'state','last'),HEALTH_SENDMAIL:sendmail}});
+      HEALTH_URL:`http://127.0.0.1:${server.address().port}/healthz`,HEALTH_STATE:path.join(folder,'state','last'),HEALTH_SENDMAIL:sendmail,HEALTH_RETRY_SECONDS:retrySeconds}});
     child.on('close',status=>resolve({status}));
   });
   const mails=()=>fs.existsSync(mailbox)?fs.readFileSync(mailbox,'utf8').split('--- end of mail ---').filter(part=>part.trim()).length:0;
   assert.equal((await check()).status,0);assert.equal(mails(),0,'up on the first check: no mail');
   assert.equal((await check()).status,0);assert.equal(mails(),0);
-  healthy=false;
-  assert.equal((await check()).status,1);assert.equal(mails(),1,'down: one mail');
+  // A failure that is over by the second try (Caddy's planned restart takes about a second) is no outage: no mail.
+  failNext=1;requests=0;
+  assert.equal((await check('1')).status,0);assert.equal(mails(),0,'a one-second gap: no mail');assert.equal(requests,2,'tried once more');
+  healthy=false;requests=0;
+  assert.equal((await check()).status,1);assert.equal(mails(),1,'down on both tries: one mail');assert.equal(requests,2);
   assert.equal((await check()).status,1);assert.equal(mails(),1,'still down: no second mail');
   healthy=true;
   assert.equal((await check()).status,0);assert.equal(mails(),2,'back up: one mail');
   const text=fs.readFileSync(mailbox,'utf8');
   assert.match(text,/Subject: Minitandem is DOWN/);assert.match(text,/Subject: Minitandem is back up/);assert.match(text,/To: owner@example\.org/);
+  // A wait that is not a whole number falls back to the default instead of breaking sleep; checked without waiting it out.
+  assert.match(fs.readFileSync(path.join(root,'ops','healthcheck.sh'),'utf8'),/case "\$RETRY" in ''\|\*\[!0-9\]\*\) RETRY=20 ;; esac/);
 });
