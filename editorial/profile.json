@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-18T20:12:30.807Z",
+  "generatedAt": "2026-11-20T17:23:01.967Z",
   "grain": "One published catalogue card; formats include groups, individual offers, events and self-guided visits.",
   "total": 325,
   "catalog": 294,
@@ -22,8 +22,8 @@
     "self": 179
   },
   "storedStatus": {
-    "active": 188,
-    "check": 96,
+    "active": 184,
+    "check": 100,
     "future": 10
   },
   "checkedDates": [
@@ -34,6 +34,7 @@
     "2026-09-22",
     "2026-11-08",
     "2026-11-01",
+    "2026-11-20",
     "2026-10-30",
     "2026-11-03",
     "2026-11-06",
@@ -42,12 +43,12 @@
   ],
   "unknownFields": {
     "minAge": 206,
-    "parent": 89,
+    "parent": 88,
     "language": 270,
-    "price": 190,
+    "price": 189,
     "address": 3
   },
-  "sources": 492,
+  "sources": 494,
   "explicitScheduleEnd": 90,
   "seeLocalities": [
     "Murten",

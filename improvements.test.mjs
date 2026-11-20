@@ -224,7 +224,8 @@ test('freshness queue prioritizes imminent meetings and the whole 0–6 audience
   assert.equal(byId.get('snowli').priority,'review');
   assert.equal(byId.get('snowli').ageFit,'confirmed');
   assert.equal(byId.get('swim-duedingen').priority,'review');
-  assert.equal(byId.get('swim-duedingen').ageFit,'confirmed');
+  // The approved update of 20 November 2026 describes the 2027 winter course from the booking portal, which states no age: "Age to be confirmed".
+  assert.equal(byId.get('swim-duedingen').ageFit,'possible');
   assert.ok(report.needsConfirmation.every(row=>row.priority!=='family'));
 });
 test('editorial profile includes practical additions and matches the public catalogue',()=>{

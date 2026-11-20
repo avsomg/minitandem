@@ -1,5 +1,5 @@
 {
-  "reviewedOn": "2026-11-18",
+  "reviewedOn": "2026-11-20",
   "rule": "Public catalogue contacts are organisation contacts only: the organisation's name, landline and role address (info@, secretariat@ ...). Never a mobile number, a private person's name or an e-mail address that carries a person's name; such a contact is left out and the source link leads families to it.",
   "digests": [
     "025d67400ac7b461766f549db890d0c40fd65562991bbbc0e7a0e59b3befe51b",
@@ -111,6 +111,7 @@
     "66c9670ad5a72feb8045e6a11d840567983f6574ea4e7082b1642d7e28cd4178",
     "6829dc179859c941dc0cd27f0f9ebbd0c4eafe5f996d2be99d51deae76e20340",
     "68ce4cc22d8c9a03ab15ab56df4f7536252d174c3e4f9e6ad4681cb89cd132bf",
+    "69dcc45c3ec0e601def8920ccd94b77fdacecce7c5d5d9f183e4b494667b5a5e",
     "6a591f3f4248fc33958914b2695bc6823de8431f6497819b6212d9428c61f219",
     "6bcee566dbc1f8ca026b3c70c513323958420c03d0aed9dcaa0afe1a777a003b",
     "6bf90a72454a2df4e2013c565386d4c5098588cf8e74820d44fdeed8f560a1d3",
@@ -183,6 +184,7 @@
     "9c5f4155f191655744a2fa69fcff7ac26c82c3a3bcee7cc44504c25828dd7cd0",
     "9d681493753fb14ade794e075a70f44400712b1ffea2b2ce1cada03712248317",
     "9f35b5eedea6fe6c061faa9df3203449c71456a0088a48059b155ff00fb0e1ce",
+    "a03e18d390d82ee22a2996edb87bb68fdf94c2adcbdfd5068d06449b16c69fb5",
     "a1211dfdd9b9b4ee327742eb5e4b835532a9fb38f24e777f2f2046277a5f5b33",
     "a34593f5a43b722d61cfe9e1307927cfd1ac0764156997afe76dec315e8852a8",
     "a39f9555b5c66de6eae8493771bb2c730aa718cc4b03b6901846ee6d8d278fe7",
@@ -237,6 +239,7 @@
     "d4744d58ced4b2c6da314bc5d9b8686667b91270f3bea49ca1852a34acd4373b",
     "d5dffb331d2fe139d19bb7cc471f3134bc2a8374ff691ec268012fd80d128eaa",
     "d67d6b3ed24cfbaeaaa177b2dbfd5f8b2ac3f2c7e3d6f5709b1f8d4e3eaeca42",
+    "d7055a270e4961126c997957b6dbbd4e0e9d6f54e97fa8814fe26c909c188f22",
     "d8031fea1efec8d706b13c228ad412cb47f88f7333fa2716d75c87b9fef4b6cc",
     "d85ae5663a4e1630501e09446daf1a5a9d1e13ff8317a6f772a1b979db965037",
     "da3843dbbd65c9453e1b0dd641d760b454a700f678a66189decfdd0f89d5be55",

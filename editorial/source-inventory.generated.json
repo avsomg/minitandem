@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-18T20:12:30.807Z",
+  "generatedAt": "2026-11-20T17:23:01.967Z",
   "sources": [
     {
       "id": "source-a9e685e2c5ed",
@@ -1979,6 +1979,20 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-311c2614d23d",
+      "url": "https://www.ideesport.ch/de/angebot/minimove/minimove-fribourg-schoenberg",
+      "recordIds": [
+        "minimove-schonberg"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Age"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-13428fe7d564",
       "url": "https://www.fr.ch/conservatoire/cours-au-conservatoire/cours-de-musique/eveil-a-la-musique-parent-enfant",
       "recordIds": [
@@ -2082,6 +2096,20 @@
         "Official source",
         "MEMO address and contacts",
         "MEMO contact and location"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-17a62fa1c00e",
+      "url": "https://www.ville-fribourg.ch/agenda/nee-pour-lire-0",
+      "recordIds": [
+        "memo-buchstart"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Age and language"
       ],
       "monitoring": "not-configured"
     },

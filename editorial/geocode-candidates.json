@@ -7033,5 +7033,34 @@
     "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Vuadens+-+La+Pinte+des+Colombettes+trail+start+and+finish&type=locations&origins=address&limit=5&sr=4326",
     "checked": "2026-11-18",
     "results": []
+  },
+  "École primaire de la Vignettaz, salle rythmique/musique, Rte de la Gruyère 9, 1700 Fribourg": {
+    "query": "Rte de la Gruyère 9 1700 Fribourg",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+de+la+Gruy%C3%A8re+9+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-20",
+    "results": [
+      {
+        "label": "Route de la Gruyère 9 1700 Fribourg",
+        "lat": 46.79817581176758,
+        "lon": 7.143957138061523
+      },
+      {
+        "label": "Route de la Gruyère 9a 1700 Fribourg",
+        "lat": 46.798274993896484,
+        "lon": 7.143911838531494
+      }
+    ]
+  },
+  "Maison de quartier, Route des Écoles 32, 1723 Marly": {
+    "query": "Route des Écoles 32 1723 Marly",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+des+%C3%89coles+32+1723+Marly&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-20",
+    "results": [
+      {
+        "label": "Route des Ecoles 32 1723 Marly",
+        "lat": 46.782806396484375,
+        "lon": 7.146188735961914
+      }
+    ]
   }
 }

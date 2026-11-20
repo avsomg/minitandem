@@ -204,8 +204,8 @@ test('new Fribourg cafes keep date-specific times and uncertain eligibility',()=
   const vignettaz=byId.get('aef-vignettaz');
   const jura=byId.get('aef-jura');
   assert.deepEqual(Array.from(vignettaz.events,event=>[event.date,event.start,event.end]),[
-    // The approved update of 6 November 2026 keeps both dates the calendar lists, the earlier one at other hours.
-    ['2026-10-07','15:00','17:00'],['2026-11-07','09:00','11:00']
+    // The approved update of 20 November 2026 keeps the one Vignettaz session the calendar still lists; the 7 October date is gone.
+    ['2026-11-07','09:00','11:00']
   ]);
   assert.deepEqual(Array.from(jura.events,event=>event.date),['2026-10-10','2026-10-31']);
   for(const record of [vignettaz,jura]){
@@ -440,8 +440,8 @@ test('follow-up preserves dated caveats, closures and price units',()=>{
   // The closure of 5–18 October 2026 is over; since the full review of 7 November 2026 the schedule states the café's standing holiday rule.
   assert.match(byId.get('kafi8-kerzers').schedule,/usually closed during Kerzers school holidays/);
   // The card is the farm shop and bistro itself, so since the editorial rule and the re-check of 7 November 2026 the farm's own hours
-  // are the card's; the note still says that the playground has no hours of its own.
-  assert.match(byId.get('laferme-murten').schedule,/09:00 – 18:30/);
+  // are the card's; the note still says that the playground has no hours of its own. The full review of 20 November 2026 writes them as 09:00–18:30.
+  assert.match(byId.get('laferme-murten').schedule,/09:00–18:30/);
   assert.deepEqual(Array.from(byId.get('laferme-murten').days),[1,2,3,4,5,6]);
   assert.match(byId.get('laferme-murten').notes.join(' '),/general opening hours/);
   assert.match(byId.get('seepark-schiffenen').schedule,/09:30–22:00/);

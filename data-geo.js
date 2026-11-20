@@ -291,13 +291,13 @@
   },
   {
     "id": "cafe-marly",
-    "address": "Maison de quartier, Route des Écoles 32, Marly",
+    "address": "Maison de quartier, Route des Écoles 32, 1723 Marly",
     "geo": {
       "label": "Route des Ecoles 32 1723 Marly",
       "lat": 46.782806396484375,
       "lon": 7.146188735961914,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+Route+des+%C3%89coles+32+Marly&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+des+%C3%89coles+32+1723+Marly&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-11-20",
       "precision": "address"
     }
   },
@@ -447,13 +447,13 @@
   },
   {
     "id": "aef-vignettaz",
-    "address": "École primaire de la Vignettaz, salle rythmique/musique,Rte de la Gruyère 9, 1700 Fribourg",
+    "address": "École primaire de la Vignettaz, salle rythmique/musique, Rte de la Gruyère 9, 1700 Fribourg",
     "geo": {
       "label": "Route de la Gruyère 9 1700 Fribourg",
       "lat": 46.79817581176758,
       "lon": 7.143957138061523,
       "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rte+de+la+Gruy%C3%A8re+9+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-10-31",
+      "checked": "2026-11-20",
       "precision": "address"
     }
   },
