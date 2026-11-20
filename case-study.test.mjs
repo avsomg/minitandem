@@ -5,6 +5,7 @@ import path from 'node:path';
 import test from 'node:test';
 import {generateCaseStudy} from './case-study.mjs';
 import {SITE_ORIGIN} from './site.mjs';
+import {ASSETS} from './ui-files.mjs';
 
 const root = path.dirname(new URL(import.meta.url).pathname);
 // Inline tags join their text to the words around them; block tags separate.
@@ -31,6 +32,9 @@ test('the case study and the home page share one link preview of 1200 x 630; Eng
     assert.match(html, /<meta property="og:image:width" content="1200">\s*<meta property="og:image:height" content="630">/);
     assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
   }
+  // The image must be a published file, not only one in the repository: 20 Nov 2026 it went live missing from ASSETS and answered 404.
+  assert.ok(ASSETS.includes('og-minitandem.png'), 'ASSETS publishes the preview image');
+  assert.ok(fs.existsSync(path.join(root, '.publish', 'assets', 'og-minitandem.png')), 'the built site holds the preview image');
   const german = fs.readFileSync(path.join(dir, 'projekt/index.html'), 'utf8'), english = fs.readFileSync(path.join(dir, 'projekt/en/index.html'), 'utf8');
   for (const quote of ['children aged 2 to 4 years', 'Registration is not needed']) assert.ok(german.includes(`«<span lang="en">${quote}</span>»`), quote);
   assert.doesNotMatch(english, /<span lang=/);

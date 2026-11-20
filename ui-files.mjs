@@ -12,7 +12,7 @@ export const STATIC=['index.html','styles.css','manifest.webmanifest','sw.js','r
 // assets/lucide.min.js and LUCIDE-LICENSE are used only by the editorial admin panel on the owner's Mac. They are not here, so they are not in the build;
 // server.mjs serves the script to the panel alone, at /admin-icons.js.
 // PHOSPHOR-LICENSE: the licence of the category icons, whose path data is inlined in category-icons.js.
-export const ASSETS=['PHOSPHOR-LICENSE','favicon.svg','icon-512.png','apple-touch-icon.png','leaflet.js','leaflet.css','LICENSE','leaflet.markercluster.js','MarkerCluster.css','MIT-LICENCE.txt','papiliorama-outside.jpg'];
+export const ASSETS=['PHOSPHOR-LICENSE','favicon.svg','icon-512.png','apple-touch-icon.png','leaflet.js','leaflet.css','LICENSE','leaflet.markercluster.js','MarkerCluster.css','MIT-LICENCE.txt','papiliorama-outside.jpg','og-minitandem.png'];
 // Loaded only when the map is opened; they are part of the offline shell all the same.
 export const LAZY_ASSETS=['leaflet.js','leaflet.css','leaflet.markercluster.js','MarkerCluster.css'];
 // Written by build.mjs and published next to the page: the catalogue with sources, linked from the footer and from every plain page.
