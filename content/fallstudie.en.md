@@ -54,7 +54,7 @@ From the demo in the repository. It runs without network access or a model, usin
 
 ## Numbers
 
-As of 18 November 2026.
+As of 20 November 2026.
 
 - 294 entries in the catalogue, 31 in the archive
 - all 7 districts of the canton

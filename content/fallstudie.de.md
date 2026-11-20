@@ -57,7 +57,7 @@ Aus der Demo im Repository. Sie läuft ohne Netz und ohne Modell, mit vorbereite
 
 ## Zahlen
 
-Stand 18. November 2026.
+Stand 20. November 2026.
 
 - 294 Einträge im Katalog, 31 im Archiv
 - alle 7 Bezirke des Kantons
