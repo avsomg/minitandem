@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T11:51:49.559Z",
+  "generatedAt": "2026-11-21T17:15:36.923Z",
   "sources": [
     {
       "id": "source-a9e685e2c5ed",
@@ -1489,6 +1489,20 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-ca279585d652",
+      "url": "https://www.marly.ch/article/les-matinees-playgrounds-reviennent-a-marly-pour-les-0-6-ans",
+      "recordIds": [
+        "playgrounds-marly"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Sessions, age and registration"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-8c0acd541bc4",
       "url": "https://cristinadanse.ch/danse-parent-enfant/",
       "recordIds": [
@@ -2042,7 +2056,6 @@
         "memo-grands-signes-2026-11-10",
         "memo-eveil-musical-2027-02-16",
         "memo-musik-entdecken-2027-03-16",
-        "memo-valise-magique-2026-11-04",
         "memo-est-ce-que-ca-joue"
       ],
       "regions": [
@@ -2063,7 +2076,6 @@
         "memo-grands-signes-2026-11-10",
         "memo-eveil-musical-2027-02-16",
         "memo-musik-entdecken-2027-03-16",
-        "memo-valise-magique-2026-11-04",
         "memo-est-ce-que-ca-joue",
         "memo-saint-nicolas-family-day-2026-12-06"
       ],
@@ -2084,7 +2096,6 @@
       "recordIds": [
         "memo-buchstart",
         "memo-library",
-        "memo-valise-magique-2026-11-04",
         "memo-est-ce-que-ca-joue",
         "memo-saint-nicolas-family-day-2026-12-06"
       ],
@@ -2275,7 +2286,6 @@
       "id": "source-3e6871b27a92",
       "url": "https://www.evgt.ch/",
       "recordIds": [
-        "rabel-giffers",
         "candles-giffers"
       ],
       "regions": [
@@ -2283,20 +2293,6 @@
       ],
       "labels": [
         "Official source"
-      ],
-      "monitoring": "not-configured"
-    },
-    {
-      "id": "source-b24e1517a56b",
-      "url": "https://www.evgt.ch/events/r%C3%A4beliechtli/",
-      "recordIds": [
-        "rabel-giffers"
-      ],
-      "regions": [
-        "sense"
-      ],
-      "labels": [
-        "Time and meeting point"
       ],
       "monitoring": "not-configured"
     },
@@ -2764,7 +2760,8 @@
       "id": "source-4f7fc9cb5f7a",
       "url": "https://www.sss-schwarzsee.ch/",
       "recordIds": [
-        "snowli-daily"
+        "snowli-daily",
+        "ski-private"
       ],
       "regions": [
         "sense"
@@ -5272,6 +5269,20 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-9e4e62ce682f",
+      "url": "https://www.laberra.ch/fr/restaurant-le-brand",
+      "recordIds": [
+        "le-brand-la-roche"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Additional check: Availability and format"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-d9f25f99d230",
       "url": "https://fribourg.ch/fr/la-gruyere/places-de-pique-nique/chapelle-thusy/",
       "recordIds": [
@@ -6984,20 +6995,6 @@
       ],
       "labels": [
         "Museum event listing: 13.01.2027"
-      ],
-      "monitoring": "not-configured"
-    },
-    {
-      "id": "source-4541931d6a07",
-      "url": "https://www.ville-fribourg.ch/agenda/les-histoires-de-la-valise-magique",
-      "recordIds": [
-        "memo-valise-magique-2026-11-04"
-      ],
-      "regions": [
-        "sarine"
-      ],
-      "labels": [
-        "City event listing"
       ],
       "monitoring": "not-configured"
     },

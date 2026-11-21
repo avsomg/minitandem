@@ -7062,5 +7062,69 @@
         "lon": 7.146188735961914
       }
     ]
+  },
+  "Route de la Berra 92, 1634 La Roche": {
+    "query": "Route de la Berra 92 1634 La Roche",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+la+Berra+92+1634+La+Roche&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-21",
+    "results": [
+      {
+        "label": "Route de la Berra 92 1634 La Roche FR",
+        "lat": 46.686824798583984,
+        "lon": 7.155079364776611
+      },
+      {
+        "label": "Route de la Berra 92d 1634 La Roche FR",
+        "lat": 46.686737060546875,
+        "lon": 7.154939651489258
+      },
+      {
+        "label": "Route de la Berra 92f 1634 La Roche FR",
+        "lat": 46.6871223449707,
+        "lon": 7.155714988708496
+      },
+      {
+        "label": "Route de la Berra 92b 1634 La Roche FR",
+        "lat": 46.686946868896484,
+        "lon": 7.155527114868164
+      },
+      {
+        "label": "Route de la Berra 92a 1634 La Roche FR",
+        "lat": 46.68681716918945,
+        "lon": 7.155398845672607
+      }
+    ]
+  },
+  "Route de la Sarine, 1667 Enney": {
+    "query": "Route de la Sarine 1667 Enney",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+la+Sarine+1667+Enney&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-21",
+    "results": [
+      {
+        "label": "Route de la Sarine 1 1667 Enney",
+        "lat": 46.5662841796875,
+        "lon": 7.0842204093933105
+      },
+      {
+        "label": "Route de la Sarine 4 1667 Enney",
+        "lat": 46.56620788574219,
+        "lon": 7.084746837615967
+      },
+      {
+        "label": "Route de la Sarine 4a 1667 Enney",
+        "lat": 46.56610870361328,
+        "lon": 7.084593296051025
+      },
+      {
+        "label": "Route de la Sarine 17 1667 Enney",
+        "lat": 46.56635284423828,
+        "lon": 7.088042736053467
+      },
+      {
+        "label": "Route de la Sarine 17b 1667 Enney",
+        "lat": 46.56631088256836,
+        "lon": 7.087890625
+      }
+    ]
   }
 }

@@ -14,18 +14,6 @@
     }
   },
   {
-    "id": "sellenhof-private",
-    "address": "Sellenhof, Seeliweg 21, 1716 Plaffeien",
-    "geo": {
-      "label": "Seeliweg 21 1716 Plaffeien",
-      "lat": 46.743980407714844,
-      "lon": 7.289436340332031,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Sellenhof+Seeliweg+21+1716+Plaffeien&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
-      "precision": "address"
-    }
-  },
-  {
     "id": "pony-entdecken",
     "address": "Ober Tschüplere 90, 1716 Oberschrot",
     "geo": {
@@ -586,18 +574,6 @@
       "lon": 7.150873184204102,
       "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+l%27Aurore+2&type=locations&origins=address&limit=5&sr=4326",
       "checked": "2026-10-26",
-      "precision": "address"
-    }
-  },
-  {
-    "id": "rabel-giffers",
-    "address": "Parkplatz der Nydegger AG, Obertswilstrasse 86, 1735 Giffers",
-    "geo": {
-      "label": "Obertswilstrasse 86 1735 Giffers",
-      "lat": 46.76761245727539,
-      "lon": 7.212735176086426,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Obertswilstrasse+86+1735+Giffers&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-11-03",
       "precision": "address"
     }
   },
@@ -1274,14 +1250,14 @@
     }
   },
   {
-    "id": "enney-sarine-play",
-    "address": "Prâ des Frassettes 185, 1667 Enney",
+    "id": "le-brand-la-roche",
+    "address": "Route de la Berra 92, 1634 La Roche",
     "geo": {
-      "label": "Prâ des Frassettes 185 1667 Enney",
-      "lat": 46.5595703125,
-      "lon": 7.0742106437683105,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Pr%C3%A2+des+Frassettes+185+1667+Enney&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-10-02",
+      "label": "Route de la Berra 92 1634 La Roche FR",
+      "lat": 46.686824798583984,
+      "lon": 7.155079364776611,
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+la+Berra+92+1634+La+Roche&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-11-21",
       "precision": "address"
     }
   },
@@ -1569,18 +1545,6 @@
       "lat": 46.793087005615234,
       "lon": 7.157187461853027,
       "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+du+Mus%C3%A9e+6+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-10-31",
-      "precision": "address"
-    }
-  },
-  {
-    "id": "memo-valise-magique-2026-11-04",
-    "address": "Rue de l’Hôpital 2, 1700 Fribourg",
-    "geo": {
-      "label": "Rue de l'Hôpital 2 1700 Fribourg",
-      "lat": 46.805633544921875,
-      "lon": 7.154872894287109,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
       "checked": "2026-10-31",
       "precision": "address"
     }

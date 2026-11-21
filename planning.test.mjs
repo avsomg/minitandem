@@ -254,8 +254,10 @@ test('map publishes only unique exact-address matches, never arbitrary first sea
   assert.equal(byId.get('elki-kerzers').geo,undefined); // address to be confirmed since the full review of 1 November 2026
   assert.equal(byId.get('swim-buissonnets').geo.label,'Route de Villars-les-Joncs 3 1700 Fribourg');
   assert.equal(byId.get('conservatoire').geo.label,'Route Louis-Braille 8 1763 Granges-Paccot');
+  // enney-sarine-play: since the approved update of 21 November 2026 the address is "Route de la Sarine, 1667 Enney", without a house number,
+  // so the registry offers several numbers and none is exact; the earlier Prâ des Frassettes point is not carried over.
+  assert.equal(byId.get('enney-sarine-play').geo,undefined);
   for(const [id,label] of [
-    ['enney-sarine-play','Prâ des Frassettes 185 1667 Enney'],
     ['thusy-pont-la-ville','Impasse de Thusy 89 1649 Pont-la-Ville'],
     ['chatonnaye-forest-cabin','Chemin de la Cabane 9 1553 Châtonnaye']
   ])assert.equal(byId.get(id).geo.label,label,id);

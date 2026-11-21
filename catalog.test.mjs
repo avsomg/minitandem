@@ -488,14 +488,18 @@ test('deep review covers active cards and preserves receipts for ended events',(
   }
   const counts=Object.fromEntries(['enriched','rechecked','unresolved','reused'].map(outcome=>[outcome,main.filter(a=>a.research.outcome===outcome).length]));
   assert.equal(Object.values(counts).reduce((sum,count)=>sum+count,0),main.length);
-  // A new full review turns an enriched card into a rechecked one; the full reviews approved on 3 and 7 November 2026 resolved twelve unresolved cards.
-  assert.ok(counts.enriched+counts.rechecked>=134 && counts.unresolved>=25);
+  // A new full review turns an enriched card into a rechecked one; the full reviews approved on 3 and 7 November 2026 resolved twelve unresolved cards,
+  // and the approved update of 21 November 2026 resolved maison-petits-villarlod.
+  assert.ok(counts.enriched+counts.rechecked>=134 && counts.unresolved>=24);
   // memo-rat-mission-2026-09-30 and herbstbasteln were closed by approved updates on 26 October and 3 November 2026, once their only
-  // date (30 September) had passed.
-  assert.deepEqual(ids(records.filter(a=>C.isArchive(a)&&a.research)).sort(),['alpabzug','chocolat','devenir-famille-fribourg-2026-10-03','erntedank','herbstbasteln','memo-musik-entdecken-2026-09-29','memo-rat-exhibition-2026','memo-rat-mission-2026-09-30','plage-chevroux']);
+  // date (30 September) had passed; memo-valise-magique-2026-11-04 and rabel-giffers by those of 21 November 2026, once their only
+  // dates (4 and 7 November) had passed.
+  assert.deepEqual(ids(records.filter(a=>C.isArchive(a)&&a.research)).sort(),['alpabzug','chocolat','devenir-famille-fribourg-2026-10-03','erntedank','herbstbasteln','memo-musik-entdecken-2026-09-29','memo-rat-exhibition-2026','memo-rat-mission-2026-09-30','memo-valise-magique-2026-11-04','plage-chevroux','rabel-giffers']);
   // swim-duedingen has published Saturdays again since the approved update of 31 October 2026.
   assert.deepEqual(Array.from(byId.get('swim-duedingen').days),[6]);
-  for(const id of ['playgrounds-marly','elki-kerzers'])assert.deepEqual(Array.from(byId.get(id).days),[],`${id}: stale schedule must not appear as a weekday`);
+  assert.deepEqual(Array.from(byId.get('elki-kerzers').days),[],'elki-kerzers: stale schedule must not appear as a weekday');
+  // playgrounds-marly: the full review of 21 November 2026 publishes Sundays 9:30–11:30 from the municipal announcement, with no end date.
+  assert.deepEqual(Array.from(byId.get('playgrounds-marly').days),[7]);
   assert.equal(byId.get('playgrounds-marly').scheduleValidThrough,null);
   // Only last season's course is published (to 25 March 2026): no weekday, and the card stays check. Since the full review of
   // 7 November 2026 that past end date is no longer kept as the horizon of a schedule that is still to be confirmed.
@@ -553,9 +557,10 @@ test('canton follow-up preserves uncertainty and filters across every district',
     else assert.ok(a.sources.some(s=>s.url===a.practical.indoor.source),a.id);
     state.f.place='d:'+a.region;assert.ok(ids(list()).includes(a.id),a.id);
   }
-  // clos-cerfs-gruyeres is active since the full review of 3 November 2026; it still publishes no fixed days.
+  // clos-cerfs-gruyeres was active after the full review of 3 November 2026 and is check again since the approved update of 21 November 2026:
+  // the castle's page names the playground but gives no hours or dates. None of these cards publishes fixed days.
   for(const id of ['fun4all-sevaz-kids','broc-outdoor-pool','clos-cerfs-gruyeres','paccots-recreation','seeweid-play','grengspitz-beaches']){
-    assert.equal(byId.get(id).status,id==='clos-cerfs-gruyeres'?'active':'check',id);
+    assert.equal(byId.get(id).status,'check',id);
     assert.deepEqual(Array.from(byId.get(id).days),[],id);
   }
   assert.equal(byId.get('jeuss-animal-park').priceKind,'free');
@@ -591,8 +596,9 @@ test('See follow-up cards use normal filters and do not revive obsolete schedule
   store.personal.age=null;state.f.days.add(6);
   assert.ok(ids(list()).includes('suniai-family-yoga'));
   for(const id of ['familybloom-yoga','kibim-murten','baby-bade-murten','gym-parents-misery'])assert.ok(!ids(list()).includes(id),id);
-  // Eight since the approved update of 7 November 2026: the organiser now lists the dates up to 19 June 2027, two Pyjama-Yoga sessions among them.
-  assert.equal(byId.get('suniai-family-yoga').events.length,8);
+  // Seven since the approved update of 21 November 2026: the organiser lists 12 December 2026 and the Saturdays to 19 June 2027, two Pyjama-Yoga
+  // sessions among them; the 7 November session has passed.
+  assert.equal(byId.get('suniai-family-yoga').events.length,7);
   assert.equal(byId.get('jeux-apav-vully-2026').events[0].start,'');
   assert.equal(byId.get('familybloom-yoga').amount,null);
   for(const id of ['stimm-family','baby-bade-murten','gym-parents-misery'])assert.equal(byId.get(id).min,null,`${id}: historical age must remain unconfirmed`);

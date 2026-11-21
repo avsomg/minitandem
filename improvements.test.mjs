@@ -253,16 +253,17 @@ test('shared calendar keeps Zurich time, stable UIDs and no invented duration or
 });
 test('calendar files carry the Minitandem names, fold lines safely and never use the old product name',()=>{
   const {EX,X:stackX,C,byId,window:W}=loadStack({today:'2026-09-27'});
-  const plan=stackX.plan({type:'vmeste-plan',version:1,visits:{'v-test':privateVisit,'v-two':{...privateVisit,activity:'suniai-family-yoga',date:'2026-11-07',time:'10:00'}}},byId);
+  const plan=stackX.plan({type:'vmeste-plan',version:1,visits:{'v-test':privateVisit,'v-two':{...privateVisit,activity:'suniai-family-yoga',date:'2026-12-12',time:'10:00'}}},byId);
   const planFile=EX.planFile(plan);
   assert.equal(planFile.name,'minitandem-plan-2026-09-27.ics');assert.equal(planFile.type,'text/calendar;charset=utf-8');
   assert.match(planFile.text,/PRODID:-\/\/Minitandem\/\/Personal Plan\/\/EN\r\n/);
-  const a=byId.get('suniai-family-yoga'),index=a.events.findIndex(e=>e.date==='2026-11-07');
+  // 12 December 2026, 10:00–11:15: the first session the approved update of 21 November 2026 lists with its time (7 November has passed).
+  const a=byId.get('suniai-family-yoga'),index=a.events.findIndex(e=>e.date==='2026-12-12');
   const event=EX.eventFile(a.id,index);
-  assert.equal(event.name,'suniai-family-yoga-2026-11-07.ics');
+  assert.equal(event.name,'suniai-family-yoga-2026-12-12.ics');
   assert.match(event.text,/PRODID:-\/\/Minitandem\/\/Family Activities\/\/EN\r\n/);
-  assert.match(unfold(event.text),/UID:suniai-family-yoga-20261107-10:00@minitandem\.local/);
-  assert.match(unfold(event.text),/DTSTART;TZID=Europe\/Zurich:20261107T100000/);assert.match(unfold(event.text),/DTEND;TZID=Europe\/Zurich:20261107T111500/); // 11:15 since the approved update of 7 November 2026
+  assert.match(unfold(event.text),/UID:suniai-family-yoga-20261212-10:00@minitandem\.local/);
+  assert.match(unfold(event.text),/DTSTART;TZID=Europe\/Zurich:20261212T100000/);assert.match(unfold(event.text),/DTEND;TZID=Europe\/Zurich:20261212T111500/);
   assert.equal(EX.eventFile(a.id,999),null);assert.equal(EX.eventFile('missing',0),null);
   for(const file of [planFile,event]){
     assert.ok(file.text.startsWith('BEGIN:VCALENDAR\r\n')&&file.text.endsWith('END:VCALENDAR\r\n'));

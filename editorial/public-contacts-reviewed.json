@@ -1,5 +1,5 @@
 {
-  "reviewedOn": "2026-11-20",
+  "reviewedOn": "2026-11-21",
   "rule": "Public catalogue contacts are organisation contacts only: the organisation's name, landline and role address (info@, secretariat@ ...). Never a mobile number, a private person's name or an e-mail address that carries a person's name; such a contact is left out and the source link leads families to it.",
   "digests": [
     "025d67400ac7b461766f549db890d0c40fd65562991bbbc0e7a0e59b3befe51b",
@@ -85,6 +85,7 @@
     "4a8596e6108f0a32c98cad060da0e636123d3430f96b1381e58efec6eabaab1e",
     "4adb0b26d0cdace3ce5ae6ab74f227c540bfac8826e97aff39e0c71cfed2dadd",
     "4b1ce21a25a5a894468790eb22d5ab9079860fa4f9e34442990eed8ddd20ff8e",
+    "4c63931591e34c3a2f2ca629267878afd9e14c4c3628c4ec581b14a493766c76",
     "4c928468aa79fd1f017eb914cfe67bf65bfa49e3e7e3d5b3320680c462065e98",
     "4d0a99461f4decc052b4b5332bf6f7714d83f6577248536babe874bc3f06e3d2",
     "4ecffa778c9b88c189b6674df8b3990fa63ed9edbeb40f67933889dcd5309d5f",
@@ -196,6 +197,7 @@
     "a85fff4960f8b469c4054658ca68928b1fe7b349bfb4588b7b6dc33d5c18499c",
     "a8a31708412285c87e664341ff5d315856ccb8edb5842f00f06ba7725f09fd0c",
     "aa1f69fd5aa49c5ee4cc92843659416747f0db1f08a667e1ce0275ce99095df7",
+    "aac833dd9479bb78fd08376932560b10a8edda5e5f8ad8d96172e5cbf4b49a13",
     "ab183697a159ca136acc81fb678c8cc7721920f708824a74473b785ddf04d797",
     "ac54649e7b8060e1585e8ae9c08bb6fd3e5f24ea1f593811b2d568db0ee18f53",
     "b0545153efb431875cf18d5a42e4732286237e7bf9aa185e1ef2d3a7226dc91f",
