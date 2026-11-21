@@ -77931,6 +77931,533 @@
         "Is there a new date for the Vignettaz café after 7 November 2026?"
       ]
     }
+  },
+  {
+    "jobId": "79c38020-50df-4b6d-9b0d-7e25aaa1bfc5",
+    "approvedOn": "2026-11-20",
+    "baseRecord": {
+      "id": "krabbel-plaffeien",
+      "name": "Krabbelgruppe Plaffeien / Oberschrot",
+      "category": "play",
+      "town": "Oberschrot",
+      "route": "local",
+      "format": "group",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Babies and young children up to about 4 years",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Once a month on a Wednesday, 09:00–11:00, including during school holidays",
+      "days": [
+        3
+      ],
+      "events": [
+        {
+          "date": "2026-11-25",
+          "start": "09:00",
+          "end": "11:00",
+          "title": "",
+          "address": "Primarschulhaus Oberschrot, Rishalta 30, 1716 Oberschrot"
+        },
+        {
+          "date": "2026-12-16",
+          "start": "09:00",
+          "end": "11:00",
+          "title": "",
+          "address": "Primarschulhaus Oberschrot, Rishalta 30, 1716 Oberschrot"
+        }
+      ],
+      "address": "Primarschulhaus Oberschrot, Rishalta 30, 1716 Oberschrot",
+      "price": "Free of charge; a donation box is available for a voluntary contribution toward costs (no fixed amount published)",
+      "priceKind": "free",
+      "amount": 0,
+      "contacts": [
+        {
+          "name": "Elternverein Plaffeien und Umgebung",
+          "phone": "",
+          "email": "info@elternverein-plaffeien.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/",
+          "label": "Official source"
+        }
+      ],
+      "notes": [
+        "No registration; sessions are also held during school holidays. Bring a snack for the child.",
+        "The playgroup room is in the school building on the floor the page calls \"1. Stock\"; the page does not say how floors are counted. Visitors are asked to keep quiet in the school building."
+      ],
+      "checked": "2026-09-27",
+      "scheduleValidThrough": "2026-12-16",
+      "research": {
+        "date": "2026-11-01",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Conditions of attendance",
+            "kind": "official",
+            "text": "Visitors are asked to keep quiet in the school building so as not to disturb lessons.",
+            "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+          },
+          {
+            "field": "Schedule",
+            "kind": "official",
+            "text": "The last published session of 2026 is on 16 December. This does not mean the group stops then.",
+            "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+          },
+          {
+            "field": "Payment",
+            "kind": "official",
+            "text": "Sessions are free; a voluntary donation can be left in the donation box.",
+            "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+          },
+          {
+            "field": "Visit",
+            "kind": "official",
+            "text": "Sessions are held without registration, including during school holidays. Coffee and tea are available for adults; a snack for the child must be brought along.",
+            "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+          },
+          {
+            "field": "Location",
+            "kind": "official",
+            "text": "The meeting takes place in the playgroup room of the primary school in Oberschrot, listed as \"1. Stock\". The page does not explain how floors are counted or describe a lift or pushchair route.",
+            "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+          },
+          {
+            "field": "Admission",
+            "kind": "official",
+            "text": "The official page says the group is open to everyone.",
+            "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+          }
+        ],
+        "remaining": [
+          "Is there a lift and space for a pushchair?",
+          "How many families come to a session?",
+          "In which languages do people talk at the sessions? Is it possible to speak standard German (Hochdeutsch)?",
+          "Will there be sessions after 16 December 2026?",
+          "Is it necessary to attend sessions regularly?",
+          "Must an adult stay with the child throughout the session?",
+          "Is there a lift or pushchair route to the playgroup room (listed as \"1. Stock\"), and how are the floors counted?"
+        ]
+      },
+      "practical": {
+        "scenario": "event",
+        "indoor": {
+          "value": true,
+          "text": "Spielgruppe room",
+          "source": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/",
+          "checked": "2026-09-27"
+        },
+        "booking": {
+          "value": false,
+          "text": "No registration",
+          "note": "No advance registration is required.",
+          "source": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/",
+          "checked": "2026-10-02"
+        },
+        "commitment": {
+          "value": false,
+          "text": "No course fee",
+          "note": "Sessions are free; a contribution to the donation box is voluntary.",
+          "source": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/",
+          "checked": "2026-10-02"
+        },
+        "access": {
+          "value": null,
+          "text": "Playgroup room listed as \"1. Stock\" in the school building; lift and pushchair access are not stated",
+          "source": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/",
+          "checked": "2026-10-23"
+        },
+        "gallery": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/",
+        "duration": {
+          "value": 120,
+          "text": "2 hours (9:00 to 11:00)",
+          "source": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/",
+          "checked": "2026-11-01"
+        },
+        "costNote": {
+          "value": "A donation box is available for a voluntary contribution toward costs; no fixed amount is published.",
+          "text": "A donation box is available for a voluntary contribution toward costs; no fixed amount is published.",
+          "source": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/",
+          "checked": "2026-11-01"
+        }
+      },
+      "intro": "A session for parents with babies and young children. The children play with others of their age, while the adults get to know each other and share experience.",
+      "region": "sense",
+      "reviewAfter": "2026-12-26",
+      "ageUpperUncertainFrom": 4,
+      "parentDetails": "Parents attend the meeting with their babies and toddlers. The page does not publish conditions for active participation.",
+      "addressPrecision": "exact",
+      "geo": {
+        "label": "Rishalta 30 1716 Oberschrot",
+        "lat": 46.74296188354492,
+        "lon": 7.283677101135254,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=+Rishalta+30+1716+Oberschrot&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-20",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Conditions of attendance",
+          "kind": "official",
+          "text": "Visitors are asked to keep quiet in the school building so as not to disturb lessons.",
+          "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+        },
+        {
+          "field": "Schedule",
+          "kind": "official",
+          "text": "The last published session of 2026 is on 16 December. This does not mean the group stops then.",
+          "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+        },
+        {
+          "field": "Payment",
+          "kind": "official",
+          "text": "Sessions are free; a voluntary donation can be left in the donation box.",
+          "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+        },
+        {
+          "field": "Visit",
+          "kind": "official",
+          "text": "Sessions are held without registration, including during school holidays. Coffee and tea are available for adults; a snack for the child must be brought along.",
+          "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+        },
+        {
+          "field": "Location",
+          "kind": "official",
+          "text": "The meeting takes place in the playgroup room of the primary school in Oberschrot, listed as \"1. Stock\". The page does not explain how floors are counted or describe a lift or pushchair route.",
+          "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+        },
+        {
+          "field": "Admission",
+          "kind": "official",
+          "text": "The official page says the group is open to everyone.",
+          "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+        },
+        {
+          "field": "Schedule",
+          "kind": "official",
+          "text": "The official page currently lists Wednesday 25 November 2026 and Wednesday 16 December 2026 as the remaining meetings of 2026, from 9:00 to 11:00.",
+          "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+        }
+      ],
+      "remaining": [
+        "Is there a lift and space for a pushchair?",
+        "How many families come to a session?",
+        "In which languages do people talk at the sessions? Is it possible to speak standard German (Hochdeutsch)?",
+        "Will there be sessions after 16 December 2026?",
+        "Is it necessary to attend sessions regularly?",
+        "Must an adult stay with the child throughout the session?",
+        "Is there a lift or pushchair route to the playgroup room (listed as \"1. Stock\"), and how are the floors counted?"
+      ]
+    },
+    "draft": {
+      "patch": {},
+      "practicalPatch": {},
+      "cardId": "krabbel-plaffeien",
+      "findings": [
+        {
+          "field": "Schedule",
+          "kind": "official",
+          "text": "The official page currently lists Wednesday 25 November 2026 and Wednesday 16 December 2026 as the remaining meetings of 2026, from 9:00 to 11:00.",
+          "url": "https://elternverein-plaffeien.ch/angebot/krabbelgruppe/"
+        }
+      ],
+      "remaining": []
+    }
+  },
+  {
+    "jobId": "49568675-bdee-488b-a171-c37a46da1067",
+    "approvedOn": "2026-11-20",
+    "baseRecord": {
+      "region": "see",
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Books for different ages; no lower age limit is stated",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Mon 15:00–17:00 · Wed 09:00–11:00 and 18:00–20:00 · Fri 18:00–20:00 · Sat 10:00–12:00",
+      "days": [
+        1,
+        3,
+        5,
+        6
+      ],
+      "events": [],
+      "address": "Auf dem Platz 1, 3210 Kerzers",
+      "price": "For borrowing: family subscription CHF 60 / year; free for children until the end of compulsory schooling",
+      "priceKind": "year",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Bibliothek Kerzers",
+          "phone": "031 755 63 67",
+          "email": "bibliothek@kerzers.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.fr.ch/de/kub/app/bibliotheques/79",
+          "label": "Cantonal directory: collection, opening hours and subscription"
+        }
+      ],
+      "notes": [
+        "During school holidays the library is open only Wed 18:00–20:00, Fri 18:00–20:00 and Sat 10:00–12:00."
+      ],
+      "checked": "2026-09-27",
+      "reviewAfter": "2026-10-24",
+      "id": "library-kerzers",
+      "name": "Bibliothek Kerzers · family visit",
+      "category": "books",
+      "town": "Kerzers",
+      "parentDetails": "An adult comes with the child; the library has a children's play corner.",
+      "research": {
+        "date": "2026-09-27",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Terms of visit",
+            "kind": "official",
+            "text": "The library is open to everyone and has a children's play corner. A subscription is needed for borrowing: free for a child until the end of compulsory school; CHF 60 per year for a family, CHF 40 per year for one adult. For occasional visits there is a card for 20 units for CHF 20.",
+            "url": "https://www.fr.ch/de/kub/app/bibliotheques/79"
+          }
+        ],
+        "remaining": [
+          "Check whether suitable toys are available and whether there is pushchair access before the first visit."
+        ]
+      },
+      "geo": {
+        "label": "Auf dem Platz 1 3210 Kerzers",
+        "lat": 46.973819732666016,
+        "lon": 7.200720310211182,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Auf+dem+Platz+1+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-20",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Terms of visit",
+          "kind": "official",
+          "text": "The library is open to everyone and has a children's play corner. A subscription is needed for borrowing: free for a child until the end of compulsory school; CHF 60 per year for a family, CHF 40 per year for one adult. For occasional visits there is a card for 20 units for CHF 20.",
+          "url": "https://www.fr.ch/de/kub/app/bibliotheques/79"
+        },
+        {
+          "field": "Play corner",
+          "kind": "official",
+          "text": "The library has a reading area for adults and a children's play corner. The library page publishes no age limits, separate hours or admission rules for the play corner.",
+          "url": "https://www.fr.ch/de/kub/app/bibliotheques/79"
+        }
+      ],
+      "remaining": [
+        "Check whether suitable toys are available and whether there is pushchair access before the first visit.",
+        "Is an adult expected to stay with a child in the library? The library page does not say.",
+        "Is a subscription needed just to visit and use the play corner, without borrowing media?",
+        "Is the entrance accessible with a pushchair, and are there a toilet, a changing table or parking for visitors?",
+        "Until what date do the published opening hours apply?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "addressPrecision": "exact"
+      },
+      "practicalPatch": {
+        "playArea": {
+          "value": true,
+          "text": "The library has a children's play corner. No age limits or separate hours are published for it.",
+          "source": "https://www.fr.ch/de/kub/app/bibliotheques/79",
+          "checked": "2026-11-20"
+        }
+      },
+      "cardId": "library-kerzers",
+      "findings": [
+        {
+          "field": "Play corner",
+          "kind": "official",
+          "text": "The library has a reading area for adults and a children's play corner. The library page publishes no age limits, separate hours or admission rules for the play corner.",
+          "url": "https://www.fr.ch/de/kub/app/bibliotheques/79"
+        }
+      ],
+      "remaining": [
+        "Is an adult expected to stay with a child in the library? The library page does not say.",
+        "Is a subscription needed just to visit and use the play corner, without borrowing media?",
+        "Is the entrance accessible with a pushchair, and are there a toilet, a changing table or parking for visitors?",
+        "Until what date do the published opening hours apply?"
+      ]
+    }
+  },
+  {
+    "jobId": "8087764a-1bb8-421e-8769-a84f49ada968",
+    "approvedOn": "2026-11-20",
+    "baseRecord": {
+      "id": "ludo-events",
+      "name": "Plaffeien toy library events",
+      "category": "events",
+      "town": "Plaffeien",
+      "route": "local",
+      "format": "event",
+      "status": "check",
+      "min": null,
+      "max": null,
+      "age": "Age to be confirmed",
+      "parent": "unknown",
+      "languages": [],
+      "schedule": "Schedule to be confirmed",
+      "days": [],
+      "events": [
+        {
+          "date": "2024-03-23",
+          "start": "",
+          "end": "",
+          "title": "Frühlingserwachen",
+          "address": ""
+        },
+        {
+          "date": "2024-11-23",
+          "start": "",
+          "end": "",
+          "title": "Wintereinläuten",
+          "address": ""
+        }
+      ],
+      "address": "",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Elternverein Plaffeien und Umgebung",
+          "phone": "",
+          "email": "ludothek@elternverein-plaffeien.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/",
+          "label": "Official source"
+        }
+      ],
+      "notes": [
+        "The language of the host or service is not confirmed."
+      ],
+      "checked": "2026-09-22",
+      "research": {
+        "date": "2026-11-07",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Old poster",
+            "text": "The current page describes a trial of outdoor toys in spring, board games in November and a games stand at the Christmas market. The exact dates of Frühlingserwachen and Wintereinläuten are still from 2024.",
+            "url": "https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/",
+            "kind": "historical"
+          },
+          {
+            "field": "events",
+            "kind": "official",
+            "text": "On 31 October 2026 the official events page still lists only two dated toy library events, both in 2024: Frühlingserwachen on 23 March 2024 and Wintereinläuten on 23 November 2024. No later date, time, age range, price or address is published, and it also mentions a games stand at the Plaffeien Christmas market.",
+            "url": "https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/"
+          },
+          {
+            "field": "events",
+            "kind": "official",
+            "text": "The official events page describes a spring event where outdoor games and vehicles can be tried by children, a November event to get to know board games, and a games stand at the Plaffeien Christmas market (no date given for the stand).",
+            "url": "https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/"
+          },
+          {
+            "field": "events",
+            "kind": "official",
+            "text": "As of 7 November 2026 the official events page lists a toy library address for the events (ludothek@elternverein-plaffeien.ch) and still shows only two dated events, Frühlingserwachen on 23 March 2024 and Wintereinläuten on 23 November 2024. No later date, time, age, price or venue is published.",
+            "url": "https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/"
+          }
+        ],
+        "remaining": [
+          "New dates, age, parent participation and price; the toy library's regular opening hours are listed as a separate activity.",
+          "Are there new dates and times for the spring and November toy library events, and for the games stand at the Christmas market?",
+          "What age range is the event for, and may a parent stay with the child?",
+          "Is there an admission price, and is registration needed?",
+          "Where exactly do the events take place?"
+        ]
+      },
+      "region": "sense",
+      "reviewAfter": "2026-10-22",
+      "practical": {},
+      "scheduleValidThrough": "2024-11-23",
+      "addressPrecision": "area",
+      "intro": "The toy library also runs a spring event (Frühlingserwachen) and an early-winter event (Wintereinläuten), alongside lending toys."
+    },
+    "research": {
+      "date": "2026-11-20",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Old poster",
+          "text": "The current page describes a trial of outdoor toys in spring, board games in November and a games stand at the Christmas market. The exact dates of Frühlingserwachen and Wintereinläuten are still from 2024.",
+          "url": "https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/",
+          "kind": "historical"
+        },
+        {
+          "field": "events",
+          "kind": "official",
+          "text": "On 31 October 2026 the official events page still lists only two dated toy library events, both in 2024: Frühlingserwachen on 23 March 2024 and Wintereinläuten on 23 November 2024. No later date, time, age range, price or address is published, and it also mentions a games stand at the Plaffeien Christmas market.",
+          "url": "https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/"
+        },
+        {
+          "field": "events",
+          "kind": "official",
+          "text": "The official events page describes a spring event where outdoor games and vehicles can be tried by children, a November event to get to know board games, and a games stand at the Plaffeien Christmas market (no date given for the stand).",
+          "url": "https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/"
+        },
+        {
+          "field": "events",
+          "kind": "official",
+          "text": "As of 7 November 2026 the official events page lists a toy library address for the events (ludothek@elternverein-plaffeien.ch) and still shows only two dated events, Frühlingserwachen on 23 March 2024 and Wintereinläuten on 23 November 2024. No later date, time, age, price or venue is published.",
+          "url": "https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/"
+        },
+        {
+          "field": "events",
+          "kind": "official",
+          "text": "On 20 November 2026 the official events page says that in spring the toy library's outdoor games and vehicles are woken from their winter rest and can be tried by children, and that the toy library has a games stand at the Plaffeien Christmas market. The page still lists only the two 2024 dates for the spring and November events, and gives no times, age range, price or registration information.",
+          "url": "https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/"
+        }
+      ],
+      "remaining": [
+        "New dates, age, parent participation and price; the toy library's regular opening hours are listed as a separate activity.",
+        "Are there new dates and times for the spring and November toy library events, and for the games stand at the Christmas market?",
+        "What age range is the event for, and may a parent stay with the child?",
+        "Is there an admission price, and is registration needed?",
+        "Where exactly do the events take place?"
+      ]
+    },
+    "draft": {
+      "patch": {},
+      "practicalPatch": {},
+      "cardId": "ludo-events",
+      "findings": [
+        {
+          "field": "events",
+          "kind": "official",
+          "text": "On 20 November 2026 the official events page says that in spring the toy library's outdoor games and vehicles are woken from their winter rest and can be tried by children, and that the toy library has a games stand at the Plaffeien Christmas market. The page still lists only the two 2024 dates for the spring and November events, and gives no times, age range, price or registration information.",
+          "url": "https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/"
+        }
+      ],
+      "remaining": [
+        "Are there new dates and times for the spring and November toy library events, and for the games stand at the Christmas market?",
+        "What age range is the event for, and may a parent stay with the child?",
+        "Is there an admission price, and is registration needed?",
+        "Where exactly do the events take place?"
+      ]
+    }
   }
 ];
 })();

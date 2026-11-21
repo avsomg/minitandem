@@ -439,7 +439,7 @@ To confirm before visiting:
 - No registration; sessions are also held during school holidays. Bring a snack for the child.
 - The playgroup room is in the school building on the floor the page calls "1. Stock"; the page does not say how floors are counted. Visitors are asked to keep quiet in the school building.
 
-### Additional check: 2026-11-01
+### Additional check: 2026-11-20
 
 - **Conditions of attendance** (Organiser source): Visitors are asked to keep quiet in the school building so as not to disturb lessons. [Source](https://elternverein-plaffeien.ch/angebot/krabbelgruppe/)
 - **Schedule** (Organiser source): The last published session of 2026 is on 16 December. This does not mean the group stops then. [Source](https://elternverein-plaffeien.ch/angebot/krabbelgruppe/)
@@ -447,6 +447,7 @@ To confirm before visiting:
 - **Visit** (Organiser source): Sessions are held without registration, including during school holidays. Coffee and tea are available for adults; a snack for the child must be brought along. [Source](https://elternverein-plaffeien.ch/angebot/krabbelgruppe/)
 - **Location** (Organiser source): The meeting takes place in the playgroup room of the primary school in Oberschrot, listed as "1. Stock". The page does not explain how floors are counted or describe a lift or pushchair route. [Source](https://elternverein-plaffeien.ch/angebot/krabbelgruppe/)
 - **Admission** (Organiser source): The official page says the group is open to everyone. [Source](https://elternverein-plaffeien.ch/angebot/krabbelgruppe/)
+- **Schedule** (Organiser source): The official page currently lists Wednesday 25 November 2026 and Wednesday 16 December 2026 as the remaining meetings of 2026, from 9:00 to 11:00. [Source](https://elternverein-plaffeien.ch/angebot/krabbelgruppe/)
 
 To confirm before visiting:
 - Is there a lift and space for a pushchair?
@@ -3108,12 +3109,13 @@ To confirm before visiting:
 - Date: 2024-11-23 time to be confirmed · Wintereinläuten
 - The language of the host or service is not confirmed.
 
-### Additional check: 2026-11-07
+### Additional check: 2026-11-20
 
 - **Old poster** (Historical information): The current page describes a trial of outdoor toys in spring, board games in November and a games stand at the Christmas market. The exact dates of Frühlingserwachen and Wintereinläuten are still from 2024. [Source](https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/)
 - **Published dates** (Organiser source): On 31 October 2026 the official events page still lists only two dated toy library events, both in 2024: Frühlingserwachen on 23 March 2024 and Wintereinläuten on 23 November 2024. No later date, time, age range, price or address is published, and it also mentions a games stand at the Plaffeien Christmas market. [Source](https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/)
 - **Published dates** (Organiser source): The official events page describes a spring event where outdoor games and vehicles can be tried by children, a November event to get to know board games, and a games stand at the Plaffeien Christmas market (no date given for the stand). [Source](https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/)
 - **Published dates** (Organiser source): As of 7 November 2026 the official events page lists a toy library address for the events (ludothek@elternverein-plaffeien.ch) and still shows only two dated events, Frühlingserwachen on 23 March 2024 and Wintereinläuten on 23 November 2024. No later date, time, age, price or venue is published. [Source](https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/)
+- **Published dates** (Organiser source): On 20 November 2026 the official events page says that in spring the toy library's outdoor games and vehicles are woken from their winter rest and can be tried by children, and that the toy library has a games stand at the Plaffeien Christmas market. The page still lists only the two 2024 dates for the spring and November events, and gives no times, age range, price or registration information. [Source](https://elternverein-plaffeien.ch/aktivitaeten/ludothek-events/)
 
 To confirm before visiting:
 - New dates, age, parent participation and price; the toy library's regular opening hours are listed as a separate activity.
@@ -4542,14 +4544,23 @@ To confirm before visiting:
 - Contact: Bibliothek Kerzers; 031 755 63 67; bibliothek@kerzers.ch
 - During school holidays the library is open only Wed 18:00–20:00, Fri 18:00–20:00 and Sat 10:00–12:00.
 
-### Additional check: 2026-09-27
+### Additional check: 2026-11-20
 
 - **Terms of visit** (Organiser source): The library is open to everyone and has a children's play corner. A subscription is needed for borrowing: free for a child until the end of compulsory school; CHF 60 per year for a family, CHF 40 per year for one adult. For occasional visits there is a card for 20 units for CHF 20. [Source](https://www.fr.ch/de/kub/app/bibliotheques/79)
+- **Play corner** (Organiser source): The library has a reading area for adults and a children's play corner. The library page publishes no age limits, separate hours or admission rules for the play corner. [Source](https://www.fr.ch/de/kub/app/bibliotheques/79)
 
 To confirm before visiting:
 - Check whether suitable toys are available and whether there is pushchair access before the first visit.
+- Is an adult expected to stay with a child in the library? The library page does not say.
+- Is a subscription needed just to visit and use the play corner, without borrowing media?
+- Is the entrance accessible with a pushchair, and are there a toilet, a changing table or parking for visitors?
+- Until what date do the published opening hours apply?
 
 - [Cantonal directory: collection, opening hours and subscription](https://www.fr.ch/de/kub/app/bibliotheques/79)
+
+### Visit conditions
+
+- Play area: The library has a children's play corner. No age limits or separate hours are published for it. [Source](https://www.fr.ch/de/kub/app/bibliotheques/79)
 - Coordinates of the address (not the entrance): 46.973819732666016, 7.200720310211182. [Address register](https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Auf+dem+Platz+1+3210+Kerzers&type=locations&origins=address&limit=5&sr=4326)
 
 ## Le Palet roulant · Vully library
