@@ -127,6 +127,15 @@ function publishedBoundMentions(root,rel,text){
   }
   return 0;
 }
+// The owner decided on 24 November 2026 that draft.snapshots[].text in approved-updates.json is exempt from the Cyrillic check as well, for the
+// same reason: it is the saved text of an organiser's page (jouons: a list of book languages, each named in its own script). Every other field
+// of that file, every other file and the built site still count, and the other checks still count inside a snapshot.
+function snapshotCyrillicWords(rel,text){
+  if(rel!=='editorial/approved-updates.json')return 0;
+  let updates;
+  try{updates=JSON.parse(text).updates;}catch{return 0;}
+  return (updates||[]).reduce((n,update)=>n+(update.draft?.snapshots||[]).reduce((m,snapshot)=>m+auditText(JSON.stringify(snapshot.text??'')).cyrillicWords,0),0);
+}
 export function auditWorkspace(root=workspace){
   const groups={data:[],editorial:[],ui:[],docs:[]};
   const walk=folder=>{
@@ -139,6 +148,7 @@ export function auditWorkspace(root=workspace){
       if(!TEXT_FILE.test(entry.name))continue;
       const posix=rel.split(path.sep).join('/'),text=fs.readFileSync(file,'utf8'),counts=auditText(text,posix);
       counts.referenceChildAge-=publishedBoundMentions(root,posix,text);
+      counts.cyrillicWords-=snapshotCyrillicWords(posix,text);
       for(const name of Object.keys(CHECKS))if(!GROUP_CHECKS[group].includes(name))counts[name]=0;
       if(Object.values(counts).some(Boolean))groups[group].push({file:posix,...counts});
     }

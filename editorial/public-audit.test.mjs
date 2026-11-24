@@ -108,6 +108,23 @@ test('code and documentation are checked for Cyrillic and the old name only; the
     [['data-de.js',1],['data-reviewed.js',3],['data.js',1],['editorial/approved-updates.json',2],['research.md',1]]);
 });
 
+test('the saved page text of approved-updates.json is exempt from the Cyrillic check; its other fields and data-reviewed.js are not',t=>{
+  const root=fs.mkdtempSync(path.join(os.tmpdir(),'minitandem-audit-cyrillic-'));
+  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  const write=(file,text)=>{fs.mkdirSync(path.dirname(path.join(root,file)),{recursive:true});fs.writeFileSync(path.join(root,file),text);};
+  // Decision of 24 November 2026: an organiser's page may name a language in its own script. The word is built at run time, so that this
+  // file holds no Cyrillic.
+  const word=String.fromCodePoint(0x43c,0x43e,0x43d,0x433,0x43e,0x43b);
+  const update=(more={})=>({baseRecord:{id:'j'},draft:{cardId:'j',snapshots:[{label:'Languages',text:'English anglais | '+word+' mongol'}],...more}});
+  write('.gitignore',PRIVATE.join('\n'));
+  write('editorial/approved-updates.json',JSON.stringify({schema:1,updates:[update()]},null,2));
+  assert.deepEqual(auditWorkspace(root).groups.data.files,[]);
+  write('editorial/approved-updates.json',JSON.stringify({schema:1,updates:[update({remaining:['Ask in '+word]})]},null,2));
+  write('data-reviewed.js','window.APPROVED_UPDATES = '+JSON.stringify([update()])+';\n');
+  assert.deepEqual(auditWorkspace(root).groups.data.files.map(row=>[row.file,row.cyrillicWords]).sort(),
+    [['data-reviewed.js',1],['editorial/approved-updates.json',1]]);
+});
+
 // Private contacts (decision of 14 October 2026). The numbers are invented and joined at run time, so that no line of this file holds one.
 const mobile=(separator=' ')=>['079','000','00','00'].join(separator);
 test('private contacts: a mobile number in a catalogue file or the built site fails, digits in web addresses and third-party bundles do not',t=>{

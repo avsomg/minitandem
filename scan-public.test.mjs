@@ -32,6 +32,18 @@ test('the publication scan finds secrets, identifiers, personal paths and Cyrill
   for(const rule of Object.keys(planted))assert.ok(report.findings.some(f=>f.rule===rule&&f.file===rule+'.txt'&&f.line===2),rule);
 });
 
+// Decision of 24 November 2026: the saved page text of approved-updates.json may hold Cyrillic (an organiser's list of languages); the same
+// word in any other field of that file, or a secret in the saved text, is still a finding.
+test('a saved page text in approved-updates.json is not a Cyrillic finding; other fields and other rules still are',t=>{
+  const word=planted.cyrillic;
+  const file=updates=>({'editorial/approved-updates.json':JSON.stringify({schema:1,updates},null,2)});
+  const update=(text,more={})=>({draft:{cardId:'j',snapshots:[{label:'Languages',text}],...more}});
+  assert.deepEqual(scan(project(t,file([update('English anglais | '+word+' mongol')]))).findings,[]);
+  const report=scan(project(t,file([update('Languages: '+word+' and '+planted['api-token'],{remaining:['Ask in '+word]})])));
+  assert.deepEqual(report.findings.map(f=>f.rule).sort(),['api-token','cyrillic']);
+  assert.ok(report.findings.some(f=>f.rule==='cyrillic'&&f.line!==report.findings.find(g=>g.rule==='api-token').line));
+});
+
 test('contact data is counted in the catalogue files and is a finding anywhere else',t=>{
   const contact='info'+'@organiser.ch, 026 123 '+'99 99';
   const report=scan(project(t,{'data.js':contact,'notes.md':contact,'fixture.test.mjs':'info@example.org and 026 000 00 00'}));

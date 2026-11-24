@@ -1551,13 +1551,13 @@
   },
   {
     "id": "memo-est-ce-que-ca-joue",
-    "address": "Rue de l’Hôpital 2, Fribourg",
+    "address": "Rue de l’Hôpital 2, 1700 Fribourg",
     "geo": {
       "label": "Rue de l'Hôpital 2 1700 Fribourg",
       "lat": 46.805633544921875,
       "lon": 7.154872894287109,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+Fribourg&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
+      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+      "checked": "2026-10-31",
       "precision": "address"
     }
   },

@@ -28,6 +28,16 @@ export const CATALOGUE_FILES=new Set(['data.js','research.md','data-reviewed.js'
 const SKIP_BINARY=/\.(?:png|jpe?g|gif|webp|ico|woff2?|pdf|sqlite)$/i;
 // Third-party bundles contain long digit runs and the like; they are checked for secrets and paths only.
 const VENDOR=/^assets\/(?:leaflet|lucide)[\w.-]*\.js$/;
+// The owner decided on 24 November 2026 that the saved page text of approved-updates.json (draft.snapshots[].text, an organiser's page,
+// such as a list of book languages each named in its own script) is not checked for Cyrillic; editorial/public-audit.mjs follows the same
+// rule. A line is exempt only when it is exactly one such text as the file writes it, and only from the Cyrillic rule: every other line of
+// the file, the editor's own wording included, and every other rule on that line still count.
+const SNAPSHOT_TEXT_FILE='editorial/approved-updates.json';
+function snapshotTextLines(text){
+  let updates;
+  try{updates=JSON.parse(text).updates;}catch{return new Set();}
+  return new Set((updates||[]).flatMap(update=>(update.draft?.snapshots||[]).map(snapshot=>'"text": '+JSON.stringify(snapshot.text??''))));
+}
 
 export function filesToScan(root){
   try{
@@ -55,8 +65,10 @@ export function scan(root){
     const text=fs.readFileSync(path.join(root,file),'utf8');
     const lines=text.split('\n');
     const rules=VENDOR.test(file)?RULES.filter(([name])=>!['cyrillic'].includes(name)):RULES;
+    const snapshotTexts=file===SNAPSHOT_TEXT_FILE?snapshotTextLines(text):new Set();
     lines.forEach((line,index)=>{
-      for(const [name,pattern] of rules)if(pattern.test(line))findings.push({file,line:index+1,rule:name});
+      const snapshotText=snapshotTexts.has(line.trim().replace(/,$/,''));
+      for(const [name,pattern] of rules)if(!(name==='cyrillic'&&snapshotText)&&pattern.test(line))findings.push({file,line:index+1,rule:name});
     });
     if(VENDOR.test(file))continue;
     const emails=(text.match(EMAIL)||[]).filter(address=>!HARMLESS_EMAIL.test(address));

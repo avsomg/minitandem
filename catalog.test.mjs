@@ -176,8 +176,8 @@ test('new AEF cafes keep exact dated sessions, and an unknown age is never a mat
 test('Estavayer reading workshop has dated bookable sessions for ages 0 to 4',()=>{
   const {list,state,byId}=load({age:AGE});
   const workshop=byId.get('ne-pour-lire-estavayer');
-  // The approved review of 1 November 2026 dropped the past session of 5 October.
-  assert.deepEqual(Array.from(workshop.events,e=>e.date),['2026-11-11','2026-12-10']);
+  // The approved update of 21 November 2026 lists the four sessions the library now publishes, 10 December 2026 to 2 March 2027.
+  assert.deepEqual(Array.from(workshop.events,e=>e.date),['2026-12-10','2027-01-08','2027-02-04','2027-03-02']);
   assert.equal(workshop.practical.booking.value,true);
   assert.equal(workshop.max,4);
   assert.equal(workshop.priceKind,'unknown');
@@ -493,8 +493,8 @@ test('deep review covers active cards and preserves receipts for ended events',(
   assert.ok(counts.enriched+counts.rechecked>=134 && counts.unresolved>=24);
   // memo-rat-mission-2026-09-30 and herbstbasteln were closed by approved updates on 26 October and 3 November 2026, once their only
   // date (30 September) had passed; memo-valise-magique-2026-11-04 and rabel-giffers by those of 21 November 2026, once their only
-  // dates (4 and 7 November) had passed.
-  assert.deepEqual(ids(records.filter(a=>C.isArchive(a)&&a.research)).sort(),['alpabzug','chocolat','devenir-famille-fribourg-2026-10-03','erntedank','herbstbasteln','memo-musik-entdecken-2026-09-29','memo-rat-exhibition-2026','memo-rat-mission-2026-09-30','memo-valise-magique-2026-11-04','plage-chevroux','rabel-giffers']);
+  // dates (4 and 7 November) had passed, and candles-giffers by its full review of 21 November 2026 (13 and 14 November).
+  assert.deepEqual(ids(records.filter(a=>C.isArchive(a)&&a.research)).sort(),['alpabzug','candles-giffers','chocolat','devenir-famille-fribourg-2026-10-03','erntedank','herbstbasteln','memo-musik-entdecken-2026-09-29','memo-rat-exhibition-2026','memo-rat-mission-2026-09-30','memo-valise-magique-2026-11-04','plage-chevroux','rabel-giffers']);
   // swim-duedingen has published Saturdays again since the approved update of 31 October 2026.
   assert.deepEqual(Array.from(byId.get('swim-duedingen').days),[6]);
   assert.deepEqual(Array.from(byId.get('elki-kerzers').days),[],'elki-kerzers: stale schedule must not appear as a weekday');

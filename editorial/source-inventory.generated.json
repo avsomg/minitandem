@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T17:15:36.923Z",
+  "generatedAt": "2026-11-24T05:54:30.985Z",
   "sources": [
     {
       "id": "source-a9e685e2c5ed",
@@ -2283,34 +2283,6 @@
       "monitoring": "not-configured"
     },
     {
-      "id": "source-3e6871b27a92",
-      "url": "https://www.evgt.ch/",
-      "recordIds": [
-        "candles-giffers"
-      ],
-      "regions": [
-        "sense"
-      ],
-      "labels": [
-        "Official source"
-      ],
-      "monitoring": "not-configured"
-    },
-    {
-      "id": "source-b142e2c2ac22",
-      "url": "https://www.evgt.ch/events/kerzenziehen/",
-      "recordIds": [
-        "candles-giffers"
-      ],
-      "regions": [
-        "sense"
-      ],
-      "labels": [
-        "Practical conditions"
-      ],
-      "monitoring": "not-configured"
-    },
-    {
       "id": "source-d4cd9d7065c1",
       "url": "https://elternverein-plaffeien.ch/aktivitaeten/weihnachtgeschichten/",
       "recordIds": [
@@ -4246,6 +4218,20 @@
       ],
       "labels": [
         "2026/27 fee and registration"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-4607625af9e1",
+      "url": "https://www.fsgestavayer.ch/?page_id=81",
+      "recordIds": [
+        "fsg-elki-lully"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Additional check: Contact"
       ],
       "monitoring": "not-configured"
     },

@@ -32,8 +32,9 @@ test('all thirteen October 2 corrections match the compiled catalogue, not just 
 });
 
 test('new-season gym schedules agree with day filters and visit conditions',()=>{
-  // bewegungsinsel: the full review of 3 November 2026 writes the start date out.
-  for(const [id,day,start] of [['bewegungsinsel',1,'7 September 2026'],['elki-giffers',3,'09.09.2026'],['elki-heitenried',3,'season and holiday dates not published']]){
+  // bewegungsinsel: the full review of 3 November 2026 writes the start date out. elki-giffers: the full review of 21 November 2026
+  // publishes the weekly pattern (Wednesdays 09:30–10:45) without a season start.
+  for(const [id,day,start] of [['bewegungsinsel',1,'7 September 2026'],['elki-giffers',3,'Wednesdays 09:30–10:45'],['elki-heitenried',3,'season and holiday dates not published']]){
     const card=byId.get(id);
     assert.deepEqual(Array.from(card.days),[day]);
     assert.ok(card.schedule.includes(start));
