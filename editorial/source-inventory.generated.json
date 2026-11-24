@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T05:54:30.985Z",
+  "generatedAt": "2026-11-24T11:26:00.078Z",
   "sources": [
     {
       "id": "source-a9e685e2c5ed",
@@ -2772,6 +2772,20 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-bb85d7b5b5fa",
+      "url": "https://www.minigolf-tennis.ch/aktive",
+      "recordIds": [
+        "minigolf"
+      ],
+      "regions": [
+        "sense"
+      ],
+      "labels": [
+        "Additional check: age"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-04e9dbd33da8",
       "url": "https://fri-memoria.bcu-fribourg.ch/uploads/r/bcu-fribourg/3/e/0/3e01f4d5a1279915f5f6e90f668a0cbf54c4d2a904a28603a1892d357ed091fe/8ad518cd-4810-4df0-9081-134e190b5b6a-Echo_Nr._09_vom_28.04.2022.pdf",
       "recordIds": [
@@ -4768,6 +4782,20 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-95e8ce57b2ad",
+      "url": "https://www.restaurant-aerodrome-epagny.ch/",
+      "recordIds": [
+        "aerodrome-epagny-play"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Additional check: Opening hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-72b50d4b17f9",
       "url": "https://fribourg.ch/fr/la-gruyere/piscines/piscine-couverte-de-charmey/",
       "recordIds": [
@@ -6559,6 +6587,20 @@
       ],
       "labels": [
         "Commune: playground renovation in 2025"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-c7f5d3cd9d96",
+      "url": "https://labrillaz.ch/autorite/une-commune-durable/",
+      "recordIds": [
+        "onnens-school-park"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Renovation status"
       ],
       "monitoring": "not-configured"
     },

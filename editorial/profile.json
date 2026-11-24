@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T05:54:30.985Z",
+  "generatedAt": "2026-11-24T11:26:00.078Z",
   "grain": "One published catalogue card; formats include groups, individual offers, events and self-guided visits.",
   "total": 325,
   "catalog": 291,
@@ -22,9 +22,9 @@
     "self": 179
   },
   "storedStatus": {
-    "active": 181,
+    "active": 186,
     "future": 12,
-    "check": 98
+    "check": 93
   },
   "checkedDates": [
     "2026-09-27",
@@ -36,6 +36,7 @@
     "2026-11-01",
     "2026-11-20",
     "2026-10-02",
+    "2026-11-24",
     "2026-10-30",
     "2026-11-03",
     "2026-11-06",
@@ -43,14 +44,14 @@
     "2026-10-26"
   ],
   "unknownFields": {
-    "minAge": 203,
-    "parent": 88,
+    "minAge": 204,
+    "parent": 93,
     "language": 269,
-    "price": 185,
+    "price": 186,
     "address": 2
   },
-  "sources": 493,
-  "explicitScheduleEnd": 87,
+  "sources": 496,
+  "explicitScheduleEnd": 85,
   "seeLocalities": [
     "Murten",
     "Kerzers",

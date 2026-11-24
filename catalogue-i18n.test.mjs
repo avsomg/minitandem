@@ -83,7 +83,12 @@ test('data-de.js and data-fr.js hold only a digest and strings per card, cover t
   assert.ok(fr.includes(Buffer.from('\u00a0:','utf8'))&&fr.includes(Buffer.from('«\u00a0','utf8')),'literal no-break spaces before : and inside « »');
   assert.ok(!fr.includes('\\u00a0'),'written as characters, not escapes');
   assert.ok(!Object.values(files.fr).some(entry=>Object.values(entry.strings).some(text=>/ [:;?!](?!\/)|« | »/.test(text.replace(/https?:\/\/\S+/g,'')))),'no ordinary space where French needs a no-break space');
-  assert.ok(!Object.values(files.de).some(entry=>Object.values(entry.strings).some(text=>/ß/.test(text))),'Swiss German: no sharp s');
+  // Swiss German writes ss. The one exception is the translation pipeline's own: a word with ß that the English string of the same field
+  // carries too is a verbatim quote of the organiser and stays as written (riggli, 24 November 2026: «für Groß und Klein»).
+  const {cards:englishCards,CI:EI,order:EO}=english(),source=new Map(englishCards.map(card=>[card.id,plain(EI.unitStrings(card,EO))]));
+  const sharp=(id,key,text)=>(text.match(/[\p{L}-]*ß[\p{L}-]*/gu)||[]).filter(word=>!String(source.get(id)?.[key]??'').includes(word));
+  assert.deepEqual(Object.entries(files.de).flatMap(([id,entry])=>Object.entries(entry.strings).flatMap(([key,text])=>sharp(id,key,text).map(word=>`${id} ${key}: ${word}`))),[],'Swiss German: no sharp s outside a quote of the source');
+  assert.deepEqual(sharp('x','intro','Die Straße ist schön'),['Straße'],'the check still finds a sharp s of our own');
 });
 
 test('the overlay shows every translated string at its path on a copy; the English card is untouched and stays reachable',()=>{

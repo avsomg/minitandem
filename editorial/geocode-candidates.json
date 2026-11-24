@@ -7158,5 +7158,17 @@
         "lon": 7.148654937744141
       }
     ]
+  },
+  "Vers le Lac 1473 Font": {
+    "query": "Vers le Lac 1473 Font",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Vers+le+Lac+1473+Font&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-24",
+    "results": [
+      {
+        "label": "Chemin des Lacustres 123l 1473 Font",
+        "lat": 46.84080505371094,
+        "lon": 6.825249671936035
+      }
+    ]
   }
 }

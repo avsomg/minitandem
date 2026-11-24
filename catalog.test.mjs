@@ -431,7 +431,10 @@ test('visitor research notes keep their caveats in the catalogue',()=>{
   // kafi8-kerzers: the full review of 7 November 2026 replaced the visitor notes; the caveat now comes from the café's own page.
   assert.match(byId.get('kafi8-kerzers').notes.join(' '),/it does not describe the play room, its age range, rules or any charge/);
   assert.match(byId.get('jardin-muntelier').notes.join(' '),/one was shown as 2 years old/);
-  assert.match(byId.get('beachhouse-muntelier').notes.join(' '),/not two independent confirmations/);
+  // beachhouse-muntelier: the approved update of 24 November 2026 replaced the visitor notes with the restaurant's own kitchen hours; the
+  // sandpit and toys of the visitor reports are open questions now, not notes.
+  assert.match(byId.get('beachhouse-muntelier').notes.join(' '),/Kitchen hours/);
+  assert.ok(byId.get('beachhouse-muntelier').research.remaining.some(question=>/sandpit open/.test(question)));
   assert.match(byId.get('migros-avry-play').notes.join(' '),/do not confirm that it is currently available/);
 });
 
@@ -489,8 +492,9 @@ test('deep review covers active cards and preserves receipts for ended events',(
   const counts=Object.fromEntries(['enriched','rechecked','unresolved','reused'].map(outcome=>[outcome,main.filter(a=>a.research.outcome===outcome).length]));
   assert.equal(Object.values(counts).reduce((sum,count)=>sum+count,0),main.length);
   // A new full review turns an enriched card into a rechecked one; the full reviews approved on 3 and 7 November 2026 resolved twelve unresolved cards,
-  // and the approved update of 21 November 2026 resolved maison-petits-villarlod.
-  assert.ok(counts.enriched+counts.rechecked>=134 && counts.unresolved>=24);
+  // the approved update of 21 November 2026 resolved maison-petits-villarlod, and the full reviews of 24 November 2026 chez-betty-massonnens
+  // and vaulruz-football-play.
+  assert.ok(counts.enriched+counts.rechecked>=134 && counts.unresolved>=22);
   // memo-rat-mission-2026-09-30 and herbstbasteln were closed by approved updates on 26 October and 3 November 2026, once their only
   // date (30 September) had passed; memo-valise-magique-2026-11-04 and rabel-giffers by those of 21 November 2026, once their only
   // dates (4 and 7 November) had passed, and candles-giffers by its full review of 21 November 2026 (13 and 14 November).
