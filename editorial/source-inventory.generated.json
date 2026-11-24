@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T11:26:00.078Z",
+  "generatedAt": "2026-11-24T17:15:52.968Z",
   "sources": [
     {
       "id": "source-a9e685e2c5ed",
@@ -3347,6 +3347,20 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-7b11ef8024a6",
+      "url": "https://karladiekarotte.ch/",
+      "recordIds": [
+        "karla-gemuesetrail"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Additional check: Tickets and access"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-a3223c683f49",
       "url": "https://portail-jeunes.ch/wp-content/uploads/2026/09/2026-2_ATF_Courtepin_A4-F.pdf",
       "recordIds": [
@@ -4975,6 +4989,20 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-ebac37f296a6",
+      "url": "https://www.ville-fribourg.ch/places-jeux/derriere-les-jardins",
+      "recordIds": [
+        "auge-gardens-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Audience and access"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-02f3671c4ad9",
       "url": "https://fribourg.ch/fr/fribourg/activites-en-plein-air/place-de-jeux-grand-places/",
       "recordIds": [
@@ -6367,6 +6395,20 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-7cde394a7c64",
+      "url": "https://www.botterens.ch/modalites-d-utilisation-du-local-a-la-place-de-jeu/",
+      "recordIds": [
+        "botterens-village-play"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Additional check: Commune page"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-72ce936cf68d",
       "url": "https://www.hauteville.ch/culture-et-loisirs/salle-communale-otavela",
       "recordIds": [
@@ -6839,6 +6881,20 @@
       ],
       "labels": [
         "Regional association: the Gérine corridor, including Villarsel-sur-Marly"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-79da7ba569ee",
+      "url": "https://www.fribourg.ch/en/fribourg/hiking/autour-de-la-gerine/",
+      "recordIds": [
+        "villarsel-gerine-corridor"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Hiking loop"
       ],
       "monitoring": "not-configured"
     },
