@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T17:15:52.968Z",
+  "generatedAt": "2026-11-25T04:04:05.651Z",
   "sources": [
     {
       "id": "source-a9e685e2c5ed",
@@ -787,13 +787,15 @@
       "id": "source-63500234d08b",
       "url": "https://lesarrazin.ch/",
       "recordIds": [
-        "sarrazin-lossy"
+        "sarrazin-lossy",
+        "sarrazin-lossy-play"
       ],
       "regions": [
         "sarine"
       ],
       "labels": [
-        "Restaurant: menu, opening hours and contacts"
+        "Restaurant: menu, opening hours and contacts",
+        "Additional check: schedule"
       ],
       "monitoring": "not-configured"
     },
@@ -1020,6 +1022,20 @@
       ],
       "labels": [
         "Separate garderie: not the restaurant's play area"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-24a54468d225",
+      "url": "https://www.avrycentre.ch/acces/",
+      "recordIds": [
+        "migros-avry-play"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: research.findings"
       ],
       "monitoring": "not-configured"
     },
@@ -4068,6 +4084,34 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-f03c2c7a257e",
+      "url": "https://lentrepot.ch/activites/zone-mini/",
+      "recordIds": [
+        "entrepot-mini-bulle"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Additional check: Price"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-11a0cdbf284a",
+      "url": "https://lentrepot.ch/infos-pratiques/",
+      "recordIds": [
+        "entrepot-mini-bulle"
+      ],
+      "regions": [
+        "gruyere"
+      ],
+      "labels": [
+        "Additional check: Hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-64e37710bd03",
       "url": "https://fribourg.ch/fr/la-gruyere/musees/maison-cailler-chocolaterie-suisse/",
       "recordIds": [
@@ -4278,6 +4322,20 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-f51c743d9653",
+      "url": "https://www.estabiblio.ch/",
+      "recordIds": [
+        "library-estavayer"
+      ],
+      "regions": [
+        "broye"
+      ],
+      "labels": [
+        "Additional check: price"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-3279a2ee14d7",
       "url": "https://fribourg.ch/fr/estavayer-payerne/patrimoine-et-terroir/village-lacustre-de-gletterens/",
       "recordIds": [
@@ -4372,6 +4430,20 @@
       ],
       "labels": [
         "Books, opening hours, prices and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e7475a4580c2",
+      "url": "https://biblio-veveyse.ch/infos-pratiques/",
+      "recordIds": [
+        "library-veveyse-chatel"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Additional check: Contacts and parking"
       ],
       "monitoring": "not-configured"
     },
@@ -5073,6 +5145,20 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-78f68c3b61b3",
+      "url": "https://www.marionnette.ch/en/visit-the-museum/visit-the-museum/",
+      "recordIds": [
+        "marionnettes-fribourg"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Opening hours"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-2b98aea3eb7c",
       "url": "https://fribourg.ch/fr/regionlacdemorat/plages/plage-a-nant/",
       "recordIds": [
@@ -5115,6 +5201,20 @@
       "monitoring": "not-configured"
     },
     {
+      "id": "source-c0c27f085ef6",
+      "url": "https://tierpark-jeuss.ch/fr/",
+      "recordIds": [
+        "jeuss-animal-park"
+      ],
+      "regions": [
+        "see"
+      ],
+      "labels": [
+        "Additional check: Opening hours and parking"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
       "id": "source-a5b3e39d2519",
       "url": "https://fribourg.ch/fr/les-paccots/patrimoine-et-terroir/ludotheque-papayou/",
       "recordIds": [
@@ -5125,6 +5225,48 @@
       ],
       "labels": [
         "Format, hours and address"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-ebcdc1d20300",
+      "url": "https://ludopapayou.wordpress.com/faq/",
+      "recordIds": [
+        "papayou-attalens"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Additional check: Price"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-2ecb864e1b7c",
+      "url": "https://ludopapayou.wordpress.com/",
+      "recordIds": [
+        "papayou-attalens"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Additional check: On-site visit"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-5f5758905269",
+      "url": "https://ludopapayou.wordpress.com/adresse/",
+      "recordIds": [
+        "papayou-attalens"
+      ],
+      "regions": [
+        "veveyse"
+      ],
+      "labels": [
+        "Additional check: Location"
       ],
       "monitoring": "not-configured"
     },
@@ -6937,6 +7079,20 @@
       ],
       "labels": [
         "Seasonal programme: free"
+      ],
+      "monitoring": "not-configured"
+    },
+    {
+      "id": "source-e780c85478fc",
+      "url": "https://fribourg.ch/de/freiburg/veranstaltungen/musik-entdecken/",
+      "recordIds": [
+        "memo-musik-entdecken-2027-03-16"
+      ],
+      "regions": [
+        "sarine"
+      ],
+      "labels": [
+        "Additional check: Date, age and booking"
       ],
       "monitoring": "not-configured"
     },

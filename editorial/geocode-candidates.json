@@ -7170,5 +7170,43 @@
         "lon": 6.825249671936035
       }
     ]
+  },
+  "Place de jeu du Grand-Clos, 1618 Châtel-St-Denis": {
+    "query": "Place de jeu du Grand-Clos 1618 Châtel-St-Denis",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Place+de+jeu+du+Grand-Clos+1618+Ch%C3%A2tel-St-Denis&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-25",
+    "results": [
+      {
+        "label": "Chemin du Clos à Golet 1 1618 Châtel-St-Denis",
+        "lat": 46.52769470214844,
+        "lon": 6.898567199707031
+      },
+      {
+        "label": "Chemin du Clos à Golet 6 1618 Châtel-St-Denis",
+        "lat": 46.528076171875,
+        "lon": 6.898998737335205
+      },
+      {
+        "label": "Chemin du Clos à Golet 6b 1618 Châtel-St-Denis",
+        "lat": 46.52809143066406,
+        "lon": 6.89915132522583
+      },
+      {
+        "label": "Chemin du Clos à Golet 6a 1618 Châtel-St-Denis",
+        "lat": 46.52803039550781,
+        "lon": 6.898727893829346
+      },
+      {
+        "label": "Chemin du Clos à Golet 7a 1618 Châtel-St-Denis",
+        "lat": 46.528377532958984,
+        "lon": 6.898306846618652
+      }
+    ]
+  },
+  "Les Blés yellow building of the Ecole primaire in Attalens, basement (abri PC)": {
+    "query": "Les Blés yellow building of the Ecole primaire in Attalens",
+    "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Les+Bl%C3%A9s+yellow+building+of+the+Ecole+primaire+in+Attalens&type=locations&origins=address&limit=5&sr=4326",
+    "checked": "2026-11-25",
+    "results": []
   }
 }

@@ -96259,6 +96259,8360 @@
         "Is the trail run on foot, by bike or by pushchair the same ticket and route?"
       ]
     }
+  },
+  {
+    "jobId": "483b0857-f577-466e-9a02-1062f557be69",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age limits are not published.",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Open park; opening hours are not published.",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Parc d’Autigny, 1742 Autigny; entrance to be confirmed",
+      "price": "Price not published.",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Commune d’Autigny",
+          "phone": "",
+          "email": "commune@autigny.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://par-chez-nous.ch/places/parc-dautigny/",
+          "label": "Sarine regional association: play, picnic, WC and access"
+        }
+      ],
+      "notes": [
+        "Covered picnic shelter and fire place with grill are listed.",
+        "Water point and WC are listed.",
+        "Nearest bus stop: Autigny, église.",
+        "The listing publishes no opening hours, age limits or prices; it names the commune as contact (commune@autigny.ch).",
+        "The listed postal address is the commune office, not a published park entrance."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "autigny-park",
+      "region": "sarine",
+      "name": "Parc d’Autigny · playground and picnic",
+      "category": "play",
+      "town": "Autigny",
+      "intro": "A green park on the banks of the Glâne river in Autigny, with a play area, covered picnic shelter, fire place with grill, water point, WC, table tennis, pétanque, a zip line and a nature trail.",
+      "research": {
+        "date": "2026-11-07",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "The regional association confirms a playground, a zip line, a covered picnic area, WC and pushchair access.",
+            "url": "https://par-chez-nous.ch/places/parc-dautigny/"
+          },
+          {
+            "field": "Facilities",
+            "kind": "official",
+            "text": "The regional venue listing for the park shows a play area, covered picnic shelter, fire place with grill, water point, WC, parking, and stroller and wheelchair access. The nearest bus stop is Autigny, église.",
+            "url": "https://par-chez-nous.ch/places/parc-dautigny/"
+          }
+        ],
+        "remaining": [
+          "The exact entrance, the age of the equipment and the condition of the playground after bad weather are not stated.",
+          "What are the park's opening hours, and does it have any age limits or an entrance fee?",
+          "Where exactly is the visitor entrance to the park?",
+          "Is the park open all year, and is the play area suitable for the youngest children?"
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "The venue description presents the park as an outdoor visit.",
+          "source": "https://par-chez-nous.ch/places/parc-dautigny/",
+          "checked": "2026-11-07"
+        },
+        "warnings": [
+          "The exact entrance, the age of the equipment and the condition of the playground after bad weather are not stated."
+        ],
+        "parking": {
+          "value": true,
+          "text": "Parking is listed for the park. Whether it is free or paid is not published.",
+          "source": "https://par-chez-nous.ch/places/parc-dautigny/",
+          "checked": "2026-11-07"
+        },
+        "access": {
+          "value": true,
+          "text": "The listing mentions access for wheelchairs and strollers.",
+          "source": "https://par-chez-nous.ch/places/parc-dautigny/",
+          "checked": "2026-11-07"
+        },
+        "toilet": {
+          "value": true,
+          "text": "A WC is listed among the park facilities. Its opening hours are not published.",
+          "source": "https://par-chez-nous.ch/places/parc-dautigny/",
+          "checked": "2026-11-07"
+        },
+        "playArea": {
+          "value": true,
+          "text": "A play area is listed. Its age limits and admission rules are not published.",
+          "source": "https://par-chez-nous.ch/places/parc-dautigny/",
+          "checked": "2026-11-07"
+        }
+      },
+      "addressPrecision": "area"
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "The regional association confirms a playground, a zip line, a covered picnic area, WC and pushchair access.",
+          "url": "https://par-chez-nous.ch/places/parc-dautigny/"
+        },
+        {
+          "field": "Facilities",
+          "kind": "official",
+          "text": "The regional venue listing for the park shows a play area, covered picnic shelter, fire place with grill, water point, WC, parking, and stroller and wheelchair access. The nearest bus stop is Autigny, église.",
+          "url": "https://par-chez-nous.ch/places/parc-dautigny/"
+        },
+        {
+          "field": "Facilities",
+          "kind": "official",
+          "text": "On 24 November 2026 the regional directory page for the park lists a play area, a zip line, a didactic trail, a covered picnic area and a WC. It names the commune office as contact.",
+          "url": "https://par-chez-nous.ch/places/parc-dautigny/"
+        }
+      ],
+      "remaining": [
+        "The exact entrance, the age of the equipment and the condition of the playground after bad weather are not stated.",
+        "What are the park's opening hours, and does it have any age limits or an entrance fee?",
+        "Where exactly is the visitor entrance to the park?",
+        "Is the park open all year, and is the play area suitable for the youngest children?",
+        "What are the park's opening hours?",
+        "Does the play area have age limits, and is there an entrance fee?",
+        "Does an adult need to stay with the child?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "status": "check",
+        "age": "Age not published",
+        "parent": "unknown",
+        "parentDetails": "Conditions for adult participation not published",
+        "schedule": "Schedule not published",
+        "days": [],
+        "address": "Visit address not published",
+        "contacts": [
+          {
+            "name": "Commune d'Autigny",
+            "phone": "",
+            "email": "commune@autigny.ch"
+          }
+        ],
+        "checked": "2026-11-24",
+        "reviewAfter": "2026-12-24"
+      },
+      "practicalPatch": {},
+      "cardId": "autigny-park",
+      "findings": [
+        {
+          "field": "Facilities",
+          "kind": "official",
+          "text": "On 24 November 2026 the regional directory page for the park lists a play area, a zip line, a didactic trail, a covered picnic area and a WC. It names the commune office as contact.",
+          "url": "https://par-chez-nous.ch/places/parc-dautigny/"
+        }
+      ],
+      "remaining": [
+        "What are the park's opening hours?",
+        "Does the play area have age limits, and is there an entrance fee?",
+        "Where exactly is the visitor entrance to the park?",
+        "Does an adult need to stay with the child?"
+      ]
+    }
+  },
+  {
+    "jobId": "939e98c5-6613-4e99-9e34-1b73e512edf9",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age limits are not published",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Open square; opening hours are not published",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Place de l'Arche, Arconciel",
+      "price": "Price is not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Commune de Bois d'Amont",
+          "phone": "",
+          "email": "commune@bois-damont.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://par-chez-nous.ch/places/place-de-larche/",
+          "label": "Sarine regional association: playground, address and access"
+        }
+      ],
+      "notes": [
+        "Small format: suitable as a short stop, not as a large play centre.",
+        "Bus stop Arconciel, Village; parking is listed on the venue page."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "arconciel-arche-play",
+      "region": "sarine",
+      "name": "Place de l’Arche · small playground",
+      "category": "play",
+      "town": "Arconciel",
+      "intro": "A round public square in the centre of Arconciel with a wide view over the surroundings, including a small playground for children.",
+      "research": {
+        "date": "2026-11-07",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Location",
+            "kind": "official",
+            "text": "The regional listing describes Place de l'Arche as a round square in the centre of Arconciel with a small playground, and names the bus stop Arconciel, Village. It gives no house number for the playground, and no age range, hours or fees.",
+            "url": "https://par-chez-nous.ch/places/place-de-larche/"
+          }
+        ],
+        "remaining": [
+          "Play equipment, age and hours are not detailed.",
+          "Which age group is the playground meant for?",
+          "Are there opening hours or days, and does the playground close in winter?",
+          "May adults stay with their children, and is there a fee?",
+          "Is the playground outdoors? The listing does not say explicitly.",
+          "Are there toilets or a changing table nearby?",
+          "Is the playground open every day of the week?"
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": null,
+          "text": "The place page does not say whether the playground is indoors or outdoors.",
+          "source": "https://par-chez-nous.ch/places/place-de-larche/",
+          "checked": "2026-10-31"
+        },
+        "warnings": [
+          "Play equipment, age and hours are not detailed."
+        ],
+        "parking": {
+          "value": true,
+          "text": "Parking is listed on the place page; whether a fee applies is not stated.",
+          "source": "https://par-chez-nous.ch/places/place-de-larche/",
+          "checked": "2026-10-31"
+        },
+        "access": {
+          "value": true,
+          "text": "The place page lists access for wheelchairs and pushchairs.",
+          "source": "https://par-chez-nous.ch/places/place-de-larche/",
+          "checked": "2026-10-31"
+        },
+        "playArea": {
+          "value": true,
+          "text": "The place page lists a playground and play space.",
+          "source": "https://par-chez-nous.ch/places/place-de-larche/",
+          "checked": "2026-10-31"
+        }
+      },
+      "addressPrecision": "exact"
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Location",
+          "kind": "official",
+          "text": "The regional listing describes Place de l'Arche as a round square in the centre of Arconciel with a small playground, and names the bus stop Arconciel, Village. It gives no house number for the playground, and no age range, hours or fees.",
+          "url": "https://par-chez-nous.ch/places/place-de-larche/"
+        },
+        {
+          "field": "Access",
+          "kind": "official",
+          "text": "The regional listing for Place de l'Arche lists a car charging point, parking and a public transport stop for the square.",
+          "url": "https://par-chez-nous.ch/places/place-de-larche/"
+        }
+      ],
+      "remaining": [
+        "Play equipment, age and hours are not detailed.",
+        "Which age group is the playground meant for?",
+        "Are there opening hours or days, and does the playground close in winter?",
+        "May adults stay with their children, and is there a fee?",
+        "Is the playground outdoors? The listing does not say explicitly.",
+        "Are there toilets or a changing table nearby?",
+        "Is the playground open every day of the week?",
+        "Is there a fee for parking or for the car charging point?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "addressPrecision": "area"
+      },
+      "practicalPatch": {},
+      "cardId": "arconciel-arche-play",
+      "findings": [
+        {
+          "field": "Access",
+          "kind": "official",
+          "text": "The regional listing for Place de l'Arche lists a car charging point, parking and a public transport stop for the square.",
+          "url": "https://par-chez-nous.ch/places/place-de-larche/"
+        }
+      ],
+      "remaining": [
+        "Is there a fee for parking or for the car charging point?"
+      ]
+    }
+  },
+  {
+    "jobId": "cf1756a6-64cb-4a2b-bdf9-1a8ad7a6c2f6",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age limits are not published",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Open walking loop in daylight",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Corminboeuf, 1720; check the start point against the GPX",
+      "price": "Price is not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Administration communale (Corminboeuf)",
+          "phone": "+41 26 475 26 46",
+          "email": "commune@corminboeuf.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/fribourg/randonnees-pedestres/randonnee-corminboeuf-faune-et-flore/",
+          "label": "Tourism: family loop, animals, length and GPX"
+        }
+      ],
+      "notes": [
+        "Listed difficulty: fairly easy (Assez facile).",
+        "Accessible by public transport, according to the route page.",
+        "The route page lists a walking time of 1 hour 20 minutes.",
+        "The route page gives the loop as 5.7 km in the description and 5 km in the route details."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "corminboeuf-fauna-walk",
+      "region": "sarine",
+      "name": "Corminboeuf · family route to the animals",
+      "category": "nature",
+      "town": "Corminboeuf",
+      "intro": "Visit the wild and domestic animals living in Corminboeuf along a loop of about 5.7 km, in this order: a botanical path, a deer meadow, cattle, toads, bees and horses.",
+      "research": {
+        "date": "2026-11-07",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "The tourist office describes the route as family-friendly and about 5 km long; it passes a botanical trail, a meadow with deer, bees and horses.",
+            "url": "https://fribourg.ch/fr/fribourg/randonnees-pedestres/randonnee-corminboeuf-faune-et-flore/"
+          },
+          {
+            "field": "Route details",
+            "kind": "official",
+            "text": "The tourist office route page presents this loop as a family hike, lists it as fairly easy with a walking time of 1 hour 20 minutes, and says it is reachable by public transport and by car.",
+            "url": "https://fribourg.ch/fr/fribourg/randonnees-pedestres/randonnee-corminboeuf-faune-et-flore/"
+          }
+        ],
+        "remaining": [
+          "The official page gives 5.7 km in the description and 5 km in the route details; the exact start point and pushchair access are not confirmed.",
+          "Where does the loop start, and is there a parking place or bus stop near it?",
+          "Is the route suitable for pushchairs?",
+          "Are there toilets or a changing table along the route?",
+          "Is the walk open all year, and is any registration or fee needed?",
+          "Is the walk outdoors only? The page does not say so explicitly."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "The tourist office describes the route as family-friendly and about 5 km long; it passes a botanical trail, a meadow with deer, bees and horses.",
+          "source": "https://fribourg.ch/fr/fribourg/randonnees-pedestres/randonnee-corminboeuf-faune-et-flore/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "The official page gives 5.7 km in the description and 5 km in the route details; the exact start point and pushchair access are not confirmed."
+        ]
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "The tourist office describes the route as family-friendly and about 5 km long; it passes a botanical trail, a meadow with deer, bees and horses.",
+          "url": "https://fribourg.ch/fr/fribourg/randonnees-pedestres/randonnee-corminboeuf-faune-et-flore/"
+        },
+        {
+          "field": "Route details",
+          "kind": "official",
+          "text": "The tourist office route page presents this loop as a family hike, lists it as fairly easy with a walking time of 1 hour 20 minutes, and says it is reachable by public transport and by car.",
+          "url": "https://fribourg.ch/fr/fribourg/randonnees-pedestres/randonnee-corminboeuf-faune-et-flore/"
+        },
+        {
+          "field": "Route details",
+          "kind": "official",
+          "text": "The tourist office route page lists the stops in this order: botanical path, deer meadow, cattle, toads, bees and horses. It says the route is accessible by public transport, and gives the distance as 5 km in the route details but 5.7 km in the description.",
+          "url": "https://fribourg.ch/fr/fribourg/randonnees-pedestres/randonnee-corminboeuf-faune-et-flore/"
+        }
+      ],
+      "remaining": [
+        "The official page gives 5.7 km in the description and 5 km in the route details; the exact start point and pushchair access are not confirmed.",
+        "Where does the loop start, and is there a parking place or bus stop near it?",
+        "Is the route suitable for pushchairs?",
+        "Are there toilets or a changing table along the route?",
+        "Is the walk open all year, and is any registration or fee needed?",
+        "Is the walk outdoors only? The page does not say so explicitly.",
+        "Is there a recommended minimum age for children, and may adults accompany them?",
+        "Does the loop measure 5 km or 5.7 km?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "addressPrecision": "area",
+        "intro": "Animal route through Corminboeuf: a botanical path, a deer meadow, cattle, toads, bees and horses, in that order.",
+        "notes": [
+          "Listed difficulty: fairly easy (Assez facile).",
+          "The route page states that the route is accessible by public transport.",
+          "The route page lists a walking time of 1 hour 20 minutes.",
+          "The route page lists a distance of 5 km, while its description mentions a 5.7 km route; check the GPX before planning."
+        ]
+      },
+      "practicalPatch": {},
+      "cardId": "corminboeuf-fauna-walk",
+      "findings": [
+        {
+          "field": "Route details",
+          "kind": "official",
+          "text": "The tourist office route page lists the stops in this order: botanical path, deer meadow, cattle, toads, bees and horses. It says the route is accessible by public transport, and gives the distance as 5 km in the route details but 5.7 km in the description.",
+          "url": "https://fribourg.ch/fr/fribourg/randonnees-pedestres/randonnee-corminboeuf-faune-et-flore/"
+        }
+      ],
+      "remaining": [
+        "Where does the loop start, and is there a parking place or bus stop near it?",
+        "Is the route suitable for pushchairs?",
+        "Are there toilets or a changing table along the route?",
+        "Is the walk open all year, and is any registration or fee needed?",
+        "Is the walk outdoors only? The page does not say so explicitly.",
+        "Is there a recommended minimum age for children, and may adults accompany them?",
+        "Does the loop measure 5 km or 5.7 km?"
+      ]
+    }
+  },
+  {
+    "jobId": "268fd638-5ea6-4339-9194-719dcb00cdf0",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age limits are not published",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Open natural shore; seasonal summer WC",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Plage de Forel, 1475 Forel",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Commune d’Estavayer",
+          "phone": "026 664 80 00",
+          "email": "commune@estavayer.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/",
+          "label": "Shore, equipment and access"
+        }
+      ],
+      "notes": [
+        "The mobile toilet is set up in summer only. The beach is about 15 minutes on foot from the Forel FR, village stop.",
+        "The car park is small and free. Personal grills are not allowed; dogs are allowed on a lead."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "forel-beach",
+      "region": "broye",
+      "name": "Plage de Forel · shore and picnic",
+      "category": "water",
+      "town": "Forel",
+      "intro": "Natural shore with shade and a picnic area; infrastructure is minimal.",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "Sand, grass, shade and two permanent grills.",
+            "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/"
+          }
+        ],
+        "remaining": [
+          "The entrance fee and whether the shore is suitable for a pushchair are not published."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "Sand, grass, shade and two permanent grills.",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "The entrance fee and whether the shore is suitable for a pushchair are not published."
+        ]
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "Sand, grass, shade and two permanent grills.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/"
+        },
+        {
+          "field": "Facilities",
+          "kind": "official",
+          "text": "The official beach page lists two fixed grills, a mobile toilet installed during the summer, and parking near the beach with limited spaces that is free.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/"
+        }
+      ],
+      "remaining": [
+        "The entrance fee and whether the shore is suitable for a pushchair are not published.",
+        "Are there opening hours or a season for the beach, and is it confirmed as open now?",
+        "What are the age limits, if any, and may adults stay with children?",
+        "Is there an entry fee, and is the shore suitable for a pushchair?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "status": "check",
+        "age": "Age not published",
+        "parent": "unknown",
+        "parentDetails": "Conditions for adult participation not published",
+        "schedule": "Schedule not published",
+        "days": [],
+        "addressPrecision": "exact",
+        "contacts": [
+          {
+            "name": "Administration communale",
+            "phone": "+41 26 664 80 00",
+            "email": "commune@estavayer.ch"
+          }
+        ],
+        "checked": "2026-11-24"
+      },
+      "practicalPatch": {
+        "parking": {
+          "value": true,
+          "text": "Parking near the beach; spaces are limited and parking is free.",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/",
+          "checked": "2026-11-24"
+        },
+        "toilet": {
+          "value": true,
+          "text": "A mobile toilet is installed during the summer only.",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/",
+          "checked": "2026-11-24"
+        }
+      },
+      "cardId": "forel-beach",
+      "findings": [
+        {
+          "field": "Facilities",
+          "kind": "official",
+          "text": "The official beach page lists two fixed grills, a mobile toilet installed during the summer, and parking near the beach with limited spaces that is free.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/"
+        }
+      ],
+      "remaining": [
+        "Are there opening hours or a season for the beach, and is it confirmed as open now?",
+        "What are the age limits, if any, and may adults stay with children?",
+        "Is there an entry fee, and is the shore suitable for a pushchair?"
+      ]
+    }
+  },
+  {
+    "jobId": "b0088a00-5da6-449d-9144-2dda16cc3a6f",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age limits are not published",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Walk in daylight",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Forêt de Montet, 1483 Montet (Broye)",
+      "price": "Price is not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Commune Les Montets",
+          "phone": "026 665 18 08",
+          "email": "admin@les-montets.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://les-montets.ch/sports-loisirs-culture/sports",
+          "label": "Commune: forest route across the Petite Glâne"
+        }
+      ],
+      "notes": [
+        "Before the trip, check the entrance on the published municipal map."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "montets-vita-forest",
+      "region": "broye",
+      "name": "Les Montets · forest fitness trail",
+      "category": "nature",
+      "town": "Montet (Broye)",
+      "intro": "A fitness trail through the forest that crosses the Petite Glâne, for fresh air, a walk, relaxation or exercise outdoors.",
+      "research": {
+        "date": "2026-11-08",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "The commune presents the forest trail across the Petite Glâne as a place to get fresh air, relax, walk or exercise outdoors. Access is shown on an attached plan or by visiting the site.",
+            "url": "https://les-montets.ch/sports-loisirs-culture/sports"
+          }
+        ],
+        "remaining": [
+          "Length, starting point, surface, pushchair access and the condition of the footbridge are not stated.",
+          "What age guidance, if any, applies to the trail?",
+          "When is the trail open?",
+          "Where exactly does the trail start, and is there parking?",
+          "Is the trail free to use?",
+          "Is the route suitable for pushchairs, and what is the surface like?"
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "The trail runs through the forest, so it is outdoors.",
+          "source": "https://les-montets.ch/sports-loisirs-culture/sports",
+          "checked": "2026-11-08"
+        },
+        "warnings": [
+          "Length, starting point, surface, pushchair access and the condition of the footbridge are not stated."
+        ]
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "The commune presents the forest trail across the Petite Glâne as a place to get fresh air, relax, walk or exercise outdoors. Access is shown on an attached plan or by visiting the site.",
+          "url": "https://les-montets.ch/sports-loisirs-culture/sports"
+        },
+        {
+          "field": "Access",
+          "kind": "official",
+          "text": "The commune's sports page gives access to the Parcours vita only as an attached plan or by visiting the site. It publishes no opening dates, hours, visitor address, age guidance or price for the trail.",
+          "url": "https://les-montets.ch/sports-loisirs-culture/sports"
+        }
+      ],
+      "remaining": [
+        "Length, starting point, surface, pushchair access and the condition of the footbridge are not stated.",
+        "What age guidance, if any, applies to the trail?",
+        "When is the trail open?",
+        "Where exactly does the trail start, and is there parking?",
+        "Is the trail free to use?",
+        "Is the route suitable for pushchairs, and what is the surface like?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "intro": "Outdoor walking and fitness route (Parcours vita) through the forest, crossing the Petite Glâne river. The commune invites visitors to relax, walk or exercise on it."
+      },
+      "practicalPatch": {},
+      "cardId": "montets-vita-forest",
+      "findings": [
+        {
+          "field": "Access",
+          "kind": "official",
+          "text": "The commune's sports page gives access to the Parcours vita only as an attached plan or by visiting the site. It publishes no opening dates, hours, visitor address, age guidance or price for the trail.",
+          "url": "https://les-montets.ch/sports-loisirs-culture/sports"
+        }
+      ],
+      "remaining": [
+        "Length, starting point, surface, pushchair access and the condition of the footbridge are not stated.",
+        "What age guidance, if any, applies to the trail?",
+        "When is the trail open?",
+        "Where exactly does the trail start, and is there parking?",
+        "Is the trail free to use?",
+        "Is the route suitable for pushchairs, and what is the surface like?"
+      ]
+    }
+  },
+  {
+    "jobId": "066f633c-4e83-4989-9315-ded524912442",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age limits are not published",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Public playground; opening hours are not published",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Place de jeux du Grand-Clos, 1618 Châtel-St-Denis",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Commune de Châtel-St-Denis",
+          "phone": "021 948 22 10",
+          "email": ""
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/communication/actualites-communales/la-boite-sympa-quitte-la-place-de-jeux-du-grand-clos",
+          "label": "Municipality: playground and closure of the Boîte Sympa"
+        },
+        {
+          "url": "https://fribourg.ch/fr/les-paccots/activites-en-plein-air/petanque-b/",
+          "label": "Tourism: playground and pétanque"
+        }
+      ],
+      "notes": [
+        "The Boîte Sympa with shared toys has been removed: do not count on it being available.",
+        "The playground is in the town centre; a separate pétanque lane is nearby."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "grand-clos-chatel-play",
+      "region": "veveyse",
+      "name": "Grand-Clos · playground in the centre",
+      "category": "play",
+      "town": "Châtel-St-Denis",
+      "intro": "The Grand-Clos town playground, without the former box of shared toys.",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "The municipality confirms that the Grand-Clos playground exists; the separate box of shared toys was discontinued in June 2026.",
+            "url": "https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/communication/actualites-communales/la-boite-sympa-quitte-la-place-de-jeux-du-grand-clos"
+          }
+        ],
+        "remaining": [
+          "Equipment, toilet and exact opening arrangements of the playground are not published."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "The municipality confirms that the Grand-Clos playground exists; the separate box of shared toys was discontinued in June 2026.",
+          "source": "https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/communication/actualites-communales/la-boite-sympa-quitte-la-place-de-jeux-du-grand-clos",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "Equipment, toilet and exact opening arrangements of the playground are not published."
+        ]
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "The municipality confirms that the Grand-Clos playground exists; the separate box of shared toys was discontinued in June 2026.",
+          "url": "https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/communication/actualites-communales/la-boite-sympa-quitte-la-place-de-jeux-du-grand-clos"
+        },
+        {
+          "field": "Location and contact",
+          "kind": "official",
+          "text": "The regional tourism listing gives the location as the Grand-Clos playground in Châtel-St-Denis and names Les Paccots – La Veveyse Tourisme as the contact. It publishes no opening hours, age range, price or facilities for the playground.",
+          "url": "https://fribourg.ch/fr/les-paccots/activites-en-plein-air/petanque-b/"
+        }
+      ],
+      "remaining": [
+        "Equipment, toilet and exact opening arrangements of the playground are not published.",
+        "What are the opening arrangements of the playground, and is there an age range for it?",
+        "Is there a toilet, parking or a changing table at the playground?",
+        "Is the playground free to use, and may adults stay with their children?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "status": "check",
+        "parent": "unknown",
+        "parentDetails": "Conditions for adult participation not published",
+        "age": "Age not published",
+        "schedule": "Schedule not published",
+        "days": [],
+        "address": "Place de jeu du Grand-Clos, 1618 Châtel-St-Denis",
+        "addressPrecision": "exact",
+        "contacts": [
+          {
+            "name": "Les Paccots – La Veveyse Tourisme",
+            "phone": "",
+            "email": "info@les-paccots.ch"
+          }
+        ],
+        "notes": [
+          "The Boîte Sympa box of shared toys is being removed: do not count on it being available.",
+          "The tourism listing mentions a free-access pétanque lane at the Grand-Clos playground and a second one at the Fruence square."
+        ],
+        "checked": "2026-11-24"
+      },
+      "practicalPatch": {
+        "indoor": {
+          "value": null,
+          "text": "Not published",
+          "source": "https://fribourg.ch/fr/les-paccots/activites-en-plein-air/petanque-b/",
+          "checked": "2026-11-24"
+        },
+        "playArea": {
+          "value": true,
+          "text": "The tourism listing names the Grand-Clos playground (place de jeu) at this location.",
+          "source": "https://fribourg.ch/fr/les-paccots/activites-en-plein-air/petanque-b/",
+          "checked": "2026-11-24"
+        }
+      },
+      "cardId": "grand-clos-chatel-play",
+      "findings": [
+        {
+          "field": "Location and contact",
+          "kind": "official",
+          "text": "The regional tourism listing gives the location as the Grand-Clos playground in Châtel-St-Denis and names Les Paccots – La Veveyse Tourisme as the contact. It publishes no opening hours, age range, price or facilities for the playground.",
+          "url": "https://fribourg.ch/fr/les-paccots/activites-en-plein-air/petanque-b/"
+        }
+      ],
+      "remaining": [
+        "What are the opening arrangements of the playground, and is there an age range for it?",
+        "Is there a toilet, parking or a changing table at the playground?",
+        "Is the playground free to use, and may adults stay with their children?"
+      ]
+    }
+  },
+  {
+    "jobId": "2184a736-3e9a-49e9-a5f2-6255051351a1",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "id": "ludo-marly",
+      "name": "Ludothèque Marly",
+      "category": "books",
+      "town": "Marly",
+      "route": "fribourg",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": 99,
+      "age": "From 0 to 99 years, as published for the lending service",
+      "parent": "unknown",
+      "languages": [],
+      "schedule": "Wednesday 13:30–16:00 · Saturday 09:30–12:00",
+      "days": [
+        3,
+        6
+      ],
+      "events": [],
+      "address": "route du Chevalier 8, 1st floor of the former kindergarten building, Marly",
+      "price": "Hire CHF 2–5 per game, or annual subscription from CHF 30 per year; no separate entry fee is stated",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Ludothèque de Marly",
+          "phone": "",
+          "email": "info@ludotheque-marly.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://marly-ludo.ch/contact/",
+          "label": "Address and opening hours"
+        },
+        {
+          "url": "https://marly-ludo.ch/",
+          "label": "Hire and prices"
+        },
+        {
+          "url": "https://marly-ludo.ch/a-propos-de/",
+          "label": "Hire"
+        }
+      ],
+      "notes": [
+        "Closed for three weeks during the summer holidays.",
+        "The rental terms ask borrowers to supervise their children to prevent accidents.",
+        "Games are borrowed for a loan period of four weeks.",
+        "The toy library asks people to phone rather than email, because of email delivery problems."
+      ],
+      "checked": "2026-11-08",
+      "reviewAfter": "2026-10-24",
+      "research": {
+        "date": "2026-11-08",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Hire",
+            "kind": "official",
+            "text": "A game is lent for 4 weeks for CHF 2–5. Annual subscriptions: 1 game CHF 30; 2 games CHF 40; 3 games CHF 45; 4–8 games CHF 50. There are sensorimotor toys, imitation games and construction sets. Registration is done on site.",
+            "url": "https://marly-ludo.ch/a-propos-de/"
+          },
+          {
+            "field": "Contact",
+            "kind": "official",
+            "text": "Because of problems with email delivery, the website asks people to phone. Outside opening hours, you can leave a voice message or send an SMS. The toy library closes for 3 weeks in summer.",
+            "url": "https://marly-ludo.ch/contact/"
+          },
+          {
+            "field": "Address",
+            "kind": "official",
+            "text": "From 4 November 2026 the toy library is at route du Chevalier 8, on the first floor of the former kindergarten building. It is open Wednesdays 13:30–16:00 and Saturdays 09:30–12:00.",
+            "url": "https://marly-ludo.ch/"
+          }
+        ],
+        "remaining": [
+          "It is not confirmed that there is space for extended play with young children. It is primarily a hire service.",
+          "May a parent stay with a child during a visit, and is there space to play on site? Families should ask the toy library.",
+          "Is advance registration needed for a visit? Families should ask the toy library."
+        ]
+      },
+      "region": "sarine",
+      "parentDetails": "Conditions for adult participation not published",
+      "addressPrecision": "exact",
+      "practical": {
+        "costNote": {
+          "value": "Late returns incur reminder fees.",
+          "text": "Late returns incur reminder fees.",
+          "source": "https://marly-ludo.ch/",
+          "checked": "2026-11-08"
+        }
+      },
+      "geo": {
+        "label": "Route du Chevalier 8 1723 Marly",
+        "lat": 46.77534866333008,
+        "lon": 7.15955924987793,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=route+du+Chevalier+8&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-11-08",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Hire",
+          "kind": "official",
+          "text": "A game is lent for 4 weeks for CHF 2–5. Annual subscriptions: 1 game CHF 30; 2 games CHF 40; 3 games CHF 45; 4–8 games CHF 50. There are sensorimotor toys, imitation games and construction sets. Registration is done on site.",
+          "url": "https://marly-ludo.ch/a-propos-de/"
+        },
+        {
+          "field": "Contact",
+          "kind": "official",
+          "text": "Because of problems with email delivery, the website asks people to phone. Outside opening hours, you can leave a voice message or send an SMS. The toy library closes for 3 weeks in summer.",
+          "url": "https://marly-ludo.ch/contact/"
+        },
+        {
+          "field": "Address",
+          "kind": "official",
+          "text": "From 4 November 2026 the toy library is at route du Chevalier 8, on the first floor of the former kindergarten building. It is open Wednesdays 13:30–16:00 and Saturdays 09:30–12:00.",
+          "url": "https://marly-ludo.ch/"
+        },
+        {
+          "field": "Hire terms",
+          "kind": "official",
+          "text": "A game is lent for 4 weeks. Extensions are free and can be made by phone, email or in person before the due date. Late returns incur reminder fees.",
+          "url": "https://marly-ludo.ch/"
+        }
+      ],
+      "remaining": [
+        "It is not confirmed that there is space for extended play with young children. It is primarily a hire service.",
+        "May a parent stay with a child during a visit, and is there space to play on site? Families should ask the toy library.",
+        "Is advance registration needed for a visit? Families should ask the toy library."
+      ]
+    },
+    "draft": {
+      "patch": {
+        "checked": "2026-11-24"
+      },
+      "practicalPatch": {
+        "costNote": {
+          "value": "Extensions are free, by phone, email or in person before the due date; the rental period is four weeks; reminder fees apply to late returns",
+          "text": "Extensions are free, by phone, email or in person before the due date; the rental period is four weeks; reminder fees apply to late returns",
+          "source": "https://marly-ludo.ch/",
+          "checked": "2026-11-24"
+        }
+      },
+      "cardId": "ludo-marly",
+      "findings": [
+        {
+          "field": "Hire terms",
+          "kind": "official",
+          "text": "A game is lent for 4 weeks. Extensions are free and can be made by phone, email or in person before the due date. Late returns incur reminder fees.",
+          "url": "https://marly-ludo.ch/"
+        }
+      ],
+      "remaining": [
+        "May a parent stay with a child during a visit, and is there space to play on site? Families should ask the toy library.",
+        "Is advance registration needed for a visit? Families should ask the toy library.",
+        "It is not confirmed that there is space for extended play with young children. It is primarily a hire service."
+      ]
+    }
+  },
+  {
+    "jobId": "612aeecd-6f26-44ae-b041-89c857a29089",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "check",
+      "min": null,
+      "max": null,
+      "age": "Age not published",
+      "parent": "unknown",
+      "languages": [],
+      "schedule": "Schedule not published",
+      "days": [],
+      "events": [],
+      "address": "Plage de Forel, 1475 Forel",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Administration communale",
+          "phone": "+41 26 664 80 00",
+          "email": "commune@estavayer.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/",
+          "label": "Shore, equipment and access"
+        }
+      ],
+      "notes": [
+        "The mobile toilet is set up in summer only. The beach is about 15 minutes on foot from the Forel FR, village stop.",
+        "The car park is small and free. Personal grills are not allowed; dogs are allowed on a lead."
+      ],
+      "checked": "2026-11-24",
+      "reviewAfter": "2026-10-28",
+      "id": "forel-beach",
+      "region": "broye",
+      "name": "Plage de Forel · shore and picnic",
+      "category": "water",
+      "town": "Forel",
+      "intro": "Natural shore with shade and a picnic area; infrastructure is minimal.",
+      "research": {
+        "date": "2026-11-24",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "Sand, grass, shade and two permanent grills.",
+            "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/"
+          },
+          {
+            "field": "Facilities",
+            "kind": "official",
+            "text": "The official beach page lists two fixed grills, a mobile toilet installed during the summer, and parking near the beach with limited spaces that is free.",
+            "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/"
+          }
+        ],
+        "remaining": [
+          "The entrance fee and whether the shore is suitable for a pushchair are not published.",
+          "Are there opening hours or a season for the beach, and is it confirmed as open now?",
+          "What are the age limits, if any, and may adults stay with children?",
+          "Is there an entry fee, and is the shore suitable for a pushchair?"
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "Sand, grass, shade and two permanent grills.",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "The entrance fee and whether the shore is suitable for a pushchair are not published."
+        ],
+        "parking": {
+          "value": true,
+          "text": "Parking near the beach; spaces are limited and parking is free.",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/",
+          "checked": "2026-11-24"
+        },
+        "toilet": {
+          "value": true,
+          "text": "A mobile toilet is installed during the summer only.",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/",
+          "checked": "2026-11-24"
+        }
+      },
+      "parentDetails": "Conditions for adult participation not published",
+      "addressPrecision": "exact"
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "Sand, grass, shade and two permanent grills.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/"
+        },
+        {
+          "field": "Facilities",
+          "kind": "official",
+          "text": "The official beach page lists two fixed grills, a mobile toilet installed during the summer, and parking near the beach with limited spaces that is free.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/"
+        },
+        {
+          "field": "Access",
+          "kind": "official",
+          "text": "The official page gives access on foot or by bike from the village of Forel, and by car along the lane down to the lake from the village centre. By bus, the stop is Forel FR, village, then about 15 minutes on foot.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/"
+        }
+      ],
+      "remaining": [
+        "The entrance fee and whether the shore is suitable for a pushchair are not published.",
+        "Are there opening hours or a season for the beach, and is it confirmed as open now?",
+        "What are the age limits, if any, and may adults stay with children?",
+        "Is there an entry fee, and is the shore suitable for a pushchair?",
+        "Are there opening hours or a season for the beach, and is it open now?",
+        "What is the exact entrance address of the beach?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "addressPrecision": "area",
+        "address": "Visit address not published",
+        "intro": "Often described as the wildest and most peaceful beach in the Estavayer-le-Lac area, on the lakeshore with sand, lawn and shaded trees, a short walk from the village of Forel.",
+        "notes": [
+          "A mobile toilet is set up in summer only. The nearest bus stop is Forel FR, village, then about 15 minutes on foot.",
+          "Parking near the beach is free but has limited places.",
+          "Two fixed barbecues are provided; personal barbecues are not allowed on the beach and the lawn. Dogs are allowed on a lead.",
+          "No opening hours for the beach are published."
+        ],
+        "checked": "2026-11-24",
+        "reviewAfter": "2027-05-24"
+      },
+      "practicalPatch": {
+        "indoor": {
+          "value": null,
+          "text": "Not published",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/",
+          "checked": "2026-11-24"
+        },
+        "costNote": {
+          "value": "Parking is free but has limited places. No entry price for the beach is published on the page.",
+          "text": "Parking is free but has limited places. No entry price for the beach is published on the page.",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/",
+          "checked": "2026-11-24"
+        }
+      },
+      "cardId": "forel-beach",
+      "findings": [
+        {
+          "field": "Access",
+          "kind": "official",
+          "text": "The official page gives access on foot or by bike from the village of Forel, and by car along the lane down to the lake from the village centre. By bus, the stop is Forel FR, village, then about 15 minutes on foot.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-forel/"
+        }
+      ],
+      "remaining": [
+        "Are there opening hours or a season for the beach, and is it open now?",
+        "What are the age limits, if any, and may adults stay with children?",
+        "Is there an entry fee, and is the shore suitable for a pushchair?",
+        "What is the exact entrance address of the beach?"
+      ]
+    }
+  },
+  {
+    "jobId": "7cf250f6-e02e-4ed4-b592-24a9c7ce5e82",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age not published",
+      "parent": "unknown",
+      "languages": [],
+      "schedule": "Weekly buvette hours from the venue's Öffnungszeiten page: Monday 08.30–15.00; Tuesday and Wednesday closed (Ruhetag); Thursday and Friday 08.30–22.00; Saturday 09.00–22.00; Sunday 09.00–17.00. No playground hours are published.",
+      "days": [
+        1,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Sageboden 60, 1737 Plasselb",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Tennisbuvette Plasselb",
+          "phone": "026 419 28 39",
+          "email": "restaurant@tennisbuvette.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/de/schwarzsee/outdoor-aktivitaeten/tennisclub-plasselb-und-umgebung/",
+          "label": "Tourism: buvette, terrace, playground and days"
+        },
+        {
+          "url": "https://www.tennisbuvette.ch/de/?page_id=23",
+          "label": "Additional check: Opening hours and parking"
+        }
+      ],
+      "notes": [
+        "You can walk along the Ärgera river, but the children's playground at the buvette is not a supervision service.",
+        "Check whether the playground is visible from the terrace and whether the buvette can be visited without club membership."
+      ],
+      "checked": "2026-11-08",
+      "reviewAfter": "2026-10-28",
+      "id": "plasselb-tennisbuvette-play",
+      "region": "sense",
+      "name": "Tennisbuvette Plasselb · terrace and playground",
+      "category": "dining",
+      "town": "Plasselb",
+      "intro": "The tourist office describes a buvette at the tennis club, open from Thursday to Monday, with a terrace and a children's playground.",
+      "research": {
+        "date": "2026-11-08",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "The tourist office describes a buvette at the tennis club, open from Thursday to Monday, with a terrace and a children's playground.",
+            "url": "https://fribourg.ch/de/schwarzsee/outdoor-aktivitaeten/tennisclub-plasselb-und-umgebung/"
+          },
+          {
+            "field": "Opening hours and parking",
+            "kind": "official",
+            "text": "The buvette's own website lists weekly hours (closed Tuesday and Wednesday) and free parking with direct car access. No separate playground hours are published.",
+            "url": "https://www.tennisbuvette.ch/de/?page_id=23"
+          }
+        ],
+        "remaining": [
+          "Is there an admission price or age guideline for the playground, and may adults stay with their children there?"
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "The tourist office describes a buvette at the tennis club, open from Thursday to Monday, with a terrace and a children's playground.",
+          "source": "https://fribourg.ch/de/schwarzsee/outdoor-aktivitaeten/tennisclub-plasselb-und-umgebung/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "Age limits, adult-presence rules and any playground costs are not published; ask the venue."
+        ],
+        "parking": {
+          "value": true,
+          "text": "The venue's website lists direct car access and free parking places.",
+          "source": "https://www.tennisbuvette.ch/de/?page_id=23",
+          "checked": "2026-11-08"
+        },
+        "playArea": {
+          "value": true,
+          "text": "The tourism listing describes a terrace with a children's playground; the venue's website says the playground is right next to the restaurant.",
+          "source": "https://fribourg.ch/de/schwarzsee/outdoor-aktivitaeten/tennisclub-plasselb-und-umgebung/",
+          "checked": "2026-11-08"
+        }
+      },
+      "parentDetails": "Conditions for adult participation not published",
+      "addressPrecision": "exact",
+      "geo": {
+        "label": "Sageboden 60 1737 Plasselb",
+        "lat": 46.72935104370117,
+        "lon": 7.248095989227295,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Sageboden+60+1737+Plasselb&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-11-18",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "The tourist office describes a buvette at the tennis club, open from Thursday to Monday, with a terrace and a children's playground.",
+          "url": "https://fribourg.ch/de/schwarzsee/outdoor-aktivitaeten/tennisclub-plasselb-und-umgebung/"
+        },
+        {
+          "field": "Opening hours and parking",
+          "kind": "official",
+          "text": "The buvette's own website lists weekly hours (closed Tuesday and Wednesday) and free parking with direct car access. No separate playground hours are published.",
+          "url": "https://www.tennisbuvette.ch/de/?page_id=23"
+        },
+        {
+          "field": "Opening hours",
+          "kind": "official",
+          "text": "The buvette's own page lists Thursday as 08.30–18.00 (Friday 08.30–22.00), closed Tuesday and Wednesday; no separate playground hours are published.",
+          "url": "https://www.tennisbuvette.ch/de/?page_id=23"
+        },
+        {
+          "field": "Play area setting",
+          "kind": "official",
+          "text": "The tourism listing mentions a terrace with a children's playground and also an indoor tennis court; it does not say whether the play area is outdoors or indoors.",
+          "url": "https://fribourg.ch/de/schwarzsee/outdoor-aktivitaeten/tennisclub-plasselb-und-umgebung/"
+        }
+      ],
+      "remaining": [
+        "Is there an admission price or age guideline for the playground, and may adults stay with their children there?",
+        "Is the terrace and playground open in winter?",
+        "Is the children's play area outdoors?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "status": "check",
+        "schedule": "Opening hours: Monday 08.30–15.00; Tuesday and Wednesday closed (Ruhetag); Thursday 08.30–18.00; Friday 08.30–22.00; Saturday 09.00–22.00; Sunday 09.00–17.00. No separate playground hours are published.",
+        "notes": [
+          "Restaurant table reservations can be requested by phone or email; email requests should be sent 48 hours in advance.",
+          "The hours are those of the buvette; no separate playground hours are published."
+        ],
+        "checked": "2026-11-24"
+      },
+      "practicalPatch": {
+        "indoor": {
+          "value": null,
+          "text": "Not published",
+          "source": "https://fribourg.ch/de/schwarzsee/outdoor-aktivitaeten/tennisclub-plasselb-und-umgebung/",
+          "checked": "2026-11-24"
+        },
+        "playArea": {
+          "value": true,
+          "text": "The tourism listing describes a terrace with a children's playground.",
+          "source": "https://fribourg.ch/de/schwarzsee/outdoor-aktivitaeten/tennisclub-plasselb-und-umgebung/",
+          "checked": "2026-11-24"
+        }
+      },
+      "cardId": "plasselb-tennisbuvette-play",
+      "findings": [
+        {
+          "field": "Opening hours",
+          "kind": "official",
+          "text": "The buvette's own page lists Thursday as 08.30–18.00 (Friday 08.30–22.00), closed Tuesday and Wednesday; no separate playground hours are published.",
+          "url": "https://www.tennisbuvette.ch/de/?page_id=23"
+        },
+        {
+          "field": "Play area setting",
+          "kind": "official",
+          "text": "The tourism listing mentions a terrace with a children's playground and also an indoor tennis court; it does not say whether the play area is outdoors or indoors.",
+          "url": "https://fribourg.ch/de/schwarzsee/outdoor-aktivitaeten/tennisclub-plasselb-und-umgebung/"
+        }
+      ],
+      "remaining": [
+        "Is the terrace and playground open in winter?",
+        "Is the children's play area outdoors?"
+      ]
+    }
+  },
+  {
+    "jobId": "ba2d05a4-417b-41b3-bca9-12df77c22adc",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age limits are not published",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Public shore; services are seasonal",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "La Pointe, 1638 Morlon",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "La Gruyère Tourisme",
+          "phone": "026 919 85 00",
+          "email": "info@la-gruyere.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/",
+          "label": "Public beach, shade and buvette"
+        }
+      ],
+      "notes": [
+        "A playground for young children is not mentioned; the buvette and the volleyball court are nearby, not necessarily on the beach.",
+        "The buvette's opening hours and conditions do not necessarily apply to the shore."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "morlon-beach",
+      "region": "gruyere",
+      "name": "La Pointe à Morlon · beach",
+      "category": "water",
+      "town": "Morlon",
+      "intro": "Public beach with a refreshment kiosk (buvette), a beach volleyball court nearby, and shaded spots.",
+      "research": {
+        "date": "2026-11-08",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "Public beach with shaded areas and a buvette nearby.",
+            "url": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/"
+          },
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "The official regional listing describes a public beach with a buvette, a beach volleyball court nearby and shaded spots. It publishes no opening hours, prices, age limits or visitor address.",
+            "url": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/"
+          }
+        ],
+        "remaining": [
+          "Facilities, water depth and buvette opening hours are not published.",
+          "What are the opening hours and the season of the beach and the buvette?",
+          "Is there a visitor address, parking and a toilet at the beach?",
+          "Is access free, and are there charges for parking or equipment rental?"
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "Public beach with shaded areas and a buvette nearby.",
+          "source": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "Facilities, water depth and buvette opening hours are not published."
+        ]
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "Public beach with shaded areas and a buvette nearby.",
+          "url": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/"
+        },
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "The official regional listing describes a public beach with a buvette, a beach volleyball court nearby and shaded spots. It publishes no opening hours, prices, age limits or visitor address.",
+          "url": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/"
+        },
+        {
+          "field": "Contacts and published information",
+          "kind": "official",
+          "text": "The official regional listing names La Gruyère Tourisme as the contact and describes a public beach with a nearby buvette, a nearby beach volleyball court and shaded spots. It publishes no beach address, opening hours, age range, price, adult-presence rules or indoor/outdoor statement.",
+          "url": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/"
+        }
+      ],
+      "remaining": [
+        "Facilities, water depth and buvette opening hours are not published.",
+        "What are the opening hours and the season of the beach and the buvette?",
+        "Is there a visitor address, parking and a toilet at the beach?",
+        "Is access free, and are there charges for parking or equipment rental?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "checked": "2026-11-24",
+        "age": "Age not published",
+        "parent": "unknown",
+        "parentDetails": "Conditions for adult participation not published",
+        "schedule": "Schedule not published",
+        "days": [],
+        "address": "Visit address not published",
+        "addressPrecision": "area",
+        "contacts": [
+          {
+            "name": "La Gruyère Tourisme",
+            "phone": "+41 (0)26 919 85 00",
+            "email": "info@la-gruyere.ch"
+          }
+        ]
+      },
+      "practicalPatch": {
+        "indoor": {
+          "value": null,
+          "text": "Not published",
+          "source": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/",
+          "checked": "2026-11-24"
+        }
+      },
+      "cardId": "morlon-beach",
+      "findings": [
+        {
+          "field": "Contacts and published information",
+          "kind": "official",
+          "text": "The official regional listing names La Gruyère Tourisme as the contact and describes a public beach with a nearby buvette, a nearby beach volleyball court and shaded spots. It publishes no beach address, opening hours, age range, price, adult-presence rules or indoor/outdoor statement.",
+          "url": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/"
+        }
+      ],
+      "remaining": []
+    }
+  },
+  {
+    "jobId": "69106639-0afb-4037-92b3-03cdf0a55ebe",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "check",
+      "min": null,
+      "max": null,
+      "age": "Age not published",
+      "parent": "unknown",
+      "languages": [],
+      "schedule": "Opening hours: Monday 08.30–15.00; Tuesday and Wednesday closed (Ruhetag); Thursday 08.30–18.00; Friday 08.30–22.00; Saturday 09.00–22.00; Sunday 09.00–17.00. No separate playground hours are published.",
+      "days": [
+        1,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Sageboden 60, 1737 Plasselb",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Tennisbuvette Plasselb",
+          "phone": "026 419 28 39",
+          "email": "restaurant@tennisbuvette.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/de/schwarzsee/outdoor-aktivitaeten/tennisclub-plasselb-und-umgebung/",
+          "label": "Tourism: buvette, terrace, playground and days"
+        },
+        {
+          "url": "https://www.tennisbuvette.ch/de/?page_id=23",
+          "label": "Additional check: Opening hours and parking"
+        }
+      ],
+      "notes": [
+        "Restaurant table reservations can be requested by phone or email; email requests should be sent 48 hours in advance.",
+        "The hours are those of the buvette; no separate playground hours are published."
+      ],
+      "checked": "2026-11-24",
+      "reviewAfter": "2026-10-28",
+      "id": "plasselb-tennisbuvette-play",
+      "region": "sense",
+      "name": "Tennisbuvette Plasselb · terrace and playground",
+      "category": "dining",
+      "town": "Plasselb",
+      "intro": "The tourist office describes a buvette at the tennis club, open from Thursday to Monday, with a terrace and a children's playground.",
+      "research": {
+        "date": "2026-11-24",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "The tourist office describes a buvette at the tennis club, open from Thursday to Monday, with a terrace and a children's playground.",
+            "url": "https://fribourg.ch/de/schwarzsee/outdoor-aktivitaeten/tennisclub-plasselb-und-umgebung/"
+          },
+          {
+            "field": "Opening hours and parking",
+            "kind": "official",
+            "text": "The buvette's own website lists weekly hours (closed Tuesday and Wednesday) and free parking with direct car access. No separate playground hours are published.",
+            "url": "https://www.tennisbuvette.ch/de/?page_id=23"
+          },
+          {
+            "field": "Opening hours",
+            "kind": "official",
+            "text": "The buvette's own page lists Thursday as 08.30–18.00 (Friday 08.30–22.00), closed Tuesday and Wednesday; no separate playground hours are published.",
+            "url": "https://www.tennisbuvette.ch/de/?page_id=23"
+          },
+          {
+            "field": "Play area setting",
+            "kind": "official",
+            "text": "The tourism listing mentions a terrace with a children's playground and also an indoor tennis court; it does not say whether the play area is outdoors or indoors.",
+            "url": "https://fribourg.ch/de/schwarzsee/outdoor-aktivitaeten/tennisclub-plasselb-und-umgebung/"
+          }
+        ],
+        "remaining": [
+          "Is there an admission price or age guideline for the playground, and may adults stay with their children there?",
+          "Is the terrace and playground open in winter?",
+          "Is the children's play area outdoors?"
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": null,
+          "text": "Not published",
+          "source": "https://fribourg.ch/de/schwarzsee/outdoor-aktivitaeten/tennisclub-plasselb-und-umgebung/",
+          "checked": "2026-11-24"
+        },
+        "warnings": [
+          "Age limits, adult-presence rules and any playground costs are not published; ask the venue."
+        ],
+        "parking": {
+          "value": true,
+          "text": "The venue's website lists direct car access and free parking places.",
+          "source": "https://www.tennisbuvette.ch/de/?page_id=23",
+          "checked": "2026-11-08"
+        },
+        "playArea": {
+          "value": true,
+          "text": "The tourism listing describes a terrace with a children's playground.",
+          "source": "https://fribourg.ch/de/schwarzsee/outdoor-aktivitaeten/tennisclub-plasselb-und-umgebung/",
+          "checked": "2026-11-24"
+        }
+      },
+      "parentDetails": "Conditions for adult participation not published",
+      "addressPrecision": "exact",
+      "geo": {
+        "label": "Sageboden 60 1737 Plasselb",
+        "lat": 46.72935104370117,
+        "lon": 7.248095989227295,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Sageboden+60+1737+Plasselb&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-11-18",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "The tourist office describes a buvette at the tennis club, open from Thursday to Monday, with a terrace and a children's playground.",
+          "url": "https://fribourg.ch/de/schwarzsee/outdoor-aktivitaeten/tennisclub-plasselb-und-umgebung/"
+        },
+        {
+          "field": "Opening hours and parking",
+          "kind": "official",
+          "text": "The buvette's own website lists weekly hours (closed Tuesday and Wednesday) and free parking with direct car access. No separate playground hours are published.",
+          "url": "https://www.tennisbuvette.ch/de/?page_id=23"
+        },
+        {
+          "field": "Opening hours",
+          "kind": "official",
+          "text": "The buvette's own page lists Thursday as 08.30–18.00 (Friday 08.30–22.00), closed Tuesday and Wednesday; no separate playground hours are published.",
+          "url": "https://www.tennisbuvette.ch/de/?page_id=23"
+        },
+        {
+          "field": "Play area setting",
+          "kind": "official",
+          "text": "The tourism listing mentions a terrace with a children's playground and also an indoor tennis court; it does not say whether the play area is outdoors or indoors.",
+          "url": "https://fribourg.ch/de/schwarzsee/outdoor-aktivitaeten/tennisclub-plasselb-und-umgebung/"
+        },
+        {
+          "field": "Opening hours",
+          "kind": "official",
+          "text": "The venue's own page publishes weekly opening hours: Monday 08.30–15.00, closed Tuesday and Wednesday, Thursday 08.30–18.00, Friday 08.30–22.00, Saturday 09.00–22.00, Sunday 09.00–17.00. No separate play-area hours are published.",
+          "url": "https://www.tennisbuvette.ch/de/?page_id=23"
+        }
+      ],
+      "remaining": [
+        "Is there an admission price or age guideline for the playground, and may adults stay with their children there?",
+        "Is the terrace and playground open in winter?",
+        "Is the children's play area outdoors?",
+        "Does the venue's own page confirm the children's play area? Only the regional tourism listing mentions it."
+      ]
+    },
+    "draft": {
+      "patch": {
+        "status": "active",
+        "intro": "Buvette terrace with a children's play area at the Tennisclub Plasselb in Plasselb.",
+        "notes": [
+          "Table reservations for the restaurant can be requested by email 48 hours in advance. This is for the restaurant, not a booking requirement for the play area.",
+          "The restaurant and terrace are stated to be accessible for guests with reduced mobility. This is not a stroller-route assessment for the play area."
+        ]
+      },
+      "practicalPatch": {},
+      "cardId": "plasselb-tennisbuvette-play",
+      "findings": [
+        {
+          "field": "Opening hours",
+          "kind": "official",
+          "text": "The venue's own page publishes weekly opening hours: Monday 08.30–15.00, closed Tuesday and Wednesday, Thursday 08.30–18.00, Friday 08.30–22.00, Saturday 09.00–22.00, Sunday 09.00–17.00. No separate play-area hours are published.",
+          "url": "https://www.tennisbuvette.ch/de/?page_id=23"
+        }
+      ],
+      "remaining": [
+        "Is there an admission price or age guideline for the playground, and may adults stay with their children there?",
+        "Is the terrace and playground open in winter?",
+        "Is the children's play area outdoors?",
+        "Does the venue's own page confirm the children's play area? Only the regional tourism listing mentions it."
+      ]
+    }
+  },
+  {
+    "jobId": "4f0f790e-15a9-4bdb-afe2-f86884de41a8",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age not published",
+      "parent": "unknown",
+      "languages": [],
+      "schedule": "Schedule not published",
+      "days": [],
+      "events": [],
+      "address": "Visit address not published",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "La Gruyère Tourisme",
+          "phone": "+41 (0)26 919 85 00",
+          "email": "info@la-gruyere.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/",
+          "label": "Public beach, shade and buvette"
+        }
+      ],
+      "notes": [
+        "A playground for young children is not mentioned; the buvette and the volleyball court are nearby, not necessarily on the beach.",
+        "The buvette's opening hours and conditions do not necessarily apply to the shore."
+      ],
+      "checked": "2026-11-24",
+      "reviewAfter": "2026-10-28",
+      "id": "morlon-beach",
+      "region": "gruyere",
+      "name": "La Pointe à Morlon · beach",
+      "category": "water",
+      "town": "Morlon",
+      "intro": "Public beach with a refreshment kiosk (buvette), a beach volleyball court nearby, and shaded spots.",
+      "research": {
+        "date": "2026-11-24",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "Public beach with shaded areas and a buvette nearby.",
+            "url": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/"
+          },
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "The official regional listing describes a public beach with a buvette, a beach volleyball court nearby and shaded spots. It publishes no opening hours, prices, age limits or visitor address.",
+            "url": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/"
+          },
+          {
+            "field": "Contacts and published information",
+            "kind": "official",
+            "text": "The official regional listing names La Gruyère Tourisme as the contact and describes a public beach with a nearby buvette, a nearby beach volleyball court and shaded spots. It publishes no beach address, opening hours, age range, price, adult-presence rules or indoor/outdoor statement.",
+            "url": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/"
+          }
+        ],
+        "remaining": [
+          "Facilities, water depth and buvette opening hours are not published.",
+          "What are the opening hours and the season of the beach and the buvette?",
+          "Is there a visitor address, parking and a toilet at the beach?",
+          "Is access free, and are there charges for parking or equipment rental?"
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": null,
+          "text": "Not published",
+          "source": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/",
+          "checked": "2026-11-24"
+        },
+        "warnings": [
+          "Facilities, water depth and buvette opening hours are not published."
+        ]
+      },
+      "parentDetails": "Conditions for adult participation not published",
+      "addressPrecision": "area"
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "Public beach with shaded areas and a buvette nearby.",
+          "url": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/"
+        },
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "The official regional listing describes a public beach with a buvette, a beach volleyball court nearby and shaded spots. It publishes no opening hours, prices, age limits or visitor address.",
+          "url": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/"
+        },
+        {
+          "field": "Contacts and published information",
+          "kind": "official",
+          "text": "The official regional listing names La Gruyère Tourisme as the contact and describes a public beach with a nearby buvette, a nearby beach volleyball court and shaded spots. It publishes no beach address, opening hours, age range, price, adult-presence rules or indoor/outdoor statement.",
+          "url": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/"
+        },
+        {
+          "field": "Address",
+          "kind": "official",
+          "text": "The official listing gives only the La Gruyère Tourisme office address in Bulle (Place de la Gare 3) as the contact for the beach. It does not publish a visitor address for the beach itself.",
+          "url": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/"
+        }
+      ],
+      "remaining": [
+        "Facilities, water depth and buvette opening hours are not published.",
+        "What are the opening hours and the season of the beach and the buvette?",
+        "Is there a visitor address, parking and a toilet at the beach?",
+        "Is access free, and are there charges for parking or equipment rental?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "status": "check",
+        "checked": "2026-11-24"
+      },
+      "practicalPatch": {},
+      "cardId": "morlon-beach",
+      "findings": [
+        {
+          "field": "Address",
+          "kind": "official",
+          "text": "The official listing gives only the La Gruyère Tourisme office address in Bulle (Place de la Gare 3) as the contact for the beach. It does not publish a visitor address for the beach itself.",
+          "url": "https://fribourg.ch/fr/la-gruyere/plages/la-pointe-a-morlon-plage-publique/"
+        }
+      ],
+      "remaining": [
+        "Facilities, water depth and buvette opening hours are not published.",
+        "What are the opening hours and the season of the beach and the buvette?",
+        "Is there a visitor address, parking and a toilet at the beach?",
+        "Is access free, and are there charges for parking or equipment rental?"
+      ]
+    }
+  },
+  {
+    "jobId": "a5d8941d-c55c-4350-965c-2e5a85fb6ad7",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "check",
+      "min": null,
+      "max": null,
+      "age": "Age not published",
+      "parent": "unknown",
+      "languages": [],
+      "schedule": "Schedule not published",
+      "days": [],
+      "events": [],
+      "address": "Place de jeu du Grand-Clos, 1618 Châtel-St-Denis",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Les Paccots – La Veveyse Tourisme",
+          "phone": "",
+          "email": "info@les-paccots.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/communication/actualites-communales/la-boite-sympa-quitte-la-place-de-jeux-du-grand-clos",
+          "label": "Municipality: playground and closure of the Boîte Sympa"
+        },
+        {
+          "url": "https://fribourg.ch/fr/les-paccots/activites-en-plein-air/petanque-b/",
+          "label": "Tourism: playground and pétanque"
+        }
+      ],
+      "notes": [
+        "The Boîte Sympa box of shared toys is being removed: do not count on it being available.",
+        "The tourism listing mentions a free-access pétanque lane at the Grand-Clos playground and a second one at the Fruence square."
+      ],
+      "checked": "2026-11-24",
+      "reviewAfter": "2026-10-28",
+      "id": "grand-clos-chatel-play",
+      "region": "veveyse",
+      "name": "Grand-Clos · playground in the centre",
+      "category": "play",
+      "town": "Châtel-St-Denis",
+      "intro": "The Grand-Clos town playground, without the former box of shared toys.",
+      "research": {
+        "date": "2026-11-24",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "The municipality confirms that the Grand-Clos playground exists; the separate box of shared toys was discontinued in June 2026.",
+            "url": "https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/communication/actualites-communales/la-boite-sympa-quitte-la-place-de-jeux-du-grand-clos"
+          },
+          {
+            "field": "Location and contact",
+            "kind": "official",
+            "text": "The regional tourism listing gives the location as the Grand-Clos playground in Châtel-St-Denis and names Les Paccots – La Veveyse Tourisme as the contact. It publishes no opening hours, age range, price or facilities for the playground.",
+            "url": "https://fribourg.ch/fr/les-paccots/activites-en-plein-air/petanque-b/"
+          }
+        ],
+        "remaining": [
+          "Equipment, toilet and exact opening arrangements of the playground are not published.",
+          "What are the opening arrangements of the playground, and is there an age range for it?",
+          "Is there a toilet, parking or a changing table at the playground?",
+          "Is the playground free to use, and may adults stay with their children?"
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": null,
+          "text": "Not published",
+          "source": "https://fribourg.ch/fr/les-paccots/activites-en-plein-air/petanque-b/",
+          "checked": "2026-11-24"
+        },
+        "warnings": [
+          "Equipment, toilet and exact opening arrangements of the playground are not published."
+        ],
+        "playArea": {
+          "value": true,
+          "text": "The tourism listing names the Grand-Clos playground (place de jeu) at this location.",
+          "source": "https://fribourg.ch/fr/les-paccots/activites-en-plein-air/petanque-b/",
+          "checked": "2026-11-24"
+        }
+      },
+      "parentDetails": "Conditions for adult participation not published",
+      "addressPrecision": "exact"
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "The municipality confirms that the Grand-Clos playground exists; the separate box of shared toys was discontinued in June 2026.",
+          "url": "https://www.chatel-st-denis.ch/fr/vivre-a-chatel-st-denis/communication/actualites-communales/la-boite-sympa-quitte-la-place-de-jeux-du-grand-clos"
+        },
+        {
+          "field": "Location and contact",
+          "kind": "official",
+          "text": "The regional tourism listing gives the location as the Grand-Clos playground in Châtel-St-Denis and names Les Paccots – La Veveyse Tourisme as the contact. It publishes no opening hours, age range, price or facilities for the playground.",
+          "url": "https://fribourg.ch/fr/les-paccots/activites-en-plein-air/petanque-b/"
+        },
+        {
+          "field": "Address",
+          "kind": "official",
+          "text": "The regional tourism listing gives the location only as the Grand-Clos playground with the postcode 1618 Châtel-St-Denis. No street number or entrance point is published, so families should treat the location as an area.",
+          "url": "https://fribourg.ch/fr/les-paccots/activites-en-plein-air/petanque-b/"
+        }
+      ],
+      "remaining": [
+        "Equipment, toilet and exact opening arrangements of the playground are not published.",
+        "What are the opening arrangements of the playground, and is there an age range for it?",
+        "Is there a toilet, parking or a changing table at the playground?",
+        "Is the playground free to use, and may adults stay with their children?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "addressPrecision": "area",
+        "contacts": [],
+        "checked": "2026-11-24"
+      },
+      "practicalPatch": {},
+      "cardId": "grand-clos-chatel-play",
+      "findings": [
+        {
+          "field": "Address",
+          "kind": "official",
+          "text": "The regional tourism listing gives the location only as the Grand-Clos playground with the postcode 1618 Châtel-St-Denis. No street number or entrance point is published, so families should treat the location as an area.",
+          "url": "https://fribourg.ch/fr/les-paccots/activites-en-plein-air/petanque-b/"
+        }
+      ],
+      "remaining": [
+        "Equipment, toilet and exact opening arrangements of the playground are not published.",
+        "What are the opening arrangements of the playground, and is there an age range for it?",
+        "Is there a toilet, parking or a changing table at the playground?",
+        "Is the playground free to use, and may adults stay with their children?"
+      ]
+    }
+  },
+  {
+    "jobId": "3cd6ebfc-866e-42c9-85d4-86f47e2b5725",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "id": "leset-villars",
+      "name": "Le Set · restaurant and playground by the terrace",
+      "category": "dining",
+      "town": "Villars-sur-Glâne",
+      "route": "detour",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Playground for young children; confirm the exact age",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Mon 09:00–22:00; Tue–Thu 09:00–23:30; Fri–Sat 09:00–00:00; Sun closed",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "events": [],
+      "address": "Avenue Jean-Paul II 11, 1752 Villars-sur-Glâne",
+      "price": "Children's dishes CHF 10–14 on the spring 2026 menu; confirm current prices",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Restaurant Le Set",
+          "phone": "026 422 11 44",
+          "email": "info@leset.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.leset.ch/",
+          "label": "Restaurant: terrace, children's play and contacts"
+        },
+        {
+          "url": "https://www.leset.ch/menu/",
+          "label": "Menu page"
+        },
+        {
+          "url": "https://www.leset.ch/wp-content/uploads/2026/02/carte-printemps-2026.pdf",
+          "label": "Spring 2026 menu: a guide, not a confirmed autumn tariff"
+        }
+      ],
+      "notes": [
+        "The operator confirms an outdoor playground for the youngest children by the shaded two-level terrace. There are also table tennis and pétanque; an indoor play room is not stated.",
+        "Guests are explicitly welcome on the terrace for just a drink, without a full lunch. The restaurant has free parking; access by bus no. 6 is stated.",
+        "Kitchen: Mon 11:30–14:00 and 18:00–21:30; Tue–Thu 11:30–14:00 and 18:00–22:00; Fri–Sat 11:30–14:30 and 18:00–22:00. Closed on Sunday.",
+        "The current menu page refers to the spring 2026 menu: children's pasta CHF 10; nuggets or roast beef with a side CHF 14. The validity of these prices for autumn is not confirmed.",
+        "The operator describes the playground as protected, but the design of the fencing and age limits are not published. For young children, ask about the specific equipment, seasonal access and a possible separate charge. Children stay with their own adult."
+      ],
+      "checked": "2026-09-27",
+      "reviewAfter": "2026-10-27",
+      "research": {
+        "date": "2026-11-08",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "practical.playArea",
+            "kind": "official",
+            "text": "The restaurant's homepage describes a secured play area set up for the youngest children. No age range, adult-accompaniment rule or play-area price is published there.",
+            "url": "https://www.leset.ch/"
+          }
+        ],
+        "remaining": [
+          "Fencing and specific equipment.",
+          "What exact age is the play area meant for?",
+          "Must an adult stay with the child at the play area?",
+          "Is there a separate charge for the play area?",
+          "Are the children's dish prices still current? The spring 2026 menu could not be checked."
+        ]
+      },
+      "region": "sarine",
+      "intro": "Restaurant with a large shaded terrace and a play area.",
+      "practical": {
+        "playArea": {
+          "value": true,
+          "text": "A secured play area has been set up for the youngest children.",
+          "source": "https://www.leset.ch/",
+          "checked": "2026-11-08"
+        },
+        "parking": {
+          "value": true,
+          "text": "A large free car park is available.",
+          "source": "https://www.leset.ch/",
+          "checked": "2026-11-08"
+        }
+      },
+      "geo": {
+        "label": "Avenue Jean-Paul II 11 1752 Villars-sur-Glâne",
+        "lat": 46.805931091308594,
+        "lon": 7.138740062713623,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Avenue+Jean-Paul+II+11+1752+Villars-sur-Gl%C3%A2ne&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "practical.playArea",
+          "kind": "official",
+          "text": "The restaurant's homepage describes a secured play area set up for the youngest children. No age range, adult-accompaniment rule or play-area price is published there.",
+          "url": "https://www.leset.ch/"
+        },
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The restaurant's homepage lists opening hours of Monday 9:00–22:00, Tuesday to Thursday 9:00–23:30 and Friday and Saturday 9:00–00:00, with Sunday closed. No separate hours for the play area are published.",
+          "url": "https://www.leset.ch/"
+        }
+      ],
+      "remaining": [
+        "Fencing and specific equipment.",
+        "What exact age is the play area meant for?",
+        "Must an adult stay with the child at the play area?",
+        "Is there a separate charge for the play area?",
+        "Are the children's dish prices still current? The spring 2026 menu could not be checked."
+      ]
+    },
+    "draft": {
+      "patch": {
+        "intro": "Restaurant with a large shaded terrace, a play area for the youngest children and a free car park."
+      },
+      "practicalPatch": {},
+      "cardId": "leset-villars",
+      "findings": [
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The restaurant's homepage lists opening hours of Monday 9:00–22:00, Tuesday to Thursday 9:00–23:30 and Friday and Saturday 9:00–00:00, with Sunday closed. No separate hours for the play area are published.",
+          "url": "https://www.leset.ch/"
+        }
+      ],
+      "remaining": [
+        "Fencing and specific equipment.",
+        "What exact age is the play area meant for?",
+        "Must an adult stay with the child at the play area?",
+        "Is there a separate charge for the play area?",
+        "Are the children's dish prices still current? The spring 2026 menu could not be checked."
+      ]
+    }
+  },
+  {
+    "jobId": "189adb1b-308e-4f19-99a1-97c339dae87d",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age limits are not published",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Mon 15:00–18:00; closed during school holidays",
+      "days": [
+        1
+      ],
+      "events": [],
+      "address": "Ecole primaire Le Petit Prince, Bâtiment Les Blés, 1616 Attalens",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Ludothèque Papayou",
+          "phone": "021 947 51 03",
+          "email": "ludopapayou@gmail.com"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/les-paccots/patrimoine-et-terroir/ludotheque-papayou/",
+          "label": "Format, hours and address"
+        }
+      ],
+      "notes": [
+        "Free play on site is not confirmed; the main services described are an introduction to the games and a loan service.",
+        "Closed during school holidays; before the first visit, check access to the school building."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "papayou-attalens",
+      "region": "veveyse",
+      "name": "Ludothèque Papayou · games and toys",
+      "category": "books",
+      "town": "Attalens",
+      "intro": "A games library in Attalens for choosing and borrowing games; the rules for playing on site are to be confirmed.",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "The games library at the Le Petit Prince school lends games and toys on Mondays.",
+            "url": "https://fribourg.ch/fr/les-paccots/patrimoine-et-terroir/ludotheque-papayou/"
+          }
+        ],
+        "remaining": [
+          "The membership price, the age range of the games and whether playing on site is possible are not stated."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "The games library at the Le Petit Prince school lends games and toys on Mondays.",
+          "source": "https://fribourg.ch/fr/les-paccots/patrimoine-et-terroir/ludotheque-papayou/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "The membership price, the age range of the games and whether playing on site is possible are not stated."
+        ]
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "The games library at the Le Petit Prince school lends games and toys on Mondays.",
+          "url": "https://fribourg.ch/fr/les-paccots/patrimoine-et-terroir/ludotheque-papayou/"
+        },
+        {
+          "field": "Price",
+          "kind": "official",
+          "text": "A subscription costs CHF 40 per family for one year or CHF 25 for 6 months; payment is by cash only.",
+          "url": "https://ludopapayou.wordpress.com/faq/"
+        },
+        {
+          "field": "On-site visit",
+          "kind": "official",
+          "text": "Families can try the games on site, play with their children and borrow 2 games per child for 2 weeks. The library is open every Monday from 15:00 to 18:00, except school holidays.",
+          "url": "https://ludopapayou.wordpress.com/"
+        },
+        {
+          "field": "Location",
+          "kind": "official",
+          "text": "The games library is in the basement of the yellow Les Blés building of the primary school in Attalens; visitors arrive from below and the entrance is on the left.",
+          "url": "https://ludopapayou.wordpress.com/adresse/"
+        }
+      ],
+      "remaining": [
+        "Is a subscription required to borrow games?",
+        "Do families need to register in advance?",
+        "Is the entrance accessible with a stroller, and are parking, a toilet or a changing table available?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "checked": "2026-11-24",
+        "age": "Games suited to all ages (organiser homepage); no visitor age range published",
+        "parentDetails": "Parents may come to try the games on site and play with their children; no requirement for the adult to attend is published.",
+        "address": "Les Blés yellow building of the Ecole primaire in Attalens, basement (abri PC)",
+        "addressPrecision": "exact",
+        "price": "CHF 40 per family for one year, or CHF 25 for 6 months (subscription).",
+        "priceKind": "year",
+        "amount": 40,
+        "contacts": [
+          {
+            "name": "Ludothèque Papayou",
+            "phone": "+41 (0)21 947 51 03",
+            "email": "ludopapayou@gmail.com"
+          }
+        ],
+        "intro": "A place to discover and borrow games and toys, in the basement of the Les Blés school building in Attalens.",
+        "notes": [
+          "Games can be borrowed: 2 games for 2 weeks.",
+          "Closed during Fribourg canton school holidays.",
+          "A CHF 5 charge may apply for a lost game piece."
+        ]
+      },
+      "practicalPatch": {
+        "indoor": {
+          "value": true,
+          "text": "The lending library is in a basement room of the school building (abri PC).",
+          "source": "https://ludopapayou.wordpress.com/faq/",
+          "checked": "2026-11-24"
+        },
+        "costNote": {
+          "value": "Payment is by cash only; card and payment-slip payments are not accepted.",
+          "text": "Payment is by cash only; card and payment-slip payments are not accepted.",
+          "source": "https://ludopapayou.wordpress.com/faq/",
+          "checked": "2026-11-24"
+        }
+      },
+      "warnings": [
+        "Payment is by cash only; cards and payment slips are not accepted."
+      ],
+      "cardId": "papayou-attalens",
+      "findings": [
+        {
+          "field": "Price",
+          "kind": "official",
+          "text": "A subscription costs CHF 40 per family for one year or CHF 25 for 6 months; payment is by cash only.",
+          "url": "https://ludopapayou.wordpress.com/faq/"
+        },
+        {
+          "field": "On-site visit",
+          "kind": "official",
+          "text": "Families can try the games on site, play with their children and borrow 2 games per child for 2 weeks. The library is open every Monday from 15:00 to 18:00, except school holidays.",
+          "url": "https://ludopapayou.wordpress.com/"
+        },
+        {
+          "field": "Location",
+          "kind": "official",
+          "text": "The games library is in the basement of the yellow Les Blés building of the primary school in Attalens; visitors arrive from below and the entrance is on the left.",
+          "url": "https://ludopapayou.wordpress.com/adresse/"
+        }
+      ],
+      "remaining": [
+        "Is a subscription required to borrow games?",
+        "Do families need to register in advance?",
+        "Is the entrance accessible with a stroller, and are parking, a toilet or a changing table available?"
+      ]
+    }
+  },
+  {
+    "jobId": "cbc5df78-46f5-44fc-a8ff-70187d493d5b",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Board games for ages 3 to 99 are published for the collection; individual games state their own ages (from 3, 4, 8 or 14), and toys for children are included.",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Wed and Fri 16:00–18:00; Sat 09:00–11:00; school holidays separately",
+      "days": [
+        3,
+        5,
+        6
+      ],
+      "events": [],
+      "address": "Route d'Arruffens 17, 1680 Romont",
+      "price": "Subscriptions for private members (4-week loan), Glâne / outside Glâne: Duo CHF 30 / CHF 40 (2 games + 2 bonus); Trio CHF 40 / CHF 50 (3 games + 3 bonus); Quatro CHF 50 / CHF 60 (4 games + 4 bonus); Multo CHF 60 / CHF 70 (10 games). Class and association subscriptions and an occasional loan without subscription are priced separately on the page.",
+      "priceKind": "year",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Ludothèque de la Glâne",
+          "phone": "026 652 48 90",
+          "email": "info@ludo-glane.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://ludotheque-glane.ch/fr/infos-pratiques",
+          "label": "Current hours, prices, address and directions"
+        },
+        {
+          "url": "https://ludotheque-glane.ch/fr/",
+          "label": "Game catalogue and format"
+        }
+      ],
+      "notes": [
+        "The library and the ludothèque are on the same campus and have different opening hours and prices.",
+        "The venue is usually closed during school holidays; in summer the timetable is limited. Check the current hours on the website before travelling.",
+        "Bicubic car park; a few minutes' walk from the Arruffens stop. Cash or Twint, no card."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "ludo-glane-romont",
+      "region": "glane",
+      "name": "Ludothèque de la Glâne · game rental",
+      "category": "books",
+      "town": "Romont",
+      "parentDetails": "Independent family visit; the child stays under the adult's supervision.",
+      "research": {
+        "date": "2026-11-08",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Visit and rental",
+            "kind": "official",
+            "text": "Current hours: Wednesday and Friday 16:00–18:00, Saturday 09:00–11:00; the subscription depends on residence in Glâne.",
+            "url": "https://ludotheque-glane.ch/fr/infos-pratiques"
+          },
+          {
+            "field": "price",
+            "kind": "official",
+            "text": "Besides the 4-week subscriptions, an occasional loan without subscription is offered: a rental is paid for each game according to its value, at most CHF 30 for 10 games over 4 weeks.",
+            "url": "https://ludotheque-glane.ch/fr/infos-pratiques"
+          },
+          {
+            "field": "practical.costNote",
+            "kind": "official",
+            "text": "Payment at the ludothèque is possible in cash or by Twint; cards are not accepted.",
+            "url": "https://ludotheque-glane.ch/fr/infos-pratiques"
+          }
+        ],
+        "remaining": [
+          "Confirm whether extended play on site without renting is allowed, and the holiday timetable.",
+          "Is the Bicubic car park free, and can children play on site without borrowing a game?",
+          "What are the holiday closure dates and the reduced summer hours?",
+          "Can children play on site without borrowing a game, and is an adult required to stay with the child?",
+          "What are the holiday closure dates and the reduced summer hours? The closure calendar and the borrowing rules page were not inspected.",
+          "Is the Bicubic car park free?"
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": true,
+          "text": "Indoor ludothèque",
+          "source": "https://ludotheque-glane.ch/fr/infos-pratiques",
+          "checked": "2026-09-28"
+        },
+        "booking": {
+          "value": null,
+          "text": "Conditions for playing on site without renting to be confirmed",
+          "source": "https://ludotheque-glane.ch/fr/infos-pratiques",
+          "checked": "2026-09-28"
+        },
+        "parking": {
+          "value": true,
+          "text": "Bicubic car park and a walk through the campus",
+          "source": "https://ludotheque-glane.ch/fr/infos-pratiques",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "Usually closed during school holidays; check the current hours before travelling"
+        ],
+        "gallery": "https://ludotheque-glane.ch/fr/infos-pratiques",
+        "commitment": {
+          "value": false,
+          "text": "A subscription is optional: an occasional loan without subscription is offered.",
+          "source": "https://ludotheque-glane.ch/fr/infos-pratiques",
+          "checked": "2026-10-31"
+        },
+        "costNote": {
+          "value": "Occasional loan without subscription: a rental fee per game based on its value, at most CHF 30 for 10 games over 4 weeks. Payment is in cash or by Twint only, not by card.",
+          "text": "Occasional loan without subscription: a rental fee per game based on its value, at most CHF 30 for 10 games over 4 weeks. Payment is in cash or by Twint only, not by card.",
+          "source": "https://ludotheque-glane.ch/fr/infos-pratiques",
+          "checked": "2026-11-08"
+        }
+      },
+      "intro": "Game and toy rental on the Romont campus."
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Visit and rental",
+          "kind": "official",
+          "text": "Current hours: Wednesday and Friday 16:00–18:00, Saturday 09:00–11:00; the subscription depends on residence in Glâne.",
+          "url": "https://ludotheque-glane.ch/fr/infos-pratiques"
+        },
+        {
+          "field": "price",
+          "kind": "official",
+          "text": "Besides the 4-week subscriptions, an occasional loan without subscription is offered: a rental is paid for each game according to its value, at most CHF 30 for 10 games over 4 weeks.",
+          "url": "https://ludotheque-glane.ch/fr/infos-pratiques"
+        },
+        {
+          "field": "practical.costNote",
+          "kind": "official",
+          "text": "Payment at the ludothèque is possible in cash or by Twint; cards are not accepted.",
+          "url": "https://ludotheque-glane.ch/fr/infos-pratiques"
+        },
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "Current published hours are Wednesday and Friday 16:00–18:00 and Saturday 09:00–11:00. The ludothèque is generally closed during Fribourg school holidays and runs restricted hours in summer.",
+          "url": "https://ludotheque-glane.ch/fr/infos-pratiques"
+        }
+      ],
+      "remaining": [
+        "Confirm whether extended play on site without renting is allowed, and the holiday timetable.",
+        "Is the Bicubic car park free, and can children play on site without borrowing a game?",
+        "What are the holiday closure dates and the reduced summer hours?",
+        "Can children play on site without borrowing a game, and is an adult required to stay with the child?",
+        "What are the holiday closure dates and the reduced summer hours? The closure calendar and the borrowing rules page were not inspected.",
+        "Is the Bicubic car park free?",
+        "Can children play on site without borrowing a game, and can an adult stay with the child during a visit?",
+        "Do families need to book a visit to borrow games?"
+      ]
+    },
+    "draft": {
+      "patch": {},
+      "practicalPatch": {},
+      "cardId": "ludo-glane-romont",
+      "findings": [
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "Current published hours are Wednesday and Friday 16:00–18:00 and Saturday 09:00–11:00. The ludothèque is generally closed during Fribourg school holidays and runs restricted hours in summer.",
+          "url": "https://ludotheque-glane.ch/fr/infos-pratiques"
+        }
+      ],
+      "remaining": [
+        "What are the holiday closure dates and the reduced summer hours?",
+        "Is the Bicubic car park free?",
+        "Can children play on site without borrowing a game, and can an adult stay with the child during a visit?",
+        "Do families need to book a visit to borrow games?"
+      ]
+    }
+  },
+  {
+    "jobId": "765317db-df22-4947-be54-3c7981a85b40",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Visit booklet for ages 6 to 12; no age range is published for the interactive area. The page says workshops and guided visits are for all ages.",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Wed–Sun 13:00–17:00; performances follow a separate calendar.",
+      "days": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Derrière-les-Jardins 2, 1700 Fribourg",
+      "price": "Entry (per visit): adults CHF 5; AVS and students CHF 4; children CHF 3. Free with the AG culturel or the Fribourg City Card. The period the prices apply to is not stated.",
+      "priceKind": "visit",
+      "amount": 5,
+      "contacts": [
+        {
+          "name": "Musée Suisse de la Marionnette",
+          "phone": "+41 26 322 85 13",
+          "email": "info@marionnette.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/fribourg/musees/musee-suisse-de-la-marionnette/",
+          "label": "Interactive area, prices, hours and address"
+        }
+      ],
+      "notes": [
+        "The visit booklet is for ages 6 to 12. No age range is published for the interactive area."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "marionnettes-fribourg",
+      "region": "sarine",
+      "name": "Musée suisse de la Marionnette · puppets",
+      "category": "creative",
+      "town": "Fribourg",
+      "intro": "An interactive area with a puppet booth (castelet) and videos at the Swiss Puppet Museum in Fribourg.",
+      "research": {
+        "date": "2026-11-08",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "The official listing describes an interactive space with a puppet theatre and videos. In 2026 the museum is open Wednesday to Sunday, 13:00–17:00, and closed Monday and Tuesday.",
+            "url": "https://fribourg.ch/fr/fribourg/musees/musee-suisse-de-la-marionnette/"
+          },
+          {
+            "field": "Guided visits",
+            "kind": "official",
+            "text": "Guided visits last about 45 minutes and are charged separately from entry: CHF 60 for a group of up to 15 people.",
+            "url": "https://fribourg.ch/fr/fribourg/musees/musee-suisse-de-la-marionnette/"
+          },
+          {
+            "field": "Performance season",
+            "kind": "official",
+            "text": "The museum's performance season runs from October to May, with a different show one weekend a month.",
+            "url": "https://fribourg.ch/fr/fribourg/musees/musee-suisse-de-la-marionnette/"
+          }
+        ],
+        "remaining": [
+          "The age limit and ticket price for young children, and the current programme of performances, need to be checked.",
+          "Is the interactive area indoors?",
+          "Which ages does the CHF 3 children's ticket cover?",
+          "Is an adult allowed or expected to stay with a child in the interactive area?",
+          "Is the interactive area stroller-accessible, and are there a toilet and changing table for visitors?",
+          "In which language is the interactive area offered?",
+          "Is a reservation needed to visit the interactive area?",
+          "Are there holiday or exceptional closures that change the published opening hours?"
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": null,
+          "text": "The museum has an interactive space with a puppet theatre and videos; the listing does not say whether this space is indoors.",
+          "source": "https://fribourg.ch/fr/fribourg/musees/musee-suisse-de-la-marionnette/",
+          "checked": "2026-10-31"
+        },
+        "warnings": [
+          "The age limit and ticket price for young children, and the current programme of performances, need to be checked."
+        ],
+        "costNote": {
+          "value": "Guided visits are charged separately: CHF 60 for a group of up to 15 people. This is not part of the interactive-area entry price.",
+          "text": "Guided visits are charged separately: CHF 60 for a group of up to 15 people. This is not part of the interactive-area entry price.",
+          "source": "https://fribourg.ch/fr/fribourg/musees/musee-suisse-de-la-marionnette/",
+          "checked": "2026-11-01"
+        }
+      },
+      "scheduleValidThrough": "2026-12-31",
+      "geo": {
+        "label": "Derrière-les-Jardins 2 1700 Fribourg",
+        "lat": 46.80283737182617,
+        "lon": 7.1677775382995605,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Derri%C3%A8re-les-Jardins+2+1700+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-28",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "The official listing describes an interactive space with a puppet theatre and videos. In 2026 the museum is open Wednesday to Sunday, 13:00–17:00, and closed Monday and Tuesday.",
+          "url": "https://fribourg.ch/fr/fribourg/musees/musee-suisse-de-la-marionnette/"
+        },
+        {
+          "field": "Guided visits",
+          "kind": "official",
+          "text": "Guided visits last about 45 minutes and are charged separately from entry: CHF 60 for a group of up to 15 people.",
+          "url": "https://fribourg.ch/fr/fribourg/musees/musee-suisse-de-la-marionnette/"
+        },
+        {
+          "field": "Performance season",
+          "kind": "official",
+          "text": "The museum's performance season runs from October to May, with a different show one weekend a month.",
+          "url": "https://fribourg.ch/fr/fribourg/musees/musee-suisse-de-la-marionnette/"
+        },
+        {
+          "field": "Opening hours",
+          "kind": "official",
+          "text": "The museum's own page lists opening hours of Wednesday to Sunday, 13:00–17:00, with Monday and Tuesday closed except for guided tours. No separate hours are published for the interactive area.",
+          "url": "https://www.marionnette.ch/en/visit-the-museum/visit-the-museum/"
+        }
+      ],
+      "remaining": [
+        "The age limit and ticket price for young children, and the current programme of performances, need to be checked.",
+        "Is the interactive area indoors?",
+        "Which ages does the CHF 3 children's ticket cover?",
+        "Is an adult allowed or expected to stay with a child in the interactive area?",
+        "Is the interactive area stroller-accessible, and are there a toilet and changing table for visitors?",
+        "In which language is the interactive area offered?",
+        "Is a reservation needed to visit the interactive area?",
+        "Are there holiday or exceptional closures that change the published opening hours?",
+        "Is the interactive area open during the museum's regular hours, and what age is it meant for?",
+        "Does the museum entry price cover the interactive area?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "schedule": "Wednesday to Sunday, 13:00–17:00; Monday and Tuesday closed except guided tours. No separate hours are published for the interactive area.",
+        "addressPrecision": "exact"
+      },
+      "practicalPatch": {},
+      "cardId": "marionnettes-fribourg",
+      "findings": [
+        {
+          "field": "Opening hours",
+          "kind": "official",
+          "text": "The museum's own page lists opening hours of Wednesday to Sunday, 13:00–17:00, with Monday and Tuesday closed except for guided tours. No separate hours are published for the interactive area.",
+          "url": "https://www.marionnette.ch/en/visit-the-museum/visit-the-museum/"
+        }
+      ],
+      "remaining": [
+        "Is the interactive area open during the museum's regular hours, and what age is it meant for?",
+        "Is a reservation needed to visit the interactive area?",
+        "Does the museum entry price cover the interactive area?"
+      ]
+    }
+  },
+  {
+    "jobId": "31b00635-cc6e-41f3-9e6d-b8c329c99d81",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age limits are not published",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "The playground's hours are not stated; the mini-golf is temporarily closed",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Parc sportif et ludique, 1744 Chénens; entrance to be confirmed",
+      "price": "Price is not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Commune de Chénens",
+          "phone": "",
+          "email": "secretariat@chenens.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/",
+          "label": "Sarine regional association: playground, access and closed mini-golf"
+        }
+      ],
+      "notes": [
+        "The current page shows the mini-golf as temporarily closed; do not plan a trip for it.",
+        "Parking and Chénens station are listed as ways to get there."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "chenens-sport-park",
+      "region": "sarine",
+      "name": "Parc sportif et ludique de Chénens",
+      "category": "play",
+      "town": "Chénens",
+      "intro": "Outdoor sports and play park in Chénens with a football pitch, outdoor fitness equipment, a beach-volleyball court and a minigolf.",
+      "research": {
+        "date": "2026-11-07",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "The regional association lists a children's playground, a picnic area and pushchair access near Chénens station.",
+            "url": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/"
+          },
+          {
+            "field": "intro",
+            "kind": "visitor",
+            "text": "The regional listing names a football pitch, outdoor fitness equipment, a beach-volleyball court and a minigolf at the park.",
+            "url": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/"
+          }
+        ],
+        "remaining": [
+          "Facilities for young children, the exact entrance and the hours of open access are not published.",
+          "What are the park's opening hours and which entrance should families use?",
+          "Is there an admission price, and are there age limits for the play area or minigolf?",
+          "When will the minigolf reopen?"
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "The regional association lists a children's playground, a picnic area and pushchair access near Chénens station.",
+          "source": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "Facilities for young children, the exact entrance and the hours of open access are not published."
+        ]
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "The regional association lists a children's playground, a picnic area and pushchair access near Chénens station.",
+          "url": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/"
+        },
+        {
+          "field": "intro",
+          "kind": "visitor",
+          "text": "The regional listing names a football pitch, outdoor fitness equipment, a beach-volleyball court and a minigolf at the park.",
+          "url": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/"
+        },
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The only opening notice on the regional listing says the minigolf is temporarily closed. No opening hours are published for the park or the playground.",
+          "url": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/"
+        }
+      ],
+      "remaining": [
+        "Facilities for young children, the exact entrance and the hours of open access are not published.",
+        "What are the park's opening hours and which entrance should families use?",
+        "Is there an admission price, and are there age limits for the play area or minigolf?",
+        "When will the minigolf reopen?",
+        "What are the park's opening hours, and which entrance should families use?",
+        "Are there age limits or an admission price for the playground or minigolf?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "status": "check",
+        "age": "Age not published",
+        "parent": "unknown",
+        "parentDetails": "Conditions for adult participation not published",
+        "schedule": "Schedule not published",
+        "days": [],
+        "address": "Visit address not published",
+        "addressPrecision": "area",
+        "intro": "The park in Chénens offers a football pitch, outdoor fitness equipment, a beach-volleyball court and a minigolf course, set in greenery for relaxation and outdoor activity.",
+        "checked": "2026-11-24"
+      },
+      "practicalPatch": {
+        "playArea": {
+          "value": true,
+          "text": "A playground is listed among the park's activities; no hours, age range or admission rules are published for it.",
+          "source": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/",
+          "checked": "2026-11-24"
+        },
+        "access": {
+          "value": true,
+          "text": "The listing labels the park as accessible for wheelchairs and pushchairs; no route detail is given.",
+          "source": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/",
+          "checked": "2026-11-24"
+        }
+      },
+      "cardId": "chenens-sport-park",
+      "findings": [
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The only opening notice on the regional listing says the minigolf is temporarily closed. No opening hours are published for the park or the playground.",
+          "url": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/"
+        }
+      ],
+      "remaining": [
+        "What are the park's opening hours, and which entrance should families use?",
+        "Are there age limits or an admission price for the playground or minigolf?"
+      ]
+    }
+  },
+  {
+    "jobId": "adf0d141-89c5-44f8-8779-3519328553a7",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "check",
+      "min": null,
+      "max": null,
+      "age": "Age not published",
+      "parent": "unknown",
+      "languages": [],
+      "schedule": "Schedule not published",
+      "days": [],
+      "events": [],
+      "address": "Visit address not published",
+      "price": "Price is not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Commune de Chénens",
+          "phone": "",
+          "email": "secretariat@chenens.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/",
+          "label": "Sarine regional association: playground, access and closed mini-golf"
+        }
+      ],
+      "notes": [
+        "The current page shows the mini-golf as temporarily closed; do not plan a trip for it.",
+        "Parking and Chénens station are listed as ways to get there."
+      ],
+      "checked": "2026-11-24",
+      "reviewAfter": "2026-10-28",
+      "id": "chenens-sport-park",
+      "region": "sarine",
+      "name": "Parc sportif et ludique de Chénens",
+      "category": "play",
+      "town": "Chénens",
+      "intro": "The park in Chénens offers a football pitch, outdoor fitness equipment, a beach-volleyball court and a minigolf course, set in greenery for relaxation and outdoor activity.",
+      "research": {
+        "date": "2026-11-24",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "The regional association lists a children's playground, a picnic area and pushchair access near Chénens station.",
+            "url": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/"
+          },
+          {
+            "field": "intro",
+            "kind": "visitor",
+            "text": "The regional listing names a football pitch, outdoor fitness equipment, a beach-volleyball court and a minigolf at the park.",
+            "url": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/"
+          },
+          {
+            "field": "schedule",
+            "kind": "official",
+            "text": "The only opening notice on the regional listing says the minigolf is temporarily closed. No opening hours are published for the park or the playground.",
+            "url": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/"
+          }
+        ],
+        "remaining": [
+          "Facilities for young children, the exact entrance and the hours of open access are not published.",
+          "What are the park's opening hours and which entrance should families use?",
+          "Is there an admission price, and are there age limits for the play area or minigolf?",
+          "When will the minigolf reopen?",
+          "What are the park's opening hours, and which entrance should families use?",
+          "Are there age limits or an admission price for the playground or minigolf?"
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "The regional association lists a children's playground, a picnic area and pushchair access near Chénens station.",
+          "source": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "Facilities for young children, the exact entrance and the hours of open access are not published."
+        ],
+        "playArea": {
+          "value": true,
+          "text": "A playground is listed among the park's activities; no hours, age range or admission rules are published for it.",
+          "source": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/",
+          "checked": "2026-11-24"
+        },
+        "access": {
+          "value": true,
+          "text": "The listing labels the park as accessible for wheelchairs and pushchairs; no route detail is given.",
+          "source": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/",
+          "checked": "2026-11-24"
+        }
+      },
+      "parentDetails": "Conditions for adult participation not published",
+      "addressPrecision": "area"
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "The regional association lists a children's playground, a picnic area and pushchair access near Chénens station.",
+          "url": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/"
+        },
+        {
+          "field": "intro",
+          "kind": "visitor",
+          "text": "The regional listing names a football pitch, outdoor fitness equipment, a beach-volleyball court and a minigolf at the park.",
+          "url": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/"
+        },
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The only opening notice on the regional listing says the minigolf is temporarily closed. No opening hours are published for the park or the playground.",
+          "url": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/"
+        },
+        {
+          "field": "practical.indoor",
+          "kind": "official",
+          "text": "The regional listing describes the park as a place for outdoor activity, so the visit is outdoors.",
+          "url": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/"
+        }
+      ],
+      "remaining": [
+        "Facilities for young children, the exact entrance and the hours of open access are not published.",
+        "What are the park's opening hours and which entrance should families use?",
+        "Is there an admission price, and are there age limits for the play area or minigolf?",
+        "When will the minigolf reopen?",
+        "What are the park's opening hours, and which entrance should families use?",
+        "Are there age limits or an admission price for the playground or minigolf?",
+        "Is visitor parking available, and where?"
+      ]
+    },
+    "draft": {
+      "patch": {},
+      "practicalPatch": {
+        "indoor": {
+          "value": false,
+          "text": "The regional listing describes the park as a place for outdoor activity.",
+          "source": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/",
+          "checked": "2026-11-24"
+        }
+      },
+      "cardId": "chenens-sport-park",
+      "findings": [
+        {
+          "field": "practical.indoor",
+          "kind": "official",
+          "text": "The regional listing describes the park as a place for outdoor activity, so the visit is outdoors.",
+          "url": "https://par-chez-nous.ch/places/parc-sportif-et-ludique-de-chenens/"
+        }
+      ],
+      "remaining": [
+        "What are the park's opening hours, and which entrance should families use?",
+        "Are there age limits or an admission price for the playground or minigolf?",
+        "When will the minigolf reopen?",
+        "Is visitor parking available, and where?"
+      ]
+    }
+  },
+  {
+    "jobId": "d36eef55-5812-4576-b0c0-f8a4402e40e6",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "id": "alice-marly",
+      "name": "Aux Merveilles d’Alice · café with play area",
+      "category": "dining",
+      "town": "Marly",
+      "route": "fribourg",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Check the age range of the play area",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Monday–Friday 8:00–20:00, Saturday 9:00–20:00, Sunday 9:00–19:00 (café opening hours; no separate play-area hours published)",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Place de l’Ancienne-Papeterie 4, 1723 Marly",
+      "price": "By menu: coffee CHF 4.20; sweet pancake from CHF 5",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Aux Merveilles d’Alice",
+          "phone": "026 435 69 92",
+          "email": "info@auxmerveillesdalice.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.auxmerveillesdalice.ch/",
+          "label": "Café: opening hours and contacts"
+        },
+        {
+          "url": "https://marche-ancienne-papeterie.ch/commerces/aux-merveilles-d-alice",
+          "label": "Play area, address and parking"
+        },
+        {
+          "url": "https://www.akdagsa.ch/wp-content/uploads/2026/06/Menu-crepes-gaufres.pdf",
+          "label": "Pancake and waffle menu with prices"
+        },
+        {
+          "url": "https://www.akdagsa.ch/wp-content/uploads/2026/07/Menu-boissons-Alice_060726.pdf",
+          "label": "Drinks menu with prices"
+        },
+        {
+          "url": "https://www.google.com/maps?cid=4119563388185101719",
+          "label": "Google Maps: venue listing"
+        }
+      ],
+      "notes": [
+        "Family café, pancake house and tea room in the Marché de l’Ancienne Papeterie. According to the complex's description, the children's play area covers more than 120 m². Independent play, not a class with an educator.",
+        "A visitor's photo on Google Maps from October 2025 shows a multi-level play structure with netting, a soft low play area, children's tables and adult tables along the aisle. The photo does not show whether all areas can be seen from the adults' seats.",
+        "Google Maps reviews read on 27.09.2026: a review then 4 weeks old confirms the play area; another, then 11 months old, also describes games for toddlers. This is guests' experience, not an official age limit. Separate rules for young children and for accompanying them inside the structure are not known.",
+        "One visitor's review mentions a wait of more than 20 minutes for an order; other reviews praise the staff. These are single visits: they show neither constant problems nor guaranteed fast service.",
+        "Published menu: pancake with sugar and butter CHF 5; with Nutella, banana and cream CHF 8; savoury pancakes CHF 11.50–18.50. Coffee or espresso CHF 4.20, cappuccino CHF 5.",
+        "Coffee and one pancake with sugar: CHF 9.20 at menu prices. This is not a special offer and not an entry price. Whether there is a separate fee for the play area, a compulsory order or a time limit is not known; free access is not confirmed.",
+        "The hours given are those of the café, not a separate schedule for the play area or the kitchen. On public holidays and before a special visit, check the opening hours.",
+        "The menu and website are in French. This is free play, not a language class; check the language of service.",
+        "The official website of the café and the complex gives number 4; the Google Maps listing gives number 2. The address shown here is the official one (number 4).",
+        "The complex reports three free hours of parking and access by bus No. 8. A swimming pool is nearby; check the parking conditions on site."
+      ],
+      "checked": "2026-09-27",
+      "parentDetails": "Family visit with a parent. Supervision by staff and the option to leave a child are not confirmed.",
+      "reviewAfter": "2026-10-27",
+      "research": {
+        "date": "2026-11-08",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "schedule",
+            "kind": "official",
+            "text": "The café's own website lists opening hours of Monday to Friday 8:00–20:00, Saturday 9:00–20:00 and Sunday 9:00–19:00. No separate hours are published for the play area.",
+            "url": "https://www.auxmerveillesdalice.ch/"
+          }
+        ],
+        "remaining": [
+          "Suitable ages for the equipment, accompaniment inside the structure, any fee, and whether the whole play area can be seen from a seat.",
+          "Which ages is the play area meant for, and may or must an adult stay with the child?",
+          "Is there a fee for the play area, or is an order required?",
+          "Is the play area indoors, and is the route to it stroller-accessible?",
+          "Is a booking needed to use the play area?",
+          "Menu prices could not be re-checked because the menu PDFs were unavailable."
+        ]
+      },
+      "practical": {
+        "indoor": {
+          "value": null,
+          "text": "Not confirmed whether the play area is indoors",
+          "source": "https://marche-ancienne-papeterie.ch/commerces/aux-merveilles-d-alice",
+          "checked": "2026-11-08"
+        },
+        "parking": {
+          "value": true,
+          "text": "Market car park: first 3 hours free",
+          "source": "https://marche-ancienne-papeterie.ch/commerces/aux-merveilles-d-alice",
+          "checked": "2026-09-27"
+        },
+        "costNote": {
+          "value": null,
+          "text": "Coffee CHF 4.20 + plain pancake CHF 5 = CHF 9.20 for an example order. This is not an entry price; check access to the play area and whether an order is required",
+          "source": "https://www.auxmerveillesdalice.ch/",
+          "checked": "2026-09-27"
+        },
+        "gallery": "https://www.auxmerveillesdalice.ch/",
+        "playArea": {
+          "value": true,
+          "text": "Children's play area of more than 120 m²",
+          "source": "https://marche-ancienne-papeterie.ch/commerces/aux-merveilles-d-alice",
+          "checked": "2026-11-08"
+        }
+      },
+      "intro": "Café with a children's play area. Ask about the conditions for using the play area, not only about the cost of an order.",
+      "region": "sarine",
+      "addressPrecision": "exact",
+      "geo": {
+        "label": "Place de l'Ancienne-Papeterie 4 1723 Marly",
+        "lat": 46.77717208862305,
+        "lon": 7.153633117675781,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Place+de+l%E2%80%99Ancienne-Papeterie+4+1723+Marly&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The café's own website lists opening hours of Monday to Friday 8:00–20:00, Saturday 9:00–20:00 and Sunday 9:00–19:00. No separate hours are published for the play area.",
+          "url": "https://www.auxmerveillesdalice.ch/"
+        },
+        {
+          "field": "practical.playArea",
+          "kind": "official",
+          "text": "The page of the Marché de l’Ancienne Papeterie for this café describes more than 120 m² of play space for children and a large car park with three free hours. It gives no age limit, no separate play-area hours, no admission rule and no fee for the play area.",
+          "url": "https://marche-ancienne-papeterie.ch/commerces/aux-merveilles-d-alice"
+        }
+      ],
+      "remaining": [
+        "Suitable ages for the equipment, accompaniment inside the structure, any fee, and whether the whole play area can be seen from a seat.",
+        "Which ages is the play area meant for, and may or must an adult stay with the child?",
+        "Is there a fee for the play area, or is an order required?",
+        "Is the play area indoors, and is the route to it stroller-accessible?",
+        "Is a booking needed to use the play area?",
+        "Menu prices could not be re-checked because the menu PDFs were unavailable."
+      ]
+    },
+    "draft": {
+      "patch": {},
+      "practicalPatch": {},
+      "cardId": "alice-marly",
+      "findings": [
+        {
+          "field": "practical.playArea",
+          "kind": "official",
+          "text": "The page of the Marché de l’Ancienne Papeterie for this café describes more than 120 m² of play space for children and a large car park with three free hours. It gives no age limit, no separate play-area hours, no admission rule and no fee for the play area.",
+          "url": "https://marche-ancienne-papeterie.ch/commerces/aux-merveilles-d-alice"
+        }
+      ],
+      "remaining": [
+        "Suitable ages for the equipment, accompaniment inside the structure, any fee, and whether the whole play area can be seen from a seat.",
+        "Which ages is the play area meant for, and may or must an adult stay with the child?",
+        "Is there a fee for the play area, or is an order required?",
+        "Is the play area indoors, and is the route to it stroller-accessible?",
+        "Is a booking needed to use the play area?",
+        "Menu prices could not be re-checked because the menu PDFs were unavailable."
+      ]
+    }
+  },
+  {
+    "jobId": "df478b3a-dd2e-4b2f-a057-4d04a9b4199e",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "id": "beo-funpark",
+      "name": "BEO-Funpark · play zones and bistro",
+      "category": "play",
+      "town": "Bösingen",
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "There are two zones for young children; equipment limits to be checked",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Mon–Fri 11:00–18:00; Sat 10:00–20:00; Sun 10:00–18:00; 26.09–25.10.2026 daily from 10:00",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Auriedstrasse 28, 3178 Bösingen",
+      "price": "Ages 1–3 CHF 10 + adult CHF 9: CHF 19 together; food extra",
+      "priceKind": "visit",
+      "amount": 19,
+      "contacts": [
+        {
+          "name": "BEO-Funpark GmbH",
+          "phone": "+41 31 747 92 92",
+          "email": "info@beo-funpark.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://beo-funpark.ch/kleinkindbereich/",
+          "label": "Two zones for young children"
+        },
+        {
+          "url": "https://beo-funpark.ch/preise/",
+          "label": "Entry prices, opening hours and holidays"
+        },
+        {
+          "url": "https://beo-funpark.ch/wp-content/uploads/2022/09/ReglementAGB.pdf",
+          "label": "Rules referred to by the current website"
+        },
+        {
+          "url": "https://beo-funpark.ch/funpark-restaurant/",
+          "label": "Bistro inside the park"
+        },
+        {
+          "url": "https://www.baernermamis.ch/blog/indoorspielplaetze/beo-funpark-boesingen",
+          "label": "Bärner Mamis, 10.02.2025: location of the zones for young children"
+        }
+      ],
+      "notes": [
+        "A large paid play park, not a small café. The operator confirms two zones for young children and warns that the main hall is at times very lively. Quiet is not guaranteed.",
+        "The Bärner Mamis family review of 10.02.2025 clarifies the location: a small zone with a ball pit and children's slides directly next to the restaurant; a large zone for young children upstairs. This helps in choosing a place for a first visit, but does not guarantee visibility from every table.",
+        "Child aged 1–3 years CHF 10; accompanying person aged 16–59 CHF 9: CHF 19 for the child and one adult together. From age 4 the child ticket is CHF 19; entry is free from age 60. Food, karting and air hockey are paid separately.",
+        "Regular hours on the official prices page: Mon–Fri 11:00–18:00, Sat 10:00–20:00, Sun 10:00–18:00. During the announced autumn holidays 26.09–25.10.2026 it opens every day at 10:00. Check public holiday hours separately.",
+        "Under the rules there is no supervision by staff. The adult is responsible for the child and accompanies children up to 6 years to the toilet. On the attractions, socks, non-slip socks or bare feet are allowed; food and drinks are forbidden in the play area.",
+        "The age of the price group does not determine admission to all equipment. Check the restrictions for individual structures and the conditions for children under one year.",
+        "From November to February the upper zone for young children is open on Saturdays only until 18:00 because of a party. Funpark-Bistro is in the park; the separate WOODSTOCK is marked 16+ and is not an option with young children."
+      ],
+      "checked": "2026-09-27",
+      "region": "sense",
+      "reviewAfter": "2026-10-27",
+      "research": {
+        "date": "2026-11-08",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "parentDetails",
+            "kind": "official",
+            "text": "The park allows children and teenagers aged 8 to 16 to visit without an adult if a guardian-signed liability waiver is provided. Teenagers over 16 may not enter without accompanying a child up to 8 years. The page does not say whether an adult must or may stay with a child under 8.",
+            "url": "https://beo-funpark.ch/preise/"
+          }
+        ],
+        "remaining": [
+          "View from a specific table and restrictions for individual structures.",
+          "Which amount on the entry price table applies to a child aged 0 to 6 and which to an adult?",
+          "What are the regular weekday, Saturday and Sunday opening hours outside school holidays?",
+          "Which ages are the toddler zones intended for, and what do the park rules say about supervision and equipment limits?",
+          "Is the upstairs toddler area indoors, and are parking, a changing table, a visitor toilet and a breastfeeding space available?",
+          "Must an adult stay with a child under 8?"
+        ]
+      },
+      "practical": {
+        "indoor": {
+          "value": true,
+          "text": "Indoor play park",
+          "source": "https://beo-funpark.ch/kleinkindbereich/",
+          "checked": "2026-09-27"
+        },
+        "tariff": {
+          "adult": 9,
+          "children": [
+            {
+              "min": 1,
+              "until": 4,
+              "price": 10
+            },
+            {
+              "min": 4,
+              "until": 16,
+              "price": 19
+            }
+          ],
+          "note": "Adults aged 16–59. Food, karting and air hockey extra. Free entry from age 60. For children under one year, check the price; the ticket does not confirm admission to all structures.",
+          "source": "https://beo-funpark.ch/preise/"
+        },
+        "gallery": "https://beo-funpark.ch/kleinkindbereich/",
+        "warnings": [
+          "The main hall can be very lively"
+        ],
+        "playArea": {
+          "value": true,
+          "text": "Two toddler zones",
+          "source": "https://beo-funpark.ch/kleinkindbereich/",
+          "checked": "2026-11-08"
+        }
+      },
+      "scheduleValidThrough": "2027-01-03",
+      "intro": "The BEO-Funpark in Bösingen has two toddler zones for its youngest guests.",
+      "parentDetails": "Children aged 8 to 16 may visit without an adult companion if a signed liability waiver is on file. The page does not state the adult rule for children under 8.",
+      "geo": {
+        "label": "Auriedstrasse 28 3178 Bösingen",
+        "lat": 46.90210723876953,
+        "lon": 7.229791641235352,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Auriedstrasse+28+3178+B%C3%B6singen&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "parentDetails",
+          "kind": "official",
+          "text": "The park allows children and teenagers aged 8 to 16 to visit without an adult if a guardian-signed liability waiver is provided. Teenagers over 16 may not enter without accompanying a child up to 8 years. The page does not say whether an adult must or may stay with a child under 8.",
+          "url": "https://beo-funpark.ch/preise/"
+        },
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The park states it is open 365 days a year. During school holidays it opens from 10:00. The upper toddler zone on the 1st floor closes at 18:00 on Saturdays from 1 November to end of February. The official prices page does not publish regular daily opening hours.",
+          "url": "https://beo-funpark.ch/preise/"
+        }
+      ],
+      "remaining": [
+        "View from a specific table and restrictions for individual structures.",
+        "Which amount on the entry price table applies to a child aged 0 to 6 and which to an adult?",
+        "What are the regular weekday, Saturday and Sunday opening hours outside school holidays?",
+        "Which ages are the toddler zones intended for, and what do the park rules say about supervision and equipment limits?",
+        "Is the upstairs toddler area indoors, and are parking, a changing table, a visitor toilet and a breastfeeding space available?",
+        "Must an adult stay with a child under 8?",
+        "What are the regular opening and closing times on ordinary days outside school holidays?",
+        "Which ages are the toddler zones intended for, and what are the park rules on supervision and equipment limits?",
+        "Which ticket price applies to a child aged 0 to 6 and one adult, and for what period or unit?",
+        "Is registration needed before a visit?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "schedule": "Open 365 days a year. During school holidays it opens from 10:00. The upper toddler zone is open only until 18:00 on Saturdays from 1 November to end of February.",
+        "notes": [
+          "Children and young people aged 8 to 16 may visit without an adult if a signed liability waiver is provided.",
+          "From 1 November to end of February the upper toddler zone (1st floor) is open on Saturdays only until 18:00."
+        ]
+      },
+      "practicalPatch": {},
+      "cardId": "beo-funpark",
+      "findings": [
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The park states it is open 365 days a year. During school holidays it opens from 10:00. The upper toddler zone on the 1st floor closes at 18:00 on Saturdays from 1 November to end of February. The official prices page does not publish regular daily opening hours.",
+          "url": "https://beo-funpark.ch/preise/"
+        }
+      ],
+      "remaining": [
+        "What are the regular opening and closing times on ordinary days outside school holidays?",
+        "Which ages are the toddler zones intended for, and what are the park rules on supervision and equipment limits?",
+        "Must an adult stay with a child under 8?",
+        "Which ticket price applies to a child aged 0 to 6 and one adult, and for what period or unit?",
+        "Is registration needed before a visit?"
+      ]
+    }
+  },
+  {
+    "jobId": "fcade373-131e-49a1-b74e-f534a45c07b6",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Toddler pool for young children (tout-petits); the website gives no numeric age range",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "During school weeks Mon–Thu 08–21, Fri 08–20:30, Sat 10–20, Sun 09–18; exceptions on the website",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Route d'Arruffens 31, 1680 Romont",
+      "price": "Adult CHF 12; child under 6 free; refundable deposit for the pass CHF 5",
+      "priceKind": "visit",
+      "amount": 12,
+      "contacts": [
+        {
+          "name": "Epicentre",
+          "phone": "026 564 21 40",
+          "email": "info@epicentre-glane.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://epicentre-glane.ch/fr/piscine.php",
+          "label": "Shallow pool, hours, prices and address"
+        },
+        {
+          "url": "https://epicentre-glane.ch/fr/faq.php",
+          "label": "Free entry under 6"
+        },
+        {
+          "url": "https://epicentre-glane.ch/content/documents/epicentre_piscine_reglement_signe_20200401.pdf",
+          "label": "Constant supervision in the children's pool"
+        }
+      ],
+      "notes": [
+        "The shallow pool is about 35 cm deep, with water at 30°C and water toys. Toddlers swim under their parents' watch.",
+        "The website says the toddler pool welcomes toddlers all day. The pool's opening hours are listed per day of the week and differ in school holidays and on public holidays.",
+        "For a single adult entry the price is CHF 12 plus a refundable deposit of CHF 5; with an account, separate time-based rates apply."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "epicentre-pataugeoire-romont",
+      "region": "glane",
+      "name": "Epicentre · pool for toddlers",
+      "category": "water",
+      "town": "Romont",
+      "parentDetails": "The page describes toddlers using the pool under their parents' watch. Whether an adult must enter the water or stay within reach is not published.",
+      "research": {
+        "date": "2026-11-08",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Child entry",
+            "kind": "official",
+            "text": "Entry to the water area is free for a child under six.",
+            "url": "https://epicentre-glane.ch/fr/faq.php"
+          },
+          {
+            "field": "Supervision",
+            "kind": "official",
+            "text": "The rules require constant adult supervision in the children's pool.",
+            "url": "https://epicentre-glane.ch/content/documents/epicentre_piscine_reglement_signe_20200401.pdf"
+          },
+          {
+            "field": "Shallow pool",
+            "kind": "official",
+            "text": "The toddler pool, 35 cm deep with water at 30°C and water-play features, welcomes toddlers all day under their parents' watch. The pool's opening hours are listed per day of the week and differ in school holidays.",
+            "url": "https://epicentre-glane.ch/fr/piscine.php"
+          },
+          {
+            "field": "Single entry",
+            "kind": "official",
+            "text": "Without an Epicentre account, a single entry to the aquatic area can be bought at reception or at the restaurant. A CHF 5 badge deposit is asked and returned on exit.",
+            "url": "https://epicentre-glane.ch/fr/piscine.php"
+          },
+          {
+            "field": "Entry for under-6s",
+            "kind": "official",
+            "text": "For now, children under 6 can pass the turnstiles in one of two ways: a parent carries the child through, or the child asks the reception attendant just before the turnstiles to open the way. The FAQ describes this as the current arrangement, so it may change.",
+            "url": "https://epicentre-glane.ch/fr/faq.php"
+          }
+        ],
+        "remaining": [
+          "Check the hours for the date of the visit and the rules for refunding the deposit for the pass.",
+          "Does the toddler pool follow the full pool opening hours on every day, including school holidays? Check on the day of the visit.",
+          "Is an adult required to stay with the toddler in the pool? The website only says toddlers are under their parents' watch.",
+          "Is the toddler pool indoors, and is there a separate play area? The website does not say.",
+          "Is advance registration needed, or can families simply turn up? The website only says a single entry can be bought at reception or the restaurant.",
+          "Is there visitor parking at the centre? The website's parking page could not be checked.",
+          "Are a changing table, a visitor toilet or a feeding space available for families with toddlers? The website does not say.",
+          "Is the toddler pool outdoors or indoors, and is there a separate play area? The website does not say."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": null,
+          "text": "The website does not say whether the toddler pool is indoors or outdoors.",
+          "source": "https://epicentre-glane.ch/fr/piscine.php",
+          "checked": "2026-10-31"
+        },
+        "playArea": {
+          "value": null,
+          "text": "The website mentions water games in the toddler pool but does not describe a separate play area.",
+          "source": "https://epicentre-glane.ch/fr/piscine.php",
+          "checked": "2026-10-31"
+        },
+        "costNote": {
+          "value": "Children under 6 have free access to the aquatic area; adult single-entry pricing is in the price field.",
+          "text": "Children under 6 have free access to the aquatic area; adult single-entry pricing is in the price field.",
+          "source": "https://epicentre-glane.ch/fr/faq.php",
+          "checked": "2026-11-08"
+        },
+        "warnings": [
+          "Hours change during school holidays and public holidays",
+          "This is recreational swimming, not a lesson with an instructor"
+        ],
+        "gallery": "https://epicentre-glane.ch/fr/piscine.php",
+        "commitment": {
+          "value": false,
+          "text": "A single entry to the aquatic area can be bought; no course, block or subscription is required.",
+          "source": "https://epicentre-glane.ch/fr/piscine.php",
+          "checked": "2026-10-31"
+        }
+      },
+      "intro": "A warm shallow pool where toddlers play in the water under their parents' watch.",
+      "scheduleValidThrough": "2027-05-28",
+      "addressPrecision": "exact",
+      "geo": {
+        "label": "Route d'Arruffens 31 1680 Romont FR",
+        "lat": 46.687171936035156,
+        "lon": 6.912230968475342,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+d%27Arruffens+31+1680+Romont&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-28",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Child entry",
+          "kind": "official",
+          "text": "Entry to the water area is free for a child under six.",
+          "url": "https://epicentre-glane.ch/fr/faq.php"
+        },
+        {
+          "field": "Supervision",
+          "kind": "official",
+          "text": "The rules require constant adult supervision in the children's pool.",
+          "url": "https://epicentre-glane.ch/content/documents/epicentre_piscine_reglement_signe_20200401.pdf"
+        },
+        {
+          "field": "Shallow pool",
+          "kind": "official",
+          "text": "The toddler pool, 35 cm deep with water at 30°C and water-play features, welcomes toddlers all day under their parents' watch. The pool's opening hours are listed per day of the week and differ in school holidays.",
+          "url": "https://epicentre-glane.ch/fr/piscine.php"
+        },
+        {
+          "field": "Single entry",
+          "kind": "official",
+          "text": "Without an Epicentre account, a single entry to the aquatic area can be bought at reception or at the restaurant. A CHF 5 badge deposit is asked and returned on exit.",
+          "url": "https://epicentre-glane.ch/fr/piscine.php"
+        },
+        {
+          "field": "Entry for under-6s",
+          "kind": "official",
+          "text": "For now, children under 6 can pass the turnstiles in one of two ways: a parent carries the child through, or the child asks the reception attendant just before the turnstiles to open the way. The FAQ describes this as the current arrangement, so it may change.",
+          "url": "https://epicentre-glane.ch/fr/faq.php"
+        },
+        {
+          "field": "Opening hours",
+          "kind": "official",
+          "text": "During school weeks the aquatic area is open Mon–Thu 8:00–21:00 (last entry 20:30), Fri 8:00–20:30 (last entry 20:00), Sat 10:00–20:00 (last entry 19:30) and Sun 9:00–18:00 (last entry 17:30). School holiday and public holiday hours are listed separately on the page.",
+          "url": "https://epicentre-glane.ch/fr/piscine.php"
+        }
+      ],
+      "remaining": [
+        "Check the hours for the date of the visit and the rules for refunding the deposit for the pass.",
+        "Does the toddler pool follow the full pool opening hours on every day, including school holidays? Check on the day of the visit.",
+        "Is an adult required to stay with the toddler in the pool? The website only says toddlers are under their parents' watch.",
+        "Is the toddler pool indoors, and is there a separate play area? The website does not say.",
+        "Is advance registration needed, or can families simply turn up? The website only says a single entry can be bought at reception or the restaurant.",
+        "Is there visitor parking at the centre? The website's parking page could not be checked.",
+        "Are a changing table, a visitor toilet or a feeding space available for families with toddlers? The website does not say.",
+        "Is the toddler pool outdoors or indoors, and is there a separate play area? The website does not say.",
+        "Is advance registration needed, or can families simply turn up? The website only says a single entry can be bought.",
+        "Is there visitor parking, a changing table, a visitor toilet or a feeding space for families with toddlers? The website pages checked do not say."
+      ]
+    },
+    "draft": {
+      "patch": {
+        "schedule": "School term: Mon–Thu 8:00–21:00 (last entry 20:30); Fri 8:00–20:30 (last entry 20:00); Sat 10:00–20:00 (last entry 19:30); Sun 9:00–18:00 (last entry 17:30). Holiday hours differ and are listed separately on the page. The children's pool has no separate hours; these are the aquatic area hours."
+      },
+      "practicalPatch": {},
+      "cardId": "epicentre-pataugeoire-romont",
+      "findings": [
+        {
+          "field": "Opening hours",
+          "kind": "official",
+          "text": "During school weeks the aquatic area is open Mon–Thu 8:00–21:00 (last entry 20:30), Fri 8:00–20:30 (last entry 20:00), Sat 10:00–20:00 (last entry 19:30) and Sun 9:00–18:00 (last entry 17:30). School holiday and public holiday hours are listed separately on the page.",
+          "url": "https://epicentre-glane.ch/fr/piscine.php"
+        }
+      ],
+      "remaining": [
+        "Is an adult required to stay with the toddler in the pool? The website only says toddlers are under their parents' watch.",
+        "Does the toddler pool follow the full pool opening hours on every day, including school holidays? Check on the day of the visit.",
+        "Is the toddler pool indoors, and is there a separate play area? The website does not say.",
+        "Is advance registration needed, or can families simply turn up? The website only says a single entry can be bought.",
+        "Is there visitor parking, a changing table, a visitor toilet or a feeding space for families with toddlers? The website pages checked do not say."
+      ]
+    }
+  },
+  {
+    "jobId": "bbce3c63-3067-4da3-9a9e-97b693ebeb46",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "id": "sarrazin-lossy",
+      "name": "Le Sarrazin · games indoors and outdoors",
+      "category": "dining",
+      "town": "Lossy",
+      "route": "detour",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age for the play areas to be confirmed",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Wed–Sat 10:00–23:00; Sun and public holidays 10:00–17:00; Mon–Tue closed",
+      "days": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Route des Sarrazins 115, 1782 Lossy",
+      "price": "Children's dishes CHF 10–16; for children up to 4 an empty plate is free",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Le Sarrazin",
+          "phone": "026 475 12 44",
+          "email": "restaurant@lesarrazin.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://lesarrazin.ch/",
+          "label": "Restaurant: menu, opening hours and contacts"
+        },
+        {
+          "url": "https://lesarrazin.ch/notre-carte/",
+          "label": "Children's dishes, plate for children up to 4 and kitchen hours"
+        },
+        {
+          "url": "https://fribourg.ch/fr/all/restaurants/le-sarrazin/",
+          "label": "Tourist office: indoor and outdoor games"
+        }
+      ],
+      "notes": [
+        "The tourist office confirms play areas indoors and outdoors. The range of toys, the size and a separate area for young children are not described.",
+        "Children's menu for children up to 10: vegetables CHF 10, pasta with tomato sauce CHF 12, mini burger or nuggets with a side dish CHF 15, mini steak with a side dish CHF 16.",
+        "Children under 4 get a free empty plate to share the parents' food. This is not a free children's dish and not confirmation of free entry to the play area. The adult dish of the day on the home page is from CHF 21.",
+        "The kitchen is open 11:30–13:30 and 18:30–21:00; on Sundays and public holidays the restaurant closes at 17:00 and there is no evening service on those days. The number of guests per service is limited.",
+        "Ask about age restrictions for the equipment, access to the games and whether an order is required. An adult stays with the child; supervision by staff is not stated."
+      ],
+      "checked": "2026-09-27",
+      "region": "sarine",
+      "reviewAfter": "2026-10-27",
+      "research": {
+        "date": "2026-09-27",
+        "outcome": "reused",
+        "findings": [],
+        "remaining": [
+          "The specific equipment, the view of the area and a separate area for young children."
+        ]
+      },
+      "geo": {
+        "label": "Route des Sarrazins 115 1782 Lossy",
+        "lat": 46.83847427368164,
+        "lon": 7.0996222496032715,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+des+Sarrazins+115+1782+Lossy&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "notes",
+          "kind": "official",
+          "text": "The restaurant's menu page lists kitchen hours of 11:45–13:30 and 18:45–21:00. These are meal service times, not hours for the games.",
+          "url": "https://lesarrazin.ch/notre-carte/"
+        }
+      ],
+      "remaining": [
+        "The specific equipment, the view of the area and a separate area for young children.",
+        "Are the indoor and outdoor games open during all restaurant opening hours, and what age range are they meant for?",
+        "May or must an adult stay with the child at the games, and is there staff supervision?",
+        "Is there an admission price or a purchase requirement for the games?",
+        "Are parking, a visitor toilet and a changing table available for visitors?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "status": "check",
+        "notes": [
+          "Kitchen hours: 11:45–13:30 and 18:45–21:00. These are meal service times, not hours for the games.",
+          "On Sundays and public holidays the restaurant is open 10:00–17:00.",
+          "Children's menu (up to 10 years only): mini burger with fries CHF 15, mini beef steak with fries and vegetables CHF 16, nuggets with fries and vegetables CHF 15, pasta with tomato sauce CHF 12, small vegetable plate CHF 10.",
+          "For children up to 3.99 years there is an empty plate at CHF 0 to share from the parents' plates. This says nothing about entry to the games.",
+          "The restaurant limits the number of covers per service.",
+          "Please ask the restaurant about the indoor and outdoor games: opening times, age range, whether an adult must stay with the child, and whether an order is required."
+        ]
+      },
+      "practicalPatch": {},
+      "cardId": "sarrazin-lossy",
+      "findings": [
+        {
+          "field": "notes",
+          "kind": "official",
+          "text": "The restaurant's menu page lists kitchen hours of 11:45–13:30 and 18:45–21:00. These are meal service times, not hours for the games.",
+          "url": "https://lesarrazin.ch/notre-carte/"
+        }
+      ],
+      "remaining": [
+        "Are the indoor and outdoor games open during all restaurant opening hours, and what age range are they meant for?",
+        "May or must an adult stay with the child at the games, and is there staff supervision?",
+        "Is there an admission price or a purchase requirement for the games?",
+        "Are parking, a visitor toilet and a changing table available for visitors?"
+      ]
+    }
+  },
+  {
+    "jobId": "40468efd-2750-4106-8f8b-ec0c79890c26",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age limits are not published",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Check the restaurant's opening hours before the trip",
+      "days": [],
+      "events": [],
+      "address": "Route des Sarrazins 115, 1782 Lossy",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Le Sarrazin",
+          "phone": "026 475 12 44",
+          "email": "restaurant@lesarrazin.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/all/restaurants/le-sarrazin/",
+          "label": "Tourism: premises and outdoor play area, address"
+        }
+      ],
+      "notes": [
+        "Staff supervision is not stated; an adult is responsible for the child even when there is a separate play room.",
+        "Whether the outdoor area can be used at a given time of year depends on the weather; check dish prices on the current menu."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "sarrazin-lossy-play",
+      "region": "sarine",
+      "name": "Le Sarrazin · lunch with a children's play area",
+      "category": "dining",
+      "town": "Lossy",
+      "intro": "The tourism page explicitly describes a play area inside and outside the family restaurant in Lossy.",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "The tourism page explicitly describes a play area inside and outside the family restaurant in Lossy.",
+            "url": "https://fribourg.ch/fr/all/restaurants/le-sarrazin/"
+          }
+        ],
+        "remaining": [
+          "The age range of the equipment, whether the play area is visible from the tables, the children's menu and opening hours are not published."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": true,
+          "text": "The tourism page explicitly describes a play area inside and outside the family restaurant in Lossy.",
+          "source": "https://fribourg.ch/fr/all/restaurants/le-sarrazin/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "The age range of the equipment, whether the play area is visible from the tables, the children's menu and opening hours are not published."
+        ]
+      },
+      "geo": {
+        "label": "Route des Sarrazins 115 1782 Lossy",
+        "lat": 46.83847427368164,
+        "lon": 7.0996222496032715,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+des+Sarrazins+115+1782+Lossy&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "The tourism page explicitly describes a play area inside and outside the family restaurant in Lossy.",
+          "url": "https://fribourg.ch/fr/all/restaurants/le-sarrazin/"
+        },
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The restaurant's own page lists opening hours: closed Monday and Tuesday, open Wednesday to Saturday 10:00–23:00, and Sunday and public holidays 10:00–17:00. No separate hours for the play area are published.",
+          "url": "https://lesarrazin.ch/"
+        }
+      ],
+      "remaining": [
+        "Is the children's play area open during all restaurant hours, and is it indoors, outdoors or both?",
+        "What ages is the play area meant for, and is there a charge to use it?",
+        "Is a table reservation needed for families who come for the play area?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "schedule": "Restaurant opening hours: Wednesday to Saturday 10:00–23:00; Sunday and public holidays 10:00–17:00; Monday and Tuesday closed. No separate hours for the play area are published.",
+        "days": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "practicalPatch": {},
+      "warnings": [
+        "The age range of the equipment, whether the play area is visible from the tables and the children's menu are not published."
+      ],
+      "cardId": "sarrazin-lossy-play",
+      "findings": [
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The restaurant's own page lists opening hours: closed Monday and Tuesday, open Wednesday to Saturday 10:00–23:00, and Sunday and public holidays 10:00–17:00. No separate hours for the play area are published.",
+          "url": "https://lesarrazin.ch/"
+        }
+      ],
+      "remaining": [
+        "Is the children's play area open during all restaurant hours, and is it indoors, outdoors or both?",
+        "What ages is the play area meant for, and is there a charge to use it?",
+        "Is a table reservation needed for families who come for the play area?"
+      ]
+    }
+  },
+  {
+    "jobId": "446a49e7-1700-49ad-806e-addeea32dc68",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "id": "migros-avry-play",
+      "name": "Migros Restaurant Avry · playground by the terrace",
+      "category": "dining",
+      "town": "Avry-sur-Matran",
+      "route": "detour",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age for the play area to be confirmed",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Mon–Thu 08:00–19:00; Fri 08:00–21:00; Sat 08:00–16:00; Sun closed",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "events": [],
+      "address": "Avry Centre, Route de Matran 9, 1754 Avry-sur-Matran",
+      "price": "According to the menu; confirm current prices and access to the games",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Migros Restaurant Avry",
+          "phone": "058 573 31 11",
+          "email": ""
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.avrycentre.ch/migros-restaurant/",
+          "label": "Shopping centre: restaurant and opening hours"
+        },
+        {
+          "url": "https://www.google.com/maps/place/restaurant+Migros+-+Avry+Centre/@46.7876479,7.0781119,17z/data=!3m1!4b1!4m6!3m5!1s0x478e6fb938a3e42b:0xdcc5a6cbe664f815!8m2!3d46.7876479!4d7.0781119!16s%2Fg%2F1hg4zy0g5",
+          "label": "Google Maps: review of the terrace and owner's reply, viewed 27.09.2026"
+        },
+        {
+          "url": "https://www.laliberte.ch/articles/regions/sarine/des-travaux-a-avry-centre-949424",
+          "label": "La Liberté, 08.01.2025: playground and slide after works"
+        },
+        {
+          "url": "https://www.avrycentre.ch/garderie/",
+          "label": "Separate garderie: not the restaurant's play area"
+        }
+      ],
+      "notes": [
+        "A Google Maps review, posted about 3 months before 27.09.2026, describes a children's playground next to the terrace and a visit for coffee only. The owner's reply confirms the playground. This is more recent than the La Liberté report of January 2025.",
+        "A visitor describes the playground as suitable for small children. This is their assessment, not an official admission for young children. The equipment, the view from a particular table and the rules for playing with an adult have not yet been established.",
+        "La Liberté mentioned the indoor slide in January 2025. The recent review and the restaurant's reply do not confirm that it is currently available. For a trip in the rain, ask specifically about the indoor slide: 058 573 31 11.",
+        "Avry Centre also has a separate childcare service (garderie) for children aged 2–5, where the child is left with staff. This is different from playing together in the restaurant; ask separately about the conditions for using the restaurant’s play area.",
+        "The current price of a children's dish at Avry is not confirmed; offers from other Migros cooperatives do not necessarily apply here. Food prices say nothing about a charge for the games. One visitor came for coffee only, but this does not confirm access without an order."
+      ],
+      "checked": "2026-09-27",
+      "region": "sarine",
+      "reviewAfter": "2026-10-27",
+      "research": {
+        "date": "2026-11-08",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "schedule",
+            "kind": "official",
+            "text": "The Avry Centre page for the Migros Restaurant, checked on 2026-11-08, lists opening hours of Monday to Thursday 08:00–19:00, Friday 08:00–21:00 and Saturday 08:00–16:00, with Sunday closed. These are the restaurant's hours; no separate hours are published for the play area.",
+            "url": "https://www.avrycentre.ch/migros-restaurant/"
+          }
+        ],
+        "remaining": [
+          "The indoor slide is confirmed only by a 2025 publication; the age range of the equipment and the conditions of access are unknown.",
+          "Is the children's playground by the terrace, including the indoor slide, currently open to families, and what are its hours?",
+          "What age range is the play area meant for, and may adults stay with their children?",
+          "Is there a charge to use the play area, and is a purchase from the restaurant required?",
+          "What is the exact visitor address, including the street number, of the restaurant entrance at Avry Centre?"
+        ]
+      },
+      "practical": {},
+      "geo": {
+        "label": "Route de Matran 9 1754 Avry-sur-Matran",
+        "lat": 46.787906646728516,
+        "lon": 7.079706192016602,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Avry+Centre+Route+de+Matran+9+1754+Avry-sur-Matran&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The Avry Centre page for the Migros Restaurant, checked on 2026-11-08, lists opening hours of Monday to Thursday 08:00–19:00, Friday 08:00–21:00 and Saturday 08:00–16:00, with Sunday closed. These are the restaurant's hours; no separate hours are published for the play area.",
+          "url": "https://www.avrycentre.ch/migros-restaurant/"
+        },
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The Avry Centre page for the Migros Restaurant, rechecked on 2026-11-24, lists opening hours of Monday to Thursday 08:00–19:00, Friday 08:00–21:00 and Saturday 08:00–16:00, with Sunday closed, and the restaurant landline 058 573 31 11.",
+          "url": "https://www.avrycentre.ch/migros-restaurant/"
+        }
+      ],
+      "remaining": [
+        "The indoor slide is confirmed only by a 2025 publication; the age range of the equipment and the conditions of access are unknown.",
+        "Is the children's playground by the terrace, including the indoor slide, currently open to families, and what are its hours?",
+        "What age range is the play area meant for, and may adults stay with their children?",
+        "Is there a charge to use the play area, and is a purchase from the restaurant required?",
+        "What is the exact visitor address, including the street number, of the restaurant entrance at Avry Centre?",
+        "Is the children's playground by the terrace currently open to families, and what are its hours?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "checked": "2026-11-24",
+        "status": "check",
+        "parent": "unknown",
+        "age": "Age to be confirmed",
+        "parentDetails": "Conditions for adult participation not published",
+        "address": "Visit address not published",
+        "addressPrecision": "area",
+        "price": "Price not published",
+        "contacts": [
+          {
+            "name": "Migros Restaurant",
+            "phone": "058 573 31 11",
+            "email": ""
+          }
+        ]
+      },
+      "practicalPatch": {},
+      "cardId": "migros-avry-play",
+      "findings": [
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The Avry Centre page for the Migros Restaurant, rechecked on 2026-11-24, lists opening hours of Monday to Thursday 08:00–19:00, Friday 08:00–21:00 and Saturday 08:00–16:00, with Sunday closed, and the restaurant landline 058 573 31 11.",
+          "url": "https://www.avrycentre.ch/migros-restaurant/"
+        }
+      ],
+      "remaining": [
+        "Is the children's playground by the terrace currently open to families, and what are its hours?",
+        "What age range is the play area meant for, and may adults stay with their children?",
+        "Is there a charge to use the play area, and is a purchase from the restaurant required?",
+        "What is the exact visitor address, including the street number, of the restaurant entrance at Avry Centre?"
+      ]
+    }
+  },
+  {
+    "jobId": "8f4d4dc1-eb3d-4141-9793-81bf789e0fdd",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "id": "migros-avry-play",
+      "name": "Migros Restaurant Avry · playground by the terrace",
+      "category": "dining",
+      "town": "Avry-sur-Matran",
+      "route": "detour",
+      "format": "self",
+      "status": "check",
+      "min": null,
+      "max": null,
+      "age": "Age to be confirmed",
+      "parent": "unknown",
+      "languages": [],
+      "schedule": "Mon–Thu 08:00–19:00; Fri 08:00–21:00; Sat 08:00–16:00; Sun closed",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "events": [],
+      "address": "Visit address not published",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Migros Restaurant",
+          "phone": "058 573 31 11",
+          "email": ""
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.avrycentre.ch/migros-restaurant/",
+          "label": "Shopping centre: restaurant and opening hours"
+        },
+        {
+          "url": "https://www.google.com/maps/place/restaurant+Migros+-+Avry+Centre/@46.7876479,7.0781119,17z/data=!3m1!4b1!4m6!3m5!1s0x478e6fb938a3e42b:0xdcc5a6cbe664f815!8m2!3d46.7876479!4d7.0781119!16s%2Fg%2F1hg4zy0g5",
+          "label": "Google Maps: review of the terrace and owner's reply, viewed 27.09.2026"
+        },
+        {
+          "url": "https://www.laliberte.ch/articles/regions/sarine/des-travaux-a-avry-centre-949424",
+          "label": "La Liberté, 08.01.2025: playground and slide after works"
+        },
+        {
+          "url": "https://www.avrycentre.ch/garderie/",
+          "label": "Separate garderie: not the restaurant's play area"
+        }
+      ],
+      "notes": [
+        "A Google Maps review, posted about 3 months before 27.09.2026, describes a children's playground next to the terrace and a visit for coffee only. The owner's reply confirms the playground. This is more recent than the La Liberté report of January 2025.",
+        "A visitor describes the playground as suitable for small children. This is their assessment, not an official admission for young children. The equipment, the view from a particular table and the rules for playing with an adult have not yet been established.",
+        "La Liberté mentioned the indoor slide in January 2025. The recent review and the restaurant's reply do not confirm that it is currently available. For a trip in the rain, ask specifically about the indoor slide: 058 573 31 11.",
+        "Avry Centre also has a separate childcare service (garderie) for children aged 2–5, where the child is left with staff. This is different from playing together in the restaurant; ask separately about the conditions for using the restaurant’s play area.",
+        "The current price of a children's dish at Avry is not confirmed; offers from other Migros cooperatives do not necessarily apply here. Food prices say nothing about a charge for the games. One visitor came for coffee only, but this does not confirm access without an order."
+      ],
+      "checked": "2026-11-24",
+      "region": "sarine",
+      "reviewAfter": "2026-10-27",
+      "research": {
+        "date": "2026-11-24",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "schedule",
+            "kind": "official",
+            "text": "The Avry Centre page for the Migros Restaurant, checked on 2026-11-08, lists opening hours of Monday to Thursday 08:00–19:00, Friday 08:00–21:00 and Saturday 08:00–16:00, with Sunday closed. These are the restaurant's hours; no separate hours are published for the play area.",
+            "url": "https://www.avrycentre.ch/migros-restaurant/"
+          },
+          {
+            "field": "schedule",
+            "kind": "official",
+            "text": "The Avry Centre page for the Migros Restaurant, rechecked on 2026-11-24, lists opening hours of Monday to Thursday 08:00–19:00, Friday 08:00–21:00 and Saturday 08:00–16:00, with Sunday closed, and the restaurant landline 058 573 31 11.",
+            "url": "https://www.avrycentre.ch/migros-restaurant/"
+          }
+        ],
+        "remaining": [
+          "The indoor slide is confirmed only by a 2025 publication; the age range of the equipment and the conditions of access are unknown.",
+          "Is the children's playground by the terrace, including the indoor slide, currently open to families, and what are its hours?",
+          "What age range is the play area meant for, and may adults stay with their children?",
+          "Is there a charge to use the play area, and is a purchase from the restaurant required?",
+          "What is the exact visitor address, including the street number, of the restaurant entrance at Avry Centre?",
+          "Is the children's playground by the terrace currently open to families, and what are its hours?"
+        ]
+      },
+      "practical": {},
+      "parentDetails": "Conditions for adult participation not published",
+      "addressPrecision": "area"
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The Avry Centre page for the Migros Restaurant, checked on 2026-11-08, lists opening hours of Monday to Thursday 08:00–19:00, Friday 08:00–21:00 and Saturday 08:00–16:00, with Sunday closed. These are the restaurant's hours; no separate hours are published for the play area.",
+          "url": "https://www.avrycentre.ch/migros-restaurant/"
+        },
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The Avry Centre page for the Migros Restaurant, rechecked on 2026-11-24, lists opening hours of Monday to Thursday 08:00–19:00, Friday 08:00–21:00 and Saturday 08:00–16:00, with Sunday closed, and the restaurant landline 058 573 31 11.",
+          "url": "https://www.avrycentre.ch/migros-restaurant/"
+        },
+        {
+          "field": "research.findings",
+          "kind": "official",
+          "text": "The Avry Centre access page, checked on 2026-11-24, says the shopping centre offers more than 2,000 free parking spaces, including a covered car park. This is centre-wide parking and is not stated for the restaurant or its play area.",
+          "url": "https://www.avrycentre.ch/acces/"
+        }
+      ],
+      "remaining": [
+        "The indoor slide is confirmed only by a 2025 publication; the age range of the equipment and the conditions of access are unknown.",
+        "Is the children's playground by the terrace, including the indoor slide, currently open to families, and what are its hours?",
+        "What age range is the play area meant for, and may adults stay with their children?",
+        "Is there a charge to use the play area, and is a purchase from the restaurant required?",
+        "What is the exact visitor address, including the street number, of the restaurant entrance at Avry Centre?",
+        "Is the children's playground by the terrace currently open to families, and what are its hours?"
+      ]
+    },
+    "draft": {
+      "patch": {},
+      "practicalPatch": {},
+      "cardId": "migros-avry-play",
+      "findings": [
+        {
+          "field": "research.findings",
+          "kind": "official",
+          "text": "The Avry Centre access page, checked on 2026-11-24, says the shopping centre offers more than 2,000 free parking spaces, including a covered car park. This is centre-wide parking and is not stated for the restaurant or its play area.",
+          "url": "https://www.avrycentre.ch/acces/"
+        }
+      ],
+      "remaining": [
+        "Is the children's playground by the terrace, including the indoor slide, currently open to families, and what are its hours?",
+        "What age range is the play area meant for, and may adults stay with their children?",
+        "Is there a charge to use the play area, and is a purchase from the restaurant required?",
+        "What is the exact visitor address, including the street number, of the restaurant entrance at Avry Centre?"
+      ]
+    }
+  },
+  {
+    "jobId": "1588c357-a669-4bab-aa89-c38b5b7d08f8",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "id": "migros-avry-play",
+      "name": "Migros Restaurant Avry · playground by the terrace",
+      "category": "dining",
+      "town": "Avry-sur-Matran",
+      "route": "detour",
+      "format": "self",
+      "status": "check",
+      "min": null,
+      "max": null,
+      "age": "Age to be confirmed",
+      "parent": "unknown",
+      "languages": [],
+      "schedule": "Mon–Thu 08:00–19:00; Fri 08:00–21:00; Sat 08:00–16:00; Sun closed",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "events": [],
+      "address": "Visit address not published",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Migros Restaurant",
+          "phone": "058 573 31 11",
+          "email": ""
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.avrycentre.ch/migros-restaurant/",
+          "label": "Shopping centre: restaurant and opening hours"
+        },
+        {
+          "url": "https://www.google.com/maps/place/restaurant+Migros+-+Avry+Centre/@46.7876479,7.0781119,17z/data=!3m1!4b1!4m6!3m5!1s0x478e6fb938a3e42b:0xdcc5a6cbe664f815!8m2!3d46.7876479!4d7.0781119!16s%2Fg%2F1hg4zy0g5",
+          "label": "Google Maps: review of the terrace and owner's reply, viewed 27.09.2026"
+        },
+        {
+          "url": "https://www.laliberte.ch/articles/regions/sarine/des-travaux-a-avry-centre-949424",
+          "label": "La Liberté, 08.01.2025: playground and slide after works"
+        },
+        {
+          "url": "https://www.avrycentre.ch/garderie/",
+          "label": "Separate garderie: not the restaurant's play area"
+        },
+        {
+          "url": "https://www.avrycentre.ch/acces/",
+          "label": "Additional check: research.findings"
+        }
+      ],
+      "notes": [
+        "A Google Maps review, posted about 3 months before 27.09.2026, describes a children's playground next to the terrace and a visit for coffee only. The owner's reply confirms the playground. This is more recent than the La Liberté report of January 2025.",
+        "A visitor describes the playground as suitable for small children. This is their assessment, not an official admission for young children. The equipment, the view from a particular table and the rules for playing with an adult have not yet been established.",
+        "La Liberté mentioned the indoor slide in January 2025. The recent review and the restaurant's reply do not confirm that it is currently available. For a trip in the rain, ask specifically about the indoor slide: 058 573 31 11.",
+        "Avry Centre also has a separate childcare service (garderie) for children aged 2–5, where the child is left with staff. This is different from playing together in the restaurant; ask separately about the conditions for using the restaurant’s play area.",
+        "The current price of a children's dish at Avry is not confirmed; offers from other Migros cooperatives do not necessarily apply here. Food prices say nothing about a charge for the games. One visitor came for coffee only, but this does not confirm access without an order."
+      ],
+      "checked": "2026-11-24",
+      "region": "sarine",
+      "reviewAfter": "2026-10-27",
+      "research": {
+        "date": "2026-11-24",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "schedule",
+            "kind": "official",
+            "text": "The Avry Centre page for the Migros Restaurant, checked on 2026-11-08, lists opening hours of Monday to Thursday 08:00–19:00, Friday 08:00–21:00 and Saturday 08:00–16:00, with Sunday closed. These are the restaurant's hours; no separate hours are published for the play area.",
+            "url": "https://www.avrycentre.ch/migros-restaurant/"
+          },
+          {
+            "field": "schedule",
+            "kind": "official",
+            "text": "The Avry Centre page for the Migros Restaurant, rechecked on 2026-11-24, lists opening hours of Monday to Thursday 08:00–19:00, Friday 08:00–21:00 and Saturday 08:00–16:00, with Sunday closed, and the restaurant landline 058 573 31 11.",
+            "url": "https://www.avrycentre.ch/migros-restaurant/"
+          },
+          {
+            "field": "research.findings",
+            "kind": "official",
+            "text": "The Avry Centre access page, checked on 2026-11-24, says the shopping centre offers more than 2,000 free parking spaces, including a covered car park. This is centre-wide parking and is not stated for the restaurant or its play area.",
+            "url": "https://www.avrycentre.ch/acces/"
+          }
+        ],
+        "remaining": [
+          "The indoor slide is confirmed only by a 2025 publication; the age range of the equipment and the conditions of access are unknown.",
+          "Is the children's playground by the terrace, including the indoor slide, currently open to families, and what are its hours?",
+          "What age range is the play area meant for, and may adults stay with their children?",
+          "Is there a charge to use the play area, and is a purchase from the restaurant required?",
+          "What is the exact visitor address, including the street number, of the restaurant entrance at Avry Centre?",
+          "Is the children's playground by the terrace currently open to families, and what are its hours?"
+        ]
+      },
+      "practical": {},
+      "parentDetails": "Conditions for adult participation not published",
+      "addressPrecision": "area"
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The Avry Centre page for the Migros Restaurant, checked on 2026-11-08, lists opening hours of Monday to Thursday 08:00–19:00, Friday 08:00–21:00 and Saturday 08:00–16:00, with Sunday closed. These are the restaurant's hours; no separate hours are published for the play area.",
+          "url": "https://www.avrycentre.ch/migros-restaurant/"
+        },
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The Avry Centre page for the Migros Restaurant, rechecked on 2026-11-24, lists opening hours of Monday to Thursday 08:00–19:00, Friday 08:00–21:00 and Saturday 08:00–16:00, with Sunday closed, and the restaurant landline 058 573 31 11.",
+          "url": "https://www.avrycentre.ch/migros-restaurant/"
+        },
+        {
+          "field": "research.findings",
+          "kind": "official",
+          "text": "The Avry Centre access page, checked on 2026-11-24, says the shopping centre offers more than 2,000 free parking spaces, including a covered car park. This is centre-wide parking and is not stated for the restaurant or its play area.",
+          "url": "https://www.avrycentre.ch/acces/"
+        },
+        {
+          "field": "research.findings",
+          "kind": "official",
+          "text": "On 2026-11-24 the Avry Centre page for the Migros Restaurant shows the restaurant's opening hours, the landline 058 573 31 11 and a welcome message. It does not mention a children's play area, so the playground's current availability, age range, rules and price are not confirmed by this page.",
+          "url": "https://www.avrycentre.ch/migros-restaurant/"
+        }
+      ],
+      "remaining": [
+        "The indoor slide is confirmed only by a 2025 publication; the age range of the equipment and the conditions of access are unknown.",
+        "Is the children's playground by the terrace, including the indoor slide, currently open to families, and what are its hours?",
+        "What age range is the play area meant for, and may adults stay with their children?",
+        "Is there a charge to use the play area, and is a purchase from the restaurant required?",
+        "What is the exact visitor address, including the street number, of the restaurant entrance at Avry Centre?",
+        "Is the children's playground by the terrace currently open to families, and what are its hours?",
+        "Is the children's playground by the terrace currently open to families, and are there hours of its own?"
+      ]
+    },
+    "draft": {
+      "patch": {},
+      "practicalPatch": {},
+      "cardId": "migros-avry-play",
+      "findings": [
+        {
+          "field": "research.findings",
+          "kind": "official",
+          "text": "On 2026-11-24 the Avry Centre page for the Migros Restaurant shows the restaurant's opening hours, the landline 058 573 31 11 and a welcome message. It does not mention a children's play area, so the playground's current availability, age range, rules and price are not confirmed by this page.",
+          "url": "https://www.avrycentre.ch/migros-restaurant/"
+        }
+      ],
+      "remaining": [
+        "Is the children's playground by the terrace currently open to families, and are there hours of its own?",
+        "What age range is the play area meant for, and may adults stay with their children?",
+        "Is there a charge to use the play area, and is a purchase from the restaurant required?",
+        "What is the exact visitor address, including the street number, of the restaurant entrance at Avry Centre?"
+      ]
+    }
+  },
+  {
+    "jobId": "699d369c-0158-4859-adfd-24f4cbe0f04d",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age limits are not published",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Freely accessible all year; no daily opening hours are published for the park itself.",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Galmguetweg 1, 1793 Jeuss",
+      "price": "Free entry",
+      "priceKind": "free",
+      "amount": 0,
+      "contacts": [
+        {
+          "name": "Tierpark Jeuss",
+          "phone": "026 674 96 00",
+          "email": "tierpark.jeuss@rsl-gns.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/parc-animalier-jeuss/",
+          "label": "Animals, playground, free entry and access"
+        }
+      ],
+      "notes": [
+        "You can watch fallow deer, goats and exotic birds; there is a picnic area and parking.",
+        "The café in the neighbouring care home is open 14:00–17:00, but these are not the opening hours of the park itself."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "jeuss-animal-park",
+      "region": "see",
+      "name": "Tierpark Jeuss · animals and playground",
+      "category": "nature",
+      "town": "Jeuss",
+      "intro": "A free animal park with a playground and a path suitable for a pushchair.",
+      "research": {
+        "date": "2026-11-08",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "The animal park and playground are open free of charge all year round; the path is suitable for a pushchair.",
+            "url": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/parc-animalier-jeuss/"
+          },
+          {
+            "field": "Animals and picnic area",
+            "kind": "official",
+            "text": "The park shows fallow deer, goats and brightly coloured exotic birds in spacious enclosures, and has a picnic area.",
+            "url": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/parc-animalier-jeuss/"
+          },
+          {
+            "field": "Goats and playground",
+            "kind": "official",
+            "text": "The tourism page for the park describes children petting the goats and playing on the playground. It publishes no rules on contact with or feeding of the animals.",
+            "url": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/parc-animalier-jeuss/"
+          }
+        ],
+        "remaining": [
+          "The rules on contact with and feeding of the animals, and the age range for the play equipment, are not published.",
+          "Are visitor toilets, a changing table or a breastfeeding space available at the park?",
+          "Is there an age range for the play equipment, and are there rules on contact with the animals?",
+          "Is the park open every day, and is the visit entirely outdoors? The page only says it is freely accessible all year."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "The animal park and playground are open free of charge all year round; the path is suitable for a pushchair.",
+          "source": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/parc-animalier-jeuss/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "The rules on contact with and feeding of the animals, and the age range for the play equipment, are not published."
+        ]
+      },
+      "geo": {
+        "label": "Galmguetweg 1 1793 Jeuss",
+        "lat": 46.91077423095703,
+        "lon": 7.168018817901611,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Galmguetweg+1+1793+Jeuss&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-28",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Animals and picnic area",
+          "kind": "official",
+          "text": "The park shows fallow deer, goats and brightly coloured exotic birds in spacious enclosures, and has a picnic area.",
+          "url": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/parc-animalier-jeuss/"
+        },
+        {
+          "field": "Opening hours and parking",
+          "kind": "official",
+          "text": "The organizer lists the park as always accessible. The care-home café has separate hours (Mon–Sun, 14:00–17:00). Free parking spaces are available directly at the entrance.",
+          "url": "https://tierpark-jeuss.ch/fr/"
+        },
+        {
+          "field": "Goats and play area",
+          "kind": "official",
+          "text": "The organizer describes children gently petting the goats. It reports that its play and meeting area is still being built, so families should ask whether the play area is open.",
+          "url": "https://tierpark-jeuss.ch/fr/"
+        }
+      ],
+      "remaining": [
+        "The rules on contact with and feeding of the animals, and the age range for the play equipment, are not published.",
+        "Are visitor toilets, a changing table or a breastfeeding space available at the park?",
+        "Is there an age range for the play equipment, and are there rules on contact with the animals?",
+        "Is the park open every day, and is the visit entirely outdoors? The page only says it is freely accessible all year.",
+        "Does the organizer confirm that entry is free? Its answer on the entry price could not be read.",
+        "Is the play area currently open, or still under construction?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "schedule": "Park always accessible (Toujours accessible). The care-home café (Lu–Di, 14h00–17h00) is a separate venue and not the park's opening hours.",
+        "addressPrecision": "exact",
+        "intro": "An animal park in Jeuss where children can gently pet the goats. The organizer lists the park as always accessible."
+      },
+      "practicalPatch": {
+        "parking": {
+          "value": true,
+          "text": "Free parking spaces are available directly at the entrance.",
+          "source": "https://tierpark-jeuss.ch/fr/",
+          "checked": "2026-11-24"
+        }
+      },
+      "cardId": "jeuss-animal-park",
+      "findings": [
+        {
+          "field": "Opening hours and parking",
+          "kind": "official",
+          "text": "The organizer lists the park as always accessible. The care-home café has separate hours (Mon–Sun, 14:00–17:00). Free parking spaces are available directly at the entrance.",
+          "url": "https://tierpark-jeuss.ch/fr/"
+        },
+        {
+          "field": "Goats and play area",
+          "kind": "official",
+          "text": "The organizer describes children gently petting the goats. It reports that its play and meeting area is still being built, so families should ask whether the play area is open.",
+          "url": "https://tierpark-jeuss.ch/fr/"
+        }
+      ],
+      "remaining": [
+        "Does the organizer confirm that entry is free? Its answer on the entry price could not be read.",
+        "Is the play area currently open, or still under construction?"
+      ]
+    }
+  },
+  {
+    "jobId": "1fa22c9c-f0de-4f99-84cd-eb5d6eded562",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Games suited to all ages (organiser homepage); no visitor age range published",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Mon 15:00–18:00; closed during school holidays",
+      "days": [
+        1
+      ],
+      "events": [],
+      "address": "Les Blés yellow building of the Ecole primaire in Attalens, basement (abri PC)",
+      "price": "CHF 40 per family for one year, or CHF 25 for 6 months (subscription).",
+      "priceKind": "year",
+      "amount": 40,
+      "contacts": [
+        {
+          "name": "Ludothèque Papayou",
+          "phone": "+41 (0)21 947 51 03",
+          "email": "ludopapayou@gmail.com"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/les-paccots/patrimoine-et-terroir/ludotheque-papayou/",
+          "label": "Format, hours and address"
+        },
+        {
+          "url": "https://ludopapayou.wordpress.com/faq/",
+          "label": "Additional check: Price"
+        },
+        {
+          "url": "https://ludopapayou.wordpress.com/",
+          "label": "Additional check: On-site visit"
+        },
+        {
+          "url": "https://ludopapayou.wordpress.com/adresse/",
+          "label": "Additional check: Location"
+        }
+      ],
+      "notes": [
+        "Games can be borrowed: 2 games for 2 weeks.",
+        "Closed during Fribourg canton school holidays.",
+        "A CHF 5 charge may apply for a lost game piece."
+      ],
+      "checked": "2026-11-24",
+      "reviewAfter": "2026-10-28",
+      "id": "papayou-attalens",
+      "region": "veveyse",
+      "name": "Ludothèque Papayou · games and toys",
+      "category": "books",
+      "town": "Attalens",
+      "intro": "A place to discover and borrow games and toys, in the basement of the Les Blés school building in Attalens.",
+      "research": {
+        "date": "2026-11-24",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "The games library at the Le Petit Prince school lends games and toys on Mondays.",
+            "url": "https://fribourg.ch/fr/les-paccots/patrimoine-et-terroir/ludotheque-papayou/"
+          },
+          {
+            "field": "Price",
+            "kind": "official",
+            "text": "A subscription costs CHF 40 per family for one year or CHF 25 for 6 months; payment is by cash only.",
+            "url": "https://ludopapayou.wordpress.com/faq/"
+          },
+          {
+            "field": "On-site visit",
+            "kind": "official",
+            "text": "Families can try the games on site, play with their children and borrow 2 games per child for 2 weeks. The library is open every Monday from 15:00 to 18:00, except school holidays.",
+            "url": "https://ludopapayou.wordpress.com/"
+          },
+          {
+            "field": "Location",
+            "kind": "official",
+            "text": "The games library is in the basement of the yellow Les Blés building of the primary school in Attalens; visitors arrive from below and the entrance is on the left.",
+            "url": "https://ludopapayou.wordpress.com/adresse/"
+          }
+        ],
+        "remaining": [
+          "Is a subscription required to borrow games?",
+          "Do families need to register in advance?",
+          "Is the entrance accessible with a stroller, and are parking, a toilet or a changing table available?"
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": true,
+          "text": "The lending library is in a basement room of the school building (abri PC).",
+          "source": "https://ludopapayou.wordpress.com/faq/",
+          "checked": "2026-11-24"
+        },
+        "warnings": [
+          "Payment is by cash only; cards and payment slips are not accepted."
+        ],
+        "costNote": {
+          "value": "Payment is by cash only; card and payment-slip payments are not accepted.",
+          "text": "Payment is by cash only; card and payment-slip payments are not accepted.",
+          "source": "https://ludopapayou.wordpress.com/faq/",
+          "checked": "2026-11-24"
+        }
+      },
+      "parentDetails": "Parents may come to try the games on site and play with their children; no requirement for the adult to attend is published.",
+      "addressPrecision": "exact"
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "The games library at the Le Petit Prince school lends games and toys on Mondays.",
+          "url": "https://fribourg.ch/fr/les-paccots/patrimoine-et-terroir/ludotheque-papayou/"
+        },
+        {
+          "field": "Price",
+          "kind": "official",
+          "text": "A subscription costs CHF 40 per family for one year or CHF 25 for 6 months; payment is by cash only.",
+          "url": "https://ludopapayou.wordpress.com/faq/"
+        },
+        {
+          "field": "On-site visit",
+          "kind": "official",
+          "text": "Families can try the games on site, play with their children and borrow 2 games per child for 2 weeks. The library is open every Monday from 15:00 to 18:00, except school holidays.",
+          "url": "https://ludopapayou.wordpress.com/"
+        },
+        {
+          "field": "Location",
+          "kind": "official",
+          "text": "The games library is in the basement of the yellow Les Blés building of the primary school in Attalens; visitors arrive from below and the entrance is on the left.",
+          "url": "https://ludopapayou.wordpress.com/adresse/"
+        },
+        {
+          "field": "Borrowing",
+          "kind": "official",
+          "text": "Borrowing is 2 games for 2 weeks. Families who want to keep games longer can ask when they collect them, or send an e-mail.",
+          "url": "https://ludopapayou.wordpress.com/faq/"
+        }
+      ],
+      "remaining": [
+        "Is a subscription required to borrow games?",
+        "Do families need to register in advance?",
+        "Is the entrance accessible with a stroller, and are parking, a toilet or a changing table available?",
+        "What age range is the games library meant for?",
+        "Is a phone number or organisation e-mail address published for the games library?"
+      ]
+    },
+    "draft": {
+      "patch": {},
+      "practicalPatch": {},
+      "cardId": "papayou-attalens",
+      "findings": [
+        {
+          "field": "Borrowing",
+          "kind": "official",
+          "text": "Borrowing is 2 games for 2 weeks. Families who want to keep games longer can ask when they collect them, or send an e-mail.",
+          "url": "https://ludopapayou.wordpress.com/faq/"
+        }
+      ],
+      "remaining": [
+        "Is a subscription required to borrow games?",
+        "Do families need to register in advance?",
+        "Is the entrance accessible with a stroller, and are parking, a toilet or a changing table available?",
+        "What age range is the games library meant for?",
+        "Is a phone number or organisation e-mail address published for the games library?"
+      ]
+    }
+  },
+  {
+    "jobId": "a6d444a8-3fba-4322-8738-d8d1d8018207",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age limits are not published",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Restaurant opening hours: Wednesday to Saturday 10:00–23:00; Sunday and public holidays 10:00–17:00; Monday and Tuesday closed. No separate hours for the play area are published.",
+      "days": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Route des Sarrazins 115, 1782 Lossy",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Le Sarrazin",
+          "phone": "026 475 12 44",
+          "email": "restaurant@lesarrazin.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/all/restaurants/le-sarrazin/",
+          "label": "Tourism: premises and outdoor play area, address"
+        },
+        {
+          "url": "https://lesarrazin.ch/",
+          "label": "Additional check: schedule"
+        }
+      ],
+      "notes": [
+        "Staff supervision is not stated; an adult is responsible for the child even when there is a separate play room.",
+        "Whether the outdoor area can be used at a given time of year depends on the weather; check dish prices on the current menu."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "sarrazin-lossy-play",
+      "region": "sarine",
+      "name": "Le Sarrazin · lunch with a children's play area",
+      "category": "dining",
+      "town": "Lossy",
+      "intro": "The tourism page explicitly describes a play area inside and outside the family restaurant in Lossy.",
+      "research": {
+        "date": "2026-11-24",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Availability and format",
+            "kind": "official",
+            "text": "The tourism page explicitly describes a play area inside and outside the family restaurant in Lossy.",
+            "url": "https://fribourg.ch/fr/all/restaurants/le-sarrazin/"
+          },
+          {
+            "field": "schedule",
+            "kind": "official",
+            "text": "The restaurant's own page lists opening hours: closed Monday and Tuesday, open Wednesday to Saturday 10:00–23:00, and Sunday and public holidays 10:00–17:00. No separate hours for the play area are published.",
+            "url": "https://lesarrazin.ch/"
+          }
+        ],
+        "remaining": [
+          "Is the children's play area open during all restaurant hours, and is it indoors, outdoors or both?",
+          "What ages is the play area meant for, and is there a charge to use it?",
+          "Is a table reservation needed for families who come for the play area?"
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": true,
+          "text": "The tourism page explicitly describes a play area inside and outside the family restaurant in Lossy.",
+          "source": "https://fribourg.ch/fr/all/restaurants/le-sarrazin/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "The age range of the equipment, whether the play area is visible from the tables and the children's menu are not published."
+        ]
+      },
+      "geo": {
+        "label": "Route des Sarrazins 115 1782 Lossy",
+        "lat": 46.83847427368164,
+        "lon": 7.0996222496032715,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+des+Sarrazins+115+1782+Lossy&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Availability and format",
+          "kind": "official",
+          "text": "The tourism page explicitly describes a play area inside and outside the family restaurant in Lossy.",
+          "url": "https://fribourg.ch/fr/all/restaurants/le-sarrazin/"
+        },
+        {
+          "field": "schedule",
+          "kind": "official",
+          "text": "The restaurant's own page lists opening hours: closed Monday and Tuesday, open Wednesday to Saturday 10:00–23:00, and Sunday and public holidays 10:00–17:00. No separate hours for the play area are published.",
+          "url": "https://lesarrazin.ch/"
+        },
+        {
+          "field": "practical.costNote",
+          "kind": "official",
+          "text": "The restaurant's homepage shows a weekday set menu with two choices from 21 (currency and validity not stated). This is a meal price; no admission price for the play area is published.",
+          "url": "https://lesarrazin.ch/"
+        }
+      ],
+      "remaining": [
+        "Is the children's play area open during all restaurant hours, and is it indoors, outdoors or both?",
+        "What ages is the play area meant for, and is there a charge to use it?",
+        "Is a table reservation needed for families who come for the play area?"
+      ]
+    },
+    "draft": {
+      "patch": {},
+      "practicalPatch": {
+        "costNote": {
+          "value": "Homepage shows a weekday set menu from 21 (currency and validity not stated). No play-area admission price is published.",
+          "text": "Homepage shows a weekday set menu from 21 (currency and validity not stated). No play-area admission price is published.",
+          "source": "https://lesarrazin.ch/",
+          "checked": "2026-11-24"
+        }
+      },
+      "cardId": "sarrazin-lossy-play",
+      "findings": [
+        {
+          "field": "practical.costNote",
+          "kind": "official",
+          "text": "The restaurant's homepage shows a weekday set menu with two choices from 21 (currency and validity not stated). This is a meal price; no admission price for the play area is published.",
+          "url": "https://lesarrazin.ch/"
+        }
+      ],
+      "remaining": [
+        "Is the children's play area open during all restaurant hours, and is it indoors, outdoors or both?",
+        "What ages is the play area meant for, and is there a charge to use it?",
+        "Is a table reservation needed for families who come for the play area?"
+      ]
+    }
+  },
+  {
+    "jobId": "6a76d8a6-9b30-45d6-982c-a2a87fd8b1b4",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age limits are not published",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Park always accessible (Toujours accessible). The care-home café (Lu–Di, 14h00–17h00) is a separate venue and not the park's opening hours.",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Galmguetweg 1, 1793 Jeuss",
+      "price": "Free entry",
+      "priceKind": "free",
+      "amount": 0,
+      "contacts": [
+        {
+          "name": "Tierpark Jeuss",
+          "phone": "026 674 96 00",
+          "email": "tierpark.jeuss@rsl-gns.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/parc-animalier-jeuss/",
+          "label": "Animals, playground, free entry and access"
+        },
+        {
+          "url": "https://tierpark-jeuss.ch/fr/",
+          "label": "Additional check: Opening hours and parking"
+        }
+      ],
+      "notes": [
+        "You can watch fallow deer, goats and exotic birds; there is a picnic area and parking.",
+        "The café in the neighbouring care home is open 14:00–17:00, but these are not the opening hours of the park itself."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "jeuss-animal-park",
+      "region": "see",
+      "name": "Tierpark Jeuss · animals and playground",
+      "category": "nature",
+      "town": "Jeuss",
+      "intro": "An animal park in Jeuss where children can gently pet the goats. The organizer lists the park as always accessible.",
+      "research": {
+        "date": "2026-11-24",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Animals and picnic area",
+            "kind": "official",
+            "text": "The park shows fallow deer, goats and brightly coloured exotic birds in spacious enclosures, and has a picnic area.",
+            "url": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/parc-animalier-jeuss/"
+          },
+          {
+            "field": "Opening hours and parking",
+            "kind": "official",
+            "text": "The organizer lists the park as always accessible. The care-home café has separate hours (Mon–Sun, 14:00–17:00). Free parking spaces are available directly at the entrance.",
+            "url": "https://tierpark-jeuss.ch/fr/"
+          },
+          {
+            "field": "Goats and play area",
+            "kind": "official",
+            "text": "The organizer describes children gently petting the goats. It reports that its play and meeting area is still being built, so families should ask whether the play area is open.",
+            "url": "https://tierpark-jeuss.ch/fr/"
+          }
+        ],
+        "remaining": [
+          "The rules on contact with and feeding of the animals, and the age range for the play equipment, are not published.",
+          "Are visitor toilets, a changing table or a breastfeeding space available at the park?",
+          "Is there an age range for the play equipment, and are there rules on contact with the animals?",
+          "Is the park open every day, and is the visit entirely outdoors? The page only says it is freely accessible all year.",
+          "Does the organizer confirm that entry is free? Its answer on the entry price could not be read.",
+          "Is the play area currently open, or still under construction?"
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "The animal park and playground are open free of charge all year round; the path is suitable for a pushchair.",
+          "source": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/parc-animalier-jeuss/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "The rules on contact with and feeding of the animals, and the age range for the play equipment, are not published."
+        ],
+        "parking": {
+          "value": true,
+          "text": "Free parking spaces are available directly at the entrance.",
+          "source": "https://tierpark-jeuss.ch/fr/",
+          "checked": "2026-11-24"
+        }
+      },
+      "addressPrecision": "exact",
+      "geo": {
+        "label": "Galmguetweg 1 1793 Jeuss",
+        "lat": 46.91077423095703,
+        "lon": 7.168018817901611,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Galmguetweg+1+1793+Jeuss&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-28",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Animals and picnic area",
+          "kind": "official",
+          "text": "The park shows fallow deer, goats and brightly coloured exotic birds in spacious enclosures, and has a picnic area.",
+          "url": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/parc-animalier-jeuss/"
+        },
+        {
+          "field": "Opening hours and parking",
+          "kind": "official",
+          "text": "The organizer lists the park as always accessible. The care-home café has separate hours (Mon–Sun, 14:00–17:00). Free parking spaces are available directly at the entrance.",
+          "url": "https://tierpark-jeuss.ch/fr/"
+        },
+        {
+          "field": "Goats and play area",
+          "kind": "official",
+          "text": "The organizer describes children gently petting the goats. It reports that its play and meeting area is still being built, so families should ask whether the play area is open.",
+          "url": "https://tierpark-jeuss.ch/fr/"
+        },
+        {
+          "field": "Free entry, access and play area",
+          "kind": "official",
+          "text": "Entry to the animal park is free. The path is described as suitable for wheelchairs and strollers, and a play area is available for younger visitors.",
+          "url": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/parc-animalier-jeuss/"
+        }
+      ],
+      "remaining": [
+        "The rules on contact with and feeding of the animals, and the age range for the play equipment, are not published.",
+        "Are visitor toilets, a changing table or a breastfeeding space available at the park?",
+        "Is there an age range for the play equipment, and are there rules on contact with the animals?",
+        "Is the play area currently open, or still under construction?",
+        "Is there an age range for the play equipment, and are there rules on contact with and feeding of the animals?",
+        "Is the play area currently open, or is the new play and meeting area still under construction?",
+        "May adults stay with their children in the park, and is there any rule on accompaniment?",
+        "Is the visit entirely outdoors?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "intro": "An animal park in Jeuss where children can experience nature up close, with animals, a playground and free entry."
+      },
+      "practicalPatch": {
+        "indoor": {
+          "value": null,
+          "text": "The pages do not say whether the visit is indoors or outdoors.",
+          "source": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/parc-animalier-jeuss/",
+          "checked": "2026-11-24"
+        },
+        "booking": {
+          "value": false,
+          "text": "The park is freely accessible all year; no registration or reservation is mentioned.",
+          "source": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/parc-animalier-jeuss/",
+          "checked": "2026-11-24"
+        },
+        "leave": {
+          "value": true,
+          "text": "The park is always accessible, so arrival and departure are not tied to a session time. This does not say whether a child may be left alone.",
+          "source": "https://tierpark-jeuss.ch/fr/",
+          "checked": "2026-11-24"
+        },
+        "commitment": {
+          "value": false,
+          "text": "Entry is free; no course, block or subscription is mentioned.",
+          "source": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/parc-animalier-jeuss/",
+          "checked": "2026-11-24"
+        },
+        "access": {
+          "value": true,
+          "text": "The path is described as suitable for wheelchairs and strollers.",
+          "source": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/parc-animalier-jeuss/",
+          "checked": "2026-11-24"
+        },
+        "playArea": {
+          "value": true,
+          "text": "A play area is available for younger visitors.",
+          "source": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/parc-animalier-jeuss/",
+          "checked": "2026-11-24"
+        }
+      },
+      "cardId": "jeuss-animal-park",
+      "findings": [
+        {
+          "field": "Free entry, access and play area",
+          "kind": "official",
+          "text": "Entry to the animal park is free. The path is described as suitable for wheelchairs and strollers, and a play area is available for younger visitors.",
+          "url": "https://fribourg.ch/fr/regionlacdemorat/activites-en-plein-air/parc-animalier-jeuss/"
+        }
+      ],
+      "remaining": [
+        "Is there an age range for the play equipment, and are there rules on contact with and feeding of the animals?",
+        "Are visitor toilets, a changing table or a breastfeeding space available at the park?",
+        "Is the play area currently open, or is the new play and meeting area still under construction?",
+        "May adults stay with their children in the park, and is there any rule on accompaniment?",
+        "Is the visit entirely outdoors?"
+      ]
+    }
+  },
+  {
+    "jobId": "58c191f7-98de-4c03-8e8f-19154f5343d7",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": null,
+      "age": "Family beach; the age range of the equipment is not stated",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Public beach; availability of services depends on the season",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Route du Port, 1468 Cheyres-Châbles",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Commune de Cheyres-Châbles",
+          "phone": "026 520 74 20",
+          "email": "conseil@cheyres-chables.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-cheyres/",
+          "label": "Play area, shade, services, access and seasonal rules"
+        }
+      ],
+      "notes": [
+        "Sand and shaded lawn, playground, WC, shower, picnic area and restaurant.",
+        "Cheyres station is within walking distance. Paid parking below the station, about eight minutes' walk from the beach, is open from May to September.",
+        "The entry price is not published. Dogs are not allowed from May to September. In winter they are allowed on a lead, but not in the water."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "plage-cheyres",
+      "region": "broye",
+      "name": "Plage de Cheyres · site by the lake",
+      "category": "water",
+      "town": "Cheyres-Châbles",
+      "parentDetails": "An adult stays with the child at the water at all times.",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Family facilities",
+            "kind": "official",
+            "text": "There is a playground, sand, shade, WC and shower. Parking is paid and about eight minutes on foot.",
+            "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-cheyres/"
+          }
+        ],
+        "remaining": [
+          "The entry price and the hours of the seasonal services are not published."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "Outdoor beach",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-cheyres/",
+          "checked": "2026-09-28"
+        },
+        "playArea": {
+          "value": true,
+          "text": "Playground",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-cheyres/",
+          "checked": "2026-09-28"
+        },
+        "toilet": {
+          "value": true,
+          "text": "WC and shower",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-cheyres/",
+          "checked": "2026-09-28"
+        },
+        "parking": {
+          "value": true,
+          "text": "Paid parking, about eight minutes on foot",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-cheyres/",
+          "checked": "2026-09-28"
+        },
+        "gallery": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-cheyres/"
+      },
+      "intro": "Shaded beach with a playground and picnic area."
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Family facilities",
+          "kind": "official",
+          "text": "There is a playground, sand, shade, WC and shower. Parking is paid and about eight minutes on foot.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-cheyres/"
+        },
+        {
+          "field": "Family facilities",
+          "kind": "official",
+          "text": "The official page lists WC and shower, a children's play area and self-service stand-up paddle rental on site. Paid parking is under the station, about 8 minutes on foot, accessible 1 May to 30 September.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-cheyres/"
+        }
+      ],
+      "remaining": [
+        "The entry price and the hours of the seasonal services are not published.",
+        "What are the opening season and hours of the beach and its services?",
+        "Is entry free, and what does parking cost?",
+        "Is there an age range or supervision rule for the play area and the water?",
+        "Is there a changing table or breastfeeding space?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "status": "check",
+        "min": null,
+        "age": "Age not published",
+        "parent": "unknown",
+        "parentDetails": "Conditions for adult participation not published",
+        "schedule": "Schedule not published",
+        "days": [],
+        "addressPrecision": "exact",
+        "contacts": [
+          {
+            "name": "Commune de Cheyres-Châbles",
+            "phone": "+41 26 520 74 20",
+            "email": "conseil@cheyres-chables.ch"
+          }
+        ],
+        "intro": "Sandy beach with a shaded lawn between the Grande Cariçaie nature reserve and the harbour at Cheyres, offering a children's play area, beach volleyball, stand-up paddle rental and a lakeside restaurant.",
+        "checked": "2026-11-24",
+        "reviewAfter": "2026-12-24"
+      },
+      "practicalPatch": {
+        "indoor": {
+          "value": null,
+          "text": "Not published",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-cheyres/",
+          "checked": "2026-11-24"
+        }
+      },
+      "cardId": "plage-cheyres",
+      "findings": [
+        {
+          "field": "Family facilities",
+          "kind": "official",
+          "text": "The official page lists WC and shower, a children's play area and self-service stand-up paddle rental on site. Paid parking is under the station, about 8 minutes on foot, accessible 1 May to 30 September.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-cheyres/"
+        }
+      ],
+      "remaining": [
+        "What are the opening season and hours of the beach and its services?",
+        "Is entry free, and what does parking cost?",
+        "Is there an age range or supervision rule for the play area and the water?",
+        "Is there a changing table or breastfeeding space?"
+      ]
+    }
+  },
+  {
+    "jobId": "f496307a-808c-446c-902a-9fd7b8a9b7af",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": 6,
+      "age": "Special area for ages 0–6",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "According to the centre's page: daily, Mon–Fri 09:00–22:00, Sat–Sun 09:00–20:00",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Rue de l'Etang 25, 1630 Bulle",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "L'Entrepôt",
+          "phone": "026 913 72 12",
+          "email": "info@lentrepot.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/la-gruyere/activites-interieures/lentrepot-bloc-trampo-bar-et-restaurant/",
+          "label": "Tourism page: mini area, address, opening hours"
+        }
+      ],
+      "notes": [
+        "The mini area is described as having a small trampoline, a play area and a ball pit; the centre also has KAPLA.",
+        "The centre's published general opening hours do not confirm that the mini area is open all day. The price of the mini area, the rules for adult entry and the rules on socks should be checked with the operator.",
+        "Access to the separate café and restaurant does not include free entry to the play area."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "entrepot-mini-bulle",
+      "region": "gruyere",
+      "name": "L’Entrepôt · mini area 0–6",
+      "category": "movement",
+      "town": "Bulle",
+      "parentDetails": "Independent family visit; check the rules for accompanying adults in the mini area.",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "unresolved",
+        "findings": [
+          {
+            "field": "Mini area",
+            "kind": "official",
+            "text": "The regional tourism website describes a separate area for ages 0–6 with a trampoline, a play area and a ball pit.",
+            "url": "https://fribourg.ch/fr/la-gruyere/activites-interieures/lentrepot-bloc-trampo-bar-et-restaurant/"
+          }
+        ],
+        "remaining": [
+          "Confirm the mini area's price, its hours and the rules for accompanying adults."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": true,
+          "text": "Separate mini area in an indoor centre",
+          "source": "https://fribourg.ch/fr/la-gruyere/activites-interieures/lentrepot-bloc-trampo-bar-et-restaurant/",
+          "checked": "2026-09-28"
+        },
+        "playArea": {
+          "value": true,
+          "text": "Trampoline, play area and ball pit for ages 0–6",
+          "source": "https://fribourg.ch/fr/la-gruyere/activites-interieures/lentrepot-bloc-trampo-bar-et-restaurant/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "The price and hours of the mini area itself are not confirmed; the centre's general schedule may differ"
+        ]
+      },
+      "intro": "Indoor movement area for young children aged 0–6.",
+      "geo": {
+        "label": "Rue de l'Etang 25 1630 Bulle",
+        "lat": 46.627044677734375,
+        "lon": 7.0665974617004395,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%27Etang+25+1630+Bulle&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-28",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Mini area",
+          "kind": "official",
+          "text": "The regional tourism website describes a separate area for ages 0–6 with a trampoline, a play area and a ball pit.",
+          "url": "https://fribourg.ch/fr/la-gruyere/activites-interieures/lentrepot-bloc-trampo-bar-et-restaurant/"
+        },
+        {
+          "field": "Price",
+          "kind": "official",
+          "text": "Entry for ages 1–6 is CHF 10.00 and an accompanying adult pays CHF 5.00. Under-1 entry is CHF 5.00 but free when accompanied by an adult and a child over 1 year. An annual subscription costs CHF 249.00 for one child and one accompanying adult.",
+          "url": "https://lentrepot.ch/activites/zone-mini/"
+        },
+        {
+          "field": "Age and supervision",
+          "kind": "official",
+          "text": "The Zone Mini is reserved for ages 0–6 only, and children stay under the supervision of their accompanying adult.",
+          "url": "https://lentrepot.ch/activites/zone-mini/"
+        },
+        {
+          "field": "Hours",
+          "kind": "official",
+          "text": "The venue is open Mon–Fri 09:00–22:00 and Sat–Sun 09:00–20:00; until the end of October the Zone Mini closes at 19:30.",
+          "url": "https://lentrepot.ch/infos-pratiques/"
+        }
+      ],
+      "remaining": [
+        "Is advance booking required for the mini area?",
+        "Are there a baby changing table, a visitor toilet and a breastfeeding space near the mini area?",
+        "Is the entrance to the mini area stroller-accessible?",
+        "Are the mini area's hours after October the same as the venue's general hours?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "age": "0–6 years; the zone is reserved for this age range",
+        "parentDetails": "Children stay under the supervision of their accompanying adult. An accompanying adult entry (CHF 5.00) is listed. The page does not say whether the adult must take part in the play.",
+        "schedule": "Venue opening hours: Mon–Fri 09:00–22:00, Sat–Sun 09:00–20:00 (2026). Until the end of October the mini area closes at 19:30.",
+        "scheduleValidThrough": "2026-12-31",
+        "addressPrecision": "exact",
+        "price": "Entry ages 1–6: CHF 10.00. Under 1 year: CHF 5.00, but free if accompanied by an adult and a child over 1 year. Accompanying adult entry: CHF 5.00. Zone Mini annual subscription: CHF 249.00 for one child and one accompanying adult. KAPLA access is included in these prices.",
+        "priceKind": "visit",
+        "amount": 10,
+        "contacts": [
+          {
+            "name": "L'Entrepôt - Escalade & Loisirs",
+            "phone": "+41 (0)26 913 72 12",
+            "email": "info@lentrepot.ch"
+          }
+        ],
+        "notes": [
+          "Non-slip socks are required for children for safety; they can be bought on site for CHF 3.00.",
+          "Shoes are not allowed in the play area, even for adults. Food is not allowed in the play area.",
+          "Until the end of October the mini area closes at 19:30.",
+          "There are no time slots or time limit, but leaving the building counts as a final exit."
+        ]
+      },
+      "practicalPatch": {
+        "parking": {
+          "value": true,
+          "text": "Parking in front of the centre; whether it is free is not stated",
+          "source": "https://lentrepot.ch/infos-pratiques/",
+          "checked": "2026-11-24"
+        },
+        "leave": {
+          "value": true,
+          "text": "No time slots or time limit; stay as long as you like. Leaving the building counts as a final exit.",
+          "source": "https://lentrepot.ch/activites/zone-mini/",
+          "checked": "2026-11-24"
+        },
+        "commitment": {
+          "value": false,
+          "text": "Single entry available; annual subscription is optional",
+          "source": "https://lentrepot.ch/activites/zone-mini/",
+          "checked": "2026-11-24"
+        }
+      },
+      "warnings": [
+        "Non-slip socks are required for children (CHF 3.00 on site); shoes are not allowed in the play area, even for adults."
+      ],
+      "cardId": "entrepot-mini-bulle",
+      "findings": [
+        {
+          "field": "Price",
+          "kind": "official",
+          "text": "Entry for ages 1–6 is CHF 10.00 and an accompanying adult pays CHF 5.00. Under-1 entry is CHF 5.00 but free when accompanied by an adult and a child over 1 year. An annual subscription costs CHF 249.00 for one child and one accompanying adult.",
+          "url": "https://lentrepot.ch/activites/zone-mini/"
+        },
+        {
+          "field": "Age and supervision",
+          "kind": "official",
+          "text": "The Zone Mini is reserved for ages 0–6 only, and children stay under the supervision of their accompanying adult.",
+          "url": "https://lentrepot.ch/activites/zone-mini/"
+        },
+        {
+          "field": "Hours",
+          "kind": "official",
+          "text": "The venue is open Mon–Fri 09:00–22:00 and Sat–Sun 09:00–20:00; until the end of October the Zone Mini closes at 19:30.",
+          "url": "https://lentrepot.ch/infos-pratiques/"
+        }
+      ],
+      "remaining": [
+        "Is advance booking required for the mini area?",
+        "Are there a baby changing table, a visitor toilet and a breastfeeding space near the mini area?",
+        "Is the entrance to the mini area stroller-accessible?",
+        "Are the mini area's hours after October the same as the venue's general hours?"
+      ]
+    }
+  },
+  {
+    "jobId": "7377f09e-c8c6-4307-b203-f55827f04425",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "region": "see",
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "No age limit to play",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Wed 13:30–15:30 · Sat 09:00–11:00",
+      "days": [
+        3,
+        6
+      ],
+      "events": [],
+      "address": "Route de Fribourg 19, 1784 Courtepin",
+      "price": "Annual subscriptions: Duplo CHF 50 (2 games), Quarto CHF 60 (4 games), Sixto CHF 70 (6 games), no extra rental fee for subscribers. Without a subscription: CHF 3 to 12 per game.",
+      "priceKind": "year",
+      "amount": 50,
+      "contacts": [
+        {
+          "name": "Ludothèque Pinocchio Courtepin",
+          "phone": "",
+          "email": "info@ludo-pinocchio.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.ludo-pinocchio.ch/index.php/fr-fr/",
+          "label": "Ludothèque: collection, address, hours and family format"
+        },
+        {
+          "url": "https://courtepin.ch/societes-locales/",
+          "label": "Municipal directory of associations"
+        },
+        {
+          "url": "https://www.ludo-pinocchio.ch/index.php/fr-fr/tarifs-et-reglement",
+          "label": "Additional check: price"
+        }
+      ],
+      "notes": [
+        "Late returns are charged CHF 3 per week.",
+        "Games are lent for 4 weeks; the loan is extended if the ludothèque is closed."
+      ],
+      "checked": "2026-11-20",
+      "reviewAfter": "2026-10-24",
+      "id": "ludo-pinocchio-courtepin",
+      "name": "Ludothèque Pinocchio · game lending",
+      "category": "books",
+      "town": "Courtepin",
+      "parentDetails": "Adults are welcome in the library; the published pages do not say whether children must be accompanied or whether an adult must stay.",
+      "research": {
+        "date": "2026-11-20",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Contact and format",
+            "kind": "official",
+            "text": "The address is Route de Fribourg 19; opening hours are Wednesday 13:30–15:30 and Saturday 09:00–11:00, and the telephone is answered during opening hours. The website invites children and adults to choose games to borrow.",
+            "url": "https://www.ludo-pinocchio.ch/index.php/fr-fr/"
+          },
+          {
+            "field": "price",
+            "kind": "official",
+            "text": "Annual subscriptions cost CHF 50 (2 games), CHF 60 (4 games) or CHF 70 (6 games). Games can also be borrowed without a subscription for CHF 3 to 12 per game.",
+            "url": "https://www.ludo-pinocchio.ch/index.php/fr-fr/tarifs-et-reglement"
+          },
+          {
+            "field": "age",
+            "kind": "official",
+            "text": "The homepage says adults are welcome and that there is no age to play; no numeric age range is published.",
+            "url": "https://www.ludo-pinocchio.ch/index.php/fr-fr/"
+          },
+          {
+            "field": "price",
+            "kind": "official",
+            "text": "The tariff page lists annual subscriptions (Duplo 2 games, Quarto 4 games, Sixto 6 games, no extra rental fee) and also rental without a subscription at 3 to 12 per game. Games are lent for 4 weeks, and a late return costs 3 per week. The page does not name a currency.",
+            "url": "https://www.ludo-pinocchio.ch/index.php/fr-fr/tarifs-et-reglement"
+          },
+          {
+            "field": "price",
+            "kind": "official",
+            "text": "Subscribers pay no additional rental fee on top of the annual subscription (Duplo, Quarto or Sixto).",
+            "url": "https://www.ludo-pinocchio.ch/index.php/fr-fr/tarifs-et-reglement"
+          }
+        ],
+        "remaining": [
+          "Is a visit possible without advance registration, and can families stay and play on site?",
+          "Are there changes to the opening hours during school holidays?",
+          "Are parking, a visitor toilet, a changing table and stroller access available at the ludothèque?",
+          "May an adult stay with a child during a visit?",
+          "Is there a language families should expect at the ludothèque?"
+        ]
+      },
+      "addressPrecision": "exact",
+      "intro": "Game lending library founded in 1987, offering more than 1,000 games for families to borrow.",
+      "practical": {
+        "commitment": {
+          "value": false,
+          "text": "Games can be borrowed without a subscription.",
+          "source": "https://www.ludo-pinocchio.ch/index.php/fr-fr/tarifs-et-reglement",
+          "checked": "2026-11-07"
+        },
+        "costNote": {
+          "value": "Loans without a subscription cost CHF 3–12 per game. Special-occasion loans are priced separately. Late returns cost CHF 3 per week.",
+          "text": "Loans without a subscription cost CHF 3–12 per game. Special-occasion loans are priced separately. Late returns cost CHF 3 per week.",
+          "source": "https://www.ludo-pinocchio.ch/index.php/fr-fr/tarifs-et-reglement",
+          "checked": "2026-11-20"
+        }
+      },
+      "geo": {
+        "label": "Route de Fribourg 19 1784 Courtepin",
+        "lat": 46.866905212402344,
+        "lon": 7.123219013214111,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+Fribourg+19+1784+Courtepin&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Contact and format",
+          "kind": "official",
+          "text": "The address is Route de Fribourg 19; opening hours are Wednesday 13:30–15:30 and Saturday 09:00–11:00, and the telephone is answered during opening hours. The website invites children and adults to choose games to borrow.",
+          "url": "https://www.ludo-pinocchio.ch/index.php/fr-fr/"
+        },
+        {
+          "field": "price",
+          "kind": "official",
+          "text": "Annual subscriptions cost CHF 50 (2 games), CHF 60 (4 games) or CHF 70 (6 games). Games can also be borrowed without a subscription for CHF 3 to 12 per game.",
+          "url": "https://www.ludo-pinocchio.ch/index.php/fr-fr/tarifs-et-reglement"
+        },
+        {
+          "field": "age",
+          "kind": "official",
+          "text": "The homepage says adults are welcome and that there is no age to play; no numeric age range is published.",
+          "url": "https://www.ludo-pinocchio.ch/index.php/fr-fr/"
+        },
+        {
+          "field": "price",
+          "kind": "official",
+          "text": "The tariff page lists annual subscriptions (Duplo 2 games, Quarto 4 games, Sixto 6 games, no extra rental fee) and also rental without a subscription at 3 to 12 per game. Games are lent for 4 weeks, and a late return costs 3 per week. The page does not name a currency.",
+          "url": "https://www.ludo-pinocchio.ch/index.php/fr-fr/tarifs-et-reglement"
+        },
+        {
+          "field": "price",
+          "kind": "official",
+          "text": "Subscribers pay no additional rental fee on top of the annual subscription (Duplo, Quarto or Sixto).",
+          "url": "https://www.ludo-pinocchio.ch/index.php/fr-fr/tarifs-et-reglement"
+        },
+        {
+          "field": "practical.costNote",
+          "kind": "official",
+          "text": "The tariff page lists special-occasion loans (e.g. birthdays): 8 games for 25.-, reservations 5.- for one week, and from 8 games 50.-.",
+          "url": "https://www.ludo-pinocchio.ch/index.php/fr-fr/tarifs-et-reglement"
+        }
+      ],
+      "remaining": [
+        "Is a visit possible without advance registration, and can families stay and play on site?",
+        "Are there changes to the opening hours during school holidays?",
+        "Are parking, a visitor toilet, a changing table and stroller access available at the ludothèque?",
+        "May an adult stay with a child during a visit?",
+        "Is there a language families should expect at the ludothèque?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "amount": null,
+        "checked": "2026-11-24",
+        "reviewAfter": "2027-02-24"
+      },
+      "practicalPatch": {
+        "costNote": {
+          "value": "Special-occasion loans (e.g. birthdays): 8 games for 25.-, bookings 5.- (1 week), from 8 games 50.-; the wording of this line is compact, so check the tariff page before relying on it.",
+          "text": "Special-occasion loans (e.g. birthdays): 8 games for 25.-, bookings 5.- (1 week), from 8 games 50.-; the wording of this line is compact, so check the tariff page before relying on it.",
+          "source": "https://www.ludo-pinocchio.ch/index.php/fr-fr/tarifs-et-reglement",
+          "checked": "2026-11-24"
+        }
+      },
+      "cardId": "ludo-pinocchio-courtepin",
+      "findings": [
+        {
+          "field": "practical.costNote",
+          "kind": "official",
+          "text": "The tariff page lists special-occasion loans (e.g. birthdays): 8 games for 25.-, reservations 5.- for one week, and from 8 games 50.-.",
+          "url": "https://www.ludo-pinocchio.ch/index.php/fr-fr/tarifs-et-reglement"
+        }
+      ],
+      "remaining": [
+        "Is a visit possible without advance registration, and can families stay and play on site?",
+        "Are there changes to the opening hours during school holidays?",
+        "Are parking, a visitor toilet, a changing table and stroller access available at the ludothèque?",
+        "May an adult stay with a child during a visit?",
+        "Is there a language families should expect at the ludothèque?"
+      ]
+    }
+  },
+  {
+    "jobId": "ae0e77eb-e0aa-4e7d-a552-f46a7b8625cd",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": null,
+      "age": "Family walk; with young children, consider the climb and that you may need to carry them.",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Year-round; the decorations and the fairy-tale story change with the season.",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Départ parking Les Rosalys, Route des Dailles, 1619 Les Paccots",
+      "price": "The cost of access is not stated.",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Les Paccots Tourisme",
+          "phone": "021 948 84 56",
+          "email": "info@les-paccots.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-des-lutins/",
+          "label": "Length, climb, route, parking and pushchair restriction"
+        }
+      ],
+      "notes": [
+        "Forest trail of about 1 km and 30 minutes from the Les Rosalys or Vérollys car park; it can be walked there and back or as a loop.",
+        "The route is not suitable for pushchairs or guests with reduced mobility; the climb is about 90 m. A small child may need to be carried.",
+        "Not to be confused with the Paccots recreation area, which is being renovated in autumn 2026."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "lutins-paccots",
+      "region": "veveyse",
+      "name": "Sentier des Lutins · forest walk",
+      "category": "nature",
+      "town": "Les Paccots",
+      "parentDetails": "Self-guided walk with an adult.",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Trail",
+            "kind": "official",
+            "text": "Themed forest route open all year, about 1 km and 30 minutes, with a climb of 90 m; not suitable for pushchairs.",
+            "url": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-des-lutins/"
+          }
+        ],
+        "remaining": [
+          "The cost of access is not stated; check the condition of the trail before the trip."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "Outdoor forest trail",
+          "source": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-des-lutins/",
+          "checked": "2026-09-28"
+        },
+        "duration": {
+          "value": 30,
+          "text": "About 30 minutes and 1 km",
+          "source": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-des-lutins/",
+          "checked": "2026-09-28"
+        },
+        "access": {
+          "value": false,
+          "text": "Not suitable for pushchairs",
+          "source": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-des-lutins/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "Climb of about 90 m; a small child may need to be carried"
+        ],
+        "gallery": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-des-lutins/"
+      },
+      "intro": "A short themed route through the forest of Les Paccots."
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Trail",
+          "kind": "official",
+          "text": "Themed forest route open all year, about 1 km and 30 minutes, with a climb of 90 m; not suitable for pushchairs.",
+          "url": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-des-lutins/"
+        },
+        {
+          "field": "Parking and playground",
+          "kind": "official",
+          "text": "Two car parks serve the trail (Les Rosalys on the Route des Dailles, and Vérollys); parking nearby has 50 spaces, and the trail can be walked as a loop that passes the playground. The page does not say whether parking is paid.",
+          "url": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-des-lutins/"
+        }
+      ],
+      "remaining": [
+        "The cost of access is not stated; check the condition of the trail before the trip.",
+        "Is there a published minimum or recommended age for children on the trail?",
+        "Does an adult need to stay with children on the trail?",
+        "Is the 50-space car park free or paid?",
+        "Are there toilets, a changing table or a breastfeeding space along the trail?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "min": null
+      },
+      "practicalPatch": {
+        "parking": {
+          "value": true,
+          "text": "Car park nearby with 50 spaces; whether it is paid is not stated",
+          "source": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-des-lutins/",
+          "checked": "2026-11-24"
+        },
+        "playArea": {
+          "value": true,
+          "text": "The loop option passes the playground; its hours and age limits are not stated",
+          "source": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-des-lutins/",
+          "checked": "2026-11-24"
+        }
+      },
+      "cardId": "lutins-paccots",
+      "findings": [
+        {
+          "field": "Parking and playground",
+          "kind": "official",
+          "text": "Two car parks serve the trail (Les Rosalys on the Route des Dailles, and Vérollys); parking nearby has 50 spaces, and the trail can be walked as a loop that passes the playground. The page does not say whether parking is paid.",
+          "url": "https://fribourg.ch/fr/les-paccots/randonnees-pedestres/sentier-des-lutins/"
+        }
+      ],
+      "remaining": [
+        "The cost of access is not stated; check the condition of the trail before the trip.",
+        "Is there a published minimum or recommended age for children on the trail?",
+        "Does an adult need to stay with children on the trail?",
+        "Is the 50-space car park free or paid?",
+        "Are there toilets, a changing table or a breastfeeding space along the trail?"
+      ]
+    }
+  },
+  {
+    "jobId": "d0c3b370-6961-40c1-a74f-770f0c4b9ddf",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": null,
+      "age": "Family hike; with young children, consider whether they can manage the route",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Open route; walk in daylight and suitable weather",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Départ à l’école, 1608 Chapelle (Glâne)",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Office du tourisme Romont",
+          "phone": "026 651 90 55",
+          "email": "info@romontregion.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/romontregion/randonnees-pedestres/le-sentier-des-fees/",
+          "label": "Length, ascent, start and equipment"
+        }
+      ],
+      "notes": [
+        "4 km loop, about 1 h 30 min, 130 m of ascent; forest huts with tasks, a picnic table and a shelter.",
+        "The description mentions an ascent on wood chips at the start. Pushchair access is not stated; a carrier may be needed for young children.",
+        "The exact street number of the start is not published; the landmark is the school and the route map beside it."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "fees-chapelle",
+      "region": "glane",
+      "name": "Sentier des Fées · forest trail",
+      "category": "nature",
+      "town": "Chapelle (Glâne)",
+      "parentDetails": "Independent walk with a parent.",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Route",
+            "kind": "official",
+            "text": "A 4 km forest loop, about 1 h 30 min with 130 m of ascent, starts at the school in Chapelle; there is a picnic area and a shelter.",
+            "url": "https://fribourg.ch/fr/romontregion/randonnees-pedestres/le-sentier-des-fees/"
+          }
+        ],
+        "remaining": [
+          "Pushchair access is not stated; the exact street number of the start is not published."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "Forest trail",
+          "source": "https://fribourg.ch/fr/romontregion/randonnees-pedestres/le-sentier-des-fees/",
+          "checked": "2026-09-28"
+        },
+        "duration": {
+          "value": 90,
+          "text": "Guide time 1 h 30 min for 4 km",
+          "source": "https://fribourg.ch/fr/romontregion/randonnees-pedestres/le-sentier-des-fees/",
+          "checked": "2026-09-28"
+        },
+        "access": {
+          "value": null,
+          "text": "Pushchair access is not stated; there is an ascent on wood chips",
+          "source": "https://fribourg.ch/fr/romontregion/randonnees-pedestres/le-sentier-des-fees/",
+          "checked": "2026-09-28"
+        },
+        "gallery": "https://fribourg.ch/fr/romontregion/randonnees-pedestres/le-sentier-des-fees/"
+      },
+      "intro": "A forest loop with activity huts and a picnic spot."
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Route",
+          "kind": "official",
+          "text": "A 4 km forest loop, about 1 h 30 min with 130 m of ascent, starts at the school in Chapelle; there is a picnic area and a shelter.",
+          "url": "https://fribourg.ch/fr/romontregion/randonnees-pedestres/le-sentier-des-fees/"
+        },
+        {
+          "field": "Route",
+          "kind": "official",
+          "text": "The official trail page describes an easy 4 km loop of about 1 h 30 min that starts at the school in Chapelle, with parking spaces available. It publishes no age range, opening hours, price or registration rule.",
+          "url": "https://fribourg.ch/fr/romontregion/randonnees-pedestres/le-sentier-des-fees/"
+        }
+      ],
+      "remaining": [
+        "Pushchair access is not stated; the exact street number of the start is not published.",
+        "Is there a published age range, or a rule on adults accompanying children, for the walk?",
+        "Is the walk open all year, and what is the exact street address of the start?",
+        "Is the walk free, and is registration needed?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "status": "check",
+        "min": null,
+        "age": "Age not published",
+        "parent": "unknown",
+        "parentDetails": "Conditions for adult participation not published",
+        "schedule": "Schedule not published",
+        "days": [],
+        "address": "Visit address not published",
+        "addressPrecision": "area",
+        "contacts": [
+          {
+            "name": "Office du tourisme de Romont et sa région",
+            "phone": "+41 (0)26 651 90 55",
+            "email": "info@romontregion.ch"
+          }
+        ],
+        "checked": "2026-11-24",
+        "reviewAfter": "2027-02-24"
+      },
+      "practicalPatch": {
+        "parking": {
+          "value": true,
+          "text": "Parking spaces are available; whether parking is paid is not stated",
+          "source": "https://fribourg.ch/fr/romontregion/randonnees-pedestres/le-sentier-des-fees/",
+          "checked": "2026-11-24"
+        }
+      },
+      "cardId": "fees-chapelle",
+      "findings": [
+        {
+          "field": "Route",
+          "kind": "official",
+          "text": "The official trail page describes an easy 4 km loop of about 1 h 30 min that starts at the school in Chapelle, with parking spaces available. It publishes no age range, opening hours, price or registration rule.",
+          "url": "https://fribourg.ch/fr/romontregion/randonnees-pedestres/le-sentier-des-fees/"
+        }
+      ],
+      "remaining": [
+        "Is there a published age range, or a rule on adults accompanying children, for the walk?",
+        "Is the walk open all year, and what is the exact street address of the start?",
+        "Is the walk free, and is registration needed?"
+      ]
+    }
+  },
+  {
+    "jobId": "254a6a72-4ec8-47fc-af1a-0bf9f9b153c1",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": null,
+      "age": "Children's books and picture books; no minimum age is set.",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Tue–Fri 15–19; Sat 09–13; during school holidays Wed 15–19",
+      "days": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "events": [],
+      "address": "Route de la Chapelle 33, 1470 Estavayer-le-Lac",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Bibliothèque publique",
+          "phone": "026 663 95 08",
+          "email": "info@estabiblio.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.fr.ch/bcu/app/bibliotheques/40",
+          "label": "Cantonal directory: corner, collection, opening hours and contact"
+        }
+      ],
+      "notes": [
+        "There is a children's corner, picture books and books in German, Portuguese, Albanian and Serbo-Croatian.",
+        "The cost of borrowing and the conditions for visiting without a library card are not given in the cantonal directory.",
+        "During school holiday weeks only the Wednesday window applies, not the usual weekday hours."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "library-estavayer",
+      "region": "broye",
+      "name": "Bibliothèque d’Estavayer · children's corner",
+      "category": "books",
+      "town": "Estavayer-le-Lac",
+      "parentDetails": "An adult accompanies the child; the library does not provide supervision.",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Visit",
+            "kind": "official",
+            "text": "The cantonal directory confirms a children's corner, books in several languages and a separate school holiday timetable.",
+            "url": "https://www.fr.ch/bcu/app/bibliotheques/40"
+          }
+        ],
+        "remaining": [
+          "The cost of borrowing and the conditions for visiting without a library card are not given."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": true,
+          "text": "Reading corner in the library",
+          "source": "https://www.fr.ch/bcu/app/bibliotheques/40",
+          "checked": "2026-09-28"
+        },
+        "playArea": {
+          "value": true,
+          "text": "The cantonal directory describes a corner for children",
+          "source": "https://www.fr.ch/bcu/app/bibliotheques/40",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "During school holidays open only on Wednesdays 15:00–19:00"
+        ]
+      },
+      "intro": "A children's corner and picture books, including in German.",
+      "geo": {
+        "label": "Route de la Chapelle 33 1470 Estavayer-le-Lac",
+        "lat": 46.848121643066406,
+        "lon": 6.853948593139648,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Route+de+la+Chapelle+33+1470+Estavayer-le-Lac&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-28",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Visit",
+          "kind": "official",
+          "text": "The cantonal directory confirms a children's corner, books in several languages and a separate school holiday timetable.",
+          "url": "https://www.fr.ch/bcu/app/bibliotheques/40"
+        },
+        {
+          "field": "price",
+          "kind": "official",
+          "text": "The library's own website lists an annual child subscription of CHF 15 for borrowing up to 6 books. It does not say whether a card is needed to use the children's corner, and its rules say books, magazines and newspapers can be consulted freely.",
+          "url": "https://www.estabiblio.ch/"
+        }
+      ],
+      "remaining": [
+        "Is a library card needed to use the children's corner, and is there an age range or adult-accompaniment rule for it?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "min": null,
+        "age": "Age not published",
+        "parent": "unknown",
+        "parentDetails": "Conditions for adult participation not published",
+        "addressPrecision": "exact",
+        "contacts": [
+          {
+            "name": "Bibliothèque publique d'Estavayer-le-Lac",
+            "phone": "+41 26 663 95 08",
+            "email": "info[at]estabiblio.ch"
+          }
+        ],
+        "notes": [
+          "There is a children's corner, picture books and books in German, Portuguese, Albanian and Serbo-Croatian.",
+          "The library's own website lists an annual child subscription of CHF 15 for borrowing up to 6 books. It does not say whether a card is needed to use the children's corner.",
+          "During school holiday weeks only the Wednesday window applies, not the usual weekday hours."
+        ],
+        "checked": "2026-11-24",
+        "reviewAfter": "2027-02-24"
+      },
+      "practicalPatch": {
+        "playArea": {
+          "value": null,
+          "text": "Not published",
+          "source": "https://www.fr.ch/bcu/app/bibliotheques/40",
+          "checked": "2026-11-24"
+        }
+      },
+      "cardId": "library-estavayer",
+      "findings": [
+        {
+          "field": "price",
+          "kind": "official",
+          "text": "The library's own website lists an annual child subscription of CHF 15 for borrowing up to 6 books. It does not say whether a card is needed to use the children's corner, and its rules say books, magazines and newspapers can be consulted freely.",
+          "url": "https://www.estabiblio.ch/"
+        }
+      ],
+      "remaining": [
+        "Is a library card needed to use the children's corner, and is there an age range or adult-accompaniment rule for it?"
+      ]
+    }
+  },
+  {
+    "jobId": "c5d632d4-26b2-4477-a7e6-ae6ff14e7186",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "id": "ludo-marly",
+      "name": "Ludothèque Marly",
+      "category": "books",
+      "town": "Marly",
+      "route": "fribourg",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": 99,
+      "age": "From 0 to 99 years, as published for the lending service",
+      "parent": "unknown",
+      "languages": [],
+      "schedule": "Wednesday 13:30–16:00 · Saturday 09:30–12:00",
+      "days": [
+        3,
+        6
+      ],
+      "events": [],
+      "address": "route du Chevalier 8, 1st floor of the former kindergarten building, Marly",
+      "price": "Hire CHF 2–5 per game, or annual subscription from CHF 30 per year; no separate entry fee is stated",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Ludothèque de Marly",
+          "phone": "",
+          "email": "info@ludotheque-marly.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://marly-ludo.ch/contact/",
+          "label": "Address and opening hours"
+        },
+        {
+          "url": "https://marly-ludo.ch/",
+          "label": "Hire and prices"
+        },
+        {
+          "url": "https://marly-ludo.ch/a-propos-de/",
+          "label": "Hire"
+        }
+      ],
+      "notes": [
+        "Closed for three weeks during the summer holidays.",
+        "The rental terms ask borrowers to supervise their children to prevent accidents.",
+        "Games are borrowed for a loan period of four weeks.",
+        "The toy library asks people to phone rather than email, because of email delivery problems."
+      ],
+      "checked": "2026-11-24",
+      "reviewAfter": "2026-10-24",
+      "research": {
+        "date": "2026-11-24",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Hire",
+            "kind": "official",
+            "text": "A game is lent for 4 weeks for CHF 2–5. Annual subscriptions: 1 game CHF 30; 2 games CHF 40; 3 games CHF 45; 4–8 games CHF 50. There are sensorimotor toys, imitation games and construction sets. Registration is done on site.",
+            "url": "https://marly-ludo.ch/a-propos-de/"
+          },
+          {
+            "field": "Contact",
+            "kind": "official",
+            "text": "Because of problems with email delivery, the website asks people to phone. Outside opening hours, you can leave a voice message or send an SMS. The toy library closes for 3 weeks in summer.",
+            "url": "https://marly-ludo.ch/contact/"
+          },
+          {
+            "field": "Address",
+            "kind": "official",
+            "text": "From 4 November 2026 the toy library is at route du Chevalier 8, on the first floor of the former kindergarten building. It is open Wednesdays 13:30–16:00 and Saturdays 09:30–12:00.",
+            "url": "https://marly-ludo.ch/"
+          },
+          {
+            "field": "Hire terms",
+            "kind": "official",
+            "text": "A game is lent for 4 weeks. Extensions are free and can be made by phone, email or in person before the due date. Late returns incur reminder fees.",
+            "url": "https://marly-ludo.ch/"
+          }
+        ],
+        "remaining": [
+          "It is not confirmed that there is space for extended play with young children. It is primarily a hire service.",
+          "May a parent stay with a child during a visit, and is there space to play on site? Families should ask the toy library.",
+          "Is advance registration needed for a visit? Families should ask the toy library."
+        ]
+      },
+      "region": "sarine",
+      "parentDetails": "Conditions for adult participation not published",
+      "addressPrecision": "exact",
+      "practical": {
+        "costNote": {
+          "value": "Extensions are free, by phone, email or in person before the due date; the rental period is four weeks; reminder fees apply to late returns",
+          "text": "Extensions are free, by phone, email or in person before the due date; the rental period is four weeks; reminder fees apply to late returns",
+          "source": "https://marly-ludo.ch/",
+          "checked": "2026-11-24"
+        }
+      },
+      "geo": {
+        "label": "Route du Chevalier 8 1723 Marly",
+        "lat": 46.77534866333008,
+        "lon": 7.15955924987793,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=route+du+Chevalier+8&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-11-08",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Hire",
+          "kind": "official",
+          "text": "A game is lent for 4 weeks for CHF 2–5. Annual subscriptions: 1 game CHF 30; 2 games CHF 40; 3 games CHF 45; 4–8 games CHF 50. There are sensorimotor toys, imitation games and construction sets. Registration is done on site.",
+          "url": "https://marly-ludo.ch/a-propos-de/"
+        },
+        {
+          "field": "Contact",
+          "kind": "official",
+          "text": "Because of problems with email delivery, the website asks people to phone. Outside opening hours, you can leave a voice message or send an SMS. The toy library closes for 3 weeks in summer.",
+          "url": "https://marly-ludo.ch/contact/"
+        },
+        {
+          "field": "Address",
+          "kind": "official",
+          "text": "From 4 November 2026 the toy library is at route du Chevalier 8, on the first floor of the former kindergarten building. It is open Wednesdays 13:30–16:00 and Saturdays 09:30–12:00.",
+          "url": "https://marly-ludo.ch/"
+        },
+        {
+          "field": "Hire terms",
+          "kind": "official",
+          "text": "A game is lent for 4 weeks. Extensions are free and can be made by phone, email or in person before the due date. Late returns incur reminder fees.",
+          "url": "https://marly-ludo.ch/"
+        },
+        {
+          "field": "Loan period",
+          "kind": "official",
+          "text": "Games are lent for four weeks, and the loan can be extended by one week, with or without an annual subscription.",
+          "url": "https://marly-ludo.ch/"
+        }
+      ],
+      "remaining": [
+        "It is not confirmed that there is space for extended play with young children. It is primarily a hire service.",
+        "May a parent stay with a child during a visit, and is there space to play on site? Families should ask the toy library.",
+        "Is advance registration needed for a visit? Families should ask the toy library.",
+        "Is the first-floor entrance reachable with a stroller? Is there parking, a toilet or a changing table for visitors? Families should ask the toy library."
+      ]
+    },
+    "draft": {
+      "patch": {
+        "schedule": "Wednesdays 13:30–16:00 and Saturdays 09:30–12:00. Closed for three weeks during the summer holidays.",
+        "price": "Simple loan: CHF 2 to 5 per game, depending on the game. Annual subscription: CHF 30 for 1 game, CHF 40 for 2 games, CHF 45 for 3 games, CHF 50 for 4–8 games.",
+        "intro": "Games lending library (ludothèque) in Marly, open since 1985 to people aged 0 to 99, where families can rent games.",
+        "reviewAfter": "2027-05-24",
+        "checked": "2026-11-24"
+      },
+      "practicalPatch": {
+        "costNote": {
+          "value": "Extending a loan is free (by phone, email or in person before the due date). Late returns incur a reminder fee.",
+          "text": "Extending a loan is free (by phone, email or in person before the due date). Late returns incur a reminder fee.",
+          "source": "https://marly-ludo.ch/",
+          "checked": "2026-11-24"
+        }
+      },
+      "cardId": "ludo-marly",
+      "findings": [
+        {
+          "field": "Loan period",
+          "kind": "official",
+          "text": "Games are lent for four weeks, and the loan can be extended by one week, with or without an annual subscription.",
+          "url": "https://marly-ludo.ch/"
+        }
+      ],
+      "remaining": [
+        "May a parent stay with a child during a visit, and is there space to play on site? Families should ask the toy library.",
+        "Is advance registration needed for a visit? Families should ask the toy library.",
+        "Is the first-floor entrance reachable with a stroller? Is there parking, a toilet or a changing table for visitors? Families should ask the toy library."
+      ]
+    }
+  },
+  {
+    "jobId": "6fafdade-17d4-48d4-a51e-a8d78bad94df",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": null,
+      "age": "Family beach; ask about the age limit for the water attractions",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Public beach; services depend on the season",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Chemin de la Grande Gouille 2, 1470 Estavayer-le-Lac",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Estavayer-le-Lac Région",
+          "phone": "026 301 60 30",
+          "email": "tourisme@estavayerlelac.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/la-nouvelle-plage/",
+          "label": "Site, facilities, address and access"
+        }
+      ],
+      "notes": [
+        "Fine sand and lawn with shade, playground, WC, shower, picnic area, bar and restaurant.",
+        "The official listing does not state an entrance fee. Equipment rental is listed without prices.",
+        "The listing gives no season or opening hours for the bar, restaurant, equipment rental and water slide; check before travelling.",
+        "Dogs are not allowed on the beach or the lawn all year round."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "nouvelle-plage-estavayer",
+      "region": "broye",
+      "name": "Nouvelle Plage · children's area by the lake",
+      "category": "water",
+      "town": "Estavayer-le-Lac",
+      "parentDetails": "An adult is responsible for the child at the water.",
+      "research": {
+        "date": "2026-10-31",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Family facilities",
+            "kind": "official",
+            "text": "A playground, toilets, shower, shade and a picnic area are confirmed at the beach.",
+            "url": "https://fribourg.ch/fr/estavayer-payerne/plages/la-nouvelle-plage/"
+          },
+          {
+            "field": "Food and drink",
+            "kind": "official",
+            "text": "The official listing names a bar (La Dérive) and the Restaurant de la Plage at the beach; it does not mention a café.",
+            "url": "https://fribourg.ch/fr/estavayer-payerne/plages/la-nouvelle-plage/"
+          }
+        ],
+        "remaining": [
+          "The entrance fee and the dates of the seasonal services are not published.",
+          "Is an adult required to stay with children at the water, and are there supervision rules at the beach?",
+          "What are the season and opening hours of the bar, restaurant, equipment rental and water slide?"
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "Beach and playground are outdoors",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/la-nouvelle-plage/",
+          "checked": "2026-09-28"
+        },
+        "playArea": {
+          "value": true,
+          "text": "There is a playground at the beach",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/la-nouvelle-plage/",
+          "checked": "2026-09-28"
+        },
+        "toilet": {
+          "value": true,
+          "text": "WC and shower available",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/la-nouvelle-plage/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "The season and opening hours of the bar, restaurant, equipment rental and water slide are not published on the official listing"
+        ],
+        "gallery": "https://fribourg.ch/fr/estavayer-payerne/plages/la-nouvelle-plage/"
+      },
+      "intro": "A beach with sand, shade, a playground and picnic facilities.",
+      "geo": {
+        "label": "Chemin de la Grande Gouille 2 1470 Estavayer-le-Lac",
+        "lat": 46.8543701171875,
+        "lon": 6.8498711585998535,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+de+la+Grande+Gouille+2+1470+Estavayer-le-Lac&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-28",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Family facilities",
+          "kind": "official",
+          "text": "A playground, toilets, shower, shade and a picnic area are confirmed at the beach.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/la-nouvelle-plage/"
+        },
+        {
+          "field": "Food and drink",
+          "kind": "official",
+          "text": "The official listing names a bar (La Dérive) and the Restaurant de la Plage at the beach; it does not mention a café.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/la-nouvelle-plage/"
+        },
+        {
+          "field": "Parking",
+          "kind": "official",
+          "text": "Visitor parking is listed along the Route de la Plage or on the square at the Chemin de la Grande Gouille, about 2 minutes on foot. The listing does not say whether parking is paid.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/la-nouvelle-plage/"
+        },
+        {
+          "field": "Play equipment",
+          "kind": "official",
+          "text": "The listing names a children's playground, table-tennis tables and a water slide among the beach's equipment. It publishes no age range or admission rules for them.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/la-nouvelle-plage/"
+        }
+      ],
+      "remaining": [
+        "The entrance fee and the dates of the seasonal services are not published.",
+        "Is an adult required to stay with children at the water, and are there supervision rules at the beach?",
+        "What are the season and opening hours of the bar, restaurant, equipment rental and water slide?",
+        "Is there an age limit or supervision rule for the playground and the water slide?",
+        "What are the opening days, hours and season of the beach?",
+        "Is there an entrance fee, and is parking paid?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "min": null,
+        "addressPrecision": "exact"
+      },
+      "practicalPatch": {
+        "parking": {
+          "value": true,
+          "text": "Parking along the Route de la Plage or on the square at the Chemin de la Grande Gouille, about 2 minutes on foot; the listing does not say whether it is paid",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/la-nouvelle-plage/",
+          "checked": "2026-11-24"
+        }
+      },
+      "cardId": "nouvelle-plage-estavayer",
+      "findings": [
+        {
+          "field": "Parking",
+          "kind": "official",
+          "text": "Visitor parking is listed along the Route de la Plage or on the square at the Chemin de la Grande Gouille, about 2 minutes on foot. The listing does not say whether parking is paid.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/la-nouvelle-plage/"
+        },
+        {
+          "field": "Play equipment",
+          "kind": "official",
+          "text": "The listing names a children's playground, table-tennis tables and a water slide among the beach's equipment. It publishes no age range or admission rules for them.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/la-nouvelle-plage/"
+        }
+      ],
+      "remaining": [
+        "Is there an age limit or supervision rule for the playground and the water slide?",
+        "What are the opening days, hours and season of the beach?",
+        "Is there an entrance fee, and is parking paid?"
+      ]
+    }
+  },
+  {
+    "jobId": "b09a89c3-26cf-4830-bb68-efe975ca6ed8",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": null,
+      "age": "Family beach; the age range for the playground equipment is not stated",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Beach area; check the season for services",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Route du Port, 1568 Delley-Portalban",
+      "price": "Price not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Commune de Delley-Portalban",
+          "phone": "026 677 18 31",
+          "email": ""
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/",
+          "label": "Site, facilities, parking and address"
+        }
+      ],
+      "notes": [
+        "Sand and lawn, playground, WC, shower, picnic area and snack bar; little shade.",
+        "Parking at Aux Grèves du Lac, about 2 minutes' walk from the beach: CHF 1 per hour on weekdays and CHF 1.50 per hour at weekends, or a day rate of CHF 8 on weekdays and CHF 12 at weekends.",
+        "Dogs and personal or disposable grills are not allowed."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "plage-portalban",
+      "region": "broye",
+      "name": "Plage de Portalban · waterside site",
+      "category": "water",
+      "town": "Delley-Portalban",
+      "parentDetails": "An adult stays with the child by the water and at the playground.",
+      "research": {
+        "date": "2026-10-25",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "By the water",
+            "kind": "official",
+            "text": "The beach has a playground, WC, shower, picnic area and snack bar; parking is paid and costs more at weekends.",
+            "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/"
+          },
+          {
+            "field": "notes",
+            "kind": "official",
+            "text": "The official page lists parking at Aux Grèves du Lac, about 2 minutes' walk away. Hourly rates are CHF 1 on weekdays and CHF 1.50 at weekends; day rates are CHF 8 on weekdays and CHF 12 at weekends.",
+            "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/"
+          }
+        ],
+        "remaining": [
+          "The entry price and the seasonal snack bar hours are not stated.",
+          "Is the snack bar or the rental service open all year or only in season, and what are the hours?"
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "Sandy beach in the open air",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/",
+          "checked": "2026-09-28"
+        },
+        "playArea": {
+          "value": true,
+          "text": "There is a playground",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/",
+          "checked": "2026-09-28"
+        },
+        "toilet": {
+          "value": true,
+          "text": "WC and shower at the beach",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/",
+          "checked": "2026-09-28"
+        },
+        "parking": {
+          "value": true,
+          "text": "CHF 1/hour on weekdays, CHF 1.50/hour at weekends",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/",
+          "checked": "2026-09-28"
+        },
+        "gallery": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/"
+      },
+      "intro": "A beach with a playground, picnic area and paid parking."
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "By the water",
+          "kind": "official",
+          "text": "The beach has a playground, WC, shower, picnic area and snack bar; parking is paid and costs more at weekends.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/"
+        },
+        {
+          "field": "notes",
+          "kind": "official",
+          "text": "The official page lists parking at Aux Grèves du Lac, about 2 minutes' walk away. Hourly rates are CHF 1 on weekdays and CHF 1.50 at weekends; day rates are CHF 8 on weekdays and CHF 12 at weekends.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/"
+        },
+        {
+          "field": "Facilities",
+          "kind": "official",
+          "text": "The official beach page lists a beach volleyball court, paddle rental, sports equipment and games rental, a snack bar and a restaurant, and a children's playground.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/"
+        }
+      ],
+      "remaining": [
+        "The entry price and the seasonal snack bar hours are not stated.",
+        "Is the snack bar or the rental service open all year or only in season, and what are the hours?",
+        "Is there an entry price for the beach, and what are the opening season and hours?",
+        "Is there an age range or an adult-supervision rule for the playground?",
+        "Is the beach area accessible with a stroller, and are there a changing table and a breastfeeding space?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "intro": "Sandy beach and lawn on the lake shore at Portalban, suited to swimming, relaxing and outdoor activities.",
+        "contacts": [
+          {
+            "name": "Administration communale de Portalban",
+            "phone": "+41 (0)26 677 18 31",
+            "email": ""
+          }
+        ]
+      },
+      "practicalPatch": {
+        "costNote": {
+          "value": "Paid parking at Aux Grèves du Lac: CHF 1.– per hour on weekdays and CHF 1.50 per hour at weekends. No admission price is published on this page.",
+          "text": "Paid parking at Aux Grèves du Lac: CHF 1.– per hour on weekdays and CHF 1.50 per hour at weekends. No admission price is published on this page.",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/",
+          "checked": "2026-11-24"
+        }
+      },
+      "cardId": "plage-portalban",
+      "findings": [
+        {
+          "field": "Facilities",
+          "kind": "official",
+          "text": "The official beach page lists a beach volleyball court, paddle rental, sports equipment and games rental, a snack bar and a restaurant, and a children's playground.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/plages/plage-de-portalban/"
+        }
+      ],
+      "remaining": [
+        "Is there an entry price for the beach, and what are the opening season and hours?",
+        "Is there an age range or an adult-supervision rule for the playground?",
+        "Is the beach area accessible with a stroller, and are there a changing table and a breastfeeding space?"
+      ]
+    }
+  },
+  {
+    "jobId": "275a4625-9212-40b5-ac42-d79f8f3595fe",
+    "approvedOn": "2026-11-24",
+    "baseRecord": {
+      "id": "memo-musik-entdecken-2027-03-16",
+      "name": "MEMO · Musik entdecken",
+      "category": "music",
+      "town": "Fribourg",
+      "region": "sarine",
+      "route": "fribourg",
+      "format": "event",
+      "status": "active",
+      "min": 2,
+      "max": 4,
+      "age": "2–4 years",
+      "parent": "yes",
+      "parentDetails": "The programme describes a session for a child together with an adult.",
+      "languages": [
+        "DE"
+      ],
+      "address": "Rue de l’Hôpital 2, Fribourg",
+      "schedule": "16 March 2027 · 10:00–10:45",
+      "days": [
+        2
+      ],
+      "events": [
+        {
+          "date": "2027-03-16",
+          "start": "10:00",
+          "end": "10:45"
+        }
+      ],
+      "scheduleValidThrough": "2027-03-16",
+      "price": "Free; booking opens on 22 October 2026",
+      "priceKind": "free",
+      "amount": 0,
+      "contacts": [
+        {
+          "name": "MEMO",
+          "phone": "026 351 71 44",
+          "email": "memo@ville-fr.ch"
+        }
+      ],
+      "sources": [
+        {
+          "label": "MEMO programme November 2026 – March 2027",
+          "url": "https://www.ville-fribourg.ch/pssst-ecoute-voir"
+        },
+        {
+          "label": "PDF with the exact date and age",
+          "url": "https://cdnm.heyzine.com/files/uploaded/v3/1b5babb077c83e6573328f25c4443b9921836c54.pdf"
+        }
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2027-03-16",
+      "intro": "Songs, movement, dances and musical instruments with a music teacher.",
+      "notes": [
+        "The programme gives the language as Swiss German (CH-DE); Standard German is not confirmed.",
+        "The programme marks booking as compulsory. Booking opens on 22 October 2026 at 16:00; availability of places is not yet known."
+      ],
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Date and age",
+            "kind": "official",
+            "text": "The seasonal programme states 16 March 2027, 10:00–10:45, 2–4 years and booking.",
+            "url": "https://cdnm.heyzine.com/files/uploaded/v3/1b5babb077c83e6573328f25c4443b9921836c54.pdf"
+          },
+          {
+            "field": "Leaders and language",
+            "kind": "official",
+            "text": "The programme names the leader and gives the language as Swiss German (CH-DE); Standard German is not confirmed.",
+            "url": "https://cdnm.heyzine.com/files/uploaded/v3/1b5babb077c83e6573328f25c4443b9921836c54.pdf"
+          },
+          {
+            "field": "Price and start of booking",
+            "kind": "official",
+            "text": "The city describes all events of the season as free. Registration opens on 22 October 2026 at 16:00.",
+            "url": "https://www.ville-fribourg.ch/pssst-ecoute-voir"
+          }
+        ],
+        "remaining": [
+          "Is booking open for this date and is there a free place?"
+        ]
+      },
+      "practical": {
+        "booking": {
+          "value": true,
+          "text": "Booking through MEMO from 22 October 2026, 16:00",
+          "source": "https://www.ville-fribourg.ch/pssst-ecoute-voir",
+          "checked": "2026-09-28"
+        },
+        "indoor": {
+          "value": true,
+          "text": "Session at MEMO",
+          "source": "https://cdnm.heyzine.com/files/uploaded/v3/1b5babb077c83e6573328f25c4443b9921836c54.pdf",
+          "checked": "2026-09-28"
+        },
+        "duration": {
+          "value": 45,
+          "text": "10:00–10:45",
+          "source": "https://cdnm.heyzine.com/files/uploaded/v3/1b5babb077c83e6573328f25c4443b9921836c54.pdf",
+          "checked": "2026-09-28"
+        }
+      },
+      "geo": {
+        "label": "Rue de l'Hôpital 2 1700 Fribourg",
+        "lat": 46.805633544921875,
+        "lon": 7.154872894287109,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+l%E2%80%99H%C3%B4pital+2+Fribourg&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-27",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-24",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Date and age",
+          "kind": "official",
+          "text": "The seasonal programme states 16 March 2027, 10:00–10:45, 2–4 years and booking.",
+          "url": "https://cdnm.heyzine.com/files/uploaded/v3/1b5babb077c83e6573328f25c4443b9921836c54.pdf"
+        },
+        {
+          "field": "Leaders and language",
+          "kind": "official",
+          "text": "The programme names the leader and gives the language as Swiss German (CH-DE); Standard German is not confirmed.",
+          "url": "https://cdnm.heyzine.com/files/uploaded/v3/1b5babb077c83e6573328f25c4443b9921836c54.pdf"
+        },
+        {
+          "field": "Price and start of booking",
+          "kind": "official",
+          "text": "The city describes all events of the season as free. Registration opens on 22 October 2026 at 16:00.",
+          "url": "https://www.ville-fribourg.ch/pssst-ecoute-voir"
+        },
+        {
+          "field": "Date, age and booking",
+          "kind": "official",
+          "text": "The city event page lists one session on Tuesday 16 March 2027, 10:00–10:45, for ages 2 to 4, by registration, at MEMO, Rue de l’Hôpital 2, Fribourg. It names an instructor from Les Ateliers Musique as the leader.",
+          "url": "https://fribourg.ch/de/freiburg/veranstaltungen/musik-entdecken/"
+        }
+      ],
+      "remaining": [
+        "Is booking open for this date and is there a free place?",
+        "Which language is the session held in, and is an adult expected to take part with the child?",
+        "Is the session free of charge?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "addressPrecision": "exact",
+        "intro": "A musical moment for the family at MEMO in Fribourg."
+      },
+      "practicalPatch": {
+        "leader": {
+          "value": "Instructor from Les Ateliers Musique",
+          "text": "Led by an instructor from Les Ateliers Musique",
+          "source": "https://fribourg.ch/de/freiburg/veranstaltungen/musik-entdecken/",
+          "checked": "2026-11-24"
+        }
+      },
+      "cardId": "memo-musik-entdecken-2027-03-16",
+      "findings": [
+        {
+          "field": "Date, age and booking",
+          "kind": "official",
+          "text": "The city event page lists one session on Tuesday 16 March 2027, 10:00–10:45, for ages 2 to 4, by registration, at MEMO, Rue de l’Hôpital 2, Fribourg. It names an instructor from Les Ateliers Musique as the leader.",
+          "url": "https://fribourg.ch/de/freiburg/veranstaltungen/musik-entdecken/"
+        }
+      ],
+      "remaining": [
+        "Is booking open for this date and is there a free place?",
+        "Which language is the session held in, and is an adult expected to take part with the child?",
+        "Is the session free of charge?"
+      ]
+    }
+  },
+  {
+    "jobId": "b19202c6-3e94-43ed-a5f8-863655fd5100",
+    "approvedOn": "2026-11-25",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": null,
+      "age": "Family visit; the age range of the equipment is not stated",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "01.05–31.10.2026 daily 08–23",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Route de la Hauta Chia 25, 1654 Cerniat",
+      "price": "Food and drinks from the menu; dish prices and a fixed entry price are not published",
+      "priceKind": "unknown",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Buvette des Gros Chaumiaux",
+          "phone": "026 927 14 79",
+          "email": ""
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/la-gruyere/buvettes-alpage/buvette-des-gros-chaumiaux/",
+          "label": "Season, playground, animals, address and opening hours"
+        }
+      ],
+      "notes": [
+        "Mountain buvette with a terrace, a playground and animals: rabbits, hens, cows, pigs.",
+        "Proximity to the animals and the presence of a playground are confirmed, but the feeding rules and the size of the playground are not described.",
+        "Summer season until 31 October. No fixed entry price and no menu prices are published."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "gros-chaumiaux-cerniat",
+      "region": "gruyere",
+      "name": "Buvette des Gros Chaumiaux · playground and animals",
+      "category": "dining",
+      "town": "Cerniat",
+      "parentDetails": "An adult accompanies the child on the playground and near the animals.",
+      "scheduleValidThrough": "2026-10-31",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Family visit",
+            "kind": "official",
+            "text": "The buvette is open daily until 31 October. There is a playground and animals next to the terrace.",
+            "url": "https://fribourg.ch/fr/la-gruyere/buvettes-alpage/buvette-des-gros-chaumiaux/"
+          }
+        ],
+        "remaining": [
+          "The menu, the price and the rules for contact with the animals need to be checked."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": false,
+          "text": "Terrace, playground and animals in the open air",
+          "source": "https://fribourg.ch/fr/la-gruyere/buvettes-alpage/buvette-des-gros-chaumiaux/",
+          "checked": "2026-09-28"
+        },
+        "playArea": {
+          "value": true,
+          "text": "Playground confirmed, equipment not described",
+          "source": "https://fribourg.ch/fr/la-gruyere/buvettes-alpage/buvette-des-gros-chaumiaux/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "The 2026 season ends on 31 October; confirm the menu and price"
+        ],
+        "gallery": "https://fribourg.ch/fr/la-gruyere/buvettes-alpage/buvette-des-gros-chaumiaux/"
+      },
+      "intro": "Mountain café (buvette) with a playground and animals."
+    },
+    "research": {
+      "date": "2026-11-25",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Family visit",
+          "kind": "official",
+          "text": "The buvette is open daily until 31 October. There is a playground and animals next to the terrace.",
+          "url": "https://fribourg.ch/fr/la-gruyere/buvettes-alpage/buvette-des-gros-chaumiaux/"
+        },
+        {
+          "field": "Opening season",
+          "kind": "official",
+          "text": "The buvette is open 1 May to 31 October, 8:00 to 23:00, 7 days a week, so it is out of season in late November.",
+          "url": "https://fribourg.ch/fr/la-gruyere/buvettes-alpage/buvette-des-gros-chaumiaux/"
+        }
+      ],
+      "remaining": [
+        "The menu, the price and the rules for contact with the animals need to be checked.",
+        "What are the age limits and the rules for adults at the play area and near the animals?",
+        "Is there an entry price for the play area, and is the play area indoors or outdoors?",
+        "What are the exact opening dates for the next season?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "status": "future",
+        "min": null,
+        "age": "Age not published",
+        "parent": "unknown",
+        "parentDetails": "Conditions for adult participation not published",
+        "schedule": "Open 1 May to 31 October, 8:00 to 23:00, 7 days a week",
+        "scheduleValidThrough": null,
+        "addressPrecision": "exact",
+        "price": "Price not published",
+        "contacts": [
+          {
+            "name": "Buvette des Gros Chaumiaux",
+            "phone": "+41 (0)26 927 14 79",
+            "email": ""
+          }
+        ],
+        "intro": "Mountain buvette in Cerniat with a play area and farm animals, and a terrace with panoramic views.",
+        "notes": [
+          "Mountain buvette with a terrace and a play area; children can see rabbits, chickens, cows and pigs.",
+          "Open 1 May to 31 October, 8:00 to 23:00, 7 days a week. No separate play-area hours are published.",
+          "Fribourg specialities and cheese dishes (fondue, chalet macaroni) are on offer.",
+          "The venue page does not publish age limits, adult rules or a price for the play area."
+        ],
+        "checked": "2026-11-25",
+        "reviewAfter": "2027-04-15"
+      },
+      "practicalPatch": {
+        "indoor": {
+          "value": null,
+          "text": "Not published",
+          "source": "https://fribourg.ch/fr/la-gruyere/buvettes-alpage/buvette-des-gros-chaumiaux/",
+          "checked": "2026-11-25"
+        }
+      },
+      "warnings": [
+        "The buvette is open 1 May to 31 October; check the opening dates before visiting outside that season."
+      ],
+      "cardId": "gros-chaumiaux-cerniat",
+      "findings": [
+        {
+          "field": "Opening season",
+          "kind": "official",
+          "text": "The buvette is open 1 May to 31 October, 8:00 to 23:00, 7 days a week, so it is out of season in late November.",
+          "url": "https://fribourg.ch/fr/la-gruyere/buvettes-alpage/buvette-des-gros-chaumiaux/"
+        }
+      ],
+      "remaining": [
+        "What are the age limits and the rules for adults at the play area and near the animals?",
+        "Is there an entry price for the play area, and is the play area indoors or outdoors?",
+        "What are the exact opening dates for the next season?"
+      ]
+    }
+  },
+  {
+    "jobId": "669ac1d2-4931-4b7c-b901-6932f4e6fb27",
+    "approvedOn": "2026-11-25",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": 5,
+      "age": "0–5 years, until the child starts school (1H)",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Mon, Thu 14:00–17:30; Tue, Fri, Sat 09:00–11:30",
+      "days": [
+        1,
+        2,
+        4,
+        5,
+        6
+      ],
+      "events": [],
+      "address": "Rue de Vevey 260, 1630 Bulle",
+      "price": "Voluntary donation",
+      "priceKind": "donation",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Espace Famille",
+          "phone": "",
+          "email": "info@espacefamille.net"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.espacefamille.net/",
+          "label": "Format, hours, donation and address"
+        }
+      ],
+      "notes": [
+        "Indoor free play, no registration. The website separately mentions a small kitchen for snacks.",
+        "Hours may change during school holidays. The visiting address on the website is Rue de Vevey 260; the postal address is Route de la Pâla 137a. The AEF calendar lists a separate meeting at Espace Famille, at Route de la Pâla 137; the location of that meeting needs to be checked.",
+        "The language spoken by the staff is not stated. The French text of the website does not confirm the language of the meeting."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "espace-famille-bulle",
+      "region": "gruyere",
+      "name": "Espace Famille · free play",
+      "category": "play",
+      "town": "Bulle",
+      "parentDetails": "The child stays with their accompanying adult the whole time. This is not childcare or a day nursery.",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "First visit",
+            "kind": "official",
+            "text": "Free play for ages 0–5 with an adult, no registration, voluntary donation. The website gives different visiting and postal addresses.",
+            "url": "https://www.espacefamille.net/"
+          }
+        ],
+        "remaining": [
+          "Check the language of the staff who receive visitors and any changes to hours during holidays."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": true,
+          "text": "Indoor free play",
+          "source": "https://www.espacefamille.net/",
+          "checked": "2026-09-28"
+        },
+        "booking": {
+          "value": false,
+          "text": "No registration",
+          "source": "https://www.espacefamille.net/",
+          "checked": "2026-09-28"
+        },
+        "observe": {
+          "value": true,
+          "text": "You can first watch while staying next to the child",
+          "source": "https://www.espacefamille.net/",
+          "checked": "2026-09-28"
+        },
+        "leave": {
+          "value": true,
+          "text": "Open visiting window",
+          "source": "https://www.espacefamille.net/",
+          "checked": "2026-09-28"
+        },
+        "commitment": {
+          "value": false,
+          "text": "Voluntary donation, no subscription",
+          "source": "https://www.espacefamille.net/",
+          "checked": "2026-09-28"
+        },
+        "gallery": "https://www.espacefamille.net/"
+      },
+      "intro": "A play room for children below school age and the adults close to them.",
+      "geo": {
+        "label": "Rue de Vevey 260 1630 Bulle",
+        "lat": 46.613983154296875,
+        "lon": 7.0382866859436035,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+de+Vevey+260+1630+Bulle&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-28",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-25",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "First visit",
+          "kind": "official",
+          "text": "Free play for ages 0–5 with an adult, no registration, voluntary donation. The website gives different visiting and postal addresses.",
+          "url": "https://www.espacefamille.net/"
+        },
+        {
+          "field": "Opening hours",
+          "kind": "official",
+          "text": "The indoor play area for ages 0-5 is open Monday and Thursday afternoons, and Tuesday, Friday and Saturday mornings, with hours changed during Fribourg school holidays. Visits need no registration and contributions are voluntary.",
+          "url": "https://www.espacefamille.net/"
+        }
+      ],
+      "remaining": [
+        "Check the language of the staff who receive visitors and any changes to hours during holidays.",
+        "What are the opening hours during Fribourg school holidays?",
+        "In which language do staff receive visitors?",
+        "May a first-time visitor simply watch, and may families arrive or leave flexibly during opening hours?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "age": "Ages 0-5 (5 years, or end of 1st HarmoS year)",
+        "ageUpperUncertainFrom": 5,
+        "parentDetails": "A parent, grandparent or other reference adult accompanies the child for the whole visit. The page does not say whether the adult joins the play or only watches.",
+        "schedule": "Mon 14:00-17:30; Tue 09:00-11:30; Thu 14:00-17:30; Fri 09:00-11:30; Sat 09:00-11:30. Different hours during Fribourg school holidays (not published).",
+        "addressPrecision": "exact",
+        "intro": "An indoor free-play space for families with children aged 0-5. Children come with a parent, grandparent or another reference adult; no registration is needed.",
+        "notes": [
+          "Not a childcare service: a shared family space, not a crèche or daycare.",
+          "Opening hours change during Fribourg school holidays; the changed hours are not published on the page.",
+          "A small kitchen is available for a snack, and a self-service baby scale is available."
+        ],
+        "checked": "2026-11-25",
+        "reviewAfter": "2026-12-25"
+      },
+      "practicalPatch": {
+        "observe": {
+          "value": null,
+          "text": "Not published",
+          "source": "https://www.espacefamille.net/",
+          "checked": "2026-11-25"
+        },
+        "leave": {
+          "value": null,
+          "text": "Not published",
+          "source": "https://www.espacefamille.net/",
+          "checked": "2026-11-25"
+        }
+      },
+      "cardId": "espace-famille-bulle",
+      "findings": [
+        {
+          "field": "Opening hours",
+          "kind": "official",
+          "text": "The indoor play area for ages 0-5 is open Monday and Thursday afternoons, and Tuesday, Friday and Saturday mornings, with hours changed during Fribourg school holidays. Visits need no registration and contributions are voluntary.",
+          "url": "https://www.espacefamille.net/"
+        }
+      ],
+      "remaining": [
+        "What are the opening hours during Fribourg school holidays?",
+        "In which language do staff receive visitors?",
+        "May a first-time visitor simply watch, and may families arrive or leave flexibly during opening hours?"
+      ]
+    }
+  },
+  {
+    "jobId": "b846a51d-c526-4b34-be7a-ec40444b10fa",
+    "approvedOn": "2026-11-25",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": null,
+      "age": "Family museum; child rate with no minimum age stated",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "March–December: Tue–Sun 13–18; closed January–February",
+      "days": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "events": [],
+      "address": "Rue du Musée 13, 1470 Estavayer-le-Lac",
+      "price": "Adult CHF 5; child CHF 3 (minimum age not stated)",
+      "priceKind": "visit",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Musée d’Estavayer",
+          "phone": "026 664 80 65",
+          "email": "musee@estavayer.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/estavayer-payerne/musees/musee-destavayer-le-lac-et-ses-grenouilles/",
+          "label": "Exhibition, rate, hours and contact"
+        }
+      ],
+      "notes": [
+        "A well-known part of the exhibition is scenes made with taxidermy frogs. If your child is sensitive, look at the content beforehand.",
+        "Closed in January–February, and also on 25, 26 and 31 December.",
+        "This is a museum visit, not a children's workshop."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "musee-grenouilles-estavayer",
+      "region": "broye",
+      "name": "Musée des Grenouilles · family visit",
+      "category": "nature",
+      "town": "Estavayer-le-Lac",
+      "parentDetails": "The child visits the museum with an adult.",
+      "scheduleValidThrough": "2026-12-31",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Exhibition",
+            "kind": "official",
+            "text": "The exhibits include scenes made of taxidermy frogs; adult entry CHF 5, child CHF 3.",
+            "url": "https://fribourg.ch/fr/estavayer-payerne/musees/musee-destavayer-le-lac-et-ses-grenouilles/"
+          }
+        ],
+        "remaining": [
+          "The minimum age for the child ticket is not stated; a family with a sensitive child should assess the exhibition beforehand."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": true,
+          "text": "Indoor museum",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/musees/musee-destavayer-le-lac-et-ses-grenouilles/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "The exhibition includes taxidermy animals; check whether this suits your child",
+          "Closed in January and February"
+        ],
+        "gallery": "https://fribourg.ch/fr/estavayer-payerne/musees/musee-destavayer-le-lac-et-ses-grenouilles/"
+      },
+      "intro": "A small museum with the history of Estavayer and an unusual collection of frogs.",
+      "geo": {
+        "label": "Rue du Musée 13 1470 Estavayer-le-Lac",
+        "lat": 46.84951400756836,
+        "lon": 6.848576545715332,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Rue+du+Mus%C3%A9e+13+1470+Estavayer-le-Lac&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-28",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-25",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Exhibition",
+          "kind": "official",
+          "text": "The exhibits include scenes made of taxidermy frogs; adult entry CHF 5, child CHF 3.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/musees/musee-destavayer-le-lac-et-ses-grenouilles/"
+        },
+        {
+          "field": "Parking and public transport",
+          "kind": "official",
+          "text": "Blue-zone parking spaces are available for visitors. The museum is reachable by public transport to Estavayer-le-Lac station, then about 10 minutes on foot.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/musees/musee-destavayer-le-lac-et-ses-grenouilles/"
+        }
+      ],
+      "remaining": [
+        "The minimum age for the child ticket is not stated; a family with a sensitive child should assess the exhibition beforehand.",
+        "What is the minimum age for the child ticket, and is the visit suitable for very young children?",
+        "Is advance booking needed for a standard visit?",
+        "Is the entrance and route stroller-accessible?",
+        "Is an adult required to accompany children?",
+        "In which language(s) are the exhibition texts or visits offered?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "amount": 5,
+        "contacts": [
+          {
+            "name": "Musée d’Estavayer-le-Lac et ses grenouilles",
+            "phone": "+41 (0)26 664 80 65",
+            "email": "musee@estavayer.ch"
+          }
+        ],
+        "intro": "A museum in Estavayer-le-Lac whose main collection is 108 naturalised frogs from the mid-19th century, arranged as scenes of everyday life in the town at that time."
+      },
+      "practicalPatch": {
+        "parking": {
+          "value": true,
+          "text": "Blue-zone parking spaces are available; whether they are free or paid is not stated.",
+          "source": "https://fribourg.ch/fr/estavayer-payerne/musees/musee-destavayer-le-lac-et-ses-grenouilles/",
+          "checked": "2026-11-25"
+        }
+      },
+      "cardId": "musee-grenouilles-estavayer",
+      "findings": [
+        {
+          "field": "Parking and public transport",
+          "kind": "official",
+          "text": "Blue-zone parking spaces are available for visitors. The museum is reachable by public transport to Estavayer-le-Lac station, then about 10 minutes on foot.",
+          "url": "https://fribourg.ch/fr/estavayer-payerne/musees/musee-destavayer-le-lac-et-ses-grenouilles/"
+        }
+      ],
+      "remaining": [
+        "What is the minimum age for the child ticket, and is the visit suitable for very young children?",
+        "Is advance booking needed for a standard visit?",
+        "Is the entrance and route stroller-accessible?",
+        "Is an adult required to accompany children?",
+        "In which language(s) are the exhibition texts or visits offered?"
+      ]
+    }
+  },
+  {
+    "jobId": "b3e4d376-0f89-464b-9eb0-c3f694387287",
+    "approvedOn": "2026-11-25",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": null,
+      "age": "Books for children up to the end of compulsory schooling",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Mon, Thu 15:15–17 and 19–20:30; Wed 15:15–17; Sat 09–11",
+      "days": [
+        1,
+        3,
+        4,
+        6
+      ],
+      "events": [],
+      "address": "Route des Vuarines 29, 1564 Domdidier",
+      "price": "Children's subscription CHF 5/year; adult CHF 25/year",
+      "priceKind": "year",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Bibliothèque Rémy Goumaz",
+          "phone": "026 675 26 67",
+          "email": "biblio.domdidier@bluewin.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://www.fr.ch/bcu/app/bibliotheques/37",
+          "label": "Cantonal directory: children's collection, opening hours, subscription"
+        }
+      ],
+      "notes": [
+        "Public library with a reading area and step-free access.",
+        "During school holidays it is open only on Monday and Thursday evenings. Individual closures are published on the municipality's website.",
+        "The subscription applies to borrowing books. Conditions for visiting without it are not specified."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "library-domdidier",
+      "region": "broye",
+      "name": "Bibliothèque Belmont-Broye · children's books",
+      "category": "books",
+      "town": "Domdidier",
+      "parentDetails": "Family visit; an adult accompanies the child.",
+      "research": {
+        "date": "2026-10-31",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Library",
+            "kind": "official",
+            "text": "The cantonal directory confirms the children's books, opening hours, the CHF 5 annual subscription for children and a separate holiday schedule.",
+            "url": "https://www.fr.ch/bcu/app/bibliotheques/37"
+          },
+          {
+            "field": "name",
+            "kind": "official",
+            "text": "The cantonal directory lists this library as the public and school library of Belmont-Broye, named \"Rémy Goumaz\", at Route des Vuarines 29 in Domdidier. The card's name and its contact name are shortened forms of this same library name.",
+            "url": "https://www.fr.ch/bcu/app/bibliotheques/37"
+          }
+        ],
+        "remaining": [
+          "Clarify visiting without a subscription and any current unscheduled closures.",
+          "Is there a separate children's section, and what are the visiting conditions for families who do not borrow books?"
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": true,
+          "text": "Public library, indoors",
+          "source": "https://www.fr.ch/bcu/app/bibliotheques/37",
+          "checked": "2026-09-28"
+        },
+        "access": {
+          "value": true,
+          "text": "The cantonal directory states step-free access",
+          "source": "https://www.fr.ch/bcu/app/bibliotheques/37",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "During holidays open only on Monday and Thursday evenings; check for unscheduled closures"
+        ]
+      },
+      "intro": "Public library with a children's collection and a reading area."
+    },
+    "research": {
+      "date": "2026-11-25",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Library",
+          "kind": "official",
+          "text": "The cantonal directory confirms the children's books, opening hours, the CHF 5 annual subscription for children and a separate holiday schedule.",
+          "url": "https://www.fr.ch/bcu/app/bibliotheques/37"
+        },
+        {
+          "field": "name",
+          "kind": "official",
+          "text": "The cantonal directory lists this library as the public and school library of Belmont-Broye, named \"Rémy Goumaz\", at Route des Vuarines 29 in Domdidier. The card's name and its contact name are shortened forms of this same library name.",
+          "url": "https://www.fr.ch/bcu/app/bibliotheques/37"
+        },
+        {
+          "field": "price",
+          "kind": "official",
+          "text": "Borrowing requires an annual subscription: CHF 5 for children and young people until the end of compulsory school, CHF 25 for adults, CHF 10 for AVS members and students up to age 25. The page states no age range for the library and does not say whether visiting without a subscription is possible.",
+          "url": "https://www.fr.ch/bcu/app/bibliotheques/37"
+        }
+      ],
+      "remaining": [
+        "Clarify visiting without a subscription and any current unscheduled closures.",
+        "Is there a separate children's section, and what are the visiting conditions for families who do not borrow books?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "min": null,
+        "amount": 5,
+        "price": "Annual subscription needed to borrow: CHF 5 per year for children and young people (until the end of compulsory school); CHF 25 per year for adults; CHF 10 per year for AVS members and students (up to age 25).",
+        "schedule": "Opened all year with adapted hours. Monday 15:15–17:00 and 19:00–20:30; Wednesday 15:15–17:00; Thursday 15:15–17:00 and 19:00–20:30; Saturday 09:00–11:00. During school holidays, open on Monday and Thursday evenings only.",
+        "intro": "Public and school library in Domdidier serving the commune of Belmont-Broye and the surrounding area."
+      },
+      "practicalPatch": {
+        "costNote": {
+          "value": "Annual subscription is required to borrow. Children and young people pay CHF 5 per year until the end of compulsory school; adults CHF 25; AVS and students CHF 10 (up to age 25). Prices are as published in Swiss francs. No fee for on-site visits is stated.",
+          "text": "Annual subscription is required to borrow. Children and young people pay CHF 5 per year until the end of compulsory school; adults CHF 25; AVS and students CHF 10 (up to age 25). Prices are as published in Swiss francs. No fee for on-site visits is stated.",
+          "source": "https://www.fr.ch/bcu/app/bibliotheques/37",
+          "checked": "2026-11-25"
+        }
+      },
+      "cardId": "library-domdidier",
+      "findings": [
+        {
+          "field": "price",
+          "kind": "official",
+          "text": "Borrowing requires an annual subscription: CHF 5 for children and young people until the end of compulsory school, CHF 25 for adults, CHF 10 for AVS members and students up to age 25. The page states no age range for the library and does not say whether visiting without a subscription is possible.",
+          "url": "https://www.fr.ch/bcu/app/bibliotheques/37"
+        }
+      ],
+      "remaining": [
+        "Clarify visiting without a subscription and any current unscheduled closures.",
+        "Is there a separate children's section, and what are the visiting conditions for families who do not borrow books?"
+      ]
+    }
+  },
+  {
+    "jobId": "83cd8918-9ffc-47f7-bbae-8a959ce9fe99",
+    "approvedOn": "2026-11-25",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": null,
+      "age": "Books from birth; the Né pour lire programme is intended for ages 0–4.",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Tue 08:30–11:30 and 14–17; Wed 08:30–11:30 and 14–21; Thu–Fri 14–17; Sat 08:30–11:30",
+      "days": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "events": [],
+      "address": "Chemin des Crêts 11, 1er étage, 1618 Châtel-St-Denis",
+      "price": "Family subscription CHF 40/year; child subscription CHF 10; outside the Veveyse district CHF 50",
+      "priceKind": "year",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Bibliothèque publique de la Veveyse",
+          "phone": "021 948 64 14",
+          "email": "info@biblio-veveyse.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://fribourg.ch/fr/les-paccots/boutiques/bibliotheque-publique-de-la-veveyse/",
+          "label": "Books, opening hours, prices and address"
+        }
+      ],
+      "notes": [
+        "There are picture books, Tonies and books in German and English. Staff offer separate free Né pour lire events for ages 0–4 and stories for ages 4+ about once a month.",
+        "Specific dates for Né pour lire are not confirmed.",
+        "During school holidays: Wed 14–21 and Sat 08:30–11:30. The prices apply to subscriptions, not to a single entry."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "library-veveyse-chatel",
+      "region": "veveyse",
+      "name": "Bibliothèque de la Veveyse · children's books",
+      "category": "books",
+      "town": "Châtel-St-Denis",
+      "parentDetails": "A joint visit by the child and an adult.",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "Collection and meetings",
+            "kind": "official",
+            "text": "The library has books in German and English, free Né pour lire meetings for ages 0–4 and a separate holiday timetable.",
+            "url": "https://fribourg.ch/fr/les-paccots/boutiques/bibliotheque-publique-de-la-veveyse/"
+          }
+        ],
+        "remaining": [
+          "The dates of the Né pour lire meetings and the terms for a single visit without a subscription are not yet known."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": true,
+          "text": "The library is indoors",
+          "source": "https://fribourg.ch/fr/les-paccots/boutiques/bibliotheque-publique-de-la-veveyse/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "Check specific Né pour lire dates in the calendar",
+          "During school holidays only Wednesday 14–21 and Saturday 08:30–11:30"
+        ],
+        "gallery": "https://fribourg.ch/fr/les-paccots/boutiques/bibliotheque-publique-de-la-veveyse/"
+      },
+      "intro": "A family visit for books; meetings for small children are published separately.",
+      "geo": {
+        "label": "Chemin des Crêts 11 1618 Châtel-St-Denis",
+        "lat": 46.53105926513672,
+        "lon": 6.8978705406188965,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Chemin+des+Cr%C3%AAts+11+1er+%C3%A9tage+1618+Ch%C3%A2tel-St-Denis&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-28",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-25",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Collection and meetings",
+          "kind": "official",
+          "text": "The library has books in German and English, free Né pour lire meetings for ages 0–4 and a separate holiday timetable.",
+          "url": "https://fribourg.ch/fr/les-paccots/boutiques/bibliotheque-publique-de-la-veveyse/"
+        },
+        {
+          "field": "Contacts and parking",
+          "kind": "official",
+          "text": "The library's own page gives the organisation's phone number 021 948 64 14 and e-mail info@biblioveveyse.ch. It says visitors can park at the Univers@lle car park. The library is on the first floor of the Gamma building of the Cycle d'Orientation, with the entrance below the swimming pool.",
+          "url": "https://biblio-veveyse.ch/infos-pratiques/"
+        }
+      ],
+      "remaining": [
+        "The dates of the Né pour lire meetings and the terms for a single visit without a subscription are not yet known.",
+        "Are there dates and times for the Né pour lire meetings, and is registration needed?",
+        "What age range does the library publish for these meetings on its own pages, and in which language are they held?",
+        "Can families visit without a subscription, and is the entrance accessible with a stroller?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "contacts": [
+          {
+            "name": "Bibliothèque publique de la Veveyse",
+            "phone": "021 948 64 14",
+            "email": "info@biblioveveyse.ch"
+          }
+        ]
+      },
+      "practicalPatch": {
+        "parking": {
+          "value": true,
+          "text": "Visitors can park at the Univers@lle car park.",
+          "source": "https://biblio-veveyse.ch/infos-pratiques/",
+          "checked": "2026-11-25"
+        }
+      },
+      "cardId": "library-veveyse-chatel",
+      "findings": [
+        {
+          "field": "Contacts and parking",
+          "kind": "official",
+          "text": "The library's own page gives the organisation's phone number 021 948 64 14 and e-mail info@biblioveveyse.ch. It says visitors can park at the Univers@lle car park. The library is on the first floor of the Gamma building of the Cycle d'Orientation, with the entrance below the swimming pool.",
+          "url": "https://biblio-veveyse.ch/infos-pratiques/"
+        }
+      ],
+      "remaining": [
+        "Are there dates and times for the Né pour lire meetings, and is registration needed?",
+        "What age range does the library publish for these meetings on its own pages, and in which language are they held?",
+        "Can families visit without a subscription, and is the entrance accessible with a stroller?"
+      ]
+    }
+  },
+  {
+    "jobId": "0c3bb16f-a499-49dd-8180-6dba6b55c5cd",
+    "approvedOn": "2026-11-25",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": null,
+      "age": "Games for different ages; ask about the age for a specific game",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "1st and 3rd Wed 15–18; Fri 15:30–18; 2nd Sat 09–11",
+      "days": [
+        3,
+        5,
+        6
+      ],
+      "events": [],
+      "address": "Ecole du Lussy, Chemin de Crey-Derrey 1, 1618 Châtel-St-Denis",
+      "price": "Family membership CHF 40/year or CHF 25/6 months; ask about the terms for playing on site without a membership",
+      "priceKind": "year",
+      "amount": null,
+      "contacts": [
+        {
+          "name": "Ludothèque La Trottinette",
+          "phone": "021 948 84 35",
+          "email": "info@ludo-chatel.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://ludo-latrottinette.ch/infos-pratiques/",
+          "label": "Opening hours, on-site play, prices and availability"
+        },
+        {
+          "url": "https://ludo-latrottinette.ch/",
+          "label": "Calendar and events"
+        }
+      ],
+      "notes": [
+        "More than 1500 games, to play on site or to borrow. Loans last four weeks, with up to four games at a time.",
+        "Closed during school holidays. The premises are stated to be wheelchair accessible, without steps.",
+        "Write to info@ludo-chatel.ch; do not use contact@mysite.com, which also appears on their website."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "ludo-trottinette-chatel",
+      "region": "veveyse",
+      "name": "La Trottinette · on-site play",
+      "category": "books",
+      "town": "Châtel-St-Denis",
+      "parentDetails": "Parents remain responsible for the child and for the games borrowed.",
+      "research": {
+        "date": "2026-09-28",
+        "outcome": "enriched",
+        "findings": [
+          {
+            "field": "On-site play and loans",
+            "kind": "official",
+            "text": "On-site play is available. A family membership costs CHF 40/year or CHF 25/half-year. Listed times: first and third Wednesday, Friday and second Saturday.",
+            "url": "https://ludo-latrottinette.ch/infos-pratiques/"
+          }
+        ],
+        "remaining": [
+          "Check whether a membership is needed for on-site play and the rules on admitting young children to individual games."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": true,
+          "text": "Indoor play",
+          "source": "https://ludo-latrottinette.ch/infos-pratiques/",
+          "checked": "2026-09-28"
+        },
+        "playArea": {
+          "value": true,
+          "text": "On-site play is available",
+          "source": "https://ludo-latrottinette.ch/infos-pratiques/",
+          "checked": "2026-09-28"
+        },
+        "access": {
+          "value": true,
+          "text": "Step-free entrance, accessible space",
+          "source": "https://ludo-latrottinette.ch/infos-pratiques/",
+          "checked": "2026-09-28"
+        },
+        "booking": {
+          "value": null,
+          "text": "Check the terms for on-site play without a membership",
+          "source": "https://ludo-latrottinette.ch/infos-pratiques/",
+          "checked": "2026-09-28"
+        },
+        "warnings": [
+          "Closed during school holidays"
+        ],
+        "gallery": "https://ludo-latrottinette.ch/infos-pratiques/"
+      },
+      "intro": "A game library for playing on site and borrowing games to take home.",
+      "geo": {
+        "label": "Chemin de Crey-Derrey 1 1618 Châtel-St-Denis",
+        "lat": 46.536197662353516,
+        "lon": 6.897556781768799,
+        "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Ecole+du+Lussy+Chemin+de+Crey-Derrey+1+1618+Ch%C3%A2tel-St-Denis&type=locations&origins=address&limit=5&sr=4326",
+        "checked": "2026-09-28",
+        "precision": "address"
+      }
+    },
+    "research": {
+      "date": "2026-11-25",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "On-site play and loans",
+          "kind": "official",
+          "text": "On-site play is available. A family membership costs CHF 40/year or CHF 25/half-year. Listed times: first and third Wednesday, Friday and second Saturday.",
+          "url": "https://ludo-latrottinette.ch/infos-pratiques/"
+        },
+        {
+          "field": "Opening hours and membership",
+          "kind": "official",
+          "text": "Regular opening hours are the first and third Wednesday of the month 15:00–18:00, Fridays 15:30–18:00 and, new from September 2026, the second Saturday of the month 09:00–11:00. The venue is closed during school holidays. Family membership for borrowing costs CHF 40 for one year or CHF 25 for six months.",
+          "url": "https://ludo-latrottinette.ch/infos-pratiques/"
+        }
+      ],
+      "remaining": [
+        "Check whether a membership is needed for on-site play and the rules on admitting young children to individual games.",
+        "Is there an age range for on-site play, and may adults stay with their children?",
+        "Does on-site play cost anything, and is a membership needed to play on site?",
+        "Is booking needed for on-site play (it is only recommended for workshops)?",
+        "Is the play space indoors?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "min": null,
+        "age": "Age not published",
+        "parent": "unknown",
+        "parentDetails": "Conditions for adult participation not published",
+        "addressPrecision": "exact",
+        "price": "Price not published",
+        "priceKind": "unknown",
+        "checked": "2026-11-25"
+      },
+      "practicalPatch": {
+        "indoor": {
+          "value": null,
+          "text": "Not published",
+          "source": "https://ludo-latrottinette.ch/infos-pratiques/",
+          "checked": "2026-11-25"
+        }
+      },
+      "cardId": "ludo-trottinette-chatel",
+      "findings": [
+        {
+          "field": "Opening hours and membership",
+          "kind": "official",
+          "text": "Regular opening hours are the first and third Wednesday of the month 15:00–18:00, Fridays 15:30–18:00 and, new from September 2026, the second Saturday of the month 09:00–11:00. The venue is closed during school holidays. Family membership for borrowing costs CHF 40 for one year or CHF 25 for six months.",
+          "url": "https://ludo-latrottinette.ch/infos-pratiques/"
+        }
+      ],
+      "remaining": [
+        "Is there an age range for on-site play, and may adults stay with their children?",
+        "Does on-site play cost anything, and is a membership needed to play on site?",
+        "Is booking needed for on-site play (it is only recommended for workshops)?",
+        "Is the play space indoors?"
+      ]
+    }
+  },
+  {
+    "jobId": "7cac4112-daa8-4c95-96e9-80b6ebe4af2e",
+    "approvedOn": "2026-11-25",
+    "baseRecord": {
+      "route": "outside",
+      "format": "self",
+      "status": "active",
+      "min": 0,
+      "max": 4,
+      "age": "From birth to the start of 1H (approximately 0–4 years)",
+      "parent": "yes",
+      "languages": [],
+      "schedule": "Mon 14:00–17:30; Wed 09:00–11:30",
+      "days": [
+        1,
+        3
+      ],
+      "events": [],
+      "address": "Route du Château 126, 1680 Romont (Maison St-Charles)",
+      "price": "Free",
+      "priceKind": "free",
+      "amount": 0,
+      "contacts": [
+        {
+          "name": "La Maison des Pitchounes",
+          "phone": "",
+          "email": "contact@lamaisondespitchounes.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://lamaisondespitchounes.ch/",
+          "label": "Format, age, hours, free entry and address"
+        }
+      ],
+      "notes": [
+        "No booking; you can come for part of the window. This is a free-play place, not a Kita.",
+        "The play space is on the first floor, listed as accessible for a pushchair. During school holidays the organiser announces separate Wednesday sessions.",
+        "The website uses both Route du Château and Rue du Château for the same number 126; the venue block gives Route du Château 126 at Maison St-Charles. For navigation, check the pin on the map."
+      ],
+      "checked": "2026-09-28",
+      "reviewAfter": "2026-10-28",
+      "id": "pitchounes-romont",
+      "region": "glane",
+      "name": "La Maison des Pitchounes · free play",
+      "category": "play",
+      "town": "Romont",
+      "parentDetails": "The child comes with a parent or another close adult; one or two specialists receive the families.",
+      "research": {
+        "date": "2026-10-21",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "First visit",
+            "kind": "official",
+            "text": "A place for children from birth to 1H: no booking, free of charge and together with an adult; one or two specialists on each shift.",
+            "url": "https://lamaisondespitchounes.ch/"
+          },
+          {
+            "field": "Address",
+            "kind": "official",
+            "text": "The venue block of the official page places the free-play space at Maison St-Charles, Route du Château 126, Romont, on the first floor and accessible with a pushchair. The page footer writes the street as Rue du Château 126.",
+            "url": "https://lamaisondespitchounes.ch/"
+          }
+        ],
+        "remaining": [
+          "Confirm the language of reception and holiday exceptions; the website is inconsistent, giving Rue in some places and Route du Château in others."
+        ]
+      },
+      "practical": {
+        "scenario": "visit",
+        "indoor": {
+          "value": true,
+          "text": "Indoor free play",
+          "source": "https://lamaisondespitchounes.ch/",
+          "checked": "2026-09-28"
+        },
+        "booking": {
+          "value": false,
+          "text": "No booking",
+          "source": "https://lamaisondespitchounes.ch/",
+          "checked": "2026-09-28"
+        },
+        "observe": {
+          "value": true,
+          "text": "You can first simply stay near the child",
+          "source": "https://lamaisondespitchounes.ch/",
+          "checked": "2026-09-28"
+        },
+        "leave": {
+          "value": true,
+          "text": "Free time of stay within the reception window",
+          "source": "https://lamaisondespitchounes.ch/",
+          "checked": "2026-09-28"
+        },
+        "commitment": {
+          "value": false,
+          "text": "Free entry",
+          "source": "https://lamaisondespitchounes.ch/",
+          "checked": "2026-09-28"
+        },
+        "access": {
+          "value": true,
+          "text": "The organiser states that the first-floor play space is accessible with a pushchair",
+          "source": "https://lamaisondespitchounes.ch/",
+          "checked": "2026-10-21"
+        },
+        "gallery": "https://lamaisondespitchounes.ch/"
+      },
+      "intro": "Calm free play with an adult and the specialists who receive families."
+    },
+    "research": {
+      "date": "2026-11-25",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "First visit",
+          "kind": "official",
+          "text": "A place for children from birth to 1H: no booking, free of charge and together with an adult; one or two specialists on each shift.",
+          "url": "https://lamaisondespitchounes.ch/"
+        },
+        {
+          "field": "Address",
+          "kind": "official",
+          "text": "The venue block of the official page places the free-play space at Maison St-Charles, Route du Château 126, Romont, on the first floor and accessible with a pushchair. The page footer writes the street as Rue du Château 126.",
+          "url": "https://lamaisondespitchounes.ch/"
+        },
+        {
+          "field": "Holiday programme",
+          "kind": "official",
+          "text": "The organiser announces holiday parent-child activities on 23 and 30 December and says it is closed on Monday 21 and 28 December. No year is given on the page. During school holidays the activities run on Wednesday mornings.",
+          "url": "https://lamaisondespitchounes.ch/"
+        }
+      ],
+      "remaining": [
+        "Confirm the language of reception and holiday exceptions; the website is inconsistent, giving Rue in some places and Route du Château in others.",
+        "Is the play space indoors, and is there parking, a changing table, a toilet or a breastfeeding space? Families may want to ask the organiser.",
+        "Can parents first watch without joining? Which language is used with the children?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "checked": "2026-11-25",
+        "reviewAfter": "2026-12-25",
+        "age": "From birth to 4 years, accompanied by a parent or reference adult",
+        "parentDetails": "Children come accompanied by a parent, grandparent or reference adult. The page does not publish conditions for active participation by the adult.",
+        "amount": null,
+        "addressPrecision": "exact",
+        "intro": "A free, drop-in play and meeting space at La Maison des Pitchounes in Romont for children from birth to 4 years, accompanied by a parent or reference adult."
+      },
+      "practicalPatch": {
+        "observe": {
+          "value": null,
+          "text": "Not published",
+          "source": "https://lamaisondespitchounes.ch/",
+          "checked": "2026-11-25"
+        },
+        "indoor": {
+          "value": null,
+          "text": "Not published",
+          "source": "https://lamaisondespitchounes.ch/",
+          "checked": "2026-11-25"
+        }
+      },
+      "cardId": "pitchounes-romont",
+      "findings": [
+        {
+          "field": "Holiday programme",
+          "kind": "official",
+          "text": "The organiser announces holiday parent-child activities on 23 and 30 December and says it is closed on Monday 21 and 28 December. No year is given on the page. During school holidays the activities run on Wednesday mornings.",
+          "url": "https://lamaisondespitchounes.ch/"
+        }
+      ],
+      "remaining": [
+        "Is the play space indoors, and is there parking, a changing table, a toilet or a breastfeeding space? Families may want to ask the organiser.",
+        "Can parents first watch without joining? Which language is used with the children?"
+      ]
+    }
+  },
+  {
+    "jobId": "3395333a-b4ee-4709-bb68-cd06268ab582",
+    "approvedOn": "2026-11-25",
+    "baseRecord": {
+      "id": "christmas-plaffeien",
+      "name": "Märlistunden · stories at the Christmas market",
+      "category": "events",
+      "town": "Plaffeien",
+      "route": "local",
+      "format": "event",
+      "status": "active",
+      "min": null,
+      "max": null,
+      "age": "Age to be confirmed",
+      "parent": "unknown",
+      "languages": [],
+      "schedule": "Saturday 12 December 2026: Märlistunde at 15:00, 15:45, 16:30, 17:00, 17:45, 18:30 and 19:15 at Dorfplatz Plaffeien.",
+      "days": [
+        6
+      ],
+      "events": [
+        {
+          "date": "2026-12-12",
+          "start": "15:00",
+          "end": "",
+          "title": "Märlistunde",
+          "address": "Dorfplatz Plaffeien"
+        },
+        {
+          "date": "2026-12-12",
+          "start": "15:45",
+          "end": "",
+          "title": "Märlistunde",
+          "address": "Dorfplatz Plaffeien"
+        },
+        {
+          "date": "2026-12-12",
+          "start": "16:30",
+          "end": "",
+          "title": "Märlistunde",
+          "address": "Dorfplatz Plaffeien"
+        },
+        {
+          "date": "2026-12-12",
+          "start": "17:00",
+          "end": "",
+          "title": "Märlistunde",
+          "address": "Dorfplatz Plaffeien"
+        },
+        {
+          "date": "2026-12-12",
+          "start": "17:45",
+          "end": "",
+          "title": "Märlistunde",
+          "address": "Dorfplatz Plaffeien"
+        },
+        {
+          "date": "2026-12-12",
+          "start": "18:30",
+          "end": "",
+          "title": "Märlistunde",
+          "address": "Dorfplatz Plaffeien"
+        },
+        {
+          "date": "2026-12-12",
+          "start": "19:15",
+          "end": "",
+          "title": "Märlistunde",
+          "address": "Dorfplatz Plaffeien"
+        }
+      ],
+      "address": "Dorfplatz Plaffeien",
+      "price": "Free",
+      "priceKind": "free",
+      "amount": 0,
+      "contacts": [
+        {
+          "name": "Elternverein Plaffeien und Umgebung",
+          "phone": "",
+          "email": "info@elternverein-plaffeien.ch"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://elternverein-plaffeien.ch/aktivitaeten/weihnachtgeschichten/",
+          "label": "Official source"
+        }
+      ],
+      "notes": [
+        "Free of charge. The organiser thanks the Gewerbeverein Plaffeien und Umgebung for its hospitality at the Christmas market."
+      ],
+      "checked": "2026-09-27",
+      "reviewAfter": "2026-12-05",
+      "scheduleValidThrough": "2026-12-12",
+      "research": {
+        "date": "2026-11-01",
+        "outcome": "rechecked",
+        "findings": [
+          {
+            "field": "Programme",
+            "text": "The published programme lists free stories for young children at the Christmas market, Dorfplatz, 12.12.2026. Sessions start at 15:00, 15:45, 16:30, 17:00, 17:45, 18:30 and 19:15.",
+            "url": "https://elternverein-plaffeien.ch/aktivitaeten/weihnachtgeschichten/",
+            "kind": "official"
+          },
+          {
+            "field": "Programme",
+            "text": "The parents' association offers free storytelling sessions at the Plaffeien Christmas market on Saturday 12 December 2026 at Dorfplatz Plaffeien, starting at 15:00, 15:45, 16:30, 17:00, 17:45, 18:30 and 19:15. No end times are published.",
+            "url": "https://elternverein-plaffeien.ch/aktivitaeten/weihnachtgeschichten/",
+            "kind": "official"
+          }
+        ],
+        "remaining": [
+          "Session length, minimum age, language, registration and whether it is possible to sit next to the child.",
+          "Is registration needed, and may a parent stay with the child?",
+          "What language are the stories told in, and from what age are they suited?",
+          "How long does one session last, and does it take place indoors or outdoors?"
+        ]
+      },
+      "region": "sense",
+      "addressPrecision": "exact",
+      "intro": "Storytelling sessions for children (\"Gschichtli verzele\") that the Elternverein Plaffeien und Umgebung has organised for years at the Plaffeien Christmas market.",
+      "practical": {
+        "commitment": {
+          "value": false,
+          "text": "Free of charge; no course, block or subscription purchase is mentioned.",
+          "source": "https://elternverein-plaffeien.ch/aktivitaeten/weihnachtgeschichten/",
+          "checked": "2026-11-01"
+        }
+      }
+    },
+    "research": {
+      "date": "2026-11-25",
+      "outcome": "rechecked",
+      "findings": [
+        {
+          "field": "Programme",
+          "text": "The published programme lists free stories for young children at the Christmas market, Dorfplatz, 12.12.2026. Sessions start at 15:00, 15:45, 16:30, 17:00, 17:45, 18:30 and 19:15.",
+          "url": "https://elternverein-plaffeien.ch/aktivitaeten/weihnachtgeschichten/",
+          "kind": "official"
+        },
+        {
+          "field": "Programme",
+          "text": "The parents' association offers free storytelling sessions at the Plaffeien Christmas market on Saturday 12 December 2026 at Dorfplatz Plaffeien, starting at 15:00, 15:45, 16:30, 17:00, 17:45, 18:30 and 19:15. No end times are published.",
+          "url": "https://elternverein-plaffeien.ch/aktivitaeten/weihnachtgeschichten/",
+          "kind": "official"
+        },
+        {
+          "field": "Programme",
+          "kind": "official",
+          "text": "The organiser's storytellers (called \"Vorlese-Feen\") tell short stories at the Christmas market, and the sessions are free. The page names no age range, language, session length or registration rule.",
+          "url": "https://elternverein-plaffeien.ch/aktivitaeten/weihnachtgeschichten/"
+        }
+      ],
+      "remaining": [
+        "Session length, minimum age, language, registration and whether it is possible to sit next to the child.",
+        "Is registration needed, and may a parent stay with the child?",
+        "What language are the stories told in, and from what age are they suited?",
+        "How long does one session last, and does it take place indoors or outdoors?"
+      ]
+    },
+    "draft": {
+      "patch": {
+        "schedule": "Saturday 12 December 2026: sessions at 15:00, 15:45, 16:30, 17:00, 17:45, 18:30 and 19:15 at Dorfplatz Plaffeien. No end times or session length are published.",
+        "events": [
+          {
+            "date": "2026-12-12",
+            "start": "15:00",
+            "end": "",
+            "title": "Märlistunden am Weihnachtsmarkt",
+            "address": "Dorfplatz Plaffeien"
+          },
+          {
+            "date": "2026-12-12",
+            "start": "15:45",
+            "end": "",
+            "title": "Märlistunden am Weihnachtsmarkt",
+            "address": "Dorfplatz Plaffeien"
+          },
+          {
+            "date": "2026-12-12",
+            "start": "16:30",
+            "end": "",
+            "title": "Märlistunden am Weihnachtsmarkt",
+            "address": "Dorfplatz Plaffeien"
+          },
+          {
+            "date": "2026-12-12",
+            "start": "17:00",
+            "end": "",
+            "title": "Märlistunden am Weihnachtsmarkt",
+            "address": "Dorfplatz Plaffeien"
+          },
+          {
+            "date": "2026-12-12",
+            "start": "17:45",
+            "end": "",
+            "title": "Märlistunden am Weihnachtsmarkt",
+            "address": "Dorfplatz Plaffeien"
+          },
+          {
+            "date": "2026-12-12",
+            "start": "18:30",
+            "end": "",
+            "title": "Märlistunden am Weihnachtsmarkt",
+            "address": "Dorfplatz Plaffeien"
+          },
+          {
+            "date": "2026-12-12",
+            "start": "19:15",
+            "end": "",
+            "title": "Märlistunden am Weihnachtsmarkt",
+            "address": "Dorfplatz Plaffeien"
+          }
+        ]
+      },
+      "practicalPatch": {},
+      "cardId": "christmas-plaffeien",
+      "findings": [
+        {
+          "field": "Programme",
+          "kind": "official",
+          "text": "The organiser's storytellers (called \"Vorlese-Feen\") tell short stories at the Christmas market, and the sessions are free. The page names no age range, language, session length or registration rule.",
+          "url": "https://elternverein-plaffeien.ch/aktivitaeten/weihnachtgeschichten/"
+        }
+      ],
+      "remaining": [
+        "Session length, minimum age, language, registration and whether it is possible to sit next to the child.",
+        "Is registration needed, and may a parent stay with the child?",
+        "What language are the stories told in, and from what age are they suited?",
+        "How long does one session last, and does it take place indoors or outdoors?"
+      ]
+    }
   }
 ];
 })();

@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-24T17:15:52.968Z",
+  "generatedAt": "2026-11-25T04:04:05.651Z",
   "grain": "One published catalogue card; formats include groups, individual offers, events and self-guided visits.",
   "total": 325,
   "catalog": 291,
   "archive": 34,
-  "geocodedCards": 131,
-  "uniqueAddressPoints": 109,
+  "geocodedCards": 130,
+  "uniqueAddressPoints": 108,
   "byRegion": {
     "sense": 56,
     "sarine": 77,
@@ -22,9 +22,9 @@
     "self": 179
   },
   "storedStatus": {
-    "active": 179,
-    "future": 12,
-    "check": 100
+    "active": 169,
+    "future": 13,
+    "check": 109
   },
   "checkedDates": [
     "2026-09-27",
@@ -36,21 +36,22 @@
     "2026-11-01",
     "2026-11-20",
     "2026-10-02",
-    "2026-11-08",
     "2026-10-30",
+    "2026-11-08",
     "2026-11-03",
     "2026-11-06",
+    "2026-11-25",
     "2026-10-31",
     "2026-10-26"
   ],
   "unknownFields": {
-    "minAge": 204,
-    "parent": 97,
+    "minAge": 212,
+    "parent": 108,
     "language": 269,
-    "price": 187,
+    "price": 186,
     "address": 2
   },
-  "sources": 500,
+  "sources": 511,
   "explicitScheduleEnd": 85,
   "seeLocalities": [
     "Murten",

@@ -302,7 +302,8 @@ test('unknown ages, languages and admission fees remain unknown for original din
   store.personal.age=AGE;
   assert.equal(list().length,dining,'unknown ages remain discoverable without becoming confirmed');
   state.f.includeUnknownAge=false;
-  assert.deepEqual(ids(list()).sort(),['buvette-sapins-epagny','gros-chaumiaux-cerniat']);
+  // gros-chaumiaux-cerniat: its full review of 25 November 2026 found no published age ("Age not published"), so it is only found with unknown ages.
+  assert.deepEqual(ids(list()).sort(),['buvette-sapins-epagny']);
   store.personal.age=null;state.f.price='free';
   assert.equal(list().length,0);
 });
@@ -378,7 +379,8 @@ test('secondary play evidence is clearly attributed and BEO is not a free cafe',
   assert.match(byId.get('bistro11-duedingen').notes.join(' '),/Bärner Mamis/);
   assert.match(byId.get('migros-avry-play').notes.join(' '),/2025/);
   assert.equal(byId.get('bistro11-duedingen').status,'check');
-  assert.equal(byId.get('migros-avry-play').status,'active');
+  // check since its full review of 25 November 2026, which also leaves the visit address as not published.
+  assert.equal(byId.get('migros-avry-play').status,'check');
   assert.match(byId.get('migros-avry-play').notes.join(' '),/The owner's reply/);
   const beo=byId.get('beo-funpark');
   assert.equal(beo.category,'play');assert.equal(beo.amount,19);assert.equal(beo.priceKind,'visit');
@@ -394,9 +396,10 @@ test('follow-up status decisions cover all sixteen new venues without implying a
   const venues=records.filter(a=>decisions.has(a.id));
   assert.equal(review.directContactMade,false);
   assert.equal(decisions.size,16);
-  // kafi8-kerzers is active since its full review of 7 November 2026, which confirmed the café and its opening hours.
-  assert.equal(venues.filter(a=>a.status==='active').length,11);
-  assert.equal(venues.filter(a=>a.status==='check').length,5);
+  // kafi8-kerzers is active since its full review of 7 November 2026, which confirmed the café and its opening hours; migros-avry-play and
+  // sarrazin-lossy are check since their approved updates of 25 November 2026.
+  assert.equal(venues.filter(a=>a.status==='active').length,9);
+  assert.equal(venues.filter(a=>a.status==='check').length,7);
   for(const a of venues){
     const decision=decisions.get(a.id);
     assert.ok(decision,a.id);
@@ -451,9 +454,14 @@ test('follow-up preserves dated caveats, closures and price units',()=>{
   assert.match(byId.get('leset-villars').price,/spring 2026/);
   assert.match(byId.get('beachhouse-muntelier').price,/Summer menu 2026/);
   assert.equal(byId.get('sarrazin-lossy').amount,null,'free empty plate is not free admission');
-  assert.match(byId.get('sarrazin-lossy').notes.join(' '),/not a free children's dish/);
-  assert.match(byId.get('beo-funpark').schedule,/Mon–Fri 11:00–18:00; Sat 10:00–20:00; Sun 10:00–18:00/);
-  assert.match(byId.get('beo-funpark').notes.join(' '),/there is no supervision by staff/);
+  // Since the approved update of 25 November 2026 the note on the CHF 0 empty plate reads "This says nothing about entry to the games."
+  assert.match(byId.get('sarrazin-lossy').notes.join(' '),/empty plate at CHF 0.*says nothing about entry to the games/);
+  // beo-funpark: the approved update of 25 November 2026 read the prices page, which publishes no regular daily hours, and dropped the note
+  // from the park rules on staff supervision. Both stay open questions; an editors' report of the same day asks the queue to settle them
+  // from the rules the card lists.
+  assert.match(byId.get('beo-funpark').schedule,/Open 365 days a year/);
+  assert.ok(byId.get('beo-funpark').research.remaining.some(question=>/supervision/.test(question)));
+  assert.ok(byId.get('beo-funpark').research.remaining.some(question=>/regular .*opening hours|opening and closing times/.test(question)));
 });
 
 test('new category coverage does not imply a completed regional survey',()=>{
@@ -492,9 +500,9 @@ test('deep review covers active cards and preserves receipts for ended events',(
   const counts=Object.fromEntries(['enriched','rechecked','unresolved','reused'].map(outcome=>[outcome,main.filter(a=>a.research.outcome===outcome).length]));
   assert.equal(Object.values(counts).reduce((sum,count)=>sum+count,0),main.length);
   // A new full review turns an enriched card into a rechecked one; the full reviews approved on 3 and 7 November 2026 resolved twelve unresolved cards,
-  // the approved update of 21 November 2026 resolved maison-petits-villarlod, and the full reviews of 24 November 2026 chez-betty-massonnens
-  // and vaulruz-football-play.
-  assert.ok(counts.enriched+counts.rechecked>=134 && counts.unresolved>=22);
+  // the approved update of 21 November 2026 resolved maison-petits-villarlod, the full reviews of 24 November 2026 chez-betty-massonnens
+  // and vaulruz-football-play, and that of 25 November 2026 entrepot-mini-bulle.
+  assert.ok(counts.enriched+counts.rechecked>=134 && counts.unresolved>=21);
   // memo-rat-mission-2026-09-30 and herbstbasteln were closed by approved updates on 26 October and 3 November 2026, once their only
   // date (30 September) had passed; memo-valise-magique-2026-11-04 and rabel-giffers by those of 21 November 2026, once their only
   // dates (4 and 7 November) had passed, and candles-giffers by its full review of 21 November 2026 (13 and 14 November).
@@ -546,8 +554,9 @@ test('canton follow-up preserves uncertainty and filters across every district',
   const {records,list,state,byId}=load();
   const followup=records.filter(a=>a.research?.findings.some(f=>FOLLOWUP_FIELDS.includes(f.field)));
   // 105 since 1 November 2026: approved updates replaced follow-up findings with newer ones, arconciel-arche-play among them.
-  // 103 since the full reviews of lion-or-siviriez and leflon-bouloz-playground (7 and 8 November 2026) replaced theirs.
-  assert.equal(followup.length,103);
+  // 103 since the full reviews of lion-or-siviriez and leflon-bouloz-playground (7 and 8 November 2026) replaced theirs; 102 since the
+  // full review of jeuss-animal-park (25 November 2026).
+  assert.equal(followup.length,102);
   assert.deepEqual([...new Set(followup.map(a=>a.region))].sort(),['broye','glane','gruyere','sarine','see','sense','veveyse']);
   for(const a of followup){
     assert.ok(a.address&&a.sources.length&&a.notes.length,a.id); // a card may have no contact since 14 October 2026, and one note since 31 October

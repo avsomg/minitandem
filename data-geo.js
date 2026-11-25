@@ -206,18 +206,6 @@
     }
   },
   {
-    "id": "migros-avry-play",
-    "address": "Avry Centre, Route de Matran 9, 1754 Avry-sur-Matran",
-    "geo": {
-      "label": "Route de Matran 9 1754 Avry-sur-Matran",
-      "lat": 46.787906646728516,
-      "lon": 7.079706192016602,
-      "source": "https://api3.geo.admin.ch/rest/services/ech/SearchServer?searchText=Avry+Centre+Route+de+Matran+9+1754+Avry-sur-Matran&type=locations&origins=address&limit=5&sr=4326",
-      "checked": "2026-09-27",
-      "precision": "address"
-    }
-  },
-  {
     "id": "beo-funpark",
     "address": "Auriedstrasse 28, 3178 Bösingen",
     "geo": {
